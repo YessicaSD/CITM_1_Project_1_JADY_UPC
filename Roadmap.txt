@@ -1,0 +1,43 @@
+0.6 (7/05/2018)
+-	Move level 5 background individually
+-	Add level 5 music
+-	Make movements of enemies, players and powerups not depend on the camera
+-	Ability to charge shoot unit
+- 	Move starred background
+-	Add enemy spawn 
+0.7 (14/05/2018)
+-	Add enemy spanw debuging
+-	Move background stars
+-	Create the following enemies (with animations, behaviour and sfx)
+	- Turret 1
+	- Ship rear
+	- Destroyable part
+	- Outside turrets
+	- Red bats
+	- Inside turrets which shoot balls
+	- Inside turrets which shoot lasers
+	- Mechs
+	- Back ship turret
+	- Ship motor
+	- Oscilators
+	- Bar guardians
+-	Add H powerup  animations, gameplay effect and sfx (for both upgrades)
+-	Controller input fullt implemented for player 1 and 2
+0.8 (21/05/2018)
+-	Create the following enemies (with animations, behaviour and sfx)
+	- Missile follow turrets
+	- Intergalactic fighters spawn
+	- Intergalactic fighters
+	- Missile launcher
+	- Missiles
+	- Piña spawn
+	- Piña
+	- Add asteroids (big, small and medium)
+	- Lamella
+	- Final boss
+	- Boss
+-	Add G powerup animations, gameplay effect and sfx (for both upgrades)
+0.9 (28/05/2018)
+
+1.0 (04/06/2018)
+-	Everything ready for testing (all previous goals achieved)
