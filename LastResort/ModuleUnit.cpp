@@ -186,6 +186,7 @@ bool ModuleUnit::Start()
 	LOG("Loading unit assets");
 	//Load assets
 	unitTx = App->textures->Load("Assets/OrangeUnitSpritesheet.png");
+	throwUnitTx = App->textures->Load("Assets/OrangeUnitThrow.png");
 	currentOrbit = currentTurnAround = angleValue[E];
 	unitCol = App->collision->AddCollider({ (int)position.x, (int)position.y, 16, 16 }, COLLIDER_INDESTRUCTIBLE, this);
 	return ret;
@@ -195,6 +196,7 @@ bool ModuleUnit::CleanUp()
 {
 	LOG("Unloading unit assets");
 	App->textures->Unload(unitTx);
+	App->textures->Unload(throwUnitTx);
 	return true;
 }
 
@@ -377,6 +379,10 @@ void ModuleUnit::Returning()
 	//- If the unit has reached its position again, we continue orbiting
 	if (sqrt(pow(position.x-playerToFollow->position.x,2) + pow(position.y - playerToFollow->position.y, 2)) < throwSpeed)
 	{
+		//IMPLEMENT: Make a nice transition for some seconds
+
+		position.x = radius + playerToFollow->position.x + 16;//+ 16 and + 6 are to make the unit orbit around the center of the player's ship
+		position.y = playerToFollow->position.y + 6;
 		unitPhase = UnitPhase::rotating;
 	}
 

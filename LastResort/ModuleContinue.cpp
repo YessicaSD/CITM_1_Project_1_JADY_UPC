@@ -8,6 +8,8 @@
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleStage01.h"
+#include "ModuleStage02.h"
+#include "ModuleStage05.h"
 #include "ModuleGameOver.h"
 #include "ModuleContinue.h"
 
@@ -72,10 +74,6 @@ bool ModuleContinue::Start() {
 		fireAnim[x].Reset();
 		fireAnim[x].finished = false;
 	}
-	//------------------------------------------------------------------------------
-
-	App->render->camera.x = 0;
-	App->render->camera.y = 0;
 
 	return ret;
 }
@@ -140,8 +138,9 @@ update_status ModuleContinue::Update() {
 		App->fade->FadeToBlack(this, App->gameoverScene, 0.0f);
 	}
 	//Input--------------------------------------------------------------------------
-	if (App->input->keyboard[SDL_SCANCODE_SPACE]) {
-		App->fade->FadeToBlack(this, App->stage01, 0.5f);
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN)
+	{
+		App->fade->FadeToBlack(this, App->stage05, 0.5f);
 	}
 	return UPDATE_CONTINUE;
 }

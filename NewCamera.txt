@@ -1,0 +1,10 @@
+//mOVE UP
+//iPoint tilemapOrigin;
+//tilemapOrigin.y -= amountUp;
+
+//iPoint shipOffset;
+//shipOffset.x = 
+//AddEnemy(enemyPos.x + shipOffset.x)
+
+//if()
+//App->render->Blit(shipTx, tilemapOrigin.x, tilemapOrigin.y, NULL);

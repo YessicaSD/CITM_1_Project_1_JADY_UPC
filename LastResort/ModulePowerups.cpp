@@ -27,7 +27,17 @@ bool ModulePowerups::Start()
 update_status ModulePowerups::Update()
 {
 	//Move the powerups
-	//The camera moves automatically, so we don't need to adjust the position of the powerup
+	for (uint i = 0; i < MAX_POWERUPS; ++i)
+	{
+		if (powerups[i] != nullptr)
+		{
+			//- Collider
+			if (powerups[i]->collider != nullptr)
+			{
+				powerups[i]->position.x -= (int)moveSpeed;
+			}
+		}
+	}
 
 	//Render the powerups
 	for (uint i = 0; i < MAX_POWERUPS; ++i)
@@ -56,7 +66,7 @@ update_status ModulePowerups::PostUpdate()
 	{
 		if (powerups[i] != nullptr)
 		{
-			if (powerups[i]->position.x  < App->render->r_camera.x - DESPAWN_MARGIN)
+			if (powerups[i]->position.x  < 0 - DESPAWN_MARGIN)
 			{
 				LOG("DeSpawning powerup at %d", powerups[i]->position.x);
 				delete powerups[i];

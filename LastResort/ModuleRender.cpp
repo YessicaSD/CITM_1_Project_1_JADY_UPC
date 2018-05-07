@@ -7,9 +7,7 @@
 
 ModuleRender::ModuleRender() : Module()
 {
-	camera.x = camera.y = 0;
-	camera.w = SCREEN_WIDTH;
-	camera.h = SCREEN_HEIGHT;
+
 }
 
 // Destructor
@@ -57,22 +55,21 @@ update_status ModuleRender::PreUpdate()
 }
 
 update_status ModuleRender::Update()	
-{
-	//Move the camera
-	int speed = 20;
-
-	if (App->input->keyboard[SDL_SCANCODE_KP_8] == KEY_STATE::KEY_REPEAT)
-		camera.y -= speed;
-	
-	if (App->input->keyboard[SDL_SCANCODE_KP_2] == KEY_STATE::KEY_REPEAT)
-		camera.y += speed;
-
-	if (App->input->keyboard[SDL_SCANCODE_KP_4] == KEY_STATE::KEY_REPEAT)
-		camera.x -= speed;
-
-	if (App->input->keyboard[SDL_SCANCODE_KP_6] == KEY_STATE::KEY_REPEAT)
-		camera.x += speed;
+{	
+	if (App->input->keyboard[SDL_SCANCODE_F3] == KEY_DOWN)
+	{
+		if(zoomed == false)
+		{
+			SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH * 5, SCREEN_HEIGHT * 5);
+			zoomed = true;
+		}
+		else
+		{
+			SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
+			zoomed = false;
+		}
 		
+	}
 	return update_status::UPDATE_CONTINUE;
 }
 
@@ -126,7 +123,7 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section)
 	return ret;
 }
 
-bool ModuleRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool use_camera)
+bool ModuleRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	bool ret = true;
 
@@ -134,20 +131,12 @@ bool ModuleRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uin
 	SDL_SetRenderDrawColor(renderer, r, g, b, a);
 
 	SDL_Rect rec(rect);
-	if (use_camera)
-	{
-		rec.x = (int)(r_camera.x + rect.x * SCREEN_SIZE);
-		rec.y = (int)(r_camera.y + rect.y * SCREEN_SIZE);
-		
-	}
-	else
-	{
-		rec.x *=   SCREEN_SIZE;
-		rec.y *=  SCREEN_SIZE;
-	}
 
+	rec.x *=   SCREEN_SIZE;
+	rec.y *=  SCREEN_SIZE;
 	rec.w *= SCREEN_SIZE;
 	rec.h *= SCREEN_SIZE;
+
 	if (SDL_RenderFillRect(renderer, &rec) != 0)
 	{
 		LOG("Cannot draw quad to screen. SDL_RenderFillRect error: %s", SDL_GetError());
@@ -187,13 +176,6 @@ bool ModuleRender::FlippedBlit(SDL_Texture* texture, int x, int y, SDL_Rect* sec
 	}
 
 	return ret;
-}
-
-
-
-float  ModuleRender::getCameraPosition(int position,float speed)
-{
-	return(-position*SCREEN_SIZE/speed);
 }
 
 

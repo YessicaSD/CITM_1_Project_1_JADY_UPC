@@ -58,6 +58,15 @@ bool ModuleWindow::Init()
 	return ret;
 }
 
+//update_status Update()
+//{
+//	if(App->input->keyboard[SDL_SCANCODE_F10] == SDL_KEYDOWN)
+//	{
+//		SDL_DestroyWindow(window);
+//		SDL_SDL_CreateWindow("Last Resort - Team JADY", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH*SCREEN_SIZE, SCREEN_HEIGHT*SCREEN_SIZE, flags)
+//	}
+//}
+
 // Called before quitting
 bool ModuleWindow::CleanUp()
 {

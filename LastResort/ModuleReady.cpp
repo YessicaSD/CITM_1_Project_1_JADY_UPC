@@ -2,13 +2,14 @@
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
-#include "ModuleStage01.h"
 #include "SDL_image\include\SDL_image.h"
 #include "ModuleReady.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "Player1.h"
+#include "ModuleStage01.h"
 #include "ModuleStage02.h"
+#include "ModuleStage05.h"
 #include "ModuleAudio.h"
 #include "ModuleGameOver.h"
 #include "ModuleStageClear.h"
@@ -49,9 +50,6 @@ bool ModuleStageReady::Start()
 	SDL_RenderFillRect(App->render->renderer, &backgroundBlack);
 	start_time = SDL_GetTicks();
 
-	App->render->camera.x = 0;
-	App->render->camera.y = 0;
-
 	return ret;
 }
 
@@ -75,7 +73,7 @@ update_status ModuleStageReady::Update()
 	current_time = (SDL_GetTicks() - start_time);
 	if (current_time > 1000)
 	{
-		App->fade->FadeToBlack(this, App->stage01, 0.5f);
+		App->fade->FadeToBlack(this, App->stage05, 0.5f);
 	}
 	App->render->Blit(backgroundReady, 110 /*SCREEN_WIDTH/2*/, 100 /*SCREEN_HEIGHT/2*/, &BGroundReady); //MAGIC NUMBERS
 

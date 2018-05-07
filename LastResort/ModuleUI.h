@@ -23,8 +23,6 @@ public:
 
 
 public:
-	Module* current_stage = nullptr;
-
 	char *str_score_p1= nullptr;
 	char *str_score_p2 = nullptr;
 	char *str_lives_p1 = nullptr;

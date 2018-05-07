@@ -28,8 +28,9 @@ bool Module5lvlScene::Start()
 {
 	bool ret = true;
 
-	App->render->camera.x = -134;
-	App->render->camera.y = 80;
+	//App->render->camera.x = -134;
+	//App->render->camera.y = 80;
+
 	//Background ------------------------------------------------------------------
 	ScrollState = SCROLL_HORIZONTAL;
 
@@ -50,7 +51,7 @@ bool Module5lvlScene::Start()
 	App->audio->ControlMUS(lvl5Music, PLAY_AUDIO);
 
 	//Enemies -------------------------------------------------------------------------------------------------
-	
+	//App->enemies->AddEnemy(OSCILATOR, -200, 200);
 	return ret;
 }
 
@@ -99,8 +100,8 @@ update_status Module5lvlScene::Update()
 	
 	//Spaceship background--------------------------------------------------------------------
 	//App->render->camera.x += 1;
-	shipRect.x = App->render->camera.x;
-	shipRect.y = App->render->camera.y;
+	//shipRect.x = App->render->camera.x;
+	//shipRect.y = App->render->camera.y;
 
 	App->render->Blit(shipTex, 0, 0, &shipRect);
 	

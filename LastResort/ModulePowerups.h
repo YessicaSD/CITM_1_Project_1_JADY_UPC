@@ -44,5 +44,6 @@ private:
 	//We don't need a queue, because we'll render the powerups as soon as AddCollider gets called
 	Powerup* powerups[MAX_POWERUPS];
 	SDL_Texture* powerupTx = nullptr;
+	const float moveSpeed = 1;
 };
 #endif

@@ -4,15 +4,6 @@
 #include "Module.h"
 #include "Globals.h"
 
-enum DebugElement
-{
-	none = -1,
-	scene,
-	checkpoint,
-	enemy,
-	powerup
-};
-
 class ModuleStageFunctionality : public Module
 {
 public:
@@ -25,12 +16,21 @@ public:
 	bool CleanUp();
 
 	void Debugging();
-	void ChooseDebugElem(int);
+	void ChooseDebugElem(int, bool &, int &, int);
 	void GoToScene();
 
 public:
-	int selectedElemNum = -1;//Selected element number
-	DebugElement debugElem = DebugElement::none;//Debug element = the type of element we're debugging. It can be any type from the enum "DebugElement"
+	int selectedScene = 1;
+	//int selectedCheckpoint = 1;//= the first checkpoint of the game
+	int selectedEnemy = 0;
+	int selectedPowerup = 0;
+
+	//Bools that indicate us if the player has pressed another letter before this one
+	bool pressedNumScene = false;
+	//bool pressedNumCheckpoint = false;
+	bool pressedNumEnemy = false;
+	bool pressedNumPowerup = false;
+
 	Module * currentStage = nullptr;
 };
 

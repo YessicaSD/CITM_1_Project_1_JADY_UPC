@@ -82,7 +82,6 @@ bool ModuleStage01::Start()
 	App->stageFunctionality->Enable();
 	App->stageFunctionality->currentStage = this;
 	App->ui->ShowUi();
-	App->ui->current_stage = this;
 	//Player variable reset--------------------------------------------------------
 	App->player1->winlvl = false;
 	App->player2->winlvl = false;
@@ -217,11 +216,6 @@ bool ModuleStage01::CleanUp()
 	//Modules-----------------------------------------------------------------------
 	App->stageFunctionality->Disable();
 	App->ui->HideUi();
-	//camera------------------------------------------------------------------------
-	App->render->camera.x = 0;
-	App->render->camera.y = 0;
-	App->render->r_camera.x = 0;
-	App->render->r_camera.y = 0;
 	//------------------------------------------------------------------------------
 	
 	return true;
@@ -352,87 +346,87 @@ update_status ModuleStage01::Update()
 
 //move up down camera
 
-void ModuleStage01::MoveCam() {
+void ModuleStage01::MoveCam()
+{
+	//if (stop_time == false)
+	//{
+	//	Current_time_y = SDL_GetTicks();
+	//	if (Current_time_y - Start_time_y > 5000)
+	//		switch (StatetCamY)
+	//		{
+	//		case CameraDown:
+	//			StatetCamY = CameraUp;
+	//			down = true;
+	//			stop_time = true;
+	//			break;
+	//		case CameraUp:
+	//			StatetCamY = CameraDown;
+	//			up = true;
+	//			stop_time = true;
+	//			break;
 
-	if (stop_time == false)
-	{
-		Current_time_y = SDL_GetTicks();
-		if (Current_time_y - Start_time_y > 5000)
-			switch (StatetCamY)
-			{
-			case CameraDown:
-				StatetCamY = CameraUp;
-				down = true;
-				stop_time = true;
-				break;
-			case CameraUp:
-				StatetCamY = CameraDown;
-				up = true;
-				stop_time = true;
-				break;
+	//		}
 
-			}
+	//}
+	//if (down)
+	//{
+	//	if (App->render->camera.y < 26 * SCREEN_SIZE)
+	//	{
+	//		App->player1->position.y += 1;
+	//		App->player2->position.y += 1;
+	//		App->render->camera.y += SCREEN_SIZE;
+	//	}
 
-	}
-	if (down)
-	{
-		if (App->render->camera.y < 26 * SCREEN_SIZE)
-		{
-			App->player1->position.y += 1;
-			App->player2->position.y += 1;
-			App->render->camera.y += SCREEN_SIZE;
-		}
+	//	else {
+	//		stop_time = false;
+	//		down = false;
+	//		Start_time_y = SDL_GetTicks();
+	//		if (App->render->camera.x >= (1400 / foregndSpeed) * SCREEN_SIZE)
+	//		{
+	//			stop_time = true;
+	//			cameraDown = true;
 
-		else {
-			stop_time = false;
-			down = false;
-			Start_time_y = SDL_GetTicks();
-			if (App->render->camera.x >= (1400 / foregndSpeed) * SCREEN_SIZE)
-			{
-				stop_time = true;
-				cameraDown = true;
-
-			}
-
-
-		}
-	}
-	if (up)
-	{
-		if (App->render->camera.y > -33 * SCREEN_SIZE)
-		{
-			App->player1->position.y -= 1;
-			App->player2->position.y -= 1;
-			App->render->camera.y -= SCREEN_SIZE;
-		}
-
-		else {
-			stop_time = false;
-			up = false;
-			Start_time_y = SDL_GetTicks();
-			if (App->render->camera.x >= (1400 / foregndSpeed) * SCREEN_SIZE)
-			{
-				stop_time = true;
-				cameraUp = true;
-			}
+	//		}
 
 
-		}
-	}
-	if (cameraUp)
-	{
-		if (App->render->camera.y < 0)
-		{
-			App->render->camera.y += SCREEN_SIZE;
-		}
-	}
-	if (cameraDown)
-	{
-		if (App->render->camera.y > 0)
-		{
-			App->render->camera.y -= SCREEN_SIZE;
-		}
-	}
+	//	}
+	//}
+	//if (up)
+	//{
+	//	if (App->render->camera.y > -33 * SCREEN_SIZE)
+	//	{
+	//		App->player1->position.y -= 1;
+	//		App->player2->position.y -= 1;
+	//		App->render->camera.y -= SCREEN_SIZE;
+	//	}
+
+	//	else {
+	//		stop_time = false;
+	//		up = false;
+	//		Start_time_y = SDL_GetTicks();
+	//		if (App->render->camera.x >= (1400 / foregndSpeed) * SCREEN_SIZE)
+	//		{
+	//			stop_time = true;
+	//			cameraUp = true;
+	//		}
+
+
+	//	}
+	//}
+	//if (cameraUp)
+	//{
+	//	if (App->render->camera.y < 0)
+	//	{
+	//		App->render->camera.y += SCREEN_SIZE;
+	//	}
+	//}
+	//if (cameraDown)
+	//{
+	//	if (App->render->camera.y > 0)
+	//	{
+	//		App->render->camera.y -= SCREEN_SIZE;
+	//	}
+	//}
 }
 
 void ModuleStage01::TakeTileMap()

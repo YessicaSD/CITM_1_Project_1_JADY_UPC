@@ -38,7 +38,6 @@ bool ModuleStageFunctionality::Start()
 	App->enemies->Enable();
 	App->powerups->Enable();
 	//App->ui->ShowUi();
-	//App->ui->current_stage = this;
 	return true;
 }
 
@@ -61,98 +60,113 @@ update_status ModuleStageFunctionality::PreUpdate()
 
 void ModuleStageFunctionality::Debugging()
 {
-	//SELECTION ELEMENT------------------------------------------
+	//SCENES-------------------------------------------------------------------------------------------------------------------------------------
 	//- Select scene
-	if(App->input->keyboard[SDL_SCANCODE_F5] == KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_REPEAT)
 	{
-		debugElem = DebugElement::scene;
-		selectedElemNum = -1;
+		if (App->input->keyboard[SDL_SCANCODE_0] == KEY_DOWN) { ChooseDebugElem(0, pressedNumScene, selectedScene, 11); }//11 = there are currently 11 scenes in the game (although lvl 3 and lvl 4 are not implemented)
+		if (App->input->keyboard[SDL_SCANCODE_1] == KEY_DOWN) { ChooseDebugElem(1, pressedNumScene, selectedScene, 11); }
+		if (App->input->keyboard[SDL_SCANCODE_2] == KEY_DOWN) { ChooseDebugElem(2, pressedNumScene, selectedScene, 11); }
+		if (App->input->keyboard[SDL_SCANCODE_3] == KEY_DOWN) { ChooseDebugElem(3, pressedNumScene, selectedScene, 11); }
+		if (App->input->keyboard[SDL_SCANCODE_4] == KEY_DOWN) { ChooseDebugElem(4, pressedNumScene, selectedScene, 11); }
+		if (App->input->keyboard[SDL_SCANCODE_5] == KEY_DOWN) { ChooseDebugElem(5, pressedNumScene, selectedScene, 11); }
+		if (App->input->keyboard[SDL_SCANCODE_6] == KEY_DOWN) { ChooseDebugElem(6, pressedNumScene, selectedScene, 11); }
+		if (App->input->keyboard[SDL_SCANCODE_7] == KEY_DOWN) { ChooseDebugElem(7, pressedNumScene, selectedScene, 11); }
+		if (App->input->keyboard[SDL_SCANCODE_8] == KEY_DOWN) { ChooseDebugElem(8, pressedNumScene, selectedScene, 11); }
+		if (App->input->keyboard[SDL_SCANCODE_9] == KEY_DOWN) { ChooseDebugElem(9, pressedNumScene, selectedScene, 11); }
 	}
-	//- Select checkpoint (to implement when checkpoints are added)
+	//- Go to scene
+	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_UP)
+	{
+		GoToScene();
+		pressedNumScene = false;
+	}
+	
+	
+	//ENEMIES------------------------------------------------------------------------------------------------------------------------------------
 	//- Select enemy
-	if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_REPEAT)
 	{
-		debugElem = DebugElement::enemy;
-		selectedElemNum = -1;
+		if (App->input->keyboard[SDL_SCANCODE_0] == KEY_DOWN) { ChooseDebugElem(0, pressedNumEnemy, selectedEnemy, ENEMY_TYPES::MAX_ENEMY - 1); }
+		if (App->input->keyboard[SDL_SCANCODE_1] == KEY_DOWN) { ChooseDebugElem(1, pressedNumEnemy, selectedEnemy, ENEMY_TYPES::MAX_ENEMY - 1); }
+		if (App->input->keyboard[SDL_SCANCODE_2] == KEY_DOWN) { ChooseDebugElem(2, pressedNumEnemy, selectedEnemy, ENEMY_TYPES::MAX_ENEMY - 1); }
+		if (App->input->keyboard[SDL_SCANCODE_3] == KEY_DOWN) { ChooseDebugElem(3, pressedNumEnemy, selectedEnemy, ENEMY_TYPES::MAX_ENEMY - 1); }
+		if (App->input->keyboard[SDL_SCANCODE_4] == KEY_DOWN) { ChooseDebugElem(4, pressedNumEnemy, selectedEnemy, ENEMY_TYPES::MAX_ENEMY - 1); }
+		if (App->input->keyboard[SDL_SCANCODE_5] == KEY_DOWN) { ChooseDebugElem(5, pressedNumEnemy, selectedEnemy, ENEMY_TYPES::MAX_ENEMY - 1); }
+		if (App->input->keyboard[SDL_SCANCODE_6] == KEY_DOWN) { ChooseDebugElem(6, pressedNumEnemy, selectedEnemy, ENEMY_TYPES::MAX_ENEMY - 1); }
+		if (App->input->keyboard[SDL_SCANCODE_7] == KEY_DOWN) { ChooseDebugElem(7, pressedNumEnemy, selectedEnemy, ENEMY_TYPES::MAX_ENEMY - 1); }
+		if (App->input->keyboard[SDL_SCANCODE_8] == KEY_DOWN) { ChooseDebugElem(8, pressedNumEnemy, selectedEnemy, ENEMY_TYPES::MAX_ENEMY - 1); }
+		if (App->input->keyboard[SDL_SCANCODE_9] == KEY_DOWN) { ChooseDebugElem(9, pressedNumEnemy, selectedEnemy, ENEMY_TYPES::MAX_ENEMY - 1); }
 	}
-	//- Select powerup
-	if (App->input->keyboard[SDL_SCANCODE_F8] == KEY_DOWN)
+	//- Spawn enemy
+	if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_UP)
 	{
-		debugElem = DebugElement::powerup;
-		selectedElemNum = -1;
-	}
-
-	//CHOSE ELEMENT-----------------------------------------------
-	if (App->input->keyboard[SDL_SCANCODE_0] == KEY_DOWN) { ChooseDebugElem(0); }
-	if (App->input->keyboard[SDL_SCANCODE_1] == KEY_DOWN) { ChooseDebugElem(1); }
-	if (App->input->keyboard[SDL_SCANCODE_2] == KEY_DOWN) { ChooseDebugElem(2); }
-	if (App->input->keyboard[SDL_SCANCODE_3] == KEY_DOWN) { ChooseDebugElem(3); }
-	if (App->input->keyboard[SDL_SCANCODE_4] == KEY_DOWN) { ChooseDebugElem(4); }
-	if (App->input->keyboard[SDL_SCANCODE_5] == KEY_DOWN) { ChooseDebugElem(5); }
-	if (App->input->keyboard[SDL_SCANCODE_6] == KEY_DOWN) { ChooseDebugElem(6); }
-	if (App->input->keyboard[SDL_SCANCODE_7] == KEY_DOWN) { ChooseDebugElem(7); }
-	if (App->input->keyboard[SDL_SCANCODE_8] == KEY_DOWN) { ChooseDebugElem(8); }
-	if (App->input->keyboard[SDL_SCANCODE_9] == KEY_DOWN) { ChooseDebugElem(9); }
-
-	//DEBUG!------------------------------------------------------
-	if(App->input->keyboard[SDL_SCANCODE_F9] == KEY_DOWN)
-	{
-		switch(debugElem)
+		if (App->player1->IsEnabled())
 		{
-		case DebugElement::scene:
-			GoToScene();
-			break;
-		//case DebugElement::checkpoint:
-		//	break;
-		case DebugElement::enemy:
-			App->enemies->AddEnemy((ENEMY_TYPES)selectedElemNum, App->player1->position.x + 100, App->player1->position.y);
-			break;
-		case DebugElement::powerup:
-			App->powerups->AddPowerup(App->player1->position.x + 100, App->player1->position.y, (POWERUP_TYPE)selectedElemNum);
-			break;
-		}		
+			App->enemies->AddEnemy((ENEMY_TYPES)selectedEnemy, App->player1->position.x + 100, App->player1->position.y);
+		}
+		else
+		{
+			App->enemies->AddEnemy((ENEMY_TYPES)selectedEnemy, App->player2->position.x + 100, App->player2->position.y);
+		}
+		
+		pressedNumEnemy = false;
+	}
+
+	//POWERUPS-----------------------------------------------------------------------------------------------------------------------------------
+	//- Select powerup
+	if (App->input->keyboard[SDL_SCANCODE_F8] == KEY_REPEAT)
+	{
+		if (App->input->keyboard[SDL_SCANCODE_0] == KEY_DOWN) { ChooseDebugElem(0, pressedNumPowerup, selectedPowerup, POWERUP_TYPE::MAX_POWERUP - 1); }
+		if (App->input->keyboard[SDL_SCANCODE_1] == KEY_DOWN) { ChooseDebugElem(1, pressedNumPowerup, selectedPowerup, POWERUP_TYPE::MAX_POWERUP - 1); }
+		if (App->input->keyboard[SDL_SCANCODE_2] == KEY_DOWN) { ChooseDebugElem(2, pressedNumPowerup, selectedPowerup, POWERUP_TYPE::MAX_POWERUP - 1); }
+		if (App->input->keyboard[SDL_SCANCODE_3] == KEY_DOWN) { ChooseDebugElem(3, pressedNumPowerup, selectedPowerup, POWERUP_TYPE::MAX_POWERUP - 1); }
+		if (App->input->keyboard[SDL_SCANCODE_4] == KEY_DOWN) { ChooseDebugElem(4, pressedNumPowerup, selectedPowerup, POWERUP_TYPE::MAX_POWERUP - 1); }
+		if (App->input->keyboard[SDL_SCANCODE_5] == KEY_DOWN) { ChooseDebugElem(5, pressedNumPowerup, selectedPowerup, POWERUP_TYPE::MAX_POWERUP - 1); }
+		if (App->input->keyboard[SDL_SCANCODE_6] == KEY_DOWN) { ChooseDebugElem(6, pressedNumPowerup, selectedPowerup, POWERUP_TYPE::MAX_POWERUP - 1); }
+		if (App->input->keyboard[SDL_SCANCODE_7] == KEY_DOWN) { ChooseDebugElem(7, pressedNumPowerup, selectedPowerup, POWERUP_TYPE::MAX_POWERUP - 1); }
+		if (App->input->keyboard[SDL_SCANCODE_8] == KEY_DOWN) { ChooseDebugElem(8, pressedNumPowerup, selectedPowerup, POWERUP_TYPE::MAX_POWERUP - 1); }
+		if (App->input->keyboard[SDL_SCANCODE_9] == KEY_DOWN) { ChooseDebugElem(9, pressedNumPowerup, selectedPowerup, POWERUP_TYPE::MAX_POWERUP - 1); }
+	}
+	//- Spawn powerup
+	if (App->input->keyboard[SDL_SCANCODE_F8] == KEY_UP)
+	{
+		if(App->player1->IsEnabled())
+		{
+			App->powerups->AddPowerup(App->player1->position.x + 100, App->player1->position.y, (POWERUP_TYPE)selectedPowerup);
+		}
+		else
+		{
+			App->powerups->AddPowerup(App->player2->position.x + 100, App->player2->position.y, (POWERUP_TYPE)selectedPowerup);
+		}
+		
+		pressedNumPowerup = false;
 	}
 }
 
-void ModuleStageFunctionality::ChooseDebugElem(int numberPressed)
+void ModuleStageFunctionality::ChooseDebugElem(int numPressed, bool &pressedNumBefore, int &selectedElem, int maximumElem)
 {
-	if (selectedElemNum == -1)
+	//Update the selected element
+	if (pressedNumBefore == false)
 	{
-		//If we haven't pressed any number before, we put that number
-		selectedElemNum = numberPressed;
+		selectedElem = numPressed;
+		pressedNumBefore = true;
 	}
 	else
 	{
-		//If we have pressed a number before, we put this number on the tens and add the number we pressed
-		selectedElemNum = selectedElemNum * 10 + numberPressed;
+		selectedElem = selectedElem * 10 + numPressed;
 	}
-	//Check that it doesn't surpass its maximum element
-	if (debugElem == DebugElement::scene)
+
+	//Check it doesn't get over the maximum number
+	if (selectedElem > maximumElem)
 	{
-		if(selectedElemNum > 11)//11 = number of scenes currently in the game
-		{
-			selectedElemNum = 11;
-		}
-	}
-	else if (debugElem == DebugElement::enemy)
-	{
-		if (selectedElemNum >= ENEMY_TYPES::MAX_ENEMY)
-		{
-			selectedElemNum = ENEMY_TYPES::MAX_ENEMY - 1;
-		}
-	}
-	else if (debugElem == DebugElement::powerup)
-	{
-		if (selectedElemNum >= POWERUP_TYPE::MAX_POWERUP)
-		{
-			selectedElemNum = POWERUP_TYPE::MAX_POWERUP - 1;
-		}
+		selectedElem = maximumElem;
 	}
 }
 
 void ModuleStageFunctionality::GoToScene()
 {
-	switch (selectedElemNum)
+	switch (selectedScene)
 	{
 	case 1:
 		//STAGE 1

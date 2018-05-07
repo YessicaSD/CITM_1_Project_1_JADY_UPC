@@ -53,8 +53,6 @@ bool ModuleStageClear::Start()
 	lvlComplitedMusic = App->audio->LoadMUS("Assets/General/Fx/Stage clear.ogg");
 	App->audio->ControlMUS(lvlComplitedMusic, PLAY_AUDIO);
 
-	App->render->camera.x = 0;
-	App->render->camera.y = 0;
 	start_time = SDL_GetTicks();
 
 	return ret;
@@ -83,10 +81,7 @@ update_status ModuleStageClear::Update()
 	App->render->Blit(Players_Texture, 200, 120, &Player2);
 	if(App->player1->numLvlwin == App->player2->numLvlwin == 1)
 	{
-
 		App->render->Blit(backgroundStageClear1, 40 , 60 , &BGroundStageClear1); //MAGIC NUMBERS
-		
-
 	}
 	if (current_time > 6000)
 	{

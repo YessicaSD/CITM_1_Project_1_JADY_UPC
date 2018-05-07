@@ -38,76 +38,79 @@ https://github.com/Dasanch/Project_1_JADY_UPC
 
 
 ## Movement keys --------------------------------------------------------------------
->> Player 1:
-	- A: Left
-	- S: Down
-	- D: Right
-	- W: Up
-	- Space: Shoot
-	- Left shift: Lock the unit
+### Player 1:
+- **A**: Move left
+- **S**: Move down
+- **D**: Move right
+- **W**: Move up
+- **Space**: Shoot
+- **Left shift**: Lock the unit
 
->> Player 2:
-	- Left_arrow: Left
-	- Down_arrow: Down
-	- Right_arrow: Right
-	- Up_arrow: Up
-	- 0 Keynumeric: Shoot
-	- 1 Keynumeric: Lock the unit
+### Player 2:
+- **Left arrow**: Move left
+- **Down arrow**: Move down
+- **Right arrow**: Move right
+- **Up arrow**: Move up
+- **0 Numpad**: Shoot
+- **1 Numpad**: Lock the unit
 
 
 ## Other functions --------------------------------------------------------------------
-
-	- Space: Skip intros
-	- +: Volume up
-	- -: Volume down
-
+- **Esc**: Closes the game
+- **Space**: Skip intros
+- **+**: Volume up
+- **-**: Volume down
 
 ## Debug functionality ----------------------------------------------------------------
 
-BASIC DEBUGGING:
-- F1: Show collision boxes
-- F2: God mode
-- NUMPAD: Move camera
-	* 8: Up;
-	* 5: Down;
-	* 4: Left;
-	* 6: Right;
+### BASIC DEBUGGING:
+- **F1**: Show collision boxes
+- **F2**: God mode
+- **F3**: Zoom out / Correct size
 
-ADVANCED DEBUGGING:
+### ADVANCED DEBUGGING:
 How to use advanced debugging?
-1- Select what do you want to debug
-	- F5 = Stage
-	- F7 = Enemy
-	- F8 = Powerup
-2- Select which element you want to debug pressing the number keys (see debugging elements table)
-In case you want to select another stage/enemy/powerup, press F5, F7 or F8 again.
-3- Press F9 to go to that scene / spawn that enemy in front of player 1 / spawn that powerup in front of player 1
+1. DEBUG:
+   - Release the **F5** key to go to a stage.
+   - Release the **F7** key to spawn an enemy in front of the player's 1 ship.
+   - Release the **F8** key to spawn a powerup in front of the player's 1 ship.
+2. SELECT ANOTHER ELEMENT FOR DEBUGGING:
+   - **Hold F5** to select stages, and **press the number/s** of the scene you want to go to (see debug stages table).
+   - **Hold F7** to select enemies, and **press the number/s** of the enemy you want to spawn in front of the player's 1 ship (see debug enemies table).
+   - **Hold F8** to select powerups, and **press the number/s** of the powerup you want to spawn in front of the player's 1 ship (see debug powerups table).
 
-Debugging elements table
-- STAGES:
-	* 1: Stage 1;
-	* 2: Stage 2;
-	* 5: Stage 5;
-	* 6: Win;
-	* 7: Lose;
-	* 8: Neo geo screen;
-	* 9: Title screen;
-	* 10: Ready screen;
-	* 11: Continue screen;
-- ENEMIES:
-	* 0: Basic;
-	* 1: Oscilator;
-	* 2: Powerdropper;
-	* 3: Metalcrow;
-- POWERUPS
-	* 0: Speed;
-	* 1: Despeed;
-	* 2: Laser;
-	* 3: Homing;
-	* 4: Ground;
+#### STAGES DEBUG TABLE:
+	- 1: Stage 1
+	- 2: Stage 2
+	- 5: Stage 5
+	- 6: Win
+	- 7: Lose
+	- 8: Neo geo screen
+	- 9: Title screen
+	- 10: Ready screen
+	- 11: Continue screen
 
+#### ENEMIES DEBUG TABLE:
+	- 0: Basic
+	- 1: Oscilator
+	- 2: Powerdropper
+	- 3: Metalcrow
 
-## CHANGES --------------------------------------------------------------------------------------
+#### POWERUPS DEBUG TABLE:
+	- 0: Speed
+	- 1: Despeed
+	- 2: Laser
+	- 3: Homing
+	- 4: Ground
+
+## Changes ----------------------------------------------------------------------------
+
+	## CHANGES IN V0.6.0.0
+		* Added stage 5 music
+		* Added stage 5 stars background and ship
+		* Added fullscreen mode
+		* Added advance debugger
+		* Added ability to throw the unit
 
 	## CHANGES IN V0.5.0.0
 		* Added UI

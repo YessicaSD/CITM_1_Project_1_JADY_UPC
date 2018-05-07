@@ -11,6 +11,7 @@
 #include "ModuleFonts.h"
 #include "ModuleFadetoBlack.h"
 #include "ModuleContinue.h"
+#include "ModuleStageFunctionality.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -65,7 +66,7 @@ update_status ModuleUI::Update() {
 	if (p1_isDead && p2_isDead) {
 		p1_isDead = false;
 		p2_isDead = false;
-		App->fade->FadeToBlack(current_stage, App->continueScene, 0.1f);
+		App->fade->FadeToBlack(App->stageFunctionality->currentStage, App->continueScene, 0.1f);
 		lives_p1 = 2;
 		lives_p2 = 2;
 	}

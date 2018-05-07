@@ -36,8 +36,6 @@ bool ModuleGameTitle:: Start()
 	//audios--------------------------------------------------------------------------------
 	Titlemusic=App->audio->LoadMUS("Assets/LastResortTitle/02-LAST-RESORT-TITLE.ogg");
 	App->audio->ControlMUS(Titlemusic, PLAY_AUDIO);
-	App->render->camera.x = 0;
-	App->render->camera.y = 0;
 	
 	return ret;
 }
