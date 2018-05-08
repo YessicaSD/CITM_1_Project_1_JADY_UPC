@@ -81,7 +81,7 @@ void Player1::Reset_Positions() {
 //MOVEMENT INPTUT
 bool Player1::MoveLeft()
 {
-	return (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT);
+	return (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT) ;
 }
 
 bool Player1::MoveRight()
@@ -104,7 +104,7 @@ bool Player1::MoveUp()
 //SHOOT INPUT
 bool Player1::Shoot()
 {
-	return (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN);
+	return (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) || (SDL_GameControllerGetButton(App->input->controller, SDL_CONTROLLER_BUTTON_B));
 }
 
 bool Player1::Charge()
