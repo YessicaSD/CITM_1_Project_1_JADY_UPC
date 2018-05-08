@@ -1,5 +1,4 @@
 # We are the team JADY
-## Movement keys --------------------------------------------------------------------
 
 ## Introduction
 This game was created by 4 students of UPC, CITM on the Game Design and Development degree.
