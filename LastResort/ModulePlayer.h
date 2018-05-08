@@ -13,6 +13,22 @@ struct Collider; //SHOT
 struct Particle;
 struct Mix_Chunk;
 
+enum ShipFrames
+{
+	MaxUp,
+	TransitionUp,
+	Idle,
+	TransitionDown,
+	MaxDown
+};
+
+enum ShipAnimations
+{
+	Initial,
+	Movement,
+	Death
+};
+
 class ModulePlayer : public Module
 {
 public:
@@ -31,7 +47,6 @@ public:
 	void ShipAnimation();
 
 	//Functions that will be rewritten in each player
-	//virtual void LoadSprites();
 	virtual bool MoveUp() = 0;
 	virtual bool MoveDown() = 0;
 	virtual bool MoveLeft() = 0;
@@ -76,22 +91,9 @@ public:
 	int currentFrame;//The frame we'll render. It will take a value from the ShipFrames enumerator
 	float const transitionLimit = 0.5f;//This indicates when the ship will transition from its idle animation to its transition animation
 	float const MaxLimit = 0.90f;//This indicates when the ship will transition from its transition animation to its max animation
-	enum ShipFrames
-	{
-		MaxUp,
-		TransitionUp,
-		Idle,
-		TransitionDown,
-		MaxDown
-	};
-	enum ShipAnimations
-	{
-		Initial,
-		Movement,
-		Death
-	} shipAnimations;
 
 	//Animations--------------------------------------------
+	ShipAnimations shipAnimations;
 	SDL_Rect *current_animation = nullptr; //pointer to the only one animation 
 	Animation shipAnim;
 	Animation shotFire; //Animation infront of ship when we are shooting basic shots
@@ -113,8 +115,6 @@ public:
 	bool LaserPowerUp = false;
 	int FadeToBlackAlfa;
 	SDL_Rect backgroundBlack;
-	
-
 };
 
 #endif

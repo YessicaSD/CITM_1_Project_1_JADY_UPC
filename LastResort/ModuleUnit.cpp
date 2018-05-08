@@ -331,6 +331,8 @@ void ModuleUnit::Rotating()
 			//Throw
 			unitPhase = UnitPhase::trowing;
 			shootTime = SDL_GetTicks();
+			//Animation
+
 		}
 		//If the player releases the button, we set the power to 0
 		power = 0;

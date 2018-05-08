@@ -132,16 +132,20 @@ update_status ModulePlayer::Update()
 
 void ModulePlayer::ShipAnimation() {
 
-	switch (shipAnimations) {
+	switch (shipAnimations)
+	{
 	case Initial:
 		current_animation = &initAnim.GetFrameEx();
-		if (initAnim.current_frame == 0) {
+		if (initAnim.current_frame == 0)
+		{
 			App->audio->ControlSFX(init_sfx, PLAY_AUDIO);
 		}
 
-		if (initAnim.finished == true) {
+		if (initAnim.finished == true)
+		{
 			shipAnimations = ShipAnimations::Movement;
-			if (godMode == false) {
+			if (godMode == false)
+			{
 				playerCol->type = COLLIDER_PLAYER;
 			}
 			initAnim.Reset();
@@ -150,48 +154,58 @@ void ModulePlayer::ShipAnimation() {
 			break;
 		}
 		//Draw ship---------------------------------------------------
-		if (initAnim.current_frame > 4) {
+		if (initAnim.current_frame > 4)
+		{
 			App->render->Blit(PlayerTexture, position.x + 32 - (current_animation->w), position.y + 6 - (current_animation->h / 2), current_animation);
 		}
-		else {
+		else
+		{
 			App->render->Blit(PlayerTexture, position.x - 40, position.y + 6 - (current_animation->h / 2), current_animation);
 		}
-		//------------------------------------------------------------
 		break;
+
 	case Movement:
 		//Idle--------------------------------------------------------
-		if (yAxis > -transitionLimit && yAxis < transitionLimit) {
+		if (yAxis > -transitionLimit && yAxis < transitionLimit)
+		{
 			currentFrame = Idle;
 		}
 		//Transitions-------------------------------------------------
-		if (yAxis >= transitionLimit && yAxis < MaxLimit) {
+		if (yAxis >= transitionLimit && yAxis < MaxLimit)
+		{
 			currentFrame = TransitionDown;
 		}
-		if (yAxis <= -transitionLimit && yAxis > -MaxLimit) {
+		if (yAxis <= -transitionLimit && yAxis > -MaxLimit)
+		{
 			currentFrame = TransitionUp;
 		}
 		//Maximums---------------------------------------------------
-		if (yAxis >= MaxLimit) {
+		if (yAxis >= MaxLimit)
+		{
 			currentFrame = MaxDown;
 		}
-		if (yAxis <= -MaxLimit) {
+		if (yAxis <= -MaxLimit)
+		{
 			currentFrame = MaxUp;
 		}
 		//Draw ship--------------------------------------------------
 		current_animation = &shipAnim.frames[currentFrame]; //It set the animation frame 
 		App->render->Blit(PlayerTexture, position.x, position.y, current_animation);
-		//-----------------------------------------------------------
 		break;
+
 	case Death:
-		if (deathAnim.finished == true) {
+		if (deathAnim.finished == true)
+		{
 			PlayerDies();
 		}
-		else if (isDying) {
+		else if (isDying)
+		{
 			playerCol->type = COLLIDER_NONE;
 			current_animation = &deathAnim.GetFrameEx();
 			App->render->Blit(PlayerTexture, position.x + 32 - current_animation->w, position.y + 6 - current_animation->h / 2, current_animation);
 		}
 		break;
+
 	}
 }
 
@@ -280,11 +294,13 @@ void  ModulePlayer::ShotInput() {
 	if (shoot == true) {
 		if (powerup_type == POWERUP_TYPE::NOPOWERUP)
 		{
-			if (shotFire.finished == false) {
+			if (shotFire.finished == false)
+			{
 				isShooting = true;
 				App->render->Blit(PlayerTexture, position.x + 32, position.y + 1, &shotFire.GetFrameEx());
 			}
-			else {
+			else
+			{
 				shotFire.finished = false;
 				isShooting = false;
 				shoot = false;
@@ -292,11 +308,13 @@ void  ModulePlayer::ShotInput() {
 		}
 		if (powerup_type == POWERUP_TYPE::LASER)
 		{
-			if (ShotLaserBasic.finished == false) {
+			if (ShotLaserBasic.finished == false)
+			{
 				isShooting = true;
 				App->render->Blit(PlayerTexture, position.x + 32, position.y + 1, &ShotLaserBasic.GetFrameEx());
 			}
-			else {
+			else
+			{
 				shotFire.finished = false;
 				isShooting = false;
 				shoot = false;
@@ -304,11 +322,13 @@ void  ModulePlayer::ShotInput() {
 		}
 		else
 		{
-			if (shotFire.finished == false) {
+			if (shotFire.finished == false)
+			{
 				isShooting = true;
 				App->render->Blit(PlayerTexture, position.x + 32, position.y + 1, &shotFire.GetFrameEx());
 			}
-			else {
+			else
+			{
 				shotFire.finished = false;
 				isShooting = false;
 				shoot = false;
