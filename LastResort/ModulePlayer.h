@@ -8,6 +8,9 @@
 #include "p2Point.h"
 #include "ModulePowerups.h"
 
+#define HORIZONTAL_MARGIN 16
+#define VERTICAL_MARGIN 2
+
 struct SDL_Texture;
 struct Collider; //SHOT
 struct Particle;
@@ -84,7 +87,7 @@ public:
 	bool canShoot;
 	//-------Ship Animation-----------------------------
 	int const playerwidth = 32;
-	int const playerheight = 16;
+	int const playerheight = 12;
 	float yAxis = 0;//This value will control the animation of the ship. It will increase up to 1 when S is pressed and it will decrease up to -1 when W is pressed. When none of those keys are pressed, it will progressively go back to 0.
 	const float keyPressSpeed = 0.05f;//The speed at which the ship will change its frame when the key is pressed
 	const float keyReleaseSpeed = 0.05f;//The speed at which the ship goes basck to the idle frame when the key is release

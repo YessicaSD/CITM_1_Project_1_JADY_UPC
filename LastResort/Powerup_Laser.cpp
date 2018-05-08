@@ -11,7 +11,7 @@ Powerup_Laser::Powerup_Laser(int x, int y) : Powerup(x, y)
 	//Push backs
 	laserAnim.PushBack({ 18, 80, 31, 16 });
 	laserAnim.PushBack({ 49, 80, 31, 16 });
-	laserAnim.speed = 0.05f;
+	laserAnim.speed = 0.01f;
 	laserAnim.loop = true;
 	//We set the animation of the base class to be this animation
 	animation = &laserAnim;
@@ -34,8 +34,18 @@ void Powerup_Laser::OnCollision(Collider* col)
 			App->unit1->Enable();
 			App->unit1->playerToFollow = App->player1;
 		}
+		//Change powerup type
 		App->player1->powerup_type = POWERUP_TYPE::LASER;
 		//Change unit type
+		if((int)laserAnim.current_frame == 0)
+		{
+			App->unit1->unitTx = App->unit1->orangeUnitTx;
+		}
+		else
+		{
+			App->unit1->unitTx = App->unit1->blueUnitTx;
+		}
+		
 	}
 	else if(col == App->player2->playerCol)
 	{
@@ -49,7 +59,16 @@ void Powerup_Laser::OnCollision(Collider* col)
 			App->unit2->Enable();
 			App->unit2->playerToFollow = App->player2;
 		}
+		//Change powerup type
 		App->player2->powerup_type = POWERUP_TYPE::LASER;
 		//Change unit type
+		if ((int)laserAnim.current_frame == 0)
+		{
+			App->unit2->unitTx = App->unit2->orangeUnitTx;
+		}
+		else
+		{
+			App->unit2->unitTx = App->unit2->blueUnitTx;
+		}
 	}
 }

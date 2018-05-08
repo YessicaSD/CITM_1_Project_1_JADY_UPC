@@ -344,22 +344,22 @@ void  ModulePlayer::ShotInput() {
 void ModulePlayer::MovementInput() {
 
 	if (MoveLeft() == true) {
-		//---------Movment-----------------------------------------------------------
+		//---------Movement-----------------------------------------------------------
 		position.x -= (int)movementSpeed;
-
-		if (position.x < 0)
-			position.x = 0;
+		if (position.x < 0 + HORIZONTAL_MARGIN)
+		{ position.x = 0 + HORIZONTAL_MARGIN; }
 	}
 	if (MoveRight() == true) {
-		//---------Movment-----------------------------------------------------------
+		//---------Movement-----------------------------------------------------------
 		position.x += (int)movementSpeed;
-		if (position.x > SCREEN_WIDTH - playerwidth) { position.x = SCREEN_WIDTH - playerwidth; }		
+		if (position.x > SCREEN_WIDTH - playerwidth - HORIZONTAL_MARGIN)
+		{ position.x = SCREEN_WIDTH - playerwidth - HORIZONTAL_MARGIN; }
 	}
 	if (MoveUp() == true) {
-		//---------Movment-----------------------------------------------------------
+		//---------Movement-----------------------------------------------------------
 		position.y -= (int)movementSpeed;
-		if (position.y < 0)
-			position.y = 0;
+		if (position.y < 0 + VERTICAL_MARGIN)
+		{ position.y = 0 + VERTICAL_MARGIN; }
 
 		//---------Animation---------------------------------------------------------
 		yAxis -= keyPressSpeed;
@@ -370,11 +370,11 @@ void ModulePlayer::MovementInput() {
 	}
 
 	if (MoveDown() == true) {
-
+		//---------Movement-----------------------------------------------------------
 		position.y += (int)movementSpeed;
-		//---------Movment-----------------------------------------------------------
-		if (position.y > SCREEN_HEIGHT - playerheight)
-			position.y = SCREEN_HEIGHT - playerheight;
+		if (position.y > SCREEN_HEIGHT - playerheight - VERTICAL_MARGIN)
+		{ position.y = SCREEN_HEIGHT - playerheight - VERTICAL_MARGIN; }
+			
 		//---------Animation---------------------------------------------------------
 		yAxis += keyPressSpeed;
 		//We check that the yAxis doesn't get above 1

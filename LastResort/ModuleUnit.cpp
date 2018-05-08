@@ -185,7 +185,9 @@ bool ModuleUnit::Start()
 	bool ret = true;
 	LOG("Loading unit assets");
 	//Load assets
-	unitTx = App->textures->Load("Assets/OrangeUnitSpritesheet.png");
+	orangeUnitTx = App->textures->Load("Assets/OrangeUnitSpritesheet.png");
+	blueUnitTx = App->textures->Load("Assets/BlueUnitSpritesheet.png");
+	unitTx = orangeUnitTx;//Just in case we don't assign a texture, it should be repointed when you grab the powerup
 	throwUnitTx = App->textures->Load("Assets/OrangeUnitThrow.png");
 	currentOrbit = currentTurnAround = angleValue[E];
 	unitCol = App->collision->AddCollider({ (int)position.x, (int)position.y, 16, 16 }, COLLIDER_INDESTRUCTIBLE, this);
@@ -195,7 +197,9 @@ bool ModuleUnit::Start()
 bool ModuleUnit::CleanUp()
 {
 	LOG("Unloading unit assets");
-	App->textures->Unload(unitTx);
+	unitTx = nullptr;
+	App->textures->Unload(orangeUnitTx);
+	App->textures->Unload(blueUnitTx);
 	App->textures->Unload(throwUnitTx);
 	return true;
 }

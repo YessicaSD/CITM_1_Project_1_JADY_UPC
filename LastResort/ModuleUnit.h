@@ -48,12 +48,6 @@ enum Angle
 	E = 0, ESE, SE, SSE, S, SSW, SW, WSW, W, WNW, NW, NNW, N, NNE, NE, ENE
 };
 
-enum UnitType
-{
-	orange = 0,
-	blue
-};
-
 enum UnitPhase
 {
 	rotating = 0,
@@ -88,10 +82,12 @@ public:
 public:
 	fPoint position;
 	ModulePlayer* playerToFollow = nullptr;//Ship it has to follow
-	UnitType type;
 	Collider* unitCol = nullptr;
 	float currentOrbit;
 	float currentTurnAround;
+	SDL_Texture* unitTx = nullptr;
+	SDL_Texture* blueUnitTx = nullptr;
+	SDL_Texture* orangeUnitTx = nullptr;
 
 	float angleValue[UNIT_AXIS];//The value of each angle
 
@@ -114,7 +110,6 @@ private:
 	int spriteYDifferences[UNIT_AXIS] =  {    8,   8,   8,   8,   8,   8,   8,   8,   8,   9,  13,  15,  14,  15,  13,   9 };//Sprite differences in y, helps us keep the unit centered on its trajectory
 	int shotPosXDifferences[UNIT_AXIS] = {   15,  14,  12,   6,   0,  -5, -11, -13, -14, -13, -11,  -6,   0,   6,  11,  14 };//Helps us position the unit projectile at the top of its antenas
 	int shotPosYDifferences[UNIT_AXIS] = {    0,   7,  12,  14,  15,  14,  12,   6,   0,  -6, -11, -14, -14, -13, -10,  -6 };//Helps us position the unit projectile at the top of its antenas
-	SDL_Texture* unitTx = nullptr;
 	SpinAnimation spinAnimation[UNIT_AXIS];//There is an animation for each direction of the unit
 
 	//Shooting
