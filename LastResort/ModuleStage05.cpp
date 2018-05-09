@@ -70,6 +70,7 @@ update_status Module5lvlScene::Update()
 	switch (ScrollState)
 	{
 	case SCROLL_HORIZONTAL:
+		
 		scroll.x -= 5;
 		if (scroll.x <= -SCREEN_WIDTH)
 			scroll.x = 0;
@@ -77,10 +78,12 @@ update_status Module5lvlScene::Update()
 		if (scroll.x <= -SCREEN_WIDTH)
 			scroll.x = 0;
 
-		StarsRect = { scroll.x,0,SCREEN_WIDTH,SCREEN_HEIGHT };
-		SDL_RenderCopy(App->render->renderer, StarsTexture, nullptr, &StarsRect);
-		StarsRect.x += SCREEN_WIDTH;
-		SDL_RenderCopy(App->render->renderer, StarsTexture, nullptr, &StarsRect);
+		/*StarsRect = { scroll.x,0,SCREEN_WIDTH,SCREEN_HEIGHT };
+		SDL_RenderCopy(App->render->renderer, StarsTexture, nullptr, &StarsRect);*/
+		App->render->Blit(StarsTexture, scroll.x, 0, NULL);
+		App->render->Blit(StarsTexture, scroll.x + SCREEN_WIDTH, 0, NULL);
+		/*StarsRect.x += SCREEN_WIDTH;
+		SDL_RenderCopy(App->render->renderer, StarsTexture, nullptr, &StarsRect);*/
 		break;
 	case SCROLL_UP:
 		
