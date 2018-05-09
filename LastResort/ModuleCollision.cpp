@@ -116,7 +116,7 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_GOD][COLLIDER_NONE] = false;
 	matrix[COLLIDER_GOD][COLLIDER_INDESTRUCTIBLE] = false;
 	matrix[COLLIDER_GOD][COLLIDER_POWERUP] = false;
-	matrix[COLLIDER_GOD][COLLIDER_GOD] = false;
+	matrix[COLLIDER_GOD][COLLIDER_GOD] = false;	
 }
 
 // Destructor
@@ -125,7 +125,7 @@ ModuleCollision::~ModuleCollision()
 
 update_status ModuleCollision::PreUpdate()
 {
-	LOG("Matrix powerup and god %d", matrix[COLLIDER_POWERUP][COLLIDER_GOD]);
+	//LOG("Matrix powerup and god %d", matrix[COLLIDER_POWERUP][COLLIDER_GOD]);
 
 	// Remove all colliders scheduled for deletion---------------------------------------------
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
@@ -235,6 +235,12 @@ void ModuleCollision::DebugDraw()
 			break;
 		}
 	}
+}
+
+bool ModuleCollision::Start()
+{
+	LOG("Bool on start: %d", matrix[COLLIDER_POWERUP][COLLIDER_GOD]);
+	return true;
 }
 
 // Called before quitting

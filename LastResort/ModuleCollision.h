@@ -7,7 +7,7 @@
 
 enum COLLIDER_TYPE
 {
-	COLLIDER_NONE = -1,
+	COLLIDER_NONE = 0,
 	COLLIDER_WALL,
 	COLLIDER_PLAYER,
 	COLLIDER_ENEMY,
@@ -49,6 +49,7 @@ public:
 	ModuleCollision();
 	~ModuleCollision();
 
+	bool Start() override;
 	update_status PreUpdate() override;
 	update_status Update() override;
 	bool CleanUp() override;
