@@ -6,7 +6,10 @@
 #include "Animation.h"
 #include "Globals.h"
 #include "SDL\include\SDL.h"
+#include "MovPath.h"
+
 typedef struct _Mix_Music Mix_Music;
+
 class Module5lvlScene : public Module
 {
 public:
@@ -20,12 +23,16 @@ public:
 	bool CleanUp();
 
 public:
+	MovePath cameraMovement;
+	fPoint shipOffset = {167, -144};
 
 	SDL_Texture * StarsTexture = nullptr;
 	SDL_Texture *shipTex = nullptr;
 	SDL_Rect shipRect;
 	SDL_Rect StarsRect;
 	SDL_Rect StarsRect2;
+
+
 	iPoint scroll;
 	enum typeScroll
 	{

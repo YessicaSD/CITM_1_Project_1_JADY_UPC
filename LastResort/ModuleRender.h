@@ -27,6 +27,7 @@ public:
 
 
 public:
+	iPoint camera;
 	SDL_Renderer* renderer = nullptr;
 	bool zoomed = false;
 };

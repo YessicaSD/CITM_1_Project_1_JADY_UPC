@@ -18,10 +18,18 @@
 #include "ModuleEnemies.h"
 #include "ModuleUnit.h"
 
+#define SPACESHIP_WIDTH 1423
+#define SPACESHIP_HEIGHT 288
 
 Module5lvlScene::Module5lvlScene()
 {
-	shipRect = { 0,0 , SCREEN_WIDTH,SCREEN_HEIGHT };
+	shipRect = { 0,0 , SPACESHIP_WIDTH,SPACESHIP_HEIGHT };
+
+	cameraMovement.originPoint = { -167, 144 };
+	cameraMovement.PushBack({ 10,144 }, 200);
+	cameraMovement.PushBack({ 10,144 }, 200);
+	cameraMovement.PushBack({ -244,-33}, 200);
+	cameraMovement.PushBack({ 99,-112}, 100);
 }
 
 bool Module5lvlScene::Start()
@@ -99,12 +107,12 @@ update_status Module5lvlScene::Update()
 	}
 	
 	//Spaceship background--------------------------------------------------------------------
-	//App->render->camera.x += 1;
-	//shipRect.x = App->render->camera.x;
-	//shipRect.y = App->render->camera.y;
 
-	App->render->Blit(shipTex, 0, 0, &shipRect);
+	fPoint shipPos = shipOffset - cameraMovement.GetCurrentPosition();
+
+	App->render->Blit(shipTex, shipPos.x, shipPos.y, &shipRect);
 	
+	LOG("ShipPos : x %i y %i", shipPos.x, shipPos.y);
 	return UPDATE_CONTINUE;
 }
 
