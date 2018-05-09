@@ -125,6 +125,8 @@ ModuleCollision::~ModuleCollision()
 
 update_status ModuleCollision::PreUpdate()
 {
+	LOG("Matrix powerup and god %d", matrix[COLLIDER_POWERUP][COLLIDER_GOD]);
+
 	// Remove all colliders scheduled for deletion---------------------------------------------
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
