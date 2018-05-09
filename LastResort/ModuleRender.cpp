@@ -132,8 +132,8 @@ bool ModuleRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uin
 
 	SDL_Rect rec(rect);
 
-	rec.x *=   SCREEN_SIZE;
-	rec.y *=  SCREEN_SIZE;
+	rec.x *= SCREEN_SIZE;
+	rec.y *= SCREEN_SIZE;
 	rec.w *= SCREEN_SIZE;
 	rec.h *= SCREEN_SIZE;
 

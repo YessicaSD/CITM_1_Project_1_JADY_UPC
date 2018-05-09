@@ -119,6 +119,7 @@ private:
 	UnitPhase unitPhase = UnitPhase::rotating;
 	Uint32 shootTime;
 	const int throwSpeed = 5;
+	Animation chargeAnim;
 
 };
 #endif

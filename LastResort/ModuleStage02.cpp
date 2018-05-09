@@ -40,8 +40,8 @@ bool Module2lvlScene::Start()
 	App->stageFunctionality->currentStage = this;
 
 	//"Reset ship position when fadetoblackends"----------------------------------
-	App->player1->Reset_Positions();
-	App->player2->Reset_Positions();
+	//App->player1->Reset_Positions();
+	//App->player2->Reset_Positions();
 
 	lvl2Text = App->textures->Load("Assets/lvl2/Background_2.png");
 	lvl2ground = App->textures->Load("Assets/lvl2/Foreground_2.png");

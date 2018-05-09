@@ -75,7 +75,7 @@ void Player1::PlayerDies() {
 }
 
 void Player1::Reset_Positions() {
-	initPosition = { 40,74 };
+	//initPosition = { 40,74 };
 	position = initPosition;
 }
 //MOVEMENT INPTUT

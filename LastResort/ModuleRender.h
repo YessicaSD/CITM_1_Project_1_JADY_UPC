@@ -23,8 +23,6 @@ public:
 	bool Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section);
 	bool FlippedBlit(SDL_Texture* texture, int x, int y, SDL_Rect* section);
 	bool DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-	float getCameraPosition(int position,float speed);
-
 
 public:
 	iPoint camera;

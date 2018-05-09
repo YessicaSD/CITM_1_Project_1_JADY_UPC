@@ -86,8 +86,8 @@ bool ModuleStage01::Start()
 	App->player1->winlvl = false;
 	App->player2->winlvl = false;
 	//"Reset ship position when fadetoblackends"----------------------------------
-	App->player1->Reset_Positions(); 
-	App->player2->Reset_Positions();
+	//App->player1->Reset_Positions(); 
+	//App->player2->Reset_Positions();
 	//Enemies---------------------------------------------------------------------
 
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 540, 78);

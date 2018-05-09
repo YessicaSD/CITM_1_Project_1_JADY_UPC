@@ -4,6 +4,7 @@
 #include "Player1.h"
 #include "Player2.h"
 #include "Globals.h"
+#include "ModulePowerups.h"
 #include "ModuleUnit.h"
 
 Powerup_Laser::Powerup_Laser(int x, int y) : Powerup(x, y)
@@ -22,8 +23,10 @@ Powerup_Laser::Powerup_Laser(int x, int y) : Powerup(x, y)
 void Powerup_Laser::OnCollision(Collider* col)
 {
 	//We find which player got this powerup
+	LOG("Colliding");
 	if(col == App->player1->playerCol)
 	{
+		LOG("Getting powerup");
 		//We give it this powerup
 		if ( App->player1->powerup_upgrades < 3)
 		{

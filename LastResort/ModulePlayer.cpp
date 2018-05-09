@@ -38,11 +38,10 @@ bool ModulePlayer::Start()
 	//textures-----------------------------------------------------------------------
 	PlayerTexture = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version																 
 	//colliders----------------------------------------------------------------------
+	InitPosition();//We set the position (before adding the collider) (note that the intial positions are set in Player1.h and Player2.h)
 	playerCol = App->collision->AddCollider({ position.x, position.y, 32, 12 }, COLLIDER_TYPE::COLLIDER_PLAYER, this);
 	//animations----------------------------------------------------------------------
 	deathAnim.Reset();
-
-	
 
 	return ret;
 }
@@ -67,13 +66,11 @@ void ModulePlayer::Reappear() {
 	canShoot = false;
 	start_time = SDL_GetTicks();
 	deathAnim.Reset();
-	position.x = initPosition.x;
-	position.y = initPosition.y;
+	InitPosition();
 }
 
 void ModulePlayer::InitPosition() {
-	position.x = initPosition.x;
-	position.y = initPosition.y;
+	position = initPosition;
 }
 
 
@@ -96,12 +93,16 @@ update_status ModulePlayer::Update()
 	{
 		if (godMode == true)
 		{
+			//Go back to normal
 			playerCol->type = COLLIDER_PLAYER;
+			SDL_SetTextureColorMod(PlayerTexture, 255, 255, 255);
 			godMode = false;
 		}
 		else
 		{
+			//Go to god mode
 			playerCol->type = COLLIDER_GOD;
+			SDL_SetTextureColorMod(PlayerTexture, -255, -255, -255);
 			godMode = true;
 		}
 	}
@@ -144,10 +145,10 @@ void ModulePlayer::ShipAnimation() {
 		if (initAnim.finished == true)
 		{
 			shipAnimations = ShipAnimations::Movement;
-			if (godMode == false)
-			{
-				playerCol->type = COLLIDER_PLAYER;
-			}
+			//if (godMode == false)
+			//{
+			//	playerCol->type = COLLIDER_PLAYER;
+			//}
 			initAnim.Reset();
 			canMove = true;
 			canShoot = true;
@@ -190,7 +191,17 @@ void ModulePlayer::ShipAnimation() {
 		}
 		//Draw ship--------------------------------------------------
 		current_animation = &shipAnim.frames[currentFrame]; //It set the animation frame 
+
+		//1- Render the texture
 		App->render->Blit(PlayerTexture, position.x, position.y, current_animation);
+		////2- Render the lightened texture above it
+		//SDL_SetRenderDrawBlendMode(App->render->renderer, SDL_BLENDMODE_ADD);
+		//SDL_SetTextureColorMod(PlayerTexture, 255, 255, 255);
+		//App->render->Blit(PlayerTexture, position.x, position.y, current_animation);
+		////3- Put everything back to normal
+		//SDL_SetRenderDrawBlendMode(App->render->renderer, SDL_BLENDMODE_NONE);
+		//SDL_SetTextureColorMod(PlayerTexture, 0, 0, 0);
+		//https://forums.libsdl.org/viewtopic.php?p=51593
 		break;
 
 	case Death:

@@ -56,11 +56,11 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_PLAYER_2_SHOT][COLLIDER_PLAYER] = false;
 	matrix[COLLIDER_PLAYER_2_SHOT][COLLIDER_ENEMY] = true;
 	matrix[COLLIDER_PLAYER_2_SHOT][COLLIDER_PLAYER_1_SHOT] = false;
+	matrix[COLLIDER_PLAYER_2_SHOT][COLLIDER_PLAYER_2_SHOT] = false;
 	matrix[COLLIDER_PLAYER_2_SHOT][COLLIDER_ENEMY_SHOT] = false;
 	matrix[COLLIDER_PLAYER_2_SHOT][COLLIDER_NONE] = false;
 	matrix[COLLIDER_PLAYER_2_SHOT][COLLIDER_INDESTRUCTIBLE] = false;
 	matrix[COLLIDER_PLAYER_2_SHOT][COLLIDER_POWERUP] = false;
-	matrix[COLLIDER_PLAYER_2_SHOT][COLLIDER_PLAYER_2_SHOT] = false;
 	matrix[COLLIDER_PLAYER_2_SHOT][COLLIDER_GOD] = false;
 
 	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_WALL] = true;
@@ -158,11 +158,17 @@ update_status ModuleCollision::PreUpdate()
 
 			if (c1->CheckCollision(c2->rect) == true)
 			{
+				matrix[COLLIDER_POWERUP][COLLIDER_GOD] = true;//FIX (this is probably rewritten somewhere else, but i can't find where)
+
 				if (matrix[c1->type][c2->type] && c1->callback)
+				{
 					c1->callback->OnCollision(c1, c2);
+				}
 
 				if (matrix[c2->type][c1->type] && c2->callback)
+				{
 					c2->callback->OnCollision(c2, c1);
+				}		
 			}
 		}
 	}
@@ -267,12 +273,8 @@ Collider* ModuleCollision::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, Module
 bool Collider::CheckCollision(const SDL_Rect& r) const
 {
 	//Return true if there is an overlap between argument "r" and property "rect"
-	if (this->rect.x + this->rect.w > r.x       &&
+	return (this->rect.x + this->rect.w > r.x   &&
 		this->rect.x                < r.x + r.w &&
 		this->rect.y + this->rect.h > r.y       &&
-		this->rect.y                < r.y + r.h)
-	{
-		return true;
-	}
-	return false;
+		this->rect.y < r.y + r.h);
 }

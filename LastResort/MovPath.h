@@ -73,8 +73,8 @@ public:
 
 	fPoint GetCurrentPosition()
 	{
-		LOG("current frame :  %i", currentFrame);
-		LOG("position : (%i,%i)", position.x, position.y);
+		//LOG("current frame :  %i", currentFrame);
+		//LOG("position : (%i,%i)", position.x, position.y);
 
 		if (currentFrame > movements[currentMov].frames)
 		{

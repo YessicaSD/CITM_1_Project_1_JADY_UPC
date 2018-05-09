@@ -48,8 +48,8 @@ bool Module5lvlScene::Start()
 	App->stageFunctionality->currentStage = this;
 
 	//"Reset ship position when fadetoblackends"----------------------------------
-	App->player1->Reset_Positions();
-	App->player2->Reset_Positions();
+	//App->player1->Reset_Positions();
+	//App->player2->Reset_Positions();
 
 	//Texture ---------------------------------------------------------------------------------------------------
 	StarsTexture = App->textures->Load("Assets/lvl5/background/backgroundstars.png");
@@ -112,7 +112,7 @@ update_status Module5lvlScene::Update()
 
 	App->render->Blit(shipTex, shipPos.x, shipPos.y, &shipRect);
 	
-	LOG("ShipPos : x %i y %i", shipPos.x, shipPos.y);
+	//LOG("ShipPos : x %i y %i", shipPos.x, shipPos.y);
 	return UPDATE_CONTINUE;
 }
 

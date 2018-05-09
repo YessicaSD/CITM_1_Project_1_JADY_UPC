@@ -173,6 +173,24 @@ ModuleUnit::ModuleUnit() //Constructor
 	spinAnimation[NNW].frame[5] = {  98, 61, 17, 23 };
 	spinAnimation[NNW].frame[6] = {  81, 61, 17, 23 };
 	spinAnimation[NNW].frame[7] = {  64, 61, 17, 23 };
+	//- Charge animation
+	chargeAnim.PushBack({ 176,  0, 42, 41 });
+	chargeAnim.PushBack({   0, 41, 42, 41 });
+	chargeAnim.PushBack({  42, 41, 46, 45 });
+	chargeAnim.PushBack({  88, 41, 46, 45 });
+	chargeAnim.PushBack({ 134, 41, 28, 27 });
+	chargeAnim.PushBack({ 162, 41, 28, 27 });
+	chargeAnim.PushBack({ 190, 41, 30, 30 });
+	chargeAnim.PushBack({ 220, 41, 30, 30 });
+	chargeAnim.PushBack({   0, 86, 32, 32 });
+	chargeAnim.PushBack({  32, 86, 32, 32 });
+	chargeAnim.PushBack({  64, 86, 28, 28 });
+	chargeAnim.PushBack({  92, 86, 28, 28 });
+	chargeAnim.PushBack({ 120, 86, 32, 32 });
+	chargeAnim.PushBack({ 156, 86, 36, 32 });
+	chargeAnim.PushBack({ 188, 86, 36, 36 });
+	chargeAnim.speed = 0.01f;
+	chargeAnim.loop = true;
 }
 
 ModuleUnit::~ModuleUnit()
@@ -326,21 +344,37 @@ void ModuleUnit::Rotating()
 		power += powerSpeed;
 		//We make sure the power doesn't get above 1
 		if (power > 1) { power = 1; }
+		//Play the charging animation
+		SDL_Rect currentChargeFrame;
+		currentChargeFrame = chargeAnim.GetCurrentFrame();
+		App->render->Blit(throwUnitTx, position.x - currentChargeFrame.w / 2, position.y - currentChargeFrame.h / 2, &currentChargeFrame);
 	}
 
-	if (playerToFollow->ReleaseCharge())
-	{
-		if (power > 0.3f)//0.3 minimum limit at which the game considers the ball to be charged
-		{
-			//Throw
-			unitPhase = UnitPhase::trowing;
-			shootTime = SDL_GetTicks();
-			//Animation
+	//if (power > 0.3f)
+	//{
+	//	if (playerToFollow->ReleaseCharge())
+	//	{
+	//		//Throw the unit
+	//	}
+	//	else
+	//	{
+	//		//Play the charging animation
+	//	}
+	//}
 
-		}
-		//If the player releases the button, we set the power to 0
-		power = 0;
-	}
+	//if (playerToFollow->ReleaseCharge())
+	//{
+	//	if (power > 0.3f)//0.3 minimum limit at which the game considers the ball to be charged
+	//	{
+	//		//Throw
+	//		unitPhase = UnitPhase::trowing;
+	//		shootTime = SDL_GetTicks();
+	//		//Animation
+
+	//	}
+	//	//If the player releases the button, we set the power to 0
+	//	power = 0;
+	//}
 }
 
 void ModuleUnit::Throwing()
