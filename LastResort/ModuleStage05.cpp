@@ -27,7 +27,7 @@ Module5lvlScene::Module5lvlScene()
 
 	cameraMovement.originPoint = { -167, 144 };
 	cameraMovement.PushBack({ 10,144 }, 200);
-	cameraMovement.PushBack({ 10,144 }, 200);
+	cameraMovement.PushBack( 200);
 	cameraMovement.PushBack({ -244,-33}, 200);
 	cameraMovement.PushBack({ 99,-112}, 100);
 }
