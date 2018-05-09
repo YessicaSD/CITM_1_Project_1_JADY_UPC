@@ -344,37 +344,27 @@ void ModuleUnit::Rotating()
 		power += powerSpeed;
 		//We make sure the power doesn't get above 1
 		if (power > 1) { power = 1; }
+	}
+
+	if(power > 0.1)
+	{
 		//Play the charging animation
 		SDL_Rect currentChargeFrame;
 		currentChargeFrame = chargeAnim.GetCurrentFrame();
 		App->render->Blit(throwUnitTx, position.x - currentChargeFrame.w / 2, position.y - currentChargeFrame.h / 2, &currentChargeFrame);
 	}
 
-	//if (power > 0.3f)
-	//{
-	//	if (playerToFollow->ReleaseCharge())
-	//	{
-	//		//Throw the unit
-	//	}
-	//	else
-	//	{
-	//		//Play the charging animation
-	//	}
-	//}
-
-	//if (playerToFollow->ReleaseCharge())
-	//{
-	//	if (power > 0.3f)//0.3 minimum limit at which the game considers the ball to be charged
-	//	{
-	//		//Throw
-	//		unitPhase = UnitPhase::trowing;
-	//		shootTime = SDL_GetTicks();
-	//		//Animation
-
-	//	}
-	//	//If the player releases the button, we set the power to 0
-	//	power = 0;
-	//}
+	if (playerToFollow->ReleaseCharge())
+	{
+		if (power > 0.3f)//0.3 minimum limit at which the game considers the ball to be charged
+		{
+			//Throw
+			unitPhase = UnitPhase::trowing;
+			shootTime = SDL_GetTicks();
+		}
+		//If the player releases the button, we set the power to 0
+		power = 0;
+	}
 }
 
 void ModuleUnit::Throwing()
@@ -387,6 +377,8 @@ void ModuleUnit::Throwing()
 	}
 	position.x += cosf(angleValue[turnAroundToRender]) * throwSpeed;
 	position.y += sinf(angleValue[turnAroundToRender]) * throwSpeed;
+	LOG("X increase: %f", cosf(angleValue[turnAroundToRender]));
+	LOG("Y increase: %f", sinf(angleValue[turnAroundToRender]));
 
 	//RENDER------------------------------------------------------------------
 	App->render->Blit(
