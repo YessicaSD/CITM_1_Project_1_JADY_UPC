@@ -7,6 +7,7 @@
 #include "Globals.h"
 #include "SDL\include\SDL.h"
 #include "MovPath.h"
+#include "SDL/include/SDL_timer.h"
 
 typedef struct _Mix_Music Mix_Music;
 
@@ -23,9 +24,13 @@ public:
 	bool CleanUp();
 
 public:
-	MovePath cameraMovement;
-	fPoint shipOffset = {167, -144};
+	//provisional-----------------------------
+	int current_time= 0;
+	int start_time = 0;
+	//----------------------------------------
 
+	MovePath cameraMovement;
+	dPoint shipOffset = {444, -240};
 	SDL_Texture * StarsTexture = nullptr;
 	SDL_Texture *shipTex = nullptr;
 	SDL_Rect shipRect;
