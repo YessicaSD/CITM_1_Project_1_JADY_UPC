@@ -118,7 +118,8 @@ private:
 	const float powerSpeed = 0.01f;
 	UnitPhase unitPhase = UnitPhase::rotating;
 	Uint32 shootTime;
-	const int throwSpeed = 5;
+	const float throwSpeed = 5;
+	const float returnSpeed = 5;
 	Animation chargeAnim;
 
 };

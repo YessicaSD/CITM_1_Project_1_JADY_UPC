@@ -377,8 +377,7 @@ void ModuleUnit::Throwing()
 	}
 	position.x += cosf(angleValue[turnAroundToRender]) * throwSpeed;
 	position.y += sinf(angleValue[turnAroundToRender]) * throwSpeed;
-	LOG("X increase: %f", cosf(angleValue[turnAroundToRender]));
-	LOG("Y increase: %f", sinf(angleValue[turnAroundToRender]));
+	unitCol->SetPos(position.x, position.y);
 
 	//RENDER------------------------------------------------------------------
 	App->render->Blit(
@@ -394,22 +393,26 @@ void ModuleUnit::Returning()
 {
 	//MOVEMENT----------------------------------------------------------------
 
-	//- Move
+	//- Move (fixed)
 	fPoint vectorIncrease;
-	float vectorModule;
-	//-- We calculate the vector from the unit position to the player it needs to return to
-	vectorIncrease.x = position.x - playerToFollow->position.x;
-	vectorIncrease.y = position.y - playerToFollow->position.y;
-	//-- We calculate the unit vector
-	vectorModule = sqrt(pow(vectorIncrease.x, 2) * pow(vectorIncrease.y, 2));
-	vectorIncrease.x = vectorIncrease.x / vectorModule;
-	vectorIncrease.y = vectorIncrease.y / vectorModule;
+	float vectorIncreaseModule;
+
+	//-- We create a vector from the player to the unit
+	vectorIncrease.x = playerToFollow->position.x - position.x;
+	vectorIncrease.y = playerToFollow->position.y - position.y;
+	//-- We find the module of the vectors
+	vectorIncreaseModule = sqrt(pow(vectorIncrease.x, 2) + (pow(vectorIncrease.y, 2)));
+	//-- We divide each component by the module
+	vectorIncrease.x /= vectorIncreaseModule;
+	vectorIncrease.y /= vectorIncreaseModule;
+
 	//-- We add that vector to the position of the orbit
-	position.x -= vectorIncrease.x * throwSpeed;
-	position.y -= vectorIncrease.y * throwSpeed;
+	position.x += vectorIncrease.x * returnSpeed;
+	position.y += vectorIncrease.y * returnSpeed;
+	unitCol->SetPos(position.x, position.y);
 
 	//- If the unit has reached its position again, we continue orbiting
-	if (sqrt(pow(position.x-playerToFollow->position.x,2) + pow(position.y - playerToFollow->position.y, 2)) < throwSpeed)
+	if (sqrt(pow(position.x-playerToFollow->position.x,2) + pow(position.y - playerToFollow->position.y, 2)) < returnSpeed)
 	{
 		//IMPLEMENT: Make a nice transition for some seconds
 
