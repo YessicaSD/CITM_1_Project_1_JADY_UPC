@@ -131,7 +131,7 @@ private:
 	int timeToReturn = 1000;
 	const float throwingSpeed = 7;
 	const float returningSpeed = 7;
-	const float positioningSpeed = 2;
+	const float positioningSpeed = 7;
 	Animation chargeAnim;
 	SDL_Rect chargeFrame;
 	int chargeXOffset[15] = { 18, 16, 16, 14, 14, 16, 16, 15, 15, 14, 14, 23, 23, 21, 21 };//INFO: 15 = number of sprites in the charging animation
