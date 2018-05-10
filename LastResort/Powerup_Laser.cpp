@@ -42,11 +42,11 @@ void Powerup_Laser::OnCollision(Collider* col)
 		//Change unit type
 		if((int)laserAnim.current_frame == 0)
 		{
-			App->unit1->unitTx = App->unit1->orangeUnitTx;
+			App->unit1->MakeUnitOrange();
 		}
 		else
 		{
-			App->unit1->unitTx = App->unit1->blueUnitTx;
+			App->unit1->MakeUnitBlue();
 		}
 		
 	}
@@ -67,11 +67,11 @@ void Powerup_Laser::OnCollision(Collider* col)
 		//Change unit type
 		if ((int)laserAnim.current_frame == 0)
 		{
-			App->unit2->unitTx = App->unit2->orangeUnitTx;
+			App->unit2->MakeUnitOrange();
 		}
 		else
 		{
-			App->unit2->unitTx = App->unit2->blueUnitTx;
+			App->unit2->MakeUnitBlue();
 		}
 	}
 }

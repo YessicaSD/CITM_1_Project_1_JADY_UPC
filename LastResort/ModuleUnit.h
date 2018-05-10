@@ -79,6 +79,9 @@ public:
 	void LimitRotation(float &);//This function limits a rotation to positive numbers and 2*PI radians
 	int TurnAroundToRender();//This function will return an angle depending on where the unit is pointing to
 
+	void MakeUnitBlue();
+	void MakeUnitOrange();
+
 public:
 	fPoint position;
 	ModulePlayer* playerToFollow = nullptr;//Ship it has to follow
@@ -114,6 +117,8 @@ private:
 
 	//Shooting
 	SDL_Texture* throwUnitTx = nullptr;
+	SDL_Texture* throwUnitOrangeTx = nullptr;
+	SDL_Texture* throwUnitBlueTx = nullptr;
 	float power = 0;
 	const float powerSpeed = 0.01f;
 	UnitPhase unitPhase = UnitPhase::rotating;
