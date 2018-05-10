@@ -60,6 +60,9 @@ bool Module5lvlScene::Start()
 
 	//Enemies -------------------------------------------------------------------------------------------------
 	//App->enemies->AddEnemy(OSCILATOR, -200, 200);
+	App->enemies->AddEnemy(POWERDROPPER, 200, 50, SPEED);
+	App->enemies->AddEnemy(POWERDROPPER, 300, 150, LASER);
+	App->enemies->AddEnemy(REDBATS, 300, 200);
 	return ret;
 }
 
