@@ -52,7 +52,8 @@ enum UnitPhase
 {
 	rotating = 0,
 	trowing,
-	returning
+	returning,
+	positioning//Returning from the center to the position at which it orbits around the player
 };
 
 struct SpinAnimation
@@ -74,6 +75,7 @@ public:
 	void Rotating();
 	void Throwing();
 	void Returning();
+	void Positioning();
 
 	void RotateTo(float, float&, float);//This function increases a rotation until it reaches its target rotation
 	void LimitRotation(float &);//This function limits a rotation to positive numbers and 2*PI radians
@@ -108,6 +110,7 @@ private:
 	bool turningAround;//A bool that indicates if we can make the unit turn around
 	const float radius = 31;
 	const float angleSeparation = PI / 16;//The separation between the angles (helps us calculate which animation we have to play)
+	iPoint playerCenter;
 
 	SpinAnimation spinAnimation[UNIT_AXIS];//There is an animation for each direction of the unit
 										 //   E, ESE,  SE, SSE,   S, SSW,  SW, WSW,   W, WNW,  NW, NNW,   N, NNE,  NE, ENE
@@ -125,8 +128,10 @@ private:
 	float power = 0;
 	const float powerSpeed = 0.01f;
 	Uint32 shootTime;
-	const float throwSpeed = 5;
-	const float returnSpeed = 5;
+	int timeToReturn = 1000;
+	const float throwingSpeed = 7;
+	const float returningSpeed = 7;
+	const float positioningSpeed = 2;
 	Animation chargeAnim;
 	SDL_Rect chargeFrame;
 	int chargeXOffset[15] = { 18, 16, 16, 14, 14, 16, 16, 15, 15, 14, 14, 23, 23, 21, 21 };//INFO: 15 = number of sprites in the charging animation
