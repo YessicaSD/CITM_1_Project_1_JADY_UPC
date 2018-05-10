@@ -118,7 +118,17 @@ bool Player2::MoveUp()
 
 bool Player2::Shoot()
 {
-	return (App->input->keyboard[SDL_SCANCODE_KP_0] == KEY_STATE::KEY_DOWN || SDL_GameControllerGetButton(App->input->controller[1], SDL_CONTROLLER_BUTTON_B));
+	if (!SDL_GameControllerGetButton(App->input->controller[1], SDL_CONTROLLER_BUTTON_B))
+	{
+		stillpressed = false;
+	}
+	if (SDL_GameControllerGetButton(App->input->controller[1], SDL_CONTROLLER_BUTTON_B) && !stillpressed)
+	{
+		Controllshoot = true;
+		stillpressed = true;
+	}
+
+	return (App->input->keyboard[SDL_SCANCODE_KP_0] == KEY_STATE::KEY_DOWN || Controllshoot);
 }
 
 bool Player2::Charge()
