@@ -174,22 +174,22 @@ ModuleUnit::ModuleUnit() //Constructor
 	spinAnimation[NNW].frame[6] = {  81, 61, 17, 23 };
 	spinAnimation[NNW].frame[7] = {  64, 61, 17, 23 };
 	//- Charge animation
-	chargeAnim.PushBack({ 176,  0, 42, 41 });
-	chargeAnim.PushBack({   0, 41, 42, 41 });
-	chargeAnim.PushBack({  42, 41, 46, 45 });
-	chargeAnim.PushBack({  88, 41, 46, 45 });
-	chargeAnim.PushBack({ 134, 41, 28, 27 });
-	chargeAnim.PushBack({ 162, 41, 28, 27 });
-	chargeAnim.PushBack({ 190, 41, 30, 30 });
-	chargeAnim.PushBack({ 220, 41, 30, 30 });
-	chargeAnim.PushBack({   0, 86, 32, 32 });
-	chargeAnim.PushBack({  32, 86, 32, 32 });
-	chargeAnim.PushBack({  64, 86, 28, 28 });
-	chargeAnim.PushBack({  92, 86, 28, 28 });
-	chargeAnim.PushBack({ 120, 86, 32, 32 });
-	chargeAnim.PushBack({ 152, 86, 32, 32 });
 	chargeAnim.PushBack({ 184, 86, 36, 36 });
-	chargeAnim.speed = 0.33f;
+	chargeAnim.PushBack({ 152, 86, 32, 32 });
+	chargeAnim.PushBack({ 120, 86, 32, 32 });
+	chargeAnim.PushBack({ 92, 86, 28, 28 });
+	chargeAnim.PushBack({ 64, 86, 28, 28 });
+	chargeAnim.PushBack({ 32, 86, 32, 32 });
+	chargeAnim.PushBack({ 0, 86, 32, 32 });
+	chargeAnim.PushBack({ 220, 41, 30, 30 });
+	chargeAnim.PushBack({ 190, 41, 30, 30 });
+	chargeAnim.PushBack({ 162, 41, 28, 27 });
+	chargeAnim.PushBack({ 134, 41, 28, 27 });
+	chargeAnim.PushBack({ 88, 41, 46, 45 });
+	chargeAnim.PushBack({ 42, 41, 46, 45 });
+	chargeAnim.PushBack({ 0, 41, 42, 41 });
+	chargeAnim.PushBack({ 176,  0, 42, 41 });
+	chargeAnim.speed = 0.5f;
 	chargeAnim.loop = true;
 }
 

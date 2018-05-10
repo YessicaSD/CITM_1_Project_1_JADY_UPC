@@ -120,8 +120,8 @@ private:
 	Uint32 shootTime;
 	const float throwSpeed = 5;
 	const float returnSpeed = 5;
-	int chargeXOffset[15] = { 21, 21, 23, 23, 14, 14, 15, 15, 16, 16, 14, 14, 16, 16, 18 };//INFO: 15 = number of sprites in the charging animation
-	int chargeYOffset[15] = { 21, 21, 23, 23, 13, 13, 15, 15, 16, 16, 14, 14, 16, 16, 18 };
+	int chargeXOffset[15] = { 18, 16, 16, 14, 14, 16, 16, 15, 15, 14, 14, 23, 23, 21, 21 };//INFO: 15 = number of sprites in the charging animation
+	int chargeYOffset[15] = { 18, 16, 16, 14, 14, 16, 16, 15, 15, 13, 13, 23, 23, 21, 21 };
 	Animation chargeAnim;
 
 };
