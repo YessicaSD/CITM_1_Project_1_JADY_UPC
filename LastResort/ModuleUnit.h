@@ -34,7 +34,7 @@
 //SPIN
 //- The unit has 8 different sprites for each of its axis
 //-	We created a struct called "SpinAnimation" which will store the 8 different sprites for the 16 different places where it can aim
-//	(basically its the same as the animation class but it allows us to have better control on its animations)
+//	(basically its the same as the animation class but it allows us to have better control over its animations)
 
 #define SPIN_FRAMES 8
 #define UNIT_AXIS 16
@@ -120,6 +120,8 @@ private:
 	Uint32 shootTime;
 	const float throwSpeed = 5;
 	const float returnSpeed = 5;
+	int chargeXOffset[15] = { 21, 21, 23, 23, 14, 14, 15, 15, 16, 16, 14, 14, 16, 16, 18 };//INFO: 15 = number of sprites in the charging animation
+	int chargeYOffset[15] = { 21, 21, 23, 23, 13, 13, 15, 15, 16, 16, 14, 14, 16, 16, 18 };
 	Animation chargeAnim;
 
 };

@@ -187,9 +187,9 @@ ModuleUnit::ModuleUnit() //Constructor
 	chargeAnim.PushBack({  64, 86, 28, 28 });
 	chargeAnim.PushBack({  92, 86, 28, 28 });
 	chargeAnim.PushBack({ 120, 86, 32, 32 });
-	chargeAnim.PushBack({ 156, 86, 36, 32 });
-	chargeAnim.PushBack({ 188, 86, 36, 36 });
-	chargeAnim.speed = 0.01f;
+	chargeAnim.PushBack({ 152, 86, 32, 32 });
+	chargeAnim.PushBack({ 184, 86, 36, 36 });
+	chargeAnim.speed = 0.33f;
 	chargeAnim.loop = true;
 }
 
@@ -309,7 +309,7 @@ void ModuleUnit::Rotating()
 	//Update the collider position (after having set its position)--------------------------------------------
 	unitCol->SetPos((int)position.x - 8, (int)position.y - 8);//- 8 is because the sphere part of the unit has 8 witdh and 8 height, so since the position.x and position.y are in the center in the trajectory, we just need to substract them from that to get the position of the collider
 
-													//Increase the animation current frame--------------------------------------------------------------------
+	//Increase the animation current frame--------------------------------------------------------------------
 	currentSpinFrame += spinSpeed;
 
 	//- Limit the animation frames
@@ -320,8 +320,7 @@ void ModuleUnit::Rotating()
 		unitTx,
 		(int)position.x - spriteXDifferences[turnAroundToRender],
 		(int)position.y - spriteYDifferences[turnAroundToRender],
-		&spinAnimation[turnAroundToRender].frame[(int)currentSpinFrame]
-		);
+		&spinAnimation[turnAroundToRender].frame[(int)currentSpinFrame]);
 
 	//Shoot---------------------------------------------------------------------------------------------------
 	App->particles->unitShot.speed.x = unitProjectileSpeed * cosf(angleValue[turnAroundToRender]);
@@ -351,7 +350,11 @@ void ModuleUnit::Rotating()
 		//Play the charging animation
 		SDL_Rect currentChargeFrame;
 		currentChargeFrame = chargeAnim.GetCurrentFrame();
-		App->render->Blit(throwUnitTx, position.x - currentChargeFrame.w / 2, position.y - currentChargeFrame.h / 2, &currentChargeFrame);
+		App->render->Blit(
+			throwUnitTx,
+			(int)position.x - chargeXOffset[(int)chargeAnim.current_frame],
+			(int)position.y - chargeYOffset[(int)chargeAnim.current_frame],
+			&currentChargeFrame);
 	}
 
 	if (playerToFollow->ReleaseCharge())
@@ -377,16 +380,14 @@ void ModuleUnit::Throwing()
 	}
 	position.x += cosf(angleValue[turnAroundToRender]) * throwSpeed;
 	position.y += sinf(angleValue[turnAroundToRender]) * throwSpeed;
-	unitCol->SetPos(position.x, position.y);
+	unitCol->SetPos((int)position.x - 8, (int)position.y - 8);//- 8 is because the sphere part of the unit has 8 witdh and 8 height, so since the position.x and position.y are in the center in the trajectory, we just need to substract them from that to get the position of the collider
 
 	//RENDER------------------------------------------------------------------
 	App->render->Blit(
 		unitTx,
 		position.x - spriteXDifferences[turnAroundToRender],
 		position.y - spriteYDifferences[turnAroundToRender],
-		&spinAnimation[turnAroundToRender].frame[(int)currentSpinFrame]),
-		0.0f,
-		false;
+		&spinAnimation[turnAroundToRender].frame[(int)currentSpinFrame]);
 }
 
 void ModuleUnit::Returning()
@@ -409,7 +410,7 @@ void ModuleUnit::Returning()
 	//-- We add that vector to the position of the orbit
 	position.x += vectorIncrease.x * returnSpeed;
 	position.y += vectorIncrease.y * returnSpeed;
-	unitCol->SetPos(position.x, position.y);
+	unitCol->SetPos((int)position.x - 8, (int)position.y - 8);//- 8 is because the sphere part of the unit has 8 witdh and 8 height, so since the position.x and position.y are in the center in the trajectory, we just need to substract them from that to get the position of the collider
 
 	//- If the unit has reached its position again, we continue orbiting
 	if (sqrt(pow(position.x-playerToFollow->position.x,2) + pow(position.y - playerToFollow->position.y, 2)) < returnSpeed)
@@ -424,8 +425,8 @@ void ModuleUnit::Returning()
 	//RENDER------------------------------------------------------------------
 	App->render->Blit(
 		unitTx,
-		position.x - spriteXDifferences[turnAroundToRender],
-		position.y - spriteYDifferences[turnAroundToRender],
+		(int)position.x - spriteXDifferences[turnAroundToRender],
+		(int)position.y - spriteYDifferences[turnAroundToRender],
 		&spinAnimation[turnAroundToRender].frame[(int)currentSpinFrame]),
 		0.0f,
 		false;

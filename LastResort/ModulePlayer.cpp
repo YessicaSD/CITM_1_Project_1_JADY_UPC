@@ -145,10 +145,8 @@ void ModulePlayer::ShipAnimation() {
 		if (initAnim.finished == true)
 		{
 			shipAnimations = ShipAnimations::Movement;
-			//if (godMode == false)
-			//{
-			//	playerCol->type = COLLIDER_PLAYER;
-			//}
+			//We change the collider type when spawning if god mode is not active
+			if (godMode == false) { playerCol->type = COLLIDER_PLAYER; }
 			initAnim.Reset();
 			canMove = true;
 			canShoot = true;
