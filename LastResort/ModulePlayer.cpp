@@ -298,6 +298,10 @@ void  ModulePlayer::ShotInput() {
 			}
 		}
 		if (isShooting == false) { shoot = true; }
+		if (Controllshoot == true) {
+			Controllshoot = false;
+
+		}
 	}
 	//----------Ship Fire-------------------------------------------
 	if (shoot == true) {

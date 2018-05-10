@@ -1,4 +1,4 @@
-# We are the team JADY
+﻿# We are the team JADY
 
 ## Introduction
 This game was created by 4 students of UPC, CITM on the Game Design and Development degree.
@@ -38,6 +38,10 @@ https://github.com/Dasanch/Project_1_JADY_UPC
 
 ## Movement keys --------------------------------------------------------------------
 ### Player 1:
+#### Controller:
+- **Left Joystick**: Movement
+- **B**: Shoot
+#### Keyboard:
 - **A**: Move left
 - **S**: Move down
 - **D**: Move right
@@ -46,6 +50,10 @@ https://github.com/Dasanch/Project_1_JADY_UPC
 - **Left shift**: Lock the unit
 
 ### Player 2:
+#### Controller:
+- **Left Joystick**: Movement
+- **B**: Shoot
+#### Keyboard:
 - **Left arrow**: Move left
 - **Down arrow**: Move down
 - **Right arrow**: Move right

@@ -126,6 +126,26 @@ public:
 	{
 		return abs(v.x - x) + abs(v.y - y);
 	}
+
+	// Custom ------------------------------------------------
+
+	//- This function makes the unit vector (a vector with module 1) from a source postion to a target postion
+	void UnitVector(p2Point targetPos, p2Point sourcePos)
+	{
+		p2Point unitVec;
+		TYPE unitVecModule;
+		//- We create a vector from the player to the unit
+		unitVec.x = targetPos.x - sourcePos.x;
+		unitVec.y = targetPos.y - sourcePos.y;
+		//- We find the module of the vectors
+		unitVecModule = sqrt(pow(unitVec.x, 2) + (pow(unitVec.y, 2)));
+		//- We divide each component by the module
+		unitVec.x /= unitVecModule;
+		unitVec.y /= unitVecModule;
+		this->x = unitVec.x;
+		this->y = unitVec.y;
+	}
+
 };
 
 typedef p2Point<int> iPoint;

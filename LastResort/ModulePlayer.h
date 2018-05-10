@@ -118,6 +118,10 @@ public:
 	bool LaserPowerUp = false;
 	int FadeToBlackAlfa;
 	SDL_Rect backgroundBlack;
+
+	//Controller variables --------------------------------
+	bool Controllshoot;
+	bool stillpressed;
 };
 
 #endif

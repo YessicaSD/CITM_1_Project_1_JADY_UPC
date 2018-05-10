@@ -52,7 +52,8 @@ enum UnitPhase
 {
 	rotating = 0,
 	trowing,
-	returning
+	returning,
+	positioning//Returning from the center to the position at which it orbits around the player
 };
 
 struct SpinAnimation
@@ -74,6 +75,7 @@ public:
 	void Rotating();
 	void Throwing();
 	void Returning();
+	void Positioning();
 
 	void RotateTo(float, float&, float);//This function increases a rotation until it reaches its target rotation
 	void LimitRotation(float &);//This function limits a rotation to positive numbers and 2*PI radians
@@ -108,26 +110,33 @@ private:
 	bool turningAround;//A bool that indicates if we can make the unit turn around
 	const float radius = 31;
 	const float angleSeparation = PI / 16;//The separation between the angles (helps us calculate which animation we have to play)
+	iPoint playerCenter;
+
+	SpinAnimation spinAnimation[UNIT_AXIS];//There is an animation for each direction of the unit
 										 //   E, ESE,  SE, SSE,   S, SSW,  SW, WSW,   W, WNW,  NW, NNW,   N, NNE,  NE, ENE
 	int spriteXDifferences[UNIT_AXIS] =  {    8,   8,   8,   8,   8,   9,  13,  14,  14,  14,  13,   9,   8,   8,   8,   8 };//Sprite differences in x, helps us keep the unit centered on its trajectory
 	int spriteYDifferences[UNIT_AXIS] =  {    8,   8,   8,   8,   8,   8,   8,   8,   8,   9,  13,  15,  14,  15,  13,   9 };//Sprite differences in y, helps us keep the unit centered on its trajectory
+	
 	int shotPosXDifferences[UNIT_AXIS] = {   15,  14,  12,   6,   0,  -5, -11, -13, -14, -13, -11,  -6,   0,   6,  11,  14 };//Helps us position the unit projectile at the top of its antenas
 	int shotPosYDifferences[UNIT_AXIS] = {    0,   7,  12,  14,  15,  14,  12,   6,   0,  -6, -11, -14, -14, -13, -10,  -6 };//Helps us position the unit projectile at the top of its antenas
-	SpinAnimation spinAnimation[UNIT_AXIS];//There is an animation for each direction of the unit
 
 	//Shooting
+	UnitPhase unitPhase = UnitPhase::rotating;
 	SDL_Texture* throwUnitTx = nullptr;
 	SDL_Texture* throwUnitOrangeTx = nullptr;
 	SDL_Texture* throwUnitBlueTx = nullptr;
 	float power = 0;
 	const float powerSpeed = 0.01f;
-	UnitPhase unitPhase = UnitPhase::rotating;
 	Uint32 shootTime;
-	const float throwSpeed = 5;
-	const float returnSpeed = 5;
+	int timeToReturn = 1000;
+	const float throwingSpeed = 7;
+	const float returningSpeed = 7;
+	const float positioningSpeed = 2;
+	Animation chargeAnim;
+	SDL_Rect chargeFrame;
 	int chargeXOffset[15] = { 18, 16, 16, 14, 14, 16, 16, 15, 15, 14, 14, 23, 23, 21, 21 };//INFO: 15 = number of sprites in the charging animation
 	int chargeYOffset[15] = { 18, 16, 16, 14, 14, 16, 16, 15, 15, 13, 13, 23, 23, 21, 21 };
-	Animation chargeAnim;
-
+	Animation throwAnim;
+	SDL_Rect throwFrame;
 };
 #endif

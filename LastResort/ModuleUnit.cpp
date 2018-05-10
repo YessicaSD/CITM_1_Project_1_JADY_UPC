@@ -177,20 +177,34 @@ ModuleUnit::ModuleUnit() //Constructor
 	chargeAnim.PushBack({ 184, 86, 36, 36 });
 	chargeAnim.PushBack({ 152, 86, 32, 32 });
 	chargeAnim.PushBack({ 120, 86, 32, 32 });
-	chargeAnim.PushBack({ 92, 86, 28, 28 });
-	chargeAnim.PushBack({ 64, 86, 28, 28 });
-	chargeAnim.PushBack({ 32, 86, 32, 32 });
-	chargeAnim.PushBack({ 0, 86, 32, 32 });
+	chargeAnim.PushBack({  92, 86, 28, 28 });
+	chargeAnim.PushBack({  64, 86, 28, 28 });
+	chargeAnim.PushBack({  32, 86, 32, 32 });
+	chargeAnim.PushBack({   0, 86, 32, 32 });
 	chargeAnim.PushBack({ 220, 41, 30, 30 });
 	chargeAnim.PushBack({ 190, 41, 30, 30 });
 	chargeAnim.PushBack({ 162, 41, 28, 27 });
 	chargeAnim.PushBack({ 134, 41, 28, 27 });
-	chargeAnim.PushBack({ 88, 41, 46, 45 });
-	chargeAnim.PushBack({ 42, 41, 46, 45 });
-	chargeAnim.PushBack({ 0, 41, 42, 41 });
+	chargeAnim.PushBack({  88, 41, 46, 45 });
+	chargeAnim.PushBack({  42, 41, 46, 45 });
+	chargeAnim.PushBack({   0, 41, 42, 41 });
 	chargeAnim.PushBack({ 176,  0, 42, 41 });
 	chargeAnim.speed = 0.5f;
 	chargeAnim.loop = true;
+	//-Throw animation
+	throwAnim.PushBack({   0, 0, 22, 22 });
+	throwAnim.PushBack({  22, 0, 24, 24 });
+	throwAnim.PushBack({  46, 0, 26, 26 });
+	throwAnim.PushBack({  72, 0, 24, 24 });
+	throwAnim.PushBack({  96, 0, 22, 22 });
+	throwAnim.PushBack({ 118, 0, 20, 20 });
+	throwAnim.PushBack({ 138, 0, 18, 18 });
+	throwAnim.PushBack({ 156, 0, 20, 20 });
+	throwAnim.speed = 0.1f;
+	throwAnim.loop = true;
+	//Other variables
+	playerCenter.x = 16;
+	playerCenter.y =  6;
 }
 
 ModuleUnit::~ModuleUnit()
@@ -236,6 +250,9 @@ update_status ModuleUnit::Update()
 		break;
 	case UnitPhase::returning:
 		Returning();
+		break;
+	case UnitPhase::positioning:
+		Positioning();
 		break;
 	}
 
@@ -305,8 +322,8 @@ void ModuleUnit::Rotating()
 	turnAroundToRender = TurnAroundToRender();
 
 	//Set the position----------------------------------------------------------------------------------------
-	position.x = radius * cosf(currentOrbit) + playerToFollow->position.x + 16;//+ 16 and + 6 are to make the unit orbit around the center of the player's ship
-	position.y = radius * sinf(currentOrbit) + playerToFollow->position.y + 6;
+	position.x = radius * cosf(currentOrbit) + playerToFollow->position.x + playerCenter.x;
+	position.y = radius * sinf(currentOrbit) + playerToFollow->position.y + playerCenter.y;
 
 	//Update the collider position (after having set its position)--------------------------------------------
 	unitCol->SetPos((int)position.x - 8, (int)position.y - 8);//- 8 is because the sphere part of the unit has 8 witdh and 8 height, so since the position.x and position.y are in the center in the trajectory, we just need to substract them from that to get the position of the collider
@@ -350,18 +367,17 @@ void ModuleUnit::Rotating()
 	if(power > 0.1)
 	{
 		//Play the charging animation
-		SDL_Rect currentChargeFrame;
-		currentChargeFrame = chargeAnim.GetCurrentFrame();
+		chargeFrame = chargeAnim.GetCurrentFrame();
 		App->render->Blit(
 			throwUnitTx,
 			(int)position.x - chargeXOffset[(int)chargeAnim.current_frame],
 			(int)position.y - chargeYOffset[(int)chargeAnim.current_frame],
-			&currentChargeFrame);
+			&chargeFrame);
 	}
 
 	if (playerToFollow->ReleaseCharge())
 	{
-		if (power > 0.3f)//0.3 minimum limit at which the game considers the ball to be charged
+		if (power > 0.3f)//0.3 minimum limit at which the game considers the unit to be charged
 		{
 			//Throw
 			unitPhase = UnitPhase::trowing;
@@ -375,63 +391,90 @@ void ModuleUnit::Rotating()
 void ModuleUnit::Throwing()
 {
 	//MOVEMENT----------------------------------------------------------------
-	//- If 2 s have passed since the unit was thrown, we return it to the player
-	if (SDL_GetTicks() > shootTime + 500)//2000 miliseconds
+	if (SDL_GetTicks() > shootTime + timeToReturn)
 	{
 		unitPhase = UnitPhase::returning;
 	}
-	position.x += cosf(angleValue[turnAroundToRender]) * throwSpeed;
-	position.y += sinf(angleValue[turnAroundToRender]) * throwSpeed;
+	position.x += cosf(angleValue[turnAroundToRender]) * throwingSpeed;
+	position.y += sinf(angleValue[turnAroundToRender]) * throwingSpeed;
 	unitCol->SetPos((int)position.x - 8, (int)position.y - 8);//- 8 is because the sphere part of the unit has 8 witdh and 8 height, so since the position.x and position.y are in the center in the trajectory, we just need to substract them from that to get the position of the collider
 
 	//RENDER------------------------------------------------------------------
+	throwFrame = throwAnim.GetCurrentFrame();
 	App->render->Blit(
-		unitTx,
-		position.x - spriteXDifferences[turnAroundToRender],
-		position.y - spriteYDifferences[turnAroundToRender],
-		&spinAnimation[turnAroundToRender].frame[(int)currentSpinFrame]);
+		throwUnitTx,
+		(int)position.x - throwFrame.w / 2,
+		(int)position.y - throwFrame.h / 2,
+		&throwFrame);
 }
 
 void ModuleUnit::Returning()
 {
 	//MOVEMENT----------------------------------------------------------------
-
-	//- Move (fixed)
+	//- We calculate the unit vector from the position to the target
 	fPoint vectorIncrease;
-	float vectorIncreaseModule;
-
-	//-- We create a vector from the player to the unit
-	vectorIncrease.x = playerToFollow->position.x - position.x;
-	vectorIncrease.y = playerToFollow->position.y - position.y;
-	//-- We find the module of the vectors
-	vectorIncreaseModule = sqrt(pow(vectorIncrease.x, 2) + (pow(vectorIncrease.y, 2)));
-	//-- We divide each component by the module
-	vectorIncrease.x /= vectorIncreaseModule;
-	vectorIncrease.y /= vectorIncreaseModule;
-
-	//-- We add that vector to the position of the orbit
-	position.x += vectorIncrease.x * returnSpeed;
-	position.y += vectorIncrease.y * returnSpeed;
-	unitCol->SetPos((int)position.x - 8, (int)position.y - 8);//- 8 is because the sphere part of the unit has 8 witdh and 8 height, so since the position.x and position.y are in the center in the trajectory, we just need to substract them from that to get the position of the collider
-
-	//- If the unit has reached its position again, we continue orbiting
-	if (sqrt(pow(position.x-playerToFollow->position.x,2) + pow(position.y - playerToFollow->position.y, 2)) < returnSpeed)
+	fPoint floatPlayerPos;
+	floatPlayerPos.x = (float)playerToFollow->position.x + playerCenter.x;
+	floatPlayerPos.y = (float)playerToFollow->position.y + playerCenter.y;
+	vectorIncrease.UnitVector(floatPlayerPos, position);
+	
+	//- If the unit has reached the center of the player, we slowly position it on the position it was when we shot it
+	if (sqrt(pow(position.x - floatPlayerPos.x, 2) + pow(position.y - floatPlayerPos.y, 2)) < returningSpeed)
 	{
-		//IMPLEMENT: Make a nice transition for some seconds
-
-		position.x = radius + playerToFollow->position.x + 16;//+ 16 and + 6 are to make the unit orbit around the center of the player's ship
-		position.y = playerToFollow->position.y + 6;
-		unitPhase = UnitPhase::rotating;
+		position.x = floatPlayerPos.x;
+		position.y = floatPlayerPos.y;
+		unitPhase = UnitPhase::positioning;
+	}
+	else
+	{
+		//- We add that vector to the position of the orbit
+		position.x += vectorIncrease.x * returningSpeed;
+		position.y += vectorIncrease.y * returningSpeed;
+		unitCol->SetPos((int)position.x - 8, (int)position.y - 8);//- 8 is because the sphere part of the unit has 8 witdh and 8 height, so since the position.x and position.y are in the center in the trajectory, we just need to substract them from that to get the position of the collider
 	}
 
 	//RENDER------------------------------------------------------------------
+	throwFrame = throwAnim.GetCurrentFrame();
+	App->render->Blit(
+		throwUnitTx,
+		(int)position.x - throwFrame.w / 2,
+		(int)position.y - throwFrame.h / 2,
+		&throwFrame);
+}
+
+void ModuleUnit::Positioning()
+{
+	//MOVEMENT-------------------------------------------------------------------------------------------------------
+	//- We calculate the position it has to go to
+	fPoint vectorIncrease;
+	fPoint targetPos;
+	targetPos.x = radius * cosf(currentOrbit) + playerToFollow->position.x + playerCenter.x;
+	targetPos.y = radius * sinf(currentOrbit) + playerToFollow->position.y + playerCenter.y;
+	vectorIncrease.UnitVector(targetPos, position);
+
+	//- When it reaches that position, we go back to rotation around the player
+	if (sqrt(pow(position.x - targetPos.x, 2) + pow(position.y - targetPos.y, 2)) < returningSpeed)
+	{
+		//- We put them at that position
+		position = targetPos;
+		unitCol->SetPos((int)position.x - 8, (int)position.y - 8);
+		//- We go back to rotating around the player ship
+		unitPhase = UnitPhase::rotating;
+	}
+	else
+	{
+		//- We move the orbit by that amount
+		position.x += vectorIncrease.x * positioningSpeed;
+		position.y += vectorIncrease.y * positioningSpeed;
+		unitCol->SetPos((int)position.x - 8, (int)position.y - 8);
+	}
+
+	//RENDER---------------------------------------------------------------------------------------------------------
 	App->render->Blit(
 		unitTx,
 		(int)position.x - spriteXDifferences[turnAroundToRender],
 		(int)position.y - spriteYDifferences[turnAroundToRender],
-		&spinAnimation[turnAroundToRender].frame[(int)currentSpinFrame]),
-		0.0f,
-		false;
+		&spinAnimation[turnAroundToRender].frame[(int)currentSpinFrame]);
 }
 
 //This function has a series of if statatements that do the following

@@ -7,6 +7,12 @@ ModuleInput::ModuleInput() : Module()
 {
 	for (uint i = 0; i < MAX_KEYS; ++i)
 		keyboard[i] = KEY_IDLE;
+
+	for (int i = 0; i < MAX_CONTROLLERS; ++i)
+	{
+		controller[i] = nullptr;
+	}
+
 }
 
 // Destructor
@@ -18,7 +24,12 @@ bool ModuleInput::Init()
 {
 	LOG("Init SDL input event system");
 	bool ret = true;
-	SDL_Init(SDL_INIT_GAMECONTROLLER);
+	if (SDL_Init(SDL_INIT_GAMECONTROLLER) < 0)
+	{
+		LOG("SDL_INIT_GAMECONTROLLER could not initialize! SDL_Error: %s\n", SDL_GetError());
+		ret = false;
+	}
+	
 
 	if(SDL_InitSubSystem(SDL_INIT_EVENTS) < 0)
 	{
@@ -26,6 +37,7 @@ bool ModuleInput::Init()
 		ret = false;
 	}
 
+	
 	return ret;
 }
 
@@ -40,15 +52,16 @@ update_status ModuleInput::PreUpdate()
 	
 	for (int i = 0; i < SDL_NumJoysticks(); ++i) {
 		if (SDL_IsGameController(i)) {
-			controller = SDL_GameControllerOpen(i);
+			controller[i] = SDL_GameControllerOpen(i);
 			if (controller) {
 				break;
 			}
 			else {
-				LOG( "Could not open gamecontroller %i: %s\n", i, SDL_GetError());
+				LOG("Could not open gamecontroller %i: %s\n", i, SDL_GetError());
 			}
 		}
 	}
+
 
 	for (int i = 0; i < MAX_KEYS; ++i)
 	{
@@ -67,7 +80,8 @@ update_status ModuleInput::PreUpdate()
 				keyboard[i] = KEY_IDLE;
 		}
 	}
-	
+
+
 	SDL_PollEvent(&event);
 	if (event.type == SDL_QUIT)
 	        return update_status::UPDATE_STOP;
@@ -84,5 +98,11 @@ bool ModuleInput::CleanUp()
 {
 	LOG("Quitting SDL input event subsystem");
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
+	for (int i = 0; i < SDL_NumJoysticks(); ++i) {
+		if (SDL_IsGameController(i)) {
+			SDL_GameControllerClose(controller[i]);
+			
+		}
+	}
 	return true;
 }
