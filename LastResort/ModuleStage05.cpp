@@ -18,6 +18,7 @@
 #include "ModuleEnemies.h"
 #include "ModuleUnit.h"
 
+
 #define SPACESHIP_WIDTH 1423
 #define SPACESHIP_HEIGHT 288
 
@@ -25,23 +26,40 @@ Module5lvlScene::Module5lvlScene()
 {
 	shipRect = { 0,0 , SPACESHIP_WIDTH,SPACESHIP_HEIGHT };
 
-	cameraMovement.originPoint = { -167, 144 };
-	cameraMovement.PushBack({ 10,144 }, 200);
-	cameraMovement.PushBack( 200);
-	cameraMovement.PushBack({ -244,-33}, 200);
-	cameraMovement.PushBack({ 99,-112}, 100);
+	cameraMovement.originPoint = { -444, 240 };     //-1      //0
+	cameraMovement.PushBack({ -167, 144 }, 330);    //0       //1
+	cameraMovement.PushBack({ 10,144 }, 468);       //1       //2 
+	cameraMovement.PushBack(720);                   //Pause   //3  
+	cameraMovement.PushBack({ -244,-33 }, 492);     //2       //4  
+	cameraMovement.PushBack({ 99,-112 }, 300);      //3       //5 
+	cameraMovement.PushBack(480);                   //Pause   //6  
+	cameraMovement.PushBack({ 371,-159 }, 780);     //4       //7
+	cameraMovement.PushBack({ 371, 0 }, 342);       //5       //8 
+	cameraMovement.PushBack({ 578, 0 }, 432);       //6       //9
+	cameraMovement.PushBack(900);                   //Pause   //10 
+	cameraMovement.PushBack({ 371, 0 }, 418);       //6.5     //11 
+	cameraMovement.PushBack({ 371, -128 }, 268);    //7       //12 
+	cameraMovement.PushBack({ 874, -128 }, 1500);   //8       //13 
+	cameraMovement.PushBack(300);                   //Pause   //14  -
+	cameraMovement.PushBack({ 1236, -33 }, 588);    //9       //15 
+	cameraMovement.PushBack({ 1312, -62 }, 288);    //10      //16
+	cameraMovement.PushBack({ 1133, 80 }, 615);     //11      //17 
+	cameraMovement.PushBack({ 915, 80 }, 780);      //12      //18  
+	cameraMovement.PushBack(900);                   //Pause   //19 
+	cameraMovement.PushBack({ 946, 64 }, 72);       //13      //20
+	cameraMovement.PushBack(1200);                  //Pause   //21
+	cameraMovement.PushBack({ 1108, 182 }, 240);    //14      //22 
 }
 
 bool Module5lvlScene::Start()
 {
 	bool ret = true;
 
-	//App->render->camera.x = -134;
-	//App->render->camera.y = 80;
-
+	//provisional-----------------------------
+	current_time = 0;
+	start_time = SDL_GetTicks();
 	//Background ------------------------------------------------------------------
 	ScrollState = SCROLL_HORIZONTAL;
-
 
 	//Enable ---------------------------------------------------------------------
 	App->stageFunctionality->Enable();
@@ -65,7 +83,8 @@ bool Module5lvlScene::Start()
 
 update_status Module5lvlScene::Update()
 {
-
+	//provisional-----------------------------
+	current_time = SDL_GetTicks() - start_time ;
 	//Background stars scroll ----------------------------------------------------------------
 	switch (ScrollState)
 	{
@@ -111,10 +130,16 @@ update_status Module5lvlScene::Update()
 	
 	//Spaceship background--------------------------------------------------------------------
 
-	fPoint shipPos = shipOffset - cameraMovement.GetCurrentPosition();
+	dPoint shipPos = shipOffset - cameraMovement.GetCurrentPosition();
 
 	App->render->Blit(shipTex, shipPos.x, shipPos.y, &shipRect);
 	
+	if (cameraMovement.movFinished)
+	{
+		LOG("Move: %i Time: %i  ", cameraMovement.currentMov, current_time);
+		start_time = SDL_GetTicks();
+	}
+
 	//LOG("ShipPos : x %i y %i", shipPos.x, shipPos.y);
 	return UPDATE_CONTINUE;
 }
