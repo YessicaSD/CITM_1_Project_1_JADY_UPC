@@ -37,6 +37,7 @@ bool ModuleInput::Init()
 		ret = false;
 	}
 
+	
 	return ret;
 }
 
@@ -56,10 +57,11 @@ update_status ModuleInput::PreUpdate()
 				break;
 			}
 			else {
-				LOG( "Could not open gamecontroller %i: %s\n", i, SDL_GetError());
+				LOG("Could not open gamecontroller %i: %s\n", i, SDL_GetError());
 			}
 		}
 	}
+
 
 	for (int i = 0; i < MAX_KEYS; ++i)
 	{
@@ -96,6 +98,11 @@ bool ModuleInput::CleanUp()
 {
 	LOG("Quitting SDL input event subsystem");
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
-
+	for (int i = 0; i < SDL_NumJoysticks(); ++i) {
+		if (SDL_IsGameController(i)) {
+			SDL_GameControllerClose(controller[i]);
+			
+		}
+	}
 	return true;
 }

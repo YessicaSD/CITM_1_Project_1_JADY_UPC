@@ -10,6 +10,7 @@
 #include "Enemy_Basic.h"
 #include "Enemy_PowerDropper.h"
 #include "MiddleBosslvl1.h"
+#include "Enemy_RedBats.h"
 
 
 #define SPAWN_MARGIN 50
@@ -150,7 +151,12 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			enemies[i] = new Enemy_MetalCraw(info.x, info.y, info.pu_Type);
 			enemies[i]->points = 100;
 			break;
+			case  ENEMY_TYPES::REDBATS:
+				enemies[i] = new Enemy_RedBats(info.x, info.y, info.pu_Type);
+				enemies[i]->points = 100;
+				break;
 		}
+
 		
 	}
 }
