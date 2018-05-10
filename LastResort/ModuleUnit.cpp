@@ -177,20 +177,31 @@ ModuleUnit::ModuleUnit() //Constructor
 	chargeAnim.PushBack({ 184, 86, 36, 36 });
 	chargeAnim.PushBack({ 152, 86, 32, 32 });
 	chargeAnim.PushBack({ 120, 86, 32, 32 });
-	chargeAnim.PushBack({ 92, 86, 28, 28 });
-	chargeAnim.PushBack({ 64, 86, 28, 28 });
-	chargeAnim.PushBack({ 32, 86, 32, 32 });
-	chargeAnim.PushBack({ 0, 86, 32, 32 });
+	chargeAnim.PushBack({  92, 86, 28, 28 });
+	chargeAnim.PushBack({  64, 86, 28, 28 });
+	chargeAnim.PushBack({  32, 86, 32, 32 });
+	chargeAnim.PushBack({   0, 86, 32, 32 });
 	chargeAnim.PushBack({ 220, 41, 30, 30 });
 	chargeAnim.PushBack({ 190, 41, 30, 30 });
 	chargeAnim.PushBack({ 162, 41, 28, 27 });
 	chargeAnim.PushBack({ 134, 41, 28, 27 });
-	chargeAnim.PushBack({ 88, 41, 46, 45 });
-	chargeAnim.PushBack({ 42, 41, 46, 45 });
-	chargeAnim.PushBack({ 0, 41, 42, 41 });
+	chargeAnim.PushBack({  88, 41, 46, 45 });
+	chargeAnim.PushBack({  42, 41, 46, 45 });
+	chargeAnim.PushBack({   0, 41, 42, 41 });
 	chargeAnim.PushBack({ 176,  0, 42, 41 });
 	chargeAnim.speed = 0.5f;
 	chargeAnim.loop = true;
+	//-Throw animation
+	throwAnim.PushBack({   0, 0, 22, 22 });
+	throwAnim.PushBack({  22, 0, 24, 24 });
+	throwAnim.PushBack({  46, 0, 26, 26 });
+	throwAnim.PushBack({  72, 0, 24, 24 });
+	throwAnim.PushBack({  96, 0, 22, 22 });
+	throwAnim.PushBack({ 118, 0, 20, 20 });
+	throwAnim.PushBack({ 138, 0, 18, 18 });
+	throwAnim.PushBack({ 156, 0, 20, 20 });
+	throwAnim.speed = 0.1f;
+	throwAnim.loop = true;
 }
 
 ModuleUnit::~ModuleUnit()
@@ -350,13 +361,12 @@ void ModuleUnit::Rotating()
 	if(power > 0.1)
 	{
 		//Play the charging animation
-		SDL_Rect currentChargeFrame;
-		currentChargeFrame = chargeAnim.GetCurrentFrame();
+		chargeFrame = chargeAnim.GetCurrentFrame();
 		App->render->Blit(
 			throwUnitTx,
 			(int)position.x - chargeXOffset[(int)chargeAnim.current_frame],
 			(int)position.y - chargeYOffset[(int)chargeAnim.current_frame],
-			&currentChargeFrame);
+			&chargeFrame);
 	}
 
 	if (playerToFollow->ReleaseCharge())
@@ -385,11 +395,12 @@ void ModuleUnit::Throwing()
 	unitCol->SetPos((int)position.x - 8, (int)position.y - 8);//- 8 is because the sphere part of the unit has 8 witdh and 8 height, so since the position.x and position.y are in the center in the trajectory, we just need to substract them from that to get the position of the collider
 
 	//RENDER------------------------------------------------------------------
+	throwFrame = throwAnim.GetCurrentFrame();
 	App->render->Blit(
-		unitTx,
-		position.x - spriteXDifferences[turnAroundToRender],
-		position.y - spriteYDifferences[turnAroundToRender],
-		&spinAnimation[turnAroundToRender].frame[(int)currentSpinFrame]);
+		throwUnitTx,
+		(int)position.x - throwFrame.w / 2,
+		(int)position.y - throwFrame.h / 2,
+		&throwFrame);
 }
 
 void ModuleUnit::Returning()
@@ -425,13 +436,12 @@ void ModuleUnit::Returning()
 	}
 
 	//RENDER------------------------------------------------------------------
+	throwFrame = throwAnim.GetCurrentFrame();
 	App->render->Blit(
-		unitTx,
-		(int)position.x - spriteXDifferences[turnAroundToRender],
-		(int)position.y - spriteYDifferences[turnAroundToRender],
-		&spinAnimation[turnAroundToRender].frame[(int)currentSpinFrame]),
-		0.0f,
-		false;
+		throwUnitTx,
+		(int)position.x - throwFrame.w / 2,
+		(int)position.y - throwFrame.h / 2,
+		&throwFrame);
 }
 
 //This function has a series of if statatements that do the following
