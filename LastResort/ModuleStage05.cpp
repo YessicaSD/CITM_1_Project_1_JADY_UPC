@@ -58,8 +58,7 @@ bool Module5lvlScene::Start()
 	//provisional-----------------------------
 	current_time = 0;
 	start_time = SDL_GetTicks();
-	//Background ------------------------------------------------------------------
-	ScrollState = SCROLL_HORIZONTAL;
+	
 
 	//Enable ---------------------------------------------------------------------
 	App->stageFunctionality->Enable();
@@ -91,49 +90,25 @@ update_status Module5lvlScene::Update()
 {
 	//provisional-----------------------------
 	current_time = SDL_GetTicks() - start_time ;
-	//Background stars scroll ----------------------------------------------------------------
-	switch (ScrollState)
-	{
-	case SCROLL_HORIZONTAL:
-		
-		scroll.x -= 5;
-		if (scroll.x <= -SCREEN_WIDTH)
-			scroll.x = 0;
-
-		if (scroll.x <= -SCREEN_WIDTH)
-			scroll.x = 0;
-
-		/*StarsRect = { scroll.x,0,SCREEN_WIDTH,SCREEN_HEIGHT };
-		SDL_RenderCopy(App->render->renderer, StarsTexture, nullptr, &StarsRect);*/
-		App->render->Blit(StarsTexture, scroll.x, 0, NULL);
-		App->render->Blit(StarsTexture, scroll.x + SCREEN_WIDTH, 0, NULL);
-		/*StarsRect.x += SCREEN_WIDTH;
-		SDL_RenderCopy(App->render->renderer, StarsTexture, nullptr, &StarsRect);*/
-		break;
-	case SCROLL_UP:
-		
-		scroll.y += 3;
-		scroll.x -= 5;
-		if (scroll.x <= -SCREEN_WIDTH)
-			scroll.x = 0;
-
-		if (scroll.y >= SCREEN_HEIGHT)
-			scroll.y = 0;
-
-		StarsRect = { scroll.x,scroll.y,SCREEN_WIDTH,SCREEN_HEIGHT };
-		StarsRect2 = { scroll.x,scroll.y,SCREEN_WIDTH,SCREEN_HEIGHT };
-		SDL_RenderCopy(App->render->renderer, StarsTexture, nullptr, &StarsRect);
-		StarsRect.y -= SCREEN_HEIGHT;
-		StarsRect2.y -= SCREEN_HEIGHT;
-		StarsRect2.x += SCREEN_WIDTH;
-		SDL_RenderCopy(App->render->renderer, StarsTexture, nullptr, &StarsRect);
-		SDL_RenderCopy(App->render->renderer, StarsTexture, nullptr, &StarsRect2);
-			break;
-	case SCROLL_DOWN:
-		break;
-
-	}
 	
+	
+	//Background blit-------------------------------------------------------------------------
+	
+	stars = stars.VectU(cameraMovement.GetCurrentPosition());
+	scroll.x -= 5;
+	scroll.y += stars.y;
+	if (scroll.x <= -SCREEN_WIDTH)
+		scroll.x = 0;
+
+	if (scroll.y <= -SCREEN_HEIGHT)
+	{
+		scroll.y = 0;
+	}
+
+	App->render->Blit(StarsTexture, scroll.x, scroll.y, NULL);
+	App->render->Blit(StarsTexture, scroll.x+SCREEN_WIDTH, scroll.y, NULL);
+	App->render->Blit(StarsTexture, scroll.x, scroll.y+SCREEN_HEIGHT, NULL);
+	App->render->Blit(StarsTexture, scroll.x + SCREEN_WIDTH, scroll.y + SCREEN_HEIGHT, NULL);
 	//Spaceship background--------------------------------------------------------------------
 
 	dPoint shipPos = shipOffset - cameraMovement.GetCurrentPosition();
@@ -145,7 +120,7 @@ update_status Module5lvlScene::Update()
 		LOG("Move: %i Time: %i  ", cameraMovement.currentMov, current_time);
 		start_time = SDL_GetTicks();
 	}
-
+	
 	//Update colliders (important: after moving the ship!)------------------------------------
 	frontShipCol1->SetPos(shipPos.x + 46, shipPos.y + 140);
 
