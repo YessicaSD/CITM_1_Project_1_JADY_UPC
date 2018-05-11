@@ -222,7 +222,13 @@ bool ModuleUnit::Start()
 	throwUnitOrangeTx = App->textures->Load("Assets/Unit/OrangeUnitThrow.png");
 	throwUnitBlueTx = App->textures->Load("Assets/Unit/BlueUnitThrow.png");
 	currentOrbit = currentTurnAround = angleValue[E];
-	unitCol = App->collision->AddCollider({ (int)position.x, (int)position.y, 16, 16 }, COLLIDER_UNIT, this);
+	unitCol = App->collision->AddCollider({ (int)position.x - sphereDiameter/2, (int)position.y - sphereDiameter / 2, sphereDiameter, sphereDiameter}, COLLIDER_UNIT , this);
+
+	hitDetectionUp    = App->collision->AddCollider({ (int)position.x - sphereDiameter / 2, (int)position.y - sphereDiameter / 2 - (int)throwingSpeed, sphereDiameter,    (int)throwingSpeed }, COLLIDER_NONE, this);
+	hitDetectionDown  = App->collision->AddCollider({ (int)position.x - sphereDiameter / 2, (int)position.y + sphereDiameter / 2,                      sphereDiameter,    (int)throwingSpeed }, COLLIDER_NONE, this);
+	hitDetectionLeft  = App->collision->AddCollider({ (int)position.x - sphereDiameter / 2 - (int)throwingSpeed, (int)position.y - sphereDiameter / 2, (int)throwingSpeed, sphereDiameter    }, COLLIDER_NONE, this);
+	hitDetectionRight = App->collision->AddCollider({ (int)position.x + sphereDiameter / 2, (int)position.y - sphereDiameter / 2,                      (int)throwingSpeed, sphereDiameter    }, COLLIDER_NONE, this);
+	//INFO: throwing speed is the width / heigth because we want to snap it if the distance to it is less than what it travels
 	return ret;
 }
 
@@ -328,7 +334,7 @@ void ModuleUnit::Rotating()
 	position.y = radius * sinf(currentOrbit) + playerToFollow->position.y + playerCenter.y;
 
 	//Update the collider position (after having set its position)--------------------------------------------
-	unitCol->SetPos((int)position.x - 8, (int)position.y - 8);//- 8 is because the sphere part of the unit has 8 witdh and 8 height, so since the position.x and position.y are in the center in the trajectory, we just need to substract them from that to get the position of the collider
+	UpdateUnitColliders();
 
 	//Increase the animation current frame--------------------------------------------------------------------
 	currentSpinFrame += spinSpeed;
@@ -399,7 +405,7 @@ void ModuleUnit::Throwing()
 	}
 	position.x += cosf(angleValue[turnAroundToRender]) * throwingSpeed;
 	position.y += sinf(angleValue[turnAroundToRender]) * throwingSpeed;
-	unitCol->SetPos((int)position.x - 8, (int)position.y - 8);//- 8 is because the sphere part of the unit has 8 witdh and 8 height, so since the position.x and position.y are in the center in the trajectory, we just need to substract them from that to get the position of the collider
+	UpdateUnitColliders();
 
 	//RENDER------------------------------------------------------------------
 	throwFrame = throwAnim.GetCurrentFrame();
@@ -432,7 +438,7 @@ void ModuleUnit::Returning()
 		//- We add that vector to the position of the orbit
 		position.x += vectorIncrease.x * returningSpeed;
 		position.y += vectorIncrease.y * returningSpeed;
-		unitCol->SetPos((int)position.x - 8, (int)position.y - 8);//- 8 is because the sphere part of the unit has 8 witdh and 8 height, so since the position.x and position.y are in the center in the trajectory, we just need to substract them from that to get the position of the collider
+		UpdateUnitColliders();
 	}
 
 	//RENDER------------------------------------------------------------------
@@ -459,7 +465,7 @@ void ModuleUnit::Positioning()
 	{
 		//- We put them at that position
 		position = targetPos;
-		unitCol->SetPos((int)position.x - 8, (int)position.y - 8);
+		UpdateUnitColliders();
 		//- We go back to rotating around the player ship
 		unitPhase = UnitPhase::rotating;
 	}
@@ -468,7 +474,7 @@ void ModuleUnit::Positioning()
 		//- We move the orbit by that amount
 		position.x += vectorIncrease.x * positioningSpeed;
 		position.y += vectorIncrease.y * positioningSpeed;
-		unitCol->SetPos((int)position.x - 8, (int)position.y - 8);
+		UpdateUnitColliders();
 	}
 
 	//RENDER---------------------------------------------------------------------------------------------------------
@@ -631,4 +637,13 @@ void ModuleUnit::MakeUnitOrange()
 {
 	unitTx = orangeUnitTx;
 	throwUnitTx = throwUnitOrangeTx;
+}
+
+void ModuleUnit::UpdateUnitColliders()
+{
+	unitCol->SetPos((int)position.x - 8, (int)position.y - 8);
+	hitDetectionUp   ->SetPos((int)position.x - sphereDiameter / 2, (int)position.y - sphereDiameter / 2 - (int)throwingSpeed);
+	hitDetectionDown ->SetPos((int)position.x - sphereDiameter / 2, (int)position.y + sphereDiameter / 2);
+	hitDetectionLeft ->SetPos((int)position.x - sphereDiameter / 2 - (int)throwingSpeed, (int)position.y - sphereDiameter / 2);
+	hitDetectionRight->SetPos((int)position.x + sphereDiameter / 2, (int)position.y - sphereDiameter / 2);
 }

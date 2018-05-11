@@ -52,6 +52,8 @@ enum UnitPhase
 {
 	rotating = 0,
 	trowing,
+	followingTerrain,
+	bouncingOnTerrain,
 	returning,
 	positioning//Returning from the center to the position at which it orbits around the player
 };
@@ -83,6 +85,8 @@ public:
 
 	void MakeUnitBlue();
 	void MakeUnitOrange();
+
+	void UpdateUnitColliders();
 
 public:
 	fPoint position;
@@ -138,5 +142,10 @@ private:
 	int chargeYOffset[15] = { 18, 16, 16, 14, 14, 16, 16, 15, 15, 13, 13, 23, 23, 21, 21 };
 	Animation throwAnim;
 	SDL_Rect throwFrame;
+	Collider* hitDetectionLeft;
+	Collider* hitDetectionRight;
+	Collider* hitDetectionUp;
+	Collider* hitDetectionDown;
+	const int sphereDiameter = 16;//The sphere part of the unit
 };
 #endif

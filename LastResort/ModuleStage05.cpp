@@ -76,11 +76,14 @@ bool Module5lvlScene::Start()
 	lvl5Music = App->audio->LoadMUS("Assets/lvl5/07-DON-T-TOUCH-ME-BABY-STAGE-5-1-_-FEAR-STAGE-5-2-_-LEGE.ogg");
 	App->audio->ControlMUS(lvl5Music, PLAY_AUDIO);
 
-	//Enemies -------------------------------------------------------------------------------------------------
+	//Enemies ---------------------------------------------------------------------------------------------------
 	//App->enemies->AddEnemy(OSCILATOR, -200, 200);
 	App->enemies->AddEnemy(POWERDROPPER, 200, 50, SPEED);
 	App->enemies->AddEnemy(POWERDROPPER, 300, 150, LASER);
 	App->enemies->AddEnemy(REDBATS, 300, 200);
+
+	//Colliders--------------------------------------------------------------------------------------------------
+	frontShipCol1 = App->collision->AddCollider({ 0, 0, 64, 38 }, COLLIDER_TYPE::COLLIDER_WALL);//No callback (its a wall)//This should be shipPos, but ship pos is a local variable =/
 	return ret;
 }
 
@@ -142,6 +145,9 @@ update_status Module5lvlScene::Update()
 		LOG("Move: %i Time: %i  ", cameraMovement.currentMov, current_time);
 		start_time = SDL_GetTicks();
 	}
+
+	//Update colliders (important: after moving the ship!)------------------------------------
+	frontShipCol1->SetPos(shipPos.x + 46, shipPos.y + 140);
 
 	//LOG("ShipPos : x %i y %i", shipPos.x, shipPos.y);
 	return UPDATE_CONTINUE;

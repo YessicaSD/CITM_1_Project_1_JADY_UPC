@@ -48,6 +48,9 @@ public:
 	typeScroll ScrollState;
 
 	Mix_Music* lvl5Music = nullptr;
+
+	//Spaceship colliders
+	Collider* frontShipCol1;
 };
 
 #endif
