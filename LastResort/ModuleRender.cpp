@@ -36,11 +36,8 @@ bool ModuleRender::Init()
 
 	if (WIN_FULLSCREEN_DESKTOP == 1)
 	{
-		SDL_RenderSetLogicalSize(renderer,
-			SCREEN_WIDTH,
-			SCREEN_HEIGHT);
+		SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
 	}
-
 
 	return ret;
 }
@@ -68,13 +65,22 @@ update_status ModuleRender::Update()
 			SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
 			zoomed = false;
 		}
-		
 	}
+
 	return update_status::UPDATE_CONTINUE;
 }
 
 update_status ModuleRender::PostUpdate()
 {
+	//Render the camera borders, so we know where the camera is
+	if (zoomed == true)
+	{
+		//Right border
+		App->render->DrawQuad({ SCREEN_WIDTH, 0, 1, SCREEN_HEIGHT }, 255, 255, 255, 255);
+		//Down border
+		App->render->DrawQuad({ 0, SCREEN_HEIGHT, SCREEN_WIDTH, 1 }, 255, 255, 255, 255);
+	}
+
 	SDL_RenderPresent(renderer);
 	return update_status::UPDATE_CONTINUE;
 }

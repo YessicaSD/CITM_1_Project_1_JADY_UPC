@@ -70,8 +70,6 @@ bool Application::Init()
 	bool ret = true;
 	// Disable all stopped modules here-----------------------------------
 	titleScene->Disable();
-	player1->Disable(); // Player will be enabled on the first update of a new scene
-	player2->Disable();
 	stage01->Disable();
 	stage02->Disable();
 	stage05 -> Disable();
@@ -81,12 +79,8 @@ bool Application::Init()
 	stageclearScene->Disable();
 	unit1->Disable();
 	unit2->Disable();
-	enemies->Disable();
-	particles->Disable();
-	collision->Disable();
 	ui->HideUi();
-	powerups->Disable();
-	stageFunctionality->Disable();
+	stageFunctionality->Disable();// Does other disables inside of its disable //Player will be enabled on the first update of a new scene
 
 	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();

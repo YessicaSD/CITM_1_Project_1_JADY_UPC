@@ -242,7 +242,11 @@ bool ModuleUnit::CleanUp()
 	App->textures->Unload(throwUnitOrangeTx);
 	App->textures->Unload(throwUnitBlueTx);
 	//If we have created a unit collider, we destroy it
-	if(unitCol != nullptr) { unitCol->to_delete = true; }
+	if (unitCol != nullptr)           { unitCol->to_delete = true; }
+	if (hitDetectionUp != nullptr)    { hitDetectionUp->to_delete = true; }
+	if (hitDetectionDown != nullptr)  { hitDetectionDown->to_delete = true; }
+	if (hitDetectionLeft != nullptr)  { hitDetectionLeft->to_delete = true; }
+	if (hitDetectionRight != nullptr) { hitDetectionRight->to_delete = true; }
 	return true;
 }
 
