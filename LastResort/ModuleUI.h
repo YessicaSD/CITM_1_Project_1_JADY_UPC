@@ -38,7 +38,7 @@ public:
 	bool p2_Unit = false;
 	bool godMode = false;
 	//General data--------------------------------
-	int credits;
+	int credits=00;
 	bool showUI = true;
 	//-------------------------------------------
 

@@ -104,7 +104,11 @@ update_status ModuleUI::Update() {
 			App->fonts->BlitText(272 - 8 * strlen(str_score_p2), 16, 0, str_score_p2);
 		}
 	}
-	App->fonts->BlitText(208, 216, 0, "CREDITS_00");//credits
+	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_DOWN && credits <=99)
+	{
+		credits +=1;
+	}
+	App->fonts->BlitText(208, 216, 0, "CREDITS_%i");//credits
 
 	delete[](str_score_p1);
 	delete[](str_score_p2);
