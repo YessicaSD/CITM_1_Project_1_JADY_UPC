@@ -147,5 +147,6 @@ private:
 	Collider* hitDetectionUp;
 	Collider* hitDetectionDown;
 	const int sphereDiameter = 16;//The sphere part of the unit
+	int positioningStep = 0;
 };
 #endif
