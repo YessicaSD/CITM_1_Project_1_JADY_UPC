@@ -8,7 +8,7 @@ struct Collider;
 class Module
 {
 public:
-	bool enabled = false;
+	bool enabled = true;
 public:
 	virtual ~Module() {}
 
