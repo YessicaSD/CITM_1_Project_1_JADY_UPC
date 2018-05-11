@@ -222,7 +222,7 @@ bool ModuleUnit::Start()
 	throwUnitOrangeTx = App->textures->Load("Assets/Unit/OrangeUnitThrow.png");
 	throwUnitBlueTx = App->textures->Load("Assets/Unit/BlueUnitThrow.png");
 	currentOrbit = currentTurnAround = angleValue[E];
-	unitCol = App->collision->AddCollider({ (int)position.x, (int)position.y, 16, 16 }, COLLIDER_INDESTRUCTIBLE, this);
+	unitCol = App->collision->AddCollider({ (int)position.x, (int)position.y, 16, 16 }, COLLIDER_UNIT, this);
 	return ret;
 }
 
@@ -235,6 +235,8 @@ bool ModuleUnit::CleanUp()
 	throwUnitTx = nullptr;
 	App->textures->Unload(throwUnitOrangeTx);
 	App->textures->Unload(throwUnitBlueTx);
+	//If we have created a unit collider, we destroy it
+	if(unitCol != nullptr) { unitCol->to_delete = true; }
 	return true;
 }
 
@@ -453,7 +455,7 @@ void ModuleUnit::Positioning()
 	vectorIncrease.UnitVector(targetPos, position);
 
 	//- When it reaches that position, we go back to rotation around the player
-	if (sqrt(pow(position.x - targetPos.x, 2) + pow(position.y - targetPos.y, 2)) < returningSpeed)
+	if (sqrt(pow(position.x - targetPos.x, 2) + pow(position.y - targetPos.y, 2)) < positioningSpeed)
 	{
 		//- We put them at that position
 		position = targetPos;
