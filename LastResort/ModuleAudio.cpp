@@ -34,10 +34,11 @@ bool ModuleAudio::Init()
 		LOG("Could not initialize Mixer lib. Mix_Init: %s", Mix_GetError());
 		ret = false;
 	}
+	else {
+		Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
+		Mix_VolumeMusic(GENERAL_MUSIC_VOLUME);
+	}
 
-	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
-	Mix_VolumeMusic(GENERAL_MUSIC_VOLUME);
-	
 
 	return ret;
 }
