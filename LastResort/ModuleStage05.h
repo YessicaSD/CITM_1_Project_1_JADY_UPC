@@ -38,14 +38,8 @@ public:
 	SDL_Rect StarsRect2;
 
 
-	iPoint scroll;
-	enum typeScroll
-	{
-		SCROLL_HORIZONTAL,
-		SCROLL_UP,
-		SCROLL_DOWN
-	};
-	typeScroll ScrollState;
+	dPoint scroll;
+	dPoint stars;
 
 	Mix_Music* lvl5Music = nullptr;
 
