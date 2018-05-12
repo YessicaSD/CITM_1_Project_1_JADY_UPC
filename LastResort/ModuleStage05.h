@@ -29,26 +29,37 @@ public:
 	//provisional-----------------------------
 	int current_time= 0;
 	int start_time = 0;
-	//----------------------------------------
 
-	MovePath cameraMovement;
-	dPoint shipOffset = {444, -240};
-	SDL_Texture * StarsTexture = nullptr;
-	SDL_Texture *shipTex = nullptr;
-	SDL_Rect shipRect;
-	SDL_Rect StarsRect;
-	SDL_Rect StarsRect2;
-
+	//Points----------------------------------
 	dPoint shipPos;//Position at which we blit the ship (see Docs>ship.psd)
 
+	MovePath cameraMovement;
+	dPoint camera;
+	dPoint shipOffset = { 444, -240 };
+	dPoint tilemapOffset = { 1856, -58 };
 	dPoint scroll;
 	dPoint stars;
 
-	Mix_Music* lvl5Music = nullptr;
+	//Rectangles-------------------------------
+	SDL_Rect shipRect;
+	SDL_Rect tilemapRect;
+	SDL_Rect StarsRect;
+	SDL_Rect StarsRect2;
 
 	//Spaceship colliders
 	Collider* shipCollidersCol[SHIP_COLLIDERS_NUM];
 	SDL_Rect shipCollidersRect[SHIP_COLLIDERS_NUM];
+
+	//Colliders-------------------------------
+	Collider* frontShipCol1;
+
+	//Tetures---------------------------------
+	SDL_Texture * StarsTexture = nullptr;
+	SDL_Texture *shipTex = nullptr;
+	SDL_Texture *tilemapTex = nullptr;
+	
+	//Music-----------------------------------
+	Mix_Music* lvl5Music = nullptr;
 };
 
 #endif
