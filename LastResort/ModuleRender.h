@@ -24,9 +24,12 @@ public:
 	bool FlippedBlit(SDL_Texture* texture, int x, int y, SDL_Rect* section);
 	bool DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
+	void ResetMovedPosition();
+
 public:
 	iPoint camera;
 	SDL_Renderer* renderer = nullptr;
+	iPoint movedPosition;
 
 	//Zoom out
 	int zoomedOutSize = 1;

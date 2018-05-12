@@ -128,23 +128,22 @@ bool Player2::Shoot()
 		stillpressed = true;
 	}
 
-	return (App->input->keyboard[SDL_SCANCODE_KP_0] == KEY_STATE::KEY_DOWN || Controllshoot);
+	return (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN || Controllshoot);
 }
 
 bool Player2::Charge()
 {
-	return (App->input->keyboard[SDL_SCANCODE_KP_0] == KEY_STATE::KEY_REPEAT);
+	return (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_REPEAT);
 }
 
 bool Player2::ReleaseCharge()
 {
-	return (App->input->keyboard[SDL_SCANCODE_KP_0] == KEY_STATE::KEY_UP);
+	return (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_UP);
 }
-
 
 bool Player2::Lock()
 {
-	return (App->input->keyboard[SDL_SCANCODE_KP_1] == KEY_STATE::KEY_DOWN);
+	return (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_DOWN);
 }
 
 void Player2::Winposition()

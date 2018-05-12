@@ -58,11 +58,13 @@ bool Module5lvlScene::Start()
 	//provisional-----------------------------
 	current_time = 0;
 	start_time = SDL_GetTicks();
-	
 
 	//Enable ---------------------------------------------------------------------
 	App->stageFunctionality->Enable();
 	App->stageFunctionality->currentStage = this;
+
+	//Set the ship pos (if we don't do it, colliders will be inicialized in a incorrect position)----------------
+	shipPos = shipOffset;
 
 	//"Reset ship position when fadetoblackends"----------------------------------
 	//App->player1->Reset_Positions();
@@ -72,6 +74,7 @@ bool Module5lvlScene::Start()
 	StarsTexture = App->textures->Load("Assets/lvl5/background/backgroundstars.png");
 	shipTex = App->textures->Load("Assets/lvl5/background/ship.png");
 	tilemapTex = App->textures->Load("Assets/lvl5/background/final.png");
+
 	//Music -----------------------------------------------------------------------------------------------------
 	lvl5Music = App->audio->LoadMUS("Assets/lvl5/07-DON-T-TOUCH-ME-BABY-STAGE-5-1-_-FEAR-STAGE-5-2-_-LEGE.ogg");
 	App->audio->ControlMUS(lvl5Music, PLAY_AUDIO);
@@ -81,9 +84,27 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(POWERDROPPER, 200, 50, SPEED);
 	App->enemies->AddEnemy(POWERDROPPER, 300, 150, LASER);
 	App->enemies->AddEnemy(REDBATS, 300, 200);
-
+	App->enemies->AddEnemy(REDBATS, 330, 200);
+	App->enemies->AddEnemy(REDBATS, 360, 200);
 	//Colliders--------------------------------------------------------------------------------------------------
-	frontShipCol1 = App->collision->AddCollider({ 0, 0, 64, 38 }, COLLIDER_TYPE::COLLIDER_WALL);//No callback (its a wall)//This should be shipPos, but ship pos is a local variable =/
+	//shipCollidersRect[0] = {};
+	//shipCollidersRect[1] = {};
+	//shipCollidersRect[2] = {};
+	//shipCollidersRect[3] = {};
+	//shipCollidersRect[4] = {};
+	//shipCollidersRect[5] = {};
+	//shipCollidersRect[6] = {};
+
+	//for(int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
+	//{
+	//	shipCollidersCol[i] = App->collision->AddCollider(
+	//	   {shipCollidersRect[i].x + (int)shipPos.x,
+	//		shipCollidersRect[i].y + (int)shipPos.y,
+	//		shipCollidersRect[i].w,
+	//		shipCollidersRect[i].h },
+	//		COLLIDER_TYPE::COLLIDER_WALL);
+	//}
+
 	return ret;
 }
 
@@ -94,7 +115,6 @@ update_status Module5lvlScene::Update()
 	
 	
 	//Background blit-------------------------------------------------------------------------
-	
 	stars = stars.VectU(cameraMovement.GetCurrentPosition());
 	scroll.x -= 5;
 	scroll.y += stars.y;
@@ -110,6 +130,7 @@ update_status Module5lvlScene::Update()
 	App->render->Blit(StarsTexture, scroll.x+SCREEN_WIDTH, scroll.y, NULL);
 	App->render->Blit(StarsTexture, scroll.x, scroll.y+SCREEN_HEIGHT, NULL);
 	App->render->Blit(StarsTexture, scroll.x + SCREEN_WIDTH, scroll.y + SCREEN_HEIGHT, NULL);
+
 	//Background--------------------------------------------------------------------
 	if (App->input->keyboard[SDL_SCANCODE_F9] == KEY_DOWN) { 
 		if (checkPoint > 0) {
@@ -125,8 +146,7 @@ update_status Module5lvlScene::Update()
 	}
 
 	camera = cameraMovement.GetCurrentPosition();
-
-	dPoint shipPos = shipOffset - camera;
+	shipPos = shipOffset - camera;
 	dPoint tilemapPos = tilemapOffset - camera;
 
 	App->render->Blit(shipTex, shipPos.x, shipPos.y, &shipRect);
@@ -134,7 +154,6 @@ update_status Module5lvlScene::Update()
 	if (cameraMovement.currentMov > 21) {
 		App->render->Blit(tilemapTex, tilemapPos.x, tilemapPos.y, &tilemapRect);
 	}
-	
 
 	if (cameraMovement.movFinished)
 	{
@@ -142,8 +161,13 @@ update_status Module5lvlScene::Update()
 		start_time = SDL_GetTicks();
 	}
 	
-	//Update colliders (important: after moving the ship!)------------------------------------
-	frontShipCol1->SetPos(shipPos.x + 46, shipPos.y + 140);
+	//Update colliders (Important: after moving the ship!)------------------------------------
+	//for (int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
+	//{
+	//	shipCollidersCol[i] ->SetPos(
+	//		shipCollidersRect[i].x + (int)shipPos.x,
+	//		shipCollidersRect[i].y + (int)shipPos.y);
+	//}
 
 	//LOG("ShipPos : x %i y %i", shipPos.x, shipPos.y);
 	return UPDATE_CONTINUE;

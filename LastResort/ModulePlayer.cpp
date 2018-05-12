@@ -39,7 +39,7 @@ bool ModulePlayer::Start()
 	PlayerTexture = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version																 
 	//colliders----------------------------------------------------------------------
 	InitPosition();//We set the position (before adding the collider) (note that the intial positions are set in Player1.h and Player2.h)
-	playerCol = App->collision->AddCollider({ position.x, position.y, 32, 12 }, COLLIDER_TYPE::COLLIDER_PLAYER, this);
+	playerCol = App->collision->AddCollider({ position.x, position.y + 2, 24, 8 }, COLLIDER_TYPE::COLLIDER_PLAYER, this);
 	//animations----------------------------------------------------------------------
 	deathAnim.Reset();
 
@@ -117,7 +117,7 @@ update_status ModulePlayer::Update()
 		else { unit_locked = true; }
 	}
 	//Collision------------------------------------------------------------------------
-	playerCol->SetPos(position.x, position.y); //We update the collider position
+	playerCol->SetPos(position.x, position.y + 2); //We update the collider position
 
 	//Ship Animation-------------------------------------------------------------------
 	ShipAnimation();

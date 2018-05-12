@@ -49,11 +49,9 @@ https://github.com/Dasanch/Project_1_JADY_UPC
 - **Space**: Shoot
 - **Left shift**: Lock the unit
 
-
-## TO SPAWN PLAYER 2
+## SPAWN PLAYER 2
 - Add credits:  "c"
 - Spawn player  "2"
-
 
 ### Player 2:
 #### Controller:
@@ -64,8 +62,8 @@ https://github.com/Dasanch/Project_1_JADY_UPC
 - **Down arrow**: Move down
 - **Right arrow**: Move right
 - **Up arrow**: Move up
-- **0 Numpad**: Shoot
-- **1 Numpad**: Lock the unit
+- **Rigth Ctrl**: Shoot
+- **Rigth Shift**: Lock the unit
 
 
 
@@ -80,7 +78,14 @@ https://github.com/Dasanch/Project_1_JADY_UPC
 ### BASIC DEBUGGING:
 - **F1**: Show collision boxes
 - **F2**: God mode
-- **F3**: Zoom out / Correct size
+- **F4**: Show grid
+- **Numpad 7**: Zoom in
+- **Numpad 9**: Zoom out
+- **Numpad 8**: Move camera up
+- **Numpad 4**: Move camera left
+- **Numpad 5**: Move camera down
+- **Numpad 6**: Move camera right
+- **Numpad 0**: Re-center camera
 
 ### ADVANCED DEBUGGING:
 How to use advanced debugging?
