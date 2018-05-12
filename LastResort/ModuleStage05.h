@@ -9,6 +9,8 @@
 #include "MovPath.h"
 #include "SDL/include/SDL_timer.h"
 
+#define SHIP_COLLIDERS_NUM 10//The number of colliders the ship is made of
+
 typedef struct _Mix_Music Mix_Music;
 
 class Module5lvlScene : public Module
@@ -37,6 +39,7 @@ public:
 	SDL_Rect StarsRect;
 	SDL_Rect StarsRect2;
 
+	dPoint shipPos;//Position at which we blit the ship (see Docs>ship.psd)
 
 	dPoint scroll;
 	dPoint stars;
@@ -44,7 +47,8 @@ public:
 	Mix_Music* lvl5Music = nullptr;
 
 	//Spaceship colliders
-	Collider* frontShipCol1;
+	Collider* shipCollidersCol[SHIP_COLLIDERS_NUM];
+	SDL_Rect shipCollidersRect[SHIP_COLLIDERS_NUM];
 };
 
 #endif
