@@ -17,6 +17,7 @@
 #include "ModuleStageFunctionality.h"
 #include "ModuleEnemies.h"
 #include "ModuleUnit.h"
+#include "ModuleInput.h"
 
 Module5lvlScene::Module5lvlScene()
 {
@@ -47,7 +48,7 @@ Module5lvlScene::Module5lvlScene()
 	cameraMovement.PushBack(1200);                  //Pause   //21
 	cameraMovement.PushBack({ 1108, 182 }, 240);    //14      //22 
 	cameraMovement.PushBack(2160);                  //Pause   //23
-	cameraMovement.PushBack({ 2151, 182 }, 2160);   //14      //24
+	cameraMovement.PushBack({ 2151, 182 }, 2160);   //15      //24
 }
 
 bool Module5lvlScene::Start()
@@ -110,6 +111,18 @@ update_status Module5lvlScene::Update()
 	App->render->Blit(StarsTexture, scroll.x, scroll.y+SCREEN_HEIGHT, NULL);
 	App->render->Blit(StarsTexture, scroll.x + SCREEN_WIDTH, scroll.y + SCREEN_HEIGHT, NULL);
 	//Background--------------------------------------------------------------------
+	if (App->input->keyboard[SDL_SCANCODE_F9] == KEY_DOWN) { 
+		if (checkPoint > 0) {
+			--checkPoint;
+			cameraMovement.SetMovement(checkPoint);
+		}
+	}
+	if (App->input->keyboard[SDL_SCANCODE_F10] == KEY_DOWN) { 
+		if (checkPoint < 24) {
+			++checkPoint;
+			cameraMovement.SetMovement(checkPoint);
+		}
+	}
 
 	camera = cameraMovement.GetCurrentPosition();
 
@@ -142,6 +155,10 @@ bool Module5lvlScene::CleanUp() {
 	//audios------------------------------------------------------------------------
 	App->audio->ControlMUS(lvl5Music, STOP_AUDIO);
 	App->audio->UnloadMUS(lvl5Music);
+	//Texture ---------------------------------------------------------------------------------------------------
+	App->textures->Unload(StarsTexture);
+	App->textures->Unload(shipTex);
+	App->textures->Unload(tilemapTex);
 	//Modules-----------------------------------------------------------------------
 	App->stageFunctionality->Disable();
 	return true;

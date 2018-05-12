@@ -27,6 +27,7 @@ public:
 	//provisional-----------------------------
 	int current_time= 0;
 	int start_time = 0;
+	int checkPoint = 0;
 	//Points----------------------------------
 	MovePath cameraMovement;
 	dPoint camera;

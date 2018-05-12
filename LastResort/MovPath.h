@@ -32,7 +32,7 @@ public:
 	MovePath() {}
 	~MovePath() {};
 
-	void PushBack(dPoint finalPoint , double frames)
+	void PushBack(dPoint finalPoint, double frames)
 	{
 		movements[last_mov].finalPoint = finalPoint;
 
@@ -43,7 +43,7 @@ public:
 			++last_mov;
 		}
 		else {
-			movements[last_mov].speed.x = (finalPoint.x - movements[last_mov - 1].finalPoint.x ) / frames;
+			movements[last_mov].speed.x = (finalPoint.x - movements[last_mov - 1].finalPoint.x) / frames;
 			movements[last_mov].speed.y = (finalPoint.y - movements[last_mov - 1].finalPoint.y) / frames;
 			movements[last_mov].frames = frames;
 			++last_mov;
@@ -52,7 +52,7 @@ public:
 
 	void PushBack(int frames)
 	{
-		
+
 		if (last_mov == 0) {
 			movements[last_mov].finalPoint = originPoint;
 			movements[last_mov].speed.x = 0;
@@ -74,8 +74,6 @@ public:
 		//LOG("current frame :  %i", currentFrame);
 		//LOG("position : (%i,%i)", position.x, position.y);
 
-
-
 		if (currentFrame < movements[currentMov].frames)
 		{
 			movFinished = false;
@@ -95,7 +93,26 @@ public:
 		return position;
 	}
 
+	dPoint SetMovement(int checkpoint)
+	{
+		position = { 0,0 };
+		currentFrame = 0;
+		currentMov = checkpoint;
 
+		for (int i = 0; i < checkpoint; ++i) {
+
+			if (i == 0) {
+				position.x += (movements[i].finalPoint.x - originPoint.x);
+				position.y += (movements[i].finalPoint.y - originPoint.y);
+				
+			}
+			else {
+				position.x += (movements[i].finalPoint.x - movements[i - 1].finalPoint.x) ;
+				position.y += (movements[i].finalPoint.y - movements[i - 1].finalPoint.y) ;
+			}
+		}
+		return position;
+	}
 };
 
 #endif // __MOVPAT_H__
