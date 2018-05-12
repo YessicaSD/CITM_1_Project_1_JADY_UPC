@@ -134,25 +134,25 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 		switch (info.type)
 		{
 		case ENEMY_TYPES::BASIC:
-			enemies[i] = new Enemy_Basic(info.x - App->stage05->tilemapPoint.x, info.y - App->stage05->tilemapPoint.y, info.pu_Type);
+			enemies[i] = new Enemy_Basic(info.x , info.y , info.pu_Type);
 			enemies[i]->points = 100;
 			break;
 
 		case ENEMY_TYPES::OSCILATOR:
-			enemies[i] = new Enemy_Oscilator(info.x - App->stage05->tilemapPoint.x, info.pu_Type);
+			enemies[i] = new Enemy_Oscilator(info.x , info.pu_Type);
 			enemies[i]->points = 100;
 			break;
 
 		case ENEMY_TYPES::POWERDROPPER:
-			enemies[i] = new Enemy_PowerDropper(info.x - App->stage05->tilemapPoint.x, info.y - App->stage05->tilemapPoint.y, info.pu_Type);
+			enemies[i] = new Enemy_PowerDropper(info.x , info.y , info.pu_Type);
 			enemies[i]->points = 100;
 			break;
 		case ENEMY_TYPES::METALCROW:
-			enemies[i] = new Enemy_MetalCraw(info.x - App->stage05->tilemapPoint.x, info.y - App->stage05->tilemapPoint.y, info.pu_Type);
+			enemies[i] = new Enemy_MetalCraw(info.x , info.y , info.pu_Type);
 			enemies[i]->points = 100;
 			break;
 			case  ENEMY_TYPES::REDBATS:
-				enemies[i] = new Enemy_RedBats(info.x - App->stage05->tilemapPoint.x, info.y , info.pu_Type);
+				enemies[i] = new Enemy_RedBats(info.x , info.y , info.pu_Type);
 				enemies[i]->points = 100;
 				break;
 		}

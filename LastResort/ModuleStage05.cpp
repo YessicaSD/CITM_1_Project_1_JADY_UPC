@@ -83,7 +83,7 @@ bool Module5lvlScene::Start()
 	//App->enemies->AddEnemy(OSCILATOR, -200, 200);
 	/*App->enemies->AddEnemy(POWERDROPPER, 200, 50, SPEED);
 	App->enemies->AddEnemy(POWERDROPPER, 300, 150, LASER);*/
-	App->enemies->AddEnemy(REDBATS, 430, 200);
+	App->enemies->AddEnemy(REDBATS, 582, 200);
 	/*App->enemies->AddEnemy(REDBATS, 275, 200);*/
 	/*App->enemies->AddEnemy(REDBATS, 360, 200);*/
 	//Colliders--------------------------------------------------------------------------------------------------
@@ -112,7 +112,6 @@ update_status Module5lvlScene::Update()
 {
 	//provisional-----------------------------
 	current_time = SDL_GetTicks() - start_time ;
-	
 	
 	//Background blit-------------------------------------------------------------------------
 	stars = stars.VectU(cameraMovement.GetCurrentPosition());
