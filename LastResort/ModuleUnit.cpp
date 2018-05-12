@@ -444,7 +444,7 @@ void ModuleUnit::Returning()
 		//- We go to position the unit around the player ship again
 		position.x = floatPlayerPos.x;
 		position.y = floatPlayerPos.y;
-		positioningStep = 0;
+		radius = 0;
 		unitPhase = UnitPhase::positioning;
 	}
 
@@ -459,37 +459,14 @@ void ModuleUnit::Returning()
 
 void ModuleUnit::Positioning()
 {
-	//MOVEMENT-------------------------------------------------------------------------------------------------------
-	//- We calculate the position it has to go to
-	fPoint vectorIncrease;
-	fPoint targetPos;
-	targetPos.x = radius * cosf(currentOrbit) + playerToFollow->position.x + playerCenter.x;
-	targetPos.y = radius * sinf(currentOrbit) + playerToFollow->position.y + playerCenter.y;
-	vectorIncrease.UnitVector(targetPos, position);
-
-	//- If the distance is more than the speed at which it travels
-	if (sqrt(pow(position.x - targetPos.x, 2) + pow(position.y - targetPos.y, 2)) >= positioningSpeed)
+	//When it's positioning, it is already rotating, but at the same time it travels to the correct distance from the center of the player
+	radius += 2;
+	if(radius > 31)
 	{
-		//- We move the orbit by that amount
-		position.x += vectorIncrease.x * positioningSpeed;
-		position.y += vectorIncrease.y * positioningSpeed;
-		UpdateUnitColliders();
-	}
-	else
-	{
-		//- We put them at that position
-		position = targetPos;
-		UpdateUnitColliders();
-		//- We go back to rotating around the player ship
+		radius = 31;
 		unitPhase = UnitPhase::rotating;
 	}
-
-	//RENDER---------------------------------------------------------------------------------------------------------
-	App->render->Blit(
-		unitTx,
-		(int)position.x - spriteXDifferences[turnAroundToRender],
-		(int)position.y - spriteYDifferences[turnAroundToRender],
-		&spinAnimation[turnAroundToRender].frame[(int)currentSpinFrame]);
+	Rotating();
 }
 
 //This function has a series of if statatements that do the following
