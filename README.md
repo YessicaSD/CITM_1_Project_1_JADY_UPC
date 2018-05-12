@@ -78,7 +78,9 @@ https://github.com/Dasanch/Project_1_JADY_UPC
 ### BASIC DEBUGGING:
 - **F1**: Show collision boxes
 - **F2**: God mode
-- **F4**: Show grid
+- **F3**: Show grid (with marks every 100 units)
+
+### CAMERA DEBUGGING:
 - **Numpad 7**: Zoom in
 - **Numpad 9**: Zoom out
 - **Numpad 8**: Move camera up

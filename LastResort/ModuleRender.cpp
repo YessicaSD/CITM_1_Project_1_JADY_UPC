@@ -5,9 +5,11 @@
 #include "ModuleInput.h"
 #include "SDL/include/SDL.h"
 
-#define BORDER_WIDTH 1
+#define DEFAULT_BORDER_WIDTH 1
 #define MAX_ZOOM 5
 #define MOVE_AMOUNT 5
+#define AXIS_LENGTH 5000
+#define MARK_LENGTH 20
 
 ModuleRender::ModuleRender() : Module()
 {
@@ -65,13 +67,12 @@ update_status ModuleRender::PreUpdate()
 	if (App->input->keyboard[SDL_SCANCODE_KP_5] == KEY_REPEAT) { movedPosition.y -= MOVE_AMOUNT; }
 	if (App->input->keyboard[SDL_SCANCODE_KP_6] == KEY_REPEAT) { movedPosition.x -= MOVE_AMOUNT; }
 	if (App->input->keyboard[SDL_SCANCODE_KP_0] == KEY_REPEAT) { ResetMovedPosition(); }
-
 	if (App->input->keyboard[SDL_SCANCODE_KP_7] == KEY_DOWN)
 	{
 		if (zoomedOutSize < MAX_ZOOM)
 		{
 			zoomedOutSize++;
-			SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH * zoomedOutSize, SCREEN_HEIGHT * zoomedOutSize);
+			SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH * zoomedOutSize * SCREEN_SIZE, SCREEN_HEIGHT * zoomedOutSize * SCREEN_SIZE);
 		}
 	}
 	if(App->input->keyboard[SDL_SCANCODE_KP_9] == KEY_DOWN)
@@ -79,8 +80,13 @@ update_status ModuleRender::PreUpdate()
 		if (zoomedOutSize > 1)
 		{
 			zoomedOutSize--;
-			SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH * zoomedOutSize, SCREEN_HEIGHT * zoomedOutSize);
+			SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH * zoomedOutSize * SCREEN_SIZE, SCREEN_HEIGHT * zoomedOutSize * SCREEN_SIZE);
 		}
+	}
+	if(App->input->keyboard[SDL_SCANCODE_F3] == KEY_DOWN)
+	{
+		if (showGrid == true) { showGrid = false; }
+		else { showGrid = true; }
 	}
 
 	return update_status::UPDATE_CONTINUE;
@@ -93,16 +99,38 @@ update_status ModuleRender::Update()
 
 update_status ModuleRender::PostUpdate()
 {
-	//Render the camera borders, so we know where the camera is
+	
 	//- INFO: Border width is multiplied by zoomedOutSize to mantain its size across all the zoomed out modes
+	int borderWidth = DEFAULT_BORDER_WIDTH /* * zoomedOutSize*/;
+
+	//Render the grids-------------------------------------------------------------------------------------------------------------------
+	if(showGrid)
+	{
+		//X marks
+		for(int i = -AXIS_LENGTH; i <= AXIS_LENGTH; i += 100)
+		{
+			App->render->DrawQuad({ -borderWidth / 2 + i, -AXIS_LENGTH / 2, borderWidth, AXIS_LENGTH }, 123, 123, 255, 123);
+		}
+		//Y marks
+		for (int i = -AXIS_LENGTH; i <= AXIS_LENGTH; i += 100)
+		{
+			App->render->DrawQuad({ -AXIS_LENGTH / 2, -borderWidth / 2 + i, AXIS_LENGTH, borderWidth }, 123, 123, 255, 123);
+		}
+		//X
+		App->render->DrawQuad({ -AXIS_LENGTH / 2, -borderWidth / 2, AXIS_LENGTH, borderWidth }, 0, 0, 255, 123);
+		//Y
+		App->render->DrawQuad({ -borderWidth / 2, -AXIS_LENGTH / 2, borderWidth, AXIS_LENGTH }, 0, 0, 255, 123);
+	}
+
+	//Render the camera borders, so we know where the camera is--------------------------------------------------------------------------
 	//Up border
-	App->render->DrawQuad({ -BORDER_WIDTH * zoomedOutSize, -BORDER_WIDTH * zoomedOutSize, SCREEN_WIDTH + BORDER_WIDTH * zoomedOutSize * 2, BORDER_WIDTH * zoomedOutSize }, 255, 255, 255, 255);
+	App->render->DrawQuad({ -borderWidth, -borderWidth, SCREEN_WIDTH + borderWidth * 2, borderWidth }, 255, 255, 255, 255);
 	//Down border
-	App->render->DrawQuad({ -BORDER_WIDTH * zoomedOutSize, SCREEN_HEIGHT, SCREEN_WIDTH + BORDER_WIDTH * zoomedOutSize * 2, BORDER_WIDTH * zoomedOutSize }, 255, 255, 255, 255);
+	App->render->DrawQuad({ -borderWidth, SCREEN_HEIGHT, SCREEN_WIDTH + borderWidth * 2, borderWidth }, 255, 255, 255, 255);
 	//Left border
-	App->render->DrawQuad({ -BORDER_WIDTH * zoomedOutSize, 0, BORDER_WIDTH * zoomedOutSize, SCREEN_HEIGHT}, 255, 255, 255, 255);
+	App->render->DrawQuad({ -borderWidth, 0, borderWidth, SCREEN_HEIGHT }, 255, 255, 255, 255);
 	//Right border
-	App->render->DrawQuad({ SCREEN_WIDTH, 0, BORDER_WIDTH * zoomedOutSize, SCREEN_HEIGHT}, 255, 255, 255, 255);
+	App->render->DrawQuad({ SCREEN_WIDTH, 0, borderWidth, SCREEN_HEIGHT }, 255, 255, 255, 255);
 
 	SDL_RenderPresent(renderer);
 	return update_status::UPDATE_CONTINUE;
