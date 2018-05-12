@@ -29,6 +29,7 @@ public:
 	//provisional-----------------------------
 	int current_time= 0;
 	int start_time = 0;
+	int checkPoint = 0;
 
 	//Points----------------------------------
 	dPoint shipPos;//Position at which we blit the ship (see Docs>ship.psd)

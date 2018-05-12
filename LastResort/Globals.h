@@ -22,7 +22,8 @@ enum update_status
 // Useful typedefs ---------
 typedef unsigned int uint;
 
-// Configuration -----------
+// Configuration -----------------------------
+//----------Screen-------------------
 #define SCREEN_SIZE 3
 #define SCREEN_WIDTH 304
 #define SCREEN_HEIGHT 224
@@ -31,4 +32,11 @@ typedef unsigned int uint;
 #define WIN_BORDERLESS 0
 #define WIN_RESIZABLE 0
 #define REN_VSYNC 1
+//----------Music-------------------
+#define GENERAL_MUSIC_VOLUME 0 //0 to 180 //Optimum 15
+#define GENERAL_SFX_VOLUME 0 //0 to 100   //Optimum 20
+
+// Useful typedefs ---------------------------
+typedef unsigned int uint;
+
 #endif // __GLOBALS_H__
