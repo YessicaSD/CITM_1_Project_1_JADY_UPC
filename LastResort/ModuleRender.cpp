@@ -101,7 +101,7 @@ update_status ModuleRender::PostUpdate()
 {
 	
 	//- INFO: Border width is multiplied by zoomedOutSize to mantain its size across all the zoomed out modes
-	int borderWidth = DEFAULT_BORDER_WIDTH /* * zoomedOutSize*/;
+	int borderWidth = DEFAULT_BORDER_WIDTH * zoomedOutSize;
 
 	//Render the grids-------------------------------------------------------------------------------------------------------------------
 	if(showGrid)
@@ -158,9 +158,7 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section)
 	rect.x = x * SCREEN_SIZE;
 	rect.y = y * SCREEN_SIZE;
 
-	//Zooming and moving the viewport
-	rect.x += SCREEN_WIDTH * (zoomedOutSize - 1) / 2 + movedPosition.x;
-	rect.y += SCREEN_HEIGHT * (zoomedOutSize - 1) / 2 + movedPosition.y;
+	AddZoomAndMovedPosition(rect);
 
 	if (section != NULL)
 	{
@@ -198,9 +196,7 @@ bool ModuleRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uin
 	rec.w *= SCREEN_SIZE;
 	rec.h *= SCREEN_SIZE;
 
-	//Zooming and moving the viewport
-	rec.x += SCREEN_WIDTH * (zoomedOutSize - 1) / 2 + movedPosition.x;
-	rec.y += SCREEN_HEIGHT * (zoomedOutSize - 1) / 2 + movedPosition.y;
+	AddZoomAndMovedPosition(rec);
 
 	if (SDL_RenderFillRect(renderer, &rec) != 0)
 	{
@@ -220,9 +216,7 @@ bool ModuleRender::FlippedBlit(SDL_Texture* texture, int x, int y, SDL_Rect* sec
 	rect.x = x * SCREEN_SIZE;
 	rect.y = y * SCREEN_SIZE;
 
-	//Zooming and moving the viewport
-	rect.x += SCREEN_WIDTH * (zoomedOutSize - 1) / 2 + movedPosition.x;
-	rect.y += SCREEN_HEIGHT * (zoomedOutSize - 1) / 2 + movedPosition.y;
+	AddZoomAndMovedPosition(rect);
 
 	if (section != NULL)
 	{
@@ -245,6 +239,13 @@ bool ModuleRender::FlippedBlit(SDL_Texture* texture, int x, int y, SDL_Rect* sec
 	}
 
 	return ret;
+}
+
+void ModuleRender::AddZoomAndMovedPosition(SDL_Rect & rect)
+{
+	//Zooming and moving the viewport
+	rect.x += SCREEN_WIDTH * (zoomedOutSize - 1) / 2 + movedPosition.x;
+	rect.y += SCREEN_HEIGHT * (zoomedOutSize - 1) / 2 + movedPosition.y;
 }
 
 
