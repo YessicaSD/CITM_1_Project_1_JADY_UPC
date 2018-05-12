@@ -113,7 +113,6 @@ update_status Module5lvlScene::Update()
 	//provisional-----------------------------
 	current_time = SDL_GetTicks() - start_time ;
 	
-	
 	//Background blit-------------------------------------------------------------------------
 	stars = stars.VectU(cameraMovement.GetCurrentPosition());
 	scroll.x -= 5;
