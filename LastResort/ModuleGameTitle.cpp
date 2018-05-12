@@ -12,6 +12,7 @@
 #include "ModuleStage01.h"
 #include "ModuleStage02.h"
 #include "ModuleStage05.h"
+#include "ModuleUI.h"
 
 
 
@@ -19,6 +20,7 @@ ModuleGameTitle::~ModuleGameTitle()
 {}
 bool ModuleGameTitle:: Start()
 {
+
 	LOG("Loading title assets");
 	bool ret = true;
 	start_time = SDL_GetTicks(); //fixed the real time that we start this module
@@ -36,7 +38,8 @@ bool ModuleGameTitle:: Start()
 	//audios--------------------------------------------------------------------------------
 	Titlemusic=App->audio->LoadMUS("Assets/LastResortTitle/02-LAST-RESORT-TITLE.ogg");
 	App->audio->ControlMUS(Titlemusic, PLAY_AUDIO);
-	
+	//UI------------------------------------------------------------------------------------
+	App->ui->Enable();
 	return ret;
 }
 bool ModuleGameTitle::CleanUp() {

@@ -33,7 +33,7 @@ bool ModuleUI::Start() {
 	App->fonts->Load("Assets/Fonts/blue_chars.png", "0123456789[]ABCDEFGHIJKLMNOPQRSTUVWXYZ_-.,&#", 1); //font id = 0
 	//textures----------------------------------------------------------------------
 	uiTex = App->textures->Load("Assets/UI.png");
-
+	coinsfx = App->audio->LoadSFX("Assets/General/Fx/001. Coin inserted.wav");
 	return ret;
 }
 
@@ -44,7 +44,7 @@ bool ModuleUI::CleanUp() {
 	//textures----------------------------------------------------------------------
 	App->textures->Unload(uiTex);
 	//audios------------------------------------------------------------------------
-
+	App->audio->UnloadSFX(coinsfx);
 	//------------------------------------------------------------------------------
 	return true;
 }
@@ -106,9 +106,10 @@ update_status ModuleUI::Update() {
 	}
 	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_DOWN && credits <=99)
 	{
+		App->audio->ControlSFX(coinsfx, PLAY_AUDIO);
 		credits +=1;
 	}
-	App->fonts->BlitText(208, 216, 0, "CREDITS_%i");//credits
+	App->fonts->BlitText(208, 216, 0, "CREDITS_00");//credits
 
 	delete[](str_score_p1);
 	delete[](str_score_p2);
