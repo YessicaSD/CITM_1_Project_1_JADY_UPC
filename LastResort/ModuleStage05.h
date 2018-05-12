@@ -35,7 +35,7 @@ public:
 	dPoint shipPos;//Position at which we blit the ship (see Docs>ship.psd)
 	dPoint tilemapPos;
 	MovePath cameraMovement;
-	dPoint camera;
+	dPoint tilemapPoint;
 	dPoint shipOffset = { 444, -240 };
 	dPoint tilemapOffset = { 1856, -58 };
 	dPoint scroll;

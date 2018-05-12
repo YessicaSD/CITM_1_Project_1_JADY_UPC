@@ -81,11 +81,11 @@ bool Module5lvlScene::Start()
 
 	//Enemies ---------------------------------------------------------------------------------------------------
 	//App->enemies->AddEnemy(OSCILATOR, -200, 200);
-	App->enemies->AddEnemy(POWERDROPPER, 200, 50, SPEED);
-	App->enemies->AddEnemy(POWERDROPPER, 300, 150, LASER);
-	App->enemies->AddEnemy(REDBATS, 300, 200);
-	App->enemies->AddEnemy(REDBATS, 330, 200);
-	App->enemies->AddEnemy(REDBATS, 360, 200);
+	/*App->enemies->AddEnemy(POWERDROPPER, 200, 50, SPEED);
+	App->enemies->AddEnemy(POWERDROPPER, 300, 150, LASER);*/
+	App->enemies->AddEnemy(REDBATS, 355, 200);
+	App->enemies->AddEnemy(REDBATS, 275, 200);
+	/*App->enemies->AddEnemy(REDBATS, 360, 200);*/
 	//Colliders--------------------------------------------------------------------------------------------------
 	//shipCollidersRect[0] = {};
 	//shipCollidersRect[1] = {};
@@ -144,9 +144,10 @@ update_status Module5lvlScene::Update()
 		}
 	}
 
-	camera = cameraMovement.GetCurrentPosition();
-	shipPos = shipOffset - camera;
-	dPoint tilemapPos = tilemapOffset - camera;
+	tilemapPoint = cameraMovement.GetCurrentPosition();
+	
+	shipPos = shipOffset - tilemapPoint;
+	dPoint tilemapPos = tilemapOffset - tilemapPoint;
 
 	App->render->Blit(shipTex, shipPos.x, shipPos.y, &shipRect);
 
