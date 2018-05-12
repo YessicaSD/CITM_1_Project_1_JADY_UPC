@@ -5,10 +5,10 @@
 #include "ModuleInput.h"
 #include "SDL/include/SDL.h"
 
-#define ZOOMED_OUT_SIZE 5
-#define ZOOMED_OUT_X_OFFSET 600//Change this to move the viewport to the left/right in zoomed out mode
-#define ZOOMED_OUT_Y_OFFSET 440//Change this to move the viewport up/down in zoomed out mode
-#define BORDER_WIDTH 2
+#define ZOOMED_OUT_X_OFFSET 152//These values help to center the image
+#define ZOOMED_OUT_Y_OFFSET 111
+#define BORDER_WIDTH 1
+#define MAX_ZOOM 5
 
 ModuleRender::ModuleRender() : Module()
 {
@@ -60,16 +60,10 @@ update_status ModuleRender::Update()
 {	
 	if (App->input->keyboard[SDL_SCANCODE_F3] == KEY_DOWN)
 	{
-		if(zoomedOut == false)
-		{
-			SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH * ZOOMED_OUT_SIZE, SCREEN_HEIGHT * ZOOMED_OUT_SIZE);
-			zoomedOut = true;
-		}
-		else
-		{
-			SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
-			zoomedOut = false;
-		}
+		zoomedOutSize++;
+		//If we get to the maximum zoom, we go back to normal
+		if (zoomedOutSize > MAX_ZOOM) { zoomedOutSize = 1; }
+		SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH * zoomedOutSize, SCREEN_HEIGHT * zoomedOutSize);
 	}
 
 	return update_status::UPDATE_CONTINUE;
@@ -78,16 +72,17 @@ update_status ModuleRender::Update()
 update_status ModuleRender::PostUpdate()
 {
 	//Render the camera borders, so we know where the camera is
-	if (zoomedOut == true)
+	//INFO: Border width is multiplied by zoomedOutSize to mantain its size across all the zoomed out modes
+	if (zoomedOutSize != 1)
 	{
-		//Right border
-		App->render->DrawQuad({ SCREEN_WIDTH, 0, BORDER_WIDTH, SCREEN_HEIGHT + BORDER_WIDTH }, 255, 255, 255, 255);
-		//Down border
-		App->render->DrawQuad({ 0, SCREEN_HEIGHT, SCREEN_WIDTH + BORDER_WIDTH, BORDER_WIDTH }, 255, 255, 255, 255);
-		//Left border
-		App->render->DrawQuad({ -BORDER_WIDTH, 0, BORDER_WIDTH, SCREEN_HEIGHT + BORDER_WIDTH }, 255, 255, 255, 255);
 		//Up border
-		App->render->DrawQuad({ -BORDER_WIDTH, 0, SCREEN_WIDTH + BORDER_WIDTH, BORDER_WIDTH }, 255, 255, 255, 255);
+		App->render->DrawQuad({ -BORDER_WIDTH * zoomedOutSize, -BORDER_WIDTH * zoomedOutSize, SCREEN_WIDTH + BORDER_WIDTH * zoomedOutSize * 2, BORDER_WIDTH * zoomedOutSize }, 255, 255, 255, 255);
+		//Down border
+		App->render->DrawQuad({ -BORDER_WIDTH * zoomedOutSize, SCREEN_HEIGHT, SCREEN_WIDTH + BORDER_WIDTH * zoomedOutSize * 2, BORDER_WIDTH * zoomedOutSize }, 255, 255, 255, 255);
+		//Left border
+		App->render->DrawQuad({ -BORDER_WIDTH * zoomedOutSize, 0, BORDER_WIDTH * zoomedOutSize, SCREEN_HEIGHT}, 255, 255, 255, 255);
+		//Right border
+		App->render->DrawQuad({ SCREEN_WIDTH, 0, BORDER_WIDTH * zoomedOutSize, SCREEN_HEIGHT}, 255, 255, 255, 255);
 	}
 
 	SDL_RenderPresent(renderer);
@@ -116,11 +111,11 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section)
 	rect.x = x * SCREEN_SIZE;
 	rect.y = y * SCREEN_SIZE;
 
-	//We render all the sprites to the center if we're in zoomed out mode
-	if(zoomedOut == true)
+	//We render all the sprites to the center (for zoomed out mode)
+	if (zoomedOutSize != 1)
 	{
-		rect.x += ZOOMED_OUT_X_OFFSET;
-		rect.y += ZOOMED_OUT_Y_OFFSET;
+		rect.x += SCREEN_WIDTH * (zoomedOutSize - 1) / 2;
+		rect.y += SCREEN_HEIGHT * (zoomedOutSize - 1) / 2;
 	}
 
 	if (section != NULL)
@@ -159,11 +154,11 @@ bool ModuleRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uin
 	rec.w *= SCREEN_SIZE;
 	rec.h *= SCREEN_SIZE;
 
-	//We render all the sprites to the center if we're in zoomed out mode
-	if (zoomedOut == true)
+	//We render all the sprites to the center (for zoomed out mode)
+	if (zoomedOutSize != 1)
 	{
-		rec.x += ZOOMED_OUT_X_OFFSET;
-		rec.y += ZOOMED_OUT_Y_OFFSET;
+		rec.x += SCREEN_WIDTH * (zoomedOutSize - 1) / 2;
+		rec.y += SCREEN_HEIGHT * (zoomedOutSize - 1) / 2;
 	}
 
 	if (SDL_RenderFillRect(renderer, &rec) != 0)
@@ -184,11 +179,11 @@ bool ModuleRender::FlippedBlit(SDL_Texture* texture, int x, int y, SDL_Rect* sec
 	rect.x = x * SCREEN_SIZE;
 	rect.y = y * SCREEN_SIZE;
 
-	//We render all the sprites to the center if we're in zoomed out mode
-	if (zoomedOut == true)
+	//We render all the sprites to the center (for zoomed out mode)
+	if (zoomedOutSize != 1)
 	{
-		rect.x += ZOOMED_OUT_X_OFFSET;
-		rect.y += ZOOMED_OUT_Y_OFFSET;
+		rect.x += SCREEN_WIDTH * (zoomedOutSize - 1) / 2;
+		rect.y += SCREEN_HEIGHT * (zoomedOutSize - 1) / 2;
 	}
 
 	if (section != NULL)
