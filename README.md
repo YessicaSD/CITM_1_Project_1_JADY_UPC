@@ -49,6 +49,12 @@ https://github.com/Dasanch/Project_1_JADY_UPC
 - **Space**: Shoot
 - **Left shift**: Lock the unit
 
+
+## TO SPAWN PLAYER 2
+- Add credits:  "c"
+- Spawn player  "2"
+
+
 ### Player 2:
 #### Controller:
 - **Left Joystick**: Movement
@@ -60,6 +66,7 @@ https://github.com/Dasanch/Project_1_JADY_UPC
 - **Up arrow**: Move up
 - **0 Numpad**: Shoot
 - **1 Numpad**: Lock the unit
+
 
 
 ## Other functions --------------------------------------------------------------------

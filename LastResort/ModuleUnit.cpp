@@ -431,18 +431,21 @@ void ModuleUnit::Returning()
 	vectorIncrease.UnitVector(floatPlayerPos, position);
 	
 	//- If the unit has reached the center of the player, we slowly position it on the position it was when we shot it
-	if (sqrt(pow(position.x - floatPlayerPos.x, 2) + pow(position.y - floatPlayerPos.y, 2)) < returningSpeed)
-	{
-		position.x = floatPlayerPos.x;
-		position.y = floatPlayerPos.y;
-		unitPhase = UnitPhase::positioning;
-	}
-	else
+	if (sqrt(pow(position.x - floatPlayerPos.x, 2) + pow(position.y - floatPlayerPos.y, 2)) >= returningSpeed)
 	{
 		//- We add that vector to the position of the orbit
+		//position.x = playerToFollow->position.x + vectorIncrease * positioningStep;
 		position.x += vectorIncrease.x * returningSpeed;
 		position.y += vectorIncrease.y * returningSpeed;
 		UpdateUnitColliders();
+	}
+	else
+	{
+		//- We go to position the unit around the player ship again
+		position.x = floatPlayerPos.x;
+		position.y = floatPlayerPos.y;
+		radius = 0;
+		unitPhase = UnitPhase::positioning;
 	}
 
 	//RENDER------------------------------------------------------------------
@@ -456,37 +459,14 @@ void ModuleUnit::Returning()
 
 void ModuleUnit::Positioning()
 {
-	//MOVEMENT-------------------------------------------------------------------------------------------------------
-	//- We calculate the position it has to go to
-	fPoint vectorIncrease;
-	fPoint targetPos;
-	targetPos.x = radius * cosf(currentOrbit) + playerToFollow->position.x + playerCenter.x;
-	targetPos.y = radius * sinf(currentOrbit) + playerToFollow->position.y + playerCenter.y;
-	vectorIncrease.UnitVector(targetPos, position);
-
-	//- When it reaches that position, we go back to rotation around the player
-	if (sqrt(pow(position.x - targetPos.x, 2) + pow(position.y - targetPos.y, 2)) < positioningSpeed)
+	//When it's positioning, it is already rotating, but at the same time it travels to the correct distance from the center of the player
+	radius += 2;
+	if(radius > 31)
 	{
-		//- We put them at that position
-		position = targetPos;
-		UpdateUnitColliders();
-		//- We go back to rotating around the player ship
+		radius = 31;
 		unitPhase = UnitPhase::rotating;
 	}
-	else
-	{
-		//- We move the orbit by that amount
-		position.x += vectorIncrease.x * positioningSpeed;
-		position.y += vectorIncrease.y * positioningSpeed;
-		UpdateUnitColliders();
-	}
-
-	//RENDER---------------------------------------------------------------------------------------------------------
-	App->render->Blit(
-		unitTx,
-		(int)position.x - spriteXDifferences[turnAroundToRender],
-		(int)position.y - spriteYDifferences[turnAroundToRender],
-		&spinAnimation[turnAroundToRender].frame[(int)currentSpinFrame]);
+	Rotating();
 }
 
 //This function has a series of if statatements that do the following

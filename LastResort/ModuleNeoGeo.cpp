@@ -14,6 +14,7 @@
 #include "ModuleGameOver.h"
 #include "ModuleStageClear.h"
 #include "SDL/include/SDL.h"
+#include "ModuleUI.h"
 
 
 ModuleNeoGeo::ModuleNeoGeo()
@@ -71,7 +72,6 @@ bool ModuleNeoGeo::Start()
 
 	neogeoMusic = App->audio->LoadMUS("Assets/NeoGeo/NeoGeoSong.ogg");
 	App->audio->ControlMUS(neogeoMusic, PLAY_AUDIO);
-
 	return ret;
 }
 update_status ModuleNeoGeo::Update()
@@ -181,6 +181,7 @@ update_status ModuleNeoGeo::Update()
 		App->render->Blit(snkTx, 116, 162, &snkAnim.GetCurrentFrame());
 		break;
 	}
+
 	return UPDATE_CONTINUE;
 }
 bool ModuleNeoGeo::CleanUp() {

@@ -18,6 +18,7 @@
 #include "ModuleGameTitle.h"
 #include "ModuleReady.h"
 #include "ModuleContinue.h"
+#include "ModuleUI.h"
 
 ModuleStageFunctionality::ModuleStageFunctionality()
 {
@@ -37,7 +38,8 @@ bool ModuleStageFunctionality::Start()
 	App->collision->Enable();
 	App->enemies->Enable();
 	App->powerups->Enable();
-	//App->ui->ShowUi();
+	App->ui->Enable();
+	App->ui->ShowUi();
 	return true;
 }
 

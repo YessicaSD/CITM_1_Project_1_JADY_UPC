@@ -7,6 +7,7 @@
 
 struct SDL_Texture;
 struct SDL_Rect;
+struct Mix_Chunk;
 class ModuleUI : public Module
 {
 public:
@@ -38,8 +39,9 @@ public:
 	bool p2_Unit = false;
 	bool godMode = false;
 	//General data--------------------------------
-	int credits;
+	int credits=00;
 	bool showUI = true;
+	Mix_Chunk*coinsfx=nullptr;
 	//-------------------------------------------
 
 	SDL_Texture *uiTex = nullptr;

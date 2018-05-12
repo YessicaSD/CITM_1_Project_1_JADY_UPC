@@ -112,7 +112,7 @@ private:
 	int turnAroundToRender;
 	bool orbiting;//A bool that indicates if we can make the unit orbit
 	bool turningAround;//A bool that indicates if we can make the unit turn around
-	const float radius = 31;
+	int radius = 31;
 	const float angleSeparation = PI / 16;//The separation between the angles (helps us calculate which animation we have to play)
 	iPoint playerCenter;
 
