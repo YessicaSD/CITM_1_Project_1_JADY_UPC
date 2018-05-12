@@ -24,15 +24,11 @@ typedef unsigned int uint;
 
 // Configuration -----------------------------
 //----------Screen-------------------
-<<<<<<< HEAD
 #define SCREEN_SIZE 1
-=======
-#define SCREEN_SIZE 4
->>>>>>> 9a8c72073f6b0d2acc407755451c2c6ad46f1e46
 #define SCREEN_WIDTH 304
 #define SCREEN_HEIGHT 224
 #define WIN_FULLSCREEN 0
-#define WIN_FULLSCREEN_DESKTOP 1 // Change this to one for full screen 
+#define WIN_FULLSCREEN_DESKTOP 0 // Change this to one for full screen 
 #define WIN_BORDERLESS 0
 #define WIN_RESIZABLE 0
 #define REN_VSYNC 1

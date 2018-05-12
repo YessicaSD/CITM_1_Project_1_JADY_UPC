@@ -7,6 +7,7 @@
 #include "ModuleAudio.h"
 #include "ModulePowerups.h"
 #include "ModuleUI.h"
+#include "ModuleStage05.h"
 
 
 Enemy::Enemy(int x, int y, POWERUP_TYPE pu_t) : position(x, y), powerUp_drop(pu_t)
@@ -27,10 +28,10 @@ void Enemy::Draw(SDL_Texture* sprites)
 {
 
 	if (collider != nullptr)
-		collider->SetPos(position.x, position.y);
+		collider->SetPos(position.x-App->stage05->tilemapPoint.x, position.y);
 
 	if (animation != nullptr)
-		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
+		App->render->Blit(sprites, position.x - App->stage05->tilemapPoint.x, position.y, &(animation->GetCurrentFrame()));
 }
 
 void Enemy::OnCollision(Collider* collider)

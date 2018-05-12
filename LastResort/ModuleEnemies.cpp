@@ -11,7 +11,7 @@
 #include "Enemy_PowerDropper.h"
 #include "MiddleBosslvl1.h"
 #include "Enemy_RedBats.h"
-
+#include "ModuleStage05.h"
 
 #define SPAWN_MARGIN 50
 
@@ -36,12 +36,12 @@ bool ModuleEnemies::Start()
 
 update_status ModuleEnemies::PreUpdate()
 {
-	// check camera position to decide what to spawn
+	// check camera position to decide what to delete
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
 		if (queue[i].type != ENEMY_TYPES::NO_TYPE)
 		{
-			if (queue[i].x  < SCREEN_WIDTH + SPAWN_MARGIN)
+			if (queue[i].x  < App->stage05->tilemapPoint.x+SCREEN_WIDTH )
 			{
 				SpawnEnemy(queue[i]);
 				queue[i].type = ENEMY_TYPES::NO_TYPE;
@@ -72,7 +72,7 @@ update_status ModuleEnemies::PostUpdate()
 	{
 		if (enemies[i] != nullptr)
 		{
-			if (enemies[i]->position.x  < 0 - SPAWN_MARGIN)
+			if (enemies[i]->position.x  < App->stage05->tilemapPoint.x- SPAWN_MARGIN)
 			{
 				LOG("DeSpawning enemy at %d", enemies[i]->position.x);
 				delete enemies[i];
@@ -134,25 +134,25 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 		switch (info.type)
 		{
 		case ENEMY_TYPES::BASIC:
-			enemies[i] = new Enemy_Basic(info.x, info.y, info.pu_Type);
+			enemies[i] = new Enemy_Basic(info.x , info.y , info.pu_Type);
 			enemies[i]->points = 100;
 			break;
 
 		case ENEMY_TYPES::OSCILATOR:
-			enemies[i] = new Enemy_Oscilator(info.x, info.pu_Type);
+			enemies[i] = new Enemy_Oscilator(info.x , info.pu_Type);
 			enemies[i]->points = 100;
 			break;
 
 		case ENEMY_TYPES::POWERDROPPER:
-			enemies[i] = new Enemy_PowerDropper(info.x, info.y, info.pu_Type);
+			enemies[i] = new Enemy_PowerDropper(info.x , info.y , info.pu_Type);
 			enemies[i]->points = 100;
 			break;
 		case ENEMY_TYPES::METALCROW:
-			enemies[i] = new Enemy_MetalCraw(info.x, info.y, info.pu_Type);
+			enemies[i] = new Enemy_MetalCraw(info.x , info.y , info.pu_Type);
 			enemies[i]->points = 100;
 			break;
 			case  ENEMY_TYPES::REDBATS:
-				enemies[i] = new Enemy_RedBats(info.x, info.y, info.pu_Type);
+				enemies[i] = new Enemy_RedBats(info.x , info.y , info.pu_Type);
 				enemies[i]->points = 100;
 				break;
 		}

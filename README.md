@@ -70,8 +70,8 @@ https://github.com/Dasanch/Project_1_JADY_UPC
 ## Other functions --------------------------------------------------------------------
 - **Esc**: Closes the game
 - **Space**: Skip intros
-- **+**: Volume up
-- **-**: Volume down
+- **Numpad +**: Volume up
+- **Numpad -**: Volume down
 
 ## Debug functionality ----------------------------------------------------------------
 
