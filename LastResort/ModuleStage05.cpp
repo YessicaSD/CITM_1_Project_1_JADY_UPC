@@ -18,13 +18,10 @@
 #include "ModuleEnemies.h"
 #include "ModuleUnit.h"
 
-
-#define SPACESHIP_WIDTH 1423
-#define SPACESHIP_HEIGHT 288
-
 Module5lvlScene::Module5lvlScene()
 {
-	shipRect = { 0,0 , SPACESHIP_WIDTH,SPACESHIP_HEIGHT };
+	shipRect = { 0,0 , 1423,288 };
+	tilemapRect = { 0,0 ,875 ,224 };
 
 	cameraMovement.originPoint = { -444, 240 };     //-1      //0
 	cameraMovement.PushBack({ -167, 144 }, 330);    //0       //1
@@ -40,7 +37,7 @@ Module5lvlScene::Module5lvlScene()
 	cameraMovement.PushBack({ 371, 0 }, 418);       //6.5     //11 
 	cameraMovement.PushBack({ 371, -128 }, 268);    //7       //12 
 	cameraMovement.PushBack({ 874, -128 }, 1500);   //8       //13 
-	cameraMovement.PushBack(300);                   //Pause   //14  -
+	cameraMovement.PushBack(300);                   //Pause   //14  
 	cameraMovement.PushBack({ 1236, -33 }, 588);    //9       //15 
 	cameraMovement.PushBack({ 1312, -62 }, 288);    //10      //16
 	cameraMovement.PushBack({ 1133, 80 }, 615);     //11      //17 
@@ -49,6 +46,8 @@ Module5lvlScene::Module5lvlScene()
 	cameraMovement.PushBack({ 946, 64 }, 72);       //13      //20
 	cameraMovement.PushBack(1200);                  //Pause   //21
 	cameraMovement.PushBack({ 1108, 182 }, 240);    //14      //22 
+	cameraMovement.PushBack(2160);                  //Pause   //23
+	cameraMovement.PushBack({ 2151, 182 }, 2160);   //14      //24
 }
 
 bool Module5lvlScene::Start()
@@ -71,6 +70,7 @@ bool Module5lvlScene::Start()
 	//Texture ---------------------------------------------------------------------------------------------------
 	StarsTexture = App->textures->Load("Assets/lvl5/background/backgroundstars.png");
 	shipTex = App->textures->Load("Assets/lvl5/background/ship.png");
+	tilemapTex = App->textures->Load("Assets/lvl5/background/final.png");
 	//Music -----------------------------------------------------------------------------------------------------
 	lvl5Music = App->audio->LoadMUS("Assets/lvl5/07-DON-T-TOUCH-ME-BABY-STAGE-5-1-_-FEAR-STAGE-5-2-_-LEGE.ogg");
 	App->audio->ControlMUS(lvl5Music, PLAY_AUDIO);
@@ -109,12 +109,20 @@ update_status Module5lvlScene::Update()
 	App->render->Blit(StarsTexture, scroll.x+SCREEN_WIDTH, scroll.y, NULL);
 	App->render->Blit(StarsTexture, scroll.x, scroll.y+SCREEN_HEIGHT, NULL);
 	App->render->Blit(StarsTexture, scroll.x + SCREEN_WIDTH, scroll.y + SCREEN_HEIGHT, NULL);
-	//Spaceship background--------------------------------------------------------------------
+	//Background--------------------------------------------------------------------
 
-	dPoint shipPos = shipOffset - cameraMovement.GetCurrentPosition();
+	camera = cameraMovement.GetCurrentPosition();
+
+	dPoint shipPos = shipOffset - camera;
+	dPoint tilemapPos = tilemapOffset - camera;
 
 	App->render->Blit(shipTex, shipPos.x, shipPos.y, &shipRect);
+
+	if (cameraMovement.currentMov > 21) {
+		App->render->Blit(tilemapTex, tilemapPos.x, tilemapPos.y, &tilemapRect);
+	}
 	
+
 	if (cameraMovement.movFinished)
 	{
 		LOG("Move: %i Time: %i  ", cameraMovement.currentMov, current_time);
