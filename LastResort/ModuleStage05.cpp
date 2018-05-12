@@ -147,7 +147,7 @@ update_status Module5lvlScene::Update()
 	tilemapPoint = cameraMovement.GetCurrentPosition();
 	
 	shipPos = shipOffset - tilemapPoint;
-	dPoint tilemapPos = tilemapOffset - tilemapPoint;
+	tilemapPos = tilemapOffset - tilemapPoint;
 
 	App->render->Blit(shipTex, shipPos.x, shipPos.y, &shipRect);
 
