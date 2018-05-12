@@ -28,10 +28,10 @@ void Enemy::Draw(SDL_Texture* sprites)
 {
 
 	if (collider != nullptr)
-		collider->SetPos(position.x-App->stage05->tilemapPoint.x, position.y);
+		collider->SetPos(position.x-App->stage05->tilemapPoint.x, position.y - App->stage05->tilemapPoint.y);
 
 	if (animation != nullptr)
-		App->render->Blit(sprites, position.x - App->stage05->tilemapPoint.x, position.y, &(animation->GetCurrentFrame()));
+		App->render->Blit(sprites, position.x - App->stage05->tilemapPoint.x, position.y - App->stage05->tilemapPoint.y, &(animation->GetCurrentFrame()));
 }
 
 void Enemy::OnCollision(Collider* collider)

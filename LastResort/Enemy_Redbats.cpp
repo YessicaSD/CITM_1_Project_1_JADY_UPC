@@ -2,7 +2,7 @@
 #include "Enemy_RedBats.h"
 #include "ModuleCollision.h"
 
-Enemy_RedBats::Enemy_RedBats(int x, int y, POWERUP_TYPE pu_t) : Enemy(x, original_y, pu_t)
+Enemy_RedBats::Enemy_RedBats(int x, int y, POWERUP_TYPE pu_t) : Enemy(x, y, pu_t)
 {
 	RedBats.PushBack({ 156,0,27,29 });
 	RedBats.PushBack({ 190,0,27,18 });
@@ -15,7 +15,7 @@ Enemy_RedBats::Enemy_RedBats(int x, int y, POWERUP_TYPE pu_t) : Enemy(x, origina
 	RedBats.speed = 0.08f;
 	animation = &RedBats;
 	collider = App->collision->AddCollider({ 0, 0, 27, 25 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
-
+	original_y = y;
 
 }
 
