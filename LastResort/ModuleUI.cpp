@@ -108,7 +108,7 @@ update_status ModuleUI::Update() {
 	{
 		credits +=1;
 	}
-	App->fonts->BlitText(208, 216, 0, "CREDITS_%i");//credits
+	App->fonts->BlitText(208, 216, 0, "CREDITS_00");//credits
 
 	delete[](str_score_p1);
 	delete[](str_score_p2);

@@ -38,6 +38,7 @@ bool ModuleStageFunctionality::Start()
 	App->collision->Enable();
 	App->enemies->Enable();
 	App->powerups->Enable();
+	App->ui->Enable();
 	App->ui->ShowUi();
 	return true;
 }
