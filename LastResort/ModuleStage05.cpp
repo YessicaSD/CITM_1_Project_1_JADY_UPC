@@ -83,7 +83,8 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(POWERDROPPER, 200, 50, SPEED);
 	App->enemies->AddEnemy(POWERDROPPER, 300, 150, LASER);
 	App->enemies->AddEnemy(REDBATS, 300, 200);
-
+	App->enemies->AddEnemy(REDBATS, 330, 200);
+	App->enemies->AddEnemy(REDBATS, 360, 200);
 	//Colliders--------------------------------------------------------------------------------------------------
 	//shipCollidersRect[0] = {};
 	//shipCollidersRect[1] = {};
