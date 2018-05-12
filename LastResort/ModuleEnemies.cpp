@@ -36,12 +36,12 @@ bool ModuleEnemies::Start()
 
 update_status ModuleEnemies::PreUpdate()
 {
-	// check camera position to decide what to delete
+	// check camera position to decide what to spawn
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
 		if (queue[i].type != ENEMY_TYPES::NO_TYPE)
 		{
-			if (queue[i].x  < App->stage05->tilemapPoint.x+SCREEN_WIDTH )
+			if (queue[i].x  < App->stage05->tilemapPoint.x+SCREEN_WIDTH && queue[i].y > App->stage05->tilemapPoint.y)
 			{
 				SpawnEnemy(queue[i]);
 				queue[i].type = ENEMY_TYPES::NO_TYPE;
@@ -67,7 +67,7 @@ update_status ModuleEnemies::Update()
 
 update_status ModuleEnemies::PostUpdate()
 {
-	// check camera position to decide what to despawn
+	// check camera position to decide  what to delete
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
 		if (enemies[i] != nullptr)
