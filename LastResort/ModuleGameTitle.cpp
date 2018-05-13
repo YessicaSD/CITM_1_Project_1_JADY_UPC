@@ -100,8 +100,8 @@ update_status ModuleGameTitle::Update() {
 	App->render->Blit(T10Texture,  238,  85, &T10.GetCurrentFrame());
 	
 
-	/*App->render->Blit(TitleTexture, ((SCREEN_WIDTH-LastResortRect.w)/2), ((SCREEN_HEIGHT - LastResortRect.h) / 2), &LastResortRect, 0.0f);*/
-	if (current_time>18000 || App->input->keyboard[SDL_SCANCODE_C])
+	
+	if (current_time>18000 /*|| App->input->keyboard[SDL_SCANCODE_C]*/)
 	{
 		App->audio->ControlMUS(Titlemusic, STOP_AUDIO);
 	}
