@@ -113,6 +113,41 @@ update_status ModuleUI::Update() {
 		if(credits < 99)
 		credits +=1;
 	}
+	if (App->input->keyboard[SDL_SCANCODE_1])
+	{
+		if (player1 == false)
+		{
+			if (credits > 0)
+			{
+				player1 = true;
+				credits -= 1;
+			}
+		}
+		
+	}
+	if (App->input->keyboard[SDL_SCANCODE_2])
+	{
+		if (player2 == false)
+		{
+			if (credits >= 2 && player1==false && Continue==false)
+			{
+				player1 = true;
+				player2 = true;
+				credits -= 2;
+			}
+			else if (credits > 0 && player1 == true)
+			{
+				player2 = true;
+				credits -= 1;
+			}
+			else if (Continue == true)
+			{
+				player2 = true;
+				credits -= 1;
+			}
+		}
+		
+	}
 	App->fonts->BlitText(208, 216, 0, str_credits);//credits
 
 	delete[](str_score_p1);
