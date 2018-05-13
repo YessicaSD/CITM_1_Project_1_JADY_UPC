@@ -71,7 +71,7 @@ update_status ModuleStageReady::Update()
 
 	//App->render->Blit(backgroundReady, 0, 0, NULL, 0.0f);
 	current_time = (SDL_GetTicks() - start_time);
-	if (current_time > 1000)
+	if (current_time > 800)
 	{
 		App->fade->FadeToBlack(this, App->stage05, 0.5f);
 	}
