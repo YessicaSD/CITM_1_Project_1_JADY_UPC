@@ -77,6 +77,10 @@ public:
 	update_status Update();
 	bool CleanUp();
 
+private:
+	//Custom variables
+	bool pauseExecution = false;
+	bool pauseNextFrame = false;
 };
 
 // Global var made extern for Application ---

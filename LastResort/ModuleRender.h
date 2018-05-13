@@ -34,7 +34,8 @@ public:
 
 	//Zoom out
 	int zoomedOutSize = 1;
-	bool showGrid = false;
+	bool showWorldGrid = false;
+	bool showTilemapGrid = false;
 };
 
 #endif //__ModuleRenderer_H__

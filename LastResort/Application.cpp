@@ -104,6 +104,23 @@ update_status Application::Update()
 	for (int i = 0; i < NUM_MODULES && ret == UPDATE_CONTINUE; ++i)
 		ret = modules[i]->IsEnabled() ? modules[i]->PostUpdate() : UPDATE_CONTINUE;
 
+	//Pause game
+	if (input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN) { pauseExecution = true; }
+	if (pauseNextFrame) { pauseNextFrame = false; pauseExecution = true; }
+	while(pauseExecution)
+	{
+		input->PreUpdate();
+		if(input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN)
+		{
+			pauseExecution = false;
+		}
+		if (input->keyboard[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN)
+		{
+			pauseExecution = false;
+			pauseNextFrame = true;
+		}
+	}
+
 	return ret;
 }
 

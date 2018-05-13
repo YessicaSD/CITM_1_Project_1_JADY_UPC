@@ -4,6 +4,7 @@
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
 #include "SDL/include/SDL.h"
+#include "ModuleStage05.h"
 
 #define DEFAULT_BORDER_WIDTH 1
 #define MAX_ZOOM 5
@@ -83,10 +84,15 @@ update_status ModuleRender::PreUpdate()
 			SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH * zoomedOutSize * SCREEN_SIZE, SCREEN_HEIGHT * zoomedOutSize * SCREEN_SIZE);
 		}
 	}
-	if(App->input->keyboard[SDL_SCANCODE_F3] == KEY_DOWN)
+	if(App->input->keyboard[SDL_SCANCODE_KP_DIVIDE] == KEY_DOWN)
 	{
-		if (showGrid == true) { showGrid = false; }
-		else { showGrid = true; }
+		if (showWorldGrid == true) { showWorldGrid = false; }
+		else { showWorldGrid = true; }
+	}
+	if (App->input->keyboard[SDL_SCANCODE_KP_MULTIPLY] == KEY_DOWN)
+	{
+		if (showTilemapGrid == true) { showTilemapGrid = false; }
+		else { showTilemapGrid = true; }
 	}
 
 	return update_status::UPDATE_CONTINUE;
@@ -103,18 +109,37 @@ update_status ModuleRender::PostUpdate()
 	//- INFO: Border width is multiplied by zoomedOutSize to mantain its size across all the zoomed out modes
 	int borderWidth = DEFAULT_BORDER_WIDTH * zoomedOutSize;
 
+	//Render the tilemap grid------------------------------------------------------------------------------------------------------------
+	if (showTilemapGrid)
+	{
+		//X marks
+		for (int i = -AXIS_LENGTH + (int)App->stage05->shipPos.x; i <= AXIS_LENGTH + (int)App->stage05->shipPos.x; i += 100)
+		{
+			App->render->DrawQuad({ -borderWidth / 2 + i, -AXIS_LENGTH / 2, borderWidth, AXIS_LENGTH }, 123, 255, 123, 50);
+		}
+		//Y marks
+		for (int i = -AXIS_LENGTH + (int)App->stage05->shipPos.y; i <= AXIS_LENGTH + (int)App->stage05->shipPos.y; i += 100)
+		{
+			App->render->DrawQuad({ -AXIS_LENGTH / 2, -borderWidth / 2 + i, AXIS_LENGTH, borderWidth }, 123, 255, 123, 50);
+		}
+		//X
+		App->render->DrawQuad({ -AXIS_LENGTH / 2, -borderWidth / 2 + (int)App->stage05->shipPos.y, AXIS_LENGTH, borderWidth }, 0, 255, 0, 123);
+		//Y
+		App->render->DrawQuad({ -borderWidth / 2 + (int)App->stage05->shipPos.x, -AXIS_LENGTH / 2, borderWidth, AXIS_LENGTH }, 0, 255, 0, 123);
+	}
+
 	//Render the grids-------------------------------------------------------------------------------------------------------------------
-	if(showGrid)
+	if(showWorldGrid)
 	{
 		//X marks
 		for(int i = -AXIS_LENGTH; i <= AXIS_LENGTH; i += 100)
 		{
-			App->render->DrawQuad({ -borderWidth / 2 + i, -AXIS_LENGTH / 2, borderWidth, AXIS_LENGTH }, 123, 123, 255, 123);
+			App->render->DrawQuad({ -borderWidth / 2 + i, -AXIS_LENGTH / 2, borderWidth, AXIS_LENGTH }, 123, 123, 255, 50);
 		}
 		//Y marks
 		for (int i = -AXIS_LENGTH; i <= AXIS_LENGTH; i += 100)
 		{
-			App->render->DrawQuad({ -AXIS_LENGTH / 2, -borderWidth / 2 + i, AXIS_LENGTH, borderWidth }, 123, 123, 255, 123);
+			App->render->DrawQuad({ -AXIS_LENGTH / 2, -borderWidth / 2 + i, AXIS_LENGTH, borderWidth }, 123, 123, 255, 50);
 		}
 		//X
 		App->render->DrawQuad({ -AXIS_LENGTH / 2, -borderWidth / 2, AXIS_LENGTH, borderWidth }, 0, 0, 255, 123);

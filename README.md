@@ -55,39 +55,43 @@ https://github.com/Dasanch/Project_1_JADY_UPC
 
 ### Player 2:
 #### Controller:
-- **Left Joystick**: Movement
-- **B**: Shoot
+-** Left Joystick **: Movement
+-** B **: Shoot
 #### Keyboard:
-- **Left arrow**: Move left
-- **Down arrow**: Move down
-- **Right arrow**: Move right
-- **Up arrow**: Move up
-- **Rigth Ctrl**: Shoot
-- **Rigth Shift**: Lock the unit
+-** Left arrow **: Move left
+-** Down arrow **: Move down
+-** Right arrow **: Move right
+-** Up arrow **: Move up
+-** Rigth Ctrl **: Shoot
+-** Rigth Shift **: Lock the unit
 
 
 
 ## Other functions --------------------------------------------------------------------
-- **Esc**: Closes the game
-- **Space**: Skip intros
-- **Numpad +**: Volume up
-- **Numpad -**: Volume down
+-** Esc **: Closes the game
+-** Space **: Skip intros
+-** Numpad +**: Volume up
+-** Numpad -**: Volume down
 
 ## Debug functionality ----------------------------------------------------------------
 
 ### BASIC DEBUGGING:
-- **F1**: Show collision boxes
-- **F2**: God mode
-- **F3**: Show grid (with marks every 100 units)
+-** F1 **: Show collision boxes
+-** F2 **: God mode
+-** F3 **: Pause/Play game
+-** F4 **: Frame forward (only when the game is paused)
+
 
 ### CAMERA DEBUGGING:
-- **Numpad 7**: Zoom in
-- **Numpad 9**: Zoom out
-- **Numpad 8**: Move camera up
-- **Numpad 4**: Move camera left
-- **Numpad 5**: Move camera down
-- **Numpad 6**: Move camera right
-- **Numpad 0**: Re-center camera
+-** Numpad 7 **: Zoom in
+-** Numpad 9 **: Zoom out
+-** Numpad 8 **: Move camera up
+-** Numpad 4 **: Move camera left
+-** Numpad 5 **: Move camera down
+-** Numpad 6 **: Move camera right
+-** Numpad 0 **: Re-center camera
+-** Numpad / **: Show world grid (which has marks every 100 units)
+-** Numpad * **: Show background grid (which has marks every 100 units)
 
 ### ADVANCED DEBUGGING:
 How to use advanced debugging?

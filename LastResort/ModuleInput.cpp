@@ -12,7 +12,6 @@ ModuleInput::ModuleInput() : Module()
 	{
 		controller[i] = nullptr;
 	}
-
 }
 
 // Destructor
