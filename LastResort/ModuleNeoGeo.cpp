@@ -77,7 +77,7 @@ bool ModuleNeoGeo::Start()
 update_status ModuleNeoGeo::Update()
 {
 	//We change the scene if the player presses space
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_C] == KEY_DOWN)
 	{
 		App->fade->FadeToBlack(this, App->titleScene, 0.5f);
 	}

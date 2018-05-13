@@ -35,12 +35,13 @@ https://github.com/Dasanch/Project_1_JADY_UPC
 * _Find her on Instragram as @randomgerbit_
 * _Github profile: https://github.com/YessicaSD_
 
+##SPAWN PLAYERS ---------------------------------------------------------------------
+	- Add credits: "c"
+	- Spawn player 1: "1"
+	- Spawn player 2: "2"
 
 ## Movement keys --------------------------------------------------------------------
 ### Player 1:
-#### Controller:
-- **Left Joystick**: Movement
-- **B**: Shoot
 #### Keyboard:
 - **A**: Move left
 - **S**: Move down
@@ -48,15 +49,11 @@ https://github.com/Dasanch/Project_1_JADY_UPC
 - **W**: Move up
 - **Space**: Shoot
 - **Left shift**: Lock the unit
-
-## SPAWN PLAYER 2
-- Add credits:  "c"
-- Spawn player  "2"
+#### Controller:
+- **Left Joystick**: Movement
+- **B**: Shoot
 
 ### Player 2:
-#### Controller:
--** Left Joystick **: Movement
--** B **: Shoot
 #### Keyboard:
 -** Left arrow **: Move left
 -** Down arrow **: Move down
@@ -64,12 +61,14 @@ https://github.com/Dasanch/Project_1_JADY_UPC
 -** Up arrow **: Move up
 -** Rigth Ctrl **: Shoot
 -** Rigth Shift **: Lock the unit
-
+#### Controller:
+-** Left Joystick **: Movement
+-** B **: Shoot
 
 
 ## Other functions --------------------------------------------------------------------
 -** Esc **: Closes the game
--** Space **: Skip intros
+-** Space **: Skip intro
 -** Numpad +**: Volume up
 -** Numpad -**: Volume down
 
@@ -127,3 +126,46 @@ How to use advanced debugging?
 	- 2: Laser
 	- 3: Homing
 	- 4: Ground
+
+## Changes ----------------------------------------------------------------------------
+
+### CHANGES IN V0.6.0.0
+- Added stage 5 music
+- Added stage 5 stars background and ship
+- Added fullscreen mode
+- Added advance debugger
+- Added ability to throw the unit
+
+### CHANGES IN V0.5.0.0
+- Added UI
+- 2 Power Ups
+- 3 Enemies (One that shot)
+- Debug Modes (GodMode)
+- Second player
+- Unit
+
+### CHANGES IN V0.4.0.0
+- Partially added last resort title animations
+- Added colliders for the player and a static enemy
+- Added particles and sfx when the player shoots
+- Completed neo geo screen animation
+ 
+### CHANGES IN 0.3.1.0
+- Added Continue Screen
+- Fixed GameOver Screen
+
+### CHANGES IN V0.3.0.0
+- The player movement is fixed. 
+- Added level 2.
+- Added the game title screen, the neogeo screen, game over screen. 
+- Added music to neogeo, the title screen, level 1 and 2.
+
+### CHANGES IN V0.2.0.1:
+- Added lights
+- Changed 3r level of the background.
+- Player transition move.
+
+### CHANGES IN V0.2.0.0:
+- Added player 1 movement and animation
+- Added paralax for all backgrounds with 3 different levels of depth.
+- Added unfunctional audio module
