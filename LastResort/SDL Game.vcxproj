@@ -81,6 +81,7 @@
     <ClInclude Include="Enemy_Oscilator.h" />
     <ClInclude Include="Enemy_Pinata.h" />
     <ClInclude Include="Enemy_PowerDropper.h" />
+    <ClInclude Include="Enemy_RotatingTurret.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="MemLeaks.h" />
     <ClInclude Include="MiddleBosslvl1.h" />
@@ -126,6 +127,7 @@
     <ClCompile Include="Enemy_Oscilator.cpp" />
     <ClCompile Include="Enemy_Pinata.cpp" />
     <ClCompile Include="Enemy_PowerDropper.cpp" />
+    <ClCompile Include="Enemy_RotatingTurret.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MiddleBosslvl1.cpp" />

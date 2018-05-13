@@ -11,6 +11,7 @@
 #include "Enemy_PowerDropper.h"
 #include "MiddleBosslvl1.h"
 #include "Enemy_RedBats.h"
+#include "Enemy_RotatingTurret.h"
 #include "ModuleStage05.h"
 
 #define SPAWN_MARGIN 50
@@ -165,13 +166,11 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			enemies[i]->points = 100;
 			enemies[i]->hp = 1;
 			break;
-
 		case ENEMY_TYPES::OSCILATOR:
 			enemies[i] = new Enemy_Oscilator(info.x - App->stage05->tilemapPoint.x, info.pu_Type);
 			enemies[i]->points = 100;
 			enemies[i]->hp = 1;
 			break;
-
 		case ENEMY_TYPES::POWERDROPPER:
 			enemies[i] = new Enemy_PowerDropper(info.x - App->stage05->tilemapPoint.x, info.y - App->stage05->tilemapPoint.y, info.pu_Type);
 			enemies[i]->points = 100;
@@ -182,15 +181,18 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			enemies[i]->points = 100;
 			enemies[i]->hp = 1;
 			break;
-
 		case  ENEMY_TYPES::REDBATS:
 			enemies[i] = new Enemy_RedBats(info.x - App->stage05->tilemapPoint.x, info.y - App->stage05->tilemapPoint.y, info.pu_Type);
 			enemies[i]->points = 100;
 			enemies[i]->hp = 1;
+
+			break;
+		case ENEMY_TYPES::ROTATING_TURRET:
+			enemies[i] = new Enemy_RotatingTurret(info.x - App->stage05->tilemapPoint.x, info.y - App->stage05->tilemapPoint.y, info.pu_Type);
+			enemies[i]->points = 100;
+			enemies[i]->hp = 1;
 			break;
 		}
-
-		
 	}
 }
 

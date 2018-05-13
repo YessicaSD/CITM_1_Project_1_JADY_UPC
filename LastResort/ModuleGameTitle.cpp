@@ -13,6 +13,7 @@
 #include "ModuleStage02.h"
 #include "ModuleStage05.h"
 #include "ModuleUI.h"
+#include "ModuleReady.h"
 
 
 
@@ -101,18 +102,15 @@ update_status ModuleGameTitle::Update() {
 	
 
 	
-	if (current_time>18000 /*|| App->input->keyboard[SDL_SCANCODE_C]*/)
+	if (current_time>18000)
 	{
 		App->audio->ControlMUS(Titlemusic, STOP_AUDIO);
 	}
 	if (App->ui->player1 == true)
 	{
-		App->fade->FadeToBlack(this, App->stage05, 0.5f);
+		App->fade->FadeToBlack(this, App->readyScene, 0.5f);
 	}
-	/*if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN || current_time>18000)
-	{
-		App->fade->FadeToBlack(this, App->stage05, 0.5f);
-	}*/
+	
 
 	return UPDATE_CONTINUE;
 }
