@@ -28,6 +28,7 @@ public:
 	char *str_score_p2 = nullptr;
 	char *str_lives_p1 = nullptr;
 	char *str_lives_p2 = nullptr;
+	char *str_credits = nullptr;
 	//Player data---------------------------------
 	int score_p1 =0;
 	int score_p2= 0; 
