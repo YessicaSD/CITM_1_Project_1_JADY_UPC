@@ -82,6 +82,7 @@ void Player2::PlayerDies() {
 	}
 	else {
 		App->ui->p2_isDead = true;
+		App->ui->player2 = false;
 		playerCol->to_delete = true;
 	}
 }

@@ -42,6 +42,7 @@ public:
 	 
 	bool player1 = false;
 	bool player2 = false;
+	bool Continue = false;
 	//General data--------------------------------
 	int credits=00;
 	bool showUI = true;

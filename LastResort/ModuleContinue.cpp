@@ -12,6 +12,7 @@
 #include "ModuleStage05.h"
 #include "ModuleGameOver.h"
 #include "ModuleContinue.h"
+#include "ModuleUI.h"
 
 #define MAX_ALPHA 255
 #define MIN_ALPHA 0
@@ -74,7 +75,7 @@ bool ModuleContinue::Start() {
 		fireAnim[x].Reset();
 		fireAnim[x].finished = false;
 	}
-
+	App->ui->Continue = true;
 	return ret;
 }
 

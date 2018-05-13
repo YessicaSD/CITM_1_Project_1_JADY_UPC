@@ -129,13 +129,18 @@ update_status ModuleUI::Update() {
 	{
 		if (player2 == false)
 		{
-			if (credits >= 2 && player1==false)
+			if (credits >= 2 && player1==false && Continue==false)
 			{
 				player1 = true;
 				player2 = true;
 				credits -= 2;
 			}
 			else if (credits > 0 && player1 == true)
+			{
+				player2 = true;
+				credits -= 1;
+			}
+			else if (Continue == true)
 			{
 				player2 = true;
 				credits -= 1;
