@@ -86,24 +86,67 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(REDBATS, 582, -95);
 	/*App->enemies->AddEnemy(REDBATS, 275, 200);*/
 	/*App->enemies->AddEnemy(REDBATS, 360, 200);*/
-	//Colliders--------------------------------------------------------------------------------------------------
-	//shipCollidersRect[0] = {};
-	//shipCollidersRect[1] = {};
-	//shipCollidersRect[2] = {};
-	//shipCollidersRect[3] = {};
-	//shipCollidersRect[4] = {};
-	//shipCollidersRect[5] = {};
-	//shipCollidersRect[6] = {};
 
-	//for(int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
-	//{
-	//	shipCollidersCol[i] = App->collision->AddCollider(
-	//	   {shipCollidersRect[i].x + (int)shipPos.x,
-	//		shipCollidersRect[i].y + (int)shipPos.y,
-	//		shipCollidersRect[i].w,
-	//		shipCollidersRect[i].h },
-	//		COLLIDER_TYPE::COLLIDER_WALL);
-	//}
+	//Colliders--------------------------------------------------------------------------------------------------
+	shipCollidersRect[ 0] = {  304, 208, 507, 16 };
+	shipCollidersRect[ 1] = {  239, 188,  65, 20 };
+	shipCollidersRect[ 2] = {  175, 174,  64, 14 };
+	shipCollidersRect[ 3] = {  125, 160,  50, 14 };
+	shipCollidersRect[ 4] = {   31, 110,  94, 50 };
+	shipCollidersRect[ 5] = {    0,  99,  31, 11 };
+	shipCollidersRect[ 6] = {   20,  82,  49, 17 };
+	shipCollidersRect[ 7] = {   69,  64,  38, 18 };
+	shipCollidersRect[ 8] = {  107,  53,  34, 11 };
+	shipCollidersRect[ 9] = {  141,  29,  37, 23 };
+	shipCollidersRect[10] = {  178,  19, 207, 13 };
+	shipCollidersRect[11] = {  385,  32,  78, 13 };
+	shipCollidersRect[12] = {  412,  45,  35, 20 };
+	shipCollidersRect[13] = {  399,  65,  13, 51 };
+	shipCollidersRect[14] = {  383, 116,  16, 76 };
+	shipCollidersRect[15] = {  399, 140,  13, 24 };
+	shipCollidersRect[16] = {  399, 192, 116, 16 };
+	shipCollidersRect[17] = {  539, 192,  72, 16 };
+	shipCollidersRect[18] = {  635, 192,  24, 16 };
+	shipCollidersRect[19] = {  683, 192, 103, 16 };
+	shipCollidersRect[20] = {  811, 192,  36, 16 };
+	shipCollidersRect[21] = {  847, 124,  16, 68 };
+	shipCollidersRect[22] = {  863, 100,   8, 24 };
+	shipCollidersRect[23] = {  847,  64,  16, 36 };
+	shipCollidersRect[24] = {  543,  47, 304, 17 };
+	shipCollidersRect[25] = {  587,  64,  20, 60 };
+	shipCollidersRect[26] = {  607,  80,  15, 20 };
+	shipCollidersRect[27] = {  587, 124,  35, 20 };
+	shipCollidersRect[28] = {  563, 116,  24, 12 };
+	shipCollidersRect[29] = {  527, 116,  36, 28 };
+	shipCollidersRect[30] = {  511,  96,  32, 20 };
+	shipCollidersRect[31] = {  543,  64,  21, 32 };
+	shipCollidersRect[32] = {  593,  32, 243, 15 };
+	shipCollidersRect[33] = {  836,  17,  30, 15 };
+	shipCollidersRect[34] = {  866,   2, 162, 15 };
+	shipCollidersRect[35] = { 1028,  16,  44, 16 };
+	shipCollidersRect[36] = { 1072,  32, 128, 16 };
+	shipCollidersRect[37] = { 1200,  47, 110, 16 };
+	shipCollidersRect[38] = { 1310,  63,  80, 16 };
+	shipCollidersRect[39] = { 1359,  79,  64, 78 };
+	shipCollidersRect[40] = { 1167, 129, 192, 13 };
+	shipCollidersRect[41] = { 1231, 142,  64, 15 };
+	shipCollidersRect[42] = { 1118, 142,  49, 15 };
+	shipCollidersRect[43] = { 1054, 157,  64, 18 };
+	shipCollidersRect[44] = { 1040, 175,  14, 37 };
+	shipCollidersRect[45] = {  914, 212, 140, 12 };
+	shipCollidersRect[46] = {  904, 224,  10, 32 };
+	shipCollidersRect[47] = {  914, 256, 124, 21 };
+	shipCollidersRect[48] = {  914, 277, 107, 10 };
+
+	for(int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
+	{
+		shipCollidersCol[i] = App->collision->AddCollider(
+		   {shipCollidersRect[i].x + (int)shipPos.x,
+			shipCollidersRect[i].y + (int)shipPos.y,
+			shipCollidersRect[i].w,
+			shipCollidersRect[i].h },
+			COLLIDER_TYPE::COLLIDER_WALL);
+	}
 
 	return ret;
 }
@@ -162,12 +205,12 @@ update_status Module5lvlScene::Update()
 	}
 	
 	//Update colliders (Important: after moving the ship!)------------------------------------
-	//for (int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
-	//{
-	//	shipCollidersCol[i] ->SetPos(
-	//		shipCollidersRect[i].x + (int)shipPos.x,
-	//		shipCollidersRect[i].y + (int)shipPos.y);
-	//}
+	for (int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
+	{
+		shipCollidersCol[i] ->SetPos(
+			shipCollidersRect[i].x + (int)shipPos.x,
+			shipCollidersRect[i].y + (int)shipPos.y);
+	}
 
 	//LOG("ShipPos : x %i y %i", shipPos.x, shipPos.y);
 	LOG("TilemapPoint:%f", tilemapPoint.x);
