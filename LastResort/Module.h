@@ -23,7 +23,7 @@ public:
 	// Module activation ---
 	bool IsEnabled() const { return enabled; }
 
-	void Enable()
+	 void Enable()
 	{
 		if (enabled == false)
 		{

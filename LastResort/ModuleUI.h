@@ -39,6 +39,9 @@ public:
 	bool p1_Unit= false;
 	bool p2_Unit = false;
 	bool godMode = false;
+	 
+	bool player1 = false;
+	bool player2 = false;
 	//General data--------------------------------
 	int credits=00;
 	bool showUI = true;

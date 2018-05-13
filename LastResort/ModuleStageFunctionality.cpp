@@ -32,7 +32,9 @@ ModuleStageFunctionality::~ModuleStageFunctionality()
 
 bool ModuleStageFunctionality::Start()
 {
+	if(App->ui->player1==true)
 	App->player1->Enable();
+	if (App->ui->player2 == true)
 	App->player2->Enable();
 	App->particles->Enable();
 	App->collision->Enable();
@@ -56,6 +58,10 @@ bool ModuleStageFunctionality::CleanUp()
 
 update_status ModuleStageFunctionality::PreUpdate()
 {
+	if (App->ui->player1 == true)
+		App->player1->Enable();
+	if (App->ui->player2 == true)
+		App->player2->Enable();
 	Debugging();
 	return UPDATE_CONTINUE;
 }

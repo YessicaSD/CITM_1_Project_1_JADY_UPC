@@ -101,11 +101,18 @@ update_status ModuleGameTitle::Update() {
 	
 
 	/*App->render->Blit(TitleTexture, ((SCREEN_WIDTH-LastResortRect.w)/2), ((SCREEN_HEIGHT - LastResortRect.h) / 2), &LastResortRect, 0.0f);*/
-
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN || current_time>18000)
+	if (current_time>18000 || App->input->keyboard[SDL_SCANCODE_C])
+	{
+		App->audio->ControlMUS(Titlemusic, STOP_AUDIO);
+	}
+	if (App->ui->player1 == true)
 	{
 		App->fade->FadeToBlack(this, App->stage05, 0.5f);
 	}
+	/*if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN || current_time>18000)
+	{
+		App->fade->FadeToBlack(this, App->stage05, 0.5f);
+	}*/
 
 	return UPDATE_CONTINUE;
 }
