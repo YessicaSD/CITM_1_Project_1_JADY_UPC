@@ -16,9 +16,14 @@ protected:
 
 public:
 	iPoint position;
-	float lives=1;
-	int points;
 	POWERUP_TYPE powerUp_drop;
+	//Statistics---------------------
+	float hp;
+	int points;
+	//Damage properties--------------
+	int dmg_frames = 0;
+	int flashing_interval = -1;
+	bool isDamaged = false;
 
 public:
 	Enemy(int x, int y, POWERUP_TYPE pu_t);

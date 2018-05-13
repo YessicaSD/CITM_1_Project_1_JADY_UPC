@@ -14,6 +14,7 @@
 #include "ModuleStage05.h"
 
 #define SPAWN_MARGIN 50
+#define DAMAGE_FLASHING_INTERVAL 4
 
 ModuleEnemies::ModuleEnemies()
 {
@@ -29,8 +30,10 @@ ModuleEnemies::~ModuleEnemies()
 bool ModuleEnemies::Start()
 {
 	// Create a prototype for each enemy available so we can copy them around
-	sprites = App->textures->Load("Assets/General/Enemies/Enemies1.png"); //ALL IN 1 PNG
-
+	 ; //ALL IN 1 PNG
+	nml_sprites = App->textures->Load("Assets/General/Enemies/Enemies1.png");
+    dmg_sprites = App->textures->Load("Assets/General/Enemies/Enemies1_white.png");
+	
 	return true;
 }
 
@@ -59,9 +62,33 @@ update_status ModuleEnemies::Update()
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 		if (enemies[i] != nullptr) enemies[i]->Move();
 
-	for (uint i = 0; i < MAX_ENEMIES; ++i)
-		if (enemies[i] != nullptr) enemies[i]->Draw(sprites);
+	for (uint i = 0; i < MAX_ENEMIES; ++i) {
+		if (enemies[i] != nullptr) {
 
+			if (enemies[i]->isDamaged)
+			{
+				if (enemies[i]->flashing_interval %2) 
+					enemies[i]->Draw(dmg_sprites);
+				else
+					enemies[i]->Draw(nml_sprites);
+					
+				enemies[i]->dmg_frames += 1;
+
+				if (enemies[i]->dmg_frames > 3) {
+					enemies[i]->flashing_interval += 1;
+					enemies[i]->dmg_frames = 0;
+				}
+				if (enemies[i]->flashing_interval > DAMAGE_FLASHING_INTERVAL) {
+					enemies[i]->isDamaged = false;
+					enemies[i]->flashing_interval = -1;
+				}
+
+			}
+			else {
+				enemies[i]->Draw(nml_sprites);
+			}
+		}
+	}
 	return UPDATE_CONTINUE;
 }
 
@@ -134,28 +161,33 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 		switch (info.type)
 		{
 		case ENEMY_TYPES::BASIC:
-			enemies[i] = new Enemy_Basic(info.x-App->stage05->tilemapPoint.x , info.y - App->stage05->tilemapPoint.y, info.pu_Type);
+			enemies[i] = new Enemy_Basic(info.x - App->stage05->tilemapPoint.x, info.y - App->stage05->tilemapPoint.y, info.pu_Type);
 			enemies[i]->points = 100;
+			enemies[i]->hp = 1;
 			break;
 
 		case ENEMY_TYPES::OSCILATOR:
 			enemies[i] = new Enemy_Oscilator(info.x - App->stage05->tilemapPoint.x, info.pu_Type);
 			enemies[i]->points = 100;
+			enemies[i]->hp = 1;
 			break;
 
 		case ENEMY_TYPES::POWERDROPPER:
-			enemies[i] = new Enemy_PowerDropper(info.x - App->stage05->tilemapPoint.x, info.y - App->stage05->tilemapPoint.y,  info.pu_Type);
+			enemies[i] = new Enemy_PowerDropper(info.x - App->stage05->tilemapPoint.x, info.y - App->stage05->tilemapPoint.y, info.pu_Type);
 			enemies[i]->points = 100;
+			enemies[i]->hp = 1;
 			break;
 		case ENEMY_TYPES::METALCROW:
 			enemies[i] = new Enemy_MetalCraw(info.x - App->stage05->tilemapPoint.x, info.y - App->stage05->tilemapPoint.y, info.pu_Type);
 			enemies[i]->points = 100;
+			enemies[i]->hp = 1;
 			break;
 
 		case  ENEMY_TYPES::REDBATS:
-				enemies[i] = new Enemy_RedBats(info.x - App->stage05->tilemapPoint.x, info.y - App->stage05->tilemapPoint.y, info.pu_Type);
-				enemies[i]->points = 100;
-				break;
+			enemies[i] = new Enemy_RedBats(info.x - App->stage05->tilemapPoint.x, info.y - App->stage05->tilemapPoint.y, info.pu_Type);
+			enemies[i]->points = 100;
+			enemies[i]->hp = 1;
+			break;
 		}
 
 		
@@ -168,15 +200,20 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 	{
 		if (enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
 		{
-			enemies[i]->lives -= 1;
-			if (enemies[i]->lives == 0)
+			//Rest hp to enemies depending on the collider's damage
+			/*enemies[i]->hp -= c2->damage;*/  
+			//If enemy dies active its own OnCollision and give out points
+			if (enemies[i]->hp <= 0)
 			{
-				enemies[i]->points;
 				enemies[i]->OnCollision(c2);
 				delete enemies[i];
 				enemies[i] = nullptr;
 			}
-			
+			//If enemy does not die only change its sprite to white
+			else if (enemies[i]->flashing_interval == -1){
+				enemies[i]->isDamaged = true;
+				enemies[i]->flashing_interval = 0;
+			}
 			
 			break;
 		}
