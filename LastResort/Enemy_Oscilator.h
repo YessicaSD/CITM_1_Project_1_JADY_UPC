@@ -8,7 +8,7 @@ class Enemy_Oscilator : public Enemy
 private:
 	float wave = -1.0f;
 	bool going_up=true;
-	int original_y = SCREEN_HEIGHT/2;
+	int original_y = SCREEN_HEIGHT/2 -20;
 	Animation Oscilator;
 
 public:

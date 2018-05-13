@@ -90,6 +90,7 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(REDBATS, 758, 25);
 
 	App->enemies->AddEnemy(OSCILATOR, 500, 0);
+	
 	//Colliders--------------------------------------------------------------------------------------------------
 	shipCollidersRect[ 0] = {  304, 208, 507, 16 };
 	shipCollidersRect[ 1] = {  239, 188,  65, 20 };

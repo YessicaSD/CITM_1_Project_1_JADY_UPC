@@ -114,7 +114,7 @@ update_status Application::Update()
 		{
 			pauseExecution = false;
 		}
-		if (input->keyboard[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN)
+		if (input->keyboard[SDL_SCANCODE_F4])
 		{
 			pauseExecution = false;
 			pauseNextFrame = true;
