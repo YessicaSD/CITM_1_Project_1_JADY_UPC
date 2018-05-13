@@ -62,7 +62,7 @@ update_status ModuleUI::Update() {
 	str_score_p2 = new char[MAX_NUMBERS_SCORE];
 	str_lives_p1 = new char[4];
 	str_lives_p2 = new char[4];
-
+	str_credits = new char[11];
 	if (p1_isDead && p2_isDead) {
 		p1_isDead = false;
 		p2_isDead = false;
@@ -75,7 +75,10 @@ update_status ModuleUI::Update() {
 	snprintf(str_lives_p2, 4 * sizeof(str_lives_p2), "%d", lives_p2);
 	snprintf(str_score_p1, 4 * sizeof(str_score_p1), "%d", score_p1);
 	snprintf(str_score_p2, 4 * sizeof(str_score_p2), "%d", score_p2);
-
+	if(credits<10)
+	snprintf(str_credits, 11, "CREDITS 0%i", credits);
+	if(credits>=10)
+		snprintf(str_credits, 11, "CREDITS %i", credits);
 
 
 	if (showUI == true) {
@@ -104,12 +107,13 @@ update_status ModuleUI::Update() {
 			App->fonts->BlitText(272 - 8 * strlen(str_score_p2), 16, 0, str_score_p2);
 		}
 	}
-	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_DOWN && credits <=99)
+	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_DOWN )
 	{
 		App->audio->ControlSFX(coinsfx, PLAY_AUDIO);
+		if(credits < 99)
 		credits +=1;
 	}
-	App->fonts->BlitText(208, 216, 0, "CREDITS_00");//credits
+	App->fonts->BlitText(208, 216, 0, str_credits);//credits
 
 	delete[](str_score_p1);
 	delete[](str_score_p2);
