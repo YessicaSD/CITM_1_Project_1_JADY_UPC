@@ -66,11 +66,19 @@ update_status ModuleUI::Update() {
 	if (p1_isDead && player2 == false)
 	{
 		p1_isDead = false;
+		player1 = false;
 		lives_p1 = 2;
 		App->fade->FadeToBlack(App->stageFunctionality->currentStage, App->continueScene, 0.1f);
 		
 	}
+	if (p2_isDead && player1 == false)
+	{
+		p2_isDead = false;
+		player2 = false;
+		lives_p2 = 2;
+		App->fade->FadeToBlack(App->stageFunctionality->currentStage, App->continueScene, 0.1f);
 
+	}
 	if (p1_isDead && p2_isDead) {
 		p1_isDead = false;
 		p2_isDead = false;

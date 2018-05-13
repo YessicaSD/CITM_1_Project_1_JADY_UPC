@@ -80,13 +80,11 @@ bool Module5lvlScene::Start()
 	App->audio->ControlMUS(lvl5Music, PLAY_AUDIO);
 
 	//Enemies ---------------------------------------------------------------------------------------------------
-	//App->enemies->AddEnemy(OSCILATOR, -200, 200);
-	/*App->enemies->AddEnemy(POWERDROPPER, 200, 50, SPEED);
-	App->enemies->AddEnemy(POWERDROPPER, 300, 150, LASER);*/
-	App->enemies->AddEnemy(BASIC, 582, -95);
-	App->enemies->AddEnemy(BASIC, 400, 70);
-	/*App->enemies->AddEnemy(REDBATS, 275, 200);*/
-	/*App->enemies->AddEnemy(REDBATS, 360, 200);*/
+	App->enemies->AddEnemy(POWERDROPPER, 230, 30, HOMING);
+	App->enemies->AddEnemy(POWERDROPPER, 620, 30, LASER);
+	App->enemies->AddEnemy(REDBATS, 670, 25);
+	App->enemies->AddEnemy(REDBATS,720 , 25);
+
 
 	//Colliders--------------------------------------------------------------------------------------------------
 	shipCollidersRect[ 0] = {  304, 208, 507, 16 };

@@ -24,18 +24,18 @@ void Enemy_PowerDropper::Move()
 		if (wave > 1.0f)
 			going_up = false;
 		else
-			wave += 0.07f;
+			wave += 0.06f;
 	}
 	else
 	{
 		if (wave < -1.0f)
 			going_up = true;
 		else
-			wave -= 0.07f;
+			wave -= 0.06f;
 	}
 
 	position.y = int(float(original_y) + (20.0f * sinf(wave)));
-	position.x -= 1;
+	position.x -= 3;
 	
 
 }
