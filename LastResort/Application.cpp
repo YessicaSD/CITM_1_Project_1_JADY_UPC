@@ -109,8 +109,8 @@ update_status Application::Update()
 	if (pauseNextFrame) { pauseNextFrame = false; pauseExecution = true; }
 	while(pauseExecution)
 	{
-		input->PreUpdate();
-		if(input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN)
+		ret = input->PreUpdate();
+		if(input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN || input->keyboard[SDL_SCANCODE_ESCAPE] == KEY_STATE::KEY_DOWN)
 		{
 			pauseExecution = false;
 		}
