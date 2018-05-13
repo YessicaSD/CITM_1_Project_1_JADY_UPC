@@ -169,7 +169,7 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 		case ENEMY_TYPES::OSCILATOR:
 			enemies[i] = new Enemy_Oscilator(info.x - App->stage05->tilemapPoint.x, info.pu_Type);
 			enemies[i]->points = 100;
-			enemies[i]->hp = 1;
+			enemies[i]->hp = 5;
 			break;
 		case ENEMY_TYPES::POWERDROPPER:
 			enemies[i] = new Enemy_PowerDropper(info.x - App->stage05->tilemapPoint.x, info.y - App->stage05->tilemapPoint.y, info.pu_Type);
@@ -178,8 +178,8 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			break;
 		case ENEMY_TYPES::METALCROW:
 			enemies[i] = new Enemy_MetalCraw(info.x - App->stage05->tilemapPoint.x, info.y - App->stage05->tilemapPoint.y, info.pu_Type);
-			enemies[i]->points = 100;
-			enemies[i]->hp = 1;
+			enemies[i]->points = 1000;
+			enemies[i]->hp = 50;
 			break;
 		case  ENEMY_TYPES::REDBATS:
 			enemies[i] = new Enemy_RedBats(info.x - App->stage05->tilemapPoint.x, info.y - App->stage05->tilemapPoint.y, info.pu_Type);
@@ -189,8 +189,8 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			break;
 		case ENEMY_TYPES::ROTATING_TURRET:
 			enemies[i] = new Enemy_RotatingTurret(info.x - App->stage05->tilemapPoint.x, info.y - App->stage05->tilemapPoint.y, info.pu_Type);
-			enemies[i]->points = 100;
-			enemies[i]->hp = 1;
+			enemies[i]->points = 200;
+			enemies[i]->hp = 50;
 			break;
 		}
 	}
@@ -203,7 +203,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 		if (enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
 		{
 			//Rest hp to enemies depending on the collider's damage
-			/*enemies[i]->hp -= c2->damage;*/  
+			enemies[i]->hp -= c2->damage;  
 			//If enemy dies active its own OnCollision and give out points
 			if (enemies[i]->hp <= 0)
 			{
