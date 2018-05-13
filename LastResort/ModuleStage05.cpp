@@ -81,10 +81,10 @@ bool Module5lvlScene::Start()
 
 	//Enemies ---------------------------------------------------------------------------------------------------
 	App->enemies->AddEnemy(POWERDROPPER, 230, 30, HOMING);
-	App->enemies->AddEnemy(POWERDROPPER, 620, 30, LASER);
+	App->enemies->AddEnemy(POWERDROPPER, 600, 30, LASER);
 	App->enemies->AddEnemy(REDBATS, 670, 25);
 	App->enemies->AddEnemy(REDBATS,720 , 25);
-
+	App->enemies->AddEnemy(REDBATS, 750, 25);
 
 	//Colliders--------------------------------------------------------------------------------------------------
 	shipCollidersRect[ 0] = {  304, 208, 507, 16 };
@@ -152,6 +152,7 @@ bool Module5lvlScene::Start()
 
 update_status Module5lvlScene::Update()
 {
+	
 	//provisional-----------------------------
 	current_time = SDL_GetTicks() - start_time ;
 	
