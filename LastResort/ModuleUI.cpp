@@ -63,12 +63,23 @@ update_status ModuleUI::Update() {
 	str_lives_p1 = new char[4];
 	str_lives_p2 = new char[4];
 	str_credits = new char[11];
+	if (p1_isDead && player2 == false)
+	{
+		p1_isDead = false;
+		lives_p1 = 2;
+		App->fade->FadeToBlack(App->stageFunctionality->currentStage, App->continueScene, 0.1f);
+		
+	}
+
 	if (p1_isDead && p2_isDead) {
 		p1_isDead = false;
 		p2_isDead = false;
-		App->fade->FadeToBlack(App->stageFunctionality->currentStage, App->continueScene, 0.1f);
+		player1 = false;
+		player2 = false; 
 		lives_p1 = 2;
 		lives_p2 = 2;
+		App->fade->FadeToBlack(App->stageFunctionality->currentStage, App->continueScene, 0.1f);
+		
 	}
 
 	snprintf(str_lives_p1, 4 * sizeof(str_lives_p1), "%d", lives_p1);

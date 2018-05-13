@@ -139,7 +139,7 @@ update_status ModuleContinue::Update() {
 		App->fade->FadeToBlack(this, App->gameoverScene, 0.0f);
 	}
 	//Input--------------------------------------------------------------------------
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN)
+	if (App->ui->player1==true || App->ui->player2 == true)
 	{
 		App->fade->FadeToBlack(this, App->stage05, 0.5f);
 	}
