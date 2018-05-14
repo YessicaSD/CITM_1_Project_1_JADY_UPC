@@ -6,6 +6,7 @@
 #include "Enemy_Basic.h"
 #include "Enemy_Oscilator.h"
 #include "Enemy_PowerDropper.h"
+#include "ModuleUI.h"
 
 #define MAX_ENEMIES 100
 
@@ -18,6 +19,8 @@ enum ENEMY_TYPES
 	METALCROW,
 	REDBATS,
 	ROTATING_TURRET,
+	PINATA,
+	PINATA_SPAWNER,
 	MAX_ENEMY
 };
 

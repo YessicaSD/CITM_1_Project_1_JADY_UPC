@@ -12,6 +12,7 @@
 #include "MiddleBosslvl1.h"
 #include "Enemy_RedBats.h"
 #include "Enemy_RotatingTurret.h"
+#include "Enemy_Pinata.h"
 #include "ModuleStage05.h"
 
 #define SPAWN_MARGIN 50
@@ -49,7 +50,7 @@ update_status ModuleEnemies::PreUpdate()
 			{
 				SpawnEnemy(queue[i]);
 				queue[i].type = ENEMY_TYPES::NO_TYPE;
-				LOG("Spawning enemy at %d", queue[i].x * SCREEN_SIZE);
+				LOG("Spawning enemy at %d", queue[i].x );
 			}
 		}
 	}
@@ -185,10 +186,19 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			enemies[i] = new Enemy_RedBats(info.x - App->stage05->tilemapPoint.x, info.y - App->stage05->tilemapPoint.y, info.pu_Type);
 			enemies[i]->points = 100;
 			enemies[i]->hp = 1;
-
 			break;
 		case ENEMY_TYPES::ROTATING_TURRET:
 			enemies[i] = new Enemy_RotatingTurret(info.x - App->stage05->tilemapPoint.x, info.y - App->stage05->tilemapPoint.y, info.pu_Type);
+			enemies[i]->points = 200;
+			enemies[i]->hp = 50;
+			break;
+		case ENEMY_TYPES::PINATA:
+			enemies[i] = new Enemy_Pinata(info.x - App->stage05->tilemapPoint.x, info.y - App->stage05->tilemapPoint.y, info.pu_Type);
+			enemies[i]->points = 200;
+			enemies[i]->hp = 50;
+			break;
+		case ENEMY_TYPES::PINATA_SPAWNER:
+			enemies[i] = new Enemy_Pinata(info.x - App->stage05->tilemapPoint.x, info.y - App->stage05->tilemapPoint.y, info.pu_Type);
 			enemies[i]->points = 200;
 			enemies[i]->hp = 50;
 			break;
@@ -204,20 +214,30 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 		{
 			//Rest hp to enemies depending on the collider's damage
 			enemies[i]->hp -= c2->damage;  
-			//If enemy dies active its own OnCollision and give out points
+			//If enemy dies-----------------------------------------
 			if (enemies[i]->hp <= 0)
 			{
+				//---Give out points------------------------
+				if (c2->type == COLLIDER_PLAYER_1_SHOT) {
+					App->ui->score_p1 += enemies[i]->points;
+				}
+				else if (c2->type == COLLIDER_PLAYER_2_SHOT) {
+					App->ui->score_p2 += enemies[i]->points;
+				}
+				//---Drop powerup---------------------------
+				if (enemies[i]->powerUp_drop != NOPOWERUP) {
+					App->powerups->AddPowerup( enemies[i]->position.x, enemies[i]->position.y, enemies[i]->powerUp_drop);
+				}
+				//---Delete enemie--------------------------
 				enemies[i]->OnCollision(c2);
 				delete enemies[i];
 				enemies[i] = nullptr;
 			}
 			//If enemy does not die only change its sprite to white
-			else if (enemies[i]->flashing_interval == -1){
+			else  if  (enemies[i]->isDamaged == false && enemies[i]->flashing_interval == -1) {
 				enemies[i]->isDamaged = true;
 				enemies[i]->flashing_interval = 0;
 			}
-			
-			break;
 		}
 	}
 }
