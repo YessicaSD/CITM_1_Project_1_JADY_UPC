@@ -104,10 +104,10 @@ update_status ModuleInput::PreUpdate()
 		}
 	}
 
+	//Controller 1 ---------------------------------------------------------------------------------
 	for (int i = 0; i < MAX_BUTTON; ++i)
 	{
-		button_state = SDL_GameControllerGetButton(controller[0],stringbutton[i]);
-		if (button_state == 1)
+		if (SDL_GameControllerGetButton(controller[0], stringbutton[i]))
 		{
 			if (Controller1[i] == BUTTON_IDLE)
 				Controller1[i] = BUTTON_DOWN;
@@ -123,6 +123,24 @@ update_status ModuleInput::PreUpdate()
 		}
 	}
 
+	//Controller 2----------------------------------------------------------------------------
+	for (int i = 0; i < MAX_BUTTON; ++i)
+	{
+		if (SDL_GameControllerGetButton(controller[1], stringbutton[i]))
+		{
+			if (Controller2[i] == BUTTON_IDLE)
+				Controller2[i] = BUTTON_DOWN;
+			else
+				Controller2[i] = BUTTON_REPEAT;
+		}
+		else
+		{
+			if (Controller2[i] == BUTTON_REPEAT || Controller2[i] == BUTTON_DOWN)
+				Controller2[i] = BUTTON_UP;
+			else
+				Controller2[i] = BUTTON_IDLE;
+		}
+	}
 
 	SDL_PollEvent(&event);
 	if (event.type == SDL_QUIT)
