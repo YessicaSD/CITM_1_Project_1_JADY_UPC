@@ -2,6 +2,8 @@
 #define __ENEMY_PINATA_H__
 
 #include "Enemy.h"
+#include "MovPath.h"
+
 
 class Enemy_Pinata : public Enemy
 {
@@ -10,11 +12,28 @@ public:
 	void Move();
 
 private:
-	Animation moveLeftAnim;
-	Animation moveRightAnim;
+	Animation moveAnim;
 	Animation rotateAnim;
-	Animation deathAnim;//Pilots drop off this enemy
+	Animation initAnim;
+	
+	enum {
+		MOVE_RIGHT = 0,
+		MOVE_LEFT = 1
+	};
+
+	enum Move_States {
+		INIT,
+		FOLLOW,
+		ROTATE
+	};
+
+	bool direction;
+	Move_States currentState = INIT;
+	Move_States lastState = INIT;
 	int moveSpeed;
+	MovePath pinataMov;
+	bool searchPlayers = false;
+	Module* targetPlayer = nullptr;
 };
 
 #endif // __ENEMY_PINATA_H__

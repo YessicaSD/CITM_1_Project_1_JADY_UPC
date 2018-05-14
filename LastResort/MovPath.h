@@ -1,5 +1,5 @@
-#ifndef __MOVPAT_H__
-#define __MOVPAT_H__
+#ifndef __MOVPATH_H__
+#define __MOVPATH_H__
 
 #include "p2Point.h"
 #include "Globals.h"
@@ -82,14 +82,19 @@ public:
 			++currentFrame;
 		}
 		else if (currentMov >= last_mov) {
-			movFinished = false;
+			movFinished = true;
 			return position;
 		}
 		else {
+			movFinished = false;
 			currentFrame = 0;
 			++currentMov;
-			movFinished = true;
 		}
+		return position;
+	}
+
+	dPoint GetPosition()
+	{
 		return position;
 	}
 
@@ -98,6 +103,7 @@ public:
 		position = { 0,0 };
 		currentFrame = 0;
 		currentMov = checkpoint;
+		movFinished = false;
 
 		for (int i = 0; i < checkpoint; ++i) {
 
@@ -115,5 +121,5 @@ public:
 	}
 };
 
-#endif // __MOVPAT_H__
+#endif // __MOVPATH_H__
 
