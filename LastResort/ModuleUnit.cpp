@@ -407,8 +407,8 @@ void ModuleUnit::Throwing()
 	{
 		unitPhase = UnitPhase::returning;
 	}
-	position.x += cosf(angleValue[turnAroundToRender]) * throwingSpeed;
-	position.y += sinf(angleValue[turnAroundToRender]) * throwingSpeed;
+	position.x += cosf(currentOrbit) * throwingSpeed;
+	position.y += sinf(currentOrbit) * throwingSpeed;
 	UpdateUnitColliders();
 
 	//RENDER------------------------------------------------------------------
