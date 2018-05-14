@@ -179,6 +179,7 @@ update_status Module5lvlScene::Update()
 	App->render->Blit(StarsTexture, scroll.x + SCREEN_WIDTH, scroll.y + SCREEN_HEIGHT, NULL);
 
 	//Background--------------------------------------------------------------------
+	//------------DebugMode------------------------------------ Change it 
 	if (App->input->keyboard[SDL_SCANCODE_F9] == KEY_DOWN) { 
 		if (checkPoint > 0) {
 			--checkPoint;
@@ -191,22 +192,14 @@ update_status Module5lvlScene::Update()
 			cameraMovement.SetMovement(checkPoint);
 		}
 	}
-
+	//------------Move------------------------------------------
 	tilemapPoint = cameraMovement.GetCurrentPosition();
-	
 	shipPos = shipOffset - tilemapPoint;
 	tilemapPos = tilemapOffset - tilemapPoint;
-
+	//-----------Draw-------------------------------------------
 	App->render->Blit(shipTex, shipPos.x, shipPos.y, &shipRect);
-
 	if (cameraMovement.currentMov > 21) {
 		App->render->Blit(tilemapTex, tilemapPos.x, tilemapPos.y, &tilemapRect);
-	}
-
-	if (cameraMovement.movFinished)
-	{
-		LOG("Move: %i Time: %i  ", cameraMovement.currentMov, current_time);
-		start_time = SDL_GetTicks();
 	}
 	
 	//Update colliders (Important: after moving the ship!)------------------------------------
