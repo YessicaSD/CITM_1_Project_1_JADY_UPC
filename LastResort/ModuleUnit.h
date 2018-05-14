@@ -67,15 +67,6 @@ enum FollowingTerrainDirection
 	FTD_left
 };
 
-enum ColliderPosition
-{
-	CP_notSet = 0,
-	CP_up,
-	CP_down,
-	CP_right,
-	CP_left
-};
-
 struct SpinAnimation
 {
 	SDL_Rect frame [SPIN_FRAMES];
@@ -106,6 +97,10 @@ public:
 
 	//Following terrain
 	//void OnCollisionFollowingTerrain();
+	bool ColliderIsOnLeft();
+	bool ColliderIsOnRight();
+	bool ColliderIsAbove();
+	bool ColliderIsBellow();
 
 	//Bouncing on terrain
 	//void OnCollisionBouncingOnTerrain();
@@ -176,7 +171,6 @@ private:
 	const int sphereDiameter = 16;//The sphere part of the unit
 	//Follow terrain
 	FollowingTerrainDirection followTerrainDir = FTD_notFollowing;
-	ColliderPosition colliderPos = CP_notSet;
 	Collider* colliderToFollow;
 	int followTerrainSpeed;
 };
