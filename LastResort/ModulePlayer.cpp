@@ -102,7 +102,7 @@ update_status ModulePlayer::Update()
 		{
 			//Go to god mode
 			playerCol->type = COLLIDER_GOD;
-			SDL_SetTextureColorMod(PlayerTexture, 123, 123, 255);
+			SDL_SetTextureColorMod(PlayerTexture, 255, 255, 150);
 			godMode = true;
 		}
 	}

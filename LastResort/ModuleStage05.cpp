@@ -84,7 +84,7 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(POWERDROPPER, 600, 30, LASER);
 
 	App->enemies->AddEnemy(REDBATS, 658, 25);
-	App->enemies->AddEnemy(REDBATS,683 , 25);
+	App->enemies->AddEnemy(REDBATS, 683, 25);
 	App->enemies->AddEnemy(REDBATS, 708, 25);
 	App->enemies->AddEnemy(REDBATS, 733, 25);
 	App->enemies->AddEnemy(REDBATS, 758, 25);
@@ -217,8 +217,8 @@ update_status Module5lvlScene::Update()
 			shipCollidersRect[i].y + (int)shipPos.y);
 	}
 
-	//LOG("ShipPos : x %i y %i", shipPos.x, shipPos.y);
-	LOG("TilemapPoint:%f", tilemapPoint.x);
+	LOG("ShipPos : x %d y %d", shipPos.x, shipPos.y);
+	LOG("TilemapPoint: x %d y %d", tilemapPoint.x, tilemapPoint.y);
 	return UPDATE_CONTINUE;
 }
 

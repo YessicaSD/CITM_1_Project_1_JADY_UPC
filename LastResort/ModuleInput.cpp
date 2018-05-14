@@ -8,10 +8,34 @@ ModuleInput::ModuleInput() : Module()
 	for (uint i = 0; i < MAX_KEYS; ++i)
 		keyboard[i] = KEY_IDLE;
 
+	for (uint i = 0; i < MAX_BUTTON; ++i)
+		Controller1[i] = BUTTON_IDLE;
+
+	for (uint i = 0; i < MAX_BUTTON; ++i)
+		Controller2[i] = BUTTON_IDLE;
+
 	for (int i = 0; i < MAX_CONTROLLERS; ++i)
 	{
 		controller[i] = nullptr;
 	}
+	int i = 0;
+	stringbutton[0] = SDL_CONTROLLER_BUTTON_A; ++i;
+	stringbutton[0 + i] = SDL_CONTROLLER_BUTTON_B; ++i;
+	stringbutton[0 + i] = SDL_CONTROLLER_BUTTON_X; ++i;
+	stringbutton[0 + i] = SDL_CONTROLLER_BUTTON_Y; ++i;
+	stringbutton[0 + i] = SDL_CONTROLLER_BUTTON_BACK; ++i;
+	stringbutton[0 + i] = SDL_CONTROLLER_BUTTON_GUIDE; ++i;
+	stringbutton[0 + i] = SDL_CONTROLLER_BUTTON_START; ++i;
+	stringbutton[0 + i] = SDL_CONTROLLER_BUTTON_LEFTSTICK; ++i;
+	stringbutton[0 + i] = SDL_CONTROLLER_BUTTON_RIGHTSTICK; ++i;
+	stringbutton[0 + i] = SDL_CONTROLLER_BUTTON_LEFTSHOULDER; ++i;
+	stringbutton[0 + i] = SDL_CONTROLLER_BUTTON_RIGHTSHOULDER; ++i;
+	stringbutton[0 + i] = SDL_CONTROLLER_BUTTON_DPAD_UP; ++i;
+	stringbutton[0 + i] = SDL_CONTROLLER_BUTTON_DPAD_DOWN; ++i;
+	stringbutton[0 + i] = SDL_CONTROLLER_BUTTON_DPAD_LEFT; ++i;
+	stringbutton[0 + i] = SDL_CONTROLLER_BUTTON_DPAD_RIGHT; ++i;
+	stringbutton[0 + i] = SDL_CONTROLLER_BUTTON_MAX; ++i;
+
 }
 
 // Destructor
@@ -35,6 +59,7 @@ bool ModuleInput::Init()
 		LOG("SDL_EVENTS could not initialize! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
 	}
+	
 
 	
 	return ret;
@@ -46,7 +71,6 @@ update_status ModuleInput::PreUpdate()
 	SDL_PumpEvents();
 
 	const Uint8* keys = SDL_GetKeyboardState(NULL);
-	
 	//Open the first available controller
 	
 	for (int i = 0; i < SDL_NumJoysticks(); ++i) {
@@ -80,6 +104,43 @@ update_status ModuleInput::PreUpdate()
 		}
 	}
 
+	//Controller 1 ---------------------------------------------------------------------------------
+	for (int i = 0; i < MAX_BUTTON; ++i)
+	{
+		if (SDL_GameControllerGetButton(controller[0], stringbutton[i]))
+		{
+			if (Controller1[i] == BUTTON_IDLE)
+				Controller1[i] = BUTTON_DOWN;
+			else
+				Controller1[i] = BUTTON_REPEAT;
+		}
+		else
+		{
+			if (Controller1[i] == BUTTON_REPEAT || Controller1[i] == BUTTON_DOWN)
+				Controller1[i] = BUTTON_UP;
+			else
+				Controller1[i] = BUTTON_IDLE;
+		}
+	}
+
+	//Controller 2----------------------------------------------------------------------------
+	for (int i = 0; i < MAX_BUTTON; ++i)
+	{
+		if (SDL_GameControllerGetButton(controller[1], stringbutton[i]))
+		{
+			if (Controller2[i] == BUTTON_IDLE)
+				Controller2[i] = BUTTON_DOWN;
+			else
+				Controller2[i] = BUTTON_REPEAT;
+		}
+		else
+		{
+			if (Controller2[i] == BUTTON_REPEAT || Controller2[i] == BUTTON_DOWN)
+				Controller2[i] = BUTTON_UP;
+			else
+				Controller2[i] = BUTTON_IDLE;
+		}
+	}
 
 	SDL_PollEvent(&event);
 	if (event.type == SDL_QUIT)
