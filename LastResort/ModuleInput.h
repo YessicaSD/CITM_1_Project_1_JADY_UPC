@@ -7,7 +7,6 @@
 
 #define MAX_KEYS 300
 #define MAX_CONTROLLERS 2
-#define MAX_BUTTON 16
 enum KEY_STATE
 {
 	KEY_IDLE = 0,
@@ -30,9 +29,9 @@ public:
 
 public:
 	KEY_STATE keyboard[MAX_KEYS];
-	KEY_STATE Controller1[MAX_BUTTON];
-	KEY_STATE Controller2[MAX_BUTTON];
-	SDL_GameControllerButton stringbutton[MAX_BUTTON];
+	KEY_STATE Controller1[SDL_CONTROLLER_BUTTON_MAX];
+	KEY_STATE Controller2[SDL_CONTROLLER_BUTTON_MAX];
+	SDL_GameControllerButton stringbutton[SDL_CONTROLLER_BUTTON_MAX];
 	SDL_GameController *controller[MAX_CONTROLLERS];
 	SDL_Event event;
 	

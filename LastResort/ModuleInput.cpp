@@ -8,10 +8,10 @@ ModuleInput::ModuleInput() : Module()
 	for (uint i = 0; i < MAX_KEYS; ++i)
 		keyboard[i] = KEY_IDLE;
 
-	for (uint i = 0; i < MAX_BUTTON; ++i)
+	for (uint i = 0; i < SDL_CONTROLLER_BUTTON_MAX; ++i)
 		Controller1[i] = KEY_IDLE;
 
-	for (uint i = 0; i < MAX_BUTTON; ++i)
+	for (uint i = 0; i <SDL_CONTROLLER_BUTTON_MAX; ++i)
 		Controller2[i] = KEY_IDLE;
 
 	for (int i = 0; i < MAX_CONTROLLERS; ++i)
@@ -34,7 +34,7 @@ ModuleInput::ModuleInput() : Module()
 	stringbutton[0 + i] = SDL_CONTROLLER_BUTTON_DPAD_DOWN; ++i;
 	stringbutton[0 + i] = SDL_CONTROLLER_BUTTON_DPAD_LEFT; ++i;
 	stringbutton[0 + i] = SDL_CONTROLLER_BUTTON_DPAD_RIGHT; ++i;
-	stringbutton[0 + i] = SDL_CONTROLLER_BUTTON_MAX; ++i;
+
 
 }
 
@@ -105,7 +105,7 @@ update_status ModuleInput::PreUpdate()
 	}
 
 	//Controller 1 ---------------------------------------------------------------------------------
-	for (int i = 0; i < MAX_BUTTON; ++i)
+	for (int i = 0; i < SDL_CONTROLLER_BUTTON_MAX; ++i)
 	{
 		if (SDL_GameControllerGetButton(controller[0], stringbutton[i]))
 		{
@@ -124,7 +124,7 @@ update_status ModuleInput::PreUpdate()
 	}
 
 	//Controller 2----------------------------------------------------------------------------
-	for (int i = 0; i < MAX_BUTTON; ++i)
+	for (int i = 0; i < SDL_CONTROLLER_BUTTON_MAX; ++i)
 	{
 		if (SDL_GameControllerGetButton(controller[1], stringbutton[i]))
 		{
