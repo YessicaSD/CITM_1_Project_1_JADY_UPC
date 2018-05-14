@@ -51,11 +51,29 @@ enum Angle
 enum UnitPhase
 {
 	rotating = 0,
-	trowing,
+	throwing,
 	followingTerrain,
 	bouncingOnTerrain,
 	returning,
 	positioning//Returning from the center to the position at which it orbits around the player
+};
+
+enum FollowingTerrainDirection
+{
+	FTD_notFollowing = 0,
+	FTD_up,
+	FTD_down,
+	FTD_right,
+	FTD_left
+};
+
+enum ColliderPosition
+{
+	CP_notSet = 0,
+	CP_up,
+	CP_down,
+	CP_right,
+	CP_left
 };
 
 struct SpinAnimation
@@ -78,10 +96,19 @@ public:
 	void Throwing();
 	void Returning();
 	void Positioning();
+	void FollowingTerrain();
+	void BouncingOnTerrain();
 
+	//Rotating
 	void RotateTo(float, float&, float);//This function increases a rotation until it reaches its target rotation
 	void LimitRotation(float &);//This function limits a rotation to positive numbers and 2*PI radians
 	int TurnAroundToRender();//This function will return an angle depending on where the unit is pointing to
+
+	//Following terrain
+	//void OnCollisionFollowingTerrain();
+
+	//Bouncing on terrain
+	//void OnCollisionBouncingOnTerrain();
 
 	void MakeUnitBlue();
 	void MakeUnitOrange();
@@ -147,5 +174,10 @@ private:
 	Collider* hitDetectionUp;
 	Collider* hitDetectionDown;
 	const int sphereDiameter = 16;//The sphere part of the unit
+	//Follow terrain
+	FollowingTerrainDirection followTerrainDir = FTD_notFollowing;
+	ColliderPosition colliderPos = CP_notSet;
+	Collider* colliderToFollow;
+	int followTerrainSpeed;
 };
 #endif
