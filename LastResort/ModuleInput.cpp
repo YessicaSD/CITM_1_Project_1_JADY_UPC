@@ -7,8 +7,12 @@ ModuleInput::ModuleInput() : Module()
 {
 	for (uint i = 0; i < MAX_KEYS; ++i)
 		keyboard[i] = KEY_IDLE;
+
 	for (uint i = 0; i < MAX_BUTTON; ++i)
-		buttonController[i] = BUTTON_IDLE;
+		Controller1[i] = BUTTON_IDLE;
+
+	for (uint i = 0; i < MAX_BUTTON; ++i)
+		Controller2[i] = BUTTON_IDLE;
 
 	for (int i = 0; i < MAX_CONTROLLERS; ++i)
 	{
@@ -105,17 +109,17 @@ update_status ModuleInput::PreUpdate()
 		button_state = SDL_GameControllerGetButton(controller[0],stringbutton[i]);
 		if (button_state == 1)
 		{
-			if (buttonController[i] == BUTTON_IDLE)
-				buttonController[i] = BUTTON_DOWN;
+			if (Controller1[i] == BUTTON_IDLE)
+				Controller1[i] = BUTTON_DOWN;
 			else
-				buttonController[i] = BUTTON_REPEAT;
+				Controller1[i] = BUTTON_REPEAT;
 		}
 		else
 		{
-			if (buttonController[i] == BUTTON_REPEAT || buttonController[i] == BUTTON_DOWN)
-				buttonController[i] = BUTTON_UP;
+			if (Controller1[i] == BUTTON_REPEAT || Controller1[i] == BUTTON_DOWN)
+				Controller1[i] = BUTTON_UP;
 			else
-				buttonController[i] = BUTTON_IDLE;
+				Controller1[i] = BUTTON_IDLE;
 		}
 	}
 

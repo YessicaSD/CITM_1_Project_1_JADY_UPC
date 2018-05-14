@@ -36,8 +36,8 @@ public:
 
 public:
 	KEY_STATE keyboard[MAX_KEYS];
-	BUTTON_STATE buttonController[MAX_BUTTON];
-
+	BUTTON_STATE Controller1[MAX_BUTTON];
+	BUTTON_STATE Controller2[MAX_BUTTON];
 	SDL_GameControllerButton stringbutton[MAX_BUTTON];
 	Uint8 button_state;
 	SDL_Event event;
