@@ -15,13 +15,7 @@ enum KEY_STATE
 	KEY_REPEAT,
 	KEY_UP
 };
-enum BUTTON_STATE
-{
-	BUTTON_IDLE = 0,
-	BUTTON_DOWN,
-	BUTTON_REPEAT,
-	BUTTON_UP
-};
+
 
 class ModuleInput : public Module
 {
@@ -36,12 +30,12 @@ public:
 
 public:
 	KEY_STATE keyboard[MAX_KEYS];
-	BUTTON_STATE Controller1[MAX_BUTTON];
-	BUTTON_STATE Controller2[MAX_BUTTON];
+	KEY_STATE Controller1[MAX_BUTTON];
+	KEY_STATE Controller2[MAX_BUTTON];
 	SDL_GameControllerButton stringbutton[MAX_BUTTON];
-	Uint8 button_state;
-	SDL_Event event;
 	SDL_GameController *controller[MAX_CONTROLLERS];
+	SDL_Event event;
+	
 
 
 	
