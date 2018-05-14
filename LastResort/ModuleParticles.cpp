@@ -28,6 +28,7 @@ ModuleParticles::ModuleParticles()
 	basicShot.anim.PushBack({ 0,247, 15,7 });
 	basicShot.anim.speed = 0.0f;
 	basicShot.speed.x = 12;
+	basicShot.speed.y = 0;
 	basicShot.anim.loop = false;
 	basicShot.collision_fx = &basic_explosion;
 	//Basic shot particle---------------------------------------

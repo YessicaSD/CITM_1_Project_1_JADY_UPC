@@ -36,60 +36,59 @@ https://github.com/Dasanch/Project_1_JADY_UPC
 * _Github profile: https://github.com/YessicaSD_
 
 ##SPAWN PLAYERS ---------------------------------------------------------------------
-	- Add credits: "c"
-	- Spawn player 1: "1"
-	- Spawn player 2: "2"
+- **ENTER**: Add credits.
+- **1**: Spawn player 1 (only works if you have credits). 
+- **2**: Spawn player 2 (only works if you have credits).
 
 ## Movement keys --------------------------------------------------------------------
 ### Player 1:
 #### Keyboard:
-- **A**: Move left
-- **S**: Move down
-- **D**: Move right
-- **W**: Move up
-- **Space**: Shoot
-- **Left shift**: Lock the unit
+- **A**: Move left.
+- **S**: Move down.
+- **D**: Move right.
+- **W**: Move up.
+- **Space**: Shoot.
+- **Left shift**: Lock the unit.
 #### Controller:
-- **Left Joystick**: Movement
-- **B**: Shoot
+- **Left Joystick**: Movement.
+- **B**: Shoot.
 
 ### Player 2:
 #### Keyboard:
--** Left arrow **: Move left
--** Down arrow **: Move down
--** Right arrow **: Move right
--** Up arrow **: Move up
--** Rigth Ctrl **: Shoot
--** Rigth Shift **: Lock the unit
+-** Left arrow **: Move left.
+-** Down arrow **: Move down.
+-** Right arrow **: Move right.
+-** Up arrow **: Move up.
+-** Rigth Ctrl **: Shoot.
+-** Rigth Shift **: Lock the unit.
 #### Controller:
--** Left Joystick **: Movement
--** B **: Shoot
+-** Left Joystick **: Movement.
+-** B **: Shoot.
 
 
 ## Other functions --------------------------------------------------------------------
--** Esc **: Closes the game
--** Space **: Skip intro
--** Numpad +**: Volume up
--** Numpad -**: Volume down
+-** Esc **: Closes the game.
+-** Numpad +**: Volume up.
+-** Numpad -**: Volume down.
 
 ## Debug functionality ----------------------------------------------------------------
 
 ### BASIC DEBUGGING:
--** F1 **: Show collision boxes
--** F2 **: God mode
--** F3 **: Pause/Play game
--** F4 **: Frame forward (only when the game is paused)
+-** F1 **: Show collision boxes.
+-** F2 **: God mode.
+-** F3 **: Pause/Play game.
+-** F4 **: Frame forward (only when the game is paused).
 
 ### CAMERA DEBUGGING
-- **Numpad 7**: Zoom in
-- **Numpad 9**: Zoom out
-- **Numpad 8**: Move camera up
-- **Numpad 4**: Move camera left
-- **Numpad 5**: Move camera down
-- **Numpad 6**: Move camera right
-- **Numpad 0**: Re-center camera
-- **Numpad /**: Show world grid (which has marks every 100 units)
-- **Numpad (*)**: Show background grid (which has marks every 100 units)
+- **Numpad 7**: Zoom in.
+- **Numpad 9**: Zoom out.
+- **Numpad 8**: Move camera up.
+- **Numpad 4**: Move camera left.
+- **Numpad 5**: Move camera down.
+- **Numpad 6**: Move camera right.
+- **Numpad 0**: Re-center camera.
+- **Numpad /**: Show world grid (which has marks every 100 units).
+- **Numpad (*)**: Show background grid (which has marks every 100 units).
 
 ### ADVANCED DEBUGGING:
 How to use advanced debugging?

@@ -263,6 +263,12 @@ update_status ModuleUnit::Update()
 	case UnitPhase::returning:
 		Returning();
 		break;
+	case UnitPhase::followingTerrain:
+		FollowingTerrain();
+		break;
+	//case UnitPhase::bouncingOnTerrain:
+	//	BouncingTerrain();
+	//	break;
 	case UnitPhase::positioning:
 		Positioning();
 		break;
@@ -617,7 +623,6 @@ void ModuleUnit::FollowingTerrain()
 		position.y -= followTerrainSpeed;
 		if (ColliderIsOnRight()) { position.x = colliderToFollow->rect.x; }
 		else if (ColliderIsOnLeft())  { position.x = colliderToFollow->rect.x + colliderToFollow->rect.w; }
-
 		//Check if it runs out of collider
 		if(position.y > colliderToFollow->rect.y)
 		{
@@ -630,20 +635,40 @@ void ModuleUnit::FollowingTerrain()
 		position.y += followTerrainSpeed;
 		if      (ColliderIsOnRight()) { position.x = colliderToFollow->rect.x; }
 		else if (ColliderIsOnLeft()) { position.x = colliderToFollow->rect.x + colliderToFollow->rect.w; }
+		//Check if it runs out of collider
+		if (position.y < colliderToFollow->rect.y + colliderToFollow->rect.h)
+		{
+			if (ColliderIsOnRight()) { followTerrainDir = FollowingTerrainDirection::FTD_right; }
+			else if (ColliderIsOnLeft()) { followTerrainDir = FollowingTerrainDirection::FTD_left; }
+		}
 		break;
 	case FTD_left:
 		//Set the position
 		position.x -= followTerrainSpeed;
 		if      (ColliderIsAbove()) { position.y = colliderToFollow->rect.y; }
 		else if (ColliderIsBellow()) { position.y = colliderToFollow->rect.y + colliderToFollow->rect.h; }
+		//Check if it runs out of collider
+		if (position.x < colliderToFollow->rect.x)
+		{
+			if (ColliderIsAbove()) { followTerrainDir = FollowingTerrainDirection::FTD_up; }
+			else if (ColliderIsBellow()) { followTerrainDir = FollowingTerrainDirection::FTD_down; }
+		}
 		break;
 	case FTD_right:
 		//Set the position
 		position.x += followTerrainSpeed;
-		if      (ColliderIsAbove()) { position.x = colliderToFollow->rect.y; }
-		else if (ColliderIsBellow()) { position.x = colliderToFollow->rect.y + colliderToFollow->rect.h; }
+		if      (ColliderIsAbove()) { position.y = colliderToFollow->rect.y; }
+		else if (ColliderIsBellow()) { position.y = colliderToFollow->rect.y + colliderToFollow->rect.h; }
+		//Check if it runs out of collider
+		if (position.x > colliderToFollow->rect.x + colliderToFollow->rect.w)
+		{
+			if (ColliderIsAbove()) { followTerrainDir = FollowingTerrainDirection::FTD_up; }
+			else if (ColliderIsBellow()) { followTerrainDir = FollowingTerrainDirection::FTD_down; }
+		}
 		break;
 	}
+
+	UpdateUnitColliders();
 
 	//RENDER------------------------------------------------------------------
 	App->render->Blit(
@@ -655,10 +680,13 @@ void ModuleUnit::FollowingTerrain()
 
 void ModuleUnit::OnCollision(Collider* collider1, Collider* collider2)
 {
+	//LOG("Collision 1");
 	if(unitPhase == UnitPhase::throwing)
 	{
+		//LOG("Collision 2");
 		if (collider1 == hitDetectionUp)
 		{
+			LOG("Collision UP");
 			//If it hadn't hit anything
 			if (followTerrainDir == FollowingTerrainDirection::FTD_notFollowing)
 			{
@@ -667,7 +695,7 @@ void ModuleUnit::OnCollision(Collider* collider1, Collider* collider2)
 				colliderToFollow = collider2;
 			}
 			//If it was moving up
-			if (followTerrainDir == FollowingTerrainDirection::FTD_up)
+			else if (followTerrainDir == FollowingTerrainDirection::FTD_up)
 			{
 				if(ColliderIsOnLeft())
 				{
@@ -682,6 +710,7 @@ void ModuleUnit::OnCollision(Collider* collider1, Collider* collider2)
 		}
 		if (collider1 == hitDetectionLeft)
 		{
+			LOG("Collision LEFT");
 			//If it hadn't hit anything
 			if (followTerrainDir == FollowingTerrainDirection::FTD_notFollowing)
 			{
@@ -690,7 +719,7 @@ void ModuleUnit::OnCollision(Collider* collider1, Collider* collider2)
 				colliderToFollow = collider2;
 			}
 			//If it was moving left
-			if (followTerrainDir == FollowingTerrainDirection::FTD_left)
+			else if (followTerrainDir == FollowingTerrainDirection::FTD_left)
 			{
 				if (ColliderIsAbove())
 				{
@@ -705,16 +734,19 @@ void ModuleUnit::OnCollision(Collider* collider1, Collider* collider2)
 		}
 		if (collider1 == hitDetectionDown)
 		{
+			LOG("Collision DOWN");
 			//If it hadn't hit anything
 			if (followTerrainDir == FollowingTerrainDirection::FTD_notFollowing)
 			{
+				LOG("Collision 3");
 				unitPhase = UnitPhase::followingTerrain;
 				followTerrainDir = FollowingTerrainDirection::FTD_right;
 				colliderToFollow = collider2;
 			}
 			//If it was moving down
-			if (followTerrainDir == FollowingTerrainDirection::FTD_down)
+			else if (followTerrainDir == FollowingTerrainDirection::FTD_down)
 			{
+				LOG("Collision 4");
 				if (ColliderIsOnLeft())
 				{
 					followTerrainDir = FollowingTerrainDirection::FTD_right;
@@ -728,6 +760,7 @@ void ModuleUnit::OnCollision(Collider* collider1, Collider* collider2)
 		}
 		if (collider1 == hitDetectionRight)
 		{
+			LOG("Collision RIGHT");
 			//If it hadn't hit anything
 			if (followTerrainDir == FollowingTerrainDirection::FTD_notFollowing)
 			{
@@ -736,7 +769,7 @@ void ModuleUnit::OnCollision(Collider* collider1, Collider* collider2)
 				colliderToFollow = collider2;
 			}
 			//If it was moving right
-			if (followTerrainDir == FollowingTerrainDirection::FTD_right)
+			else if (followTerrainDir == FollowingTerrainDirection::FTD_right)
 			{
 				if (ColliderIsAbove())
 				{
@@ -785,10 +818,10 @@ bool ModuleUnit::ColliderIsOnRight()
 
 bool ModuleUnit::ColliderIsAbove()
 {
-	return (colliderToFollow->rect.y + colliderToFollow->rect.h > position.y);
+	return false /*(colliderToFollow->rect.y < position.y)*/;
 }
 
 bool ModuleUnit::ColliderIsBellow()
 {
-	return (colliderToFollow->rect.y < position.y);
+	return false /*(colliderToFollow->rect.y + colliderToFollow->rect.h > position.y)*/;
 }

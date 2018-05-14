@@ -182,8 +182,6 @@ update_status ModuleCollision::PreUpdate()
 
 			if (c1->CheckCollision(c2->rect) == true)
 			{
-				matrix[COLLIDER_POWERUP][COLLIDER_GOD] = true;//FIX (this is probably rewritten somewhere else, but i can't find where)
-
 				if (matrix[c1->type][c2->type] && c1->callback)
 				{
 					c1->callback->OnCollision(c1, c2);
@@ -255,6 +253,8 @@ void ModuleCollision::DebugDraw()
 		case COLLIDER_GOD: // white
 			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, alpha);
 			break;
+		case COLLIDER_HIT_DETECTION_WALL:
+			App->render->DrawQuad(colliders[i]->rect, 255, 125, 125, alpha);
 		}
 	}
 }

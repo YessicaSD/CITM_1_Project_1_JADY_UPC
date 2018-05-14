@@ -126,7 +126,7 @@ update_status ModuleUI::Update() {
 			App->fonts->BlitText(272 - 8 * strlen(str_score_p2), 16, 0, str_score_p2);
 		}
 	}
-	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_DOWN )
+	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN )
 	{
 		App->audio->ControlSFX(coinsfx, PLAY_AUDIO);
 		if(credits < 99)

@@ -171,7 +171,7 @@ private:
 	const int sphereDiameter = 16;//The sphere part of the unit
 	//Follow terrain
 	FollowingTerrainDirection followTerrainDir = FTD_notFollowing;
-	Collider* colliderToFollow;
-	int followTerrainSpeed;
+	Collider* colliderToFollow = nullptr;
+	int followTerrainSpeed = 1;
 };
 #endif

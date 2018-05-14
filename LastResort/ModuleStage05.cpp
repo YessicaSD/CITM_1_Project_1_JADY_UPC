@@ -193,7 +193,6 @@ update_status Module5lvlScene::Update()
 	}
 
 	tilemapPoint = cameraMovement.GetCurrentPosition();
-	
 	shipPos = shipOffset - tilemapPoint;
 	tilemapPos = tilemapOffset - tilemapPoint;
 
@@ -217,8 +216,8 @@ update_status Module5lvlScene::Update()
 			shipCollidersRect[i].y + (int)shipPos.y);
 	}
 
-	LOG("ShipPos : x %d y %d", shipPos.x, shipPos.y);
-	LOG("TilemapPoint: x %d y %d", tilemapPoint.x, tilemapPoint.y);
+	//LOG("ShipPos : x %d y %d", shipPos.x, shipPos.y);
+	//LOG("TilemapPoint: x %d y %d", tilemapPoint.x, tilemapPoint.y);
 	return UPDATE_CONTINUE;
 }
 

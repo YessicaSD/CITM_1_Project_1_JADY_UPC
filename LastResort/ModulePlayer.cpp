@@ -231,7 +231,7 @@ void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
 
 void  ModulePlayer::ShotInput() {
 	//Basic shoot-------------------------------------------------------------------
-	if (Shoot() == true)
+	if (Shoot())
 	{
 		if(powerup_type == POWERUP_TYPE::NOPOWERUP)
 		{
