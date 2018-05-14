@@ -80,17 +80,16 @@ https://github.com/Dasanch/Project_1_JADY_UPC
 -** F3 **: Pause/Play game
 -** F4 **: Frame forward (only when the game is paused)
 
-
-### CAMERA DEBUGGING:
--** Numpad 7 **: Zoom in
--** Numpad 9 **: Zoom out
--** Numpad 8 **: Move camera up
--** Numpad 4 **: Move camera left
--** Numpad 5 **: Move camera down
--** Numpad 6 **: Move camera right
--** Numpad 0 **: Re-center camera
--** Numpad / **: Show world grid (which has marks every 100 units)
--** Numpad * **: Show background grid (which has marks every 100 units)
+### CAMERA DEBUGGING
+- **Numpad 7**: Zoom in
+- **Numpad 9**: Zoom out
+- **Numpad 8**: Move camera up
+- **Numpad 4**: Move camera left
+- **Numpad 5**: Move camera down
+- **Numpad 6**: Move camera right
+- **Numpad 0**: Re-center camera
+- **Numpad /**: Show world grid (which has marks every 100 units)
+- **Numpad (*)**: Show background grid (which has marks every 100 units)
 
 ### ADVANCED DEBUGGING:
 How to use advanced debugging?
@@ -134,6 +133,7 @@ How to use advanced debugging?
 - Added  2 enemies: Oscilator & RedBat
 - Added camera debbuging mode
 -Added pause/play key (**F3**)
+- Enemies can now take damage and change their sprite
 - Now the unit inflicts damage
 - Camera movement has been fixed
 - Several bugs solved
