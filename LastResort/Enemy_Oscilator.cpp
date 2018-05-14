@@ -4,21 +4,29 @@
 
 Enemy_Oscilator::Enemy_Oscilator(int x, POWERUP_TYPE pu_t) : Enemy(x, original_y, pu_t)
 {
-	Oscilator.PushBack({ 0,0,50,48 });
-	Oscilator.PushBack({ 50,0,50,48 });
-	Oscilator.PushBack({ 0,49,50,49 });
-	Oscilator.PushBack({ 50,49,50,49 });
-	Oscilator.PushBack({ 0,98,50,50 });
-	Oscilator.PushBack({ 52,148,50,51 });
-	Oscilator.PushBack({ 0,98,50,50 });
-	Oscilator.PushBack({ 100,49,50,49 });
+
+
+	//down
+	Oscilator.PushBack({ 50,49,50,49 }); //5
+	Oscilator.PushBack({ 51,98,49,50 }); //8
+	Oscilator.PushBack({ 100,98,49,50 });//9 es largo
+	Oscilator.PushBack({ 102,148,50,51 }); //12
+	Oscilator.PushBack({ 51,98,49,50 }); //8
 	
-	Oscilator.PushBack({ 51,98,49,50 });
-	Oscilator.PushBack({ 100,98,49,50 });
-	Oscilator.PushBack({ 0,148,49,52 });
-	
-	Oscilator.PushBack({ 102,148,50,51 });
-	Oscilator.speed = 0.02f;
+
+	//up
+	Oscilator.PushBack({ 50,49,50,49 }); //5
+	Oscilator.PushBack({ 100,49,50,49 }); //6
+	Oscilator.PushBack({ 50,0,50,48 }); //2
+	Oscilator.PushBack({ 0,0,50,48 }); //1
+	Oscilator.PushBack({ 0,98,50,50 }); //7 //es largo
+	Oscilator.PushBack({ 100,0,50,49 }); //3
+	Oscilator.PushBack({ 0,49,50,49 });  //4
+	Oscilator.PushBack({ 0,0,50,48 }); //1
+	Oscilator.PushBack({ 50,0,50,48 }); //2
+
+
+	Oscilator.speed = 0.2f;
 	animation = &Oscilator;
 	collider = App->collision->AddCollider({ 0, 0, 50, 48 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 

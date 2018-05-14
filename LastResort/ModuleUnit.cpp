@@ -403,14 +403,13 @@ void ModuleUnit::Rotating()
 void ModuleUnit::Throwing()
 {
 	//MOVEMENT----------------------------------------------------------------
-	position.x += cosf(angleValue[turnAroundToRender]) * throwingSpeed;
-	position.y += sinf(angleValue[turnAroundToRender]) * throwingSpeed;
+	position.x += cosf(currentOrbit) * throwingSpeed;
+	position.y += sinf(currentOrbit) * throwingSpeed;
 	UpdateUnitColliders();
 	if (SDL_GetTicks() > shootTime + timeToReturn)
 	{
 		unitPhase = UnitPhase::returning;
 	}
-
 	//RENDER------------------------------------------------------------------
 	throwFrame = throwAnim.GetCurrentFrame();
 	App->render->Blit(

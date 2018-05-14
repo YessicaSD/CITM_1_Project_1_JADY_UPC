@@ -25,6 +25,7 @@ struct Collider
 {
 	SDL_Rect rect;
 	bool to_delete = false;
+	int damage = 1;
 	COLLIDER_TYPE type;
 	Module* callback = nullptr;
 
@@ -33,6 +34,10 @@ struct Collider
 		type(type),
 		callback(callback)
 	{}
+
+	void SetDamage(int dmg) {
+		damage = dmg;
+	}
 
 	void SetPos(int x, int y)
 	{
