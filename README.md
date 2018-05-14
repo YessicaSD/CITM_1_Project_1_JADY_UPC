@@ -129,6 +129,15 @@ How to use advanced debugging?
 
 ## Changes ----------------------------------------------------------------------------
 
+### CHANGES IN V0.7.0.0
+- Added ship colliders
+- Added  2 enemies: Oscilator & RedBat
+- Added camera debbuging mode
+-Added pause/play key (**F3**)
+- Now the unit inflicts damage
+- Camera movement has been fixed
+- Several bugs solved
+
 ### CHANGES IN V0.6.0.0
 - Added stage 5 music
 - Added stage 5 stars background and ship
