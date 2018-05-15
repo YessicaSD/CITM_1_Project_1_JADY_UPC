@@ -53,6 +53,7 @@ public:
 	void OnCollision(Collider* c1, Collider* c2);
 
 	bool AddEnemy(ENEMY_TYPES type, int x, int y, Uint32 delay = 0, POWERUP_TYPE powerup_type = NOPOWERUP);
+	bool InstaSpawn(ENEMY_TYPES type, int x, int y, POWERUP_TYPE powerup_type = NOPOWERUP);
 
 private:
 
@@ -60,6 +61,7 @@ private:
 
 private:
 	EnemyInfo queue[MAX_ENEMIES];
+	EnemyInfo instaQueue[MAX_ENEMIES];//Enemies in this queue will spawn when they reach the screen, not when they reach the spawn area
 	Enemy* enemies[MAX_ENEMIES];
 
 public:

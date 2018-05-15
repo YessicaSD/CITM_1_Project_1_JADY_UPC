@@ -141,6 +141,8 @@ bool Module5lvlScene::Start()
 	//App->enemies->AddEnemy(REDBATS, 758, 25);
 	//App->enemies->AddEnemy(OSCILATOR, 500, 0);
 	App->enemies->AddEnemy(FRONT_TURRET, 47, 64, 0, POWERUP_TYPE::NOPOWERUP);
+	//App->enemies->InstaSpawn(PINATA, 150, 165, POWERUP_TYPE::NOPOWERUP);
+	App->enemies->InstaSpawn(FRONT_TURRET, 150, 165, POWERUP_TYPE::NOPOWERUP);
 
 	//Colliders--------------------------------------------------------------------------------------------------
 	for(int i = 0; i < SHIP_COLLIDERS_NUM; ++i)

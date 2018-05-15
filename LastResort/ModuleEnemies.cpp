@@ -41,7 +41,8 @@ bool ModuleEnemies::Start()
 
 update_status ModuleEnemies::PreUpdate()
 {
-	//Check if the enemy is inside the "spawn area (viewport + spawn margin)" to spawn it---------------------------------------------------------------------------
+	//SPAWN WITH MARGINS (queue)---------------------------------------------------------------------
+	//- Check if the enemy is inside the "spawn area (viewport + spawn margin)" to spawn it
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
 		if (queue[i].type != ENEMY_TYPES::NO_TYPE)
@@ -64,6 +65,23 @@ update_status ModuleEnemies::PreUpdate()
 					queue[i].type = ENEMY_TYPES::NO_TYPE;
 					LOG("Spawning enemy at x: %d, y: %d", queue[i].x, queue[i].y);
 				}
+			}
+		}
+	}
+
+	//SPAWN WITHOUT MARGINS (instaQueue)-------------------------------------------------------------
+	for (uint i = 0; i < MAX_ENEMIES; ++i)
+	{
+		if (instaQueue[i].type != ENEMY_TYPES::NO_TYPE)
+		{
+			if (App->stage05->spawnPos.x + instaQueue[i].x < 0 + SCREEN_WIDTH &&
+				App->stage05->spawnPos.x + instaQueue[i].x > 0 &&
+				App->stage05->spawnPos.y + instaQueue[i].y > 0 &&
+				App->stage05->spawnPos.y + instaQueue[i].y < 0 + SCREEN_HEIGHT)
+			{
+				SpawnEnemy(instaQueue[i]);
+				instaQueue[i].type = ENEMY_TYPES::NO_TYPE;
+				LOG("Spawning enemy at x: %d, y: %d", instaQueue[i].x, instaQueue[i].y);
 			}
 		}
 	}
@@ -171,6 +189,40 @@ bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, Uint32 delay, POWER
 
 	return ret;
 }
+
+bool ModuleEnemies::InstaSpawn(ENEMY_TYPES type, int x, int y, POWERUP_TYPE powerup_type)
+{
+	bool ret = false;
+
+	for (uint i = 0; i < MAX_ENEMIES; ++i)
+	{
+		if (instaQueue[i].type == ENEMY_TYPES::NO_TYPE)
+		{
+			instaQueue[i].type = type;
+			instaQueue[i].x = x;
+			instaQueue[i].y = y;
+			instaQueue[i].pu_Type = powerup_type;
+			ret = true;
+			break;
+		}
+	}
+
+	return ret;
+}
+
+//Gets deleted if you instaspawn in a position that's different to the camera
+//bool ModuleEnemies::InstaSpawn(ENEMY_TYPES type, int x, int y, POWERUP_TYPE powerup_type)
+//{
+//	EnemyInfo enemyInfo;
+//	enemyInfo.type = type;
+//	enemyInfo.x = x;
+//	enemyInfo.y = y;
+//	enemyInfo.delay = 0;
+//	enemyInfo.pu_Type = powerup_type;
+//	SpawnEnemy(enemyInfo);
+//
+//	return true;
+//}
 
 void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 {
