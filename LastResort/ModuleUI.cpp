@@ -101,28 +101,39 @@ update_status ModuleUI::Update() {
 
 	if (showUI == true) {
 		//Static UI-----------------------------------------------------
+		if (player1 == true)
 		App->render->Blit(uiTex, 16, 16, &lives_score_p1);
+		if (player2 == true)
 		App->render->Blit(uiTex, 256, 16, &live_score_p2);
+
 		App->render->Blit(uiTex, 112, 16, &top);
 		App->render->Blit(uiTex, 24, 208, &pow);
 		App->render->Blit(uiTex, 184, 208, &pow);	/*App->render->Blit(uiTex, 192, 16, &push_p2, 0.0f);*/ //Remember 1.0
 
 		//Variable UI----------------------------------------------------
+		if (player1 == true)
 		App->fonts->BlitText(48, 24, 0, str_lives_p1);  //lives player 1
+		if(player2==true)
 		App->fonts->BlitText(264, 24, 0, str_lives_p2); //lives player 2
 		//-------------score player 1------------------------------------
-		if (score_p1 == 0) {
-			App->fonts->BlitText( 72, 16, 0, "00"); 
-		}
-		else {
-			App->fonts->BlitText(88- 8*strlen(str_score_p1) , 16, 0, str_score_p1);
+		if (player1 == true)
+		{
+			if (score_p1 == 0) {
+				App->fonts->BlitText(72, 16, 0, "00");
+			}
+			else {
+				App->fonts->BlitText(88 - 8 * strlen(str_score_p1), 16, 0, str_score_p1);
+			}
 		}
 		//-------------score player 2------------------------------------
-		if (score_p2 == 0) {
-			App->fonts->BlitText(256, 16, 0, "00");
-		}
-		else {
-			App->fonts->BlitText(272 - 8 * strlen(str_score_p2), 16, 0, str_score_p2);
+		if (player2 == true)
+		{
+			if (score_p2 == 0) {
+				App->fonts->BlitText(256, 16, 0, "00");
+			}
+			else {
+				App->fonts->BlitText(272 - 8 * strlen(str_score_p2), 16, 0, str_score_p2);
+			}
 		}
 	}
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN )
