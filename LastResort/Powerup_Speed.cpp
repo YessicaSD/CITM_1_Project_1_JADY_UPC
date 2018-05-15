@@ -4,7 +4,7 @@
 #include "Player1.h"
 #include "Player2.h"
 #include "Globals.h"
-
+#include "ModuleAudio.h"
 Powerup_Speed::Powerup_Speed(int x, int y) : Powerup(x, y)
 {
 	//Push backs
@@ -17,14 +17,18 @@ Powerup_Speed::Powerup_Speed(int x, int y) : Powerup(x, y)
 
 void Powerup_Speed::OnCollision(Collider* col)
 {
+	App->audio->ControlSFX(App->powerups->SpeedSfx, PLAY_AUDIO);
 	//We find which player got this powerup
 	if (col == App->player1->playerCol)
 	{
+		
+		App->player1->SpeedPowerup = true;
 		//We give it this powerup
 		App->player1->movementSpeed += 0.5f;//Test value. We should check what is the speed increase in the game.
 	}
 	else if (col == App->player2->playerCol)
 	{
+		App->player2->SpeedPowerup = true;
 		//We give it this powerup
 		App->player1->movementSpeed += 0.5f;//Test value. We should check what is the speed increase in the game.
 	}

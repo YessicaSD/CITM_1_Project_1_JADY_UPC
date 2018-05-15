@@ -70,7 +70,6 @@ public:
 	//Enemies------------------------------------------------
 	Particle MiddleBossShot;
 	Particle MiddleBosExplotion;
-
 	iPoint VectorMiddleBossShots;
 	//Mix_Chunk* g_explosion02_2sfx = nullptr;
 	//Mix_Chunk* g_explosion02_3sfx = nullptr;	

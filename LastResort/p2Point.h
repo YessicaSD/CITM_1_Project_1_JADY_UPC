@@ -146,17 +146,25 @@ public:
 		this->y = unitVec.y;
 	}
 	//- This function makes the unit vector (a vector with module 1) from a source postion to a target postion
-	p2Point VectU(p2Point vector)
+	p2Point VectU()
 	{
 		p2Point Vecu;
 		TYPE unitVecModule;
-		Vecu.x = vector.x;
-		Vecu.y = vector.y;
+		Vecu.x = this->x;
+		Vecu.y = this->y;
 		//- We find the module of the vectors
 		unitVecModule = sqrt(pow(Vecu.x, 2) + (pow(Vecu.y, 2)));
 		//- We divide each component by the module
-		Vecu.x /= unitVecModule;
-		Vecu.y /= unitVecModule;
+		if (unitVecModule != 0)
+		{
+			Vecu.x /= unitVecModule;
+			Vecu.y /= unitVecModule;
+		}
+		if (unitVecModule == 0)
+		{
+			Vecu.x = 0;
+				Vecu.y = 0;
+		}
 		return Vecu;
 	}
 

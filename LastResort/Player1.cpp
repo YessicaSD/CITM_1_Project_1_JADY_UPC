@@ -60,6 +60,7 @@ Player1::Player1() {
 	ShotLaserBasic.PushBack({ 47,288,15,15 });
 	ShotLaserBasic.speed = 0.2f;
 	ShotLaserBasic.loop = true;
+	
 }
 
 void Player1::PlayerDies() {

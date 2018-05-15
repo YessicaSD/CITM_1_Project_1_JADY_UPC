@@ -15,7 +15,20 @@
 #include "Player2.h"
 
 ModulePlayer::ModulePlayer() //Constructor 
-{}
+{
+	SpeedAnimation.PushBack({ 0,0,32,31 });
+	SpeedAnimation.PushBack({ 32,0,32,32 });
+	SpeedAnimation.PushBack({ 64,0,32,32 });
+	SpeedAnimation.PushBack({ 96,0,32,32 });
+	SpeedAnimation.PushBack({ 0,32,32,32 });
+	SpeedAnimation.PushBack({ 32,32,32,32 });
+	SpeedAnimation.PushBack({ 64,32,32,32 });
+	SpeedAnimation.PushBack({ 96,54,32,32 });
+	SpeedAnimation.PushBack({ 32,54,32,32 });
+	SpeedAnimation.PushBack({ 0,0,0,0 });
+	SpeedAnimation.speed = 0.2f;
+	SpeedAnimation.loop = false;
+}
 
 ModulePlayer::~ModulePlayer()
 {}
@@ -42,7 +55,7 @@ bool ModulePlayer::Start()
 	playerCol = App->collision->AddCollider({ position.x, position.y + 2, 24, 8 }, COLLIDER_TYPE::COLLIDER_PLAYER, this);
 	//animations----------------------------------------------------------------------
 	deathAnim.Reset();
-
+	SpeedAnimationTex= App->textures->Load("Assets/Powerups/speed.png");
 	return ret;
 }
 
@@ -122,6 +135,15 @@ update_status ModulePlayer::Update()
 	//Ship Animation-------------------------------------------------------------------
 	ShipAnimation();
 
+	if (SpeedPowerup == true)
+	{
+		App->render->Blit(SpeedAnimationTex, position.x - 32, position.y-9 , &SpeedAnimation.GetCurrentFrame());
+		if (SpeedAnimation.current_frame == 9)
+		{
+			SpeedAnimation.current_frame = 0;
+			SpeedPowerup = false;
+		}
+	}
 
 	//Winlvl
 	if (winlvl)
