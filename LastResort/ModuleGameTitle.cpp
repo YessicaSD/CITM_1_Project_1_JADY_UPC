@@ -86,7 +86,7 @@ update_status ModuleGameTitle::Update() {
 	{
 		L1.current_frame = 30;
 		A2.current_frame = 30;
-		S3.current_frame = 33;
+		S3.current_frame = 34;
 		T4.current_frame = 31;
 		R5.current_frame = 31;
 		E6.current_frame = 32;
