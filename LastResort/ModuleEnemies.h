@@ -68,12 +68,14 @@ public:
 
 	//Spawning
 	const int spawnMarginLeft = 50;
-	const int spawnMarginRight = 50;
+	const int spawnMarginRight = 25;
 	const int spawnMarginUp = 50;
-	const int spawnMarginDown = 50;
-	int spawnMargin = 50;
-	int despawnMargin = spawnMargin + 50;// Despawn margin always needs to be a little bigger than spawn margin or otherwise enemies would be spawned and immmediately despawned
-	//despawn (same * 2)
+	const int spawnMarginDown = 25;
+	const int despawnMarginLeft = spawnMarginLeft * 2;
+	const int despawnMarginRight = spawnMarginRight * 2;
+	const int despawnMarginUp = spawnMarginUp * 2;
+	const int despawnMarginDown = spawnMarginDown * 2;
+	// Despawn margin always needs to be a little bigger than spawn margin or otherwise enemies would be spawned and immmediately despawned
 };
 
 #endif // __ModuleEnemies_H__

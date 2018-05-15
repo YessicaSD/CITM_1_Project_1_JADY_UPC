@@ -118,16 +118,16 @@ update_status ModuleRender::PostUpdate()
 	//Render the spawn and despawn area--------------------------------------------------------------------------------------------------
 	if(showSpawnArea)
 	{
-		//Despawn area
-		App->render->DrawQuad({ -App->enemies->despawnMargin, -App->enemies->despawnMargin, SCREEN_WIDTH + App->enemies->despawnMargin * 2, App->enemies->despawnMargin}, 255, 0, 0, 50);
-		App->render->DrawQuad({ -App->enemies->despawnMargin, SCREEN_HEIGHT, SCREEN_WIDTH + App->enemies->despawnMargin * 2, App->enemies->despawnMargin}, 255, 0, 0, 50);
-		App->render->DrawQuad({ -App->enemies->despawnMargin, 0, App->enemies->despawnMargin, SCREEN_HEIGHT }, 255, 0, 0, 50);
-		App->render->DrawQuad({ SCREEN_WIDTH, 0, App->enemies->despawnMargin, SCREEN_HEIGHT }, 255, 0, 0, 50);
 		//Spawn area
-		App->render->DrawQuad({ -App->enemies->spawnMargin, -App->enemies->spawnMargin, SCREEN_WIDTH + App->enemies->spawnMargin * 2, App->enemies->spawnMargin }, 255, 165, 0, 50);
-		App->render->DrawQuad({ -App->enemies->spawnMargin, SCREEN_HEIGHT, SCREEN_WIDTH + App->enemies->spawnMargin * 2, App->enemies->spawnMargin }, 255, 165, 0, 50);
-		App->render->DrawQuad({ -App->enemies->spawnMargin, 0, App->enemies->spawnMargin, SCREEN_HEIGHT }, 255, 165, 0, 50);
-		App->render->DrawQuad({ SCREEN_WIDTH, 0, App->enemies->spawnMargin, SCREEN_HEIGHT }, 255, 165, 0, 50);
+		App->render->DrawQuad({ -App->enemies->spawnMarginLeft, -App->enemies->spawnMarginUp, SCREEN_WIDTH + App->enemies->spawnMarginLeft + App->enemies->spawnMarginRight, App->enemies->spawnMarginUp }, 255, 165, 0, 50);//Up
+		App->render->DrawQuad({ -App->enemies->spawnMarginLeft, SCREEN_HEIGHT, SCREEN_WIDTH + App->enemies->spawnMarginLeft + App->enemies->spawnMarginRight, App->enemies->spawnMarginDown }, 255, 165, 0, 50);//Down
+		App->render->DrawQuad({ -App->enemies->spawnMarginLeft, 0, App->enemies->spawnMarginLeft, SCREEN_HEIGHT }, 255, 165, 0, 50);//Left
+		App->render->DrawQuad({ SCREEN_WIDTH, 0, App->enemies->spawnMarginRight, SCREEN_HEIGHT }, 255, 165, 0, 50);//Right
+		//Despawn area
+		App->render->DrawQuad({ -App->enemies->despawnMarginLeft, -App->enemies->despawnMarginUp, SCREEN_WIDTH + App->enemies->despawnMarginLeft + App->enemies->despawnMarginRight, App->enemies->despawnMarginUp }, 255, 0, 0, 50);//Up
+		App->render->DrawQuad({ -App->enemies->despawnMarginLeft, SCREEN_HEIGHT, SCREEN_WIDTH + App->enemies->despawnMarginLeft + App->enemies->despawnMarginRight, App->enemies->despawnMarginDown }, 255, 0, 0, 50);//Down
+		App->render->DrawQuad({ -App->enemies->despawnMarginLeft, 0, App->enemies->despawnMarginLeft, SCREEN_HEIGHT }, 255, 0, 0, 50);//Left
+		App->render->DrawQuad({ SCREEN_WIDTH, 0, App->enemies->despawnMarginRight, SCREEN_HEIGHT }, 255, 0, 0, 50);//Right
 	}
 
 	//Render the background grid------------------------------------------------------------------------------------------------------------

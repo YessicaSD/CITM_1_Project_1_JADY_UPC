@@ -217,9 +217,7 @@ update_status Module5lvlScene::Update()
 			shipCollidersRect[i].x + (int)shipPos.x,
 			shipCollidersRect[i].y + (int)shipPos.y);
 	}
-	LOG("Background position x: %d, y %d", App->stage05->backgroundPoint.x, App->stage05->backgroundPoint.y);
-	//LOG("ShipPos : x %d y %d", shipPos.x, shipPos.y);
-	//LOG("TilemapPoint: x %d y %d", tilemapPoint.x, tilemapPoint.y);
+
 	return UPDATE_CONTINUE;
 }
 
