@@ -48,7 +48,7 @@ public:
 	//Time variables
 	Uint32 start_time; 
 	Uint32 current_time;
-
+	bool titleDone = false;
 	float speed = 0.3f;
 	//audios
 	Mix_Music* Titlemusic = nullptr;

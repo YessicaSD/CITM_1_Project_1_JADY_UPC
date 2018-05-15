@@ -54,7 +54,7 @@ bool ModuleGameTitle::CleanUp() {
 	E6.Reset();
 	S7.Reset();
 	O8.Reset();
-	R9.Reset(); //2LASTCHAR
+	R9.Reset(); 
 	T10.Reset();
 	//textures----------------------------------------------------------------------
 	
@@ -72,6 +72,8 @@ bool ModuleGameTitle::CleanUp() {
 	App->audio->ControlMUS(Titlemusic, STOP_AUDIO);
 	App->audio->UnloadMUS(Titlemusic);
 
+	//Reset variables---------------------------------------------------------------
+	titleDone = false;
 	return true;
 }
 update_status ModuleGameTitle::Update() {
@@ -80,25 +82,42 @@ update_status ModuleGameTitle::Update() {
 
 	//title letters---------------------------------------------------------------------
 	/*App->render->Blit(A2Texture, 60, 30, &A2.frames[(int)currenA2], 0.0f);*/
-	App->render->Blit(L1Texture, 56, 16, &L1.GetCurrentFrame());
-	if(current_time>300)
-	App->render->Blit(A2Texture, 103, 15, &A2.GetCurrentFrame());
-	if (current_time>600)
-	App->render->Blit(S3Texture, 164, 16, &S3.GetCurrentFrame());
-	if (current_time>900)
-	App->render->Blit(T4Texture, 208, 13, &T4.GetCurrentFrame());
-	if (current_time>1200)
-	App->render->Blit(R5Texture, 20, 88, &R5.GetCurrentFrame());
-	if (current_time>1500)
-	App->render->Blit(E6Texture, 70, 88, &E6.GetCurrentFrame());
-	if (current_time>1800)
-	App->render->Blit(S7Texture, 114, 88, &S7.GetCurrentFrame());
-	if (current_time>2100)
-	App->render->Blit(O8Texture, 147, 85, &O8.GetCurrentFrame());
-	if (current_time>2400)
-	App->render->Blit(R9Texture, 194, 88, &R9.GetCurrentFrame());
-	if (current_time>2600)
-	App->render->Blit(T10Texture,  238,  85, &T10.GetCurrentFrame());
+	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN)
+	{
+		L1.current_frame = 29;
+		A2.current_frame = 29;
+		S3.current_frame = 29;
+		T4.current_frame = 29;
+		R5.current_frame = 30;
+		E6.current_frame = 31;
+		S7.current_frame = 31;
+		O8.current_frame = 31;
+		R9.current_frame = 31;
+		T10.current_frame = 31;
+		titleDone = true;
+	}
+	
+		App->render->Blit(L1Texture, 56, 16, &L1.GetCurrentFrame());
+		if (current_time>300 || titleDone == true)
+			App->render->Blit(A2Texture, 103, 15, &A2.GetCurrentFrame());
+		if (current_time>600 || titleDone == true)
+			App->render->Blit(S3Texture, 164, 16, &S3.GetCurrentFrame());
+		if (current_time>900 || titleDone == true)
+			App->render->Blit(T4Texture, 208, 13, &T4.GetCurrentFrame());
+		if (current_time>1200 || titleDone == true)
+			App->render->Blit(R5Texture, 20, 88, &R5.GetCurrentFrame());
+		if (current_time>1500 || titleDone == true)
+			App->render->Blit(E6Texture, 70, 88, &E6.GetCurrentFrame());
+		if (current_time>1800 || titleDone == true)
+			App->render->Blit(S7Texture, 114, 88, &S7.GetCurrentFrame());
+		if (current_time>2100 || titleDone == true)
+			App->render->Blit(O8Texture, 147, 85, &O8.GetCurrentFrame());
+		if (current_time>2400 || titleDone == true)
+			App->render->Blit(R9Texture, 194, 88, &R9.GetCurrentFrame());
+		if (current_time>2600 || titleDone == true)
+			App->render->Blit(T10Texture, 238, 85, &T10.GetCurrentFrame());
+	
+	
 	
 
 	
@@ -110,7 +129,7 @@ update_status ModuleGameTitle::Update() {
 	{
 		App->fade->FadeToBlack(this, App->readyScene, 0.5f);
 	}
-	
+
 
 	return UPDATE_CONTINUE;
 }
