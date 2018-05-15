@@ -117,7 +117,9 @@ bool Module5lvlScene::Start()
 	App->stageFunctionality->currentStage = this;
 
 	//Set the spawn pos (if we don't do it, enemies will be inicialized in a incorrect position)----------------
-	spawnPos = shipPos = shipOffset;
+	shipPos = shipOffset;
+	spawnPos.x = (int)shipPos.x;
+	spawnPos.y = (int)shipPos.y;
 
 	//"Reset ship position when fadetoblackends"----------------------------------
 	//App->player1->Reset_Positions();
@@ -142,12 +144,15 @@ bool Module5lvlScene::Start()
 	//App->enemies->AddEnemy(REDBATS, 733, 25);
 	//App->enemies->AddEnemy(REDBATS, 758, 25);
 	//App->enemies->AddEnemy(OSCILATOR, 500, 0);
+	
+	//- FINAL POSITION ENEMIES
+	App->enemies->AddEnemy(FRONT_TURRET, 47, 64, 0, POWERUP_TYPE::NOPOWERUP);
 
+	//- TEST ENEMIES
 	App->enemies->AddEnemy(BASIC, 250, 10, 1000);
 	App->enemies->AddEnemy(OSCILATOR, -47, 470);
-	App->enemies->AddEnemy(FRONT_TURRET, 47, 64, 0, POWERUP_TYPE::NOPOWERUP);
+	//App->enemies->InstaSpawn(PINATA, 150, 165, POWERUP_TYPE::NOPOWERUP);
 	App->enemies->AddEnemy(PINATA, 150, 140, 0, POWERUP_TYPE::NOPOWERUP);
-	App->enemies->InstaSpawn(FRONT_TURRET, 150, 165, POWERUP_TYPE::NOPOWERUP);
 
 	//Colliders--------------------------------------------------------------------------------------------------
 	for(int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
@@ -202,7 +207,8 @@ update_status Module5lvlScene::Update()
 	shipPos = shipOffset - backgroundPoint;
 	tunnelPos = tunnelOffset - backgroundPoint;
 	//- We update the spawn position----------------------------
-	spawnPos = shipPos;
+	spawnPos.x = (int)shipPos.x;
+	spawnPos.y = (int)shipPos.y;
 
 	//-----------Draw-------------------------------------------
 	if (cameraMovement.currentMov <= 21)
