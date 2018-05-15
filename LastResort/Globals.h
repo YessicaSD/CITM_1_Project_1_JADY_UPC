@@ -43,7 +43,7 @@ const int SPAWN_MARGIN_DOWN = 30;
 const int DESPAWN_MARGIN_LEFT = 200;
 const int DESPAWN_MARGIN_RIGHT = 200;
 const int DESPAWN_MARGIN_UP = 200;
-const int DESPAWN_MARGIN_DOWN = 200;
+const int DESPAWN_MARGIN_DOWN = 200;// Despawn margin always needs to be bigger than spawn margin or otherwise enemies would be spawned and immmediately despawned
 
 // Useful typedefs ---------------------------
 typedef unsigned int uint;

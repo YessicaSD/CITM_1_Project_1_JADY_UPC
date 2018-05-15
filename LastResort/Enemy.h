@@ -19,7 +19,7 @@ public:
 	POWERUP_TYPE powerUp_drop;
 	//Statistics---------------------
 	float hp;
-	int points;
+	int scoreValue;
 	//Damage properties--------------
 	int dmg_frames = 0;
 	int flashing_interval = -1;

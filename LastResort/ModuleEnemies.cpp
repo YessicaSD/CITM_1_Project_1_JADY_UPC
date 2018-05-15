@@ -5,6 +5,7 @@
 #include "ModuleParticles.h"
 #include "ModuleTextures.h"
 #include "ModulePowerups.h"
+#include "ModuleStage05.h"
 #include "Enemy.h"
 #include "Enemy_Oscilator.h"
 #include "Enemy_Basic.h"
@@ -13,7 +14,7 @@
 #include "Enemy_RedBats.h"
 #include "Enemy_RotatingTurret.h"
 #include "Enemy_Pinata.h"
-#include "ModuleStage05.h"
+#include "Enemy_FrontTurret.h"
 
 #define DAMAGE_FLASHING_INTERVAL 4
 
@@ -183,44 +184,48 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 		{
 		case ENEMY_TYPES::BASIC:
 			enemies[i] = new Enemy_Basic(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
-			enemies[i]->points = 100;
+			enemies[i]->scoreValue = 100;
 			enemies[i]->hp = 1;
 			break;
 		case ENEMY_TYPES::OSCILATOR:
 			enemies[i] = new Enemy_Oscilator(info.x + App->stage05->spawnPos.x, info.pu_Type);
-			enemies[i]->points = 100;
+			enemies[i]->scoreValue = 100;
 			enemies[i]->hp = 5;
 			break;
 		case ENEMY_TYPES::POWERDROPPER:
 			enemies[i] = new Enemy_PowerDropper(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
-			enemies[i]->points = 100;
+			enemies[i]->scoreValue = 100;
 			enemies[i]->hp = 1;
 			break;
 		case ENEMY_TYPES::METALCROW:
 			enemies[i] = new Enemy_MetalCraw(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
-			enemies[i]->points = 1000;
+			enemies[i]->scoreValue = 1000;
 			enemies[i]->hp = 50;
 			break;
 		case  ENEMY_TYPES::REDBATS:
 			enemies[i] = new Enemy_RedBats(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
-			enemies[i]->points = 100;
+			enemies[i]->scoreValue = 100;
 			enemies[i]->hp = 1;
 			break;
 		case ENEMY_TYPES::ROTATING_TURRET:
 			enemies[i] = new Enemy_RotatingTurret(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
-			enemies[i]->points = 200;
+			enemies[i]->scoreValue = 200;
 			enemies[i]->hp = 50;
 			break;
 		case ENEMY_TYPES::PINATA:
 			enemies[i] = new Enemy_Pinata(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
-			enemies[i]->points = 200;
+			enemies[i]->scoreValue = 200;
 			enemies[i]->hp = 50;
 			break;
 		case ENEMY_TYPES::PINATA_SPAWNER:
 			enemies[i] = new Enemy_Pinata(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
-			enemies[i]->points = 200;
+			enemies[i]->scoreValue = 200;
 			enemies[i]->hp = 50;
 			break;
+		case ENEMY_TYPES::FRONT_TURRET:
+			enemies[i] = new Enemy_FrontTurret(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
+			enemies[i]->scoreValue = 200;
+			enemies[i]->hp = 5;
 		}
 	}
 }
@@ -238,10 +243,10 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			{
 				//---Give out points------------------------
 				if (c2->type == COLLIDER_PLAYER_1_SHOT) {
-					App->ui->score_p1 += enemies[i]->points;
+					App->ui->score_p1 += enemies[i]->scoreValue;
 				}
 				else if (c2->type == COLLIDER_PLAYER_2_SHOT) {
-					App->ui->score_p2 += enemies[i]->points;
+					App->ui->score_p2 += enemies[i]->scoreValue;
 				}
 				//---Drop powerup---------------------------
 				if (enemies[i]->powerUp_drop != NOPOWERUP) {
