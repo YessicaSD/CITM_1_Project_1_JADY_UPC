@@ -62,7 +62,7 @@ public:
 	SDL_Texture* nml_sprites = nullptr;
 	SDL_Texture* dmg_sprites = nullptr;
 	int spawnMargin = 50;
-	int despawnMargin = spawnMargin + 10;// Despawn margin always needs to be a little bigger than spawn margin or otherwise enemies would be spawned and immmediately despawned
+	int despawnMargin = spawnMargin + 50;// Despawn margin always needs to be a little bigger than spawn margin or otherwise enemies would be spawned and immmediately despawned
 };
 
 #endif // __ModuleEnemies_H__

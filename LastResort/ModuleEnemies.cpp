@@ -45,10 +45,10 @@ update_status ModuleEnemies::PreUpdate()
 	{
 		if (queue[i].type != ENEMY_TYPES::NO_TYPE)
 		{
-			if (App->stage05->shipPos.x - queue[i].x < 0 + SCREEN_WIDTH + spawnMargin &&
-				App->stage05->shipPos.x - queue[i].x > 0 - spawnMargin &&
-				App->stage05->shipPos.y + queue[i].y > 0 - spawnMargin &&
-				App->stage05->shipPos.y + queue[i].y < 0 + SCREEN_HEIGHT + spawnMargin)//We add y because SDL inverts the y axis
+			if (App->stage05->spawnPos.x + queue[i].x < 0 + SCREEN_WIDTH + spawnMargin &&
+				App->stage05->spawnPos.x + queue[i].x > 0 - spawnMargin &&
+				App->stage05->spawnPos.y + queue[i].y > 0 - spawnMargin &&
+				App->stage05->spawnPos.y + queue[i].y < 0 + SCREEN_HEIGHT + spawnMargin)
 			{
 				SpawnEnemy(queue[i]);
 				queue[i].type = ENEMY_TYPES::NO_TYPE;
@@ -106,10 +106,10 @@ update_status ModuleEnemies::PostUpdate()
 	{
 		if (enemies[i] != nullptr)
 		{
-			if (/*queue[i].x + App->stage05->shipPos.x > 0 + SCREEN_WIDTH + despawnMargin ||*/
-				App->stage05->shipPos.x - queue[i].x < 0 - despawnMargin /*||
-				queue[i].y + App->stage05->shipPos.y < 0 - spawnMargin ||
-				queue[i].y + App->stage05->shipPos.y > 0 + SCREEN_HEIGHT + spawnMargin*/)
+			if (enemies[i]->position.x > 0 + SCREEN_WIDTH + despawnMargin ||
+				enemies[i]->position.x < 0 - despawnMargin ||
+				enemies[i]->position.y < 0 - despawnMargin ||
+				enemies[i]->position.y > 0 + SCREEN_HEIGHT + despawnMargin)
 			{
 				LOG("DeSpawning enemy at %d", enemies[i]->position.x);
 				delete enemies[i];
@@ -171,42 +171,42 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 		switch (info.type)
 		{
 		case ENEMY_TYPES::BASIC:
-			enemies[i] = new Enemy_Basic(info.x + App->stage05->shipPos.x, info.y + App->stage05->shipPos.y, info.pu_Type);
+			enemies[i] = new Enemy_Basic(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
 			enemies[i]->points = 100;
 			enemies[i]->hp = 1;
 			break;
 		case ENEMY_TYPES::OSCILATOR:
-			enemies[i] = new Enemy_Oscilator(info.x + App->stage05->shipPos.x, info.pu_Type);
+			enemies[i] = new Enemy_Oscilator(info.x + App->stage05->spawnPos.x, info.pu_Type);
 			enemies[i]->points = 100;
 			enemies[i]->hp = 5;
 			break;
 		case ENEMY_TYPES::POWERDROPPER:
-			enemies[i] = new Enemy_PowerDropper(info.x + App->stage05->shipPos.x, info.y + App->stage05->shipPos.y, info.pu_Type);
+			enemies[i] = new Enemy_PowerDropper(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
 			enemies[i]->points = 100;
 			enemies[i]->hp = 1;
 			break;
 		case ENEMY_TYPES::METALCROW:
-			enemies[i] = new Enemy_MetalCraw(info.x + App->stage05->shipPos.x, info.y + App->stage05->shipPos.y, info.pu_Type);
+			enemies[i] = new Enemy_MetalCraw(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
 			enemies[i]->points = 1000;
 			enemies[i]->hp = 50;
 			break;
 		case  ENEMY_TYPES::REDBATS:
-			enemies[i] = new Enemy_RedBats(info.x + App->stage05->shipPos.x, info.y + App->stage05->shipPos.y, info.pu_Type);
+			enemies[i] = new Enemy_RedBats(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
 			enemies[i]->points = 100;
 			enemies[i]->hp = 1;
 			break;
 		case ENEMY_TYPES::ROTATING_TURRET:
-			enemies[i] = new Enemy_RotatingTurret(info.x + App->stage05->shipPos.x, info.y + App->stage05->shipPos.y, info.pu_Type);
+			enemies[i] = new Enemy_RotatingTurret(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
 			enemies[i]->points = 200;
 			enemies[i]->hp = 50;
 			break;
 		case ENEMY_TYPES::PINATA:
-			enemies[i] = new Enemy_Pinata(info.x + App->stage05->shipPos.x, info.y + App->stage05->shipPos.y, info.pu_Type);
+			enemies[i] = new Enemy_Pinata(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
 			enemies[i]->points = 200;
 			enemies[i]->hp = 50;
 			break;
 		case ENEMY_TYPES::PINATA_SPAWNER:
-			enemies[i] = new Enemy_Pinata(info.x + App->stage05->shipPos.x, info.y + App->stage05->shipPos.y, info.pu_Type);
+			enemies[i] = new Enemy_Pinata(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
 			enemies[i]->points = 200;
 			enemies[i]->hp = 50;
 			break;

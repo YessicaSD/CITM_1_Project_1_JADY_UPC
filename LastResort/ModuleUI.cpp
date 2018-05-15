@@ -1,4 +1,3 @@
-
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleUI.h"
@@ -38,7 +37,7 @@ bool ModuleUI::Start() {
 }
 
 bool ModuleUI::CleanUp() {
-	LOG("Unloading Module UI assets");
+ 	LOG("Unloading Module UI assets");
 	//Fonts-------------------------------------------------------------------------
 	App->fonts->UnLoad(0);
 	//textures----------------------------------------------------------------------
@@ -132,7 +131,11 @@ update_status ModuleUI::Update() {
 		if(credits < 99)
 		credits +=1;
 	}
-	if (App->input->keyboard[SDL_SCANCODE_1])
+	if (App->input->keyboard[SDL_SCANCODE_1] &&
+		App->input->keyboard[SDL_SCANCODE_F5] == KEY_IDLE &&
+		App->input->keyboard[SDL_SCANCODE_F6] == KEY_IDLE &&
+		App->input->keyboard[SDL_SCANCODE_F7] == KEY_IDLE &&
+		App->input->keyboard[SDL_SCANCODE_F8] == KEY_IDLE)
 	{
 		if (player1 == false)
 		{
@@ -144,7 +147,12 @@ update_status ModuleUI::Update() {
 		}
 		
 	}
-	if (App->input->keyboard[SDL_SCANCODE_2])
+	//If we press 2 and we're not debugging
+	if (App->input->keyboard[SDL_SCANCODE_2] &&
+		App->input->keyboard[SDL_SCANCODE_F5] == KEY_IDLE &&
+		App->input->keyboard[SDL_SCANCODE_F6] == KEY_IDLE &&
+		App->input->keyboard[SDL_SCANCODE_F7] == KEY_IDLE &&
+		App->input->keyboard[SDL_SCANCODE_F8] == KEY_IDLE)
 	{
 		if (player2 == false)
 		{

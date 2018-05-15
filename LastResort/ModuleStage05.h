@@ -34,16 +34,17 @@ public:
 	//Points----------------------------------
 	dPoint backgroundPoint;//The position that we directly move with the path
 	dPoint shipPos;//We'll use this position to instantiate enemies. Position at which we blit the ship (see Docs>ship.psd). 
-	dPoint tilemapPos;
+	dPoint tunnelPos;
 	MovePath cameraMovement;
 	dPoint shipOffset = { 444, -240 };
 	dPoint tunnelOffset = { 1856, -58 };
 	dPoint scroll;
 	dPoint stars;
+	dPoint spawnPos;//The position from which we spawn enemies, in this stage it's going to be the same as shipPos (because it's easy for us to get the positions from that psd)
 
 	//Rectangles-------------------------------
 	SDL_Rect shipRect;
-	SDL_Rect tilemapRect;
+	SDL_Rect tunnelRect;
 	SDL_Rect StarsRect;
 	SDL_Rect StarsRect2;
 

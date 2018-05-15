@@ -22,7 +22,7 @@
 Module5lvlScene::Module5lvlScene()
 {
 	shipRect = { 0,0 , 1423,288 };
-	tilemapRect = { 0,0 ,875 ,224 };
+	tunnelRect = { 0,0 ,875 ,224 };
 
 	cameraMovement.originPoint = { -444, 240 };     //-1      //0
 	cameraMovement.PushBack({ -167, 144 }, 330);    //0       //1
@@ -114,8 +114,8 @@ bool Module5lvlScene::Start()
 	App->stageFunctionality->Enable();
 	App->stageFunctionality->currentStage = this;
 
-	//Set the ship pos (if we don't do it, colliders will be inicialized in a incorrect position)----------------
-	shipPos = shipOffset;
+	//Set the spawn pos (if we don't do it, enemies will be inicialized in a incorrect position)----------------
+	spawnPos = shipPos = shipOffset;
 
 	//"Reset ship position when fadetoblackends"----------------------------------
 	//App->player1->Reset_Positions();
@@ -140,7 +140,7 @@ bool Module5lvlScene::Start()
 	//App->enemies->AddEnemy(REDBATS, 733, 25);
 	//App->enemies->AddEnemy(REDBATS, 758, 25);
 	//App->enemies->AddEnemy(OSCILATOR, 500, 0);
-	App->enemies->AddEnemy(BASIC, 100, 30);
+	App->enemies->AddEnemy(BASIC, 250, 10);
 
 	//Colliders--------------------------------------------------------------------------------------------------
 	for(int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
@@ -196,7 +196,10 @@ update_status Module5lvlScene::Update()
 	//------------Move------------------------------------------
 	backgroundPoint = cameraMovement.GetCurrentPosition();
 	shipPos = shipOffset - backgroundPoint;
-	tilemapPos = tunnelOffset - backgroundPoint;
+	tunnelPos = tunnelOffset - backgroundPoint;
+	//- We update the spawn position----------------------------
+	spawnPos = shipPos;
+
 	//-----------Draw-------------------------------------------
 	if (cameraMovement.currentMov <= 21)
 	{
@@ -204,7 +207,7 @@ update_status Module5lvlScene::Update()
 	}
 	if (cameraMovement.currentMov > 21)
 	{
-		App->render->Blit(tilemapTex, tilemapPos.x, tilemapPos.y, &tilemapRect);
+		App->render->Blit(tilemapTex, tunnelPos.x, tunnelPos.y, &tunnelRect);
 	}
 	
 	//Update colliders (Important: after moving the ship!)------------------------------------
@@ -214,7 +217,7 @@ update_status Module5lvlScene::Update()
 			shipCollidersRect[i].x + (int)shipPos.x,
 			shipCollidersRect[i].y + (int)shipPos.y);
 	}
-
+	LOG("Background position x: %d, y %d", App->stage05->backgroundPoint.x, App->stage05->backgroundPoint.y);
 	//LOG("ShipPos : x %d y %d", shipPos.x, shipPos.y);
 	//LOG("TilemapPoint: x %d y %d", tilemapPoint.x, tilemapPoint.y);
 	return UPDATE_CONTINUE;

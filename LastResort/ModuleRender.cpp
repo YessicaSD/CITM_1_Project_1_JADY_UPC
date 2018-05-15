@@ -130,23 +130,23 @@ update_status ModuleRender::PostUpdate()
 		App->render->DrawQuad({ SCREEN_WIDTH, 0, App->enemies->spawnMargin, SCREEN_HEIGHT }, 255, 165, 0, 50);
 	}
 
-	//Render the tilemap grid------------------------------------------------------------------------------------------------------------
+	//Render the background grid------------------------------------------------------------------------------------------------------------
 	if (showTilemapGrid)
 	{
 		//X marks
-		for (int i = -AXIS_LENGTH + (int)App->stage05->shipPos.x; i <= AXIS_LENGTH + (int)App->stage05->shipPos.x; i += 100)
+		for (int i = -AXIS_LENGTH + (int)App->stage05->spawnPos.x; i <= AXIS_LENGTH + (int)App->stage05->spawnPos.x; i += 100)
 		{
 			App->render->DrawQuad({ -borderWidth / 2 + i, -AXIS_LENGTH / 2, borderWidth, AXIS_LENGTH }, 123, 255, 123, 50);
 		}
 		//Y marks
-		for (int i = -AXIS_LENGTH + (int)App->stage05->shipPos.y; i <= AXIS_LENGTH + (int)App->stage05->shipPos.y; i += 100)
+		for (int i = -AXIS_LENGTH + (int)App->stage05->spawnPos.y; i <= AXIS_LENGTH + (int)App->stage05->spawnPos.y; i += 100)
 		{
 			App->render->DrawQuad({ -AXIS_LENGTH / 2, -borderWidth / 2 + i, AXIS_LENGTH, borderWidth }, 123, 255, 123, 50);
 		}
 		//X
-		App->render->DrawQuad({ -AXIS_LENGTH / 2, -borderWidth / 2 + (int)App->stage05->shipPos.y, AXIS_LENGTH, borderWidth }, 0, 255, 0, 123);
+		App->render->DrawQuad({ -AXIS_LENGTH / 2, -borderWidth / 2 + (int)App->stage05->spawnPos.y, AXIS_LENGTH, borderWidth }, 0, 255, 0, 123);
 		//Y
-		App->render->DrawQuad({ -borderWidth / 2 + (int)App->stage05->shipPos.x, -AXIS_LENGTH / 2, borderWidth, AXIS_LENGTH }, 0, 255, 0, 123);
+		App->render->DrawQuad({ -borderWidth / 2 + (int)App->stage05->spawnPos.x, -AXIS_LENGTH / 2, borderWidth, AXIS_LENGTH }, 0, 255, 0, 123);
 	}
 
 	//Render the grids-------------------------------------------------------------------------------------------------------------------
