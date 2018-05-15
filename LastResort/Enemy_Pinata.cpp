@@ -24,7 +24,7 @@ Enemy_Pinata::Enemy_Pinata(int x, int y, POWERUP_TYPE pu_t) : Enemy(x, y, pu_t)
 	initAnim.PushBack({ 263, 139,40,38 });  //2
 	initAnim.PushBack({ 223, 139,40,38 });  //3
 	//Add collider--------------------------
-	collider = App->collision->AddCollider({ 0, 0, 32, 16 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ x, y, 32, 16 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 }
 
 void Enemy_Pinata::Move()
