@@ -6,7 +6,8 @@
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
-
+#include "Player1.h"
+#include "Player2.h"
 #include "SDL/include/SDL_timer.h"
 
 ModuleParticles::ModuleParticles()
@@ -106,7 +107,9 @@ ModuleParticles::ModuleParticles()
 	death_explosion.anim.speed = 0.2f;
 	death_explosion.anim.loop = false;
 
-	//GENERAL---------------------------------------------------------------//
+	
+	
+	//----------------------------------------------------------------------------------GENERAL---------------------------------------------------------------//
 	//General explosion 02 particle-----------------------------
 	g_explosion02.anim.PushBack({ 0,0,32,32 });
 	g_explosion02.anim.PushBack({ 32,0,32,32 });
@@ -126,6 +129,7 @@ ModuleParticles::ModuleParticles()
 	g_explosion02.anim.PushBack({ 61,96,30,32 });
 	g_explosion02.anim.loop = false;
 	g_explosion02.anim.speed = 0.3f;
+	
 }
 
 ModuleParticles::~ModuleParticles()
@@ -139,6 +143,10 @@ bool ModuleParticles::Start()
 	graphics = App->textures->Load("Assets/General/Fx/Explosion_2.png");
 	//particles-----------------------------------------------
 	g_explosion02.texture = graphics;
+	//Powerups ---------------------------------------------------------------------
+	
+	Basic_LaserFx = App->audio->LoadSFX("Assets/014. Lasser_2-Center.WAV");
+	Basic_Laser.sfx = Basic_LaserFx;
 	//audios--------------------------------------------------
 	basic_shot_sfx = App->audio->LoadSFX("Assets/004. Shot - center.wav");
 	basicShot.sfx = basic_shot_sfx;
@@ -146,8 +154,8 @@ bool ModuleParticles::Start()
 	death_explosion.sfx = death_sfx;
 	g_explosion01_1sfx = App->audio->LoadSFX("Assets/General/Fx/Explosion_1.wav");
 	g_explosion02_1sfx = App->audio->LoadSFX("Assets/General/Fx/Explosion_2.wav");
-	Basic_LaserFx = App->audio->LoadSFX("Assets/014. Lasser_2-Center.WAV");
-	Basic_Laser.sfx = Basic_LaserFx;
+	
+
 	//--------------------------------------------------------
 	return true;
 }
@@ -156,8 +164,10 @@ bool ModuleParticles::Start()
 bool ModuleParticles::CleanUp()
 {
 	LOG("Unloading particles");
+	
 	//textures--------------------------------------------------
 	App->textures->Unload(graphics);
+
 	//audios---------------------------------------------------
 	App->audio->UnloadSFX(basic_shot_sfx);
 	App->audio->UnloadSFX(death_sfx);
@@ -177,6 +187,8 @@ bool ModuleParticles::CleanUp()
 
 update_status ModuleParticles::Update()
 {
+	
+
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
 		Particle* p = active[i];
@@ -263,8 +275,9 @@ Particle::~Particle()
 
 bool Particle::Update()
 {
+	
 	bool ret = true;
-
+	
 	if (life > 0)
 	{
 		if ((SDL_GetTicks() - born) > life)

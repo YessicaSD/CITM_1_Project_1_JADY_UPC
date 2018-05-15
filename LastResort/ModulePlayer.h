@@ -122,6 +122,11 @@ public:
 	//Controller variables --------------------------------
 	bool Controllshoot;
 	bool stillpressed;
+
+	//---------------------------------------------------------POWERUPS----------------------------------------------------------//
+	bool SpeedPowerup = false;
+	Animation SpeedAnimation;
+	SDL_Texture* SpeedAnimationTex = nullptr;
 };
 
 #endif

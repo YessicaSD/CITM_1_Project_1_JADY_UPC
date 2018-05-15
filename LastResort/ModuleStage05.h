@@ -39,7 +39,6 @@ public:
 	dPoint shipOffset = { 444, -240 };
 	dPoint tunnelOffset = { 1856, -58 };
 	dPoint scroll;
-	dPoint stars;
 	dPoint spawnPos;//The position from which we spawn enemies, in this stage it's going to be the same as shipPos (because it's easy for us to get the positions from that psd)
 
 	//Rectangles-------------------------------

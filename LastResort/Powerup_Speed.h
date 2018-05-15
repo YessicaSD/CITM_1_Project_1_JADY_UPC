@@ -4,12 +4,13 @@
 #include "Powerup.h"
 
 struct Collider;
-
+struct Mix_Chunk;
 class Powerup_Speed : public Powerup
 {
 public:
 	Powerup_Speed(int x, int y);
 	Animation speedAnim;
+	
 	void OnCollision(Collider*);
 };
 

@@ -14,7 +14,7 @@ Enemy_RedBats::Enemy_RedBats(int x, int y, POWERUP_TYPE pu_t) : Enemy(x, y, pu_t
 	RedBats.PushBack({ 256,34,28,21 });
 	RedBats.speed = 0.10f;
 	animation = &RedBats;
-	collider = App->collision->AddCollider({ 0, 0, 27, 25 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ x, y, 27, 25 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 	original_y = y;
 	
 }

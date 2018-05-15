@@ -7,7 +7,12 @@
 
 //This module follows the structure of the module enemies
 //But it doesn't spawn. It only moves, renders and despawns powerups
+
+//Because powerups are spawned via AddPowerup when an enemy dies
+struct Mix_Chunk;
+
 //Because powerups are directly spawned via AddPowerup when an enemy dies
+
 
 enum POWERUP_TYPE
 {
@@ -38,11 +43,15 @@ public:
 	void OnCollision(Collider* c1, Collider* c2);
 
 	bool AddPowerup(int, int, POWERUP_TYPE);
-
+	Mix_Chunk*SpeedSfx = nullptr;
 private:
 	//We don't need a queue, because we'll render the powerups as soon as AddCollider gets called
 	Powerup* powerups[MAX_POWERUPS];
 	SDL_Texture* powerupTx = nullptr;
 	const float moveSpeed = 1;
+
+	//Speed powerups -------------
+	
+
 };
 #endif

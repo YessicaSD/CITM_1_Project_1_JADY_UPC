@@ -6,6 +6,7 @@
 #include "Powerup_Speed.h"
 #include "Powerup_Laser.h"
 #include "ModuleCollision.h"
+#include "ModuleAudio.h"
 
 ModulePowerups::ModulePowerups()
 {
@@ -20,7 +21,8 @@ ModulePowerups::~ModulePowerups()
 
 bool ModulePowerups::Start()
 {
-	powerupTx = App->textures->Load("Assets/PowerUps.png");
+	powerupTx = App->textures->Load("Assets/PowerUps/PowerUps.png");
+	SpeedSfx = App->audio->LoadSFX("Assets/PowerUps/019. Move speed upgrade.wav");
 	return true;
 }
 
@@ -95,7 +97,7 @@ bool ModulePowerups::CleanUp()
 			powerups[i] = nullptr;
 		}
 	}
-
+	App->audio->UnloadSFX(SpeedSfx);
 	return true;
 }
 

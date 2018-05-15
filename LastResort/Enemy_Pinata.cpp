@@ -33,8 +33,6 @@ Enemy_Pinata::Enemy_Pinata(int x, int y, POWERUP_TYPE pu_t) : Enemy(x, y, pu_t)
 	initAnim.speed = 0.1f;
 	//Add collider--------------------------------
 	collider = App->collision->AddCollider({ initialX, initialY, 32, 16 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
-
-
 }
 
 

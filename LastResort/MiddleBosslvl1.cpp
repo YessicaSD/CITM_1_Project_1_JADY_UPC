@@ -33,7 +33,7 @@ Enemy_MetalCraw::Enemy_MetalCraw(int x, int y, POWERUP_TYPE pu_t ) : Enemy(x, y,
 	Lights.PushBack({ 90,458,30,30 });
 	Lights.speed = 0.2f;
 
-	collider = App->collision->AddCollider({ -97, 6, 42, 42 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ x, y, 42, 42 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 	hp = 20;
 	start_time = SDL_GetTicks();
 	numparticles = 0;

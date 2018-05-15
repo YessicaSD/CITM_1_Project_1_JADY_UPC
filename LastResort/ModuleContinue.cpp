@@ -75,6 +75,7 @@ bool ModuleContinue::Start() {
 		fireAnim[x].Reset();
 		fireAnim[x].finished = false;
 	}
+	App->ui->showUI = false;
 	App->ui->Continue = true;
 	return ret;
 }

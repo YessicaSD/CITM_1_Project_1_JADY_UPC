@@ -107,7 +107,9 @@ update_status ModuleUI::Update() {
 		App->render->Blit(uiTex, 256, 16, &live_score_p2);
 
 		App->render->Blit(uiTex, 112, 16, &top);
+		if (player1 == true)
 		App->render->Blit(uiTex, 24, 208, &pow);
+		if (player2 == true)
 		App->render->Blit(uiTex, 184, 208, &pow);	/*App->render->Blit(uiTex, 192, 16, &push_p2, 0.0f);*/ //Remember 1.0
 
 		//Variable UI----------------------------------------------------
@@ -136,7 +138,7 @@ update_status ModuleUI::Update() {
 			}
 		}
 	}
-	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN )
+	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->Controller1[SDL_CONTROLLER_BUTTON_Y] == KEY_DOWN)
 	{
 		App->audio->ControlSFX(coinsfx, PLAY_AUDIO);
 		if(credits < 99)

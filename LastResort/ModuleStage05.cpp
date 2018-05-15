@@ -132,7 +132,7 @@ bool Module5lvlScene::Start()
 
 	//Enemies ---------------------------------------------------------------------------------------------------
 	//INFO: We'll calculate the x and y positions based on the position of the ship in Docs>ship.psd
-	//App->enemies->AddEnemy(POWERDROPPER, 230, 30, HOMING);
+	/*App->enemies->AddEnemy(POWERDROPPER, 360, 470, HOMING);*/
 	//App->enemies->AddEnemy(POWERDROPPER, 600, 30, LASER);
 	//App->enemies->AddEnemy(REDBATS, 658, 25);
 	//App->enemies->AddEnemy(REDBATS, 683, 25);
@@ -140,9 +140,12 @@ bool Module5lvlScene::Start()
 	//App->enemies->AddEnemy(REDBATS, 733, 25);
 	//App->enemies->AddEnemy(REDBATS, 758, 25);
 	//App->enemies->AddEnemy(OSCILATOR, 500, 0);
+
 	App->enemies->AddEnemy(BASIC, 250, 10, 1000);
+	App->enemies->AddEnemy(OSCILATOR, -47, 470);
 	App->enemies->AddEnemy(FRONT_TURRET, 47, 64, 0, POWERUP_TYPE::NOPOWERUP);
 	App->enemies->AddEnemy(PINATA, 150, 140, 0, POWERUP_TYPE::NOPOWERUP);
+	App->enemies->InstaSpawn(FRONT_TURRET, 150, 165, POWERUP_TYPE::NOPOWERUP);
 
 	//Colliders--------------------------------------------------------------------------------------------------
 	for(int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
@@ -165,12 +168,10 @@ update_status Module5lvlScene::Update()
 	current_time = SDL_GetTicks() - start_time ;
 	
 	//Background blit-------------------------------------------------------------------------
-	stars = stars.VectU(cameraMovement.GetCurrentPosition());
 	scroll.x -= 5;
-	scroll.y += stars.y;
+	scroll.y += cameraMovement.GetCurrentPosition().VectU().y;
 	if (scroll.x <= -SCREEN_WIDTH)
 		scroll.x = 0;
-
 	if (scroll.y <= -SCREEN_HEIGHT)
 	{
 		scroll.y = 0;
@@ -180,7 +181,6 @@ update_status Module5lvlScene::Update()
 	App->render->Blit(StarsTexture, scroll.x+SCREEN_WIDTH,- scroll.y, NULL);
 	App->render->Blit(StarsTexture, scroll.x, -scroll.y-SCREEN_HEIGHT, NULL);
 	App->render->Blit(StarsTexture, scroll.x + SCREEN_WIDTH,- scroll.y - SCREEN_HEIGHT, NULL);
-
 	//Background--------------------------------------------------------------------
 	//------------DebugMode------------------------------------ Change it 
 	if (App->input->keyboard[SDL_SCANCODE_F9] == KEY_DOWN) { 

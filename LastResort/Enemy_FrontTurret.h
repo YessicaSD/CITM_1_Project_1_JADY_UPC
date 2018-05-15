@@ -11,8 +11,8 @@ public:
 
 private:
 	Animation frontTurretAnim;
-	int initialY;
-	int initialX;
+	int fixedY;
+	int fixedX;
 };
 
 #endif // __ENEMY_FRONT_SHIP_TURRET_H__
