@@ -140,7 +140,7 @@ bool Module5lvlScene::Start()
 	//App->enemies->AddEnemy(REDBATS, 733, 25);
 	//App->enemies->AddEnemy(REDBATS, 758, 25);
 	//App->enemies->AddEnemy(OSCILATOR, 500, 0);
-	App->enemies->AddEnemy(BASIC, 250, 10);
+	App->enemies->AddEnemy(BASIC, 250, 10, 1000);
 
 	//Colliders--------------------------------------------------------------------------------------------------
 	for(int i = 0; i < SHIP_COLLIDERS_NUM; ++i)

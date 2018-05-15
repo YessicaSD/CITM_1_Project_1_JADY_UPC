@@ -30,7 +30,11 @@ struct EnemyInfo
 {
 	ENEMY_TYPES type = ENEMY_TYPES::NO_TYPE;
 	int x, y;
+	Uint32 delay;//In miliseconds
 	POWERUP_TYPE pu_Type = POWERUP_TYPE:: NOPOWERUP;
+	//Additional variables (help us spawn enemies with time)
+	bool counting = false;
+	Uint32 spawnTime;
 };
 
 class ModuleEnemies : public Module
@@ -47,7 +51,7 @@ public:
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
 
-	bool AddEnemy(ENEMY_TYPES type, int x, int y, POWERUP_TYPE powerup_type = NOPOWERUP);
+	bool AddEnemy(ENEMY_TYPES type, int x, int y, Uint32 delay = 0, POWERUP_TYPE powerup_type = NOPOWERUP);
 
 private:
 
@@ -61,8 +65,15 @@ public:
 	SDL_Texture* sprites = nullptr;
 	SDL_Texture* nml_sprites = nullptr;
 	SDL_Texture* dmg_sprites = nullptr;
+
+	//Spawning
+	const int spawnMarginLeft = 50;
+	const int spawnMarginRight = 50;
+	const int spawnMarginUp = 50;
+	const int spawnMarginDown = 50;
 	int spawnMargin = 50;
 	int despawnMargin = spawnMargin + 50;// Despawn margin always needs to be a little bigger than spawn margin or otherwise enemies would be spawned and immmediately despawned
+	//despawn (same * 2)
 };
 
 #endif // __ModuleEnemies_H__

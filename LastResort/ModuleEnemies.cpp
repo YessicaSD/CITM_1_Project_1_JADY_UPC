@@ -50,9 +50,19 @@ update_status ModuleEnemies::PreUpdate()
 				App->stage05->spawnPos.y + queue[i].y > 0 - spawnMargin &&
 				App->stage05->spawnPos.y + queue[i].y < 0 + SCREEN_HEIGHT + spawnMargin)
 			{
-				SpawnEnemy(queue[i]);
-				queue[i].type = ENEMY_TYPES::NO_TYPE;
-				LOG("Spawning enemy at %d", queue[i].x );
+				//If we get to the position, we start counting
+				if (queue[i].counting == false)
+				{
+					queue[i].spawnTime = SDL_GetTicks() + queue[i].delay;
+					queue[i].counting = true;
+				}
+				//If we reach the spawn time, we spawn the enemy!
+				if(queue[i].counting == true && SDL_GetTicks() <= queue[i].spawnTime)
+				{
+					SpawnEnemy(queue[i]);
+					queue[i].type = ENEMY_TYPES::NO_TYPE;
+					LOG("Spawning enemy at %d", queue[i].x);
+				}
 			}
 		}
 	}
@@ -140,7 +150,7 @@ bool ModuleEnemies::CleanUp()
 	return true;
 }
 
-bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, POWERUP_TYPE powerup_type)
+bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, Uint32 delay, POWERUP_TYPE powerup_type)
 {
 	bool ret = false;
 
@@ -151,6 +161,7 @@ bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, POWERUP_TYPE poweru
 			queue[i].type = type;
 			queue[i].x = x;
 			queue[i].y = y;
+			queue[i].delay = delay;
 			queue[i].pu_Type = powerup_type;
 			ret = true;
 			break;
