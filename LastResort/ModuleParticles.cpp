@@ -183,13 +183,12 @@ update_status ModuleParticles::Update()
 
 		if (p == nullptr)
 			continue;
-	
+
 		if (p->Update() == false)
 		{
 			delete p;
 			active[i] = nullptr;
 		}
-
 		else if (SDL_GetTicks() >= p->born)
 		{
 			App->render->Blit(p->texture, p->position.x, p->position.y - p->anim.GetCurrentFrame().h/2, &p->anim.GetFrame());
