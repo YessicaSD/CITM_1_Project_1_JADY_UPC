@@ -141,6 +141,7 @@ bool Module5lvlScene::Start()
 	//App->enemies->AddEnemy(REDBATS, 758, 25);
 	//App->enemies->AddEnemy(OSCILATOR, 500, 0);
 	App->enemies->AddEnemy(BASIC, 250, 10, 1000);
+	App->enemies->AddEnemy(FRONT_TURRET, 47, 64, 0, POWERUP_TYPE::NOPOWERUP);
 
 	//Colliders--------------------------------------------------------------------------------------------------
 	for(int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
@@ -214,9 +215,7 @@ update_status Module5lvlScene::Update()
 			shipCollidersRect[i].x + (int)shipPos.x,
 			shipCollidersRect[i].y + (int)shipPos.y);
 	}
-	LOG("Background position x: %d, y %d", App->stage05->backgroundPoint.x, App->stage05->backgroundPoint.y);
-	//LOG("ShipPos : x %d y %d", shipPos.x, shipPos.y);
-	//LOG("TilemapPoint: x %d y %d", tilemapPoint.x, tilemapPoint.y);
+
 	return UPDATE_CONTINUE;
 }
 

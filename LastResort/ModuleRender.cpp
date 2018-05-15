@@ -118,16 +118,16 @@ update_status ModuleRender::PostUpdate()
 	//Render the spawn and despawn area--------------------------------------------------------------------------------------------------
 	if(showSpawnArea)
 	{
-		//Despawn area
-		App->render->DrawQuad({ -App->enemies->despawnMargin, -App->enemies->despawnMargin, SCREEN_WIDTH + App->enemies->despawnMargin * 2, App->enemies->despawnMargin}, 255, 0, 0, 50);
-		App->render->DrawQuad({ -App->enemies->despawnMargin, SCREEN_HEIGHT, SCREEN_WIDTH + App->enemies->despawnMargin * 2, App->enemies->despawnMargin}, 255, 0, 0, 50);
-		App->render->DrawQuad({ -App->enemies->despawnMargin, 0, App->enemies->despawnMargin, SCREEN_HEIGHT }, 255, 0, 0, 50);
-		App->render->DrawQuad({ SCREEN_WIDTH, 0, App->enemies->despawnMargin, SCREEN_HEIGHT }, 255, 0, 0, 50);
 		//Spawn area
-		App->render->DrawQuad({ -App->enemies->spawnMargin, -App->enemies->spawnMargin, SCREEN_WIDTH + App->enemies->spawnMargin * 2, App->enemies->spawnMargin }, 255, 165, 0, 50);
-		App->render->DrawQuad({ -App->enemies->spawnMargin, SCREEN_HEIGHT, SCREEN_WIDTH + App->enemies->spawnMargin * 2, App->enemies->spawnMargin }, 255, 165, 0, 50);
-		App->render->DrawQuad({ -App->enemies->spawnMargin, 0, App->enemies->spawnMargin, SCREEN_HEIGHT }, 255, 165, 0, 50);
-		App->render->DrawQuad({ SCREEN_WIDTH, 0, App->enemies->spawnMargin, SCREEN_HEIGHT }, 255, 165, 0, 50);
+		App->render->DrawQuad({ -SPAWN_MARGIN_LEFT, -SPAWN_MARGIN_UP, SCREEN_WIDTH + SPAWN_MARGIN_LEFT + SPAWN_MARGIN_RIGHT, SPAWN_MARGIN_UP }, 255, 165, 0, 50);//Up
+		App->render->DrawQuad({ -SPAWN_MARGIN_LEFT, SCREEN_HEIGHT, SCREEN_WIDTH + SPAWN_MARGIN_LEFT + SPAWN_MARGIN_RIGHT, SPAWN_MARGIN_DOWN }, 255, 165, 0, 50);//Down
+		App->render->DrawQuad({ -SPAWN_MARGIN_LEFT, 0, SPAWN_MARGIN_LEFT, SCREEN_HEIGHT }, 255, 165, 0, 50);//Left
+		App->render->DrawQuad({ SCREEN_WIDTH, 0, SPAWN_MARGIN_RIGHT, SCREEN_HEIGHT }, 255, 165, 0, 50);//Right
+		//Despawn area
+		App->render->DrawQuad({ -DESPAWN_MARGIN_LEFT, -DESPAWN_MARGIN_UP, SCREEN_WIDTH + DESPAWN_MARGIN_LEFT + DESPAWN_MARGIN_RIGHT, DESPAWN_MARGIN_UP }, 255, 0, 0, 50);//Up
+		App->render->DrawQuad({ -DESPAWN_MARGIN_LEFT, SCREEN_HEIGHT, SCREEN_WIDTH + DESPAWN_MARGIN_LEFT + DESPAWN_MARGIN_RIGHT, DESPAWN_MARGIN_DOWN }, 255, 0, 0, 50);//Down
+		App->render->DrawQuad({ -DESPAWN_MARGIN_LEFT, 0, DESPAWN_MARGIN_LEFT, SCREEN_HEIGHT }, 255, 0, 0, 50);//Left
+		App->render->DrawQuad({ SCREEN_WIDTH, 0, DESPAWN_MARGIN_RIGHT, SCREEN_HEIGHT }, 255, 0, 0, 50);//Right
 	}
 
 	//Render the background grid------------------------------------------------------------------------------------------------------------
@@ -254,7 +254,7 @@ bool ModuleRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uin
 }
 
 //Blit that flips the texture horizontally
-bool ModuleRender::FlippedBlit(SDL_Texture* texture, int x, int y, SDL_Rect* section)
+bool ModuleRender::BlitEx(SDL_Texture* texture, int x, int y, SDL_Rect* section, SDL_RendererFlip axis)
 {
 	bool ret = true;
 	SDL_Rect rect;
@@ -278,7 +278,7 @@ bool ModuleRender::FlippedBlit(SDL_Texture* texture, int x, int y, SDL_Rect* sec
 	rect.h *= SCREEN_SIZE;
 
 	
-	if (SDL_RenderCopyEx(renderer, texture, section, &rect, NULL, NULL, SDL_FLIP_HORIZONTAL) != 0)
+	if (SDL_RenderCopyEx(renderer, texture, section, &rect, NULL, NULL, axis) != 0)
 	{
 		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
 		ret = false;

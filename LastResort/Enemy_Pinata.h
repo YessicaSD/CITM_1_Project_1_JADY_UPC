@@ -4,36 +4,39 @@
 #include "Enemy.h"
 #include "MovPath.h"
 
+class ModulePlayer;
 
 class Enemy_Pinata : public Enemy
 {
 public:
 	Enemy_Pinata(int x, int y, POWERUP_TYPE pu_t);
 	void Move();
+	void Draw(SDL_Texture* sprites);
 
 private:
+	//Animations---------------------------
 	Animation moveAnim;
 	Animation rotateAnim;
 	Animation initAnim;
-	
-	enum {
-		MOVE_RIGHT = 0,
-		MOVE_LEFT = 1
-	};
+	//Variables---------------------------
+	enum Direction {
+		STILL,
+		RIGHT,
+		LEFT
+	} currentDir = STILL, lastDir = STILL;
 
 	enum Move_States {
 		INIT,
 		FOLLOW,
 		ROTATE
-	};
+	} currentState = INIT;
 
-	bool direction;
-	Move_States currentState = INIT;
-	Move_States lastState = INIT;
-	int moveSpeed;
 	MovePath pinataMov;
-	bool searchPlayers = false;
-	Module* targetPlayer = nullptr;
+	bool checkTarget = false;
+	bool checkDirection = false;
+	bool blitEx = false;
+	ModulePlayer* currentTarget = nullptr;
+	ModulePlayer* lastTarget = nullptr;
 };
 
 #endif // __ENEMY_PINATA_H__

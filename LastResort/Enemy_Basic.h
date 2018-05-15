@@ -6,13 +6,10 @@
 class Enemy_Basic : public Enemy
 {
 private:
-	
-	bool going_up = true;
 	Animation basicenemy;
 	int initialY;
 
 public:
-
 	Enemy_Basic(int x, int y, POWERUP_TYPE pu_t);
 	void Move();
 };

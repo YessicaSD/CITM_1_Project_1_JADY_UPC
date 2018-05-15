@@ -1,6 +1,7 @@
 #include "Application.h"
 #include "Enemy_Pinata.h"
 #include "ModuleCollision.h"
+#include "ModulePlayer.h"
 #include "Player1.h"
 #include "Player2.h"
 #include "MovPath.h"
@@ -28,28 +29,49 @@ Enemy_Pinata::Enemy_Pinata(int x, int y, POWERUP_TYPE pu_t) : Enemy(x, y, pu_t)
 
 void Enemy_Pinata::Move()
 {
-	//Search tarjet player---------------------------------------------
-	if (searchPlayers == true) {
+	//Check tarjet player---------------------------------------------
+	if (checkTarget == true) {
 
 		if (App->player2->position.DistanceTo(position) > App->player1->position.DistanceTo(position)) {
-			targetPlayer = App->player1;
+			currentTarget = App->player1;
 		}
 		else {
-			targetPlayer = App->player2;
+			currentTarget = App->player2;
 		}
 
+		if (lastTarget == nullptr) {
+			lastTarget = currentTarget;
+		}
+		else if (lastTarget != currentTarget) {
+			checkDirection = true;
+			lastTarget = currentTarget;
+		}
+	}
+	//Check enemie direction-------------------------------------------
+	if (checkDirection == true) {
+		if (position.x < currentTarget->position.x) {
+			currentDir = RIGHT;
+		}
+		else {
+			currentDir = LEFT;
+		}
 
-
-
+		if (lastDir == STILL) {
+			lastDir = currentDir;
+		}
+		else if (lastDir != currentDir) {
+			currentState = ROTATE;
+			lastDir = currentDir;
+		}
 	}
 
 	//Move-------------------------------------------------------------
 
 	switch (currentState)
 	{
-	case Enemy_Pinata::INIT:
+	case INIT:
 		if (pinataMov.movFinished) {
-			searchPlayers = true;
+			checkTarget = true;
 			currentState = FOLLOW;
 			break;
 		}
@@ -57,14 +79,64 @@ void Enemy_Pinata::Move()
 		position.x = pinataMov.GetPosition().x;
 		position.y = pinataMov.GetPosition().y;
 		break;
-	case Enemy_Pinata::FOLLOW:
 
-
+	case FOLLOW:
+		
 		break;
-	case Enemy_Pinata::ROTATE:
+	case ROTATE:
+
 		break;
 	default:
 		break;
 	}
+
+}
+
+void Enemy_Pinata::Draw(SDL_Texture* sprites)
+{
+	SDL_Rect currentAnim;
+	blitEx = false;
+
+	if (collider != nullptr)
+		collider->SetPos(position.x, position.y);
+
+	switch (currentState)
+	{
+	case INIT:
+
+		if (pinataMov.currentMov == 0) {
+			currentAnim = initAnim.frames[0];
+		}
+		else {
+			currentAnim = initAnim.GetCurrentFrame();
+		}
+		break;
+
+	case FOLLOW:
+
+
+
+		break;
+	case ROTATE:
+
+		break;
+	default:
+		break;
+	}
+
+	//Check direction for flip blit or not----------------------------------
+	if (currentDir == RIGHT)
+		blitEx = true;
+	else
+		blitEx = false;
+
+	//Draw------------------------------------------------------------------
+	if (!blitEx) {
+		App->render->Blit(sprites, position.x, position.y, &currentAnim);
+	}
+	else {
+		App->render->BlitEx(sprites, position.x, position.y, &currentAnim);
+	}
+		
 
 }
