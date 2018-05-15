@@ -144,13 +144,13 @@ bool Module5lvlScene::Start()
 	//App->enemies->AddEnemy(OSCILATOR, 500, 0);
 	
 	//- FINAL POSITION ENEMIES
-	App->enemies->AddEnemy(FRONT_TURRET, 47, 64, 0, POWERUP_TYPE::NOPOWERUP);
+	App->enemies->AddEnemy(FRONT_TURRET, 47, 64, 5000, POWERUP_TYPE::NOPOWERUP);
 
 	//- TEST ENEMIES
-	App->enemies->AddEnemy(BASIC, 250, 10, 1000);
-	App->enemies->AddEnemy(OSCILATOR, -47, 470);
+	//App->enemies->AddEnemy(BASIC, 250, 10, 1000);
+	//App->enemies->AddEnemy(OSCILATOR, -47, 470);
 	//App->enemies->InstaSpawn(PINATA, 150, 165, POWERUP_TYPE::NOPOWERUP);
-	App->enemies->AddEnemy(PINATA, 150, 140, 0, POWERUP_TYPE::NOPOWERUP);
+	//App->enemies->AddEnemy(PINATA, 150, 140, 0, POWERUP_TYPE::NOPOWERUP);
 
 	//Colliders--------------------------------------------------------------------------------------------------
 	for(int i = 0; i < SHIP_COLLIDERS_NUM; ++i)

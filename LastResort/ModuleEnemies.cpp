@@ -59,7 +59,7 @@ update_status ModuleEnemies::PreUpdate()
 					queue[i].counting = true;
 				}
 				//If we reach the spawn time, we spawn the enemy!
-				if(queue[i].counting == true && SDL_GetTicks() <= queue[i].spawnTime)
+				if(queue[i].counting == true && SDL_GetTicks() >= queue[i].spawnTime)
 				{
 					SpawnEnemy(queue[i]);
 					queue[i].type = ENEMY_TYPES::NO_TYPE;
