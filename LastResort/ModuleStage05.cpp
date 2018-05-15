@@ -174,10 +174,10 @@ update_status Module5lvlScene::Update()
 		scroll.y = 0;
 	}
 
-	App->render->Blit(StarsTexture, scroll.x, scroll.y, NULL);
-	App->render->Blit(StarsTexture, scroll.x+SCREEN_WIDTH, scroll.y, NULL);
-	App->render->Blit(StarsTexture, scroll.x, scroll.y+SCREEN_HEIGHT, NULL);
-	App->render->Blit(StarsTexture, scroll.x + SCREEN_WIDTH, scroll.y + SCREEN_HEIGHT, NULL);
+	App->render->Blit(StarsTexture, scroll.x, -scroll.y, NULL);
+	App->render->Blit(StarsTexture, scroll.x+SCREEN_WIDTH,- scroll.y, NULL);
+	App->render->Blit(StarsTexture, scroll.x, -scroll.y-SCREEN_HEIGHT, NULL);
+	App->render->Blit(StarsTexture, scroll.x + SCREEN_WIDTH,- scroll.y - SCREEN_HEIGHT, NULL);
 
 	//Background--------------------------------------------------------------------
 	//------------DebugMode------------------------------------ Change it 
