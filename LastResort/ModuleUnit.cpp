@@ -322,7 +322,7 @@ void ModuleUnit::Rotating()
 	}
 
 	//If the ball is locked it won't rotate around the player ship
-	if (playerToFollow->unit_locked == true) { orbiting = false; }
+	if (playerToFollow->unitLocked == true) { orbiting = false; }
 
 	//Move the orbit to the target rotation---------------------------------------------------------------
 	//- Orbit around the player

@@ -6,7 +6,7 @@
 #include "Enemy_Basic.h"
 #include "Enemy_Oscilator.h"
 #include "Enemy_PowerDropper.h"
-#include "ModuleUI.h"
+
 
 #define MAX_ENEMIES 100
 

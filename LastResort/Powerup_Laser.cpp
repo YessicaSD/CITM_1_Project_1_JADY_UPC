@@ -28,17 +28,17 @@ void Powerup_Laser::OnCollision(Collider* col)
 	{
 		LOG("Getting powerup");
 		//We give it this powerup
-		if ( App->player1->powerup_upgrades < 3)
+		if ( App->player1->powerupUpgrades < 3)
 		{
-			App->player1->powerup_upgrades++;
+			App->player1->powerupUpgrades++;
 		}
-		if ( App->player1->powerup_upgrades == 1)
+		if ( App->player1->powerupUpgrades == 1)
 		{
 			App->unit1->Enable();
 			App->unit1->playerToFollow = App->player1;
 		}
 		//Change powerup type
-		App->player1->powerup_type = POWERUP_TYPE::LASER;
+		App->player1->currentPowerUp = POWERUP_TYPE::LASER;
 		//Change unit type
 		if((int)laserAnim.current_frame == 0)
 		{
@@ -53,17 +53,17 @@ void Powerup_Laser::OnCollision(Collider* col)
 	else if(col == App->player2->playerCol)
 	{
 		//We give it this powerup
-		if (App->player2->powerup_upgrades < 3)
+		if (App->player2->powerupUpgrades < 3)
 		{
-			App->player2->powerup_upgrades++;
+			App->player2->powerupUpgrades++;
 		}
-		if (App->player2->powerup_upgrades == 1)
+		if (App->player2->powerupUpgrades == 1)
 		{
 			App->unit2->Enable();
 			App->unit2->playerToFollow = App->player2;
 		}
 		//Change powerup type
-		App->player2->powerup_type = POWERUP_TYPE::LASER;
+		App->player2->currentPowerUp = POWERUP_TYPE::LASER;
 		//Change unit type
 		if ((int)laserAnim.current_frame == 0)
 		{

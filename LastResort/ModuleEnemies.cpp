@@ -4,8 +4,11 @@
 #include "ModuleEnemies.h"
 #include "ModuleParticles.h"
 #include "ModuleTextures.h"
+#include "Player1.h"
+#include "Player2.h"
 #include "ModulePowerups.h"
 #include "ModuleStage05.h"
+//Enemies----------------------------
 #include "Enemy.h"
 #include "Enemy_Oscilator.h"
 #include "Enemy_Basic.h"
@@ -296,10 +299,10 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			{
 				//---Give out points------------------------
 				if (c2->type == COLLIDER_PLAYER_1_SHOT) {
-					App->ui->score_p1 += enemies[i]->scoreValue;
+					App->player1->score += enemies[i]->scoreValue;
 				}
 				else if (c2->type == COLLIDER_PLAYER_2_SHOT) {
-					App->ui->score_p2 += enemies[i]->scoreValue;
+					App->player2->score += enemies[i]->scoreValue;
 				}
 				//---Drop powerup---------------------------
 				if (enemies[i]->powerUp_drop != NOPOWERUP) {

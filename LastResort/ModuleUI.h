@@ -30,18 +30,10 @@ public:
 	char *str_lives_p2 = nullptr;
 	char *str_credits = nullptr;
 	//Player data---------------------------------
-	int score_p1 =0;
-	int score_p2= 0; 
-	int lives_p1 =1;
-	int lives_p2= 2;
-	bool p1_isDead = false;
-	bool p2_isDead = false;
-	bool p1_Unit= false;
-	bool p2_Unit = false;
-	bool godMode = false;
-	 
+
 	bool player1 = false;
 	bool player2 = false;
+
 	bool Continue = false;
 	//General data--------------------------------
 	int credits=00;

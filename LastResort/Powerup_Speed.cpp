@@ -22,13 +22,13 @@ void Powerup_Speed::OnCollision(Collider* col)
 	if (col == App->player1->playerCol)
 	{
 		
-		App->player1->SpeedPowerup = true;
+		App->player1->speedPowerup = true;
 		//We give it this powerup
 		App->player1->movementSpeed += 0.5f;//Test value. We should check what is the speed increase in the game.
 	}
 	else if (col == App->player2->playerCol)
 	{
-		App->player2->SpeedPowerup = true;
+		App->player2->speedPowerup = true;
 		//We give it this powerup
 		App->player1->movementSpeed += 0.5f;//Test value. We should check what is the speed increase in the game.
 	}

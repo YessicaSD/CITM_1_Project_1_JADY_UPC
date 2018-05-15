@@ -64,13 +64,12 @@ Player1::Player1() {
 }
 
 void Player1::PlayerDies() {
-	if (App->ui->lives_p1 > 0) {
-		App->ui->lives_p1 -= 1;
+	if (lives > 0) {
+		lives -= 1;
 		Reappear();
-		LOG("lives p2 %d", App->ui->lives_p1);
 	}
 	else {
-		App->ui->p1_isDead = true;
+		isDead = true;
 		App->ui->player1 = false;
 		playerCol->to_delete = true;
 	}

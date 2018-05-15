@@ -42,10 +42,9 @@ bool ModulePlayer::Start()
 	isShooting = false;
 	shoot = false;
 	canMove = false;
-	canShoot = false;
 	isDying = false;
 	shipAnimations = ShipAnimations::Initial;
-	start_time = SDL_GetTicks();
+
 	//audios-------------------------------------------------------------------------
 	init_sfx = App->audio->LoadSFX("Assets/initial_sfx.wav");
 	//textures-----------------------------------------------------------------------
@@ -70,14 +69,12 @@ bool ModulePlayer::CleanUp()
 }
 
 void ModulePlayer::Reappear() {
-	powerup_upgrades = 0;
-	powerup_type = POWERUP_TYPE::NOPOWERUP;
+	powerupUpgrades = 0;
+	currentPowerUp = POWERUP_TYPE::NOPOWERUP;
 	shipAnimations = ShipAnimations::Initial;
 	isShooting = false;
 	shoot = false;
 	canMove = false;
-	canShoot = false;
-	start_time = SDL_GetTicks();
 	deathAnim.Reset();
 	InitPosition();
 }
@@ -99,8 +96,6 @@ update_status ModulePlayer::PreUpdate()
 
 update_status ModulePlayer::Update()
 {
-	//Timer----------------------------------------------------------------------------
-	current_time = SDL_GetTicks() - start_time; //Delete if it has not use
 	//Debug Modes----------------------------------------------------------------------
 	if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN)
 	{
@@ -120,14 +115,14 @@ update_status ModulePlayer::Update()
 		}
 	}
 	//Shots----------------------------------------------------------------------------
-	if (canShoot == true) {
+	if (canMove == true) {
 		ShotInput();
 	}
 	//Lock the unit--------------------------------------------------------------------
 	if (Lock())
 	{
-		if (unit_locked == true) { unit_locked = false; }
-		else { unit_locked = true; }
+		if (unitLocked == true) { unitLocked = false; }
+		else { unitLocked = true; }
 	}
 	//Collision------------------------------------------------------------------------
 	playerCol->SetPos(position.x, position.y + 2); //We update the collider position
@@ -135,13 +130,13 @@ update_status ModulePlayer::Update()
 	//Ship Animation-------------------------------------------------------------------
 	ShipAnimation();
 
-	if (SpeedPowerup == true)
+	if (speedPowerup == true)
 	{
 		App->render->Blit(SpeedAnimationTex, position.x - 32, position.y-9 , &SpeedAnimation.GetCurrentFrame());
 		if (SpeedAnimation.current_frame == 9)
 		{
 			SpeedAnimation.current_frame = 0;
-			SpeedPowerup = false;
+			speedPowerup = false;
 		}
 	}
 
@@ -171,7 +166,6 @@ void ModulePlayer::ShipAnimation() {
 			if (godMode == false) { playerCol->type = COLLIDER_PLAYER; }
 			initAnim.Reset();
 			canMove = true;
-			canShoot = true;
 			break;
 		}
 		//Draw ship---------------------------------------------------
@@ -246,7 +240,6 @@ void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
 	App->particles->AddParticle(App->particles->death_explosion, position.x, position.y , PlayerTexture, COLLIDER_NONE);
 	isDying = true;
 	canMove = false;
-	canShoot = false;
 	shipAnimations = ShipAnimations::Death;
 	KillUnit();
 }
@@ -255,14 +248,14 @@ void  ModulePlayer::ShotInput() {
 	//Basic shoot-------------------------------------------------------------------
 	if (Shoot())
 	{
-		if(powerup_type == POWERUP_TYPE::NOPOWERUP)
+		if(currentPowerUp == POWERUP_TYPE::NOPOWERUP)
 		{
 			//Basic shoot
 			App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
 		}
-		if (powerup_type == POWERUP_TYPE::LASER)
+		if (currentPowerUp == POWERUP_TYPE::LASER)
 		{
-			switch(powerup_upgrades)
+			switch(powerupUpgrades)
 			{
 			case 1:
 				//Basic shoot
@@ -279,9 +272,9 @@ void  ModulePlayer::ShotInput() {
 				break;
 			}
 		}
-		if (powerup_type == POWERUP_TYPE::HOMING)
+		if (currentPowerUp == POWERUP_TYPE::HOMING)
 		{
-			switch (powerup_upgrades)
+			switch (powerupUpgrades)
 			{
 			case 1:
 				//Basic shoot
@@ -299,9 +292,9 @@ void  ModulePlayer::ShotInput() {
 				break;
 			}
 		}
-		if (powerup_type == POWERUP_TYPE::GROUND)
+		if (currentPowerUp == POWERUP_TYPE::GROUND)
 		{
-			switch (powerup_upgrades)
+			switch (powerupUpgrades)
 			{
 			case 1:
 				//Basic shoot
@@ -327,7 +320,7 @@ void  ModulePlayer::ShotInput() {
 	}
 	//----------Ship Fire-------------------------------------------
 	if (shoot == true) {
-		if (powerup_type == POWERUP_TYPE::NOPOWERUP)
+		if (currentPowerUp == POWERUP_TYPE::NOPOWERUP)
 		{
 			if (shotFire.finished == false)
 			{
@@ -341,7 +334,7 @@ void  ModulePlayer::ShotInput() {
 				shoot = false;
 			}
 		}
-		if (powerup_type == POWERUP_TYPE::LASER)
+		if (currentPowerUp == POWERUP_TYPE::LASER)
 		{
 			if (ShotLaserBasic.finished == false)
 			{
@@ -440,7 +433,7 @@ void ModulePlayer::Winlvl()
 		godMode = true;
 	}
 
-	canShoot = false;
+	
 	canMove = false;
 	Winposition();
 }

@@ -151,7 +151,6 @@ bool Module5lvlScene::Start()
 	//- TEST ENEMIES
 	App->enemies->AddEnemy(BASIC, 250, 10, 1000);
 	App->enemies->AddEnemy(OSCILATOR, -47, 470);
-	//App->enemies->InstaSpawn(PINATA, 150, 165, POWERUP_TYPE::NOPOWERUP);
 	App->enemies->AddEnemy(PINATA, 150, 140, 0, POWERUP_TYPE::NOPOWERUP);
 
 	//Colliders--------------------------------------------------------------------------------------------------

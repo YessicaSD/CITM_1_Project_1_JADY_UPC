@@ -61,42 +61,43 @@ update_status ModuleUI::Update() {
 	str_score_p2 = new char[MAX_NUMBERS_SCORE];
 	str_lives_p1 = new char[4];
 	str_lives_p2 = new char[4];
-	str_credits = new char[11];
-	if (p1_isDead && player2 == false)
-	{
-		p1_isDead = false;
-		player1 = false;
-		lives_p1 = 2;
-		App->fade->FadeToBlack(App->stageFunctionality->currentStage, App->continueScene, 0.1f);
-		
-	}
-	if (p2_isDead && player1 == false)
-	{
-		p2_isDead = false;
-		player2 = false;
-		lives_p2 = 2;
-		App->fade->FadeToBlack(App->stageFunctionality->currentStage, App->continueScene, 0.1f);
+	str_credits = new char[8];
 
+
+	if (App->player1->isDead == true && player2 == false)
+	{
+		App->player1->isDead = false;
+		player1 = false;
+		App->player1->lives = 2;
 	}
-	if (p1_isDead && p2_isDead) {
-		p1_isDead = false;
-		p2_isDead = false;
+
+	else if (App->player2->isDead == true && player1 == false)
+	{
+		App->player2->isDead = false;
+		player2 = false;
+		App->player2->lives = 2;
+	}
+
+	else if (App->player1->isDead == true && App->player2->isDead == true) {
+		App->player1->isDead = false;
+		App->player2->isDead = false;
 		player1 = false;
 		player2 = false; 
-		lives_p1 = 2;
-		lives_p2 = 2;
+		App->player1->lives = 2;
+		App->player2->lives = 2;
 		App->fade->FadeToBlack(App->stageFunctionality->currentStage, App->continueScene, 0.1f);
 		
 	}
 
-	snprintf(str_lives_p1, 4 * sizeof(str_lives_p1), "%d", lives_p1);
-	snprintf(str_lives_p2, 4 * sizeof(str_lives_p2), "%d", lives_p2);
-	snprintf(str_score_p1, 4 * sizeof(str_score_p1), "%d", score_p1);
-	snprintf(str_score_p2, 4 * sizeof(str_score_p2), "%d", score_p2);
+	snprintf(str_lives_p1, 4 * sizeof(str_lives_p1), "%d", App->player1->lives);
+	snprintf(str_lives_p2, 4 * sizeof(str_lives_p2), "%d", App->player2->lives);
+	snprintf(str_score_p1, 4 * sizeof(str_score_p1), "%d", App->player1->score);
+	snprintf(str_score_p2, 4 * sizeof(str_score_p2), "%d", App->player2->score);
+	
 	if(credits<10)
-	snprintf(str_credits, 11, "CREDITS 0%i", credits);
+	snprintf(str_credits, 8, "CREDITS 0%i", credits);
 	if(credits>=10)
-		snprintf(str_credits, 11, "CREDITS %i", credits);
+		snprintf(str_credits, 8, "CREDITS %i", credits);
 
 
 	if (showUI == true) {
@@ -120,7 +121,7 @@ update_status ModuleUI::Update() {
 		//-------------score player 1------------------------------------
 		if (player1 == true)
 		{
-			if (score_p1 == 0) {
+			if (App->player1->score == 0) {
 				App->fonts->BlitText(72, 16, 0, "00");
 			}
 			else {
@@ -130,7 +131,7 @@ update_status ModuleUI::Update() {
 		//-------------score player 2------------------------------------
 		if (player2 == true)
 		{
-			if (score_p2 == 0) {
+			if (App->player2->score == 0) {
 				App->fonts->BlitText(256, 16, 0, "00");
 			}
 			else {
@@ -138,6 +139,9 @@ update_status ModuleUI::Update() {
 			}
 		}
 	}
+
+
+
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->Controller1[SDL_CONTROLLER_BUTTON_Y] == KEY_DOWN)
 	{
 		App->audio->ControlSFX(coinsfx, PLAY_AUDIO);
@@ -194,10 +198,12 @@ update_status ModuleUI::Update() {
 	delete[](str_score_p2);
 	delete[](str_lives_p1);
 	delete[](str_lives_p2);
+	delete[](str_credits);
 	str_score_p1 = nullptr;
 	str_score_p2 = nullptr;
 	str_lives_p1 = nullptr;
 	str_lives_p2 = nullptr;
+	str_credits = nullptr;
 
 	return UPDATE_CONTINUE;
 }

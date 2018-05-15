@@ -63,29 +63,46 @@ public:
 	virtual void KillUnit() = 0;
 
 public:
-	//Variables--------------------------------------------
-	Mix_Chunk* init_sfx = nullptr;
-	//--------Gameplay-----------------------------
-	int powerup_upgrades = 0;
-	POWERUP_TYPE powerup_type = POWERUP_TYPE::NOPOWERUP;
-	//--------States--------------------------------
-	bool isAppearing;
-	bool isDying;
-	bool isShooting = false;
-	bool shoot = false;
-	bool unit_locked = false;
-	//--------Debug Modes--------------------------
-	bool godMode;
-	//--------Time---------------------------------
-	Uint32 start_time;
-	Uint32 current_time;
-	//--------Movment------------------------------
+	//Player Data------------------------------------------------------------//
+	//--------Gameplay------------------------------
+	int lives = 2;
+	int score = 0;
+	//--------Movment-------------------------------
 	iPoint position;
 	iPoint initPosition;
-	float movementSpeed = 2;//It can't be const because the speed powerup modifies this value
+	float movementSpeed = 2;
+	//--------States--------------------------------
+	bool isDead;
+	bool isAppearing;
+	bool isDying;
 	bool canMove;
-	bool canShoot;
-	//-------Ship Animation-----------------------------
+	bool unitLocked = false;
+	bool isShooting = false;
+	bool shoot = false;
+	//--------PowerUps-----------------------------
+	POWERUP_TYPE currentPowerUp = POWERUP_TYPE::NOPOWERUP;
+	int powerupUpgrades = 0;
+	bool unitPowerUp = false;
+	bool speedPowerup = false;
+	bool laserPowerUp = false;
+	bool missilesPowerUp = false;
+	bool bombsPowerUp = false;
+	//-------Debug Modes--------------------------
+	bool godMode;
+
+	//Animations---------------------------------------------------------------//
+	//------------States----------------------------
+	ShipAnimations shipAnimations;
+	Animation initAnim;
+	Animation shipAnim;
+	Animation deathAnim;
+	//------------PowerUps--------------------------
+	Animation ShotLaserBasic;
+	Animation SpeedAnimation;
+	//------------Basic----------------------------
+	SDL_Rect *current_animation = nullptr; //pointer to the only one animation 
+	Animation shotFire;                    //Animation infront of ship when we are shooting basic shots
+	//------------Variables-------------------------
 	int const playerwidth = 32;
 	int const playerheight = 12;
 	float yAxis = 0;//This value will control the animation of the ship. It will increase up to 1 when S is pressed and it will decrease up to -1 when W is pressed. When none of those keys are pressed, it will progressively go back to 0.
@@ -95,19 +112,15 @@ public:
 	float const transitionLimit = 0.5f;//This indicates when the ship will transition from its idle animation to its transition animation
 	float const MaxLimit = 0.90f;//This indicates when the ship will transition from its transition animation to its max animation
 
-	//Animations--------------------------------------------
-	ShipAnimations shipAnimations;
-	SDL_Rect *current_animation = nullptr; //pointer to the only one animation 
-	Animation shipAnim;
-	Animation shotFire; //Animation infront of ship when we are shooting basic shots
-	Animation initAnim;
-	Animation deathAnim;
-	Animation ShotLaserBasic;
-	//Textures---------------------------------------------
+	//Textures----------------------------------------------------------------//
 	SDL_Texture* PlayerTexture = nullptr;
-	//Collision--------------------------------------------
+	SDL_Texture* SpeedAnimationTex = nullptr;
+	//Colliders---------------------------------------------------------------//
 	Collider* playerCol = nullptr;
 	COLLIDER_TYPE shot_colType;
+	//Audios------------------------------------------------------------------//
+	Mix_Chunk* init_sfx = nullptr;
+
 
 	//Win variables
 	bool winlvl;
@@ -115,7 +128,7 @@ public:
 	void Winlvl();
 	virtual void Winposition()=0; 
 	bool start_timer;
-	bool LaserPowerUp = false;
+
 	int FadeToBlackAlfa;
 	SDL_Rect backgroundBlack;
 
@@ -123,10 +136,9 @@ public:
 	bool Controllshoot;
 	bool stillpressed;
 
-	//---------------------------------------------------------POWERUPS----------------------------------------------------------//
-	bool SpeedPowerup = false;
-	Animation SpeedAnimation;
-	SDL_Texture* SpeedAnimationTex = nullptr;
+	
+	
+
 };
 
 #endif
