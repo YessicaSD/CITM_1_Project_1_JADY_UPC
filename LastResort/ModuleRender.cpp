@@ -5,6 +5,7 @@
 #include "ModuleInput.h"
 #include "SDL/include/SDL.h"
 #include "ModuleStage05.h"
+#include "ModuleEnemies.h"
 
 #define DEFAULT_BORDER_WIDTH 1
 #define MAX_ZOOM 5
@@ -94,6 +95,11 @@ update_status ModuleRender::PreUpdate()
 		if (showTilemapGrid == true) { showTilemapGrid = false; }
 		else { showTilemapGrid = true; }
 	}
+	if (App->input->keyboard[SDL_SCANCODE_KP_PERIOD] == KEY_DOWN)
+	{
+		if (showSpawnArea == true) { showSpawnArea = false; }
+		else { showSpawnArea = true; }
+	}
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -108,6 +114,21 @@ update_status ModuleRender::PostUpdate()
 	
 	//- INFO: Border width is multiplied by zoomedOutSize to mantain its size across all the zoomed out modes
 	int borderWidth = DEFAULT_BORDER_WIDTH * zoomedOutSize;
+
+	//Render the spawn and despawn area--------------------------------------------------------------------------------------------------
+	if(showSpawnArea)
+	{
+		//Despawn area
+		App->render->DrawQuad({ -App->enemies->despawnMargin, -App->enemies->despawnMargin, SCREEN_WIDTH + App->enemies->despawnMargin * 2, App->enemies->despawnMargin}, 255, 0, 0, 50);
+		App->render->DrawQuad({ -App->enemies->despawnMargin, SCREEN_HEIGHT, SCREEN_WIDTH + App->enemies->despawnMargin * 2, App->enemies->despawnMargin}, 255, 0, 0, 50);
+		App->render->DrawQuad({ -App->enemies->despawnMargin, 0, App->enemies->despawnMargin, SCREEN_HEIGHT }, 255, 0, 0, 50);
+		App->render->DrawQuad({ SCREEN_WIDTH, 0, App->enemies->despawnMargin, SCREEN_HEIGHT }, 255, 0, 0, 50);
+		//Spawn area
+		App->render->DrawQuad({ -App->enemies->spawnMargin, -App->enemies->spawnMargin, SCREEN_WIDTH + App->enemies->spawnMargin * 2, App->enemies->spawnMargin }, 255, 165, 0, 50);
+		App->render->DrawQuad({ -App->enemies->spawnMargin, SCREEN_HEIGHT, SCREEN_WIDTH + App->enemies->spawnMargin * 2, App->enemies->spawnMargin }, 255, 165, 0, 50);
+		App->render->DrawQuad({ -App->enemies->spawnMargin, 0, App->enemies->spawnMargin, SCREEN_HEIGHT }, 255, 165, 0, 50);
+		App->render->DrawQuad({ SCREEN_WIDTH, 0, App->enemies->spawnMargin, SCREEN_HEIGHT }, 255, 165, 0, 50);
+	}
 
 	//Render the tilemap grid------------------------------------------------------------------------------------------------------------
 	if (showTilemapGrid)

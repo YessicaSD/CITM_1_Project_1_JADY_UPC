@@ -32,12 +32,12 @@ public:
 	int checkPoint = 0;
 
 	//Points----------------------------------
-	dPoint shipPos;//Position at which we blit the ship (see Docs>ship.psd)
+	dPoint backgroundPoint;//The position that we directly move with the path
+	dPoint shipPos;//We'll use this position to instantiate enemies. Position at which we blit the ship (see Docs>ship.psd). 
 	dPoint tilemapPos;
 	MovePath cameraMovement;
-	dPoint tilemapPoint;
 	dPoint shipOffset = { 444, -240 };
-	dPoint tilemapOffset = { 1856, -58 };
+	dPoint tunnelOffset = { 1856, -58 };
 	dPoint scroll;
 	dPoint stars;
 

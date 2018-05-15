@@ -49,47 +49,6 @@ Module5lvlScene::Module5lvlScene()
 	cameraMovement.PushBack({ 1108, 182 }, 240);    //14      //22 
 	cameraMovement.PushBack(2160);                  //Pause   //23
 	cameraMovement.PushBack({ 2151, 182 }, 2160);   //15      //24
-}
-
-bool Module5lvlScene::Start()
-{
-	bool ret = true;
-
-	//provisional-----------------------------
-	current_time = 0;
-	start_time = SDL_GetTicks();
-
-	//Enable ---------------------------------------------------------------------
-	App->stageFunctionality->Enable();
-	App->stageFunctionality->currentStage = this;
-
-	//Set the ship pos (if we don't do it, colliders will be inicialized in a incorrect position)----------------
-	shipPos = shipOffset;
-
-	//"Reset ship position when fadetoblackends"----------------------------------
-	//App->player1->Reset_Positions();
-	//App->player2->Reset_Positions();
-
-	//Texture ---------------------------------------------------------------------------------------------------
-	StarsTexture = App->textures->Load("Assets/lvl5/background/backgroundstars.png");
-	shipTex = App->textures->Load("Assets/lvl5/background/ship.png");
-	tilemapTex = App->textures->Load("Assets/lvl5/background/final.png");
-
-	//Music -----------------------------------------------------------------------------------------------------
-	lvl5Music = App->audio->LoadMUS("Assets/lvl5/07-DON-T-TOUCH-ME-BABY-STAGE-5-1-_-FEAR-STAGE-5-2-_-LEGE.ogg");
-	App->audio->ControlMUS(lvl5Music, PLAY_AUDIO);
-
-	//Enemies ---------------------------------------------------------------------------------------------------
-	App->enemies->AddEnemy(POWERDROPPER, 230, 30, HOMING);
-	App->enemies->AddEnemy(POWERDROPPER, 600, 30, LASER);
-
-	App->enemies->AddEnemy(REDBATS, 658, 25);
-	App->enemies->AddEnemy(REDBATS, 683, 25);
-	App->enemies->AddEnemy(REDBATS, 708, 25);
-	App->enemies->AddEnemy(REDBATS, 733, 25);
-	App->enemies->AddEnemy(REDBATS, 758, 25);
-
-	App->enemies->AddEnemy(OSCILATOR, 500, 0);
 	
 	//Colliders--------------------------------------------------------------------------------------------------
 	shipCollidersRect[ 0] = {  304, 208, 507, 16 };
@@ -141,7 +100,49 @@ bool Module5lvlScene::Start()
 	shipCollidersRect[46] = {  904, 224,  10, 32 };
 	shipCollidersRect[47] = {  914, 256, 124, 21 };
 	shipCollidersRect[48] = {  914, 277, 107, 10 };
+}
 
+bool Module5lvlScene::Start()
+{
+	bool ret = true;
+
+	//provisional-----------------------------
+	current_time = 0;
+	start_time = SDL_GetTicks();
+
+	//Enable ---------------------------------------------------------------------
+	App->stageFunctionality->Enable();
+	App->stageFunctionality->currentStage = this;
+
+	//Set the ship pos (if we don't do it, colliders will be inicialized in a incorrect position)----------------
+	shipPos = shipOffset;
+
+	//"Reset ship position when fadetoblackends"----------------------------------
+	//App->player1->Reset_Positions();
+	//App->player2->Reset_Positions();
+
+	//Texture ---------------------------------------------------------------------------------------------------
+	StarsTexture = App->textures->Load("Assets/lvl5/background/backgroundstars.png");
+	shipTex = App->textures->Load("Assets/lvl5/background/ship.png");
+	tilemapTex = App->textures->Load("Assets/lvl5/background/final.png");
+
+	//Music -----------------------------------------------------------------------------------------------------
+	lvl5Music = App->audio->LoadMUS("Assets/lvl5/07-DON-T-TOUCH-ME-BABY-STAGE-5-1-_-FEAR-STAGE-5-2-_-LEGE.ogg");
+	App->audio->ControlMUS(lvl5Music, PLAY_AUDIO);
+
+	//Enemies ---------------------------------------------------------------------------------------------------
+	//INFO: We'll calculate the x and y positions based on the position of the ship in Docs>ship.psd
+	//App->enemies->AddEnemy(POWERDROPPER, 230, 30, HOMING);
+	//App->enemies->AddEnemy(POWERDROPPER, 600, 30, LASER);
+	//App->enemies->AddEnemy(REDBATS, 658, 25);
+	//App->enemies->AddEnemy(REDBATS, 683, 25);
+	//App->enemies->AddEnemy(REDBATS, 708, 25);
+	//App->enemies->AddEnemy(REDBATS, 733, 25);
+	//App->enemies->AddEnemy(REDBATS, 758, 25);
+	//App->enemies->AddEnemy(OSCILATOR, 500, 0);
+	App->enemies->AddEnemy(BASIC, 100, 30);
+
+	//Colliders--------------------------------------------------------------------------------------------------
 	for(int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
 	{
 		shipCollidersCol[i] = App->collision->AddCollider(
@@ -193,12 +194,16 @@ update_status Module5lvlScene::Update()
 		}
 	}
 	//------------Move------------------------------------------
-	tilemapPoint = cameraMovement.GetCurrentPosition();
-	shipPos = shipOffset - tilemapPoint;
-	tilemapPos = tilemapOffset - tilemapPoint;
+	backgroundPoint = cameraMovement.GetCurrentPosition();
+	shipPos = shipOffset - backgroundPoint;
+	tilemapPos = tunnelOffset - backgroundPoint;
 	//-----------Draw-------------------------------------------
-	App->render->Blit(shipTex, shipPos.x, shipPos.y, &shipRect);
-	if (cameraMovement.currentMov > 21) {
+	if (cameraMovement.currentMov <= 21)
+	{
+		App->render->Blit(shipTex, shipPos.x, shipPos.y, &shipRect);
+	}
+	if (cameraMovement.currentMov > 21)
+	{
 		App->render->Blit(tilemapTex, tilemapPos.x, tilemapPos.y, &tilemapRect);
 	}
 	

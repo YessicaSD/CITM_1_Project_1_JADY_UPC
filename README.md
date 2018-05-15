@@ -89,6 +89,7 @@ https://github.com/Dasanch/Project_1_JADY_UPC
 - **Numpad 0**: Re-center camera.
 - **Numpad /**: Show world grid (which has marks every 100 units).
 - **Numpad (*)**: Show background grid (which has marks every 100 units).
+- **Numpad .**: Show spawn area (in orange) and despawn area (in red)
 
 ### ADVANCED DEBUGGING:
 How to use advanced debugging?

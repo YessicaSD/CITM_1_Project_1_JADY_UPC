@@ -36,6 +36,7 @@ public:
 	int zoomedOutSize = 1;
 	bool showWorldGrid = false;
 	bool showTilemapGrid = false;
+	bool showSpawnArea = false;
 };
 
 #endif //__ModuleRenderer_H__

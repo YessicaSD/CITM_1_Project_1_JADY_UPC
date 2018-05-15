@@ -15,7 +15,6 @@
 #include "Enemy_Pinata.h"
 #include "ModuleStage05.h"
 
-#define SPAWN_MARGIN 50
 #define DAMAGE_FLASHING_INTERVAL 4
 
 ModuleEnemies::ModuleEnemies()
@@ -41,12 +40,15 @@ bool ModuleEnemies::Start()
 
 update_status ModuleEnemies::PreUpdate()
 {
-	// check camera position to decide what to spawn
+	//Check if the enemy is inside the "spawn area (viewport + spawn margin)" to spawn it---------------------------------------------------------------------------
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
 		if (queue[i].type != ENEMY_TYPES::NO_TYPE)
 		{
-			if (queue[i].x  < App->stage05->tilemapPoint.x+SCREEN_WIDTH && queue[i].y > App->stage05->tilemapPoint.y)
+			if (App->stage05->shipPos.x - queue[i].x < 0 + SCREEN_WIDTH + spawnMargin &&
+				App->stage05->shipPos.x - queue[i].x > 0 - spawnMargin &&
+				App->stage05->shipPos.y + queue[i].y > 0 - spawnMargin &&
+				App->stage05->shipPos.y + queue[i].y < 0 + SCREEN_HEIGHT + spawnMargin)//We add y because SDL inverts the y axis
 			{
 				SpawnEnemy(queue[i]);
 				queue[i].type = ENEMY_TYPES::NO_TYPE;
@@ -62,7 +64,10 @@ update_status ModuleEnemies::PreUpdate()
 update_status ModuleEnemies::Update()
 {
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
-		if (enemies[i] != nullptr) enemies[i]->Move();
+		if (enemies[i] != nullptr)
+		{
+			enemies[i]->Move();
+		}
 
 	for (uint i = 0; i < MAX_ENEMIES; ++i) {
 		if (enemies[i] != nullptr) {
@@ -96,12 +101,15 @@ update_status ModuleEnemies::Update()
 
 update_status ModuleEnemies::PostUpdate()
 {
-	// check camera position to decide  what to delete
+	//Check if the enemy is outside the "spawn area (viewport + despawn margin)" to despawn it---------------------------------------------------------------------------
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
 		if (enemies[i] != nullptr)
 		{
-			if (enemies[i]->position.x  < 0- SPAWN_MARGIN)
+			if (/*queue[i].x + App->stage05->shipPos.x > 0 + SCREEN_WIDTH + despawnMargin ||*/
+				App->stage05->shipPos.x - queue[i].x < 0 - despawnMargin /*||
+				queue[i].y + App->stage05->shipPos.y < 0 - spawnMargin ||
+				queue[i].y + App->stage05->shipPos.y > 0 + SCREEN_HEIGHT + spawnMargin*/)
 			{
 				LOG("DeSpawning enemy at %d", enemies[i]->position.x);
 				delete enemies[i];
@@ -163,42 +171,42 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 		switch (info.type)
 		{
 		case ENEMY_TYPES::BASIC:
-			enemies[i] = new Enemy_Basic(info.x - App->stage05->tilemapPoint.x, info.y - App->stage05->tilemapPoint.y, info.pu_Type);
+			enemies[i] = new Enemy_Basic(info.x + App->stage05->shipPos.x, info.y + App->stage05->shipPos.y, info.pu_Type);
 			enemies[i]->points = 100;
 			enemies[i]->hp = 1;
 			break;
 		case ENEMY_TYPES::OSCILATOR:
-			enemies[i] = new Enemy_Oscilator(info.x - App->stage05->tilemapPoint.x, info.pu_Type);
+			enemies[i] = new Enemy_Oscilator(info.x + App->stage05->shipPos.x, info.pu_Type);
 			enemies[i]->points = 100;
 			enemies[i]->hp = 5;
 			break;
 		case ENEMY_TYPES::POWERDROPPER:
-			enemies[i] = new Enemy_PowerDropper(info.x - App->stage05->tilemapPoint.x, info.y - App->stage05->tilemapPoint.y, info.pu_Type);
+			enemies[i] = new Enemy_PowerDropper(info.x + App->stage05->shipPos.x, info.y + App->stage05->shipPos.y, info.pu_Type);
 			enemies[i]->points = 100;
 			enemies[i]->hp = 1;
 			break;
 		case ENEMY_TYPES::METALCROW:
-			enemies[i] = new Enemy_MetalCraw(info.x - App->stage05->tilemapPoint.x, info.y - App->stage05->tilemapPoint.y, info.pu_Type);
+			enemies[i] = new Enemy_MetalCraw(info.x + App->stage05->shipPos.x, info.y + App->stage05->shipPos.y, info.pu_Type);
 			enemies[i]->points = 1000;
 			enemies[i]->hp = 50;
 			break;
 		case  ENEMY_TYPES::REDBATS:
-			enemies[i] = new Enemy_RedBats(info.x - App->stage05->tilemapPoint.x, info.y - App->stage05->tilemapPoint.y, info.pu_Type);
+			enemies[i] = new Enemy_RedBats(info.x + App->stage05->shipPos.x, info.y + App->stage05->shipPos.y, info.pu_Type);
 			enemies[i]->points = 100;
 			enemies[i]->hp = 1;
 			break;
 		case ENEMY_TYPES::ROTATING_TURRET:
-			enemies[i] = new Enemy_RotatingTurret(info.x - App->stage05->tilemapPoint.x, info.y - App->stage05->tilemapPoint.y, info.pu_Type);
+			enemies[i] = new Enemy_RotatingTurret(info.x + App->stage05->shipPos.x, info.y + App->stage05->shipPos.y, info.pu_Type);
 			enemies[i]->points = 200;
 			enemies[i]->hp = 50;
 			break;
 		case ENEMY_TYPES::PINATA:
-			enemies[i] = new Enemy_Pinata(info.x - App->stage05->tilemapPoint.x, info.y - App->stage05->tilemapPoint.y, info.pu_Type);
+			enemies[i] = new Enemy_Pinata(info.x + App->stage05->shipPos.x, info.y + App->stage05->shipPos.y, info.pu_Type);
 			enemies[i]->points = 200;
 			enemies[i]->hp = 50;
 			break;
 		case ENEMY_TYPES::PINATA_SPAWNER:
-			enemies[i] = new Enemy_Pinata(info.x - App->stage05->tilemapPoint.x, info.y - App->stage05->tilemapPoint.y, info.pu_Type);
+			enemies[i] = new Enemy_Pinata(info.x + App->stage05->shipPos.x, info.y + App->stage05->shipPos.y, info.pu_Type);
 			enemies[i]->points = 200;
 			enemies[i]->hp = 50;
 			break;

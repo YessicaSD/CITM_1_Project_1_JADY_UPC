@@ -111,12 +111,12 @@ void ModuleStageFunctionality::Debugging()
 	{
 		if (App->player1->IsEnabled())
 		{
-			App->enemies->AddEnemy((ENEMY_TYPES)selectedEnemy, App->player1->position.x + 100, App->player1->position.y);
+			App->enemies->AddEnemy((ENEMY_TYPES)selectedEnemy, App->player1->position.x - App->stage05->shipPos.x + 100, App->player1->position.y - App->stage05->shipPos.y);//We substract the ship pos because we need to "undo the step we did before"
 		}
-		else
-		{
-			App->enemies->AddEnemy((ENEMY_TYPES)selectedEnemy, App->player2->position.x + 100, App->player2->position.y);
-		}
+		//else
+		//{
+		//	App->enemies->AddEnemy((ENEMY_TYPES)selectedEnemy, App->player2->position.x + 100, App->player2->position.y);
+		//}
 		
 		pressedNumEnemy = false;
 	}

@@ -90,72 +90,72 @@ bool ModuleStage01::Start()
 	//App->player2->Reset_Positions();
 	//Enemies---------------------------------------------------------------------
 
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 540, 78);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 580, 100);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 610, 78);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 610, 150);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 540, 78);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 580, 100);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 610, 78);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 610, 150);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 675, 150);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 660, 35);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 700, 35);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 740, 35);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 780, 35);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 820, 35, LASER);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 675, 150);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 660, 35);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 700, 35);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 740, 35);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 780, 35);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 820, 35, LASER);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 850, 150);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 890, 150);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 930, 150);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 970, 150, SPEED);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 850, 150);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 890, 150);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 930, 150);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 970, 150, SPEED);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 990, 100);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1030, 120);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1035, 40);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 990, 100);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1030, 120);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1035, 40);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1085, 110);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1087, 70);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1130, 55);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1175, 65);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1085, 110);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1087, 70);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1130, 55);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1175, 65);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1250, 45);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1285, 45);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1320, 45);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1355, 45);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1385, 45, LASER);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1250, 45);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1285, 45);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1320, 45);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1355, 45);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1385, 45, LASER);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1257, 150);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1295, 150);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1335, 150);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1375, 150, LASER);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1257, 150);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1295, 150);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1335, 150);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1375, 150, LASER);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::METALCROW, 1500, SCREEN_HEIGHT);
+	//App->enemies->AddEnemy(ENEMY_TYPES::METALCROW, 1500, SCREEN_HEIGHT);
 
-	//- Basic diagonal enemies
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1650, 45);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1690, 60);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1730, 75);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1770, 90);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1810, 105);
+	////- Basic diagonal enemies
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1650, 45);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1690, 60);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1730, 75);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1770, 90);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1810, 105);
 
-	//Enemies that follow a straight line
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1840, 105);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1870, 105);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1900, 105);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1930, 105);
+	////Enemies that follow a straight line
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1840, 105);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1870, 105);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1900, 105);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1930, 105);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 3500, 180,LASER);
+	//App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 3500, 180,LASER);
 
-	//Start of the tunnel
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 3540, 45);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 3580, 45);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 3620, 45);
+	////Start of the tunnel
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 3540, 45);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 3580, 45);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 3620, 45);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 7700, 45, LASER);
-	App->enemies->AddEnemy(ENEMY_TYPES::METALCROW, 8500, SCREEN_HEIGHT+50);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 8100, 60);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 8000, 100);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 8050, 50);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 8100, 50);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 8150, 80);
+	//App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 7700, 45, LASER);
+	//App->enemies->AddEnemy(ENEMY_TYPES::METALCROW, 8500, SCREEN_HEIGHT+50);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 8100, 60);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 8000, 100);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 8050, 50);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 8100, 50);
+	//App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 8150, 80);
 	//End of the tunnel
 
 	//define moveCamera struct values

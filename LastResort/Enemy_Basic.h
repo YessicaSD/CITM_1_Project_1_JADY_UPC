@@ -9,6 +9,7 @@ private:
 	
 	bool going_up = true;
 	Animation basicenemy;
+	int initialY;
 
 public:
 
