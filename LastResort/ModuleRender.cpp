@@ -290,8 +290,8 @@ bool ModuleRender::BlitEx(SDL_Texture* texture, int x, int y, SDL_Rect* section,
 void ModuleRender::AddZoomAndMovedPosition(SDL_Rect & rect)
 {
 	//Zooming and moving the viewport
-	rect.x += SCREEN_WIDTH * (zoomedOutSize - 1) / 2 + movedPosition.x;
-	rect.y += SCREEN_HEIGHT * (zoomedOutSize - 1) / 2 + movedPosition.y;
+	rect.x += (SCREEN_WIDTH * (zoomedOutSize - 1) / 2 + movedPosition.x)* SCREEN_SIZE; 
+	rect.y += (SCREEN_HEIGHT * (zoomedOutSize - 1) / 2 + movedPosition.y)*SCREEN_SIZE;
 }
 
 

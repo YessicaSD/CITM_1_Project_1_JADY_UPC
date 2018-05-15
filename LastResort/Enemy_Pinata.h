@@ -12,6 +12,8 @@ public:
 	Enemy_Pinata(int x, int y, POWERUP_TYPE pu_t);
 	void Move();
 	void Draw(SDL_Texture* sprites);
+	void CheckTarget() ;
+	void CheckDirection();
 
 private:
 	//Animations---------------------------
@@ -19,6 +21,8 @@ private:
 	Animation rotateAnim;
 	Animation initAnim;
 	//Variables---------------------------
+	int initialY;
+	int initialX;
 	enum Direction {
 		STILL,
 		RIGHT,
@@ -32,8 +36,7 @@ private:
 	} currentState = INIT;
 
 	MovePath pinataMov;
-	bool checkTarget = false;
-	bool checkDirection = false;
+
 	bool blitEx = false;
 	ModulePlayer* currentTarget = nullptr;
 	ModulePlayer* lastTarget = nullptr;

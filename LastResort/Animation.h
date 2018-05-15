@@ -125,28 +125,30 @@ public:
 	{
 		if (first_loop) {
 			first_loop = false;
+			current_frame += speed;
 			return frames[0];
 		}
 		else {
 			if (invert == false) {
 
+				current_frame += speed;
+
 				if (current_frame >= last_frame) {
-					current_frame = last_frame -0.1f ;
+					current_frame = last_frame - speed;
 					invert = true;
 				}
-				else
-					current_frame += speed;
 			}
 			else {
+
+				current_frame -= speed;
+
 				if (current_frame < 0) {
-					current_frame = 0;
+					current_frame = speed;
 					invert = false;
 				}
-				else
-					current_frame -= speed;
 			}
+			return frames[(int)current_frame];
 		}
-		return frames[(int)current_frame];
 	}
 };
 
