@@ -10,7 +10,7 @@
 #include "ModuleContinue.h"
 #include "ModuleGameTitle.h"
 #include "ModuleStageClear.h"
-
+#include "ModuleUI.h"
 
 #define MAX_ALPHA 255
 #define MIN_ALPHA 0
@@ -58,7 +58,7 @@ bool ModuleGameOver::Start() {
 	black_go_Alpha = MIN_ALPHA;
 	//textures-----------------------------------------------------------------------
 	goTex = App->textures->Load("Assets/GameOver.png");
-
+	App->ui->showUI = false;
 	return ret;
 }
 
