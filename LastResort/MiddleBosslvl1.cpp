@@ -53,10 +53,10 @@ void Enemy_MetalCraw::Move()
 		numparticles += 1;
 		if (numparticles <= 1)
 		{
-			App->particles->AddParticle(App->particles->MiddleBossShot, position.x-10, position.y-10, App->enemies->sprites, COLLIDER_ENEMY);
-		App->particles->AddParticle(App->particles->MiddleBossShot, position.x+50, position.y+10, App->enemies->sprites, COLLIDER_ENEMY);
-		App->particles->AddParticle(App->particles->MiddleBossShot, position.x-10, position.y+50, App->enemies->sprites, COLLIDER_ENEMY);
-		App->particles->AddParticle(App->particles->MiddleBossShot, position.x+50, position.y+10, App->enemies->sprites, COLLIDER_ENEMY);
+			App->particles->AddParticle(App->particles->MiddleBossShot, position.x-10, position.y-10, App->enemies->nml_sprites, COLLIDER_ENEMY);
+		App->particles->AddParticle(App->particles->MiddleBossShot, position.x+50, position.y+10, App->enemies->nml_sprites, COLLIDER_ENEMY);
+		App->particles->AddParticle(App->particles->MiddleBossShot, position.x-10, position.y+50, App->enemies->nml_sprites, COLLIDER_ENEMY);
+		App->particles->AddParticle(App->particles->MiddleBossShot, position.x+50, position.y+10, App->enemies->nml_sprites, COLLIDER_ENEMY);
 		}
 		App->particles->VectorMiddleBossShots.x = (position.x - App->player1->position.x) / (sqrt  (pow(position.x - App->player1->position.x, 2) + pow(position.y - App->player1->position.y, 2) ));
 		App->particles->VectorMiddleBossShots.y = (position.y - App->player1->position.y) / (sqrt(pow(position.x - App->player1->position.x, 2) + pow(position.y - App->player1->position.y, 2)));

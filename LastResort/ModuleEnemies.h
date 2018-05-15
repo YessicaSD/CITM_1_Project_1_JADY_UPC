@@ -10,6 +10,7 @@
 
 #define MAX_ENEMIES 100
 
+
 enum ENEMY_TYPES
 {
 	NO_TYPE = -1,
@@ -65,7 +66,7 @@ private:
 	Enemy* enemies[MAX_ENEMIES];
 
 public:
-	SDL_Texture* sprites = nullptr;
+
 	SDL_Texture* nml_sprites = nullptr;
 	SDL_Texture* dmg_sprites = nullptr;
 };
