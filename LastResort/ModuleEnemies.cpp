@@ -45,10 +45,10 @@ update_status ModuleEnemies::PreUpdate()
 	{
 		if (queue[i].type != ENEMY_TYPES::NO_TYPE)
 		{
-			if (App->stage05->spawnPos.x + queue[i].x < 0 + SCREEN_WIDTH + spawnMarginRight &&
-				App->stage05->spawnPos.x + queue[i].x > 0 - spawnMarginLeft &&
-				App->stage05->spawnPos.y + queue[i].y > 0 - spawnMarginUp &&
-				App->stage05->spawnPos.y + queue[i].y < 0 + SCREEN_HEIGHT + spawnMarginDown)
+			if (App->stage05->spawnPos.x + queue[i].x < 0 + SCREEN_WIDTH + SPAWN_MARGIN_RIGHT &&
+				App->stage05->spawnPos.x + queue[i].x > 0 - SPAWN_MARGIN_LEFT &&
+				App->stage05->spawnPos.y + queue[i].y > 0 - SPAWN_MARGIN_UP &&
+				App->stage05->spawnPos.y + queue[i].y < 0 + SCREEN_HEIGHT + SPAWN_MARGIN_DOWN)
 			{
 				//If we get to the position, we start counting
 				if (queue[i].counting == false)
@@ -61,7 +61,7 @@ update_status ModuleEnemies::PreUpdate()
 				{
 					SpawnEnemy(queue[i]);
 					queue[i].type = ENEMY_TYPES::NO_TYPE;
-					LOG("Spawning enemy at %d", queue[i].x);
+					LOG("Spawning enemy at x: %d, y: %d", queue[i].x, queue[i].y);
 				}
 			}
 		}
@@ -116,12 +116,12 @@ update_status ModuleEnemies::PostUpdate()
 	{
 		if (enemies[i] != nullptr)
 		{
-			if (enemies[i]->position.x > 0 + SCREEN_WIDTH + despawnMarginRight ||
-				enemies[i]->position.x < 0 - despawnMarginLeft ||
-				enemies[i]->position.y < 0 - despawnMarginUp ||
-				enemies[i]->position.y > 0 + SCREEN_HEIGHT + despawnMarginDown)
+			if (enemies[i]->position.x > 0 + SCREEN_WIDTH + DESPAWN_MARGIN_RIGHT ||
+				enemies[i]->position.x < 0 - DESPAWN_MARGIN_LEFT ||
+				enemies[i]->position.y < 0 - DESPAWN_MARGIN_UP ||
+				enemies[i]->position.y > 0 + SCREEN_HEIGHT + DESPAWN_MARGIN_DOWN)
 			{
-				LOG("DeSpawning enemy at %d", enemies[i]->position.x);
+				LOG("DeSpawning enemy at x: %d, y: %d", enemies[i]->position.x, enemies[i]->position.y);
 				delete enemies[i];
 				enemies[i] = nullptr;
 			}

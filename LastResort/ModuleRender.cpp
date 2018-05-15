@@ -119,15 +119,15 @@ update_status ModuleRender::PostUpdate()
 	if(showSpawnArea)
 	{
 		//Spawn area
-		App->render->DrawQuad({ -App->enemies->spawnMarginLeft, -App->enemies->spawnMarginUp, SCREEN_WIDTH + App->enemies->spawnMarginLeft + App->enemies->spawnMarginRight, App->enemies->spawnMarginUp }, 255, 165, 0, 50);//Up
-		App->render->DrawQuad({ -App->enemies->spawnMarginLeft, SCREEN_HEIGHT, SCREEN_WIDTH + App->enemies->spawnMarginLeft + App->enemies->spawnMarginRight, App->enemies->spawnMarginDown }, 255, 165, 0, 50);//Down
-		App->render->DrawQuad({ -App->enemies->spawnMarginLeft, 0, App->enemies->spawnMarginLeft, SCREEN_HEIGHT }, 255, 165, 0, 50);//Left
-		App->render->DrawQuad({ SCREEN_WIDTH, 0, App->enemies->spawnMarginRight, SCREEN_HEIGHT }, 255, 165, 0, 50);//Right
+		App->render->DrawQuad({ -SPAWN_MARGIN_LEFT, -SPAWN_MARGIN_UP, SCREEN_WIDTH + SPAWN_MARGIN_LEFT + SPAWN_MARGIN_RIGHT, SPAWN_MARGIN_UP }, 255, 165, 0, 50);//Up
+		App->render->DrawQuad({ -SPAWN_MARGIN_LEFT, SCREEN_HEIGHT, SCREEN_WIDTH + SPAWN_MARGIN_LEFT + SPAWN_MARGIN_RIGHT, SPAWN_MARGIN_DOWN }, 255, 165, 0, 50);//Down
+		App->render->DrawQuad({ -SPAWN_MARGIN_LEFT, 0, SPAWN_MARGIN_LEFT, SCREEN_HEIGHT }, 255, 165, 0, 50);//Left
+		App->render->DrawQuad({ SCREEN_WIDTH, 0, SPAWN_MARGIN_RIGHT, SCREEN_HEIGHT }, 255, 165, 0, 50);//Right
 		//Despawn area
-		App->render->DrawQuad({ -App->enemies->despawnMarginLeft, -App->enemies->despawnMarginUp, SCREEN_WIDTH + App->enemies->despawnMarginLeft + App->enemies->despawnMarginRight, App->enemies->despawnMarginUp }, 255, 0, 0, 50);//Up
-		App->render->DrawQuad({ -App->enemies->despawnMarginLeft, SCREEN_HEIGHT, SCREEN_WIDTH + App->enemies->despawnMarginLeft + App->enemies->despawnMarginRight, App->enemies->despawnMarginDown }, 255, 0, 0, 50);//Down
-		App->render->DrawQuad({ -App->enemies->despawnMarginLeft, 0, App->enemies->despawnMarginLeft, SCREEN_HEIGHT }, 255, 0, 0, 50);//Left
-		App->render->DrawQuad({ SCREEN_WIDTH, 0, App->enemies->despawnMarginRight, SCREEN_HEIGHT }, 255, 0, 0, 50);//Right
+		App->render->DrawQuad({ -DESPAWN_MARGIN_LEFT, -DESPAWN_MARGIN_UP, SCREEN_WIDTH + DESPAWN_MARGIN_LEFT + DESPAWN_MARGIN_RIGHT, DESPAWN_MARGIN_UP }, 255, 0, 0, 50);//Up
+		App->render->DrawQuad({ -DESPAWN_MARGIN_LEFT, SCREEN_HEIGHT, SCREEN_WIDTH + DESPAWN_MARGIN_LEFT + DESPAWN_MARGIN_RIGHT, DESPAWN_MARGIN_DOWN }, 255, 0, 0, 50);//Down
+		App->render->DrawQuad({ -DESPAWN_MARGIN_LEFT, 0, DESPAWN_MARGIN_LEFT, SCREEN_HEIGHT }, 255, 0, 0, 50);//Left
+		App->render->DrawQuad({ SCREEN_WIDTH, 0, DESPAWN_MARGIN_RIGHT, SCREEN_HEIGHT }, 255, 0, 0, 50);//Right
 	}
 
 	//Render the background grid------------------------------------------------------------------------------------------------------------

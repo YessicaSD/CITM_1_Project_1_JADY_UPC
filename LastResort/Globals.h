@@ -35,6 +35,15 @@ typedef unsigned int uint;
 //----------Music-------------------
 #define GENERAL_MUSIC_VOLUME 15 //0 to 180 //Optimum 15
 #define GENERAL_SFX_VOLUME 20 //0 to 100   //Optimum 20
+//----------Spawning----------------
+const int SPAWN_MARGIN_LEFT = 40;
+const int SPAWN_MARGIN_RIGHT = 30;
+const int SPAWN_MARGIN_UP = 40;
+const int SPAWN_MARGIN_DOWN = 30;
+const int DESPAWN_MARGIN_LEFT = 200;
+const int DESPAWN_MARGIN_RIGHT = 200;
+const int DESPAWN_MARGIN_UP = 200;
+const int DESPAWN_MARGIN_DOWN = 200;
 
 // Useful typedefs ---------------------------
 typedef unsigned int uint;

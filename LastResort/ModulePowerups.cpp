@@ -66,9 +66,12 @@ update_status ModulePowerups::PostUpdate()
 	{
 		if (powerups[i] != nullptr)
 		{
-			if (powerups[i]->position.x  < 0 - DESPAWN_MARGIN)
+			if (powerups[i]->position.x < 0 - DESPAWN_MARGIN_LEFT ||
+				powerups[i]->position.y < 0 - DESPAWN_MARGIN_UP ||
+				powerups[i]->position.y > 0 + SCREEN_HEIGHT + DESPAWN_MARGIN_DOWN ||
+				powerups[i]->position.x > 0 + SCREEN_WIDTH + DESPAWN_MARGIN_RIGHT)
 			{
-				LOG("DeSpawning powerup at %d", powerups[i]->position.x);
+				LOG("DeSpawning powerup at x: %d, y: %d", powerups[i]->position.x, powerups[i]->position.y);
 				delete powerups[i];
 				powerups[i] = nullptr;
 			}

@@ -4,11 +4,10 @@
 #include "Module.h"
 
 #define MAX_POWERUPS 20
-#define DESPAWN_MARGIN 50
 
 //This module follows the structure of the module enemies
 //But it doesn't spawn. It only moves, renders and despawns powerups
-//Because powerups are spawned via AddPowerup when an enemy dies
+//Because powerups are directly spawned via AddPowerup when an enemy dies
 
 enum POWERUP_TYPE
 {
