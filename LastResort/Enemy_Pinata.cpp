@@ -135,7 +135,7 @@ void Enemy_Pinata::Draw(SDL_Texture* sprites)
 		App->render->Blit(sprites, position.x, position.y, &currentAnim);
 	}
 	else {
-		App->render->FlippedBlit(sprites, position.x, position.y, &currentAnim);
+		App->render->BlitEx(sprites, position.x, position.y, &currentAnim);
 	}
 		
 

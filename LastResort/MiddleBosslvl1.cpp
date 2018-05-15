@@ -82,10 +82,10 @@ void  Enemy_MetalCraw::Draw(SDL_Texture* sprites)
 		App->render->Blit(sprites, position.x + 20, position.y + 9, &(Lights.GetCurrentFrame()));
 
 		App->render->Blit(sprites, position.x-43, position.y-6, &(Arm.GetCurrentFrame()));
-		App->render->FlippedBlit(sprites, position.x+ 39, position.y-6, &(Arm.GetCurrentFrame()));
+		App->render->BlitEx(sprites, position.x+ 39, position.y-6, &(Arm.GetCurrentFrame()));
 
 		App->render->Blit(sprites, position.x - 3, position.y + 35, &Leg);
-		App->render->FlippedBlit(sprites, position.x +27, position.y + 35, &Leg);
+		App->render->BlitEx(sprites, position.x +27, position.y + 35, &Leg);
 
 		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
 	}
