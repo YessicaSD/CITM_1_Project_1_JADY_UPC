@@ -11,6 +11,7 @@
 
 #define SHIP_COLLIDERS_NUM 49//The number of colliders the ship is made of (see Docs>shipColliders.psd)
 
+
 typedef struct _Mix_Music Mix_Music;
 
 class Module5lvlScene : public Module

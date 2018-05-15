@@ -155,7 +155,8 @@ bool ModuleEnemies::CleanUp()
 {
 	LOG("Freeing all enemies");
 
-	App->textures->Unload(sprites);
+	App->textures->Unload(nml_sprites);
+	App->textures->Unload(dmg_sprites);
 
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{

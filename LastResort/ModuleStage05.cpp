@@ -1,3 +1,4 @@
+#include "ModuleStage05.h"
 #include "SDL\include\SDL.h"
 #include "Player1.h"
 #include "Player2.h"
@@ -11,13 +12,14 @@
 #include "ModuleCollision.h"
 #include "ModuleGameOver.h"
 #include "ModuleStageClear.h"
-#include "ModuleStage05.h"
 #include "ModuleStage01.h"
 #include "ModuleStage02.h"
 #include "ModuleStageFunctionality.h"
 #include "ModuleEnemies.h"
 #include "ModuleUnit.h"
 #include "ModuleInput.h"
+
+
 
 Module5lvlScene::Module5lvlScene()
 {
