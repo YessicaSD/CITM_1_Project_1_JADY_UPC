@@ -12,7 +12,7 @@ Enemy_RedBats::Enemy_RedBats(int x, int y, POWERUP_TYPE pu_t) : Enemy(x, y, pu_t
 	RedBats.PushBack({ 189,35,26,19 });
 	RedBats.PushBack({ 221,39,27,10 });
 	RedBats.PushBack({ 256,34,28,21 });
-	RedBats.speed = 0.10f;
+	RedBats.speed = 0.09f;
 	animation = &RedBats;
 	collider = App->collision->AddCollider({ x, y, 27, 25 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 	original_y = y;
@@ -37,7 +37,7 @@ void Enemy_RedBats::Move()
 			wave -= 0.08f;
 	}
 
-	position.y = int(float(original_y) + (25.0f * sinf(wave)));
+	position.y = int(float(original_y) + (18.0f * sinf(wave)));
 	position.x -= 2;
 
 }

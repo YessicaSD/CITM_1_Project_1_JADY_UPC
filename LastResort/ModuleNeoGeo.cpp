@@ -80,6 +80,7 @@ update_status ModuleNeoGeo::Update()
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->Controller1[SDL_CONTROLLER_BUTTON_A] == KEY_DOWN || App->input->Controller1[SDL_CONTROLLER_BUTTON_B] == KEY_DOWN || App->input->Controller1[SDL_CONTROLLER_BUTTON_Y] == KEY_DOWN)
 	{
 		App->titleScene->titleDone = true;
+		App->ui->credits = 1;
 		App->fade->FadeToBlack(this, App->titleScene, 0.5f);
 	}
 	//We check the conditions to change animation
