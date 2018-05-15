@@ -14,8 +14,8 @@
 #include "ModuleStage05.h"
 #include "ModuleUI.h"
 #include "ModuleReady.h"
-
-
+#include "ModuleFonts.h"
+#include <stdio.h>
 
 ModuleGameTitle::~ModuleGameTitle()
 {}
@@ -41,6 +41,20 @@ bool ModuleGameTitle:: Start()
 	App->audio->ControlMUS(Titlemusic, PLAY_AUDIO);
 	//UI------------------------------------------------------------------------------------
 	App->ui->Enable();
+	if (titleDone ==true)
+	{
+		L1.current_frame = 30;
+		A2.current_frame = 30;
+		S3.current_frame = 34;
+		T4.current_frame = 31;
+		R5.current_frame = 31;
+		E6.current_frame = 32;
+		S7.current_frame = 32;
+		O8.current_frame = 32;
+		R9.current_frame = 32;
+		T10.current_frame = 32;
+		
+	}
 	return ret;
 }
 bool ModuleGameTitle::CleanUp() {
@@ -118,11 +132,20 @@ update_status ModuleGameTitle::Update() {
 			App->render->Blit(T10Texture, 238, 85, &T10.GetCurrentFrame());
 	
 	
+		if (current_time>17000 || titleDone == true)
+		App->fonts->BlitText(50, 190, 0, "SNK CORP. OF AMERICA @1992");
 	
-
-	
-	if (current_time>18000)
+	if (current_time>18000 || titleDone == true)
 	{
+
+	/*	if (time<10)
+			snprintf(str_time, 8, "TIME 0%i", time);
+		else
+		{
+			snprintf(str_time, 10, "TIME %i", time);
+		}
+		App->fonts->BlitText(50, 150, 0, str_time);
+		--time;*/
 		App->audio->ControlMUS(Titlemusic, STOP_AUDIO);
 	}
 	if (App->ui->player1 == true)
