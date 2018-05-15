@@ -82,11 +82,11 @@ update_status ModuleGameTitle::Update() {
 
 	//title letters---------------------------------------------------------------------
 	/*App->render->Blit(A2Texture, 60, 30, &A2.frames[(int)currenA2], 0.0f);*/
-	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->Controller1[SDL_CONTROLLER_BUTTON_Y] == KEY_DOWN)
 	{
 		L1.current_frame = 30;
 		A2.current_frame = 30;
-		S3.current_frame = 33;
+		S3.current_frame = 34;
 		T4.current_frame = 31;
 		R5.current_frame = 31;
 		E6.current_frame = 32;
