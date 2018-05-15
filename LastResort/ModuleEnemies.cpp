@@ -58,13 +58,13 @@ update_status ModuleEnemies::PreUpdate()
 					queue[i].spawnTime = SDL_GetTicks() + queue[i].delay;
 					queue[i].counting = true;
 				}
-				//If we reach the spawn time, we spawn the enemy!
-				if(queue[i].counting == true && SDL_GetTicks() >= queue[i].spawnTime)
-				{
-					SpawnEnemy(queue[i]);
-					queue[i].type = ENEMY_TYPES::NO_TYPE;
-					LOG("Spawning enemy at x: %d, y: %d", queue[i].x, queue[i].y);
-				}
+			}
+			//If we reach the spawn time, we spawn the enemy!
+			if (queue[i].counting == true && SDL_GetTicks() >= queue[i].spawnTime)
+			{
+				SpawnEnemy(queue[i]);
+				queue[i].type = ENEMY_TYPES::NO_TYPE;
+				LOG("Spawning enemy at x: %d, y: %d", queue[i].x, queue[i].y);
 			}
 		}
 	}
