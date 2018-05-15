@@ -67,14 +67,14 @@ public:
 	SDL_Texture* dmg_sprites = nullptr;
 
 	//Spawning
-	const int spawnMarginLeft = 50;
-	const int spawnMarginRight = 25;
-	const int spawnMarginUp = 50;
-	const int spawnMarginDown = 25;
-	const int despawnMarginLeft = spawnMarginLeft * 2;
-	const int despawnMarginRight = spawnMarginRight * 2;
-	const int despawnMarginUp = spawnMarginUp * 2;
-	const int despawnMarginDown = spawnMarginDown * 2;
+	const int spawnMarginLeft = 40;
+	const int spawnMarginRight = 30;
+	const int spawnMarginUp = 40;
+	const int spawnMarginDown = 30;
+	const int despawnMarginLeft = 200;
+	const int despawnMarginRight = 200;
+	const int despawnMarginUp = 200;
+	const int despawnMarginDown = 200;
 	// Despawn margin always needs to be a little bigger than spawn margin or otherwise enemies would be spawned and immmediately despawned
 };
 
