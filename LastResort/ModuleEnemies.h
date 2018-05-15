@@ -21,6 +21,7 @@ enum ENEMY_TYPES
 	ROTATING_TURRET,
 	PINATA,
 	PINATA_SPAWNER,
+	FRONT_TURRET,
 	MAX_ENEMY
 };
 
@@ -65,17 +66,6 @@ public:
 	SDL_Texture* sprites = nullptr;
 	SDL_Texture* nml_sprites = nullptr;
 	SDL_Texture* dmg_sprites = nullptr;
-
-	//Spawning
-	const int spawnMarginLeft = 40;
-	const int spawnMarginRight = 30;
-	const int spawnMarginUp = 40;
-	const int spawnMarginDown = 30;
-	const int despawnMarginLeft = 200;
-	const int despawnMarginRight = 200;
-	const int despawnMarginUp = 200;
-	const int despawnMarginDown = 200;
-	// Despawn margin always needs to be a little bigger than spawn margin or otherwise enemies would be spawned and immmediately despawned
 };
 
 #endif // __ModuleEnemies_H__
