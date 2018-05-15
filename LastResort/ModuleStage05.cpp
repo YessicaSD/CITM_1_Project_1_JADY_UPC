@@ -140,7 +140,6 @@ bool Module5lvlScene::Start()
 	//App->enemies->AddEnemy(REDBATS, 733, 25);
 	//App->enemies->AddEnemy(REDBATS, 758, 25);
 	//App->enemies->AddEnemy(OSCILATOR, 500, 0);
-	App->enemies->AddEnemy(BASIC, 250, 10, 1000);
 	App->enemies->AddEnemy(FRONT_TURRET, 47, 64, 0, POWERUP_TYPE::NOPOWERUP);
 
 	//Colliders--------------------------------------------------------------------------------------------------
