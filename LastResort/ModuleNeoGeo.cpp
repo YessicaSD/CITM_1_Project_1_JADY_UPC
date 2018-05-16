@@ -88,7 +88,7 @@ update_status ModuleNeoGeo::Update()
 	{
 		currentFrame = 0;
 		currentAnimation = Max330ProGearSpecLine1;
-		SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, 255);
+		currentFade = 0;
 	}
 	//- If the first rect doesn't hide Max330ProGear spec anymore
 	else if(currentAnimation == Max330ProGearSpecLine1 && cover01PosX >= proGearSpecPosX + proGearSpecWidth)
@@ -121,8 +121,7 @@ update_status ModuleNeoGeo::Update()
 				currentFade = 0;
 			}
 		}
-		SDL_SetRenderDrawColor(App->render->renderer, currentFade, currentFade, currentFade, 255);
-		SDL_RenderFillRect(App->render->renderer, NULL);
+		App->render->DrawQuad({ 0,0,SCREEN_WIDTH,SCREEN_HEIGHT }, currentFade, currentFade, currentFade, 255);
 		//Animate the logo
 		App->render->Blit(neogeoTx, 40, 52, &neogeoAnim.GetCurrentFrame());
 		//40, 52 positions calculated from the original game

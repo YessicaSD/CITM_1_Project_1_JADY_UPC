@@ -613,16 +613,13 @@ int ModuleUnit::TurnAroundToRender()
 
 void ModuleUnit::FollowingTerrain()
 {
-	//INFO: We get the currect frame so that we can get the position adjusted correctly
-	throwFrame = throwAnim.GetCurrentFrame();
-
 	switch(followTerrainDir)
 	{
 	case FTD_up:
 		//Set the position
 		position.y -= followTerrainSpeed;
-		if (ColliderIsOnRight()) { position.x = colliderToFollow->rect.x - throwFrame.w / 2; }
-		else if (ColliderIsOnLeft())  { position.x = colliderToFollow->rect.x + colliderToFollow->rect.w + throwFrame.w / 2; }
+		if (ColliderIsOnRight()) { position.x = colliderToFollow->rect.x - sphereDiameter / 2; }
+		else if (ColliderIsOnLeft())  { position.x = colliderToFollow->rect.x + colliderToFollow->rect.w + sphereDiameter / 2; }
 		//Check if it runs out of collider
 		if(position.y < colliderToFollow->rect.y)
 		{
@@ -633,8 +630,8 @@ void ModuleUnit::FollowingTerrain()
 	case FTD_down:
 		//Set the position
 		position.y += followTerrainSpeed;
-		if      (ColliderIsOnRight()) { position.x = colliderToFollow->rect.x - throwFrame.w / 2; }
-		else if (ColliderIsOnLeft()) { position.x = colliderToFollow->rect.x + colliderToFollow->rect.w + throwFrame.w / 2; }
+		if      (ColliderIsOnRight()) { position.x = colliderToFollow->rect.x - sphereDiameter / 2; }
+		else if (ColliderIsOnLeft()) { position.x = colliderToFollow->rect.x + colliderToFollow->rect.w + sphereDiameter / 2; }
 		//Check if it runs out of collider
 		if (position.y > colliderToFollow->rect.y + colliderToFollow->rect.h)
 		{
@@ -645,8 +642,8 @@ void ModuleUnit::FollowingTerrain()
 	case FTD_left:
 		//Set the position
 		position.x -= followTerrainSpeed;
-		if      (ColliderIsAbove()) { position.y = colliderToFollow->rect.y + colliderToFollow->rect.h + throwFrame.h / 2; }
-		else if (ColliderIsBellow()) { position.y = colliderToFollow->rect.y - throwFrame.h / 2; }
+		if      (ColliderIsAbove()) { position.y = colliderToFollow->rect.y + colliderToFollow->rect.h + sphereDiameter / 2; }
+		else if (ColliderIsBellow()) { position.y = colliderToFollow->rect.y - sphereDiameter / 2; }
 		//Check if it runs out of collider
 		if (position.x < colliderToFollow->rect.x)
 		{
@@ -657,8 +654,8 @@ void ModuleUnit::FollowingTerrain()
 	case FTD_right:
 		//Set the position
 		position.x += followTerrainSpeed;
-		if      (ColliderIsAbove()) { position.y = colliderToFollow->rect.y + colliderToFollow->rect.h + throwFrame.h / 27; }
-		else if (ColliderIsBellow()) { position.y = colliderToFollow->rect.y - throwFrame.h / 2; }
+		if      (ColliderIsAbove()) { position.y = colliderToFollow->rect.y + colliderToFollow->rect.h + sphereDiameter / 2; }
+		else if (ColliderIsBellow()) { position.y = colliderToFollow->rect.y - sphereDiameter / 2; }
 		//Check if it runs out of collider
 		if (position.x > colliderToFollow->rect.x + colliderToFollow->rect.w)
 		{
@@ -671,6 +668,7 @@ void ModuleUnit::FollowingTerrain()
 	UpdateUnitColliders();
 
 	//RENDER------------------------------------------------------------------
+	throwFrame = throwAnim.GetCurrentFrame();
 	App->render->Blit(
 		throwUnitTx,
 		(int)position.x - throwFrame.w / 2,
