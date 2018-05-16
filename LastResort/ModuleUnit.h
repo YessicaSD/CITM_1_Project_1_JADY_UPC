@@ -97,10 +97,15 @@ public:
 
 	//Following terrain
 	//void OnCollisionFollowingTerrain();
-	bool ColliderIsOnLeft();
+	bool ColliderIsOnLeft();//Collider to follow is on left...
 	bool ColliderIsOnRight();
 	bool ColliderIsAbove();
 	bool ColliderIsBellow();
+	void ActivateHitDetectionRight();
+	void ActivateHitDetectionLeft();
+	void ActivateHitDetectionUp();
+	void ActivateHitDetectionDown();
+	void ActivateAllHitDetection();
 
 	//Bouncing on terrain
 	//void OnCollisionBouncingOnTerrain();
