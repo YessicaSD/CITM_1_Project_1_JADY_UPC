@@ -4,6 +4,8 @@
 #include "Module.h"
 #include "Globals.h"
 
+struct SDL_Texture;
+
 class ModuleStageFunctionality : public Module
 {
 public:
@@ -32,6 +34,10 @@ public:
 	bool pressedNumPowerup = false;
 
 	Module * currentStage = nullptr;
+
+
+	SDL_Texture* PlayerTexture = nullptr;
+	SDL_Texture* SpeedAnimationTex = nullptr;
 };
 
 #endif // __ModuleStageFunctionality_H_H__

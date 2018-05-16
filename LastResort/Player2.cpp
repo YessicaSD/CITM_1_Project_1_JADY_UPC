@@ -1,10 +1,10 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModulePlayer.h"
+#include "ModuleUI.h"
 #include "Player2.h"
 #include "ModuleInput.h"
 #include "ModuleRender.h"
-#include "ModuleUI.h"
 #include "ModuleFadetoBlack.h"
 #include "ModuleUnit.h"
 
@@ -74,21 +74,7 @@ Player2::Player2() {
 }
 
 void Player2::PlayerDies() {
-
-	if (lives> 0) {
-		lives -= 1;
-		Reappear();
-	}
-	else {
-		isDead = true;
-		App->ui->player2 = false;
-		playerCol->to_delete = true;
-	}
-}
-
-void Player2::Reset_Positions() {
-	initPosition = { 40,138 };
-	position = initPosition;
+	App->ui->CheckLoseConditions(App->player2);
 }
 
 bool Player2::MoveLeft()

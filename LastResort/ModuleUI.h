@@ -8,6 +8,8 @@
 struct SDL_Texture;
 struct SDL_Rect;
 struct Mix_Chunk;
+class ModulePlayer;
+
 class ModuleUI : public Module
 {
 public:
@@ -21,27 +23,33 @@ public:
 
 	void HideUi();
 	void ShowUi();
-
+	void CheckLoseConditions(ModulePlayer *player);
 
 public:
-	char *str_score_p1= nullptr;
+	//Player data---------------------------------
+	bool player1 =false;
+	bool player2 = false;
+	enum uiState {
+		COMPLETE,
+		CONTINUE,
+		GAME_OVER,
+		PUSH_BUTTON
+	} uiP1, uiP2 ;
+	//General data--------------------------------
+	Module * currentScene = nullptr;
+	bool showUI = true;
+	int credits = 0;
+	int Continue = false;
+	char *str_score_p1 = nullptr;
 	char *str_score_p2 = nullptr;
 	char *str_lives_p1 = nullptr;
 	char *str_lives_p2 = nullptr;
 	char *str_credits = nullptr;
-	//Player data---------------------------------
-
-	bool player1 = false;
-	bool player2 = false;
-
-	bool Continue = false;
-	//General data--------------------------------
-	int credits=00;
-	bool showUI = true;
-	Mix_Chunk*coinsfx=nullptr;
-	//-------------------------------------------
-
+	//Audios-------------------------------------
+	Mix_Chunk*coinsSfx=nullptr;
+	//Textures------------------------------------
 	SDL_Texture *uiTex = nullptr;
+	//Rectangles---------------------------------
 	SDL_Rect lives_score_p1;
 	SDL_Rect live_score_p2;
 	SDL_Rect pow;

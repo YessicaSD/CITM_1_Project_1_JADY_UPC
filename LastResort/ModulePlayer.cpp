@@ -2,12 +2,14 @@
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModuleInput.h"
+#include "ModuleUI.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
+#include "ModuleStageFunctionality.h"
 #include "ModuleStageClear.h"
 #include "ModuleStage01.h"
 #include "ModuleUnit.h"
@@ -48,39 +50,38 @@ bool ModulePlayer::Start()
 	//audios-------------------------------------------------------------------------
 	init_sfx = App->audio->LoadSFX("Assets/initial_sfx.wav");
 	//textures-----------------------------------------------------------------------
-	PlayerTexture = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version																 
+	//PlayerTexture = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version		
+	//SpeedAnimationTex = App->textures->Load("Assets/Powerups/speed.png");
+
+
 	//colliders----------------------------------------------------------------------
-	InitPosition();//We set the position (before adding the collider) (note that the intial positions are set in Player1.h and Player2.h)
+	position = initPosition;//We set the position (before adding the collider) (note that the intial positions are set in Player1.h and Player2.h)
 	playerCol = App->collision->AddCollider({ position.x, position.y + 2, 24, 8 }, COLLIDER_TYPE::COLLIDER_PLAYER, this);
-	//animations----------------------------------------------------------------------
-	deathAnim.Reset();
-	SpeedAnimationTex= App->textures->Load("Assets/Powerups/speed.png");
+
 	return ret;
 }
 
 bool ModulePlayer::CleanUp()
 {
 	LOG("Unloading player assets");
-	//textures------------------------------------------------------------------
-	App->textures->Unload(PlayerTexture);
+	////textures------------------------------------------------------------------
+	//App->textures->Unload(PlayerTexture);
+	//App->textures->Unload(SpeedAnimationTex);
 	//audios-------------------------------------------------------------------------
 	App->audio->UnloadSFX(init_sfx);
 	return true;
 }
 
 void ModulePlayer::Reappear() {
+	playerCol = App->collision->AddCollider({ position.x, position.y + 2, 24, 8 }, COLLIDER_TYPE::COLLIDER_PLAYER, this);
+	position = initPosition;
 	powerupUpgrades = 0;
 	currentPowerUp = POWERUP_TYPE::NOPOWERUP;
 	shipAnimations = ShipAnimations::Initial;
 	isShooting = false;
 	shoot = false;
 	canMove = false;
-	deathAnim.Reset();
-	InitPosition();
-}
 
-void ModulePlayer::InitPosition() {
-	position = initPosition;
 }
 
 
@@ -96,6 +97,8 @@ update_status ModulePlayer::PreUpdate()
 
 update_status ModulePlayer::Update()
 {
+	PlayerTexture = App->stageFunctionality->PlayerTexture;
+	SpeedAnimationTex = App->stageFunctionality->SpeedAnimationTex;
 	//Debug Modes----------------------------------------------------------------------
 	if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN)
 	{
@@ -205,22 +208,20 @@ void ModulePlayer::ShipAnimation() {
 		}
 		//Draw ship--------------------------------------------------
 		current_animation = &shipAnim.frames[currentFrame]; //It set the animation frame 
-
-		//1- Render the texture
 		App->render->Blit(PlayerTexture, position.x, position.y, current_animation);
-		////2- Render the lightened texture above it
-		//SDL_SetRenderDrawBlendMode(App->render->renderer, SDL_BLENDMODE_ADD);
-		//SDL_SetTextureColorMod(PlayerTexture, 255, 255, 255);
-		//App->render->Blit(PlayerTexture, position.x, position.y, current_animation);
-		////3- Put everything back to normal
-		//SDL_SetRenderDrawBlendMode(App->render->renderer, SDL_BLENDMODE_NONE);
-		//SDL_SetTextureColorMod(PlayerTexture, 0, 0, 0);
-		//https://forums.libsdl.org/viewtopic.php?p=51593
+
 		break;
 
 	case Death:
 		if (deathAnim.finished == true)
 		{
+			isDying = false;
+			deathAnim.Reset();
+			shipAnimations = None;
+			lives -= 1;
+			if (lives < 0) {
+				isDead = true;
+			}
 			PlayerDies();
 		}
 		else if (isDying)
@@ -231,13 +232,18 @@ void ModulePlayer::ShipAnimation() {
 		}
 		break;
 
+	case None:
+		break;
+
+
 	}
 }
 
 
 void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
 {
-	App->particles->AddParticle(App->particles->death_explosion, position.x, position.y , PlayerTexture, COLLIDER_NONE);
+	playerCol->to_delete = true;
+	App->particles->AddParticle(App->particles->death_explosion, position.x , position.y , PlayerTexture);
 	isDying = true;
 	canMove = false;
 	shipAnimations = ShipAnimations::Death;

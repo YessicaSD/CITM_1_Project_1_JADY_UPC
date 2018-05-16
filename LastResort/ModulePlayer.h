@@ -29,7 +29,8 @@ enum ShipAnimations
 {
 	Initial,
 	Movement,
-	Death
+	Death,
+	None
 };
 
 class ModulePlayer : public Module
@@ -42,11 +43,12 @@ public:
 	update_status PreUpdate();
 	update_status Update();
 	bool CleanUp();
-	void MovementInput(); //Added 
-	void ShotInput(); //Added 
 	void OnCollision(Collider*, Collider*);
+
+	//Added-----------------------------
 	void Reappear();
-	void InitPosition();
+	void MovementInput(); 
+	void ShotInput();  
 	void ShipAnimation();
 
 	//Functions that will be rewritten in each player
@@ -58,7 +60,6 @@ public:
 	virtual bool Charge() = 0;
 	virtual bool ReleaseCharge() = 0;
 	virtual bool Lock() = 0;
-	virtual void Reset_Positions() = 0;
 	virtual void PlayerDies() = 0;
 	virtual void KillUnit() = 0;
 
@@ -72,7 +73,7 @@ public:
 	iPoint initPosition;
 	float movementSpeed = 2;
 	//--------States--------------------------------
-	bool isDead;
+	bool isDead = true;
 	bool isAppearing;
 	bool isDying;
 	bool canMove;

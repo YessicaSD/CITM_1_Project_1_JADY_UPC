@@ -139,11 +139,7 @@ update_status ModuleContinue::Update() {
 		time_finished = true;
 		App->fade->FadeToBlack(this, App->gameoverScene, 0.0f);
 	}
-	//Input--------------------------------------------------------------------------
-	if (App->ui->player1==true || App->ui->player2 == true)
-	{
-		App->fade->FadeToBlack(this, App->stage05, 0.5f);
-	}
+
 	return UPDATE_CONTINUE;
 }
 

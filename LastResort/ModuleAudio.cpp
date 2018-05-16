@@ -69,12 +69,14 @@ bool ModuleAudio::CleanUp()
 	for (uint i = 0; i < MAX_SOUNDEFECTS; ++i) {
 		if (sfx[i] != nullptr) {
 			Mix_FreeChunk(sfx[i]);
+			break;
 		}
 	}
 
 	for (uint i = 0; i < MAX_MUSICS; ++i) {
 		if (musics[i] != nullptr) {
 			Mix_FreeMusic(musics[i]);
+			break;
 		}
 	}
 
@@ -199,8 +201,6 @@ bool ModuleAudio::ControlMUS(Mix_Music* music, Audio_State state) {
 		case STOP_AUDIO:
 			if (!Mix_PausedMusic())
 				Mix_PauseMusic();
-			else
-				LOG("Music is already stopped");
 			break;
 
 		default:

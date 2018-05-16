@@ -16,6 +16,7 @@
 #include "ModuleStage02.h"
 #include "ModuleStageFunctionality.h"
 #include "ModuleEnemies.h"
+#include "ModuleUI.h"
 #include "ModuleUnit.h"
 #include "ModuleInput.h"
 
@@ -115,6 +116,7 @@ bool Module5lvlScene::Start()
 	//Enable ---------------------------------------------------------------------
 	App->stageFunctionality->Enable();
 	App->stageFunctionality->currentStage = this;
+	App->ui->currentScene = this;
 
 	//Set the spawn pos (if we don't do it, enemies will be inicialized in a incorrect position)----------------
 	shipPos = shipOffset;
@@ -136,22 +138,26 @@ bool Module5lvlScene::Start()
 
 	//Enemies ---------------------------------------------------------------------------------------------------
 	//INFO: We'll calculate the x and y positions based on the position of the ship in Docs>ship.psd
-	/*App->enemies->AddEnemy(POWERDROPPER, 360, 470, HOMING);*/
-	//App->enemies->AddEnemy(POWERDROPPER, 600, 30, LASER);
-	//App->enemies->AddEnemy(REDBATS, 658, 25);
-	//App->enemies->AddEnemy(REDBATS, 683, 25);
-	//App->enemies->AddEnemy(REDBATS, 708, 25);
-	//App->enemies->AddEnemy(REDBATS, 733, 25);
-	//App->enemies->AddEnemy(REDBATS, 758, 25);
+	App->enemies->AddEnemy(POWERDROPPER, -88, 260, HOMING);
+	App->enemies->AddEnemy(POWERDROPPER, 180, 280, LASER);
+	App->enemies->AddEnemy(REDBATS, 250, 270);
+	App->enemies->AddEnemy(REDBATS, 275, 270);
+	App->enemies->AddEnemy(REDBATS, 300, 270);
+	App->enemies->AddEnemy(REDBATS, 325, 270);
+	App->enemies->AddEnemy(REDBATS, 345, 270);
+	App->enemies->AddEnemy(REDBATS, 325, -5);
+	App->enemies->AddEnemy(REDBATS, 390, -5);
 	//App->enemies->AddEnemy(OSCILATOR, 500, 0);
 	
 	//- FINAL POSITION ENEMIES
-	App->enemies->AddEnemy(FRONT_TURRET, 47, 64, 0, POWERUP_TYPE::NOPOWERUP);
+	App->enemies->AddEnemy(FRONT_TURRET, 47, 64, 5000, POWERUP_TYPE::NOPOWERUP);
 
 	//- TEST ENEMIES
+
 	App->enemies->AddEnemy(BASIC, 250, 10, 1000);
 	App->enemies->AddEnemy(OSCILATOR, -47, 470);
 	App->enemies->AddEnemy(PINATA, 150, 140, 0, POWERUP_TYPE::NOPOWERUP);
+
 
 	//Colliders--------------------------------------------------------------------------------------------------
 	for(int i = 0; i < SHIP_COLLIDERS_NUM; ++i)

@@ -1,6 +1,7 @@
 #include "Application.h"
 #include "ModuleStageFunctionality.h"
 #include "ModuleInput.h"
+#include "ModuleTextures.h"
 #include "ModuleEnemies.h"
 #include "Player1.h"
 #include "Player2.h"
@@ -32,36 +33,52 @@ ModuleStageFunctionality::~ModuleStageFunctionality()
 
 bool ModuleStageFunctionality::Start()
 {
-	if(App->ui->player1==true)
-	App->player1->Enable();
-	if (App->ui->player2 == true)
-	App->player2->Enable();
+	if (App->ui->player1 == true) {
+		App->player1->Enable();
+		App->player1->isDead = false;
+	}
+
+	if (App->ui->player2 == true) {
+		App->player2->Enable();
+		App->player2->isDead = false;
+	}
+	
+	//textures-----------------------------------------------------------------------
+	PlayerTexture = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version		
+	SpeedAnimationTex = App->textures->Load("Assets/Powerups/speed.png");
+
 	App->particles->Enable();
 	App->collision->Enable();
 	App->enemies->Enable();
 	App->powerups->Enable();
-	App->ui->Enable();
 	App->ui->ShowUi();
 	return true;
 }
 
 bool ModuleStageFunctionality::CleanUp()
 {
-	App->player1->Disable();
-	App->player2->Disable();
+	if (App->ui->player1 == true) {
+		App->player1->Disable();
+		App->player1->isDead = true;
+		
+	}
+		
+	if (App->ui->player2 == true) {
+		App->player2->Disable();
+		App->player2->isDead = true;
+		
+	}
+		
 	App->particles->Disable();
 	App->collision->Disable();
 	App->enemies->Disable();
 	App->powerups->Disable();
+	App->ui->HideUi();
 	return true;
 }
 
 update_status ModuleStageFunctionality::PreUpdate()
 {
-	if (App->ui->player1 == true)
-		App->player1->Enable();
-	if (App->ui->player2 == true)
-		App->player2->Enable();
 	Debugging();
 	return UPDATE_CONTINUE;
 }

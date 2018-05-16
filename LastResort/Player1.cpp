@@ -1,9 +1,9 @@
 #include "Globals.h"
 #include "Application.h"
 #include "Player1.h"
+#include "ModuleUI.h"
 #include "ModuleInput.h"
 #include "ModuleRender.h"
-#include "ModuleUI.h"
 #include "ModuleFadetoBlack.h"
 #include "ModuleUnit.h"
 
@@ -64,21 +64,9 @@ Player1::Player1() {
 }
 
 void Player1::PlayerDies() {
-	if (lives > 0) {
-		lives -= 1;
-		Reappear();
-	}
-	else {
-		isDead = true;
-		App->ui->player1 = false;
-		playerCol->to_delete = true;
-	}
+	App->ui->CheckLoseConditions(App->player1);
 }
 
-void Player1::Reset_Positions() {
-	//initPosition = { 40,74 };
-	position = initPosition;
-}
 //MOVEMENT INPTUT
 bool Player1::MoveLeft()
 {
