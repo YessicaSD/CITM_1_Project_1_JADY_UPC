@@ -11,8 +11,8 @@
 Enemy_Pinata::Enemy_Pinata(int x, int y, POWERUP_TYPE pu_t) : Enemy(x, y, pu_t)
 {
 	//Position--------------------------------------
-	initialX = x - (int)App->stage05->spawnPos.x;//We get the x position
-	initialY = y - (int)App->stage05->spawnPos.y;//We get the y position
+	initialX = x - App->stage05->spawnPos.x;//We get the x position
+	initialY = y - App->stage05->spawnPos.y;//We get the y position
 	//Movement--------------------------------------
 	pinataMov.originPoint = { 0,0 };
 	pinataMov.PushBack({ 0,90 }, 150);
