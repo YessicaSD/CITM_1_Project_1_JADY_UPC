@@ -818,10 +818,10 @@ bool ModuleUnit::ColliderIsOnRight()
 
 bool ModuleUnit::ColliderIsAbove()
 {
-	return false /*(colliderToFollow->rect.y < position.y)*/;
+	return (colliderToFollow->rect.y + colliderToFollow->rect.h < position.y);
 }
 
 bool ModuleUnit::ColliderIsBellow()
 {
-	return false /*(colliderToFollow->rect.y + colliderToFollow->rect.h > position.y)*/;
+	return (colliderToFollow->rect.y > position.y);
 }

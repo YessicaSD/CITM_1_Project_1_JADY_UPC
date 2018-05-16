@@ -159,7 +159,8 @@ update_status ModuleUI::Update() {
 			credits += 1;
 	}
 
-
+	//Spawn player 1--------------------------------------------------------------------------
+	//INFO: We also check if the debugging keys are not pressed because we don't want to acidentally spawn a player if we select a debugging element
 	if (App->input->keyboard[SDL_SCANCODE_1] &&
 		App->input->keyboard[SDL_SCANCODE_F5] == KEY_IDLE &&
 		App->input->keyboard[SDL_SCANCODE_F6] == KEY_IDLE &&
@@ -176,8 +177,8 @@ update_status ModuleUI::Update() {
 		}
 
 	}
-
-	//If we press 2 and we're not debugging
+	//Spawn player 2--------------------------------------------------------------------------
+	//INFO: We also check if the debugging keys are not pressed because we don't want to acidentally spawn a player if we select a debugging element
 	if (App->input->keyboard[SDL_SCANCODE_2] &&
 		App->input->keyboard[SDL_SCANCODE_F5] == KEY_IDLE &&
 		App->input->keyboard[SDL_SCANCODE_F6] == KEY_IDLE &&
