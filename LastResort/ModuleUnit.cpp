@@ -621,7 +621,7 @@ void ModuleUnit::FollowingTerrain()
 		if (ColliderIsOnRight()) { position.x = colliderToFollow->rect.x - sphereDiameter / 2; }
 		else if (ColliderIsOnLeft())  { position.x = colliderToFollow->rect.x + colliderToFollow->rect.w + sphereDiameter / 2; }
 		//Check if it runs out of collider
-		if(position.y < colliderToFollow->rect.y)
+		if(position.y + sphereDiameter/2 < colliderToFollow->rect.y)
 		{
 			if (ColliderIsOnRight())
 			{
@@ -641,7 +641,7 @@ void ModuleUnit::FollowingTerrain()
 		if      (ColliderIsOnRight()) { position.x = colliderToFollow->rect.x - sphereDiameter / 2; }
 		else if (ColliderIsOnLeft()) { position.x = colliderToFollow->rect.x + colliderToFollow->rect.w + sphereDiameter / 2; }
 		//Check if it runs out of collider
-		if (position.y > colliderToFollow->rect.y + colliderToFollow->rect.h)
+		if (position.y - sphereDiameter/2 > colliderToFollow->rect.y + colliderToFollow->rect.h)
 		{
 			if (ColliderIsOnRight())
 			{
@@ -661,7 +661,7 @@ void ModuleUnit::FollowingTerrain()
 		if      (ColliderIsAbove()) { position.y = colliderToFollow->rect.y + colliderToFollow->rect.h + sphereDiameter / 2; }
 		else if (ColliderIsBellow()) { position.y = colliderToFollow->rect.y - sphereDiameter / 2; }
 		//Check if it runs out of collider
-		if (position.x < colliderToFollow->rect.x)
+		if (position.x + sphereDiameter/2 < colliderToFollow->rect.x)
 		{
 			if (ColliderIsAbove())
 			{
@@ -681,7 +681,7 @@ void ModuleUnit::FollowingTerrain()
 		if      (ColliderIsAbove()) { position.y = colliderToFollow->rect.y + colliderToFollow->rect.h + sphereDiameter / 2; }
 		else if (ColliderIsBellow()) { position.y = colliderToFollow->rect.y - sphereDiameter / 2; }
 		//Check if it runs out of collider
-		if (position.x > colliderToFollow->rect.x + colliderToFollow->rect.w)
+		if (position.x - sphereDiameter/2 > colliderToFollow->rect.x + colliderToFollow->rect.w)
 		{
 			if (ColliderIsAbove())
 			{
@@ -710,7 +710,6 @@ void ModuleUnit::FollowingTerrain()
 
 void ModuleUnit::OnCollision(Collider* collider1, Collider* collider2)
 {
-	LOG("Collision 0");
 	if(unitPhase == UnitPhase::throwing || unitPhase == UnitPhase::followingTerrain)
 	{
 		if (collider1 == hitDetectionUp)
@@ -802,7 +801,6 @@ void ModuleUnit::OnCollision(Collider* collider1, Collider* collider2)
 		}
 		if (collider1 == hitDetectionRight)
 		{
-			LOG("Collision on right");
 			//If it hadn't hit anything
 			if (followTerrainDir == FollowingTerrainDirection::FTD_notFollowing)
 			{
@@ -814,12 +812,10 @@ void ModuleUnit::OnCollision(Collider* collider1, Collider* collider2)
 			//If it was moving right
 			else if (followTerrainDir == FollowingTerrainDirection::FTD_right)
 			{
-				LOG("Collision 2");
 				if (collider2 != colliderToFollow)
 				{
 					if (ColliderIsAbove())
 					{
-						LOG("Collision 3");
 						followTerrainDir = FollowingTerrainDirection::FTD_down;
 						ActivateHitDetectionDown();
 					}
