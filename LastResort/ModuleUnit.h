@@ -1,52 +1,53 @@
 #ifndef __ModuleUnit_H__
 #define __ModuleUnit_H__
 
+//------------------------------MODULE UNIT BASIC EXPLANATION----------------------------------
+//---------------------------------------------------------------------------------------------
+//This module takes care of the unit behaviour in the game.
+//---------------------------------------------------------------------------------------------
+//The unit has 5 distinct phases
+//- Rotating: default state. Unit rotates around the player ship
+//- Throwing: if you charge the unit, it will be launched respective to its position with the player ship
+//- Following terrain: activated when orange unit collides. Unit follows the terrain
+//- Bouncing on terrain: activated when blue unit collides. Unit bounces on terrain
+//- Returning: unit returns to the center of the player
+//- Positioning: unit positions itself from the center of the player to the rotation it had
+//----------------------------------------ROTATION---------------------------------------------
+//The unit rotates in 2 different ways:
+//- Around the player ship, which changes its position. We'll call this rotation "orbit"
+//- Around its own center, which changes where it aims. We'll call this rotation "turn around"
+//- It also has an animation simulating a rotation on the sphere part. We'll call this "spin"
+//CONSIDERATIONS
+//- The rotations are mesured in radians, not in degrees
+//-	It's very important to note that the y coordinates are inverted.
+//	So for example if a 45º angle would instead really be 315º angle.
+//- ORBIT
+//  - The unit rotates around the player's ship we point to with playerToFollow.
+//  - The unit will always orbit to the opposite direction to where we're going.
+//	  For example, if we move to the right it will rotate to the left.
+//  - The unit can rotate clock wise or counter clock wise.
+//  - It will rotate in the way which it has to travel less distance to get to its target position.
+//  - If the distance is the same counter clock wise and clock wise, it will prioritize rotatating counter clock wise.
+//- TURN AROUND
+//  - The unit has 16 different axis or places where it can aim.
+//  - The unit will turn around twice as fast as it orbits around the player ship,
+//    which means that if the unit is on the right side of the ship and we move to the right, when it is just above the ship, the unit will already be pointing towards the left.
+//- SPIN
+//  - The unit has 8 different sprites for each of its axis
+//  - We created a struct called "SpinAnimation" which will store the 8 different sprites for the 16 different places where it can aim
+//    (basically its the same as the animation class but it allows us to have better control over its animations)
+
 #include "Module.h"
 #include "Globals.h"
 #include "Animation.h"
 #include "p2Point.h"
 #include "ModulePlayer.h"
 
-//MODULE UNIT BASIC EXPLANATION
-//---------------------------------------------------------------------------------------------
-//This module takes care of the unit behaviour in the game.
-//The unit rotates in 2 different ways:
-//- Around the player ship, which changes its position. We'll call this rotation "orbit"
-//- Around its own center, which changes where it aims. We'll call this rotation "turn around"
-//It also has an animation simulating a rotation on the sphere part. We'll call this "spin"
-//---------------------------------------------------------------------------------------------
-//CONSIDERATIONS
-//- The rotations are mesured in radians, not in degrees
-//-	It's very important to note that the y coordinates are inverted.
-//	So for example if a 45º angle would instead really be 315º angle.
-//---------------------------------------------------------------------------------------------
-//ORBIT
-//- The unit rotates around the player's ship we point to with playerToFollow.
-//-	The unit will always orbit to the opposite direction to where we're going.
-//	For example, if we move to the right it will rotate to the left.
-//- The unit can rotate clock wise or counter clock wise.
-//- It will rotate in the way which it has to travel less distance to get to its target position.
-//- If the distance is the same counter clock wise and clock wise, it will prioritize rotatating counter clock wise.
-//TURN AROUND
-//- The unit has 16 different axis or places where it can aim.
-//- The unit will turn around twice as fast as it orbits around the player ship,
-//	which means that if the unit is on the right side of the ship and we move to the right, when it is just above the ship, the unit will already be pointing towards the left.
-//SPIN
-//- The unit has 8 different sprites for each of its axis
-//-	We created a struct called "SpinAnimation" which will store the 8 different sprites for the 16 different places where it can aim
-//	(basically its the same as the animation class but it allows us to have better control over its animations)
-
 #define SPIN_FRAMES 8
 #define UNIT_AXIS 16
 
 struct SDL_Texture;
 struct Collider;
-
-enum Angle
-{
-	//S (south), N (north), E (east), W (west)
-	E = 0, ESE, SE, SSE, S, SSW, SW, WSW, W, WNW, NW, NNW, N, NNE, NE, ENE
-};
 
 enum UnitPhase
 {
@@ -55,7 +56,13 @@ enum UnitPhase
 	followingTerrain,
 	bouncingOnTerrain,
 	returning,
-	positioning//Returning from the center to the position at which it orbits around the player
+	positioning
+};
+
+enum Angle
+{
+	//S (south), N (north), E (east), W (west)
+	E = 0, ESE, SE, SSE, S, SSW, SW, WSW, W, WNW, NW, NNW, N, NNE, NE, ENE
 };
 
 enum FollowingTerrainDirection
@@ -97,6 +104,7 @@ public:
 	void OnCollisionThrowing(Collider*, Collider*);
 	void OnCollisionFollowingTerrain(Collider*, Collider*);
 	void OnCollisionBouncingOnTerrain(Collider*, Collider*);
+	void CheckPowerDamage(Collider*, Collider*);//Checks if it must return because it has killed many enemies
 
 	//Rotating
 	void RotateTo(float, float&, float);//Increases a rotation until it reaches its target rotation
@@ -108,6 +116,10 @@ public:
 	bool ColliderIsOnRight();//Returns true if collider to follow is on the right of the unit
 	bool ColliderIsAbove();//Returns true if collider to follow is above of the unit
 	bool ColliderIsBellow();//Returns true if collider to follow is bellow of the unit
+
+	//Returning
+	void CheckReturnTime(Uint32);
+	void CheckPlayerClose();
 
 	//Change color
 	void MakeUnitBlue();
@@ -158,8 +170,8 @@ private:
 	SDL_Texture* throwUnitBlueTx = nullptr;
 	float power = 0;
 	const float powerSpeed = 0.01f;
+	int powerDamage = 0;//The damage it can make
 	Uint32 shootTime;
-	int timeToReturn = 1000;
 	const float throwingSpeed = 7;
 	const float returningSpeed = 7;
 	const float positioningSpeed = 7;
@@ -178,6 +190,6 @@ private:
 	//Following terrain
 	FollowingTerrainDirection followTerrainDir = FTD_notFollowing;
 	Collider* colliderToFollow = nullptr;
-	int followTerrainSpeed = 1;
+	int followTerrainSpeed = 4;
 };
 #endif

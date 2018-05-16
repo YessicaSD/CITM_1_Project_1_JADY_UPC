@@ -4,7 +4,10 @@
 #include "ModuleTextures.h"
 #include "ModuleCollision.h"
 #include "ModuleRender.h"
+#include "Enemy.h"
+#include "ModuleEnemies.h"
 #include "Player1.h"
+#include "Player2.h"
 #include <stdio.h>
 #include <math.h>
 #include "SDL\include\SDL.h"
@@ -260,15 +263,15 @@ update_status ModuleUnit::Update()
 	case UnitPhase::throwing:
 		Throwing();
 		break;
-	case UnitPhase::returning:
-		Returning();
-		break;
 	case UnitPhase::followingTerrain:
 		FollowingTerrain();
 		break;
 	//case UnitPhase::bouncingOnTerrain:
 	//	BouncingTerrain();
 	//	break;
+	case UnitPhase::returning:
+		Returning();
+		break;
 	case UnitPhase::positioning:
 		Positioning();
 		break;
@@ -412,10 +415,6 @@ void ModuleUnit::Throwing()
 	position.x += cosf(currentOrbit) * throwingSpeed;
 	position.y += sinf(currentOrbit) * throwingSpeed;
 	UpdateUnitColliders();
-	if (SDL_GetTicks() > shootTime + timeToReturn)
-	{
-		unitPhase = UnitPhase::returning;
-	}
 	//RENDER------------------------------------------------------------------
 	throwFrame = throwAnim.GetCurrentFrame();
 	App->render->Blit(
@@ -423,6 +422,8 @@ void ModuleUnit::Throwing()
 		(int)position.x - throwFrame.w / 2,
 		(int)position.y - throwFrame.h / 2,
 		&throwFrame);
+	//Check if we need to return by time--------------------------------------
+	CheckReturnTime(1000);//1 second
 }
 
 void ModuleUnit::Returning()
@@ -674,18 +675,59 @@ void ModuleUnit::FollowingTerrain()
 		(int)position.x - throwFrame.w / 2,
 		(int)position.y - throwFrame.h / 2,
 		&throwFrame);
+
+	//Check if it should return by time---------------------------------------
+	CheckReturnTime(5000);//5 seconds
+	//Check if it should return because it's too close to the player----------
+	CheckPlayerClose();
 }
 
 void ModuleUnit::OnCollision(Collider* collider1, Collider* collider2)
 {
+	//TO DO: Decide (unit not be a killing machine, and work better with powerDamage)
+	//- We have two ways of handling collisions with the unit
+	//1- Have matrix[COLLIDER_ENEMY][COLLIDER_UNIT] be false
+	//and use collider2->callback->OnCollision(); for when its rotating (maybe only call it every x time)
+	//Possible problems (it make check collisions twice per frame =/ for all enemy colliders, although if they are deleted this should be no problem)
+	//2- Have an if in collider enemy
+	//Check if collider2->type is COLLIDER_UNIT
+	//Start a timer, and if it's less than the timer don't do damage
+	//In summary, have it in ModuleUnit or in ModuleEnemies
+	//3- Have hp and life be a float, set damage on the unit to be 0.1, so that effectively it will do damage every frame, but very little
+
 	switch(unitPhase)
 	{
+	//case UnitPhase::rotating:
+	//	//Simply does damage, no need to write anything
+	//	break;
 	case UnitPhase::throwing:
 		OnCollisionThrowing(collider1, collider2);
+		//CheckPowerDamage(collider1, collider2);
 		break;
 	case UnitPhase::followingTerrain:
 		OnCollisionFollowingTerrain(collider1, collider2);
+		//CheckPowerDamage(collider1, collider2);
 		break;
+	case UnitPhase::bouncingOnTerrain:
+		//Not implemented yet
+		break;
+	//case UnitPhase::returning:
+	//	//Simply does damage, no need to write anything
+	//	break;
+	//case UnitPhase::positioning:
+	//	//Simply does damage, no need to write anything
+	//	break;
+	}
+
+	//Right now it works in the following way
+	//- If you hit an enemy or time limit passes the ball returns
+	//However in the game it's not exactly like this
+	if(unitPhase == UnitPhase::throwing || unitPhase == UnitPhase::followingTerrain || unitPhase == UnitPhase::followingTerrain)
+	{
+		if (collider1->type == COLLIDER_TYPE::COLLIDER_UNIT && collider2->type == COLLIDER_ENEMY)
+		{
+			unitPhase = UnitPhase::returning;
+		}
 	}
 }
 
@@ -801,3 +843,41 @@ bool ModuleUnit::ColliderIsBellow()
 {
 	return (colliderToFollow->rect.y > position.y);
 }
+
+void ModuleUnit::CheckReturnTime(Uint32 time)
+{
+	if (SDL_GetTicks() > shootTime + time)
+	{
+		unitPhase = UnitPhase::returning;
+	}
+}
+
+void ModuleUnit::CheckPlayerClose()
+{
+	if(sqrt(pow(position.x - playerToFollow->position.x + playerCenter.x, 2) + pow(position.y - playerToFollow->position.y + playerCenter.y, 2)) < 20)//20 = distance to return
+	{
+		unitPhase = UnitPhase::returning;
+	}
+}
+
+//void ModuleUnit::CheckPowerDamage(Collider* collider1, Collider * collider2)
+//{
+//	//If it's an enemy touching the unit
+//	if(collider1->type == COLLIDER_TYPE::COLLIDER_UNIT && collider2 -> type == COLLIDER_TYPE::COLLIDER_ENEMY)
+//	{
+//		Enemy* auxEnemy = nullptr;
+//		auxEnemy == App->enemies->GetEnemyFromCollider(collider2);
+//		//If auxEnemy is nullptr (the function returns nullptr if it doesn't find any enemies)
+//		if(auxEnemy != nullptr)
+//		{
+//			//Take enemy health from the power damage
+//			powerDamage -= auxEnemy->hp;
+//			//TO DO: decrement enemy health (first decide how are we going to handle collision with enemies on the unit)
+//			//Check if we ran out of power damage
+//			if (powerDamage <= 0)
+//			{
+//				unitPhase = UnitPhase::returning;
+//			}
+//		}
+//	}
+//}
