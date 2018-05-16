@@ -7,12 +7,45 @@
 
 Enemy_RotatingTurret::Enemy_RotatingTurret(int x, int y, POWERUP_TYPE pu_t) : Enemy(x, y, pu_t)
 {
-	//animation = &basicenemy;
+	//Position
+
+	//Animation
+	//animation = &rotatingTurretAnim;
 	//collider = App->collision->AddCollider({ x, y, 32, 16 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 }
 
 void Enemy_RotatingTurret::Move()
 {
+	//Movement-------------------------------------------------------------------
+	//- Lock position
+
+
+
+	//Shoot----------------------------------------------------------------------
+	//- Select which player we need to follow
+	//if()
+	//{
+
+	//}
+	//If(sqrt((pow(App->player1->position.x – position.x, 2) + pow(App->player2->position.y – position.y))<)
+	//			//Checkejar que estigui enabled
+	//		{
+	//			playerToFollow = App->player2;
+	//		}
+	//		Else
+	//		{
+	//			playerToFollow = App->player1;
+	//		}
+
+	//Move()
+	//{
+	//	//Select which player we need to follow
+	//	
+	//		//Then check rotation from that player to the turret
+	//		//Render
+	//		//Shoot every x time? Or when it fixes the position?
+	//}
+
 	//Calculate the rotation as if it was a triangle
 	//int adjacentSide;
 	//int oppositeSide;
@@ -24,4 +57,6 @@ void Enemy_RotatingTurret::Move()
 	//{
 
 	//}
+
+	//ModulePlayer playerToFollow;
 }

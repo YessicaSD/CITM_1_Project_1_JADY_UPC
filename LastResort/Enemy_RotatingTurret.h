@@ -10,7 +10,8 @@ public:
 	void Move();
 
 private:
-	SDL_Rect rotatingTurretAnim[8];
+	Animation rotatingTurretAnim;
+	iPoint targetPlayerPos;
 	int rotation;
 };
 
