@@ -623,16 +623,8 @@ void ModuleUnit::FollowingTerrain()
 		//Check if it runs out of collider
 		if(position.y + sphereDiameter/2 < colliderToFollow->rect.y)
 		{
-			if (ColliderIsOnRight())
-			{
-				followTerrainDir = FollowingTerrainDirection::FTD_right;
-				ActivateHitDetectionRight();
-			}
-			else if (ColliderIsOnLeft())
-			{
-				followTerrainDir = FollowingTerrainDirection::FTD_left;
-				ActivateHitDetectionLeft();
-			}
+			if      (ColliderIsOnRight()) { followTerrainDir = FollowingTerrainDirection::FTD_right; }
+			else if (ColliderIsOnLeft())  { followTerrainDir = FollowingTerrainDirection::FTD_left;  }
 		}
 		break;
 	case FTD_down:
@@ -643,16 +635,8 @@ void ModuleUnit::FollowingTerrain()
 		//Check if it runs out of collider
 		if (position.y - sphereDiameter/2 > colliderToFollow->rect.y + colliderToFollow->rect.h)
 		{
-			if (ColliderIsOnRight())
-			{
-				followTerrainDir = FollowingTerrainDirection::FTD_right;
-				ActivateHitDetectionRight();
-			}
-			else if (ColliderIsOnLeft())
-			{
-				followTerrainDir = FollowingTerrainDirection::FTD_left;
-				ActivateHitDetectionLeft();
-			}
+			if      (ColliderIsOnRight()) { followTerrainDir = FollowingTerrainDirection::FTD_right; }
+			else if (ColliderIsOnLeft())  { followTerrainDir = FollowingTerrainDirection::FTD_left;  }
 		}
 		break;
 	case FTD_left:
@@ -663,16 +647,8 @@ void ModuleUnit::FollowingTerrain()
 		//Check if it runs out of collider
 		if (position.x + sphereDiameter/2 < colliderToFollow->rect.x)
 		{
-			if (ColliderIsAbove())
-			{
-				followTerrainDir = FollowingTerrainDirection::FTD_up;
-				ActivateHitDetectionUp();
-			}
-			else if (ColliderIsBellow())
-			{
-				followTerrainDir = FollowingTerrainDirection::FTD_down;
-				ActivateHitDetectionDown();
-			}
+			if      (ColliderIsAbove())  { followTerrainDir = FollowingTerrainDirection::FTD_up;   }
+			else if (ColliderIsBellow()) { followTerrainDir = FollowingTerrainDirection::FTD_down; }
 		}
 		break;
 	case FTD_right:
@@ -683,16 +659,8 @@ void ModuleUnit::FollowingTerrain()
 		//Check if it runs out of collider
 		if (position.x - sphereDiameter/2 > colliderToFollow->rect.x + colliderToFollow->rect.w)
 		{
-			if (ColliderIsAbove())
-			{
-				followTerrainDir = FollowingTerrainDirection::FTD_up;
-				ActivateHitDetectionUp();
-			}
-			else if (ColliderIsBellow())
-			{
-				followTerrainDir = FollowingTerrainDirection::FTD_down;
-				ActivateHitDetectionDown();
-			}
+			if      (ColliderIsAbove())  { followTerrainDir = FollowingTerrainDirection::FTD_up;   }
+			else if (ColliderIsBellow()) { followTerrainDir = FollowingTerrainDirection::FTD_down; }
 		}
 		break;
 	}
@@ -710,123 +678,85 @@ void ModuleUnit::FollowingTerrain()
 
 void ModuleUnit::OnCollision(Collider* collider1, Collider* collider2)
 {
-	if(unitPhase == UnitPhase::throwing || unitPhase == UnitPhase::followingTerrain)
+	switch(unitPhase)
 	{
-		if (collider1 == hitDetectionUp)
+	case UnitPhase::throwing:
+		OnCollisionThrowing(collider1, collider2);
+		break;
+	case UnitPhase::followingTerrain:
+		OnCollisionFollowingTerrain(collider1, collider2);
+		break;
+	}
+}
+
+void ModuleUnit::OnCollisionThrowing(Collider* collider1, Collider* collider2)
+{
+	if (collider1 == hitDetectionUp)
+	{
+		unitPhase = UnitPhase::followingTerrain;
+		followTerrainDir = FollowingTerrainDirection::FTD_right;
+		colliderToFollow = collider2;
+	}
+	if (collider1 == hitDetectionLeft)
+	{
+		unitPhase = UnitPhase::followingTerrain;
+		followTerrainDir = FollowingTerrainDirection::FTD_down;
+		colliderToFollow = collider2;
+	}
+	if (collider1 == hitDetectionDown)
+	{
+		unitPhase = UnitPhase::followingTerrain;
+		followTerrainDir = FollowingTerrainDirection::FTD_right;
+		colliderToFollow = collider2;
+	}
+	if (collider1 == hitDetectionRight)
+	{
+		unitPhase = UnitPhase::followingTerrain;
+		followTerrainDir = FollowingTerrainDirection::FTD_down;
+		colliderToFollow = collider2;
+	}
+}
+
+void ModuleUnit::OnCollisionFollowingTerrain(Collider* collider1, Collider* collider2)
+{
+	if (collider1 == hitDetectionUp)
+	{
+		//If it was moving up
+		if (followTerrainDir == FollowingTerrainDirection::FTD_up && collider2 != colliderToFollow)
 		{
-			//If it hadn't hit anything
-			if (followTerrainDir == FollowingTerrainDirection::FTD_notFollowing)
-			{
-				unitPhase = UnitPhase::followingTerrain;
-				followTerrainDir = FollowingTerrainDirection::FTD_right;
-				ActivateHitDetectionRight();
-				colliderToFollow = collider2;
-			}
-			//If it was moving up
-			else if (followTerrainDir == FollowingTerrainDirection::FTD_up)
-			{
-				if(collider2 != colliderToFollow)
-				{
-					if (ColliderIsOnLeft())
-					{
-						followTerrainDir = FollowingTerrainDirection::FTD_right;
-						ActivateHitDetectionRight();
-					}
-					else if (ColliderIsOnRight())
-					{
-						followTerrainDir = FollowingTerrainDirection::FTD_left;
-						ActivateHitDetectionLeft();
-					}
-					colliderToFollow = collider2;
-				}
-			}
+			if      (ColliderIsOnLeft())  { followTerrainDir = FollowingTerrainDirection::FTD_right; }
+			else if (ColliderIsOnRight()) { followTerrainDir = FollowingTerrainDirection::FTD_left;  }
+			colliderToFollow = collider2;
 		}
-		if (collider1 == hitDetectionLeft)
+	}
+	if (collider1 == hitDetectionLeft)
+	{
+		//If it was moving left
+		if (followTerrainDir == FollowingTerrainDirection::FTD_left && collider2 != colliderToFollow)
 		{
-			//If it hadn't hit anything
-			if (followTerrainDir == FollowingTerrainDirection::FTD_notFollowing)
-			{
-				unitPhase = UnitPhase::followingTerrain;
-				followTerrainDir = FollowingTerrainDirection::FTD_down;
-				ActivateHitDetectionDown();
-				colliderToFollow = collider2;
-			}
-			//If it was moving left
-			else if (followTerrainDir == FollowingTerrainDirection::FTD_left)
-			{
-				if (collider2 != colliderToFollow)
-				{
-					if (ColliderIsAbove())
-					{
-						followTerrainDir = FollowingTerrainDirection::FTD_down;
-						ActivateHitDetectionDown();
-					}
-					else if (ColliderIsBellow())
-					{
-						followTerrainDir = FollowingTerrainDirection::FTD_up;
-						ActivateHitDetectionUp();
-					}
-					colliderToFollow = collider2;
-				}
-			}
+			if      (ColliderIsAbove())  { followTerrainDir = FollowingTerrainDirection::FTD_down; }
+			else if (ColliderIsBellow()) { followTerrainDir = FollowingTerrainDirection::FTD_up;   }
+			colliderToFollow = collider2;
 		}
-		if (collider1 == hitDetectionDown)
+	}
+	if (collider1 == hitDetectionDown)
+	{
+		//If it was moving down
+		if (followTerrainDir == FollowingTerrainDirection::FTD_down && collider2 != colliderToFollow)
 		{
-			//If it hadn't hit anything
-			if (followTerrainDir == FollowingTerrainDirection::FTD_notFollowing)
-			{
-				unitPhase = UnitPhase::followingTerrain;
-				followTerrainDir = FollowingTerrainDirection::FTD_right;
-				ActivateHitDetectionRight();
-				colliderToFollow = collider2;
-			}
-			//If it was moving down
-			else if (followTerrainDir == FollowingTerrainDirection::FTD_down)
-			{
-				if (collider2 != colliderToFollow)
-				{
-					if (ColliderIsOnLeft())
-					{
-						followTerrainDir = FollowingTerrainDirection::FTD_right;
-						ActivateHitDetectionRight();
-					}
-					else if (ColliderIsOnRight())
-					{
-						followTerrainDir = FollowingTerrainDirection::FTD_left;
-						ActivateHitDetectionLeft();
-					}
-					colliderToFollow = collider2;
-				}
-			}
+			if      (ColliderIsOnLeft())  { followTerrainDir = FollowingTerrainDirection::FTD_right; }
+			else if (ColliderIsOnRight()) { followTerrainDir = FollowingTerrainDirection::FTD_left;  }
+			colliderToFollow = collider2;
 		}
-		if (collider1 == hitDetectionRight)
+	}
+	if (collider1 == hitDetectionRight)
+	{
+		//If it was moving right
+		if (followTerrainDir == FollowingTerrainDirection::FTD_right && collider2 != colliderToFollow)
 		{
-			//If it hadn't hit anything
-			if (followTerrainDir == FollowingTerrainDirection::FTD_notFollowing)
-			{
-				unitPhase = UnitPhase::followingTerrain;
-				followTerrainDir = FollowingTerrainDirection::FTD_down;
-				ActivateHitDetectionDown();
-				colliderToFollow = collider2;
-			}
-			//If it was moving right
-			else if (followTerrainDir == FollowingTerrainDirection::FTD_right)
-			{
-				if (collider2 != colliderToFollow)
-				{
-					if (ColliderIsAbove())
-					{
-						followTerrainDir = FollowingTerrainDirection::FTD_down;
-						ActivateHitDetectionDown();
-					}
-					else if (ColliderIsBellow())
-					{
-						followTerrainDir = FollowingTerrainDirection::FTD_up;
-						ActivateHitDetectionUp();
-					}
-					colliderToFollow = collider2;
-				}
-			}
+			if      (ColliderIsAbove())  { followTerrainDir = FollowingTerrainDirection::FTD_down; }
+			else if (ColliderIsBellow()) { followTerrainDir = FollowingTerrainDirection::FTD_up;   }
+			colliderToFollow = collider2;
 		}
 	}
 }
@@ -870,44 +800,4 @@ bool ModuleUnit::ColliderIsAbove()
 bool ModuleUnit::ColliderIsBellow()
 {
 	return (colliderToFollow->rect.y > position.y);
-}
-
-void ModuleUnit::ActivateHitDetectionRight()
-{
-	hitDetectionUp->type = COLLIDER_TYPE::COLLIDER_NONE;
-	hitDetectionDown->type = COLLIDER_TYPE::COLLIDER_NONE;
-	hitDetectionLeft->type = COLLIDER_TYPE::COLLIDER_NONE;
-	hitDetectionRight->type = COLLIDER_TYPE::COLLIDER_HIT_DETECTION_WALL;
-}
-
-void ModuleUnit::ActivateHitDetectionLeft()
-{
-	hitDetectionUp->type = COLLIDER_TYPE::COLLIDER_NONE;
-	hitDetectionDown->type = COLLIDER_TYPE::COLLIDER_NONE;
-	hitDetectionLeft->type = COLLIDER_TYPE::COLLIDER_HIT_DETECTION_WALL;
-	hitDetectionRight->type = COLLIDER_TYPE::COLLIDER_NONE;
-}
-
-void ModuleUnit::ActivateHitDetectionUp()
-{
-	hitDetectionUp->type = COLLIDER_TYPE::COLLIDER_HIT_DETECTION_WALL;
-	hitDetectionDown->type = COLLIDER_TYPE::COLLIDER_NONE;
-	hitDetectionLeft->type = COLLIDER_TYPE::COLLIDER_NONE;
-	hitDetectionRight->type = COLLIDER_TYPE::COLLIDER_NONE;
-}
-
-void ModuleUnit::ActivateHitDetectionDown()
-{
-	hitDetectionUp->type = COLLIDER_TYPE::COLLIDER_NONE;
-	hitDetectionDown->type = COLLIDER_TYPE::COLLIDER_HIT_DETECTION_WALL;
-	hitDetectionLeft->type = COLLIDER_TYPE::COLLIDER_NONE;
-	hitDetectionRight->type = COLLIDER_TYPE::COLLIDER_NONE;
-}
-
-void ModuleUnit::ActivateAllHitDetection()
-{
-	hitDetectionUp->type = COLLIDER_TYPE::COLLIDER_HIT_DETECTION_WALL;
-	hitDetectionDown->type = COLLIDER_TYPE::COLLIDER_HIT_DETECTION_WALL;
-	hitDetectionLeft->type = COLLIDER_TYPE::COLLIDER_HIT_DETECTION_WALL;
-	hitDetectionRight->type = COLLIDER_TYPE::COLLIDER_HIT_DETECTION_WALL;
 }

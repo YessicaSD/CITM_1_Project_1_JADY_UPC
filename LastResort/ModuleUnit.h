@@ -75,44 +75,45 @@ struct SpinAnimation
 class ModuleUnit : public Module
 {
 public:
+	
 	ModuleUnit();
 	~ModuleUnit();
 
+	//Inherited functions from Module class
 	bool Start();
-	update_status Update();//Here we'll check for input, rotate the unit, and render it
+	update_status Update();
 	bool CleanUp();
 	void OnCollision(Collider*, Collider*);
 
-	void Rotating();
+	//Unit phases
+	void Rotating();//Here we'll check for input, rotate the unit, and render it
 	void Throwing();
-	void Returning();
-	void Positioning();
 	void FollowingTerrain();
 	void BouncingOnTerrain();
+	void Returning();
+	void Positioning();
+
+	//Collision phases (collision behaves differenly depending on which phase it is)
+	void OnCollisionThrowing(Collider*, Collider*);
+	void OnCollisionFollowingTerrain(Collider*, Collider*);
+	void OnCollisionBouncingOnTerrain(Collider*, Collider*);
 
 	//Rotating
-	void RotateTo(float, float&, float);//This function increases a rotation until it reaches its target rotation
-	void LimitRotation(float &);//This function limits a rotation to positive numbers and 2*PI radians
-	int TurnAroundToRender();//This function will return an angle depending on where the unit is pointing to
+	void RotateTo(float, float&, float);//Increases a rotation until it reaches its target rotation
+	void LimitRotation(float &);//Limits a rotation to positive numbers and 2*PI radians
+	int TurnAroundToRender();//Return an angle depending on where the unit is pointing to
 
 	//Following terrain
-	//void OnCollisionFollowingTerrain();
-	bool ColliderIsOnLeft();//Collider to follow is on left...
-	bool ColliderIsOnRight();
-	bool ColliderIsAbove();
-	bool ColliderIsBellow();
-	void ActivateHitDetectionRight();
-	void ActivateHitDetectionLeft();
-	void ActivateHitDetectionUp();
-	void ActivateHitDetectionDown();
-	void ActivateAllHitDetection();
+	bool ColliderIsOnLeft();//Returns true if collider to follow is on the left of the unit
+	bool ColliderIsOnRight();//Returns true if collider to follow is on the right of the unit
+	bool ColliderIsAbove();//Returns true if collider to follow is above of the unit
+	bool ColliderIsBellow();//Returns true if collider to follow is bellow of the unit
 
-	//Bouncing on terrain
-	//void OnCollisionBouncingOnTerrain();
-
+	//Change color
 	void MakeUnitBlue();
 	void MakeUnitOrange();
 
+	//Other helper functions
 	void UpdateUnitColliders();
 
 public:
@@ -121,13 +122,12 @@ public:
 	Collider* unitCol = nullptr;
 	float currentOrbit;
 	float currentTurnAround;
-	SDL_Texture* unitTx = nullptr;
-	SDL_Texture* blueUnitTx = nullptr;
-	SDL_Texture* orangeUnitTx = nullptr;
-
 	float angleValue[UNIT_AXIS];//The value of each angle
 
 private:
+	SDL_Texture* unitTx = nullptr;
+	SDL_Texture* blueUnitTx = nullptr;
+	SDL_Texture* orangeUnitTx = nullptr;
 	const float PI = 3.141592;
 	const float orbitSpeed = 3.141592 / 27;//The speed at which the unit rotates around the player ship
 	const float turnAroundSpeed = orbitSpeed * 2;
@@ -150,9 +150,9 @@ private:
 	
 	int shotPosXDifferences[UNIT_AXIS] = {   15,  14,  12,   6,   0,  -5, -11, -13, -14, -13, -11,  -6,   0,   6,  11,  14 };//Helps us position the unit projectile at the top of its antenas
 	int shotPosYDifferences[UNIT_AXIS] = {    0,   7,  12,  14,  15,  14,  12,   6,   0,  -6, -11, -14, -14, -13, -10,  -6 };//Helps us position the unit projectile at the top of its antenas
-
-	//Shooting
 	UnitPhase unitPhase = UnitPhase::rotating;
+
+	//Throwing
 	SDL_Texture* throwUnitTx = nullptr;
 	SDL_Texture* throwUnitOrangeTx = nullptr;
 	SDL_Texture* throwUnitBlueTx = nullptr;
@@ -174,7 +174,8 @@ private:
 	Collider* hitDetectionUp;
 	Collider* hitDetectionDown;
 	const int sphereDiameter = 16;//The sphere part of the unit
-	//Follow terrain
+
+	//Following terrain
 	FollowingTerrainDirection followTerrainDir = FTD_notFollowing;
 	Collider* colliderToFollow = nullptr;
 	int followTerrainSpeed = 1;
