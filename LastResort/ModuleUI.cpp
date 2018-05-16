@@ -152,7 +152,7 @@ update_status ModuleUI::Update() {
 
 	//Credits functionality------------------------------------------------------------------------------//
 
-	if (App->input->keyboard[SDL_SCANCODE_LCTRL] == KEY_DOWN || App->input->Controller1[SDL_CONTROLLER_BUTTON_Y] == KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_LCTRL] == KEY_DOWN || App->input->Controller1[SDL_CONTROLLER_BUTTON_Y] == KEY_DOWN)
 	{
 		App->audio->ControlSFX(coinsSfx, PLAY_AUDIO);
 		if (credits < 99)
