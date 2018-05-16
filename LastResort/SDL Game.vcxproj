@@ -112,7 +112,7 @@
     <ClInclude Include="ModuleUnit.h" />
     <ClInclude Include="ModuleWindow.h" />
     <ClInclude Include="MovPath.h" />
-    <ClInclude Include="Outdoor_turret.h" />
+    <ClInclude Include="Enemy_Outdoor_turret.h" />
     <ClInclude Include="p2Point.h" />
     <ClInclude Include="Path.h" />
     <ClInclude Include="Player1.h" />
@@ -159,7 +159,7 @@
     <ClCompile Include="ModuleUI.cpp" />
     <ClCompile Include="ModuleUnit.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
-    <ClCompile Include="Outdoor_turret.cpp" />
+    <ClCompile Include="Enemy_Outdoor_turret.cpp" />
     <ClCompile Include="Player1.cpp" />
     <ClCompile Include="Player2.cpp" />
     <ClCompile Include="Powerup.cpp" />
