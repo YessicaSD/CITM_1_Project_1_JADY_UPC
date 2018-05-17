@@ -138,23 +138,32 @@ bool Module5lvlScene::Start()
 	//INFO: We'll calculate the x and y positions based on the position of the ship in Docs>ship.psd
 	//- FINAL POSITION ENEMIES
 	App->enemies->AddEnemy(FRONT_TURRET, 47, 64);
+
 	App->enemies->AddEnemy(POWERDROPPER, -88, 260, 0, POWERUP_TYPE::HOMING);
 	App->enemies->AddEnemy(POWERDROPPER, 180, 280, 0, POWERUP_TYPE::LASER);
+
 	App->enemies->AddEnemy(REDBATS, 250, 270);
 	App->enemies->AddEnemy(REDBATS, 275, 270);
 	App->enemies->AddEnemy(REDBATS, 300, 270);
 	App->enemies->AddEnemy(REDBATS, 325, 270);
-	App->enemies->AddEnemy(REDBATS, 345, 270);
-	App->enemies->AddEnemy(REDBATS, 325, -5);
-	App->enemies->AddEnemy(REDBATS, 390, -5);
-	App->enemies->AddEnemy(OUTDOOR_TURRET, 209, 15);
-	App->enemies->AddEnemy(OUTDOOR_TURRET, 249, 17);
-	App->enemies->AddEnemy(OUTDOOR_TURRET, 288, 15);
-	App->enemies->AddEnemy(OUTDOOR_TURRET, 328, 17);
+	App->enemies->AddEnemy(REDBATS, 325, 270,700,SPEED);
+
+	App->enemies->AddEnemy(REDBATS, 325, -20);
+	App->enemies->AddEnemy(REDBATS, 400, -25);
+	App->enemies->AddEnemy(REDBATS, 404, -25,800);
+	App->enemies->AddEnemy(REDBATS, 404, -25, 1400);
+	App->enemies->AddEnemy(REDBATS, 404, -25, 1800);
+
+
+	/*App->enemies->AddEnemy(REDBATS, 390, -5);*/
+
+	App->enemies->AddEnemy(OUTDOOR_TURRET, 208, 13);
+	App->enemies->AddEnemy(OUTDOOR_TURRET, 248, 13);
+	App->enemies->AddEnemy(OUTDOOR_TURRET, 288, 13);
+	App->enemies->AddEnemy(OUTDOOR_TURRET, 328, 13);
+	
 
 	//- TEST ENEMIES
-	App->enemies->AddEnemy(BASIC, 250, 10, 1000);
-	App->enemies->AddEnemy(OSCILATOR, -47, 470);
 	App->enemies->AddEnemy(PINATA, 150, 140);
 	//App->enemies->AddEnemy(OSCILATOR, 500, 0);
 

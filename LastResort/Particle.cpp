@@ -6,7 +6,7 @@ Particle::Particle()
 	speed.SetToZero();
 }
 
-Particle::Particle(const Particle& p) :
+Particle::Particle( Particle& p) :
 	anim(p.anim), position(p.position), speed(p.speed),
 	collision_fx(p.collision_fx), born(p.born), life(p.life), texture(p.texture) //struct texture added
 

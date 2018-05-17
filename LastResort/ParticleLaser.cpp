@@ -1,7 +1,10 @@
-//#include "ParticleLaser.h"
-//
-//Particle_Laser::Particle_Laser(int x, int y, POWERUP_TYPE pu_t);
-//void Move();
-//OutdoorLacerAnim.PushBack({ 142,216,16,16 });
-///*OutdoorLacerAnim.loop = true;*/
-//animation = &OutdoorLacerAnim;
+#include "ParticleLaser.h"
+#include "Particle.h"
+Particle_Laser::Particle_Laser(Particle& p) : Particle(p)
+{
+	p.anim.PushBack( { 142,216,16,16 } );
+	
+}
+void Particle_Laser:: Move() {
+
+}
