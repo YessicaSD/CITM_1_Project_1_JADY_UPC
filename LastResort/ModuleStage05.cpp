@@ -149,6 +149,10 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(REDBATS, 345, 270);
 	App->enemies->AddEnemy(REDBATS, 325, -5);
 	App->enemies->AddEnemy(REDBATS, 390, -5);
+	App->enemies->AddEnemy(OUTDOOR_TURRET, 209, 15);
+	App->enemies->AddEnemy(OUTDOOR_TURRET, 249, 17);
+	App->enemies->AddEnemy(OUTDOOR_TURRET, 288, 15);
+	App->enemies->AddEnemy(OUTDOOR_TURRET, 328, 17);
 
 	//- TEST ENEMIES
 	App->enemies->AddEnemy(BASIC, 250, 10, 1000);
@@ -177,7 +181,7 @@ update_status Module5lvlScene::Update()
 	//provisional-----------------------------
 	current_time = SDL_GetTicks() - start_time ;
 	
-	//Background blit-------------------------------------------------------------------------
+	//Background stars blit-------------------------------------------------------------------------
 	scroll.x -= 5;
 	scroll.y += cameraMovement.GetCurrentPosition().VectU().y;
 	if (scroll.x <= -SCREEN_WIDTH)

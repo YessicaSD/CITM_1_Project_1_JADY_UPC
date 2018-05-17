@@ -18,6 +18,7 @@
 #include "Enemy_RotatingTurret.h"
 #include "Enemy_Pinata.h"
 #include "Enemy_FrontTurret.h"
+#include "Enemy_Outdoor_turret.h"
 
 #define DAMAGE_FLASHING_INTERVAL 4
 
@@ -281,6 +282,12 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			enemies[i] = new Enemy_FrontTurret(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
 			enemies[i]->scoreValue = 200;
 			enemies[i]->hp = 5;
+			break;
+		case ENEMY_TYPES::OUTDOOR_TURRET:
+			enemies[i] = new Enemy_Outdoor_turret(info.x /*+ App->stage05->spawnPos.x*/, info.y /*+ App->stage05->spawnPos.y*/, info.pu_Type);
+			enemies[i]->scoreValue = 300;
+			enemies[i]->hp = 15;
+			break;
 		}
 	}
 }
