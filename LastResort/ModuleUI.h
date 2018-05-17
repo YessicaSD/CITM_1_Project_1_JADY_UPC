@@ -24,6 +24,7 @@ public:
 	void HideUi();
 	void ShowUi();
 	void CheckLoseConditions(ModulePlayer *player);
+	void RenderPowerBar();
 
 public:
 

@@ -52,6 +52,8 @@ https://github.com/Dasanch/Project_1_JADY_UPC
 #### Controller:
 - **Left Joystick**: Movement.
 - **B**: Shoot.
+- **A**: Lock the unit.
+- **Y**: Insert coins.
 
 ### Player 2:
 #### Keyboard:
@@ -64,6 +66,8 @@ https://github.com/Dasanch/Project_1_JADY_UPC
 #### Controller:
 -** Left Joystick **: Movement.
 -** B **: Shoot.
+- **A**: Lock the unit.
+- **Y**: Insert coins.
 
 
 ## Other functions --------------------------------------------------------------------

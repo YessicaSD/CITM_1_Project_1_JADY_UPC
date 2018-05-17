@@ -13,6 +13,7 @@
 #include "ModuleContinue.h"
 #include "ModuleStageFunctionality.h"
 #include "ModuleReady.h"
+#include "ModuleUnit.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -150,6 +151,8 @@ update_status ModuleUI::Update() {
 		}
 	}
 
+	RenderPowerBar();
+
 	//Credits functionality------------------------------------------------------------------------------//
 
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_LCTRL] == KEY_DOWN || App->input->Controller1[SDL_CONTROLLER_BUTTON_Y] == KEY_DOWN || App->input->Controller2[SDL_CONTROLLER_BUTTON_Y] == KEY_DOWN)
@@ -233,4 +236,17 @@ void ModuleUI::HideUi() {
 	if (showUI == true) {
 		showUI = false;
 	}
+}
+
+void ModuleUI::RenderPowerBar()
+{
+	//if(App->unit1->IsEnabled())
+	//{
+	//	App->render->Blit();
+	//}
+
+	//if (App->unit2->IsEnabled())
+	//{
+	//	App->render->Blit();
+	//}
 }
