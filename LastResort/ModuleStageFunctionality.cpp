@@ -126,7 +126,7 @@ void ModuleStageFunctionality::Debugging()
 	//- Spawn enemy
 	if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_UP)
 	{
-		//if (App->player1->IsEnabled())
+		//if (App->player1.isDead == false)
 		//{
 			App->enemies->AddEnemy((ENEMY_TYPES)selectedEnemy, App->player1->position.x - App->stage05->spawnPos.x + 100, App->player1->position.y - App->stage05->spawnPos.y);//We need to substract this position because in module enemies we add it to check if it's in position
 		//}

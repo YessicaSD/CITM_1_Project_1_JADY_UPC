@@ -105,19 +105,32 @@ update_status Application::Update()
 		ret = modules[i]->IsEnabled() ? modules[i]->PostUpdate() : UPDATE_CONTINUE;
 
 	//Pause game
-	if (input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN) { pauseExecution = true; }
-	if (pauseNextFrame) { pauseNextFrame = false; pauseExecution = true; }
+	if (input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN)
+	{
+		pauseExecution = true;
+		Mix_PauseMusic();
+	}
+
+	if (pauseNextFrame)
+	{
+		pauseNextFrame = false;
+		pauseExecution = true;
+		Mix_PauseMusic();
+	}
+
 	while(pauseExecution)
 	{
 		ret = input->PreUpdate();
 		if(input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN || input->keyboard[SDL_SCANCODE_ESCAPE] == KEY_STATE::KEY_DOWN)
 		{
 			pauseExecution = false;
+			Mix_ResumeMusic();
 		}
 		if (input->keyboard[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN)
 		{
 			pauseExecution = false;
 			pauseNextFrame = true;
+			Mix_ResumeMusic();
 		}
 	}
 
