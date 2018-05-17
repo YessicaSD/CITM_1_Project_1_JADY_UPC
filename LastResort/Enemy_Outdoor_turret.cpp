@@ -17,7 +17,7 @@ Enemy_Outdoor_turret::Enemy_Outdoor_turret(int x, int y, POWERUP_TYPE pu_t) : En
 void Enemy_Outdoor_turret::Move()
 {
 
-	position.x = x-App->stage05->spawnPos.x+position_x;
+	position.x = App->stage05->spawnPos.x+position_x;
 	position.y = App->stage05->spawnPos.y+position_y;
 }
 
