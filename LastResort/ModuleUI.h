@@ -64,8 +64,8 @@ public:
 	SDL_Rect lives_score_p1;
 	SDL_Rect live_score_p2;
 	SDL_Rect pow;
+	SDL_Rect powBar;
 	SDL_Rect top;
 	SDL_Rect push_p2;
-
 };
 #endif // !_MODULEUI_H_
