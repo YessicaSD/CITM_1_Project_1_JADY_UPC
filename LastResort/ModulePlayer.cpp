@@ -18,16 +18,16 @@
 
 ModulePlayer::ModulePlayer() //Constructor 
 {
-	SpeedAnimation.PushBack({ 0,0,32,31 });
-	SpeedAnimation.PushBack({ 32,0,32,32 });
-	SpeedAnimation.PushBack({ 64,0,32,32 });
-	SpeedAnimation.PushBack({ 96,0,32,32 });
-	SpeedAnimation.PushBack({ 0,32,32,32 });
+	SpeedAnimation.PushBack({  0, 0,32,31 });
+	SpeedAnimation.PushBack({ 32, 0,32,32 });
+	SpeedAnimation.PushBack({ 64, 0,32,32 });
+	SpeedAnimation.PushBack({ 96, 0,32,32 });
+	SpeedAnimation.PushBack({  0,32,32,32 });
 	SpeedAnimation.PushBack({ 32,32,32,32 });
 	SpeedAnimation.PushBack({ 64,32,32,32 });
 	SpeedAnimation.PushBack({ 96,54,32,32 });
 	SpeedAnimation.PushBack({ 32,54,32,32 });
-	SpeedAnimation.PushBack({ 0,0,0,0 });
+	SpeedAnimation.PushBack({  0, 0, 0, 0 });
 	SpeedAnimation.speed = 0.2f;
 	SpeedAnimation.loop = false;
 }
@@ -59,6 +59,8 @@ bool ModulePlayer::Start()
 
 bool ModulePlayer::CleanUp()
 {
+	powerupUpgrades = 0;
+	currentPowerUp = POWERUP_TYPE::NOPOWERUP;
 	LOG("Unloading player assets");
 	////textures------------------------------------------------------------------
 	//App->textures->Unload(PlayerTexture);
@@ -69,6 +71,7 @@ bool ModulePlayer::CleanUp()
 }
 
 void ModulePlayer::Reappear() {
+
 	playerCol = App->collision->AddCollider({ position.x, position.y + 2, 24, 8 }, COLLIDER_TYPE::COLLIDER_PLAYER, this);
 	position = initPosition;
 	powerupUpgrades = 0;
@@ -124,7 +127,9 @@ update_status ModulePlayer::Update()
 		else { unitLocked = true; }
 	}
 	//Collision------------------------------------------------------------------------
-	playerCol->SetPos(position.x, position.y + 2); //We update the collider position
+	if (playerCol != nullptr) {
+		playerCol->SetPos(position.x, position.y + 2); //We update the collider position
+	}
 
 	//Ship Animation-------------------------------------------------------------------
 	ShipAnimation();
@@ -239,8 +244,18 @@ void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
 	//Player variables--------------------------------------------------------------
 	isDying = true;
 	canMove = false;
-	KillUnit();
 	playerAnimState = PlayerAnimationState::Death;
+	//Kill the unit
+	powerupUpgrades = 0;
+	currentPowerUp = POWERUP_TYPE::NOPOWERUP;
+
+	if (SDL_GetTicks() % 2)	//Sfx REMEMBER: Improve it for 1.0
+		App->audio->ControlSFX(App->particles->g_explosion01_1sfx, PLAY_AUDIO);
+	else
+		App->audio->ControlSFX(App->particles->g_explosion02_1sfx, PLAY_AUDIO);
+
+	KillUnit();
+	
 	//Particles---------------------------------------------------------------------
 	App->particles->AddParticle(App->particles->death_explosion, position.x, position.y, PlayerTexture);
 	

@@ -71,7 +71,7 @@ update_status ModuleUI::Update() {
 	//-------Spawn players--------------------------------------------
 
 	//----------------------1 pressed---------------------
-	if (App->input->keyboard[SDL_SCANCODE_1] &&
+	if (App->input->keyboard[SDL_SCANCODE_1] == KEY_DOWN &&
 		App->input->keyboard[SDL_SCANCODE_F5] == KEY_IDLE &&
 		App->input->keyboard[SDL_SCANCODE_F6] == KEY_IDLE &&
 		App->input->keyboard[SDL_SCANCODE_F7] == KEY_IDLE &&
@@ -82,6 +82,7 @@ update_status ModuleUI::Update() {
 			switch (currentScene)
 			{
 			case TITLE_SCENE:
+				LOG("F1");
 				credits -= 1;
 				App->player1->isActived = true;
 				App->player1->lives = 2;
@@ -98,20 +99,22 @@ update_status ModuleUI::Update() {
 				App->player1->lives = 2;
 				break;
 			default:
+				LOG("F1 default");
 				break;
 			}
 		}
 	}
 	//----------------------2 pressed---------------------
-	if (App->input->keyboard[SDL_SCANCODE_2] &&
-		App->input->keyboard[SDL_SCANCODE_F5] == KEY_IDLE &&
+	if (App->input->keyboard[SDL_SCANCODE_2] == KEY_DOWN && 
+		(App->input->keyboard[SDL_SCANCODE_F5] == KEY_IDLE &&
 		App->input->keyboard[SDL_SCANCODE_F6] == KEY_IDLE &&
 		App->input->keyboard[SDL_SCANCODE_F7] == KEY_IDLE &&
-		App->input->keyboard[SDL_SCANCODE_F8] == KEY_IDLE || App->input->Controller2[SDL_CONTROLLER_BUTTON_X])
+		App->input->keyboard[SDL_SCANCODE_F8] == KEY_IDLE ) || App->input->Controller2[SDL_CONTROLLER_BUTTON_X])
 	{
 		switch (currentScene)
 		{
 		case TITLE_SCENE:
+			
 			if (credits >= 2)
 			{
 				App->player1->isActived = true;
@@ -138,6 +141,7 @@ update_status ModuleUI::Update() {
 			}
 			break;
 		default:
+			LOG("F2 default");
 			break;
 		}
 	}
@@ -164,9 +168,12 @@ update_status ModuleUI::Update() {
 	if (showUI == true) {
 		//------Common--------------------------------------------------
 		App->fonts->BlitText(208, 216, 0, str_credits);
+		if (App->player1->isActived == true || App->player2->isActived == true)
 		App->render->Blit(uiTex, 112, 16, &top);
 		//------Player 1------------------------------------------------
+
 		if (App->player1->isActived == true) {
+
 			//-----------Static UI-----------------------
 			App->render->Blit(uiTex, 16, 16, &lives_score_p1);
 			App->render->Blit(uiTex, 24, 208, &pow);
@@ -180,7 +187,9 @@ update_status ModuleUI::Update() {
 			}
 		}
 		//------Player 2----------------------------------------------
+
 		if (App->player2->isActived == true) {
+
 			//-----------Static UI----------------------
 			App->render->Blit(uiTex, 256, 16, &live_score_p2);
 			App->render->Blit(uiTex, 184, 208, &pow);
@@ -195,6 +204,7 @@ update_status ModuleUI::Update() {
 			}
 		}
 	}
+
 
 	delete[](str_score_p1);
 	delete[](str_score_p2);

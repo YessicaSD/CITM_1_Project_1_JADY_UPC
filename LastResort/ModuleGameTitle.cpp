@@ -4,6 +4,7 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "Player1.h"
+#include "Player2.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
@@ -41,7 +42,7 @@ bool ModuleGameTitle:: Start()
 	App->audio->ControlMUS(Titlemusic, PLAY_AUDIO);
 	//UI------------------------------------------------------------------------------------
 	App->ui->ShowUi();
-	App->ui->currentScene == TITLE_SCENE;
+	App->ui->currentScene = TITLE_SCENE;
 	//-------------------------------------------------------------------------------------
 	if (titleDone ==true)
 	{
@@ -89,7 +90,7 @@ bool ModuleGameTitle::CleanUp() {
 
 	//Reset variables---------------------------------------------------------------
 	titleDone = false;
-	App->ui->currentScene == NONE;
+	App->ui->currentScene = NONE;
 
 	return true;
 }
@@ -151,7 +152,8 @@ update_status ModuleGameTitle::Update() {
 		--time;
 		App->audio->ControlMUS(Titlemusic, STOP_AUDIO);
 	}*/
-	if (App->player1->isActived == true)
+
+	if (App->player1->isActived == true || App->player2->isActived == true)
 	{
 		App->fade->FadeToBlack(this, App->readyScene, 0.5f);
 	}

@@ -87,7 +87,7 @@ void Player1::PlayerDies() {
 		else {
 			isActived = false;
 			//Continue
-			App->fade->FadeToBlack(App->stageFunctionality->currentStage, App->continueScene);
+			App->fade->FadeToBlack(App->stageFunctionality->currentStage, App->continueScene, 0.0f);
 		}
 	}
 	else if (App->player2->isActived == false) {
@@ -95,12 +95,12 @@ void Player1::PlayerDies() {
 		if (lives > 0) {
 			--lives;
 			//Ready
-			App->fade->FadeToBlack(App->stageFunctionality->currentStage, App->readyScene);
+			App->fade->FadeToBlack(App->stageFunctionality->currentStage, App->readyScene, 0.0f);
 		}
 		else {
 			isActived = false;
 			//Continue
-			App->fade->FadeToBlack(App->stageFunctionality->currentStage, App->continueScene);
+			App->fade->FadeToBlack(App->stageFunctionality->currentStage, App->continueScene, 0.0f);
 		}
 	}
 }
@@ -178,6 +178,7 @@ void Player1::Winposition()
 
 void Player1::KillUnit()
 {
+	App->particles->AddParticle(App->particles->g_explosion02, App->unit1->position.x, App->unit1->position.y, App->particles->g_explosion02.texture, COLLIDER_NONE, 0);//Explosion type REMEMBER: Improve it for 1.0
+	App->unit1->currentOrbit = App->unit1->currentTurnAround = App->unit1->angleValue[E];
 	App->unit1->Disable();
-	//App->unit1.currentOrbit = App->unit1.currentSpin = angle angleValue[E];
 }

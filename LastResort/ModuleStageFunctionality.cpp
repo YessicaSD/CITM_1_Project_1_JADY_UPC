@@ -33,6 +33,7 @@ ModuleStageFunctionality::~ModuleStageFunctionality()
 
 bool ModuleStageFunctionality::Start()
 {
+
 	if (App->player1->isActived == true) {
 		App->player1->Enable();
 	}
@@ -55,8 +56,11 @@ bool ModuleStageFunctionality::Start()
 
 bool ModuleStageFunctionality::CleanUp()
 {
+
 	App->player1->Disable();
 	App->player2->Disable();
+	App->unit1->Disable();
+	App->unit2->Disable();
 	App->particles->Disable();
 	App->collision->Disable();
 	App->enemies->Disable();

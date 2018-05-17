@@ -8,6 +8,7 @@
 #include "ModuleAudio.h"
 #include "Player1.h"
 #include "Player2.h"
+#include "ParticleLaser.h"
 #include "SDL/include/SDL_timer.h"
 
 ModuleParticles::ModuleParticles()
@@ -209,32 +210,51 @@ update_status ModuleParticles::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle(const Particle& particle, int x, int y, SDL_Texture *tex,  COLLIDER_TYPE collider_type, Uint32 delay, PARTICLE_TYPE particle_type)
+void ModuleParticles::AddParticle( Particle& particle, int x, int y, SDL_Texture *tex,  COLLIDER_TYPE collider_type, Uint32 delay, PARTICLE_TYPE particle_type)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
 		if (active[i] == nullptr)
 		{
-			Particle* p = new Particle(particle);
-			p->born = SDL_GetTicks() + delay;
-			p->position.x = x;
-			p->position.y = y;
-			p->texture = tex; // texture
-
-			if (particle.collision_fx != nullptr)
+			if (particle_type == NOTYPE)
 			{
-				p->collision_fx = particle.collision_fx;
+				Particle* p = new Particle(particle);
+				p->born = SDL_GetTicks() + delay;
+				p->position.x = x;
+				p->position.y = y;
+				p->texture = tex; // texture
+				if (particle.collision_fx != nullptr)
+				{p->collision_fx = particle.collision_fx;}
+				if (particle.sfx != nullptr)
+				{App->audio->ControlSFX(particle.sfx, PLAY_AUDIO);}
+				if (collider_type != COLLIDER_NONE)
+					//Updated for not spawn it since 1 frame on x,y animation rect values
+					p->collider = App->collision->AddCollider({ p->position.x, p->position.y ,p->anim.GetCurrentFrame().w, p->anim.GetCurrentFrame().h }, collider_type, this);
+				active[i] = p;
+				break;
 			}
-			if (particle.sfx != nullptr)
+			if (particle_type == PARTICLE_LASER)
 			{
-				App->audio->ControlSFX(particle.sfx, PLAY_AUDIO);
+				Particle* p = new Particle_Laser(particle);
+				p->born = SDL_GetTicks() + delay;
+				p->position.x = x;
+				p->position.y = y;
+				p->texture = tex; // texture
+				if (particle.collision_fx != nullptr)
+				{
+					p->collision_fx = particle.collision_fx;
+				}
+				if (particle.sfx != nullptr)
+				{
+					App->audio->ControlSFX(particle.sfx, PLAY_AUDIO);
+				}
+				if (collider_type != COLLIDER_NONE)
+					//Updated for not spawn it since 1 frame on x,y animation rect values
+					p->collider = App->collision->AddCollider({ p->position.x, p->position.y ,p->anim.GetCurrentFrame().w, p->anim.GetCurrentFrame().h }, collider_type, this);
+				active[i] = p;
+				break;
 			}
-
-			if (collider_type != COLLIDER_NONE)
-				//Updated for not spawn it since 1 frame on x,y animation rect values
-				p->collider = App->collision->AddCollider({p->position.x, p->position.y ,p->anim.GetCurrentFrame().w, p->anim.GetCurrentFrame().h }, collider_type, this);
-			active[i] = p;
-			break;
+			
 		}
 	}
 }

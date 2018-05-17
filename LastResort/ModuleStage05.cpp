@@ -54,55 +54,53 @@ Module5lvlScene::Module5lvlScene()
 	cameraMovement.PushBack({ 2151, 182 }, 2160);   //15      //24
 	
 	//Colliders--------------------------------------------------------------------------------------------------
-	shipCollidersRect[ 0] = {  304, 208, 507, 16 };
-	shipCollidersRect[ 1] = {  239, 188,  65, 20 };
-	shipCollidersRect[ 2] = {  175, 174, 129, 14 };
-	shipCollidersRect[ 3] = {  125, 160, 179, 14 };
-	shipCollidersRect[ 4] = {   31, 110, 273, 50 };
-	shipCollidersRect[ 5] = {    0,  99, 304, 11 };
-	shipCollidersRect[ 6] = {   20,  82, 284, 17 };
-	shipCollidersRect[ 7] = {   69,  64, 235, 18 };
-	shipCollidersRect[ 8] = {  107,  53,  71, 11 };
-	shipCollidersRect[ 9] = {  141,  29,  37, 24 };
-	shipCollidersRect[10] = {  178,  19, 207, 13 };
-	shipCollidersRect[11] = {  178,  32, 285, 13 };
-	shipCollidersRect[12] = {  178,  45, 269, 19 };
-	shipCollidersRect[13] = {  304,  64, 108, 52 };
-	shipCollidersRect[14] = {  304, 116,  95, 76 };
-	shipCollidersRect[15] = {  399, 140,  13, 24 };
-	shipCollidersRect[16] = {  304, 192, 211, 16 };
-	shipCollidersRect[17] = {  539, 192,  72, 16 };
-	shipCollidersRect[18] = {  635, 192,  24, 16 };
-	shipCollidersRect[19] = {  683, 192, 103, 16 };
-	shipCollidersRect[20] = {  811, 192,  36, 16 };
-	shipCollidersRect[21] = {  847, 124,  16, 68 };
-	shipCollidersRect[22] = {  863, 100,   8, 24 };
-	shipCollidersRect[23] = {  847,  64,  16, 36 };
-	shipCollidersRect[24] = {  543,  47, 304, 17 };
-	shipCollidersRect[25] = {  587,  64,  20, 60 };
-	shipCollidersRect[26] = {  607,  80,  15, 20 };
-	shipCollidersRect[27] = {  587, 124,  35, 20 };
-	shipCollidersRect[28] = {  563, 116,  24, 12 };
-	shipCollidersRect[29] = {  527, 116,  36, 28 };
-	shipCollidersRect[30] = {  511,  96,  32, 20 };
-	shipCollidersRect[31] = {  543,  64,  21, 32 };
-	shipCollidersRect[32] = {  593,  32, 243, 15 };
-	shipCollidersRect[33] = {  836,  17,  30, 15 };
-	shipCollidersRect[34] = {  866,   2, 162, 15 };
-	shipCollidersRect[35] = { 1028,  16,  44, 16 };
-	shipCollidersRect[36] = { 1072,  32, 128, 16 };
-	shipCollidersRect[37] = { 1200,  47, 110, 16 };
-	shipCollidersRect[38] = { 1310,  63,  80, 16 };
-	shipCollidersRect[39] = { 1359,  79,  64, 78 };
-	shipCollidersRect[40] = { 1167, 129, 192, 13 };
-	shipCollidersRect[41] = { 1231, 142,  64, 15 };
-	shipCollidersRect[42] = { 1118, 142,  49, 15 };
-	shipCollidersRect[43] = { 1054, 157,  64, 18 };
-	shipCollidersRect[44] = { 1040, 175,  14, 37 };
-	shipCollidersRect[45] = {  914, 212, 140, 12 };
-	shipCollidersRect[46] = {  904, 224,  10, 32 };
-	shipCollidersRect[47] = {  914, 256, 124, 21 };
-	shipCollidersRect[48] = {  914, 277, 107, 10 };
+	shipCollidersRect[ 0] = {  304, 208, 750,  16 };
+	shipCollidersRect[ 1] = {  239, 188,  65,  20 };
+	shipCollidersRect[ 2] = {  175, 174, 129,  14 };
+	shipCollidersRect[ 3] = {  125, 160, 179,  14 };
+	shipCollidersRect[ 4] = {   31, 110, 273,  50 };
+	shipCollidersRect[ 5] = {    0,  99, 304,  11 };
+	shipCollidersRect[ 6] = {   20,  82, 284,  17 };
+	shipCollidersRect[ 7] = {   69,  64, 235,  18 };
+	shipCollidersRect[ 8] = {  107,  53,  71,  11 };
+	shipCollidersRect[ 9] = {  141,  29,  37,  24 };
+	shipCollidersRect[10] = {  178,  19, 207,  13 };
+	shipCollidersRect[11] = {  178,  32, 285,  13 };
+	shipCollidersRect[12] = {  178,  45, 269,  19 };
+	shipCollidersRect[13] = {  304,  64, 108,  52 };
+	shipCollidersRect[14] = {  304, 116,  95,  76 };
+	shipCollidersRect[15] = {  399, 140,  13,  24 };
+	shipCollidersRect[16] = {  304, 192, 211,  16 };
+	shipCollidersRect[17] = {  539, 192,  72,  16 };
+	shipCollidersRect[18] = {  635, 192,  24,  16 };
+	shipCollidersRect[19] = {  683, 192, 103,  16 };
+	shipCollidersRect[20] = {  811, 192,  52,  16 };
+	shipCollidersRect[21] = {  847, 124,  16,  68 };
+	shipCollidersRect[22] = {  847,  64,  16,  36 };
+	shipCollidersRect[23] = {  543,  47, 320,  17 };
+	shipCollidersRect[24] = {  587,  64,  20,  60 };
+	shipCollidersRect[25] = {  607,  80,  15,  20 };
+	shipCollidersRect[26] = {  587, 124,  35,  20 };
+	shipCollidersRect[27] = {  563, 116,  24,  12 };
+	shipCollidersRect[28] = {  527, 116,  36,  28 };
+	shipCollidersRect[29] = {  511,  96,  76,  20 };
+	shipCollidersRect[30] = {  543,  64,  44,  32 };
+	shipCollidersRect[31] = {  593,  32, 270,  15 };
+	shipCollidersRect[32] = {  836,  17,  27,  15 };
+	shipCollidersRect[33] = {  863,   2, 165, 206 };
+	shipCollidersRect[34] = { 1028,  16,  44, 141 };
+	shipCollidersRect[35] = { 1072,  32, 128,  47 };
+	shipCollidersRect[36] = { 1200,  47, 110,  32 };
+	shipCollidersRect[37] = { 1310,  63,  80,  16 };
+	shipCollidersRect[38] = { 1359,  79,  64,  78 };
+	shipCollidersRect[39] = { 1167,  79, 192,  63 }; 
+	shipCollidersRect[40] = { 1231, 142,  64,  15 };
+	shipCollidersRect[41] = { 1072,  79,  95,  78 };
+	shipCollidersRect[42] = { 1028, 157,  90,  18 };
+	shipCollidersRect[43] = { 1028, 175,  26,  33 };
+	shipCollidersRect[44] = {  863, 224,  51,  32 };
+	shipCollidersRect[45] = {  863, 256, 175,  21 };
+	shipCollidersRect[46] = {  863, 277, 158,  10 };
 }
 
 bool Module5lvlScene::Start()
@@ -116,7 +114,7 @@ bool Module5lvlScene::Start()
 	//Enable ---------------------------------------------------------------------
 	App->stageFunctionality->Enable();
 	App->stageFunctionality->currentStage = this;
-	App->ui->currentScene == STAGE_SCENE;
+	App->ui->currentScene = STAGE_SCENE;
 
 	//Set the spawn pos (if we don't do it, enemies will be inicialized in a incorrect position)----------------
 	shipPos = shipOffset;
@@ -140,23 +138,32 @@ bool Module5lvlScene::Start()
 	//INFO: We'll calculate the x and y positions based on the position of the ship in Docs>ship.psd
 	//- FINAL POSITION ENEMIES
 	App->enemies->AddEnemy(FRONT_TURRET, 47, 64);
+
 	App->enemies->AddEnemy(POWERDROPPER, -88, 260, 0, POWERUP_TYPE::HOMING);
 	App->enemies->AddEnemy(POWERDROPPER, 180, 280, 0, POWERUP_TYPE::LASER);
+
 	App->enemies->AddEnemy(REDBATS, 250, 270);
 	App->enemies->AddEnemy(REDBATS, 275, 270);
 	App->enemies->AddEnemy(REDBATS, 300, 270);
 	App->enemies->AddEnemy(REDBATS, 325, 270);
-	App->enemies->AddEnemy(REDBATS, 345, 270);
-	App->enemies->AddEnemy(REDBATS, 325, -5);
-	App->enemies->AddEnemy(REDBATS, 390, -5);
-	App->enemies->AddEnemy(OUTDOOR_TURRET, 209, 15);
-	App->enemies->AddEnemy(OUTDOOR_TURRET, 249, 17);
-	App->enemies->AddEnemy(OUTDOOR_TURRET, 288, 15);
-	App->enemies->AddEnemy(OUTDOOR_TURRET, 328, 17);
+	App->enemies->AddEnemy(REDBATS, 325, 270,700,SPEED);
+
+	App->enemies->AddEnemy(REDBATS, 325, -20);
+	App->enemies->AddEnemy(REDBATS, 400, -25);
+	App->enemies->AddEnemy(REDBATS, 404, -25,800);
+	App->enemies->AddEnemy(REDBATS, 404, -25, 1400);
+	App->enemies->AddEnemy(REDBATS, 404, -25, 1800);
+
+
+	/*App->enemies->AddEnemy(REDBATS, 390, -5);*/
+
+	App->enemies->AddEnemy(OUTDOOR_TURRET, 208, 13);
+	App->enemies->AddEnemy(OUTDOOR_TURRET, 248, 13);
+	App->enemies->AddEnemy(OUTDOOR_TURRET, 288, 13);
+	App->enemies->AddEnemy(OUTDOOR_TURRET, 328, 13);
+	
 
 	//- TEST ENEMIES
-	App->enemies->AddEnemy(BASIC, 250, 10, 1000);
-	App->enemies->AddEnemy(OSCILATOR, -47, 470);
 	App->enemies->AddEnemy(PINATA, 150, 140);
 	//App->enemies->AddEnemy(OSCILATOR, 500, 0);
 
@@ -250,6 +257,6 @@ bool Module5lvlScene::CleanUp() {
 	App->textures->Unload(tilemapTex);
 	//Modules-----------------------------------------------------------------------
 	App->stageFunctionality->Disable();
-	App->ui->currentScene == NONE;
+	App->ui->currentScene = NONE;
 	return true;
 }

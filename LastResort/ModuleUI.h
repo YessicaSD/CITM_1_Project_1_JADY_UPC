@@ -42,6 +42,7 @@ public:
 
 
 public:
+
 	//Player data---------------------------------
 	uiState uiP1, uiP2;
 	sceneType currentScene = NONE;

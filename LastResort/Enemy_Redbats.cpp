@@ -4,14 +4,14 @@
 
 Enemy_RedBats::Enemy_RedBats(int x, int y, POWERUP_TYPE pu_t) : Enemy(x, y, pu_t)
 {
-	RedBats.PushBack({ 156,0,27,29 });
-	RedBats.PushBack({ 190,0,27,18 });
-	RedBats.PushBack({ 223,10,26,10 });
-	RedBats.PushBack({ 256,5,26,19 });
-	RedBats.PushBack({ 156,30,26,29 });
-	RedBats.PushBack({ 189,35,26,19 });
-	RedBats.PushBack({ 221,39,27,10 });
-	RedBats.PushBack({ 256,34,28,21 });
+	RedBats.PushBack({ 150,0,27,29 });
+	RedBats.PushBack({ 176,0,25,30 });
+	RedBats.PushBack({ 202,0,26,29 });
+	RedBats.PushBack({ 228,0,26,29 });
+	RedBats.PushBack({ 150,30,26,29 });
+	RedBats.PushBack({ 176,29,26,29 });
+	RedBats.PushBack({ 202,29,26,29 });
+	RedBats.PushBack({ 228,29,26,29 });
 	RedBats.speed = 0.09f;
 	animation = &RedBats;
 	collider = App->collision->AddCollider({ x, y, 27, 25 }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
