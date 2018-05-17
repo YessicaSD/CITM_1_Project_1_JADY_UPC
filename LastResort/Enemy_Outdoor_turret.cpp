@@ -10,7 +10,7 @@ Enemy_Outdoor_turret::Enemy_Outdoor_turret(int x, int y, POWERUP_TYPE pu_t) : En
 	animation = &OutdoorTurretAnim;
 	position_x = x-App->stage05->spawnPos.x;
 	position_y = y-App->stage05->spawnPos.y;
-	collider = App->collision->AddCollider({ x, y+3, 24, 17 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ x, y+3, 24, 17 }, COLLIDER_TYPE::COLLIDER_ENEMY_HEAVY, (Module*)App->enemies);
 	
 }
 

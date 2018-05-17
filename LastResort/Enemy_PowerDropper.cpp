@@ -12,7 +12,7 @@ Enemy_PowerDropper::Enemy_PowerDropper(int x, int y, POWERUP_TYPE pu_t) : Enemy(
 		dropper.speed = 0.2f;
 	animation = &dropper;
 
-	collider = App->collision->AddCollider({ x, y, 32, 26 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ x, y, 32, 26 }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
 	original_y = y;
 }
 

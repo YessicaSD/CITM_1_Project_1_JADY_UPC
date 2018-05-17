@@ -11,7 +11,7 @@ Enemy_FrontTurret::Enemy_FrontTurret(int x, int y, POWERUP_TYPE pu_t) : Enemy(x,
 	frontTurretAnim.loop = true;
 	animation = &frontTurretAnim;
 	//Collider------------------------------------------------
-	collider = App->collision->AddCollider({ x, y, 32, 24}, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ x, y, 32, 24}, COLLIDER_TYPE::COLLIDER_ENEMY_HEAVY, (Module*)App->enemies);
 	//Positions-----------------------------------------------
 	fixedX = x - App->stage05->spawnPos.x;//We get the x position
 	fixedY = y - App->stage05->spawnPos.y;//We get the y position

@@ -423,7 +423,8 @@ void ModuleUnit::Throwing()
 		(int)position.y - throwFrame.h / 2,
 		&throwFrame);
 	//Check if we need to return by time--------------------------------------
-	CheckReturnTime(1000);//1 second
+	CheckOutOfScreen();
+	CheckReturnTime();
 }
 
 void ModuleUnit::Returning()
@@ -467,7 +468,7 @@ void ModuleUnit::Positioning()
 {
 	//When it's positioning, it is already rotating, but at the same time it travels to the correct distance from the center of the player
 	radius += 2;
-	if(radius > 31)
+	if(radius >= 31)
 	{
 		radius = 31;
 		unitPhase = UnitPhase::rotating;
@@ -614,6 +615,7 @@ int ModuleUnit::TurnAroundToRender()
 
 void ModuleUnit::FollowingTerrain()
 {
+	//Logic-------------------------------------------------------------------
 	switch(followTerrainDir)
 	{
 	case FTD_up:
@@ -665,69 +667,59 @@ void ModuleUnit::FollowingTerrain()
 		}
 		break;
 	}
-
 	UpdateUnitColliders();
 
-	//RENDER------------------------------------------------------------------
+	//- Check return conditions-----------------------------------------------
+	CheckPlayerClose();
+	CheckOutOfScreen();
+	CheckReturnTime();
+
+	//Render------------------------------------------------------------------
 	throwFrame = throwAnim.GetCurrentFrame();
 	App->render->Blit(
 		throwUnitTx,
 		(int)position.x - throwFrame.w / 2,
 		(int)position.y - throwFrame.h / 2,
 		&throwFrame);
-
-	//Check if it should return by time---------------------------------------
-	CheckReturnTime(5000);//5 seconds
-	//Check if it should return because it's too close to the player----------
-	CheckPlayerClose();
 }
+
+//void ModuleUnit::BouncingOnTerrain()
+//{
+//	//Logic-------------------------------------------------------------------
+//	//- Check return conditions-----------------------------------------------
+//	CheckPlayerClose();
+//	CheckOutOfScreen();
+//	CheckReturnTime();
+//	//Render------------------------------------------------------------------
+//}
 
 void ModuleUnit::OnCollision(Collider* collider1, Collider* collider2)
 {
-	//TO DO: Decide (unit not be a killing machine, and work better with powerDamage)
-	//- We have two ways of handling collisions with the unit
-	//1- Have matrix[COLLIDER_ENEMY][COLLIDER_UNIT] be false
-	//and use collider2->callback->OnCollision(); for when its rotating (maybe only call it every x time)
-	//Possible problems (it make check collisions twice per frame =/ for all enemy colliders, although if they are deleted this should be no problem)
-	//2- Have an if in collider enemy
-	//Check if collider2->type is COLLIDER_UNIT
-	//Start a timer, and if it's less than the timer don't do damage
-	//In summary, have it in ModuleUnit or in ModuleEnemies
-	//3- Have hp and life be a float, set damage on the unit to be 0.1, so that effectively it will do damage every frame, but very little
-
 	switch(unitPhase)
 	{
 	//case UnitPhase::rotating:
-	//	//Simply does damage, no need to write anything
+	//	Simply does damage, no need to write anything
 	//	break;
 	case UnitPhase::throwing:
 		OnCollisionThrowing(collider1, collider2);
-		//CheckPowerDamage(collider1, collider2);
 		break;
 	case UnitPhase::followingTerrain:
 		OnCollisionFollowingTerrain(collider1, collider2);
-		//CheckPowerDamage(collider1, collider2);
 		break;
 	case UnitPhase::bouncingOnTerrain:
 		//Not implemented yet
 		break;
 	//case UnitPhase::returning:
-	//	//Simply does damage, no need to write anything
+	//	Simply does damage, no need to write anything
 	//	break;
 	//case UnitPhase::positioning:
-	//	//Simply does damage, no need to write anything
+	//	Simply does damage, no need to write anything
 	//	break;
 	}
 
-	//Right now it works in the following way
-	//- If you hit an enemy or time limit passes the ball returns
-	//However in the game it's not exactly like this
-	if(unitPhase == UnitPhase::throwing || unitPhase == UnitPhase::followingTerrain || unitPhase == UnitPhase::followingTerrain)
+	if(unitPhase == UnitPhase::throwing || unitPhase == UnitPhase::followingTerrain || unitPhase == UnitPhase::bouncingOnTerrain)
 	{
-		if (collider1->type == COLLIDER_TYPE::COLLIDER_UNIT && collider2->type == COLLIDER_ENEMY)
-		{
-			unitPhase = UnitPhase::returning;
-		}
+		CheckHitHeavyEnemy(collider1, collider2);
 	}
 }
 
@@ -757,6 +749,8 @@ void ModuleUnit::OnCollisionThrowing(Collider* collider1, Collider* collider2)
 		followTerrainDir = FollowingTerrainDirection::FTD_down;
 		colliderToFollow = collider2;
 	}
+
+	CheckHitHeavyEnemy(collider1, collider2);
 }
 
 void ModuleUnit::OnCollisionFollowingTerrain(Collider* collider1, Collider* collider2)
@@ -801,7 +795,15 @@ void ModuleUnit::OnCollisionFollowingTerrain(Collider* collider1, Collider* coll
 			colliderToFollow = collider2;
 		}
 	}
+
+	CheckHitHeavyEnemy(collider1, collider2);
 }
+
+//void ModuleUnit::OnCollisionBouncingOnTerrain(Collider* collider1, Collider* collider2)
+//{
+//	//Bounce code
+//	CheckHitHeavyEnemy(collider1, collider2);
+//}
 
 void ModuleUnit::MakeUnitBlue()
 {
@@ -844,10 +846,24 @@ bool ModuleUnit::ColliderIsBellow()
 	return (colliderToFollow->rect.y > position.y);
 }
 
-void ModuleUnit::CheckReturnTime(Uint32 time)
+void ModuleUnit::CheckOutOfScreen()
 {
-	if (SDL_GetTicks() > shootTime + time)
+	if(position.x < 0 - returnMargin ||
+		position.x > 0 + SCREEN_WIDTH + returnMargin ||
+		position.y < 0 - returnMargin ||
+		position.y > 0 + SCREEN_HEIGHT + returnMargin
+		)
 	{
+		unitPhase = UnitPhase::returning;
+	}
+}
+
+void ModuleUnit::CheckReturnTime()
+{
+	//If it remains on the screen for more than 10 seconds it's problably bugged in a collider and it should return to the player
+	if (SDL_GetTicks() > shootTime + 10000)
+	{
+		LOG("The unit has been on the screen for too much time and it's probably bugged, returning it to the player.")
 		unitPhase = UnitPhase::returning;
 	}
 }
@@ -860,24 +876,10 @@ void ModuleUnit::CheckPlayerClose()
 	}
 }
 
-//void ModuleUnit::CheckPowerDamage(Collider* collider1, Collider * collider2)
-//{
-//	//If it's an enemy touching the unit
-//	if(collider1->type == COLLIDER_TYPE::COLLIDER_UNIT && collider2 -> type == COLLIDER_TYPE::COLLIDER_ENEMY)
-//	{
-//		Enemy* auxEnemy = nullptr;
-//		auxEnemy == App->enemies->GetEnemyFromCollider(collider2);
-//		//If auxEnemy is nullptr (the function returns nullptr if it doesn't find any enemies)
-//		if(auxEnemy != nullptr)
-//		{
-//			//Take enemy health from the power damage
-//			powerDamage -= auxEnemy->hp;
-//			//TO DO: decrement enemy health (first decide how are we going to handle collision with enemies on the unit)
-//			//Check if we ran out of power damage
-//			if (powerDamage <= 0)
-//			{
-//				unitPhase = UnitPhase::returning;
-//			}
-//		}
-//	}
-//}
+void ModuleUnit::CheckHitHeavyEnemy(Collider* collider1, Collider* collider2)
+{
+	if (collider1->type == COLLIDER_TYPE::COLLIDER_UNIT && collider2->type == COLLIDER_ENEMY_HEAVY)
+	{
+		unitPhase = UnitPhase::returning;
+	}
+}

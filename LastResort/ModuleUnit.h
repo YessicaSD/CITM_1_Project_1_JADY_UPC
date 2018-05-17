@@ -104,7 +104,12 @@ public:
 	void OnCollisionThrowing(Collider*, Collider*);
 	void OnCollisionFollowingTerrain(Collider*, Collider*);
 	void OnCollisionBouncingOnTerrain(Collider*, Collider*);
-	void CheckPowerDamage(Collider*, Collider*);//Checks if it must return because it has killed many enemies
+
+	//Return conditions (a series of conditions that make the unit return, so that it never gets stuck for too much time)
+	void CheckPlayerClose();
+	void CheckHitHeavyEnemy(Collider*, Collider*);
+	void CheckOutOfScreen();
+	void CheckReturnTime();
 
 	//Rotating
 	void RotateTo(float, float&, float);//Increases a rotation until it reaches its target rotation
@@ -116,10 +121,6 @@ public:
 	bool ColliderIsOnRight();//Returns true if collider to follow is on the right of the unit
 	bool ColliderIsAbove();//Returns true if collider to follow is above of the unit
 	bool ColliderIsBellow();//Returns true if collider to follow is bellow of the unit
-
-	//Returning
-	void CheckReturnTime(Uint32);
-	void CheckPlayerClose();
 
 	//Change color
 	void MakeUnitBlue();
@@ -145,6 +146,7 @@ private:
 	const float turnAroundSpeed = orbitSpeed * 2;
 	const float spinSpeed = 0.2f;
 	const float unitProjectileSpeed = 6;//6= pixels it moves each frame
+	const int returnMargin = 80;
 
 	float currentSpinFrame;
 	float targetOrbit;//The orbit rotation we want the unit to be in

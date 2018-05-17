@@ -31,7 +31,7 @@ Enemy_Oscilator::Enemy_Oscilator(int x, POWERUP_TYPE pu_t) : Enemy(x, original_y
 	Oscilator.PushBack({ 51,98,49,50 }); //8
 	Oscilator.speed = 0.2f;
 	animation = &Oscilator;
-	collider = App->collision->AddCollider({ x, original_y, 50, 48 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ x, original_y, 50, 48 }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
 
 
 }

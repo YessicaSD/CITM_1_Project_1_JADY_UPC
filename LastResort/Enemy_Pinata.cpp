@@ -32,7 +32,7 @@ Enemy_Pinata::Enemy_Pinata(int x, int y, POWERUP_TYPE pu_t) : Enemy(x, y, pu_t)
 	initAnim.PushBack({ 223, 138,40,38 });  //2
 	initAnim.speed = 0.1f;
 	//Add collider--------------------------------
-	collider = App->collision->AddCollider({ initialX, initialY, 32, 16 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ initialX, initialY, 32, 16 }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
 }
 
 

@@ -13,7 +13,7 @@ Enemy_Basic::Enemy_Basic(int x, int y, POWERUP_TYPE pu_t) : Enemy(x, y, pu_t)
 
 	animation = &basicenemy;
 
-	collider = App->collision->AddCollider({ x, y, 32, 16 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ x, y, 32, 16 }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
 	initialY = y - App->stage05->spawnPos.y;//We get the y position
 }
 
