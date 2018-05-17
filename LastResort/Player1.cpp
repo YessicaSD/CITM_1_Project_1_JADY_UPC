@@ -140,6 +140,8 @@ void Player1::Winposition()
 
 void Player1::KillUnit()
 {
+	powerupUpgrades = 0;
+	currentPowerUp = POWERUP_TYPE::NOPOWERUP;
+	App->unit1->currentOrbit = App->unit1->currentTurnAround = App->unit1->angleValue[E];
 	App->unit1->Disable();
-	//App->unit1.currentOrbit = App->unit1.currentSpin = angle angleValue[E];
 }

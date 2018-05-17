@@ -147,6 +147,8 @@ void Player2::Winposition()
 
 void Player2::KillUnit()
 {
+	powerupUpgrades = 0;
+	currentPowerUp = POWERUP_TYPE::NOPOWERUP;
+	App->unit2->currentOrbit = App->unit2->currentTurnAround = App->unit2->angleValue[E];
 	App->unit2->Disable();
-	//App->unit2.currentOrbit = App->unit2.currentSpin = angle angleValue[E];
 }

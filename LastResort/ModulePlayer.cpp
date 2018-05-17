@@ -18,16 +18,16 @@
 
 ModulePlayer::ModulePlayer() //Constructor 
 {
-	SpeedAnimation.PushBack({ 0,0,32,31 });
-	SpeedAnimation.PushBack({ 32,0,32,32 });
-	SpeedAnimation.PushBack({ 64,0,32,32 });
-	SpeedAnimation.PushBack({ 96,0,32,32 });
-	SpeedAnimation.PushBack({ 0,32,32,32 });
+	SpeedAnimation.PushBack({  0, 0,32,31 });
+	SpeedAnimation.PushBack({ 32, 0,32,32 });
+	SpeedAnimation.PushBack({ 64, 0,32,32 });
+	SpeedAnimation.PushBack({ 96, 0,32,32 });
+	SpeedAnimation.PushBack({  0,32,32,32 });
 	SpeedAnimation.PushBack({ 32,32,32,32 });
 	SpeedAnimation.PushBack({ 64,32,32,32 });
 	SpeedAnimation.PushBack({ 96,54,32,32 });
 	SpeedAnimation.PushBack({ 32,54,32,32 });
-	SpeedAnimation.PushBack({ 0,0,0,0 });
+	SpeedAnimation.PushBack({  0, 0, 0, 0 });
 	SpeedAnimation.speed = 0.2f;
 	SpeedAnimation.loop = false;
 }
@@ -75,8 +75,6 @@ bool ModulePlayer::CleanUp()
 void ModulePlayer::Reappear() {
 	playerCol = App->collision->AddCollider({ position.x, position.y + 2, 24, 8 }, COLLIDER_TYPE::COLLIDER_PLAYER, this);
 	position = initPosition;
-	powerupUpgrades = 0;
-	currentPowerUp = POWERUP_TYPE::NOPOWERUP;
 	shipAnimations = ShipAnimations::Initial;
 	isShooting = false;
 	shoot = false;
@@ -242,6 +240,7 @@ void ModulePlayer::ShipAnimation() {
 
 void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
 {
+	//If it collides, it dies
 	playerCol->to_delete = true;
 	App->particles->AddParticle(App->particles->death_explosion, position.x , position.y , PlayerTexture);
 	isDying = true;
