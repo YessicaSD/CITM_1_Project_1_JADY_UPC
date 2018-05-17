@@ -136,6 +136,7 @@ public:
 	float currentOrbit;
 	float currentTurnAround;
 	float angleValue[UNIT_AXIS];//The value of each angle
+	float power = 0;
 
 private:
 	SDL_Texture* unitTx = nullptr;
@@ -170,7 +171,6 @@ private:
 	SDL_Texture* throwUnitTx = nullptr;
 	SDL_Texture* throwUnitOrangeTx = nullptr;
 	SDL_Texture* throwUnitBlueTx = nullptr;
-	float power = 0;
 	const float powerSpeed = 0.01f;
 	int powerDamage = 0;//The damage it can make
 	Uint32 shootTime;

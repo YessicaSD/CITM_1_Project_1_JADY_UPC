@@ -22,6 +22,7 @@ ModuleUI::ModuleUI() {
 	lives_score_p1 = { 0,0,32,16};
 	live_score_p2 = { 160,16,40,16};
 	pow = { 0,16,96,8};
+	powBar = { 96, 16, 64, 3 };
 	push_p2= { 159,0,96,16 };
 	top = { 96,0,63,16};
 
@@ -125,6 +126,11 @@ update_status ModuleUI::Update() {
 			//-----------Static UI-----------------------
 			App->render->Blit(uiTex, 16, 16, &lives_score_p1);
 			App->render->Blit(uiTex, 24, 208, &pow);
+			if (App->unit1->IsEnabled())
+			{
+				powBar.w = (int)(64 * App->unit1->power);
+				App->render->Blit(uiTex, 48, 210, &powBar);
+			}
 			//-----------Variable UI--------------------
 			App->fonts->BlitText(48, 24, 0, str_lives_p1);
 			if (App->player1->score == 0) {
@@ -139,6 +145,11 @@ update_status ModuleUI::Update() {
 			//-----------Static UI----------------------
 			App->render->Blit(uiTex, 256, 16, &live_score_p2);
 			App->render->Blit(uiTex, 184, 208, &pow);
+			if (App->unit2->IsEnabled())
+			{
+				powBar.w = (int)(64 * App->unit2->power);
+				App->render->Blit(uiTex, 208, 210, &powBar);
+			}
 			//-----------Variable UI--------------------
 			App->fonts->BlitText(264, 24, 0, str_lives_p2); //lives player 2
 
@@ -150,8 +161,6 @@ update_status ModuleUI::Update() {
 			}
 		}
 	}
-
-	RenderPowerBar();
 
 	//Credits functionality------------------------------------------------------------------------------//
 
@@ -236,17 +245,4 @@ void ModuleUI::HideUi() {
 	if (showUI == true) {
 		showUI = false;
 	}
-}
-
-void ModuleUI::RenderPowerBar()
-{
-	//if(App->unit1->IsEnabled())
-	//{
-	//	App->render->Blit();
-	//}
-
-	//if (App->unit2->IsEnabled())
-	//{
-	//	App->render->Blit();
-	//}
 }
