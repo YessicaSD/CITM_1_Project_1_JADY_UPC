@@ -45,14 +45,10 @@ bool ModulePlayer::Start()
 	shoot = false;
 	canMove = false;
 	isDying = false;
-	shipAnimations = ShipAnimations::Initial;
+	playerAnimState = PlayerAnimationState::Initial;
 
 	//audios-------------------------------------------------------------------------
 	init_sfx = App->audio->LoadSFX("Assets/initial_sfx.wav");
-	//textures-----------------------------------------------------------------------
-	//PlayerTexture = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version		
-	//SpeedAnimationTex = App->textures->Load("Assets/Powerups/speed.png");
-
 
 	//colliders----------------------------------------------------------------------
 	position = initPosition;//We set the position (before adding the collider) (note that the intial positions are set in Player1.h and Player2.h)
@@ -75,9 +71,12 @@ bool ModulePlayer::CleanUp()
 }
 
 void ModulePlayer::Reappear() {
+
 	playerCol = App->collision->AddCollider({ position.x, position.y + 2, 24, 8 }, COLLIDER_TYPE::COLLIDER_PLAYER, this);
 	position = initPosition;
-	shipAnimations = ShipAnimations::Initial;
+	powerupUpgrades = 0;
+	currentPowerUp = POWERUP_TYPE::NOPOWERUP;
+	playerAnimState = PlayerAnimationState::Initial;
 	isShooting = false;
 	shoot = false;
 	canMove = false;
@@ -128,7 +127,9 @@ update_status ModulePlayer::Update()
 		else { unitLocked = true; }
 	}
 	//Collision------------------------------------------------------------------------
-	playerCol->SetPos(position.x, position.y + 2); //We update the collider position
+	if (playerCol != nullptr) {
+		playerCol->SetPos(position.x, position.y + 2); //We update the collider position
+	}
 
 	//Ship Animation-------------------------------------------------------------------
 	ShipAnimation();
@@ -153,7 +154,7 @@ update_status ModulePlayer::Update()
 
 void ModulePlayer::ShipAnimation() {
 
-	switch (shipAnimations)
+	switch (playerAnimState)
 	{
 	case Initial:
 		current_animation = &initAnim.GetFrameEx();
@@ -164,7 +165,7 @@ void ModulePlayer::ShipAnimation() {
 
 		if (initAnim.finished == true)
 		{
-			shipAnimations = ShipAnimations::Movement;
+			playerAnimState = PlayerAnimationState::Movement;
 			//We change the collider type when spawning if god mode is not active
 			if (godMode == false) { playerCol->type = COLLIDER_PLAYER; }
 			initAnim.Reset();
@@ -217,16 +218,11 @@ void ModulePlayer::ShipAnimation() {
 		{
 			isDying = false;
 			deathAnim.Reset();
-			shipAnimations = None;
-			lives -= 1;
-			if (lives < 0) {
-				isDead = true;
-			}
+			playerAnimState = None;
 			PlayerDies();
 		}
 		else if (isDying)
 		{
-			playerCol->type = COLLIDER_NONE;
 			current_animation = &deathAnim.GetFrameEx();
 			App->render->Blit(PlayerTexture, position.x + 32 - current_animation->w, position.y + 6 - current_animation->h / 2, current_animation);
 		}
@@ -242,20 +238,28 @@ void ModulePlayer::ShipAnimation() {
 
 void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
 {
-	//If it collides, it dies
+	//Delete player collider--------------------------------------------------------
 	playerCol->to_delete = true;
-	App->particles->AddParticle(App->particles->death_explosion, position.x , position.y , PlayerTexture);
+	playerCol = nullptr;
+	//Player variables--------------------------------------------------------------
 	isDying = true;
 	canMove = false;
-	shipAnimations = ShipAnimations::Death;
+	playerAnimState = PlayerAnimationState::Death;
 	//Kill the unit
 	powerupUpgrades = 0;
 	currentPowerUp = POWERUP_TYPE::NOPOWERUP;
+
 	if (SDL_GetTicks() % 2)	//Sfx REMEMBER: Improve it for 1.0
 		App->audio->ControlSFX(App->particles->g_explosion01_1sfx, PLAY_AUDIO);
 	else
 		App->audio->ControlSFX(App->particles->g_explosion02_1sfx, PLAY_AUDIO);
+
 	KillUnit();
+	
+	//Particles---------------------------------------------------------------------
+	App->particles->AddParticle(App->particles->death_explosion, position.x, position.y, PlayerTexture);
+	
+	
 }
 
 void  ModulePlayer::ShotInput() {

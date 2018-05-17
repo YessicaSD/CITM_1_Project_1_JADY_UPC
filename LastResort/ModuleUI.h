@@ -10,6 +10,22 @@ struct SDL_Rect;
 struct Mix_Chunk;
 class ModulePlayer;
 
+
+enum sceneType {
+	NONE,
+	TITLE_SCENE,
+	STAGE_SCENE,
+	CONTINUE_SCENE
+};
+
+enum uiState {
+	COMPLETE,
+	CONTINUE,
+	GAME_OVER,
+	INSERT_COIN,
+	PUSH_BUTTON
+};
+
 class ModuleUI : public Module
 {
 public:
@@ -23,24 +39,18 @@ public:
 
 	void HideUi();
 	void ShowUi();
-	void CheckLoseConditions(ModulePlayer *player);
+
 
 public:
 
 	//Player data---------------------------------
-	enum uiState {
-		COMPLETE,
-		CONTINUE,
-		GAME_OVER,
-		PUSH_BUTTON
-	} uiP1, uiP2 ;
-
+	uiState uiP1, uiP2;
+	sceneType currentScene = NONE;
 
 	//General data--------------------------------
-	Module * currentScene = nullptr;
-	bool showUI = true;
+	bool showUI = false;
 	int credits = 0;
-	int Continue = false;
+
 	char *str_score_p1 = nullptr;
 	char *str_score_p2 = nullptr;
 	char *str_lives_p1 = nullptr;

@@ -1,11 +1,15 @@
 #include "Globals.h"
 #include "Application.h"
-#include "Player1.h"
 #include "ModuleUI.h"
+#include "Player1.h"
+#include "Player2.h"
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 #include "ModuleFadetoBlack.h"
 #include "ModuleUnit.h"
+#include "ModuleStageFunctionality.h"
+#include "ModuleContinue.h"
+#include "ModuleReady.h"
 
 
 Player1::Player1() {
@@ -64,7 +68,41 @@ Player1::Player1() {
 }
 
 void Player1::PlayerDies() {
-	App->ui->CheckLoseConditions(App->player1);
+
+	if (App->player2->isActived == true) {
+		if (lives > 0) {
+			--lives;
+			Reappear();
+		}
+		else {
+			isActived = false;
+		}
+	}
+	else if (App->ui->uiP2 == uiState::CONTINUE) {
+
+		if (lives > 0) {
+			--lives;
+			Reappear();
+		}
+		else {
+			isActived = false;
+			//Continue
+			App->fade->FadeToBlack(App->stageFunctionality->currentStage, App->continueScene, 0.0f);
+		}
+	}
+	else if (App->player2->isActived == false) {
+
+		if (lives > 0) {
+			--lives;
+			//Ready
+			App->fade->FadeToBlack(App->stageFunctionality->currentStage, App->readyScene, 0.0f);
+		}
+		else {
+			isActived = false;
+			//Continue
+			App->fade->FadeToBlack(App->stageFunctionality->currentStage, App->continueScene, 0.0f);
+		}
+	}
 }
 
 //MOVEMENT INPTUT

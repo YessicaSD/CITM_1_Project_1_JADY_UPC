@@ -25,13 +25,7 @@ enum ShipFrames
 	MaxDown
 };
 
-enum ShipAnimations
-{
-	Initial,
-	Movement,
-	Death,
-	None
-};
+
 
 
 
@@ -76,7 +70,7 @@ public:
 	iPoint initPosition;
 	float movementSpeed = 2;
 	//--------States--------------------------------
-	bool isDead = true;
+	bool isActived = false; //If user pays for a game with this player
 	bool isAppearing;
 	bool isDying;
 	bool canMove;
@@ -95,8 +89,15 @@ public:
 	bool godMode;
 
 	//Animations---------------------------------------------------------------//
+	enum PlayerAnimationState
+	{
+		Initial,
+		Movement,
+		Death,
+		None
+	};
 	//------------States----------------------------
-	ShipAnimations shipAnimations;
+	PlayerAnimationState playerAnimState;
 	Animation initAnim;
 	Animation shipAnim;
 	Animation deathAnim;

@@ -4,7 +4,6 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleAudio.h"
-#include "ModulePlayer.h"
 #include "Player1.h"
 #include "Player2.h"
 #include "ModuleInput.h"
@@ -58,46 +57,98 @@ update_status  ModuleUI::PreUpdate() {
 	return update_status::UPDATE_CONTINUE;
 }
 
-void ModuleUI::CheckLoseConditions(ModulePlayer *player) {
-
-	//Lose conditions-------------------------------------------------------------------------------//
-
-	//------Nobody dead-------------------------------------------------------
-
-	if (App->player1->isDead == false && App->player2->isDead == false)
-	{
-		if (player->lives >= 0)
-			player->Reappear();
-
-	}
-	//------Only Player 2-----------------------------------------------------
-
-	else if (App->player1->isDead == false &&  App->player2->isDead == true)
-	{
-		if (App->player2->lives >= 0)
-			App->fade->FadeToBlack(currentScene, App->readyScene, 0.0f);
-
-	}
-	//------Only Player 1-----------------------------------------------------
-
-	else if (App->player1->isDead == true && App->player2->isDead == false) {
-
-		if (App->player1->lives >= 0)
-			App->fade->FadeToBlack(currentScene, App->readyScene, 0.0f);
-
-	}
-	//-----Player 1 & 2 ---------------------------------------------------
-
-	else if (App->player1->isDead == true && App->player2->isDead == true) {
-		App->fade->FadeToBlack(currentScene, App->continueScene, 0.0f);
-	}
-}
-
-
-
 
 update_status ModuleUI::Update() {
 
+	//Credits functionality------------------------------------------------------------------------------//
+
+	//-------Add credits-----------------------------------------------
+	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_LCTRL] == KEY_DOWN || App->input->Controller1[SDL_CONTROLLER_BUTTON_Y] == KEY_DOWN || App->input->Controller2[SDL_CONTROLLER_BUTTON_Y] == KEY_DOWN)
+	{
+		App->audio->ControlSFX(coinsSfx, PLAY_AUDIO);
+		if (credits < 99)
+			credits += 1;
+	}
+
+	//-------Spawn players--------------------------------------------
+
+	//----------------------1 pressed---------------------
+	if (App->input->keyboard[SDL_SCANCODE_1] == KEY_DOWN &&
+		App->input->keyboard[SDL_SCANCODE_F5] == KEY_IDLE &&
+		App->input->keyboard[SDL_SCANCODE_F6] == KEY_IDLE &&
+		App->input->keyboard[SDL_SCANCODE_F7] == KEY_IDLE &&
+		App->input->keyboard[SDL_SCANCODE_F8] == KEY_IDLE || App->input->Controller1[SDL_CONTROLLER_BUTTON_X])
+	{
+		if (App->player1->isActived == false && credits > 0)
+		{
+			switch (currentScene)
+			{
+			case TITLE_SCENE:
+				LOG("F1");
+				credits -= 1;
+				App->player1->isActived = true;
+				App->player1->lives = 2;
+				break;
+			case STAGE_SCENE:
+				credits -= 1;
+				App->player1->isActived = true;
+				App->player1->lives = 2;
+				App->player1->Reappear();
+				break;
+			case CONTINUE_SCENE:
+				credits -= 1;
+				App->player1->isActived = true;
+				App->player1->lives = 2;
+				break;
+			default:
+				LOG("F1 default");
+				break;
+			}
+		}
+	}
+	//----------------------2 pressed---------------------
+	if (App->input->keyboard[SDL_SCANCODE_2] == KEY_DOWN && 
+		(App->input->keyboard[SDL_SCANCODE_F5] == KEY_IDLE &&
+		App->input->keyboard[SDL_SCANCODE_F6] == KEY_IDLE &&
+		App->input->keyboard[SDL_SCANCODE_F7] == KEY_IDLE &&
+		App->input->keyboard[SDL_SCANCODE_F8] == KEY_IDLE ) || App->input->Controller2[SDL_CONTROLLER_BUTTON_X])
+	{
+		switch (currentScene)
+		{
+		case TITLE_SCENE:
+			
+			if (credits >= 2)
+			{
+				App->player1->isActived = true;
+				App->player2->isActived = true;
+				App->player1->lives = 2;
+				App->player2->lives = 2;
+				credits -= 2;
+			}
+			break;
+		case STAGE_SCENE:
+			if (credits > 0 && App->player2->isActived == false)
+			{
+				App->player2->isActived = true;
+				App->player2->lives = 2;
+				App->player2->Reappear();
+				credits -= 1;
+			}
+			break;
+		case CONTINUE_SCENE:
+			if (credits > 0)
+			{
+				App->player2->isActived = true;
+				credits -= 1;
+			}
+			break;
+		default:
+			LOG("F2 default");
+			break;
+		}
+	}
+
+	
 
 	str_score_p1 = new char[MAX_NUMBERS_SCORE];
 	str_score_p2 = new char[MAX_NUMBERS_SCORE];
@@ -116,13 +167,15 @@ update_status ModuleUI::Update() {
 
 	//Draw UI----------------------------------------------------------------------------------------//
 
-	App->fonts->BlitText(208, 216, 0, str_credits);
-
 	if (showUI == true) {
 		//------Common--------------------------------------------------
+		App->fonts->BlitText(208, 216, 0, str_credits);
+		if (App->player1->isActived == true || App->player2->isActived == true)
 		App->render->Blit(uiTex, 112, 16, &top);
 		//------Player 1------------------------------------------------
-		if (App->player1->IsActive == true) {
+
+		if (App->player1->isActived == true) {
+
 			//-----------Static UI-----------------------
 			App->render->Blit(uiTex, 16, 16, &lives_score_p1);
 			App->render->Blit(uiTex, 24, 208, &pow);
@@ -141,7 +194,9 @@ update_status ModuleUI::Update() {
 			}
 		}
 		//------Player 2----------------------------------------------
-		if (App->player2->IsActive == true) {
+
+		if (App->player2->isActived == true) {
+
 			//-----------Static UI----------------------
 			App->render->Blit(uiTex, 256, 16, &live_score_p2);
 			App->render->Blit(uiTex, 184, 208, &pow);
@@ -161,64 +216,6 @@ update_status ModuleUI::Update() {
 			}
 		}
 	}
-
-	//Credits functionality------------------------------------------------------------------------------//
-
-	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_LCTRL] == KEY_DOWN || App->input->Controller1[SDL_CONTROLLER_BUTTON_Y] == KEY_DOWN || App->input->Controller2[SDL_CONTROLLER_BUTTON_Y] == KEY_DOWN)
-	{
-		App->audio->ControlSFX(coinsSfx, PLAY_AUDIO);
-		if (credits < 99)
-			credits += 1;
-	}
-
-	//Spawn player 1--------------------------------------------------------------------------
-	//INFO: We also check if the debugging keys are not pressed because we don't want to acidentally spawn a player if we select a debugging element
-	if (App->input->keyboard[SDL_SCANCODE_1] &&
-		App->input->keyboard[SDL_SCANCODE_F5] == KEY_IDLE &&
-		App->input->keyboard[SDL_SCANCODE_F6] == KEY_IDLE &&
-		App->input->keyboard[SDL_SCANCODE_F7] == KEY_IDLE &&
-		App->input->keyboard[SDL_SCANCODE_F8] == KEY_IDLE  || App->input->Controller1[SDL_CONTROLLER_BUTTON_X])
-	{
-		if (App->player1->IsActive == false)
-		{
-			if (credits > 0)
-			{
-				App->player1->IsActive = true;
-				credits -= 1;
-			}
-		}
-
-	}
-	//Spawn player 2--------------------------------------------------------------------------
-	//INFO: We also check if the debugging keys are not pressed because we don't want to acidentally spawn a player if we select a debugging element
-	if (App->input->keyboard[SDL_SCANCODE_2] &&
-		App->input->keyboard[SDL_SCANCODE_F5] == KEY_IDLE &&
-		App->input->keyboard[SDL_SCANCODE_F6] == KEY_IDLE &&
-		App->input->keyboard[SDL_SCANCODE_F7] == KEY_IDLE &&
-		App->input->keyboard[SDL_SCANCODE_F8] == KEY_IDLE || App->input->Controller2[SDL_CONTROLLER_BUTTON_X])
-	{
-		if (App->player2->IsActive == false)
-		{
-			if (credits >= 2 && App->player1->IsActive == false && Continue == false)
-			{
-				App->player1->IsActive = true;
-				App->player2->IsActive = true;
-				credits -= 2;
-			}
-			else if (credits > 0 && App->player1->IsActive == true)
-			{
-				App->player2->IsActive = true;
-				credits -= 1;
-			}
-			else if (Continue == true)
-			{
-				App->player2->IsActive = true;
-				credits -= 1;
-			}
-		}
-
-	}
-
 
 
 	delete[](str_score_p1);

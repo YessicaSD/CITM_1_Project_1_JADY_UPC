@@ -79,7 +79,6 @@ bool Application::Init()
 	stageclearScene->Disable();
 	unit1->Disable();
 	unit2->Disable();
-	ui->Disable();
 	stageFunctionality->Disable();// Does other disables inside of its disable //Player will be enabled on the first update of a new scene
 
 	for (int i = 0; i < NUM_MODULES && ret == true; ++i)

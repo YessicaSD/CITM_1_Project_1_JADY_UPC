@@ -114,7 +114,7 @@ bool Module5lvlScene::Start()
 	//Enable ---------------------------------------------------------------------
 	App->stageFunctionality->Enable();
 	App->stageFunctionality->currentStage = this;
-	App->ui->currentScene = this;
+	App->ui->currentScene = STAGE_SCENE;
 
 	//Set the spawn pos (if we don't do it, enemies will be inicialized in a incorrect position)----------------
 	shipPos = shipOffset;
@@ -257,5 +257,6 @@ bool Module5lvlScene::CleanUp() {
 	App->textures->Unload(tilemapTex);
 	//Modules-----------------------------------------------------------------------
 	App->stageFunctionality->Disable();
+	App->ui->currentScene = NONE;
 	return true;
 }

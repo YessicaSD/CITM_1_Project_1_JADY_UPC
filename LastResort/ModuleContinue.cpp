@@ -75,8 +75,8 @@ bool ModuleContinue::Start() {
 		fireAnim[x].Reset();
 		fireAnim[x].finished = false;
 	}
-	App->ui->showUI = false;
-	App->ui->Continue = true;
+	//UI---------------------------------------------------------------------------
+	App->ui->currentScene = CONTINUE_SCENE;
 	return ret;
 }
 
@@ -90,7 +90,8 @@ bool ModuleContinue::CleanUp() {
 		App->audio->ControlMUS(continue_and_go, STOP_AUDIO);
 		App->audio->UnloadMUS(continue_and_go);
 	}
-	//------------------------------------------------------------------------------
+	//UI----------------------------------------------------------------------------
+	App->ui->currentScene = NONE;
 	return true;
 }
 
