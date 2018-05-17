@@ -26,6 +26,7 @@ public:
 	void CheckLoseConditions(ModulePlayer *player);
 
 public:
+
 	//Player data---------------------------------
 	enum uiState {
 		COMPLETE,
@@ -33,6 +34,8 @@ public:
 		GAME_OVER,
 		PUSH_BUTTON
 	} uiP1, uiP2 ;
+
+
 	//General data--------------------------------
 	Module * currentScene = nullptr;
 	bool showUI = true;
