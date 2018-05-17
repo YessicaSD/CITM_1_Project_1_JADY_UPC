@@ -14,8 +14,9 @@ struct Collider;
 enum COLLIDER_TYPE;
 struct Mix_Chunk;
 
-struct Particle
+class Particle
 {
+public:
 	Collider* collider = nullptr;
 	Animation anim;
 	SDL_Texture* texture = nullptr;
@@ -30,6 +31,7 @@ struct Particle
 	Particle(const Particle& p);
 	~Particle();
 	bool Update();
+	/*virtual void Move();*/
 };
 
 class ModuleParticles : public Module
@@ -44,6 +46,7 @@ public:
 	void OnCollision(Collider* c1, Collider* c2);
 
 	void AddParticle(const Particle& particle, int x, int y, SDL_Texture *tex ,COLLIDER_TYPE collider_type = COLLIDER_NONE, Uint32 delay = 0);
+	
 
 private:
 	SDL_Texture* graphics = nullptr;

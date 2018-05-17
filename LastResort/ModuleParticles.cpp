@@ -220,6 +220,7 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, SDL_Te
 			p->position.x = x;
 			p->position.y = y;
 			p->texture = tex; // texture
+
 			if (particle.collision_fx != nullptr)
 			{
 				p->collision_fx = particle.collision_fx;
@@ -286,7 +287,7 @@ bool Particle::Update()
 	else
 		if (anim.Finished())
 			ret = false;
-
+	/*this->Move();*/
 	position.x += speed.x;
 	position.y += speed.y;
 

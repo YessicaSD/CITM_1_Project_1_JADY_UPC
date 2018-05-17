@@ -24,7 +24,7 @@ typedef unsigned int uint;
 
 // Configuration -----------------------------
 //----------Screen-------------------
-#define SCREEN_SIZE 1
+#define SCREEN_SIZE 4
 #define SCREEN_WIDTH 304
 #define SCREEN_HEIGHT 224
 #define WIN_FULLSCREEN 0
@@ -38,7 +38,7 @@ typedef unsigned int uint;
 //----------Spawning----------------
 const int SPAWN_MARGIN_LEFT = 40;
 const int SPAWN_MARGIN_RIGHT = 30;
-const int SPAWN_MARGIN_UP = 40;
+const int SPAWN_MARGIN_UP = 30;
 const int SPAWN_MARGIN_DOWN = 30;
 const int DESPAWN_MARGIN_LEFT = 250;
 const int DESPAWN_MARGIN_RIGHT = 200;
