@@ -9,7 +9,7 @@
 #include "MovPath.h"
 #include "SDL/include/SDL_timer.h"
 
-#define SHIP_COLLIDERS_NUM 49//The number of colliders the ship is made of (see Docs>shipColliders.psd)
+#define SHIP_COLLIDERS_NUM 47//The number of colliders the ship is made of (see Docs>shipColliders.psd)
 
 
 typedef struct _Mix_Music Mix_Music;
