@@ -133,9 +133,7 @@ public:
 	int FadeToBlackAlfa;
 	SDL_Rect backgroundBlack;
 
-	//Controller variables --------------------------------
-	bool Controllshoot;
-	bool stillpressed;
+
 
 	
 	

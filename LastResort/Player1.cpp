@@ -113,7 +113,7 @@ bool Player1::ReleaseCharge()
 
 bool Player1::Lock()
 {
-	return (App->input->keyboard[SDL_SCANCODE_LSHIFT] == KEY_STATE::KEY_DOWN);
+	return (App->input->keyboard[SDL_SCANCODE_LSHIFT] == KEY_STATE::KEY_DOWN || App->input->Controller1[SDL_CONTROLLER_BUTTON_A] == KEY_STATE::KEY_UP);
 }
 
 

@@ -152,7 +152,7 @@ update_status ModuleUI::Update() {
 
 	//Credits functionality------------------------------------------------------------------------------//
 
-	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_LCTRL] == KEY_DOWN || App->input->Controller1[SDL_CONTROLLER_BUTTON_Y] == KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_LCTRL] == KEY_DOWN || App->input->Controller1[SDL_CONTROLLER_BUTTON_Y] == KEY_DOWN || App->input->Controller2[SDL_CONTROLLER_BUTTON_Y] == KEY_DOWN)
 	{
 		App->audio->ControlSFX(coinsSfx, PLAY_AUDIO);
 		if (credits < 99)
@@ -213,13 +213,13 @@ update_status ModuleUI::Update() {
 	delete[](str_score_p2);
 	delete[](str_lives_p1);
 	delete[](str_lives_p2);
-	delete[](str_credits);
+	/*delete[](str_credits);*/
 	str_score_p1 = nullptr;
 	str_score_p2 = nullptr;
 	str_lives_p1 = nullptr;
 	str_lives_p2 = nullptr;
-	str_credits = nullptr;
-
+	/*str_credits = nullptr;
+*/
 	return UPDATE_CONTINUE;
 }
 

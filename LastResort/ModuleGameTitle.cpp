@@ -135,19 +135,19 @@ update_status ModuleGameTitle::Update() {
 		if (current_time>17000 || titleDone == true)
 		App->fonts->BlitText(50, 190, 0, "SNK CORP. OF AMERICA @1992");
 	
-	if (current_time>18000 || titleDone == true)
+	/*if (current_time>18000 || titleDone == true)
 	{
 
-	/*	if (time<10)
+	if (time<10)
 			snprintf(str_time, 8, "TIME 0%i", time);
 		else
 		{
 			snprintf(str_time, 10, "TIME %i", time);
 		}
 		App->fonts->BlitText(50, 150, 0, str_time);
-		--time;*/
+		--time;
 		App->audio->ControlMUS(Titlemusic, STOP_AUDIO);
-	}
+	}*/
 	if (App->ui->player1 == true)
 	{
 		App->fade->FadeToBlack(this, App->readyScene, 0.5f);

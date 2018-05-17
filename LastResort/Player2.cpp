@@ -104,32 +104,24 @@ bool Player2::MoveUp()
 
 bool Player2::Shoot()
 {
-	if (!SDL_GameControllerGetButton(App->input->controller[1], SDL_CONTROLLER_BUTTON_B))
-	{
-		stillpressed = false;
-	}
-	if (SDL_GameControllerGetButton(App->input->controller[1], SDL_CONTROLLER_BUTTON_B) && !stillpressed)
-	{
-		Controllshoot = true;
-		stillpressed = true;
-	}
+	
 
-	return (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN || Controllshoot);
+	return (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_DOWN || App->input->Controller2[SDL_CONTROLLER_BUTTON_B] == KEY_STATE::KEY_DOWN);
 }
 
 bool Player2::Charge()
 {
-	return (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_REPEAT);
+	return (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_REPEAT || App->input->Controller2[SDL_CONTROLLER_BUTTON_B] == KEY_STATE::KEY_REPEAT);
 }
 
 bool Player2::ReleaseCharge()
 {
-	return (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_UP);
+	return (App->input->keyboard[SDL_SCANCODE_RCTRL] == KEY_STATE::KEY_UP || App->input->Controller2[SDL_CONTROLLER_BUTTON_B] == KEY_STATE::KEY_UP);
 }
 
 bool Player2::Lock()
 {
-	return (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_DOWN);
+	return (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_DOWN || App->input->Controller2[SDL_CONTROLLER_BUTTON_A] == KEY_STATE::KEY_UP);
 }
 
 void Player2::Winposition()
