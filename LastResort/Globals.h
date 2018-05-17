@@ -32,9 +32,11 @@ typedef unsigned int uint;
 #define WIN_BORDERLESS 0
 #define WIN_RESIZABLE 0
 #define REN_VSYNC 1
+
 //----------Music-------------------
 #define GENERAL_MUSIC_VOLUME 15 //0 to 180 //Optimum 15
 #define GENERAL_SFX_VOLUME 20 //0 to 100   //Optimum 20
+
 //----------Spawning----------------
 const int SPAWN_MARGIN_LEFT = 40;
 const int SPAWN_MARGIN_RIGHT = 30;

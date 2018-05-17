@@ -10,6 +10,8 @@ private:
 	int initialY;
 	int position_y;
 	int position_x;
+	Uint32 StartTime;
+	Uint32 CurrentTime;
 public:
 	Enemy_Outdoor_turret(int x, int y, POWERUP_TYPE pu_t);
 	void Move();
