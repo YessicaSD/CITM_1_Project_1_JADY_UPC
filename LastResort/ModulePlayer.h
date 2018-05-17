@@ -33,6 +33,8 @@ enum ShipAnimations
 	None
 };
 
+
+
 class ModulePlayer : public Module
 {
 public:
