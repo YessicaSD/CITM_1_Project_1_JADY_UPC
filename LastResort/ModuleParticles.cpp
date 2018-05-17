@@ -8,6 +8,7 @@
 #include "ModuleAudio.h"
 #include "Player1.h"
 #include "Player2.h"
+#include "ParticleLaser.h"
 #include "SDL/include/SDL_timer.h"
 
 ModuleParticles::ModuleParticles()
@@ -232,7 +233,27 @@ void ModuleParticles::AddParticle( Particle& particle, int x, int y, SDL_Texture
 				active[i] = p;
 				break;
 			}
-
+			if (particle_type == PARTICLE_LASER)
+			{
+				Particle* p = new Particle_Laser(particle);
+				p->born = SDL_GetTicks() + delay;
+				p->position.x = x;
+				p->position.y = y;
+				p->texture = tex; // texture
+				if (particle.collision_fx != nullptr)
+				{
+					p->collision_fx = particle.collision_fx;
+				}
+				if (particle.sfx != nullptr)
+				{
+					App->audio->ControlSFX(particle.sfx, PLAY_AUDIO);
+				}
+				if (collider_type != COLLIDER_NONE)
+					//Updated for not spawn it since 1 frame on x,y animation rect values
+					p->collider = App->collision->AddCollider({ p->position.x, p->position.y ,p->anim.GetCurrentFrame().w, p->anim.GetCurrentFrame().h }, collider_type, this);
+				active[i] = p;
+				break;
+			}
 			
 		}
 	}

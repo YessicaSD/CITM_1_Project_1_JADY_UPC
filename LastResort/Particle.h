@@ -34,7 +34,7 @@ public:
 	Mix_Chunk *sfx = nullptr;
 	virtual void Move();
 	Particle();
-	Particle(const Particle& p);
+	Particle( Particle& p);
 	~Particle();
 	bool Update();
 	/*virtual void Move();*/
