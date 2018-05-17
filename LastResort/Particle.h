@@ -13,7 +13,11 @@ struct SDL_Texture;
 struct Collider;
 enum COLLIDER_TYPE;
 struct Mix_Chunk;
-
+enum PARTICLE_TYPE
+{
+	NOTYPE,
+	MAX_PARTICLE,
+};
 class Particle
 {
 public:

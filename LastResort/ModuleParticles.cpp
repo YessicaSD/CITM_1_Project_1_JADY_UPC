@@ -209,7 +209,7 @@ update_status ModuleParticles::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle(const Particle& particle, int x, int y, SDL_Texture *tex,  COLLIDER_TYPE collider_type, Uint32 delay)
+void ModuleParticles::AddParticle(const Particle& particle, int x, int y, SDL_Texture *tex,  COLLIDER_TYPE collider_type, Uint32 delay, PARTICLE_TYPE particle_type)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
