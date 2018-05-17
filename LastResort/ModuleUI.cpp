@@ -213,13 +213,13 @@ update_status ModuleUI::Update() {
 	delete[](str_score_p2);
 	delete[](str_lives_p1);
 	delete[](str_lives_p2);
-	/*delete[](str_credits);*/
+	delete[](str_credits);
 	str_score_p1 = nullptr;
 	str_score_p2 = nullptr;
 	str_lives_p1 = nullptr;
 	str_lives_p2 = nullptr;
-	/*str_credits = nullptr;
-*/
+	str_credits = nullptr;
+
 	return UPDATE_CONTINUE;
 }
 
