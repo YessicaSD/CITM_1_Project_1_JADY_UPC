@@ -115,6 +115,7 @@
     <ClInclude Include="MovPath.h" />
     <ClInclude Include="Enemy_Outdoor_turret.h" />
     <ClInclude Include="p2Point.h" />
+    <ClInclude Include="Particle.h" />
     <ClInclude Include="Path.h" />
     <ClInclude Include="Player1.h" />
     <ClInclude Include="Player2.h" />
@@ -162,6 +163,7 @@
     <ClCompile Include="ModuleUnit.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
     <ClCompile Include="Enemy_Outdoor_turret.cpp" />
+    <ClCompile Include="Particle.cpp" />
     <ClCompile Include="Player1.cpp" />
     <ClCompile Include="Player2.cpp" />
     <ClCompile Include="Powerup.cpp" />

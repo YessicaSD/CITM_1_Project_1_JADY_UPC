@@ -6,7 +6,7 @@
 #include "Globals.h"
 #include "p2Point.h"
 #include "ModuleCollision.h"
-
+#include "Particle.h"
 #define MAX_ACTIVE_PARTICLES 100
 
 struct SDL_Texture;
@@ -14,25 +14,7 @@ struct Collider;
 enum COLLIDER_TYPE;
 struct Mix_Chunk;
 
-class Particle
-{
-public:
-	Collider* collider = nullptr;
-	Animation anim;
-	SDL_Texture* texture = nullptr;
-	Particle* collision_fx = nullptr;
-	iPoint position;
-	iPoint speed;
-	Uint32 born = 0;
-	Uint32 life = 0;
-	Mix_Chunk *sfx = nullptr;
 
-	Particle();
-	Particle(const Particle& p);
-	~Particle();
-	bool Update();
-	/*virtual void Move();*/
-};
 
 class ModuleParticles : public Module
 {
@@ -45,7 +27,7 @@ public:
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
 
-	void AddParticle(const Particle& particle, int x, int y, SDL_Texture *tex ,COLLIDER_TYPE collider_type = COLLIDER_NONE, Uint32 delay = 0);
+	void AddParticle(const Particle& particle, int x, int y, SDL_Texture *tex ,COLLIDER_TYPE collider_type = COLLIDER_NONE, Uint32 delay = 0, PARTICLE_TYPE particle_type=NOTYPE);
 	
 
 private:
