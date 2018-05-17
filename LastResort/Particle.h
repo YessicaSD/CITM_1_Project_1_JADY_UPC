@@ -30,7 +30,7 @@ public:
 	Uint32 born = 0;
 	Uint32 life = 0;
 	Mix_Chunk *sfx = nullptr;
-
+	virtual void Move();
 	Particle();
 	Particle(const Particle& p);
 	~Particle();

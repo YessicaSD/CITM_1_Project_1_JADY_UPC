@@ -9,6 +9,7 @@ Particle::Particle()
 Particle::Particle(const Particle& p) :
 	anim(p.anim), position(p.position), speed(p.speed),
 	collision_fx(p.collision_fx), born(p.born), life(p.life), texture(p.texture) //struct texture added
+
 {}
 
 Particle::~Particle()
@@ -30,13 +31,12 @@ bool Particle::Update()
 	else
 		if (anim.Finished())
 			ret = false;
-	/*this->Move();*/
-	position.x += speed.x;
-	position.y += speed.y;
+	Move();
+	
 
 	if (collider != nullptr) {
 
-		collider->SetPos(position.x, position.y - anim.GetFrame().h / 2);
+		collider->SetPos(position.x, position.y /*- anim.GetFrame().h / 2*/);
 
 		if (collider->type == COLLIDER_PLAYER_1_SHOT || COLLIDER_PLAYER_2_SHOT || COLLIDER_ENEMY_SHOT) {
 			if (position.x >  SCREEN_WIDTH || position.x < 0)
@@ -47,4 +47,8 @@ bool Particle::Update()
 		}
 	}
 	return ret;
+}
+void Particle::Move() {
+	position.x += speed.x;
+	position.y += speed.y;
 }
