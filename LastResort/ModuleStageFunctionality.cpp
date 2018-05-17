@@ -68,7 +68,9 @@ bool ModuleStageFunctionality::CleanUp()
 		App->player2->isDead = true;
 		
 	}
-		
+	
+	App->unit1->Disable();
+	App->unit2->Disable();
 	App->particles->Disable();
 	App->collision->Disable();
 	App->enemies->Disable();
