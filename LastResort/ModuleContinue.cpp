@@ -1,5 +1,6 @@
 #include "Globals.h"
 #include "Application.h"
+#include "Animation.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleAudio.h"
@@ -7,12 +8,10 @@
 #include "Player2.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
-#include "ModuleStage01.h"
-#include "ModuleStage02.h"
-#include "ModuleStage05.h"
 #include "ModuleGameOver.h"
-#include "ModuleContinue.h"
+#include "ModuleReady.h"
 #include "ModuleUI.h"
+#include "ModuleContinue.h"
 
 #define MAX_ALPHA 255
 #define MIN_ALPHA 0
@@ -139,6 +138,13 @@ update_status ModuleContinue::Update() {
 	if (number < 0) {
 		time_finished = true;
 		App->fade->FadeToBlack(this, App->gameoverScene, 0.0f);
+	}
+
+
+
+	if (App->player1->isActived == true || App->player2->isActived == true)
+	{
+		App->fade->FadeToBlack(this, App->readyScene, 0.0f);
 	}
 
 	return UPDATE_CONTINUE;

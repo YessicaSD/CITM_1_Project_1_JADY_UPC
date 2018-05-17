@@ -155,9 +155,8 @@ update_status ModuleGameTitle::Update() {
 
 	if (App->player1->isActived == true || App->player2->isActived == true)
 	{
-		App->fade->FadeToBlack(this, App->readyScene, 0.5f);
+		App->fade->FadeToBlack(this, App->readyScene,  0.0f);
 	}
-
 
 	return UPDATE_CONTINUE;
 }
