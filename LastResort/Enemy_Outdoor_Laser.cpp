@@ -10,7 +10,7 @@ Enemy_Outdoor_Laser::Enemy_Outdoor_Laser(int x, int y, POWERUP_TYPE pu_t) : Enem
 	animation = &OutdoorLacerAnim;
 	position_x = x;
 	position_y = y;
-	collider = App->collision->AddCollider({ x, y + 3, 24, 17 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ x, y + 3, 24, 17 }, COLLIDER_TYPE::COLLIDER_ENEMY_HEAVY, (Module*)App->enemies);
 
 }
 
