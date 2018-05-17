@@ -68,6 +68,7 @@ public:
 	//--------Gameplay------------------------------
 	int lives = 2;
 	int score = 0;
+	bool IsActive;
 	//--------Movment-------------------------------
 	iPoint position;
 	iPoint initPosition;

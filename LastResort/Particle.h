@@ -16,7 +16,9 @@ struct Mix_Chunk;
 enum PARTICLE_TYPE
 {
 	NOTYPE,
+	PARTICLE_LASER,
 	MAX_PARTICLE,
+
 };
 class Particle
 {
@@ -30,7 +32,7 @@ public:
 	Uint32 born = 0;
 	Uint32 life = 0;
 	Mix_Chunk *sfx = nullptr;
-
+	virtual void Move();
 	Particle();
 	Particle(const Particle& p);
 	~Particle();

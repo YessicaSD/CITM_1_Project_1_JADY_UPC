@@ -148,7 +148,7 @@ update_status ModuleGameTitle::Update() {
 		--time;
 		App->audio->ControlMUS(Titlemusic, STOP_AUDIO);
 	}*/
-	if (App->ui->player1 == true)
+	if (App->player1->IsActive == true)
 	{
 		App->fade->FadeToBlack(this, App->readyScene, 0.5f);
 	}
