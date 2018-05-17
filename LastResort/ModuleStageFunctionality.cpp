@@ -33,14 +33,12 @@ ModuleStageFunctionality::~ModuleStageFunctionality()
 
 bool ModuleStageFunctionality::Start()
 {
-	if (App->ui->player1 == true) {
+	if (App->player1->isActived == true) {
 		App->player1->Enable();
-		App->player1->isDead = false;
 	}
 
-	if (App->ui->player2 == true) {
+	if (App->player2->isActived == true) {
 		App->player2->Enable();
-		App->player2->isDead = false;
 	}
 	
 	//textures-----------------------------------------------------------------------
@@ -57,18 +55,8 @@ bool ModuleStageFunctionality::Start()
 
 bool ModuleStageFunctionality::CleanUp()
 {
-	if (App->ui->player1 == true) {
-		App->player1->Disable();
-		App->player1->isDead = true;
-		
-	}
-		
-	if (App->ui->player2 == true) {
-		App->player2->Disable();
-		App->player2->isDead = true;
-		
-	}
-		
+	App->player1->Disable();
+	App->player2->Disable();
 	App->particles->Disable();
 	App->collision->Disable();
 	App->enemies->Disable();

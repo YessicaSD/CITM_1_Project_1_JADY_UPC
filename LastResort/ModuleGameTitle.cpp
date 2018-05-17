@@ -40,7 +40,9 @@ bool ModuleGameTitle:: Start()
 	Titlemusic=App->audio->LoadMUS("Assets/LastResortTitle/02-LAST-RESORT-TITLE.ogg");
 	App->audio->ControlMUS(Titlemusic, PLAY_AUDIO);
 	//UI------------------------------------------------------------------------------------
-	App->ui->Enable();
+	App->ui->ShowUi();
+	App->ui->currentScene == TITLE_SCENE;
+	//-------------------------------------------------------------------------------------
 	if (titleDone ==true)
 	{
 		L1.current_frame = 30;
@@ -59,7 +61,6 @@ bool ModuleGameTitle:: Start()
 }
 bool ModuleGameTitle::CleanUp() {
 	LOG("Unloading Title scene");
-	App->player1->Disable();
 	L1.Reset();
 	A2.Reset();
 	S3.Reset();
@@ -88,6 +89,8 @@ bool ModuleGameTitle::CleanUp() {
 
 	//Reset variables---------------------------------------------------------------
 	titleDone = false;
+	App->ui->currentScene == NONE;
+
 	return true;
 }
 update_status ModuleGameTitle::Update() {
@@ -148,7 +151,7 @@ update_status ModuleGameTitle::Update() {
 		--time;
 		App->audio->ControlMUS(Titlemusic, STOP_AUDIO);
 	}*/
-	if (App->ui->player1 == true)
+	if (App->player1->isActived == true)
 	{
 		App->fade->FadeToBlack(this, App->readyScene, 0.5f);
 	}
