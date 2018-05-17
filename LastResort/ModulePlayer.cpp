@@ -49,10 +49,9 @@ bool ModulePlayer::Start()
 
 	//audios-------------------------------------------------------------------------
 	init_sfx = App->audio->LoadSFX("Assets/initial_sfx.wav");
-
 	//colliders----------------------------------------------------------------------
 	position = initPosition;//We set the position (before adding the collider) (note that the intial positions are set in Player1.h and Player2.h)
-	playerCol = App->collision->AddCollider({ position.x, position.y + 2, 24, 8 }, COLLIDER_TYPE::COLLIDER_PLAYER, this);
+	playerCol = App->collision->AddCollider({ position.x, position.y + 2, 24, 8 }, COLLIDER_TYPE::COLLIDER_GOD, this);
 
 	return ret;
 }
@@ -72,7 +71,7 @@ bool ModulePlayer::CleanUp()
 
 void ModulePlayer::Reappear() {
 
-	playerCol = App->collision->AddCollider({ position.x, position.y + 2, 24, 8 }, COLLIDER_TYPE::COLLIDER_PLAYER, this);
+	playerCol->type = COLLIDER_TYPE::COLLIDER_GOD;
 	position = initPosition;
 	powerupUpgrades = 0;
 	currentPowerUp = POWERUP_TYPE::NOPOWERUP;
@@ -238,10 +237,11 @@ void ModulePlayer::ShipAnimation() {
 
 void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
 {
-	//Delete player collider--------------------------------------------------------
-	playerCol->to_delete = true;
-	playerCol = nullptr;
+	//Particles---------------------------------------------------------------------
+	App->particles->AddParticle(App->particles->death_explosion, position.x, position.y, PlayerTexture);
+
 	//Player variables--------------------------------------------------------------
+	playerCol->type = COLLIDER_GOD;
 	isDying = true;
 	canMove = false;
 	playerAnimState = PlayerAnimationState::Death;
@@ -255,10 +255,7 @@ void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
 		App->audio->ControlSFX(App->particles->g_explosion02_1sfx, PLAY_AUDIO);
 
 	KillUnit();
-	
-	//Particles---------------------------------------------------------------------
-	App->particles->AddParticle(App->particles->death_explosion, position.x, position.y, PlayerTexture);
-	
+	//Delete player collider--------------------------------------------------------
 	
 }
 

@@ -6,13 +6,13 @@
 #include "ModuleReady.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
-#include "Player1.h"
 #include "ModuleStage01.h"
 #include "ModuleStage02.h"
 #include "ModuleStage05.h"
 #include "ModuleAudio.h"
 #include "ModuleGameOver.h"
 #include "ModuleStageClear.h"
+#include "ModuleUI.h"
 
 
 ModuleStageReady::ModuleStageReady()
@@ -45,7 +45,7 @@ bool ModuleStageReady::Start()
 	bool ret = true;
 
 	backgroundReady = App->textures->Load("Assets/UI.png");
-
+	App->ui->HideUi();
 	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, 255);
 	SDL_RenderFillRect(App->render->renderer, &backgroundBlack);
 	start_time = SDL_GetTicks();
@@ -73,7 +73,7 @@ update_status ModuleStageReady::Update()
 	current_time = (SDL_GetTicks() - start_time);
 	if (current_time > 800)
 	{
-		App->fade->FadeToBlack(this, App->stage05, 0.5f);
+		App->fade->FadeToBlack(this, App->stage05, 0.0f);
 	}
 	App->render->Blit(backgroundReady, 110 /*SCREEN_WIDTH/2*/, 100 /*SCREEN_HEIGHT/2*/, &BGroundReady); //MAGIC NUMBERS
 

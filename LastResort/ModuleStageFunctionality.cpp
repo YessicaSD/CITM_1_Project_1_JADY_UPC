@@ -65,7 +65,6 @@ bool ModuleStageFunctionality::CleanUp()
 	App->collision->Disable();
 	App->enemies->Disable();
 	App->powerups->Disable();
-	App->ui->HideUi();
 	return true;
 }
 
