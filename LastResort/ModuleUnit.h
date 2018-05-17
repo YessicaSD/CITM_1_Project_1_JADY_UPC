@@ -137,6 +137,7 @@ public:
 	float currentTurnAround;
 	float angleValue[UNIT_AXIS];//The value of each angle
 	float power = 0;
+	UnitPhase unitPhase = UnitPhase::rotating;
 
 private:
 	SDL_Texture* unitTx = nullptr;
@@ -156,7 +157,6 @@ private:
 	bool turningAround;//A bool that indicates if we can make the unit turn around
 	int radius = 31;
 	const float angleSeparation = PI / 16;//The separation between the angles (helps us calculate which animation we have to play)
-	iPoint playerCenter;
 
 	SpinAnimation spinAnimation[UNIT_AXIS];//There is an animation for each direction of the unit
 										 //   E, ESE,  SE, SSE,   S, SSW,  SW, WSW,   W, WNW,  NW, NNW,   N, NNE,  NE, ENE
@@ -165,7 +165,6 @@ private:
 	
 	int shotPosXDifferences[UNIT_AXIS] = {   15,  14,  12,   6,   0,  -5, -11, -13, -14, -13, -11,  -6,   0,   6,  11,  14 };//Helps us position the unit projectile at the top of its antenas
 	int shotPosYDifferences[UNIT_AXIS] = {    0,   7,  12,  14,  15,  14,  12,   6,   0,  -6, -11, -14, -14, -13, -10,  -6 };//Helps us position the unit projectile at the top of its antenas
-	UnitPhase unitPhase = UnitPhase::rotating;
 
 	//Throwing
 	SDL_Texture* throwUnitTx = nullptr;

@@ -178,7 +178,10 @@ void Player1::Winposition()
 
 void Player1::KillUnit()
 {
-	App->particles->AddParticle(App->particles->g_explosion02, App->unit1->position.x, App->unit1->position.y, App->particles->g_explosion02.texture, COLLIDER_NONE, 0);//Explosion type REMEMBER: Improve it for 1.0
+	if(App->unit1->IsEnabled())
+	{
+		App->particles->AddParticle(App->particles->g_explosion02, App->unit1->position.x, App->unit1->position.y, App->particles->g_explosion02.texture, COLLIDER_NONE, 0);//Explosion type REMEMBER: Improve it for 1.0
+	}
 	App->unit1->currentOrbit = App->unit1->currentTurnAround = App->unit1->angleValue[E];
 	App->unit1->Disable();
 }
