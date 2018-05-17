@@ -165,7 +165,7 @@ update_status ModuleUI::Update() {
 		App->input->keyboard[SDL_SCANCODE_F5] == KEY_IDLE &&
 		App->input->keyboard[SDL_SCANCODE_F6] == KEY_IDLE &&
 		App->input->keyboard[SDL_SCANCODE_F7] == KEY_IDLE &&
-		App->input->keyboard[SDL_SCANCODE_F8] == KEY_IDLE)
+		App->input->keyboard[SDL_SCANCODE_F8] == KEY_IDLE  || App->input->Controller1[SDL_CONTROLLER_BUTTON_X])
 	{
 		if (player1 == false)
 		{
