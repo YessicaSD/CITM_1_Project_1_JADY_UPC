@@ -171,7 +171,7 @@ private:
 	SDL_Texture* throwUnitTx = nullptr;
 	SDL_Texture* throwUnitOrangeTx = nullptr;
 	SDL_Texture* throwUnitBlueTx = nullptr;
-	const float powerSpeed = 0.01f;
+	const float powerSpeed = 0.02f;
 	int powerDamage = 0;//The damage it can make
 	Uint32 shootTime;
 	const float throwingSpeed = 7;
