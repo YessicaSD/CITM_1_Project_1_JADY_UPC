@@ -16,7 +16,9 @@ struct Mix_Chunk;
 enum PARTICLE_TYPE
 {
 	NOTYPE,
+	PARTICLE_LASER,
 	MAX_PARTICLE,
+
 };
 class Particle
 {

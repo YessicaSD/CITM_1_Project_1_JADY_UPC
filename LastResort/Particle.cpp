@@ -36,7 +36,7 @@ bool Particle::Update()
 
 	if (collider != nullptr) {
 
-		collider->SetPos(position.x, position.y /*- anim.GetFrame().h / 2*/);
+		collider->SetPos(position.x, position.y - anim.GetFrame().h / 2);
 
 		if (collider->type == COLLIDER_PLAYER_1_SHOT || COLLIDER_PLAYER_2_SHOT || COLLIDER_ENEMY_SHOT) {
 			if (position.x >  SCREEN_WIDTH || position.x < 0)

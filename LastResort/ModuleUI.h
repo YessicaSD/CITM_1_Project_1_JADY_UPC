@@ -27,8 +27,6 @@ public:
 
 public:
 	//Player data---------------------------------
-	bool player1 =false;
-	bool player2 = false;
 	enum uiState {
 		COMPLETE,
 		CONTINUE,

@@ -120,7 +120,7 @@ update_status ModuleUI::Update() {
 		//------Common--------------------------------------------------
 		App->render->Blit(uiTex, 112, 16, &top);
 		//------Player 1------------------------------------------------
-		if (player1 == true) {
+		if (App->player1->IsActive == true) {
 			//-----------Static UI-----------------------
 			App->render->Blit(uiTex, 16, 16, &lives_score_p1);
 			App->render->Blit(uiTex, 24, 208, &pow);
@@ -134,7 +134,7 @@ update_status ModuleUI::Update() {
 			}
 		}
 		//------Player 2----------------------------------------------
-		if (player2 == true) {
+		if (App->player2->IsActive == true) {
 			//-----------Static UI----------------------
 			App->render->Blit(uiTex, 256, 16, &live_score_p2);
 			App->render->Blit(uiTex, 184, 208, &pow);
@@ -167,11 +167,11 @@ update_status ModuleUI::Update() {
 		App->input->keyboard[SDL_SCANCODE_F7] == KEY_IDLE &&
 		App->input->keyboard[SDL_SCANCODE_F8] == KEY_IDLE  || App->input->Controller1[SDL_CONTROLLER_BUTTON_X])
 	{
-		if (player1 == false)
+		if (App->player1->IsActive == false)
 		{
 			if (credits > 0)
 			{
-				player1 = true;
+				App->player1->IsActive = true;
 				credits -= 1;
 			}
 		}
@@ -185,22 +185,22 @@ update_status ModuleUI::Update() {
 		App->input->keyboard[SDL_SCANCODE_F7] == KEY_IDLE &&
 		App->input->keyboard[SDL_SCANCODE_F8] == KEY_IDLE || App->input->Controller2[SDL_CONTROLLER_BUTTON_X])
 	{
-		if (player2 == false)
+		if (App->player2->IsActive == false)
 		{
-			if (credits >= 2 && player1 == false && Continue == false)
+			if (credits >= 2 && App->player1->IsActive == false && Continue == false)
 			{
-				player1 = true;
-				player2 = true;
+				App->player1->IsActive = true;
+				App->player2->IsActive = true;
 				credits -= 2;
 			}
-			else if (credits > 0 && player1 == true)
+			else if (credits > 0 && App->player1->IsActive == true)
 			{
-				player2 = true;
+				App->player2->IsActive = true;
 				credits -= 1;
 			}
 			else if (Continue == true)
 			{
-				player2 = true;
+				App->player2->IsActive = true;
 				credits -= 1;
 			}
 		}
