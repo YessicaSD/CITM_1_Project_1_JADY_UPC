@@ -226,7 +226,6 @@ bool ModuleUnit::Start()
 	throwUnitBlueTx = App->textures->Load("Assets/Unit/BlueUnitThrow.png");
 	currentOrbit = currentTurnAround = angleValue[E];
 	unitCol = App->collision->AddCollider({ (int)position.x - sphereDiameter/2, (int)position.y - sphereDiameter / 2, sphereDiameter, sphereDiameter}, COLLIDER_UNIT , this);
-
 	hitDetectionUp    = App->collision->AddCollider({ (int)position.x - sphereDiameter / 2, (int)position.y - sphereDiameter / 2 - (int)throwingSpeed, sphereDiameter,    (int)throwingSpeed }, COLLIDER_HIT_DETECTION_WALL, this);
 	hitDetectionDown  = App->collision->AddCollider({ (int)position.x - sphereDiameter / 2, (int)position.y + sphereDiameter / 2,                      sphereDiameter,    (int)throwingSpeed }, COLLIDER_HIT_DETECTION_WALL, this);
 	hitDetectionLeft  = App->collision->AddCollider({ (int)position.x - sphereDiameter / 2 - (int)throwingSpeed, (int)position.y - sphereDiameter / 2, (int)throwingSpeed, sphereDiameter    }, COLLIDER_HIT_DETECTION_WALL, this);
@@ -402,6 +401,7 @@ void ModuleUnit::Rotating()
 		{
 			//Throw
 			unitPhase = UnitPhase::throwing;
+			unitCol->SetDamage(12);
 			shootTime = SDL_GetTicks();
 		}
 		//If the player releases the button, we set the power to 0
@@ -471,6 +471,7 @@ void ModuleUnit::Positioning()
 	if(radius >= 31)
 	{
 		radius = 31;
+		unitCol->SetDamage(1);
 		unitPhase = UnitPhase::rotating;
 	}
 	Rotating();
