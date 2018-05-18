@@ -77,7 +77,7 @@ update_status ModuleInput::PreUpdate()
 		if (SDL_IsGameController(i)) {
 			controller[i] = SDL_GameControllerOpen(i);
 			if (controller) {
-				break;
+			
 			}
 			else {
 				LOG("Could not open gamecontroller %i: %s\n", i, SDL_GetError());
