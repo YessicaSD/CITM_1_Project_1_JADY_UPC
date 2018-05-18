@@ -132,6 +132,14 @@ How to use advanced debugging?
 
 ## Changes ----------------------------------------------------------------------------
 
+### CHANGES IN V0.8.0.0
+- Added enemies: Front ship turret 
+- Now you can throw the Unit and inflict damage
+- Added Unit Orange Power  ( try to throw the unit to any collider)
+- Added CheckPoints in Stage 05
+- Several bugs  solved
+
+
 ### CHANGES IN V0.7.0.0
 - Added ship colliders
 - Added  2 enemies: Oscilator & RedBat
