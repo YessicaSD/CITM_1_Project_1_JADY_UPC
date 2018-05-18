@@ -27,10 +27,11 @@ public:
 	bool CleanUp();
 
 public:
-	//provisional-----------------------------
+	//CheckPoint-----------------------------
 	int current_time= 0;
 	int start_time = 0;
-	int checkPoint = 0;
+	int currentCheckPoint = 0;
+	int currentMov = 0;
 
 	//Points----------------------------------
 	dPoint backgroundPoint;//The position that we directly move with the path

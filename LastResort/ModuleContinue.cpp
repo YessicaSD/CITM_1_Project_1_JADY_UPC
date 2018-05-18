@@ -75,6 +75,7 @@ bool ModuleContinue::Start() {
 		fireAnim[x].finished = false;
 	}
 	//UI---------------------------------------------------------------------------
+	App->ui->ShowUi();
 	App->ui->currentScene = CONTINUE_SCENE;
 	return ret;
 }

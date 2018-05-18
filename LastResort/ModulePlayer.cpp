@@ -16,6 +16,8 @@
 #include "Player1.h"
 #include "Player2.h"
 
+#define INVINCIBILITY_FRAMES  140
+
 ModulePlayer::ModulePlayer() //Constructor 
 {
 	SpeedAnimation.PushBack({  0, 0,32,31 });
@@ -39,21 +41,42 @@ bool ModulePlayer::Start()
 {
 	bool ret = true;
 	LOG("Loading player assets");
-	//variables-----------------------------------------------------------------------
+
+	//position-----------------------------------------------------------------------
+	position = initPosition;//We set the position (before adding the collider) (note that the intial positions are set in Player1.h and Player2.h)
+	//variables----------------------------------------------------------------------
+	playerAnimState = PlayerAnimationState::Initial;
 	godMode = false;
 	isShooting = false;
 	shoot = false;
 	canMove = false;
 	isDying = false;
-	playerAnimState = PlayerAnimationState::Initial;
-
+	isInvincible = true;
+	invincibilityFrames = INVINCIBILITY_FRAMES;
 	//audios-------------------------------------------------------------------------
 	init_sfx = App->audio->LoadSFX("Assets/initial_sfx.wav");
-	//colliders----------------------------------------------------------------------
-	position = initPosition;//We set the position (before adding the collider) (note that the intial positions are set in Player1.h and Player2.h)
+	//collider-----------------------------------------------------------------------
 	playerCol = App->collision->AddCollider({ position.x, position.y + 2, 24, 8 }, COLLIDER_TYPE::COLLIDER_GOD, this);
 
 	return ret;
+}
+
+void ModulePlayer::Reappear() {
+	//position-----------------------------------------------------------------------
+	position = initPosition;
+	//variables----------------------------------------------------------------------
+	playerAnimState = PlayerAnimationState::Initial;
+	powerupUpgrades = 0;
+	currentPowerUp = POWERUP_TYPE::NOPOWERUP;
+	isShooting = false;
+	shoot = false;
+	canMove = false;
+	isDying = false;
+	isInvincible = true;
+	invincibilityFrames = INVINCIBILITY_FRAMES;
+	//collider-----------------------------------------------------------------------
+	playerCol->type = COLLIDER_TYPE::COLLIDER_GOD;
+
 }
 
 bool ModulePlayer::CleanUp()
@@ -69,18 +92,6 @@ bool ModulePlayer::CleanUp()
 	return true;
 }
 
-void ModulePlayer::Reappear() {
-
-	playerCol->type = COLLIDER_TYPE::COLLIDER_GOD;
-	position = initPosition;
-	powerupUpgrades = 0;
-	currentPowerUp = POWERUP_TYPE::NOPOWERUP;
-	playerAnimState = PlayerAnimationState::Initial;
-	isShooting = false;
-	shoot = false;
-	canMove = false;
-
-}
 
 
 update_status ModulePlayer::PreUpdate()
@@ -165,8 +176,6 @@ void ModulePlayer::ShipAnimation() {
 		if (initAnim.finished == true)
 		{
 			playerAnimState = PlayerAnimationState::Movement;
-			//We change the collider type when spawning if god mode is not active
-			if (godMode == false) { playerCol->type = COLLIDER_PLAYER; }
 			initAnim.Reset();
 			canMove = true;
 			break;
@@ -183,6 +192,7 @@ void ModulePlayer::ShipAnimation() {
 		break;
 
 	case Movement:
+
 		//Idle--------------------------------------------------------
 		if (yAxis > -transitionLimit && yAxis < transitionLimit)
 		{
@@ -207,7 +217,25 @@ void ModulePlayer::ShipAnimation() {
 			currentFrame = MaxUp;
 		}
 		//Draw ship--------------------------------------------------
-		current_animation = &shipAnim.frames[currentFrame]; //It set the animation frame 
+		if (isInvincible == true) {
+			if ((invincibilityFrames/2) % 2 == 0) {
+				current_animation = &shipAnimBlack.frames[currentFrame];
+			}
+			else {
+				current_animation = &shipAnim.frames[currentFrame];
+			}
+			--invincibilityFrames;
+
+			if (invincibilityFrames < 0) {
+				isInvincible = false;
+				//We change the collider type when spawning if god mode is not active
+				if (godMode == false) { playerCol->type = COLLIDER_PLAYER; }
+			}
+		}
+		else {
+			current_animation = &shipAnim.frames[currentFrame]; //It set the animation frame 
+		}
+	
 		App->render->Blit(PlayerTexture, position.x, position.y, current_animation);
 
 		break;

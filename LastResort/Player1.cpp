@@ -16,13 +16,21 @@ Player1::Player1() {
 	//Initial values------------------------------------------
 	initPosition = { 40,74 };
 	shot_colType = COLLIDER_PLAYER_1_SHOT;
-
+	
 	//Movement animation----------------------------------------
+	//----Normal-------------------------------
 	shipAnim.PushBack({ 0, 3, 32, 12 });	//0 = UpShip
 	shipAnim.PushBack({ 32, 3, 32, 12 });	//1 = MiddleUpShip
 	shipAnim.PushBack({ 64, 3, 32, 12 });	//2 = idle
 	shipAnim.PushBack({ 96, 3, 32, 12 });	//3 = MiddleDownShip
 	shipAnim.PushBack({ 128, 3, 32, 12 });	//4 = DownShip
+	//----Black-------------------------------
+	shipAnimBlack.PushBack({ 0, 3 - 384, 32, 12 });	    //0 = UpShip
+	shipAnimBlack.PushBack({ 32, 3 - 384, 32, 12 });	//1 = MiddleUpShip
+	shipAnimBlack.PushBack({ 64, 3 - 384, 32, 12 });	//2 = idle
+	shipAnimBlack.PushBack({ 96, 3 - 384, 32, 12 });	//3 = MiddleDownShip
+	shipAnimBlack.PushBack({ 128, 3 - 384, 32, 12 });	//4 = DownShip
+
 	//Initial animation-----------------------------------------
 	initAnim.PushBack({ 0, 122, 111, 2 });
 	initAnim.PushBack({ 0, 124, 117, 3 });

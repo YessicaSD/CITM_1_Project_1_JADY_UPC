@@ -11,6 +11,7 @@
 #define HORIZONTAL_MARGIN 16
 #define VERTICAL_MARGIN 2
 
+
 struct SDL_Texture;
 struct Collider; //SHOT
 struct Particle;
@@ -72,6 +73,7 @@ public:
 	//--------States--------------------------------
 	bool isActived = false; //If user pays for a game with this player
 	bool isAppearing;
+	bool isInvincible = false;
 	bool isDying;
 	bool canMove;
 	bool unitLocked = false;
@@ -100,6 +102,7 @@ public:
 	PlayerAnimationState playerAnimState;
 	Animation initAnim;
 	Animation shipAnim;
+	Animation shipAnimBlack;
 	Animation deathAnim;
 	//------------PowerUps--------------------------
 	Animation ShotLaserBasic;
@@ -110,6 +113,7 @@ public:
 	//------------Variables-------------------------
 	int const playerwidth = 32;
 	int const playerheight = 12;
+	int invincibilityFrames;
 	float yAxis = 0;//This value will control the animation of the ship. It will increase up to 1 when S is pressed and it will decrease up to -1 when W is pressed. When none of those keys are pressed, it will progressively go back to 0.
 	const float keyPressSpeed = 0.05f;//The speed at which the ship will change its frame when the key is pressed
 	const float keyReleaseSpeed = 0.05f;//The speed at which the ship goes basck to the idle frame when the key is release

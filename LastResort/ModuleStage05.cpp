@@ -28,7 +28,7 @@ Module5lvlScene::Module5lvlScene()
 	tunnelRect = { 0,0 ,875 ,224 };
 
 	cameraMovement.originPoint = { -444, 240 };     //-1      //0
-	cameraMovement.PushBack({ -167, 144 }, 330);    //0       //1
+	cameraMovement.PushBack({ -167, 144 }, 700);    //0       //1
 	cameraMovement.PushBack({ 10,144 }, 468);       //1       //2 
 	cameraMovement.PushBack(720);                   //Pause   //3  
 	cameraMovement.PushBack({ -244,-33 }, 492);     //2       //4  
@@ -116,14 +116,16 @@ bool Module5lvlScene::Start()
 	App->stageFunctionality->currentStage = this;
 	App->ui->currentScene = STAGE_SCENE;
 
-	//Set the spawn pos (if we don't do it, enemies will be inicialized in a incorrect position)----------------
-	shipPos = shipOffset;
+	//Positions--------------------------------------------------------------------------------------------------
+	if (currentCheckPoint == 0) {
+		cameraMovement.SetMovement(0);
+	}
+	else 
+		cameraMovement.SetMovement(22);
+
+	shipPos = shipOffset - cameraMovement.GetPosition();
 	spawnPos.x = (int)shipPos.x;
 	spawnPos.y = (int)shipPos.y;
-
-	//"Reset ship position when fadetoblackends"----------------------------------
-	//App->player1->Reset_Positions();
-	//App->player2->Reset_Positions();
 
 	//Texture ---------------------------------------------------------------------------------------------------
 	StarsTexture = App->textures->Load("Assets/lvl5/background/backgroundstars.png");
@@ -164,7 +166,7 @@ bool Module5lvlScene::Start()
 	
 
 	//- TEST ENEMIES
-	App->enemies->AddEnemy(PINATA, 150, 140);
+	/*App->enemies->AddEnemy(PINATA, 150, 120);*/
 	//App->enemies->AddEnemy(OSCILATOR, 500, 0);
 
 
@@ -186,9 +188,56 @@ update_status Module5lvlScene::Update()
 {
 	
 	//provisional-----------------------------
+
 	current_time = SDL_GetTicks() - start_time ;
+
 	
-	//Background stars blit-------------------------------------------------------------------------
+	//Updates----------------------------------------------------------------------------------------------------//
+
+	//----------Update Points--------------------------------------------
+
+	backgroundPoint = cameraMovement.GetCurrentPosition();
+	shipPos = shipOffset - backgroundPoint;
+	tunnelPos = tunnelOffset - backgroundPoint;
+	spawnPos.x = (int)shipPos.x;
+	spawnPos.y = (int)shipPos.y;
+
+	//----------Update CheckPoint----------------------------------------
+
+	if (cameraMovement.currentMov  > 21) 
+		currentCheckPoint = 1;
+	else 
+		currentCheckPoint = 0;
+
+	//----------Update Colliders-----------------------------------------
+
+	for (int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
+	{
+		shipCollidersCol[i]->SetPos(
+			shipCollidersRect[i].x + (int)shipPos.x,
+			shipCollidersRect[i].y + (int)shipPos.y);
+	}
+	//----------DebugMode------------------------------------------------ TODO: Change it
+
+	currentMov = cameraMovement.currentMov;
+
+	if (App->input->keyboard[SDL_SCANCODE_F9] == KEY_DOWN) {
+		if (currentMov > 0) {
+			--currentMov;
+			cameraMovement.SetMovement(currentMov);
+		}
+	}
+	if (App->input->keyboard[SDL_SCANCODE_F10] == KEY_DOWN) {
+		if (currentMov < 24) {
+			++currentMov;
+			cameraMovement.SetMovement(currentMov);
+		}
+	}
+
+	//Background----------------------------------------------------------------------------------------------------//
+
+	//----------Stars Scroll----------------------------------------------
+
 	scroll.x -= 5;
 	scroll.y += cameraMovement.GetCurrentPosition().VectU().y;
 	if (scroll.x <= -SCREEN_WIDTH)
@@ -202,45 +251,21 @@ update_status Module5lvlScene::Update()
 	App->render->Blit(StarsTexture, scroll.x+SCREEN_WIDTH,- scroll.y, NULL);
 	App->render->Blit(StarsTexture, scroll.x, -scroll.y-SCREEN_HEIGHT, NULL);
 	App->render->Blit(StarsTexture, scroll.x + SCREEN_WIDTH,- scroll.y - SCREEN_HEIGHT, NULL);
-	//Background--------------------------------------------------------------------
-	//------------DebugMode------------------------------------ Change it 
-	if (App->input->keyboard[SDL_SCANCODE_F9] == KEY_DOWN) { 
-		if (checkPoint > 0) {
-			--checkPoint;
-			cameraMovement.SetMovement(checkPoint);
-		}
-	}
-	if (App->input->keyboard[SDL_SCANCODE_F10] == KEY_DOWN) { 
-		if (checkPoint < 24) {
-			++checkPoint;
-			cameraMovement.SetMovement(checkPoint);
-		}
-	}
-	//------------Move------------------------------------------
-	backgroundPoint = cameraMovement.GetCurrentPosition();
-	shipPos = shipOffset - backgroundPoint;
-	tunnelPos = tunnelOffset - backgroundPoint;
-	//- We update the spawn position----------------------------
-	spawnPos.x = (int)shipPos.x;
-	spawnPos.y = (int)shipPos.y;
+	
+	//----------SpaceShip-------------------------------------------------
 
-	//-----------Draw-------------------------------------------
 	if (cameraMovement.currentMov <= 21)
 	{
 		App->render->Blit(shipTex, shipPos.x, shipPos.y, &shipRect);
 	}
+	//----------Final Tilemap--------------------------------------------
+
 	if (cameraMovement.currentMov > 21)
 	{
 		App->render->Blit(tilemapTex, tunnelPos.x, tunnelPos.y, &tunnelRect);
 	}
 	
-	//Update colliders (Important: after moving the ship!)------------------------------------
-	for (int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
-	{
-		shipCollidersCol[i] ->SetPos(
-			shipCollidersRect[i].x + (int)shipPos.x,
-			shipCollidersRect[i].y + (int)shipPos.y);
-	}
+
 
 	return UPDATE_CONTINUE;
 }
@@ -251,7 +276,7 @@ bool Module5lvlScene::CleanUp() {
 	//audios------------------------------------------------------------------------
 	App->audio->ControlMUS(lvl5Music, STOP_AUDIO);
 	App->audio->UnloadMUS(lvl5Music);
-	//Texture ---------------------------------------------------------------------------------------------------
+	//Texture -----------------------------------------------------------------------
 	App->textures->Unload(StarsTexture);
 	App->textures->Unload(shipTex);
 	App->textures->Unload(tilemapTex);

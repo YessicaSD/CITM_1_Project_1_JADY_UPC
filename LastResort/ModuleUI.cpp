@@ -11,6 +11,7 @@
 #include "ModuleFadetoBlack.h"
 #include "ModuleContinue.h"
 #include "ModuleStageFunctionality.h"
+#include "ModuleStage05.h"
 #include "ModuleReady.h"
 #include "ModuleUnit.h"
 #include <stdio.h>
@@ -106,6 +107,7 @@ update_status ModuleUI::Update() {
 				credits -= 1;
 				App->player1->isActived = true;
 				App->player1->lives = 2;
+				App->stage05->currentCheckPoint = 0;
 				break;
 			default:
 				LOG("F1 default");
@@ -153,8 +155,9 @@ update_status ModuleUI::Update() {
 		case CONTINUE_SCENE:
 			if (credits > 0)
 			{
-				App->player2->isActived = true;
 				credits -= 1;
+				App->player2->isActived = true;
+				App->stage05->currentCheckPoint = 0;
 			}
 			break;
 		default:
@@ -181,6 +184,7 @@ update_status ModuleUI::Update() {
 		snprintf(str_credits, 4 * sizeof(str_credits), "CREDITS %d", credits);
 
 	//Draw UI----------------------------------------------------------------------------------------//
+
 
 	if (showUI == true) {
 		//------Common--------------------------------------------------
