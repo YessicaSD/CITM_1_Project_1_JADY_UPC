@@ -40,9 +40,9 @@ bool ModuleGameTitle:: Start()
 	//audios--------------------------------------------------------------------------------
 	Titlemusic=App->audio->LoadMUS("Assets/LastResortTitle/02-LAST-RESORT-TITLE.ogg");
 	App->audio->ControlMUS(Titlemusic, PLAY_AUDIO);
-	//UI------------------------------------------------------------------------------------
-	App->ui->ShowUi();
+	//UI-------------------------------------------------------------------------------------
 	App->ui->currentScene = TITLE_SCENE;
+	App->ui->ShowUi();
 	//-------------------------------------------------------------------------------------
 	if (titleDone ==true)
 	{
@@ -91,6 +91,7 @@ bool ModuleGameTitle::CleanUp() {
 	//Reset variables---------------------------------------------------------------
 	titleDone = false;
 	App->ui->currentScene = NONE;
+	
 
 	return true;
 }

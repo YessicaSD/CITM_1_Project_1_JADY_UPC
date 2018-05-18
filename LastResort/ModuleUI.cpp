@@ -86,6 +86,7 @@ update_status ModuleUI::Update() {
 			case TITLE_SCENE:
 				LOG("F1");
 				credits -= 1;
+				HideUi();
 				App->player1->isActived = true;
 				App->player1->lives = 2;
 				break;
@@ -93,7 +94,13 @@ update_status ModuleUI::Update() {
 				credits -= 1;
 				App->player1->isActived = true;
 				App->player1->lives = 2;
-				App->player1->Reappear();
+				if (App->player1->enabled == true) {
+					App->player1->Reappear();
+				}
+				else {
+					App->player1->Enable();
+				}
+				
 				break;
 			case CONTINUE_SCENE:
 				credits -= 1;
@@ -119,6 +126,7 @@ update_status ModuleUI::Update() {
 			
 			if (credits >= 2)
 			{
+				HideUi();
 				App->player1->isActived = true;
 				App->player2->isActived = true;
 				App->player1->lives = 2;
@@ -131,7 +139,14 @@ update_status ModuleUI::Update() {
 			{
 				App->player2->isActived = true;
 				App->player2->lives = 2;
-				App->player2->Reappear();
+
+				if (App->player2->enabled == true) {
+					App->player2->Reappear();
+				}
+				else {
+					App->player2->Enable();
+				}
+				
 				credits -= 1;
 			}
 			break;

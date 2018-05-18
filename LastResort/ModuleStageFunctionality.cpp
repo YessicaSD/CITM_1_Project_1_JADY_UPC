@@ -45,18 +45,17 @@ bool ModuleStageFunctionality::Start()
 	//textures-----------------------------------------------------------------------
 	PlayerTexture = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version		
 	SpeedAnimationTex = App->textures->Load("Assets/Powerups/speed.png");
-
+	App->ui->ShowUi();
 	App->particles->Enable();
 	App->collision->Enable();
 	App->enemies->Enable();
 	App->powerups->Enable();
-	App->ui->ShowUi();
 	return true;
 }
 
 bool ModuleStageFunctionality::CleanUp()
 {
-
+	App->ui->HideUi();
 	App->player1->Disable();
 	App->player2->Disable();
 	App->unit1->Disable();

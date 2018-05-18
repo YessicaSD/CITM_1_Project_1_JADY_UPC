@@ -45,7 +45,6 @@ bool ModuleStageReady::Start()
 	bool ret = true;
 
 	backgroundReady = App->textures->Load("Assets/UI.png");
-	App->ui->HideUi();
 	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, 255);
 	SDL_RenderFillRect(App->render->renderer, &backgroundBlack);
 	start_time = SDL_GetTicks();
