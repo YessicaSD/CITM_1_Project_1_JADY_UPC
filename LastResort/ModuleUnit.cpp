@@ -205,9 +205,6 @@ ModuleUnit::ModuleUnit() //Constructor
 	throwAnim.PushBack({ 156, 0, 20, 20 });
 	throwAnim.speed = 0.1f;
 	throwAnim.loop = true;
-	//Other variables
-	playerCenter.x = 16;
-	playerCenter.y =  6;
 }
 
 ModuleUnit::~ModuleUnit()
@@ -244,11 +241,16 @@ bool ModuleUnit::CleanUp()
 	App->textures->Unload(throwUnitOrangeTx);
 	App->textures->Unload(throwUnitBlueTx);
 	//If we have created a unit collider, we destroy it
-	if (unitCol != nullptr)           { unitCol->to_delete = true; }
-	if (hitDetectionUp != nullptr)    { hitDetectionUp->to_delete = true; }
-	if (hitDetectionDown != nullptr)  { hitDetectionDown->to_delete = true; }
-	if (hitDetectionLeft != nullptr)  { hitDetectionLeft->to_delete = true; }
-	if (hitDetectionRight != nullptr) { hitDetectionRight->to_delete = true; }
+	if (unitCol != nullptr)           { unitCol->type = COLLIDER_TYPE::COLLIDER_NONE; }
+	if (hitDetectionUp != nullptr)    { hitDetectionUp->type = COLLIDER_TYPE::COLLIDER_NONE; }
+	if (hitDetectionDown != nullptr)  { hitDetectionDown->type = COLLIDER_TYPE::COLLIDER_NONE; }
+	if (hitDetectionLeft != nullptr)  { hitDetectionLeft->type = COLLIDER_TYPE::COLLIDER_NONE; }
+	if (hitDetectionRight != nullptr) { hitDetectionRight->type = COLLIDER_TYPE::COLLIDER_NONE; }
+	//if (unitCol != nullptr)           { unitCol->to_delete = true; }
+	//if (hitDetectionUp != nullptr)    { hitDetectionUp->to_delete = true; }
+	//if (hitDetectionDown != nullptr)  { hitDetectionDown->to_delete = true; }
+	//if (hitDetectionLeft != nullptr)  { hitDetectionLeft->to_delete = true; }
+	//if (hitDetectionRight != nullptr) { hitDetectionRight->to_delete = true; }
 	return true;
 }
 
@@ -342,8 +344,8 @@ void ModuleUnit::Rotating()
 	turnAroundToRender = TurnAroundToRender();
 
 	//Set the position----------------------------------------------------------------------------------------
-	position.x = radius * cosf(currentOrbit) + playerToFollow->position.x + playerCenter.x;
-	position.y = radius * sinf(currentOrbit) + playerToFollow->position.y + playerCenter.y;
+	position.x = radius * cosf(currentOrbit) + playerToFollow->position.x + playerToFollow->playerCenter.x;
+	position.y = radius * sinf(currentOrbit) + playerToFollow->position.y + playerToFollow->playerCenter.y;
 
 	//Update the collider position (after having set its position)--------------------------------------------
 	UpdateUnitColliders();
@@ -433,8 +435,8 @@ void ModuleUnit::Returning()
 	//- We calculate the unit vector from the position to the target
 	fPoint vectorIncrease;
 	fPoint floatPlayerPos;
-	floatPlayerPos.x = (float)playerToFollow->position.x + playerCenter.x;
-	floatPlayerPos.y = (float)playerToFollow->position.y + playerCenter.y;
+	floatPlayerPos.x = (float)playerToFollow->position.x + playerToFollow->playerCenter.x;
+	floatPlayerPos.y = (float)playerToFollow->position.y + playerToFollow->playerCenter.y;
 	vectorIncrease.UnitVector(floatPlayerPos, position);
 	
 	//- If the unit has reached the center of the player, we slowly position it on the position it was when we shot it
@@ -871,7 +873,7 @@ void ModuleUnit::CheckReturnTime()
 
 void ModuleUnit::CheckPlayerClose()
 {
-	if(sqrt(pow(position.x - playerToFollow->position.x + playerCenter.x, 2) + pow(position.y - playerToFollow->position.y + playerCenter.y, 2)) < 20)//20 = distance to return
+	if(sqrt(pow(position.x - playerToFollow->position.x + playerToFollow->playerCenter.x, 2) + pow(position.y - playerToFollow->position.y + playerToFollow->playerCenter.y, 2)) < 20)//20 = distance to return
 	{
 		unitPhase = UnitPhase::returning;
 	}
