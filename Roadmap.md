@@ -3,38 +3,38 @@
 ## Current roadmap
 
 0.8.2 (21/05/2018 23:59)
-(Aurelio) - G powerup
-(Aurelio) - Pinata
-(Aurelio) - Pinata spawn
-(Jaume)- Turret 1
-(Jaume)- Destroyable part
-(Yess)- Outside turrets
-(Yess)- Laser powerup
+- [ ] @alejandro61299 - G powerup
+- [ ] @alejandro61299 - Pinata
+- [ ] @alejandro61299 - Pinata spawn
+- [ ] @JaumeMontagut - Turret 1
+- [ ] @JaumeMontagut - Destroyable part
+- [ ] @YessicaSD - Outside turrets
+- [ ] @YessicaSD - Laser powerup
 
 0.8.3 (23/05/2018 23:59)
-(Jaume)- Ship rear
-(Jaume)- Unit bounce on terrain
-(Jaume)- Unit trail
-(Yess)- Mechs
-(Yess)- Add asteroids (big, small and medium)
+- [ ] @JaumeMontagut - Ship rear
+- [x] @JaumeMontagut - Unit bounce on terrain
+- [ ] @JaumeMontagut - Unit trail
+- [ ] @YessicaSD - Mechs
+- [ ] @YessicaSD - Add asteroids (big, small and medium)
 
 0.8.4 (25/05/2018 23:59)
-(Jaume) - H powerup
-(Jaume) - Back ship turret
-(Yess) - Missile launcher
-(Yess) - Missiles
-(Yess)- Inside turrets which shoot lasers
+- [ ] @JaumeMontagut - H powerup
+- [ ] @JaumeMontagut - Back ship turret
+- [ ] @YessicaSD - Missile launcher
+- [ ] @YessicaSD - Missiles
+- [ ] @YessicaSD - Inside turrets which shoot lasers
 
 0.9 (27/05/2018 23:59)
-(Aurelio) - Final boss
-(Aurelio) - Intergalactic fighters spawn
-(Aurelio) - Intergalactic fighters
-(Jaume)- Bar guardians
-(Jaume)- Lamella
-(Yess)- Inside turrets which shoot balls
-(Yess)- Ship motor
-(Yess)- Metal bee
-(Yess)- Missile follow turrets
+- [ ] @alejandro61299 - Final boss
+- [ ] @alejandro61299 - Intergalactic fighters spawn
+- [ ] @alejandro61299 - Intergalactic fighters
+- [ ] @JaumeMontagut - Bar guardians
+- [ ] @JaumeMontagut - Lamella
+- [ ] @YessicaSD - Inside turrets which shoot balls
+- [ ] @YessicaSD - Ship motor
+- [ ] @YessicaSD - Metal bee
+- [ ] @YessicaSD - Missile follow turrets
 
 ## Previous roadmap
 
