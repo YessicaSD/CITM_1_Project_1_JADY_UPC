@@ -34,11 +34,11 @@ ModuleStageFunctionality::~ModuleStageFunctionality()
 bool ModuleStageFunctionality::Start()
 {
 
-	if (App->player1->isActived == true) {
+	if (App->player1->isActive == true) {
 		App->player1->Enable();
 	}
 
-	if (App->player2->isActived == true) {
+	if (App->player2->isActive == true) {
 		App->player2->Enable();
 	}
 	
@@ -140,14 +140,14 @@ void ModuleStageFunctionality::Debugging()
 	//- Spawn enemy
 	if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_UP)
 	{
-		//if (App->player1.isDead == false)
-		//{
+		if (App->player1->isActive)
+		{
 			App->enemies->AddEnemy((ENEMY_TYPES)selectedEnemy, App->player1->position.x - App->stage05->spawnPos.x + 100, App->player1->position.y - App->stage05->spawnPos.y);//We need to substract this position because in module enemies we add it to check if it's in position
-		//}
-		//else
-		//{
-		//	App->enemies->AddEnemy((ENEMY_TYPES)selectedEnemy, App->player2->position.x + 100, App->player2->position.y);
-		//}
+		}
+		else if (App->player2->isActive)
+		{
+			App->enemies->AddEnemy((ENEMY_TYPES)selectedEnemy, App->player2->position.x + 100, App->player2->position.y);
+		}
 		
 		pressedNumEnemy = false;
 	}
@@ -170,14 +170,14 @@ void ModuleStageFunctionality::Debugging()
 	//- Spawn powerup
 	if (App->input->keyboard[SDL_SCANCODE_F8] == KEY_UP)
 	{
-		//if(App->player1->IsEnabled())
-		//{
+		if(App->player1->isActive)
+		{
 			App->powerups->AddPowerup(App->player1->position.x + 100, App->player1->position.y, (POWERUP_TYPE)selectedPowerup);
-		//}
-		//else
-		//{
-		//	App->powerups->AddPowerup(App->player2->position.x + 100, App->player2->position.y, (POWERUP_TYPE)selectedPowerup);
-		//}
+		}
+		else if (App->player2->isActive)
+		{
+			App->powerups->AddPowerup(App->player2->position.x + 100, App->player2->position.y, (POWERUP_TYPE)selectedPowerup);
+		}
 		
 		pressedNumPowerup = false;
 	}

@@ -71,7 +71,7 @@ public:
 	iPoint initPosition;
 	float movementSpeed = 2;
 	//--------States--------------------------------
-	bool isActived = false; //If user pays for a game with this player
+	bool isActive = false; //If user pays for a game with this player
 	bool isAppearing;
 	bool isInvincible = false;
 	bool isDying;

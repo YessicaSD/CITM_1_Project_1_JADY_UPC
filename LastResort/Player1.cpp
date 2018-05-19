@@ -77,13 +77,13 @@ Player1::Player1() {
 
 void Player1::PlayerDies() {
 
-	if (App->player2->isActived == true) {
+	if (App->player2->isActive == true) {
 		if (lives > 0) {
 			--lives;
 			Reappear();
 		}
 		else {
-			isActived = false;
+			isActive = false;
 		}
 	}
 	else if (App->ui->uiP2 == uiState::CONTINUE) {
@@ -93,12 +93,12 @@ void Player1::PlayerDies() {
 			Reappear();
 		}
 		else {
-			isActived = false;
+			isActive = false;
 			//Continue
 			App->fade->FadeToBlack(App->stageFunctionality->currentStage, App->continueScene, 0.0f);
 		}
 	}
-	else if (App->player2->isActived == false) {
+	else if (App->player2->isActive == false) {
 
 		if (lives > 0) {
 			--lives;
@@ -106,7 +106,7 @@ void Player1::PlayerDies() {
 			App->fade->FadeToBlack(App->stageFunctionality->currentStage, App->readyScene, 0.0f);
 		}
 		else {
-			isActived = false;
+			isActive = false;
 			//Continue
 			App->fade->FadeToBlack(App->stageFunctionality->currentStage, App->continueScene, 0.0f);
 		}

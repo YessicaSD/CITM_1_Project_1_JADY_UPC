@@ -81,7 +81,7 @@ update_status ModuleUI::Update() {
 		App->input->keyboard[SDL_SCANCODE_F8] == KEY_IDLE ||
 		App->input->Controller1[SDL_CONTROLLER_BUTTON_B])
 	{
-		if (App->player1->isActived == false && credits > 0)
+		if (App->player1->isActive == false && credits > 0)
 		{
 			switch (currentScene)
 			{
@@ -89,12 +89,12 @@ update_status ModuleUI::Update() {
 				LOG("F1");
 				credits -= 1;
 				HideUi();
-				App->player1->isActived = true;
+				App->player1->isActive = true;
 				App->player1->lives = 2;
 				break;
 			case STAGE_SCENE:
 				credits -= 1;
-				App->player1->isActived = true;
+				App->player1->isActive = true;
 				App->player1->lives = 2;
 				if (App->player1->enabled == true) {
 					App->player1->Reappear();
@@ -106,7 +106,7 @@ update_status ModuleUI::Update() {
 				break;
 			case CONTINUE_SCENE:
 				credits -= 1;
-				App->player1->isActived = true;
+				App->player1->isActive = true;
 				App->player1->lives = 2;
 				App->stage05->currentCheckPoint = 0;
 				break;
@@ -122,7 +122,7 @@ update_status ModuleUI::Update() {
 		App->input->keyboard[SDL_SCANCODE_F6] == KEY_IDLE &&
 		App->input->keyboard[SDL_SCANCODE_F7] == KEY_IDLE &&
 		App->input->keyboard[SDL_SCANCODE_F8] == KEY_IDLE ||
-		App->input->Controller2[SDL_CONTROLLER_BUTTON_Y]))
+		App->input->Controller2[SDL_CONTROLLER_BUTTON_B]))
 	{
 		switch (currentScene)
 		{
@@ -131,17 +131,17 @@ update_status ModuleUI::Update() {
 			if (credits >= 2)
 			{
 				HideUi();
-				App->player1->isActived = true;
-				App->player2->isActived = true;
+				App->player1->isActive = true;
+				App->player2->isActive = true;
 				App->player1->lives = 2;
 				App->player2->lives = 2;
 				credits -= 2;
 			}
 			break;
 		case STAGE_SCENE:
-			if (credits > 0 && App->player2->isActived == false)
+			if (credits > 0 && App->player2->isActive == false)
 			{
-				App->player2->isActived = true;
+				App->player2->isActive = true;
 				App->player2->lives = 2;
 
 				if (App->player2->enabled == true) {
@@ -158,7 +158,7 @@ update_status ModuleUI::Update() {
 			if (credits > 0)
 			{
 				credits -= 1;
-				App->player2->isActived = true;
+				App->player2->isActive = true;
 				App->stage05->currentCheckPoint = 0;
 			}
 			break;
@@ -191,11 +191,11 @@ update_status ModuleUI::Update() {
 	if (showUI == true) {
 		//------Common--------------------------------------------------
 		App->fonts->BlitText(208, 216, 0, str_credits);
-		if (App->player1->isActived == true || App->player2->isActived == true)
+		if (App->player1->isActive == true || App->player2->isActive == true)
 		App->render->Blit(uiTex, 112, 16, &top);
 		//------Player 1------------------------------------------------
 
-		if (App->player1->isActived == true) {
+		if (App->player1->isActive == true) {
 
 			//-----------Static UI-----------------------
 			App->render->Blit(uiTex, 16, 16, &lives_score_p1);
@@ -216,7 +216,7 @@ update_status ModuleUI::Update() {
 		}
 		//------Player 2----------------------------------------------
 
-		if (App->player2->isActived == true) {
+		if (App->player2->isActive == true) {
 
 			//-----------Static UI----------------------
 			App->render->Blit(uiTex, 256, 16, &live_score_p2);

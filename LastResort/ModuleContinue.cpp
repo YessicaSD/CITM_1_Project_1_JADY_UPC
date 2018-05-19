@@ -143,7 +143,7 @@ update_status ModuleContinue::Update() {
 
 
 
-	if (App->player1->isActived == true || App->player2->isActived == true)
+	if (App->player1->isActive == true || App->player2->isActive == true)
 	{
 		App->fade->FadeToBlack(this, App->readyScene, 0.0f);
 	}
