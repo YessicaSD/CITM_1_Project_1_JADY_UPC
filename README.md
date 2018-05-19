@@ -33,42 +33,42 @@ https://github.com/YessicaSD/Project_1_JADY_UPC
 
 ## Controls
 ### Controller:
--** Left Joystick **: Movement.
--** Y **: Insert credits.
--** B **: Shoot / Spawn (only if you have credits).
--** A **: Lock the unit.
+- **Left Joystick**: Movement.
+- **Y**: Insert credits.
+- **B**: Shoot / Spawn (only if you have credits).
+- **A**: Lock the unit.
 
 ### Keyboard:
 #### Basic
--** ENTER **: Add credits.
--** 1 **: Spawn player 1 (only works if you have credits). 
--** 2 **: Spawn player 2 (only works if you have credits).
--** Esc **: Close the game.
--** Numpad + **: Volume up.
--** Numpad - **: Volume down.
+- **Enter**: Add credits
+- **1**: Spawn player 1 (only works if you have credits)
+- **2**: Spawn player 2 (only works if you have credits)
+- **Esc**: Close the game
+- **Numpad +**: Volume up
+- **Numpad -**: Volume down
 
 ##### Player 1:
--** W **: Move up.
--** A **: Move left.
--** S **: Move down.
--** D **: Move right.
--** Space **: Shoot.
--** Left shift **: Lock the unit.
+- **W**: Move up.
+- **A**: Move left.
+- **S**: Move down.
+- **D**: Move right.
+- **Space**: Shoot.
+- **Left shift**: Lock the unit.
 
 ##### Player 2:
--** Up arrow **: Move up.
--** Left arrow **: Move left.
--** Down arrow **: Move down.
--** Right arrow **: Move right.
--** Rigth Ctrl **: Shoot.
--** Rigth Shift **: Lock the unit.
+- **Up arrow**: Move up.
+- **Left arrow**: Move left.
+- **Down arrow**: Move down.
+- **Right arrow**: Move right.
+- **Rigth Ctrl**: Shoot.
+- **Rigth Shift**: Lock the unit.
 
 #### Debug functionality
 ##### Basic:
--** F1 **: God mode.
--** F2 **: Show collision boxes.
--** F3 **: Pause/Play game.
--** F4 **: Frame forward (only when the game is paused).
+- **F1**: God mode.
+- **F2**: Show collision boxes.
+- **F3**: Pause/Play game.
+- **F4**: Frame forward (only when the game is paused).
 
 ##### Camera:
 - **Numpad 7**: Zoom in.
@@ -95,7 +95,7 @@ How to use advanced debugging?
    - **Hold F7** to select enemies, and **press the number/s** of the enemy you want to spawn in front of the player's 1 ship (see debug enemies table).
    - **Hold F8** to select powerups, and **press the number/s** of the powerup you want to spawn in front of the player's 1 ship (see debug powerups table).
 
-###### STAGES DEBUG TABLE:
+###### Stages debug table:
 	- 1: Stage 1
 	- 2: Stage 2
 	- 5: Stage 5
@@ -106,13 +106,19 @@ How to use advanced debugging?
 	- 10: Ready screen
 	- 11: Continue screen
 
-###### ENEMIES DEBUG TABLE:
+###### Enemies debug table:
 	- 0: Basic
 	- 1: Oscilator
 	- 2: Powerdropper
 	- 3: Metalcrow
+	- 4: Redbats
+	- 5: Rotating turret
+	- 6: Piñata
+	- 7: Piñata spawner
+	- 8: Front turret
+	- 9: Outdoor turret
 
-###### POWERUPS DEBUG TABLE:
+###### Powerups debug table:
 	- 0: Speed
 	- 1: Despeed
 	- 2: Laser
