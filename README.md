@@ -15,21 +15,21 @@ https://github.com/YessicaSD/Project_1_JADY_UPC
 
 ## Credits
 
-> Management and programming: Jaume Montagut i Guix
-* _Find him on his webpage https://wadoren.wixsite.com/gamedev
-* _Github profile: https://github.com/JaumeMontagut_
+- Management and programming: Jaume Montagut i Guix
+> _Find him on his webpage https://wadoren.wixsite.com/gamedev
+> _Github profile: https://github.com/JaumeMontagut_
 
-> Art, QA and programming: Alejandro Gamarra Niño
-* _Find him on Instragram as @ax3_rt_
-* _Github profile: https://github.com/alejandro61299_
+- Art, QA and programming: Alejandro Gamarra Niño
+> _Find him on Instragram as @ax3_rt_
+> _Github profile: https://github.com/alejandro61299_
 
-> QA: Dani Sanchez Flores
-* _Find him on Instragram as @vampir_nex
-* _Github profile: https://github.com/Dasanch_
+- QA: Dani Sanchez Flores
+> _Find him on Instragram as @vampir_nex
+> _Github profile: https://github.com/Dasanch_
 
-> Programming and code revision: Yessica Servin Dominguez          
-* _Find her on Instragram as @randomgerbit_
-* _Github profile: https://github.com/YessicaSD_
+- Programming and code revision: Yessica Servin Dominguez          
+> _Find her on Instragram as @randomgerbit_
+> _Github profile: https://github.com/YessicaSD_
 
 ## Controls
 ### Controller:
@@ -80,7 +80,7 @@ https://github.com/YessicaSD/Project_1_JADY_UPC
 - **Numpad 0**: Re-center camera.
 - **Numpad /**: Show world grid (which has marks every 100 units).
 - **Numpad (*)**: Show background grid (which has marks every 100 units).
-- **Numpad .**: Show spawn area (in orange) and despawn area (in red)
+- **Numpad .**: Show spawn area (in orange) and despawn area (in red).
 
 ##### Advanced:
 How to use advanced debugging?

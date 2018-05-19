@@ -267,9 +267,9 @@ update_status ModuleUnit::Update()
 	case UnitPhase::followingTerrain:
 		FollowingTerrain();
 		break;
-	//case UnitPhase::bouncingOnTerrain:
-	//	BouncingTerrain();
-	//	break;
+	case UnitPhase::bouncingOnTerrain:
+		BouncingOnTerrain();
+		break;
 	case UnitPhase::returning:
 		Returning();
 		break;
@@ -403,6 +403,8 @@ void ModuleUnit::Rotating()
 		{
 			//Throw
 			unitPhase = UnitPhase::throwing;
+			throwSpeed.x = cosf(currentOrbit) * throwingSpeed;
+			throwSpeed.y = sinf(currentOrbit) * throwingSpeed;
 			unitCol->SetDamage(12);
 			shootTime = SDL_GetTicks();
 		}
@@ -413,21 +415,43 @@ void ModuleUnit::Rotating()
 
 void ModuleUnit::Throwing()
 {
-	//MOVEMENT----------------------------------------------------------------
-	position.x += cosf(currentOrbit) * throwingSpeed;
-	position.y += sinf(currentOrbit) * throwingSpeed;
+	//Logic-------------------------------------------------------------------
+	position.x += throwSpeed.x;
+	position.y += throwSpeed.y;
 	UpdateUnitColliders();
-	//RENDER------------------------------------------------------------------
+	//- Check return conditions-----------------------------------------------
+	CheckOutOfScreen();
+	CheckReturnTime();
+
+	//Render------------------------------------------------------------------
 	throwFrame = throwAnim.GetCurrentFrame();
 	App->render->Blit(
 		throwUnitTx,
 		(int)position.x - throwFrame.w / 2,
 		(int)position.y - throwFrame.h / 2,
 		&throwFrame);
-	//Check if we need to return by time--------------------------------------
+}
+
+void ModuleUnit::BouncingOnTerrain()
+{
+	//Logic-------------------------------------------------------------------
+	position.x += throwSpeed.x;
+	position.y += throwSpeed.y;
+	UpdateUnitColliders();
+	//- Check return conditions-----------------------------------------------
+	CheckPlayerClose();
 	CheckOutOfScreen();
 	CheckReturnTime();
+
+	//Render------------------------------------------------------------------
+	throwFrame = throwAnim.GetCurrentFrame();
+	App->render->Blit(
+		throwUnitTx,
+		(int)position.x - throwFrame.w / 2,
+		(int)position.y - throwFrame.h / 2,
+		&throwFrame);
 }
+
 
 void ModuleUnit::Returning()
 {
@@ -686,16 +710,6 @@ void ModuleUnit::FollowingTerrain()
 		&throwFrame);
 }
 
-//void ModuleUnit::BouncingOnTerrain()
-//{
-//	//Logic-------------------------------------------------------------------
-//	//- Check return conditions-----------------------------------------------
-//	CheckPlayerClose();
-//	CheckOutOfScreen();
-//	CheckReturnTime();
-//	//Render------------------------------------------------------------------
-//}
-
 void ModuleUnit::OnCollision(Collider* collider1, Collider* collider2)
 {
 	switch(unitPhase)
@@ -710,7 +724,7 @@ void ModuleUnit::OnCollision(Collider* collider1, Collider* collider2)
 		OnCollisionFollowingTerrain(collider1, collider2);
 		break;
 	case UnitPhase::bouncingOnTerrain:
-		//Not implemented yet
+		OnCollisionBouncingOnTerrain(collider1, collider2);
 		break;
 	//case UnitPhase::returning:
 	//	Simply does damage, no need to write anything
@@ -719,38 +733,59 @@ void ModuleUnit::OnCollision(Collider* collider1, Collider* collider2)
 	//	Simply does damage, no need to write anything
 	//	break;
 	}
-
-	if(unitPhase == UnitPhase::throwing || unitPhase == UnitPhase::followingTerrain || unitPhase == UnitPhase::bouncingOnTerrain)
-	{
-		CheckHitHeavyEnemy(collider1, collider2);
-	}
 }
 
 void ModuleUnit::OnCollisionThrowing(Collider* collider1, Collider* collider2)
 {
-	if (collider1 == hitDetectionUp)
+	if(unitTx == orangeUnitTx)
 	{
-		unitPhase = UnitPhase::followingTerrain;
-		followTerrainDir = FollowingTerrainDirection::FTD_right;
-		colliderToFollow = collider2;
+		if (collider1 == hitDetectionUp)
+		{
+			unitPhase = UnitPhase::followingTerrain;
+			followTerrainDir = FollowingTerrainDirection::FTD_right;
+			colliderToFollow = collider2;
+		}
+		if (collider1 == hitDetectionLeft)
+		{
+			unitPhase = UnitPhase::followingTerrain;
+			followTerrainDir = FollowingTerrainDirection::FTD_down;
+			colliderToFollow = collider2;
+		}
+		if (collider1 == hitDetectionDown)
+		{
+			unitPhase = UnitPhase::followingTerrain;
+			followTerrainDir = FollowingTerrainDirection::FTD_right;
+			colliderToFollow = collider2;
+		}
+		if (collider1 == hitDetectionRight)
+		{
+			unitPhase = UnitPhase::followingTerrain;
+			followTerrainDir = FollowingTerrainDirection::FTD_down;
+			colliderToFollow = collider2;
+		}
 	}
-	if (collider1 == hitDetectionLeft)
+	else if (unitTx == blueUnitTx)
 	{
-		unitPhase = UnitPhase::followingTerrain;
-		followTerrainDir = FollowingTerrainDirection::FTD_down;
-		colliderToFollow = collider2;
-	}
-	if (collider1 == hitDetectionDown)
-	{
-		unitPhase = UnitPhase::followingTerrain;
-		followTerrainDir = FollowingTerrainDirection::FTD_right;
-		colliderToFollow = collider2;
-	}
-	if (collider1 == hitDetectionRight)
-	{
-		unitPhase = UnitPhase::followingTerrain;
-		followTerrainDir = FollowingTerrainDirection::FTD_down;
-		colliderToFollow = collider2;
+		if (collider1 == hitDetectionUp)
+		{
+			unitPhase = UnitPhase::bouncingOnTerrain;
+			throwSpeed.y = -throwSpeed.y;
+		}
+		if (collider1 == hitDetectionLeft)
+		{
+			unitPhase = UnitPhase::bouncingOnTerrain;
+			throwSpeed.x = -throwSpeed.x;
+		}
+		if (collider1 == hitDetectionDown)
+		{
+			unitPhase = UnitPhase::bouncingOnTerrain;
+			throwSpeed.y = -throwSpeed.y;
+		}
+		if (collider1 == hitDetectionRight)
+		{
+			unitPhase = UnitPhase::bouncingOnTerrain;
+			throwSpeed.x = -throwSpeed.x;
+		}
 	}
 
 	CheckHitHeavyEnemy(collider1, collider2);
@@ -802,11 +837,43 @@ void ModuleUnit::OnCollisionFollowingTerrain(Collider* collider1, Collider* coll
 	CheckHitHeavyEnemy(collider1, collider2);
 }
 
-//void ModuleUnit::OnCollisionBouncingOnTerrain(Collider* collider1, Collider* collider2)
-//{
-//	//Bounce code
-//	CheckHitHeavyEnemy(collider1, collider2);
-//}
+void ModuleUnit::OnCollisionBouncingOnTerrain(Collider* collider1, Collider* collider2)
+{
+	if (collider1 == hitDetectionUp)
+	{
+		//If it was moving up
+		if(throwSpeed.y < 0)
+		{
+			throwSpeed.y = -throwSpeed.y;
+		}
+	}
+	else if (collider1 == hitDetectionLeft)
+	{
+		//If it was moving left
+		if (throwSpeed.x < 0)
+		{
+			throwSpeed.x = -throwSpeed.x;
+		}
+	}
+	else if (collider1 == hitDetectionDown)
+	{
+		//If it was moving down
+		if (throwSpeed.y > 0)
+		{
+			throwSpeed.y = -throwSpeed.y;
+		}
+	}
+	else if (collider1 == hitDetectionRight)
+	{
+		//If it was moving right
+		if (throwSpeed.x > 0)
+		{
+			throwSpeed.x = -throwSpeed.x;
+		}
+	}
+
+	CheckHitHeavyEnemy(collider1, collider2);
+}
 
 void ModuleUnit::MakeUnitBlue()
 {

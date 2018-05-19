@@ -192,5 +192,8 @@ private:
 	FollowingTerrainDirection followTerrainDir = FTD_notFollowing;
 	Collider* colliderToFollow = nullptr;
 	int followTerrainSpeed = 4;
+
+	//Bouncing on terrain
+	fPoint throwSpeed;
 };
 #endif
