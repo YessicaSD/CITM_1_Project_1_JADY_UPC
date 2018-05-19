@@ -108,7 +108,7 @@ ModuleCollision::ModuleCollision()
 
 	//Collider enemy shot-----------------------------------------------
 	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_NONE] = false;
-	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_WALL] = true;
+	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_WALL] = false;
 	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_PLAYER] = true;
 	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_ENEMY_LIGHT] = false;
 	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_ENEMY_HEAVY] = false;
