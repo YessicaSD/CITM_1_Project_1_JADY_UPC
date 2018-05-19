@@ -28,7 +28,7 @@ typedef unsigned int uint;
 #define SCREEN_WIDTH 304
 #define SCREEN_HEIGHT 224
 #define WIN_FULLSCREEN 0
-#define WIN_FULLSCREEN_DESKTOP 1 // Change this to one for full screen 
+#define WIN_FULLSCREEN_DESKTOP 0 // Change this to one for full screen 
 #define WIN_BORDERLESS 0
 #define WIN_RESIZABLE 0
 #define REN_VSYNC 1
@@ -39,7 +39,7 @@ typedef unsigned int uint;
 
 //----------Spawning----------------
 const int SPAWN_MARGIN_LEFT = 40;
-const int SPAWN_MARGIN_RIGHT = 30;
+const int SPAWN_MARGIN_RIGHT = 20;
 const int SPAWN_MARGIN_UP = 40;
 const int SPAWN_MARGIN_DOWN = 30;
 const int DESPAWN_MARGIN_LEFT = 250;

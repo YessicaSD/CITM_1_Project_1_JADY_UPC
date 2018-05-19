@@ -27,7 +27,7 @@ public:
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
 
-	void AddParticle(Particle& particle, int x, int y, SDL_Texture *tex ,COLLIDER_TYPE collider_type = COLLIDER_NONE, Uint32 delay = 0, PARTICLE_TYPE particle_type=NOTYPE);
+	void AddParticle(Particle& particle, int x, int y, SDL_Texture *tex ,COLLIDER_TYPE collider_type = COLLIDER_NONE, Uint32 delay = 0, PARTICLE_TYPE particle_type = PARTICLE_REGULAR);
 	
 
 private:
@@ -56,6 +56,10 @@ public:
 	Particle MiddleBossShot;
 	Particle MiddleBosExplotion;
 	iPoint VectorMiddleBossShots;
+
+	Particle LacerEnemyShot;
+	SDL_Texture* LacerTex;
+
 	//Mix_Chunk* g_explosion02_2sfx = nullptr;
 	//Mix_Chunk* g_explosion02_3sfx = nullptr;	
 	//Mix_Chunk* g_explosion01_2sfx = nullptr;
