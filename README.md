@@ -11,24 +11,23 @@ In order to acomplish our mission, we pilot a spaceship with the help of a small
 and we will defeat all kinds of enemies.
 
 ## Find project
-https://github.com/YessicaSD/JADY_Project1_CITM_UPC/edit/master/README.md
-https://github.com/Dasanch/Project_1_JADY_UPC
+https://github.com/YessicaSD/Project_1_JADY_UPC
 
 ## Credits
 
-> Jaume Montagut i Guix
+> Management and programming: Jaume Montagut i Guix
 * _Find him on his webpage https://wadoren.wixsite.com/gamedev
 * _Github profile: https://github.com/JaumeMontagut_
 
-> Alejandro Gamarra Niño
+> Art, QA and programming: Alejandro Gamarra Niño
 * _Find him on Instragram as @ax3_rt_
 * _Github profile: https://github.com/alejandro61299_
 
-> Dani Sanchez Flores
+> QA: Dani Sanchez Flores
 * _Find him on Instragram as @vampir_nex
 * _Github profile: https://github.com/Dasanch_
 
-> Yessica Servin Dominguez          
+> Programming and code revision: Yessica Servin Dominguez          
 * _Find her on Instragram as @randomgerbit_
 * _Github profile: https://github.com/YessicaSD_
 

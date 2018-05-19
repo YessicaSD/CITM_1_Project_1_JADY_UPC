@@ -35,7 +35,7 @@ Application::Application()
 	modules[i++] = textures = new ModuleTextures();
 	modules[i++] = fonts = new ModuleFonts();
 	modules[i++] = audio = new ModuleAudio();
-	//Stages----------------------------------------------------
+	//Other modules--------------------------------------------
 	modules[i++] = stage01 = new ModuleStage01();
 	modules[i++] = stage02 = new Module2lvlScene();
 	modules[i++] = stage05 = new Module5lvlScene();
