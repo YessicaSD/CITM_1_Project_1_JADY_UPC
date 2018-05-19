@@ -65,8 +65,8 @@ https://github.com/YessicaSD/Project_1_JADY_UPC
 
 #### Debug functionality
 ##### Basic:
--** F1 **: Show collision boxes.
--** F2 **: God mode.
+-** F1 **: God mode.
+-** F2 **: Show collision boxes.
 -** F3 **: Pause/Play game.
 -** F4 **: Frame forward (only when the game is paused).
 

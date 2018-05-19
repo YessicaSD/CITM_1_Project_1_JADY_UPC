@@ -109,7 +109,7 @@ update_status ModulePlayer::Update()
 	PlayerTexture = App->stageFunctionality->PlayerTexture;
 	SpeedAnimationTex = App->stageFunctionality->SpeedAnimationTex;
 	//Debug Modes----------------------------------------------------------------------
-	if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_F1] == KEY_STATE::KEY_DOWN)
 	{
 		if (godMode == true)
 		{
