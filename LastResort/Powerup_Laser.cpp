@@ -62,10 +62,10 @@ void Powerup_Laser::OnCollision(Collider* col)
 		if (App->player2->powerupUpgrades == 1)
 		{
 			App->unit2->Enable();
-			App->unit1->playerToFollow = App->player2;
+			App->unit2->playerToFollow = App->player2;
 			App->unit2->position.x = App->player2->position.x + App->player2->playerCenter.x;
 			App->unit2->position.y = App->player2->position.y + App->player2->playerCenter.y;
-			App->unit1->power = 0;
+			App->unit2->power = 0;
 			App->unit2->playerToFollow = App->player2;
 		}
 		//Change powerup type
