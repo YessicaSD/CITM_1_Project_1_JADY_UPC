@@ -18,18 +18,18 @@ public:
 	bool CleanUp();
 
 	void Debugging();
-	void ChooseDebugElem(int, bool &, int &, int);
+	void ChooseDebugElem(int, bool &, int &, int, int);
 	void GoToScene();
 
 public:
 	int selectedScene = 1;
-	//int selectedCheckpoint = 1;//= the first checkpoint of the game
+	int selectedCheckpoint = 0;
 	int selectedEnemy = 0;
 	int selectedPowerup = 0;
 
 	//Bools that indicate us if the player has pressed another letter before this one
 	bool pressedNumScene = false;
-	//bool pressedNumCheckpoint = false;
+	bool pressedNumCheckpoint = false;
 	bool pressedNumEnemy = false;
 	bool pressedNumPowerup = false;
 

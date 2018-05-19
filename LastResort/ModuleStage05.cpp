@@ -217,22 +217,6 @@ update_status Module5lvlScene::Update()
 			shipCollidersRect[i].x + (int)shipPos.x,
 			shipCollidersRect[i].y + (int)shipPos.y);
 	}
-	//----------DebugMode------------------------------------------------ TODO: Change it
-
-	currentMov = cameraMovement.currentMov;
-
-	if (App->input->keyboard[SDL_SCANCODE_F9] == KEY_DOWN) {
-		if (currentMov > 0) {
-			--currentMov;
-			cameraMovement.SetMovement(currentMov);
-		}
-	}
-	if (App->input->keyboard[SDL_SCANCODE_F10] == KEY_DOWN) {
-		if (currentMov < 24) {
-			++currentMov;
-			cameraMovement.SetMovement(currentMov);
-		}
-	}
 
 	//Background----------------------------------------------------------------------------------------------------//
 
