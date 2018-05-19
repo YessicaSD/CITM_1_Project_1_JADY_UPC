@@ -37,7 +37,7 @@ ModuleEnemies::~ModuleEnemies()
 bool ModuleEnemies::Start()
 {
 	// Create a prototype for each enemy available so we can copy them around
-	 ; //ALL IN 1 PNG
+	 //ALL IN 1 PNG
 	nml_sprites = App->textures->Load("Assets/General/Enemies/Enemies1.png");
     dmg_sprites = App->textures->Load("Assets/General/Enemies/Enemies1_white.png");
 	
@@ -289,11 +289,7 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			enemies[i]->scoreValue = 300;
 			enemies[i]->hp = 15;
 			break;
-			case ENEMY_TYPES::OUTDOOR_LASER:
-			enemies[i] = new Enemy_Outdoor_Laser(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
-			enemies[i]->scoreValue = 0;
-			enemies[i]->hp = 10000;
-			break;
+		
 		}
 	}
 }
