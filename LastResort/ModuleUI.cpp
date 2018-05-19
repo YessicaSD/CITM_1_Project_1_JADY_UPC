@@ -78,7 +78,8 @@ update_status ModuleUI::Update() {
 		App->input->keyboard[SDL_SCANCODE_F5] == KEY_IDLE &&
 		App->input->keyboard[SDL_SCANCODE_F6] == KEY_IDLE &&
 		App->input->keyboard[SDL_SCANCODE_F7] == KEY_IDLE &&
-		App->input->keyboard[SDL_SCANCODE_F8] == KEY_IDLE || App->input->Controller1[SDL_CONTROLLER_BUTTON_X])
+		App->input->keyboard[SDL_SCANCODE_F8] == KEY_IDLE ||
+		App->input->Controller1[SDL_CONTROLLER_BUTTON_B])
 	{
 		if (App->player1->isActived == false && credits > 0)
 		{
@@ -116,11 +117,12 @@ update_status ModuleUI::Update() {
 		}
 	}
 	//----------------------2 pressed---------------------
-	if (App->input->keyboard[SDL_SCANCODE_2] == KEY_DOWN && 
+	if (App->input->keyboard[SDL_SCANCODE_2] == KEY_DOWN  && 
 		(App->input->keyboard[SDL_SCANCODE_F5] == KEY_IDLE &&
 		App->input->keyboard[SDL_SCANCODE_F6] == KEY_IDLE &&
 		App->input->keyboard[SDL_SCANCODE_F7] == KEY_IDLE &&
-		App->input->keyboard[SDL_SCANCODE_F8] == KEY_IDLE ) || App->input->Controller2[SDL_CONTROLLER_BUTTON_X])
+		App->input->keyboard[SDL_SCANCODE_F8] == KEY_IDLE ||
+		App->input->Controller2[SDL_CONTROLLER_BUTTON_Y]))
 	{
 		switch (currentScene)
 		{

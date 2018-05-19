@@ -50,10 +50,10 @@ https://github.com/Dasanch/Project_1_JADY_UPC
 - **Space**: Shoot.
 - **Left shift**: Lock the unit.
 #### Controller:
-- **Left Joystick**: Movement.
-- **B**: Shoot.
-- **A**: Lock the unit.
-- **Y**: Insert coins.
+-** Left Joystick **: Movement.
+-** Y **: Insert credits.
+-** B **: Shoot / Spawn (only if you have credits).
+-** A **: Lock the unit.
 
 ### Player 2:
 #### Keyboard:
@@ -65,9 +65,9 @@ https://github.com/Dasanch/Project_1_JADY_UPC
 -** Rigth Shift **: Lock the unit.
 #### Controller:
 -** Left Joystick **: Movement.
--** B **: Shoot.
-- **A**: Lock the unit.
-- **Y**: Insert coins.
+-** Y **: Insert credits.
+-** B **: Shoot / Spawn (only if you have credits).
+-** A **: Lock the unit.
 
 
 ## Other functions --------------------------------------------------------------------

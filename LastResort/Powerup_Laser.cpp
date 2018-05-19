@@ -67,6 +67,7 @@ void Powerup_Laser::OnCollision(Collider* col)
 			App->unit2->position.y = App->player2->position.y + App->player2->playerCenter.y;
 			App->unit2->power = 0;
 			App->unit2->playerToFollow = App->player2;
+			App->unit2->unitPhase == UnitPhase::positioning;
 		}
 		//Change powerup type
 		App->player2->currentPowerUp = POWERUP_TYPE::LASER;
