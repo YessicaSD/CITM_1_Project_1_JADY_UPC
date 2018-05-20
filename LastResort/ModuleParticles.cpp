@@ -159,7 +159,7 @@ bool ModuleParticles::Start()
 	LOG("Loading ModuleParticles assets ");
 	//textures-------------------------------------------------
 	graphics = App->textures->Load("Assets/General/Fx/Explosion_2.png");
-	LacerTex = App->textures->Load("Assets/General/Enemies/Laser_Niv5.png");
+	LaserTex = App->textures->Load("Assets/General/Enemies/Laser_Niv5.png");
 	//particles-----------------------------------------------
 	g_explosion02.texture = graphics;
 	//Powerups ---------------------------------------------------------------------
@@ -185,11 +185,13 @@ bool ModuleParticles::CleanUp()
 	
 	//textures--------------------------------------------------
 	App->textures->Unload(graphics);
-	App->textures->Unload(LacerTex);
+	App->textures->Unload(LaserTex);
 	//audios---------------------------------------------------
 	App->audio->UnloadSFX(basic_shot_sfx);
 	App->audio->UnloadSFX(death_sfx);
 	App->audio->UnloadSFX(Basic_LaserFx);
+	App->audio->UnloadSFX(g_explosion01_1sfx);
+	App->audio->UnloadSFX(g_explosion02_1sfx);
 	//----------------------------------------------------------
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{

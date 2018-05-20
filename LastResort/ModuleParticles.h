@@ -58,7 +58,7 @@ public:
 	iPoint VectorMiddleBossShots;
 
 	Particle LacerEnemyShot;
-	SDL_Texture* LacerTex;
+	SDL_Texture* LaserTex;
 
 	//Mix_Chunk* g_explosion02_2sfx = nullptr;
 	//Mix_Chunk* g_explosion02_3sfx = nullptr;	

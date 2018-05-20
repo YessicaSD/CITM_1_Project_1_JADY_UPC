@@ -83,7 +83,7 @@ public:
 	bool CleanUp();
 	void OnCollision(Collider*, Collider*);
 
-	//Unit phases
+	//Unit phases (executed inside update)
 	void Rotating();//Here we'll check for input, rotate the unit, and render it
 	void Throwing();
 	void FollowingTerrain();
@@ -124,42 +124,38 @@ public:
 	float power = 0;
 	UnitPhase unitPhase = UnitPhase::rotating;
 
-private:
-	SDL_Texture* unitTx = nullptr;
-	SDL_Texture* blueUnitTx = nullptr;
-	SDL_Texture* orangeUnitTx = nullptr;
-	
+private:	
+	//Rotating
+	//- Orbit
+	float targetOrbit;//The orbit rotation we want the unit to be in
+	bool orbiting;//A bool that indicates if we can make the unit orbit
+	int radius = 31;
 	const float orbitSpeed = 3.141592 / 27;//The speed at which the unit rotates around the player ship
+	//- Turn around
+	bool turningAround;//A bool that indicates if we can make the unit turn around
+	int turnAroundToRender;
 	const float turnAroundSpeed = orbitSpeed * 2;
+	//- Spin
+	float currentSpinFrame;
 	const float spinSpeed = 0.2f;
+	SpinAnimation spinAnimation[UNIT_AXIS];// There is an animation for each direction of the unit
+	//									  E, ESE,  SE, SSE,   S, SSW,  SW, WSW,   W, WNW,  NW, NNW,   N, NNE,  NE, ENE
+	int spriteXDifferences[UNIT_AXIS] = { 8,   8,   8,   8,   8,   9,  13,  14,  14,  14,  13,   9,   8,   8,   8,   8 };//Sprite differences in x, helps us keep the unit centered on its trajectory
+	int spriteYDifferences[UNIT_AXIS] = { 8,   8,   8,   8,   8,   8,   8,   8,   8,   9,  13,  15,  14,  15,  13,   9 };//Sprite differences in y, helps us keep the unit centered on its trajectory
+
+	//Shooting
 	const float unitProjectileSpeed = 6;//6= pixels it moves each frame
+	//									    E, ESE,  SE, SSE,   S, SSW,  SW, WSW,   W, WNW,  NW, NNW,   N, NNE,  NE, ENE
+	int shotPosXDifferences[UNIT_AXIS] = { 15,  14,  12,   6,   0,  -5, -11, -13, -14, -13, -11,  -6,   0,   6,  11,  14 };//Helps us position the unit projectile at the top of its antenas
+	int shotPosYDifferences[UNIT_AXIS] = {  0,   7,  12,  14,  15,  14,  12,   6,   0,  -6, -11, -14, -14, -13, -10,  -6 };//Helps us position the unit projectile at the top of its antenas
+
+	//Return conditions
 	const int returnMargin = 80;
 
-	float currentSpinFrame;
-	float targetOrbit;//The orbit rotation we want the unit to be in
-	int turnAroundToRender;
-	bool orbiting;//A bool that indicates if we can make the unit orbit
-	bool turningAround;//A bool that indicates if we can make the unit turn around
-	int radius = 31;
-
-	SpinAnimation spinAnimation[UNIT_AXIS];//There is an animation for each direction of the unit
-										 //   E, ESE,  SE, SSE,   S, SSW,  SW, WSW,   W, WNW,  NW, NNW,   N, NNE,  NE, ENE
-	int spriteXDifferences[UNIT_AXIS] =  {    8,   8,   8,   8,   8,   9,  13,  14,  14,  14,  13,   9,   8,   8,   8,   8 };//Sprite differences in x, helps us keep the unit centered on its trajectory
-	int spriteYDifferences[UNIT_AXIS] =  {    8,   8,   8,   8,   8,   8,   8,   8,   8,   9,  13,  15,  14,  15,  13,   9 };//Sprite differences in y, helps us keep the unit centered on its trajectory
-	
-	int shotPosXDifferences[UNIT_AXIS] = {   15,  14,  12,   6,   0,  -5, -11, -13, -14, -13, -11,  -6,   0,   6,  11,  14 };//Helps us position the unit projectile at the top of its antenas
-	int shotPosYDifferences[UNIT_AXIS] = {    0,   7,  12,  14,  15,  14,  12,   6,   0,  -6, -11, -14, -14, -13, -10,  -6 };//Helps us position the unit projectile at the top of its antenas
-
 	//Throwing
-	SDL_Texture* throwUnitTx = nullptr;
-	SDL_Texture* throwUnitOrangeTx = nullptr;
-	SDL_Texture* throwUnitBlueTx = nullptr;
 	const float powerSpeed = 0.02f;
-	int powerDamage = 0;//The damage it can make
 	Uint32 shootTime;
 	const float throwingSpeed = 7;
-	const float returningSpeed = 7;
-	const float positioningSpeed = 7;
 	Animation chargeAnim;
 	SDL_Rect chargeFrame;
 	int chargeXOffset[15] = { 18, 16, 16, 14, 14, 16, 16, 15, 15, 14, 14, 23, 23, 21, 21 };//INFO: 15 = number of sprites in the charging animation
@@ -179,5 +175,19 @@ private:
 
 	//Bouncing on terrain
 	fPoint throwSpeed;
+
+	//Returning
+	const float returningSpeed = 7;
+
+	//Positioning
+	const float positioningSpeed = 7;
+
+	//Textures
+	SDL_Texture* unitTx = nullptr;
+	SDL_Texture* blueUnitTx = nullptr;
+	SDL_Texture* orangeUnitTx = nullptr;
+	SDL_Texture* throwUnitTx = nullptr;
+	SDL_Texture* throwUnitOrangeTx = nullptr;
+	SDL_Texture* throwUnitBlueTx = nullptr;
 };
 #endif

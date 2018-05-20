@@ -18,95 +18,95 @@ ModuleUnit::ModuleUnit() //Constructor
 
 	//Push backs
 	//- North
-	spinAnimation[N].frame[0] = {  48, 61, 16, 22 };
-	spinAnimation[N].frame[1] = {  32, 61, 16, 22 };
-	spinAnimation[N].frame[2] = {  16, 61, 16, 22 };
-	spinAnimation[N].frame[3] = {   0, 61, 16, 22 };
-	spinAnimation[N].frame[4] = { 226, 38, 16, 22 };
-	spinAnimation[N].frame[5] = { 210, 38, 16, 22 };
-	spinAnimation[N].frame[6] = { 194, 38, 16, 22 };
-	spinAnimation[N].frame[7] = { 178, 38, 16, 22 };
+	spinAnimation[N].frame[0]   = {  48,  61, 16, 22 };
+	spinAnimation[N].frame[1]   = {  32,  61, 16, 22 };
+	spinAnimation[N].frame[2]   = {  16,  61, 16, 22 };
+	spinAnimation[N].frame[3]   = {   0,  61, 16, 22 };
+	spinAnimation[N].frame[4]   = { 226,  38, 16, 22 };
+	spinAnimation[N].frame[5]   = { 210,  38, 16, 22 };
+	spinAnimation[N].frame[6]   = { 194,  38, 16, 22 };
+	spinAnimation[N].frame[7]   = { 178,  38, 16, 22 };
 	//- West
-	spinAnimation[W].frame[0] = { 220, 105, 22, 16 };
-	spinAnimation[W].frame[1] = { 198, 105, 22, 16 };
-	spinAnimation[W].frame[2] = { 176, 105, 22, 16 };
-	spinAnimation[W].frame[3] = { 154, 105, 22, 16 };
-	spinAnimation[W].frame[4] = { 132, 105, 22, 16 };
-	spinAnimation[W].frame[5] = { 110, 105, 22, 16 };
-	spinAnimation[W].frame[6] = {  88, 105, 22, 16 };
-	spinAnimation[W].frame[7] = {  66, 105 ,22, 16 };
-	//- East
-	spinAnimation[E].frame[0] = { 154, 0, 22, 16 };
-	spinAnimation[E].frame[1] = { 132, 0, 22, 16 };
-	spinAnimation[E].frame[2] = { 110, 0, 22, 16 };
-	spinAnimation[E].frame[3] = {  88, 0, 22, 16 };
-	spinAnimation[E].frame[4] = {  66, 0, 22, 16 };
-	spinAnimation[E].frame[5] = {  44, 0, 22, 16 };
-	spinAnimation[E].frame[6] = {  22, 0, 22, 16 };
-	spinAnimation[E].frame[7] = {   0, 0, 22, 16 };
+	spinAnimation[W].frame[0]   = { 220, 105, 22, 16 };
+	spinAnimation[W].frame[1]   = { 198, 105, 22, 16 };
+	spinAnimation[W].frame[2]   = { 176, 105, 22, 16 };
+	spinAnimation[W].frame[3]   = { 154, 105, 22, 16 };
+	spinAnimation[W].frame[4]   = { 132, 105, 22, 16 };
+	spinAnimation[W].frame[5]   = { 110, 105, 22, 16 };
+	spinAnimation[W].frame[6]   = {  88, 105, 22, 16 };
+	spinAnimation[W].frame[7]   = {  66, 105 ,22, 16 };
+	//- Eastw
+	spinAnimation[E].frame[0]   = { 154,   0, 22, 16 };
+	spinAnimation[E].frame[1]   = { 132,   0, 22, 16 };
+	spinAnimation[E].frame[2]   = { 110,   0, 22, 16 };
+	spinAnimation[E].frame[3]   = {  88,   0, 22, 16 };
+	spinAnimation[E].frame[4]   = {  66,   0, 22, 16 };
+	spinAnimation[E].frame[5]   = {  44,   0, 22, 16 };
+	spinAnimation[E].frame[6]   = {  22,   0, 22, 16 };
+	spinAnimation[E].frame[7]   = {   0,   0, 22, 16 };
 	//- South
-	spinAnimation[S].frame[0] = { 112, 166, 16, 22 };
-	spinAnimation[S].frame[1] = {  96, 166, 16, 22 };
-	spinAnimation[S].frame[2] = {  80, 166, 16, 22 };
-	spinAnimation[S].frame[3] = {  64, 166, 16, 22 };
-	spinAnimation[S].frame[4] = {  48, 166, 16, 22 };
-	spinAnimation[S].frame[5] = {  32, 166, 16, 22 };
-	spinAnimation[S].frame[6] = {  16, 166, 16, 22 };
-	spinAnimation[S].frame[7] = {   0, 166, 16, 22 };
+	spinAnimation[S].frame[0]   = { 112, 166, 16, 22 };
+	spinAnimation[S].frame[1]   = {  96, 166, 16, 22 };
+	spinAnimation[S].frame[2]   = {  80, 166, 16, 22 };
+	spinAnimation[S].frame[3]   = {  64, 166, 16, 22 };
+	spinAnimation[S].frame[4]   = {  48, 166, 16, 22 };
+	spinAnimation[S].frame[5]   = {  32, 166, 16, 22 };
+	spinAnimation[S].frame[6]   = {  16, 166, 16, 22 };
+	spinAnimation[S].frame[7]   = {   0, 166, 16, 22 };
 	//- North east
-	spinAnimation[NE].frame[0] = {  21, 38, 21, 21 };
-	spinAnimation[NE].frame[1] = {   0, 38, 21, 21 };
-	spinAnimation[NE].frame[2] = { 215, 17, 21, 21 };
-	spinAnimation[NE].frame[3] = { 194, 17, 21, 21 };
-	spinAnimation[NE].frame[4] = { 173, 17, 21, 21 };
-	spinAnimation[NE].frame[5] = { 152, 17, 21, 21 };
-	spinAnimation[NE].frame[6] = { 131, 17, 21, 21 };
-	spinAnimation[NE].frame[7] = { 110, 17, 21, 21 };
+	spinAnimation[NE].frame[0]  = {  21,  38, 21, 21 };
+	spinAnimation[NE].frame[1]  = {   0,  38, 21, 21 };
+	spinAnimation[NE].frame[2]  = { 215,  17, 21, 21 };
+	spinAnimation[NE].frame[3]  = { 194,  17, 21, 21 };
+	spinAnimation[NE].frame[4]  = { 173,  17, 21, 21 };
+	spinAnimation[NE].frame[5]  = { 152,  17, 21, 21 };
+	spinAnimation[NE].frame[6]  = { 131,  17, 21, 21 };
+	spinAnimation[NE].frame[7]  = { 110,  17, 21, 21 };
 	//- North west
-	spinAnimation[NW].frame[0] = { 105, 84, 21, 21 };
-	spinAnimation[NW].frame[1] = {  84, 84, 21, 21 };
-	spinAnimation[NW].frame[2] = {  63, 84, 21, 21 };
-	spinAnimation[NW].frame[3] = {  42, 84, 21, 21 };
-	spinAnimation[NW].frame[4] = {  21, 84, 21, 21 };
-	spinAnimation[NW].frame[5] = {   0, 84, 21, 21 };
-	spinAnimation[NW].frame[6] = { 221, 61, 21, 21 };
-	spinAnimation[NW].frame[7] = { 200, 61, 21, 21 };
+	spinAnimation[NW].frame[0]  = { 105,  84, 21, 21 };
+	spinAnimation[NW].frame[1]  = {  84,  84, 21, 21 };
+	spinAnimation[NW].frame[2]  = {  63,  84, 21, 21 };
+	spinAnimation[NW].frame[3]  = {  42,  84, 21, 21 };
+	spinAnimation[NW].frame[4]  = {  21,  84, 21, 21 };
+	spinAnimation[NW].frame[5]  = {   0,  84, 21, 21 };
+	spinAnimation[NW].frame[6]  = { 221,  61, 21, 21 };
+	spinAnimation[NW].frame[7]  = { 200,  61, 21, 21 };
 	//- South east
-	spinAnimation[SE].frame[0] = { 164, 189, 21, 21 };
-	spinAnimation[SE].frame[1] = { 143, 189, 21, 21 };
-	spinAnimation[SE].frame[2] = { 122, 189, 21, 21 };
-	spinAnimation[SE].frame[3] = { 101, 189, 21, 21 };
-	spinAnimation[SE].frame[4] = {  80, 189, 21, 21 };
-	spinAnimation[SE].frame[5] = {  59, 189, 21, 21 };
-	spinAnimation[SE].frame[6] = {  38, 189, 21, 21 };
-	spinAnimation[SE].frame[7] = {  17, 189, 21, 21 };
+	spinAnimation[SE].frame[0]  = { 164, 189, 21, 21 };
+	spinAnimation[SE].frame[1]  = { 143, 189, 21, 21 };
+	spinAnimation[SE].frame[2]  = { 122, 189, 21, 21 };
+	spinAnimation[SE].frame[3]  = { 101, 189, 21, 21 };
+	spinAnimation[SE].frame[4]  = {  80, 189, 21, 21 };
+	spinAnimation[SE].frame[5]  = {  59, 189, 21, 21 };
+	spinAnimation[SE].frame[6]  = {  38, 189, 21, 21 };
+	spinAnimation[SE].frame[7]  = {  17, 189, 21, 21 };
 	//- South west
-	spinAnimation[SW].frame[0] = {  84, 143, 21, 21 };
-	spinAnimation[SW].frame[1] = {  63, 143, 21, 21 };
-	spinAnimation[SW].frame[2] = {  42, 143, 21, 21 };
-	spinAnimation[SW].frame[3] = {  21, 143, 21, 21 };
-	spinAnimation[SW].frame[4] = {   0, 143, 21, 21 };
-	spinAnimation[SW].frame[5] = { 218, 122, 21, 21 };
-	spinAnimation[SW].frame[6] = { 197, 122, 21, 21 };
-	spinAnimation[SW].frame[7] = { 176, 122, 21, 21 };
+	spinAnimation[SW].frame[0]  = {  84, 143, 21, 21 };
+	spinAnimation[SW].frame[1]  = {  63, 143, 21, 21 };
+	spinAnimation[SW].frame[2]  = {  42, 143, 21, 21 };
+	spinAnimation[SW].frame[3]  = {  21, 143, 21, 21 };
+	spinAnimation[SW].frame[4]  = {   0, 143, 21, 21 };
+	spinAnimation[SW].frame[5]  = { 218, 122, 21, 21 };
+	spinAnimation[SW].frame[6]  = { 197, 122, 21, 21 };
+	spinAnimation[SW].frame[7]  = { 176, 122, 21, 21 };
 	//- North north east
-	spinAnimation[NNE].frame[0] = { 161, 38, 17, 23 };
-	spinAnimation[NNE].frame[1] = { 144, 38, 17, 23 };
-	spinAnimation[NNE].frame[2] = { 127, 38, 17, 23 };
-	spinAnimation[NNE].frame[3] = { 110, 38, 17, 23 };
-	spinAnimation[NNE].frame[4] = {  93, 38, 17, 23 };
-	spinAnimation[NNE].frame[5] = {  76, 38, 17, 23 };
-	spinAnimation[NNE].frame[6] = {  59, 38, 17, 23 };
-	spinAnimation[NNE].frame[7] = {  42, 38, 17, 23 };
+	spinAnimation[NNE].frame[0] = { 161,  38, 17, 23 };
+	spinAnimation[NNE].frame[1] = { 144,  38, 17, 23 };
+	spinAnimation[NNE].frame[2] = { 127,  38, 17, 23 };
+	spinAnimation[NNE].frame[3] = { 110,  38, 17, 23 };
+	spinAnimation[NNE].frame[4] = {  93,  38, 17, 23 };
+	spinAnimation[NNE].frame[5] = {  76,  38, 17, 23 };
+	spinAnimation[NNE].frame[6] = {  59,  38, 17, 23 };
+	spinAnimation[NNE].frame[7] = {  42,  38, 17, 23 };
 	//- North east east
-	spinAnimation[ENE].frame[0] = {  88, 17, 22, 17 };
-	spinAnimation[ENE].frame[1] = {  66, 17, 22, 17 };
-	spinAnimation[ENE].frame[2] = {  44, 17, 22, 17 };
-	spinAnimation[ENE].frame[3] = {  22, 17, 22, 17 };
-	spinAnimation[ENE].frame[4] = {   0, 17, 22, 17 };
-	spinAnimation[ENE].frame[5] = { 220,  0, 22, 17 };
-	spinAnimation[ENE].frame[6] = { 198,  0, 22, 17 };
-	spinAnimation[ENE].frame[7] = { 176,  0, 22, 17 };
+	spinAnimation[ENE].frame[0] = {  88,  17, 22, 17 };
+	spinAnimation[ENE].frame[1] = {  66,  17, 22, 17 };
+	spinAnimation[ENE].frame[2] = {  44,  17, 22, 17 };
+	spinAnimation[ENE].frame[3] = {  22,  17, 22, 17 };
+	spinAnimation[ENE].frame[4] = {   0,  17, 22, 17 };
+	spinAnimation[ENE].frame[5] = { 220,   0, 22, 17 };
+	spinAnimation[ENE].frame[6] = { 198,   0, 22, 17 };
+	spinAnimation[ENE].frame[7] = { 176,   0, 22, 17 };
 	//- South east east
 	spinAnimation[ESE].frame[0] = {  88, 212, 22, 17 };
 	spinAnimation[ESE].frame[1] = {  66, 212, 22, 17 };
@@ -153,14 +153,14 @@ ModuleUnit::ModuleUnit() //Constructor
 	spinAnimation[WNW].frame[6] = { 148,  84, 22, 17 };
 	spinAnimation[WNW].frame[7] = { 126,  84, 22, 17 };
 	//- North north west
-	spinAnimation[NNW].frame[0] = { 183, 61, 17, 23 };
-	spinAnimation[NNW].frame[1] = { 166, 61, 17, 23 };
-	spinAnimation[NNW].frame[2] = { 149, 61, 17, 23 };
-	spinAnimation[NNW].frame[3] = { 132, 61, 17, 23 };
-	spinAnimation[NNW].frame[4] = { 115, 61, 17, 23 };
-	spinAnimation[NNW].frame[5] = {  98, 61, 17, 23 };
-	spinAnimation[NNW].frame[6] = {  81, 61, 17, 23 };
-	spinAnimation[NNW].frame[7] = {  64, 61, 17, 23 };
+	spinAnimation[NNW].frame[0] = { 183,  61, 17, 23 };
+	spinAnimation[NNW].frame[1] = { 166,  61, 17, 23 };
+	spinAnimation[NNW].frame[2] = { 149,  61, 17, 23 };
+	spinAnimation[NNW].frame[3] = { 132,  61, 17, 23 };
+	spinAnimation[NNW].frame[4] = { 115,  61, 17, 23 };
+	spinAnimation[NNW].frame[5] = {  98,  61, 17, 23 };
+	spinAnimation[NNW].frame[6] = {  81,  61, 17, 23 };
+	spinAnimation[NNW].frame[7] = {  64,  61, 17, 23 };
 	//- Charge animation
 	chargeAnim.PushBack({ 184, 86, 36, 36 });
 	chargeAnim.PushBack({ 152, 86, 32, 32 });
@@ -417,6 +417,76 @@ void ModuleUnit::Throwing()
 		&throwFrame);
 }
 
+void ModuleUnit::FollowingTerrain()
+{
+	//Logic-------------------------------------------------------------------
+	switch (followTerrainDir)
+	{
+	case FTD_up:
+		//Set the position
+		position.y -= followTerrainSpeed;
+		if (ColliderIsOnRight()) { position.x = colliderToFollow->rect.x - sphereDiameter / 2; }
+		else if (ColliderIsOnLeft()) { position.x = colliderToFollow->rect.x + colliderToFollow->rect.w + sphereDiameter / 2; }
+		//Check if it runs out of collider
+		if (position.y + sphereDiameter / 2 < colliderToFollow->rect.y)
+		{
+			if (ColliderIsOnRight()) { followTerrainDir = FollowingTerrainDirection::FTD_right; }
+			else if (ColliderIsOnLeft()) { followTerrainDir = FollowingTerrainDirection::FTD_left; }
+		}
+		break;
+	case FTD_down:
+		//Set the position
+		position.y += followTerrainSpeed;
+		if (ColliderIsOnRight()) { position.x = colliderToFollow->rect.x - sphereDiameter / 2; }
+		else if (ColliderIsOnLeft()) { position.x = colliderToFollow->rect.x + colliderToFollow->rect.w + sphereDiameter / 2; }
+		//Check if it runs out of collider
+		if (position.y - sphereDiameter / 2 > colliderToFollow->rect.y + colliderToFollow->rect.h)
+		{
+			if (ColliderIsOnRight()) { followTerrainDir = FollowingTerrainDirection::FTD_right; }
+			else if (ColliderIsOnLeft()) { followTerrainDir = FollowingTerrainDirection::FTD_left; }
+		}
+		break;
+	case FTD_left:
+		//Set the position
+		position.x -= followTerrainSpeed;
+		if (ColliderIsAbove()) { position.y = colliderToFollow->rect.y + colliderToFollow->rect.h + sphereDiameter / 2; }
+		else if (ColliderIsBellow()) { position.y = colliderToFollow->rect.y - sphereDiameter / 2; }
+		//Check if it runs out of collider
+		if (position.x + sphereDiameter / 2 < colliderToFollow->rect.x)
+		{
+			if (ColliderIsAbove()) { followTerrainDir = FollowingTerrainDirection::FTD_up; }
+			else if (ColliderIsBellow()) { followTerrainDir = FollowingTerrainDirection::FTD_down; }
+		}
+		break;
+	case FTD_right:
+		//Set the position
+		position.x += followTerrainSpeed;
+		if (ColliderIsAbove()) { position.y = colliderToFollow->rect.y + colliderToFollow->rect.h + sphereDiameter / 2; }
+		else if (ColliderIsBellow()) { position.y = colliderToFollow->rect.y - sphereDiameter / 2; }
+		//Check if it runs out of collider
+		if (position.x - sphereDiameter / 2 > colliderToFollow->rect.x + colliderToFollow->rect.w)
+		{
+			if (ColliderIsAbove()) { followTerrainDir = FollowingTerrainDirection::FTD_up; }
+			else if (ColliderIsBellow()) { followTerrainDir = FollowingTerrainDirection::FTD_down; }
+		}
+		break;
+	}
+	UpdateUnitColliders();
+
+	//- Check return conditions-----------------------------------------------
+	CheckPlayerClose();
+	CheckOutOfScreen();
+	CheckReturnTime();
+
+	//Render------------------------------------------------------------------
+	throwFrame = throwAnim.GetCurrentFrame();
+	App->render->Blit(
+		throwUnitTx,
+		(int)position.x - throwFrame.w / 2,
+		(int)position.y - throwFrame.h / 2,
+		&throwFrame);
+}
+
 void ModuleUnit::BouncingOnTerrain()
 {
 	//Logic-------------------------------------------------------------------
@@ -486,76 +556,6 @@ void ModuleUnit::Positioning()
 		unitPhase = UnitPhase::rotating;
 	}
 	Rotating();
-}
-
-void ModuleUnit::FollowingTerrain()
-{
-	//Logic-------------------------------------------------------------------
-	switch(followTerrainDir)
-	{
-	case FTD_up:
-		//Set the position
-		position.y -= followTerrainSpeed;
-		if (ColliderIsOnRight()) { position.x = colliderToFollow->rect.x - sphereDiameter / 2; }
-		else if (ColliderIsOnLeft())  { position.x = colliderToFollow->rect.x + colliderToFollow->rect.w + sphereDiameter / 2; }
-		//Check if it runs out of collider
-		if(position.y + sphereDiameter/2 < colliderToFollow->rect.y)
-		{
-			if      (ColliderIsOnRight()) { followTerrainDir = FollowingTerrainDirection::FTD_right; }
-			else if (ColliderIsOnLeft())  { followTerrainDir = FollowingTerrainDirection::FTD_left;  }
-		}
-		break;
-	case FTD_down:
-		//Set the position
-		position.y += followTerrainSpeed;
-		if      (ColliderIsOnRight()) { position.x = colliderToFollow->rect.x - sphereDiameter / 2; }
-		else if (ColliderIsOnLeft()) { position.x = colliderToFollow->rect.x + colliderToFollow->rect.w + sphereDiameter / 2; }
-		//Check if it runs out of collider
-		if (position.y - sphereDiameter/2 > colliderToFollow->rect.y + colliderToFollow->rect.h)
-		{
-			if      (ColliderIsOnRight()) { followTerrainDir = FollowingTerrainDirection::FTD_right; }
-			else if (ColliderIsOnLeft())  { followTerrainDir = FollowingTerrainDirection::FTD_left;  }
-		}
-		break;
-	case FTD_left:
-		//Set the position
-		position.x -= followTerrainSpeed;
-		if      (ColliderIsAbove()) { position.y = colliderToFollow->rect.y + colliderToFollow->rect.h + sphereDiameter / 2; }
-		else if (ColliderIsBellow()) { position.y = colliderToFollow->rect.y - sphereDiameter / 2; }
-		//Check if it runs out of collider
-		if (position.x + sphereDiameter/2 < colliderToFollow->rect.x)
-		{
-			if      (ColliderIsAbove())  { followTerrainDir = FollowingTerrainDirection::FTD_up;   }
-			else if (ColliderIsBellow()) { followTerrainDir = FollowingTerrainDirection::FTD_down; }
-		}
-		break;
-	case FTD_right:
-		//Set the position
-		position.x += followTerrainSpeed;
-		if      (ColliderIsAbove()) { position.y = colliderToFollow->rect.y + colliderToFollow->rect.h + sphereDiameter / 2; }
-		else if (ColliderIsBellow()) { position.y = colliderToFollow->rect.y - sphereDiameter / 2; }
-		//Check if it runs out of collider
-		if (position.x - sphereDiameter/2 > colliderToFollow->rect.x + colliderToFollow->rect.w)
-		{
-			if      (ColliderIsAbove())  { followTerrainDir = FollowingTerrainDirection::FTD_up;   }
-			else if (ColliderIsBellow()) { followTerrainDir = FollowingTerrainDirection::FTD_down; }
-		}
-		break;
-	}
-	UpdateUnitColliders();
-
-	//- Check return conditions-----------------------------------------------
-	CheckPlayerClose();
-	CheckOutOfScreen();
-	CheckReturnTime();
-
-	//Render------------------------------------------------------------------
-	throwFrame = throwAnim.GetCurrentFrame();
-	App->render->Blit(
-		throwUnitTx,
-		(int)position.x - throwFrame.w / 2,
-		(int)position.y - throwFrame.h / 2,
-		&throwFrame);
 }
 
 void ModuleUnit::OnCollision(Collider* collider1, Collider* collider2)

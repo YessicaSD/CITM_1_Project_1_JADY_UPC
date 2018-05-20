@@ -67,13 +67,14 @@ void Enemy_RotatingTurret::Move()
 
 	//- Calculate rotation
 	rotation = CalculateRotationToPoint(position, targetPlayerPos);
-		
+
+	LOG("Rotation: %f", rotation);
+
 	//- Shoot
 	//Shoot every x time? Or when it fixes the position?
 }
 
 void Enemy_RotatingTurret::Draw(SDL_Texture* sprites)
 {
-	//App->render->Blit(sprites, position.x, position.y, rotatingTurretAnim.GetFrame());//Cridar funcio
-	//Posar funcio a Rotation.h
+	App->render->Blit(sprites, position.x, position.y, &rotatingTurretAnim.ReturnFrame(GetNearestAngle(rotation)));
 }

@@ -33,7 +33,6 @@ ModuleStageFunctionality::~ModuleStageFunctionality()
 
 bool ModuleStageFunctionality::Start()
 {
-
 	App->player1->Enable();
 	App->player2->Enable();
 	if (App->player1->isActive)
