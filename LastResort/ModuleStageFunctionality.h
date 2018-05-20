@@ -6,6 +6,15 @@
 
 struct SDL_Texture;
 
+enum debuggingElement
+{
+	NOTHING = 0,
+	SCENES,
+	CHECKPOINTS,
+	ENEMIES,
+	POWERUPS
+};
+
 class ModuleStageFunctionality : public Module
 {
 public:
@@ -33,8 +42,10 @@ public:
 	bool pressedNumEnemy = false;
 	bool pressedNumPowerup = false;
 
-	Module * currentStage = nullptr;
+	//Bools that indicate us what is the last element you're debugging
+	debuggingElement debugElem = NOTHING;
 
+	Module * currentStage = nullptr;
 
 	SDL_Texture* PlayerTexture = nullptr;
 	SDL_Texture* SpeedAnimationTex = nullptr;

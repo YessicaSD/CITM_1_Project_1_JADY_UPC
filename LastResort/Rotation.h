@@ -1,5 +1,8 @@
 #ifndef __ROTATION_H__
 #define __ROTATION_H__
+
+#include "p2Point.h"
+
 //-------------------------------------ROTATION------------------------------------------------
 //- This script holds helpful values to calculate any rotation in the game
 //INFO:
@@ -49,5 +52,8 @@ float const angleValue[16]
 	7 * PI / 4,
 	15 * PI / 8
 };
+
+void LimitRotation(float &);
+float CalculateRotationToPoint(iPoint, iPoint);
 
 #endif //__ROTATION_H__

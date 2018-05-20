@@ -81,7 +81,7 @@ public:
 			position.y += movements[currentMov].speed.y;
 			++currentFrame;
 		}
-		else if (currentMov >= last_mov) {
+		else if (currentMov >= (int)last_mov) {
 			movFinished = true;
 			return position;
 		}

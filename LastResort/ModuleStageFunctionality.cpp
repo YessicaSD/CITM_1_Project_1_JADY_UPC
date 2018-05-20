@@ -76,8 +76,13 @@ update_status ModuleStageFunctionality::PreUpdate()
 void ModuleStageFunctionality::Debugging()
 {
 	//SCENES-------------------------------------------------------------------------------------------------------------------------------------
+	//- Selecting scenes
+	if(App->input->keyboard[SDL_SCANCODE_F5] == KEY_DOWN)
+	{
+		debugElem = debuggingElement::SCENES;
+	}
 	//- Select scene
-	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_REPEAT && debugElem == debuggingElement::SCENES)
 	{
 		if (App->input->keyboard[SDL_SCANCODE_0] == KEY_DOWN) { ChooseDebugElem(0, pressedNumScene, selectedScene, 1, 11); }//11 = there are currently 11 scenes in the game (although lvl 3 and lvl 4 are not implemented)
 		if (App->input->keyboard[SDL_SCANCODE_1] == KEY_DOWN) { ChooseDebugElem(1, pressedNumScene, selectedScene, 1, 11); }
@@ -91,17 +96,23 @@ void ModuleStageFunctionality::Debugging()
 		if (App->input->keyboard[SDL_SCANCODE_9] == KEY_DOWN) { ChooseDebugElem(9, pressedNumScene, selectedScene, 1, 11); }
 	}
 	//- Go to scene
-	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_UP)
+	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_UP && debugElem == debuggingElement::SCENES)
 	{
 		GoToScene();
 		pressedNumScene = false;
+		debugElem = debuggingElement::NOTHING;
 	}
 
 	//CHECKPOINTS--------------------------------------------------------------------------------------------------------------------------------
 	if(currentStage == App->stage05)
 	{
+		//-Selecting checkpoints
+		if(App->input->keyboard[SDL_SCANCODE_F6] == KEY_DOWN)
+		{
+			debugElem = debuggingElement::CHECKPOINTS;
+		}
 		//- Select checkpoint
-		if (App->input->keyboard[SDL_SCANCODE_F6] == KEY_REPEAT)
+		if (App->input->keyboard[SDL_SCANCODE_F6] == KEY_REPEAT && debugElem == debuggingElement::CHECKPOINTS)
 		{
 			if (App->input->keyboard[SDL_SCANCODE_0] == KEY_DOWN) { ChooseDebugElem(0, pressedNumCheckpoint, selectedCheckpoint, 0, 24); }//The number of checkpoints in level 5
 			if (App->input->keyboard[SDL_SCANCODE_1] == KEY_DOWN) { ChooseDebugElem(1, pressedNumCheckpoint, selectedCheckpoint, 0, 24); }
@@ -115,16 +126,22 @@ void ModuleStageFunctionality::Debugging()
 			if (App->input->keyboard[SDL_SCANCODE_9] == KEY_DOWN) { ChooseDebugElem(9, pressedNumCheckpoint, selectedCheckpoint, 0, 24); }
 		}
 		//- Go to checkpoint
-		if (App->input->keyboard[SDL_SCANCODE_F6] == KEY_UP)
+		if (App->input->keyboard[SDL_SCANCODE_F6] == KEY_UP && debugElem == debuggingElement::CHECKPOINTS)
 		{
 			App->stage05->cameraMovement.SetMovement(selectedCheckpoint);
 			pressedNumCheckpoint = false;
+			debugElem = debuggingElement::NOTHING;
 		}
 	}
 	
 	//ENEMIES------------------------------------------------------------------------------------------------------------------------------------
+	//- Selecting enemies
+	if(App->input->keyboard[SDL_SCANCODE_F7] == KEY_DOWN)
+	{
+		debugElem = debuggingElement::ENEMIES;
+	}
 	//- Select enemy
-	if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_REPEAT && debugElem == debuggingElement::ENEMIES)
 	{
 		if (App->input->keyboard[SDL_SCANCODE_0] == KEY_DOWN) { ChooseDebugElem(0, pressedNumEnemy, selectedEnemy, 0, ENEMY_TYPES::MAX_ENEMY - 1); }
 		if (App->input->keyboard[SDL_SCANCODE_1] == KEY_DOWN) { ChooseDebugElem(1, pressedNumEnemy, selectedEnemy, 0, ENEMY_TYPES::MAX_ENEMY - 1); }
@@ -138,7 +155,7 @@ void ModuleStageFunctionality::Debugging()
 		if (App->input->keyboard[SDL_SCANCODE_9] == KEY_DOWN) { ChooseDebugElem(9, pressedNumEnemy, selectedEnemy, 0, ENEMY_TYPES::MAX_ENEMY - 1); }
 	}
 	//- Spawn enemy
-	if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_UP)
+	if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_UP && debugElem == debuggingElement::ENEMIES)
 	{
 		if (App->player1->isActive)
 		{
@@ -148,13 +165,18 @@ void ModuleStageFunctionality::Debugging()
 		{
 			App->enemies->AddEnemy((ENEMY_TYPES)selectedEnemy, App->player2->position.x + 100, App->player2->position.y);
 		}
-		
 		pressedNumEnemy = false;
+		debugElem = debuggingElement::NOTHING;
 	}
 
 	//POWERUPS-----------------------------------------------------------------------------------------------------------------------------------
+	//- Selecting powerup
+	if(App->input->keyboard[SDL_SCANCODE_F8] == KEY_DOWN)
+	{
+		debugElem = debuggingElement::POWERUPS;
+	}
 	//- Select powerup
-	if (App->input->keyboard[SDL_SCANCODE_F8] == KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_F8] == KEY_REPEAT  && debugElem == debuggingElement::POWERUPS)
 	{
 		if (App->input->keyboard[SDL_SCANCODE_0] == KEY_DOWN) { ChooseDebugElem(0, pressedNumPowerup, selectedPowerup, 0, POWERUP_TYPE::MAX_POWERUP - 1); }
 		if (App->input->keyboard[SDL_SCANCODE_1] == KEY_DOWN) { ChooseDebugElem(1, pressedNumPowerup, selectedPowerup, 0, POWERUP_TYPE::MAX_POWERUP - 1); }
@@ -168,7 +190,7 @@ void ModuleStageFunctionality::Debugging()
 		if (App->input->keyboard[SDL_SCANCODE_9] == KEY_DOWN) { ChooseDebugElem(9, pressedNumPowerup, selectedPowerup, 0, POWERUP_TYPE::MAX_POWERUP - 1); }
 	}
 	//- Spawn powerup
-	if (App->input->keyboard[SDL_SCANCODE_F8] == KEY_UP)
+	if (App->input->keyboard[SDL_SCANCODE_F8] == KEY_UP  && debugElem == debuggingElement::POWERUPS)
 	{
 		if(App->player1->isActive)
 		{
@@ -180,6 +202,7 @@ void ModuleStageFunctionality::Debugging()
 		}
 		
 		pressedNumPowerup = false;
+		debugElem = debuggingElement::NOTHING;
 	}
 }
 

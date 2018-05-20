@@ -172,6 +172,7 @@
     <ClCompile Include="Powerup_Speed.cpp" />
     <ClCompile Include="ModuleStageFunctionality.cpp" />
     <ClCompile Include="Enemy_Redbats.cpp" />
+    <ClCompile Include="Rotation.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

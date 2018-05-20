@@ -9,8 +9,6 @@ public:
 	Enemy_RotatingTurret(int x, int y, POWERUP_TYPE pu_t);
 	void Move();
 
-	float CalculateRotation();
-
 private:
 	Animation rotatingTurretAnim;
 	iPoint targetPlayerPos;

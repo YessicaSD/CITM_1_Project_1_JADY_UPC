@@ -5,6 +5,7 @@
 #include "Player1.h"
 #include "Player2.h"
 #include "ModuleStage05.h"
+#include "Rotation.h"
 
 Enemy_RotatingTurret::Enemy_RotatingTurret(int x, int y, POWERUP_TYPE pu_t) : Enemy(x, y, pu_t)
 {
@@ -67,7 +68,7 @@ void Enemy_RotatingTurret::Move()
 
 
 	//- Calculate rotation
-	CalculateRotation();
+	CalculateRotationToPoint(position, targetPlayerPos);
 
 
 	//Shoot----------------------------------------------------------------------
@@ -100,58 +101,4 @@ void Enemy_RotatingTurret::Move()
 	//}
 
 	//ModulePlayer playerToFollow;
-}
-
-float Enemy_RotatingTurret::CalculateRotation()
-{
-	//1- Check where the player is
-	//2- Calculate the rotation
-
-	//Fist quadrant
-	if(targetPlayerPos.x > this->position.x && targetPlayerPos.y > this->position.y)
-	{
-
-	}
-	//Second quadrant
-	else if (targetPlayerPos.x < this->position.x && targetPlayerPos.y > this->position.y)
-	{
-
-	}
-	//Third quadrant
-	else if (targetPlayerPos.x < this->position.x && targetPlayerPos.y < this->position.y)
-	{
-
-	}
-	//Fourth quadrant
-	else if (targetPlayerPos.x > this->position.x && targetPlayerPos.y < this->position.y)
-	{
-
-	}
-
-
-	//- In line
-	else if (targetPlayerPos.x == this->position.x && targetPlayerPos.y > this->position.y)
-	{
-
-	}
-	else if (targetPlayerPos.x < this->position.x && targetPlayerPos.y == this->position.y)
-	{
-
-	}
-	else if (targetPlayerPos.x == this->position.x && targetPlayerPos.y < this->position.y)
-	{
-
-	}
-	else if (targetPlayerPos.x > this->position.x && targetPlayerPos.y == this->position.y)
-	{
-
-	}
-
-
-	//Same position
-	else if (targetPlayerPos.x == this->position.x && targetPlayerPos.y == this->position.y)
-	{
-		//Keep the same rotation as the frame before
-		return rotation;
-	}
 }

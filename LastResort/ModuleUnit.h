@@ -104,7 +104,6 @@ public:
 
 	//Rotating
 	void RotateTo(float, float&, float);//Increases a rotation until it reaches its target rotation
-	void LimitRotation(float &);//Limits a rotation to positive numbers and 2*PI radians
 	int TurnAroundToRender();//Return an angle depending on where the unit is pointing to
 
 	//Following terrain

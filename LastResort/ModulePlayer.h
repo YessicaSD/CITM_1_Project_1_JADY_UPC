@@ -14,7 +14,7 @@
 
 struct SDL_Texture;
 struct Collider; //SHOT
-struct Particle;
+class Particle;
 struct Mix_Chunk;
 
 enum ShipFrames

@@ -591,20 +591,6 @@ void ModuleUnit::RotateTo(float targetRotation, float &currentRotation, float sp
 	}
 }
 
-void ModuleUnit::LimitRotation(float &rotation)
-{
-	//- Limit the rotation to positive numbers (after modifing it)
-	if (rotation < 0)
-	{
-		rotation = 2 * PI + rotation;//We add the rotation because it's negative, so it will efectively substract it
-	}
-	//- Limit the rotation to one circle
-	while (rotation > 2 * PI)
-	{
-		rotation -= 2 * PI;
-	}
-}
-
 int ModuleUnit::TurnAroundToRender()
 {
 	//Start with the exception (E). We need an or because you can end up in this case if you increase the currentTurnAround to 2PI or we decrease it to 0
