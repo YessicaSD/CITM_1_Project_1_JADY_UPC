@@ -21,7 +21,7 @@ private:
 	Animation rotateAnim;
 	Animation initAnim;
 	//Variables---------------------------
-	fPoint position;
+	fPoint float_position;
 	int initialY;
 	int initialX;
 	enum Direction {

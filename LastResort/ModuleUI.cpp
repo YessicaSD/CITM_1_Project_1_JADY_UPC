@@ -96,12 +96,7 @@ update_status ModuleUI::Update() {
 				credits -= 1;
 				App->player1->isActive = true;
 				App->player1->lives = 2;
-				if (App->player1->enabled == true) {
-					App->player1->Reappear();
-				}
-				else {
-					App->player1->Enable();
-				}
+				App->player1->Reappear();
 				
 				break;
 			case CONTINUE_SCENE:
@@ -143,13 +138,7 @@ update_status ModuleUI::Update() {
 			{
 				App->player2->isActive = true;
 				App->player2->lives = 2;
-
-				if (App->player2->enabled == true) {
-					App->player2->Reappear();
-				}
-				else {
-					App->player2->Enable();
-				}
+				App->player2->Reappear();
 				
 				credits -= 1;
 			}

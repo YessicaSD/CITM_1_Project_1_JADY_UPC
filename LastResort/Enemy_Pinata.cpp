@@ -40,21 +40,21 @@ Enemy_Pinata::Enemy_Pinata(int x, int y, POWERUP_TYPE pu_t) : Enemy(x, y, pu_t)
 
 void Enemy_Pinata:: CheckTarget() {
 
-	float DistancePlayer1 = position.DistanceTo({ (float)App->player1->position.x,(float)App->player1->position.y });
-	float DistancePlayer2 = position.DistanceTo({ (float)App->player2->position.x,(float)App->player2->position.y });
+	float DistancePlayer1 = float_position.DistanceTo({ (float)App->player1->position.x,(float)App->player1->position.y });
+	float DistancePlayer2 = float_position.DistanceTo({ (float)App->player2->position.x,(float)App->player2->position.y });
 
-	if (DistancePlayer1 < DistancePlayer2 && App->player1->isActive == true) {
-		currentTarget = App->player1;
-	}
-	else if (DistancePlayer2  < DistancePlayer1  && App->player2->isActive == true)    {
-		currentTarget = App->player2;
-	}
-
-	else if (DistancePlayer2 == DistancePlayer1) {
+	 if (DistancePlayer1 <= DistancePlayer2) {
 		if (App->player1->isActive)
 			currentTarget = App->player1;
-		else if (!App->player2->isActive)
+		else if (App->player2->isActive)
 			currentTarget = App->player2;
+	}
+	else if (DistancePlayer2  < DistancePlayer1) 
+	{
+		if (App->player2->isActive)
+			currentTarget = App->player2; 
+		else if (App->player1->isActive)
+			currentTarget = App->player1;
 	}
 
 	if (lastTarget == nullptr) {
@@ -71,17 +71,17 @@ void Enemy_Pinata:: CheckTarget() {
 
 void Enemy_Pinata::CheckDirection() {
 
-	if (position.x  < currentTarget->position.x) {
+	if (float_position.x  < currentTarget->position.x) {
 		currentDir = RIGHT;
 	}
-	else if (position.x >= currentTarget->position.x) {
+	else if (float_position.x >= currentTarget->position.x) {
 		currentDir = LEFT;
 	}
 
 	if (lastDir == STILL) {
 		lastDir = currentDir;
 	}
-	else if (lastDir != currentDir && currentState != INIT) {
+	else if (lastDir != currentDir) {
 		currentState = ROTATE;
 		lastDir = currentDir; 
 	}
@@ -109,12 +109,12 @@ void Enemy_Pinata::Move()
 		}
 
 		pinataMov.GetCurrentPosition();
-		position.y = initialY + pinataMov.GetPosition().y;
+		float_position.y = initialY + pinataMov.GetPosition().y;
 
 		if (currentDir == RIGHT)
-			position.x = initialX - pinataMov.GetPosition().x;
+			float_position.x = initialX - pinataMov.GetPosition().x;
 		else
-			position.x = initialX +  pinataMov.GetPosition().x;
+			float_position.x = initialX +  pinataMov.GetPosition().x;
 
 		break;
 
@@ -131,18 +131,18 @@ void Enemy_Pinata::Move()
 			PlayerPos.x = (float)currentTarget->position.x + currentTarget->playerCenter.x - 8;
 			PlayerPos.y = (float)currentTarget->position.y + currentTarget->playerCenter.y;
 		}
-		vectorIncrease.UnitVector(PlayerPos, position);
+		vectorIncrease.UnitVector(PlayerPos, float_position);
 
-		position.x += vectorIncrease.x * 1;
-		position.y += vectorIncrease.y * 0.8;
+		float_position.x += vectorIncrease.x * 1;
+		float_position.y += vectorIncrease.y * 0.5;
 		break;
 
 	case ROTATE:
 
 		//Not move
 		break;
-
 	}
+	position = { (int)float_position.x, (int)float_position.y };
 }
 
 void Enemy_Pinata::Draw(SDL_Texture* sprites)

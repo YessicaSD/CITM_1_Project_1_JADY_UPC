@@ -272,7 +272,7 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 		case ENEMY_TYPES::PINATA:
 			enemies[i] = new Enemy_Pinata(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
 			enemies[i]->scoreValue = 200;
-			enemies[i]->hp = 50;
+			enemies[i]->hp = 1;
 			break;
 		case ENEMY_TYPES::PINATA_SPAWNER:
 			enemies[i] = new Enemy_Pinata(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
