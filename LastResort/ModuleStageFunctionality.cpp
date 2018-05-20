@@ -62,6 +62,8 @@ bool ModuleStageFunctionality::CleanUp()
 	App->collision->Disable();
 	App->enemies->Disable();
 	App->powerups->Disable();
+	App->textures->Unload(PlayerTexture);
+	App->textures->Unload(SpeedAnimationTex);
 	return true;
 }
 
