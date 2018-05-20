@@ -34,13 +34,12 @@ ModuleStageFunctionality::~ModuleStageFunctionality()
 bool ModuleStageFunctionality::Start()
 {
 
-	if (App->player1->isActive == true) {
-		App->player1->Enable();
-	}
-
-	if (App->player2->isActive == true) {
-		App->player2->Enable();
-	}
+	App->player1->Enable();
+	App->player2->Enable();
+	if (App->player1->isActive)
+		App->player1->Reappear();
+	if (App->player2->isActive)
+		App->player2->Reappear();
 	
 	//textures-----------------------------------------------------------------------
 	PlayerTexture = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version		

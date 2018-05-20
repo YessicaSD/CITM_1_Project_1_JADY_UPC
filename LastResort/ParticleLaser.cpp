@@ -6,7 +6,7 @@
 #include "Player2.h"
 Particle_Laser::Particle_Laser(Particle& p) : Particle(p)
 {
-	if (App->player2->position.y > App->player1->position.y && App->player2->IsActive==true)
+	if (App->player2->position.y > App->player1->position.y && App->player2->isActive==true)
 	{
 		PlayerPosition.x = App->player2->position.x;
 		PlayerPosition.y = App->player2->position.y;

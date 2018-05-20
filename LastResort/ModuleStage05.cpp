@@ -138,6 +138,10 @@ bool Module5lvlScene::Start()
 
 	//Enemies ---------------------------------------------------------------------------------------------------
 	//INFO: We'll calculate the x and y positions based on the position of the ship in Docs>ship.psd
+	//- TEST ENEMIES
+	App->enemies->AddEnemy(PINATA, 150, 120);
+	//App->enemies->AddEnemy(OSCILATOR, 500, 0);
+
 	//- FINAL POSITION ENEMIES
 	App->enemies->AddEnemy(FRONT_TURRET, 47, 64);
 
@@ -164,11 +168,6 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(OUTDOOR_TURRET, 288, 13);
 	App->enemies->AddEnemy(OUTDOOR_TURRET, 328, 13);
 	
-
-	//- TEST ENEMIES
-	/*App->enemies->AddEnemy(PINATA, 150, 120);*/
-	//App->enemies->AddEnemy(OSCILATOR, 500, 0);
-
 
 	//Colliders--------------------------------------------------------------------------------------------------
 	for(int i = 0; i < SHIP_COLLIDERS_NUM; ++i)

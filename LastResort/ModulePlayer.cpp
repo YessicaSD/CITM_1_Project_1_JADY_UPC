@@ -45,14 +45,8 @@ bool ModulePlayer::Start()
 	//position-----------------------------------------------------------------------
 	position = initPosition;//We set the position (before adding the collider) (note that the intial positions are set in Player1.h and Player2.h)
 	//variables----------------------------------------------------------------------
-	playerAnimState = PlayerAnimationState::Initial;
+	playerAnimState = PlayerAnimationState::None;
 	godMode = false;
-	isShooting = false;
-	shoot = false;
-	canMove = false;
-	isDying = false;
-	isInvincible = true;
-	invincibilityFrames = INVINCIBILITY_FRAMES;
 	//audios-------------------------------------------------------------------------
 	init_sfx = App->audio->LoadSFX("Assets/initial_sfx.wav");
 	//collider-----------------------------------------------------------------------
