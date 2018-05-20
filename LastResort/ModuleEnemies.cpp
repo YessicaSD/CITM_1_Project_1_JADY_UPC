@@ -17,6 +17,7 @@
 #include "Enemy_RedBats.h"
 #include "Enemy_RotatingTurret.h"
 #include "Enemy_Pinata.h"
+#include "Enemy_Pinata_Spawner.h"
 #include "Enemy_FrontTurret.h"
 #include "Enemy_Outdoor_turret.h"
 #include "Enemy_Outdoor_Laser.h"
@@ -168,6 +169,29 @@ bool ModuleEnemies::CleanUp()
 			enemies[i] = nullptr;
 		}
 	}
+
+	for (uint i = 0; i < MAX_ENEMIES; ++i)
+	{
+			queue[i].type = ENEMY_TYPES::NO_TYPE;
+			queue[i].delay = 0;
+			queue[i].pu_Type = POWERUP_TYPE::NOPOWERUP;
+			queue[i].counting = false;
+			queue[i].spawnTime = 0;
+			queue[i].pointer = nullptr;
+	}
+
+	for (uint i = 0; i < MAX_ENEMIES; ++i)
+	{
+
+			instaQueue[i].type = ENEMY_TYPES::NO_TYPE;
+			instaQueue[i].delay = 0;
+			instaQueue[i].pu_Type = POWERUP_TYPE::NOPOWERUP;
+			instaQueue[i].counting = false;
+			instaQueue[i].spawnTime = 0;
+			/*instaQueue[i].pointer = nullptr;*/
+		
+	}
+
 	App->textures->Unload(nml_sprites);
 	App->textures->Unload(dmg_sprites);
 
@@ -275,9 +299,9 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			enemies[i]->hp = 1;
 			break;
 		case ENEMY_TYPES::PINATA_SPAWNER:
-			enemies[i] = new Enemy_Pinata(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
+			enemies[i] = new Enemy_Pinata_Spawner(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
 			enemies[i]->scoreValue = 200;
-			enemies[i]->hp = 50;
+			enemies[i]->hp = 5;
 			break;
 		case ENEMY_TYPES::FRONT_TURRET:
 			enemies[i] = new Enemy_FrontTurret(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);

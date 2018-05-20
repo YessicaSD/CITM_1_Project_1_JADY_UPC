@@ -3,6 +3,12 @@
 
 #include "Enemy.h"
 
+
+#define MAX_SPAWNED 3
+#define SPAWN_FRAMES 180
+
+class Enemy_Pinata;
+
 class Enemy_Pinata_Spawner : public Enemy
 {
 public:
@@ -10,11 +16,19 @@ public:
 	void Move();
 
 private:
-	Animation moveLeftAnim;
-	Animation moveRightAnim;
-	Animation rotateAnim;
-	Animation deathAnim;//Pilots drop off this enemy
-	int moveSpeed;
+	iPoint fixedPos;
+	Animation openAnim;//Pilots drop off this enemy
+
+	enum animState {
+		IDLE,
+		FOLLOW,
+		ROTATE
+	} currentState = IDLE;
+
+	Enemy_Pinata* enemies[MAX_SPAWNED];
+	int currentEnemies = 0;
+	int spawnFrames = SPAWN_FRAMES;
+	bool isSpawning = false;
 };
 
 #endif // __ENEMY_PINATA_SPAWNER_H__

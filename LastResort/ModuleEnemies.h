@@ -38,6 +38,7 @@ struct EnemyInfo
 	//Additional variables (help us spawn enemies with time)
 	bool counting = false;
 	Uint32 spawnTime;
+	Enemy *pointer = nullptr;
 };
 
 class ModuleEnemies : public Module

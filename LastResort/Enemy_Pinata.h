@@ -25,16 +25,16 @@ private:
 	int initialY;
 	int initialX;
 	enum Direction {
-		STILL,
+		NONE,
 		RIGHT,
 		LEFT
-	} currentDir = STILL, lastDir = STILL;
+	} currentDir = NONE, lastDir = NONE;
 
-	enum Move_States {
-		INIT,
+	enum MoveState {
+		IDLE,
 		FOLLOW,
 		ROTATE
-	} currentState = INIT;
+	} currentState = IDLE;
 
 	MovePath pinataMov;
 

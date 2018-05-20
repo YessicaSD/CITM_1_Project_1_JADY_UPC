@@ -16,7 +16,7 @@ Enemy_Pinata::Enemy_Pinata(int x, int y, POWERUP_TYPE pu_t) : Enemy(x, y, pu_t)
 	//Movement--------------------------------------
 	pinataMov.originPoint = { 0,0 };
 	pinataMov.PushBack({ 0,90 }, 150);
-	pinataMov.PushBack({ -15 ,80 }, 30);
+	pinataMov.PushBack({ -10 ,85 }, 15);
 	//Animations------------------------------------
 	moveAnim.PushBack({ 263, 62,40,38 });   //1
 	moveAnim.PushBack({ 223, 100,40,38 });  //2
@@ -32,7 +32,7 @@ Enemy_Pinata::Enemy_Pinata(int x, int y, POWERUP_TYPE pu_t) : Enemy(x, y, pu_t)
 	initAnim.PushBack({ 223, 138,40,38 });  //2
 	initAnim.speed = 0.1f;
 	//Add collider--------------------------------
-	collider = App->collision->AddCollider({ initialX, initialY, 32, 16 }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ initialX, initialY, 32, 30 }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
 }
 
 
@@ -78,10 +78,10 @@ void Enemy_Pinata::CheckDirection() {
 		currentDir = LEFT;
 	}
 
-	if (lastDir == STILL) {
+	if (lastDir == NONE) {
 		lastDir = currentDir;
 	}
-	else if (lastDir != currentDir) {
+	else if (lastDir != currentDir && currentState != IDLE) {
 		currentState = ROTATE;
 		lastDir = currentDir; 
 	}
@@ -96,9 +96,9 @@ void Enemy_Pinata::Move()
 
 	switch (currentState)
 	{
-	case INIT:
+	case IDLE:
 
-		if (pinataMov.currentMov == 0) {
+		if (pinataMov.currentMov == 1) {
 			CheckTarget();
 			CheckDirection();
 		}
@@ -120,9 +120,6 @@ void Enemy_Pinata::Move()
 
 	case FOLLOW:
 
-		CheckTarget();
-		CheckDirection();
-
 		if (currentDir == RIGHT) {
 			PlayerPos.x = (float)currentTarget->position.x + currentTarget->playerCenter.x + 8;
 			PlayerPos.y = (float)currentTarget->position.y + currentTarget->playerCenter.y;
@@ -135,8 +132,11 @@ void Enemy_Pinata::Move()
 
 		float_position.x += vectorIncrease.x * 1;
 		float_position.y += vectorIncrease.y * 0.5;
-		break;
 
+		CheckTarget();
+		CheckDirection();
+
+		break;
 	case ROTATE:
 
 		//Not move
@@ -155,7 +155,7 @@ void Enemy_Pinata::Draw(SDL_Texture* sprites)
 
 	switch (currentState)
 	{
-	case INIT:
+	case IDLE:
 
 		if (pinataMov.currentMov == 0) {
 			currentAnim = initAnim.frames[0];
