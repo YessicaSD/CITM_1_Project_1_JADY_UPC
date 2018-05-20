@@ -102,10 +102,6 @@ public:
 	void CheckOutOfScreen();
 	void CheckReturnTime();
 
-	//Rotating
-	void RotateTo(float, float&, float);//Increases a rotation until it reaches its target rotation
-	int TurnAroundToRender();//Return an angle depending on where the unit is pointing to
-
 	//Following terrain
 	bool ColliderIsOnLeft();//Returns true if collider to follow is on the left of the unit
 	bool ColliderIsOnRight();//Returns true if collider to follow is on the right of the unit
@@ -145,7 +141,6 @@ private:
 	bool orbiting;//A bool that indicates if we can make the unit orbit
 	bool turningAround;//A bool that indicates if we can make the unit turn around
 	int radius = 31;
-	const float angleSeparation = PI / 16;//The separation between the angles (helps us calculate which animation we have to play)
 
 	SpinAnimation spinAnimation[UNIT_AXIS];//There is an animation for each direction of the unit
 										 //   E, ESE,  SE, SSE,   S, SSW,  SW, WSW,   W, WNW,  NW, NNW,   N, NNE,  NE, ENE
