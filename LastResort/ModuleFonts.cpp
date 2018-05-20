@@ -109,3 +109,12 @@ void ModuleFonts::BlitText(int x, int y, int font_id, const char* text) const
 		x += font->char_w;
 	}
 }
+
+uint ModuleFonts::GetCharWidth(int fontId) const
+{
+	if(fontId < 0 || fontId > MAX_FONTS)
+	{
+		LOG("Accessing invalid font! SDL_Error: %s\n", SDL_GetError());//This is not a SDL error, but hopefully it will crash if we access an invalid font
+	}
+	return fonts[fontId].char_w;
+}

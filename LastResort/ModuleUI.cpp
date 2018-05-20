@@ -175,11 +175,13 @@ update_status ModuleUI::Update() {
 	str_lives_p1 = new char[4];
 	str_lives_p2 = new char[4];
 	str_credits = new char[20];
+	str_debug = new char[3];
 
 	snprintf(str_lives_p1, 4 * sizeof(str_lives_p1), "%d", App->player1->lives);
 	snprintf(str_lives_p2, 4 * sizeof(str_lives_p2), "%d", App->player2->lives);
 	snprintf(str_score_p1, 4 * sizeof(str_score_p1), "%d", App->player1->score);
 	snprintf(str_score_p2, 4 * sizeof(str_score_p2), "%d", App->player2->score);
+	
 	if (credits<10)
 		snprintf(str_credits, 4 * sizeof(str_credits), "CREDITS 0%d", credits);
 	else
@@ -236,6 +238,42 @@ update_status ModuleUI::Update() {
 				App->fonts->BlitText(272 - 8 * strlen(str_score_p2), 16, 0, str_score_p2);
 			}
 		}
+
+		//Debug-------------------------------------------------------
+
+		switch (App->stageFunctionality->debugElem)
+		{
+		case NOTHING:
+			break;
+		case SCENES:
+			snprintf(str_debug, 4 * sizeof(str_debug), "%i", App->stageFunctionality->selectedScene);
+			App->fonts->BlitText( SCREEN_WIDTH / 2 - 15 * App->fonts->GetCharWidth(0) / 2, SCREEN_HEIGHT - 45,
+				0, "SELECTING SCENE");//15 number of letters in SELECTING SCENE
+			App->fonts->BlitText( SCREEN_WIDTH / 2 -  3 * App->fonts->GetCharWidth(0) / 2, SCREEN_HEIGHT - 35,
+				0, str_debug);
+			break;
+		case CHECKPOINTS:
+			snprintf(str_debug, 4 * sizeof(str_debug), "%i", App->stageFunctionality->selectedCheckpoint);
+			App->fonts->BlitText( SCREEN_WIDTH / 2 - 20 * App->fonts->GetCharWidth(0) / 2, SCREEN_HEIGHT - 45,
+				0, "SELECTING CHECKPOINT");
+			App->fonts->BlitText( SCREEN_WIDTH / 2 -  3 * App->fonts->GetCharWidth(0) / 2, SCREEN_HEIGHT - 35,
+				0, str_debug);
+			break;
+		case ENEMIES:
+			snprintf(str_debug, 4 * sizeof(str_debug), "%i", App->stageFunctionality->selectedEnemy);
+			App->fonts->BlitText( SCREEN_WIDTH / 2 - 15 * App->fonts->GetCharWidth(0) / 2, SCREEN_HEIGHT - 45,
+				0, "SELECTING ENEMY");
+			App->fonts->BlitText( SCREEN_WIDTH / 2 -  3 * App->fonts->GetCharWidth(0) / 2, SCREEN_HEIGHT - 35,
+				0, str_debug);
+			break;
+		case POWERUPS:
+			snprintf(str_debug, 4 * sizeof(str_debug), "%i", App->stageFunctionality->selectedPowerup);
+			App->fonts->BlitText( SCREEN_WIDTH / 2 - 17 * App->fonts->GetCharWidth(0) / 2, SCREEN_HEIGHT - 45,
+				0, "SELECTING POWERUP");
+			App->fonts->BlitText( SCREEN_WIDTH / 2 -  3 * App->fonts->GetCharWidth(0) / 2, SCREEN_HEIGHT - 35,
+				0, str_debug);
+			break;
+		}
 	}
 
 
@@ -244,6 +282,7 @@ update_status ModuleUI::Update() {
 	delete[](str_lives_p1);
 	delete[](str_lives_p2);
 	delete[](str_credits);
+	delete[](str_debug);
 	str_score_p1 = nullptr;
 	str_score_p2 = nullptr;
 	str_lives_p1 = nullptr;

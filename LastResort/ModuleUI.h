@@ -56,6 +56,7 @@ public:
 	char *str_lives_p1 = nullptr;
 	char *str_lives_p2 = nullptr;
 	char *str_credits = nullptr;
+	char *str_debug = nullptr;
 	//Audios-------------------------------------
 	Mix_Chunk*coinsSfx=nullptr;
 	//Textures------------------------------------
