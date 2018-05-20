@@ -124,6 +124,7 @@
     <ClInclude Include="Powerup_Speed.h" />
     <ClInclude Include="ModuleStageFunctionality.h" />
     <ClInclude Include="Enemy_RedBats.h" />
+    <ClInclude Include="Rotation.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />

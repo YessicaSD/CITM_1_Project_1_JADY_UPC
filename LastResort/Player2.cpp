@@ -10,6 +10,7 @@
 #include "ModuleStageFunctionality.h"
 #include "ModuleContinue.h"
 #include "ModuleReady.h"
+#include "Rotation.h"
 
 Player2::Player2() {
 	//Initial position------------------------------------------
@@ -193,6 +194,6 @@ void Player2::KillUnit()
 	{
 		App->particles->AddParticle(App->particles->g_explosion02, App->unit2->position.x, App->unit2->position.y, App->particles->g_explosion02.texture, COLLIDER_NONE, 0);//Explosion type REMEMBER: Improve it for 1.0
 	}
-	App->unit2->currentOrbit = App->unit2->currentTurnAround = App->unit2->angleValue[E];
+	App->unit2->currentOrbit = App->unit2->currentTurnAround = angleValue[E];
 	App->unit2->Disable();
 }

@@ -1,7 +1,7 @@
 #ifndef __ModuleUnit_H__
 #define __ModuleUnit_H__
 
-//------------------------------MODULE UNIT BASIC EXPLANATION----------------------------------
+//---------------------------------MODULE UNIT EXPLANATION-------------------------------------
 //---------------------------------------------------------------------------------------------
 //This module takes care of the unit behaviour in the game.
 //---------------------------------------------------------------------------------------------
@@ -17,10 +17,6 @@
 //- Around the player ship, which changes its position. We'll call this rotation "orbit"
 //- Around its own center, which changes where it aims. We'll call this rotation "turn around"
 //- It also has an animation simulating a rotation on the sphere part. We'll call this "spin"
-//CONSIDERATIONS
-//- The rotations are mesured in radians, not in degrees
-//-	It's very important to note that the y coordinates are inverted.
-//	So for example if a 45º angle would instead really be 315º angle.
 //- ORBIT
 //  - The unit rotates around the player's ship we point to with playerToFollow.
 //  - The unit will always orbit to the opposite direction to where we're going.
@@ -42,6 +38,7 @@
 #include "Animation.h"
 #include "p2Point.h"
 #include "ModulePlayer.h"
+#include "Rotation.h"
 
 #define SPIN_FRAMES 8
 #define UNIT_AXIS 16
@@ -57,12 +54,6 @@ enum UnitPhase
 	bouncingOnTerrain,
 	returning,
 	positioning
-};
-
-enum Angle
-{
-	//S (south), N (north), E (east), W (west)
-	E = 0, ESE, SE, SSE, S, SSW, SW, WSW, W, WNW, NW, NNW, N, NNE, NE, ENE
 };
 
 enum FollowingTerrainDirection
@@ -135,7 +126,6 @@ public:
 	Collider* unitCol = nullptr;
 	float currentOrbit;
 	float currentTurnAround;
-	float angleValue[UNIT_AXIS];//The value of each angle
 	float power = 0;
 	UnitPhase unitPhase = UnitPhase::rotating;
 
@@ -143,7 +133,7 @@ private:
 	SDL_Texture* unitTx = nullptr;
 	SDL_Texture* blueUnitTx = nullptr;
 	SDL_Texture* orangeUnitTx = nullptr;
-	const float PI = 3.141592;
+	
 	const float orbitSpeed = 3.141592 / 27;//The speed at which the unit rotates around the player ship
 	const float turnAroundSpeed = orbitSpeed * 2;
 	const float spinSpeed = 0.2f;

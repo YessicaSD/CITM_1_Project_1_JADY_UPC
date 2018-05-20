@@ -11,26 +11,11 @@
 #include <stdio.h>
 #include <math.h>
 #include "SDL\include\SDL.h"
+#include "Rotation.h"
 
 ModuleUnit::ModuleUnit() //Constructor 
 {
-	//Define the angle values
-	angleValue[E] = 2 * PI;
-	angleValue[ESE] = PI / 8;
-	angleValue[SE] = PI / 4;
-	angleValue[SSE] = 3 * PI / 8;
-	angleValue[S] = PI / 2;
-	angleValue[SSW] = 5 * PI / 8;
-	angleValue[SW] = 3 * PI / 4;
-	angleValue[WSW] = 7 * PI / 8;
-	angleValue[W] = PI;
-	angleValue[WNW] = 9 * PI / 8;
-	angleValue[NW] = 5 * PI / 4;
-	angleValue[NNW] = 11 * PI / 8;
-	angleValue[N] = 3 * PI / 2;
-	angleValue[NNE] = 13 * PI / 8;
-	angleValue[NE] = 7 * PI / 4;
-	angleValue[ENE] = 15 * PI / 8;
+
 	//Push backs
 	//- North
 	spinAnimation[N].frame[0] = {  48, 61, 16, 22 };
