@@ -168,24 +168,24 @@ update_status ModuleUI::Update() {
 		}
 	}
 
-	
-
 	str_score_p1 = new char[MAX_NUMBERS_SCORE];
 	str_score_p2 = new char[MAX_NUMBERS_SCORE];
 	str_lives_p1 = new char[4];
 	str_lives_p2 = new char[4];
-	str_credits = new char[20];
+	str_credits = new char[15];
 	str_debug = new char[3];
 
 	snprintf(str_lives_p1, 4 * sizeof(str_lives_p1), "%d", App->player1->lives);
 	snprintf(str_lives_p2, 4 * sizeof(str_lives_p2), "%d", App->player2->lives);
 	snprintf(str_score_p1, 4 * sizeof(str_score_p1), "%d", App->player1->score);
 	snprintf(str_score_p2, 4 * sizeof(str_score_p2), "%d", App->player2->score);
-	
-	if (credits<10)
-		snprintf(str_credits, 4 * sizeof(str_credits), "CREDITS 0%d", credits);
+
+	if(credits<2)
+		snprintf(str_credits, 4 * sizeof(str_credits), "CREDIT  0%i", credits);
+	else if (credits<10)
+		snprintf(str_credits, 4 * sizeof(str_credits), "CREDITS 0%i", credits);
 	else
-		snprintf(str_credits, 4 * sizeof(str_credits), "CREDITS %d", credits);
+		snprintf(str_credits, 4 * sizeof(str_credits), "CREDITS %i", credits);
 
 	//Draw UI----------------------------------------------------------------------------------------//
 
