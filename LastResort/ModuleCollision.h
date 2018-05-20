@@ -62,7 +62,6 @@ public:
 	ModuleCollision();
 	~ModuleCollision();
 
-	bool Start() override;
 	update_status PreUpdate() override;
 	update_status Update() override;
 	bool CleanUp() override;

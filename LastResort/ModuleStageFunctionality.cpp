@@ -33,7 +33,6 @@ ModuleStageFunctionality::~ModuleStageFunctionality()
 
 bool ModuleStageFunctionality::Start()
 {
-
 	App->player1->Enable();
 	App->player2->Enable();
 	if (App->player1->isActive)
@@ -63,6 +62,8 @@ bool ModuleStageFunctionality::CleanUp()
 	App->collision->Disable();
 	App->enemies->Disable();
 	App->powerups->Disable();
+	App->textures->Unload(PlayerTexture);
+	App->textures->Unload(SpeedAnimationTex);
 	return true;
 }
 

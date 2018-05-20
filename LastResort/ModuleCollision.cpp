@@ -298,12 +298,6 @@ void ModuleCollision::DebugDraw()
 	}
 }
 
-bool ModuleCollision::Start()
-{
-	LOG("Bool on start: %d", matrix[COLLIDER_POWERUP][COLLIDER_GOD]);
-	return true;
-}
-
 // Called before quitting
 bool ModuleCollision::CleanUp()
 {

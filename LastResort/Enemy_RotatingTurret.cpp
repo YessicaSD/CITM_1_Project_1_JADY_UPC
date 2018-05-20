@@ -36,14 +36,14 @@ Enemy_RotatingTurret::Enemy_RotatingTurret(int x, int y, POWERUP_TYPE pu_t) : En
 
 void Enemy_RotatingTurret::Move()
 {
-	//Movement-------------------------------------------------------------------
+	//Logic--------------------------------------------------------------------
 	//- Lock position
 	position = App->stage05->spawnPos + fixedPos;
 
 	//- Select the player we need to aim to
 	if(App->player1->isActive == true && App->player2->isActive == true)
 	{
-		//Check which one is at less distance
+		//-- Check which one is at less distance
 		if (sqrt(pow(position.x - App->player1->position.x, 2) + pow(position.y - App->player1->position.y, 2)) <=
 			sqrt(pow(position.x - App->player2->position.x, 2) + pow(position.y - App->player2->position.y, 2)))
 		{
@@ -65,40 +65,16 @@ void Enemy_RotatingTurret::Move()
 		targetPlayerPos = App->player2->position;
 	}
 
-
-
 	//- Calculate rotation
-	CalculateRotationToPoint(position, targetPlayerPos);
+	rotation = CalculateRotationToPoint(position, targetPlayerPos);
 
+	LOG("Rotation: %f", rotation);
 
-	//Shoot----------------------------------------------------------------------
-	//- Select which player we need to follow
-	//if()
-	//{
+	//- Shoot
+	//Shoot every x time? Or when it fixes the position?
+}
 
-	//}
-
-
-	//Move()
-	//{
-	//	//Select which player we need to follow
-	//	
-	//		//Then check rotation from that player to the turret
-	//		//Render
-	//		//Shoot every x time? Or when it fixes the position?
-	//}
-
-	//Calculate the rotation as if it was a triangle
-	//int adjacentSide;
-	//int oppositeSide;
-	//adjacentSide = App->player1->position.y - position.y;
-	//oppositeSide = App->player1->position.x - position.x;
-	//rotation = atan(abs(oppositeSide)/abs(adjacentSide));
-	////Then add a rotation depending on which triangle it is
-	//if( position.y < App->player1->position.y && position.x >)
-	//{
-
-	//}
-
-	//ModulePlayer playerToFollow;
+void Enemy_RotatingTurret::Draw(SDL_Texture* sprites)
+{
+	App->render->Blit(sprites, position.x, position.y, &rotatingTurretAnim.ReturnFrame(GetNearestAngle(rotation)));
 }
