@@ -18,6 +18,7 @@ public:
 	Enemy_Big_Asteroid(int x, int y, POWERUP_TYPE pu_t);
 	~Enemy_Big_Asteroid() {};
 	void Move();
+	void OnCollision(Collider*);
 };
 
 #endif // __ENEMY_BIG_ASTERIOD_H__
