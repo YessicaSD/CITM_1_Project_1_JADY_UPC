@@ -19,6 +19,7 @@ enum COLLIDER_TYPE
 	COLLIDER_POWERUP,
 	COLLIDER_GOD,//Collider the player gets on god mode
 	COLLIDER_HIT_DETECTION_WALL,//The unit needs this collider to know when it collides with a wall
+	COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE,
 	COLLIDER_MAX
 };
 
