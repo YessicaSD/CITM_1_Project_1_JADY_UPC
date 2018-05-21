@@ -166,6 +166,9 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(OUTDOOR_TURRET, 288, 13);
 	App->enemies->AddEnemy(OUTDOOR_TURRET, 328, 13);
 
+	App->enemies->AddEnemy(OUTDOOR_TURRET, 1087, 29);
+	App->enemies->AddEnemy(OUTDOOR_TURRET, 1119, 29);
+	App->enemies->AddEnemy(OUTDOOR_TURRET, 1151, 29);
 	App->enemies->AddEnemy(MECH, 738, 195, 1000);
 	
 
