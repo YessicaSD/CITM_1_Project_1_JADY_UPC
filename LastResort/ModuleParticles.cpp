@@ -267,6 +267,7 @@ void ModuleParticles::AddParticle( Particle& particle, int x, int y, SDL_Texture
 				p->position.x = x;
 				p->position.y = y;
 				p->initialPosition.x = x - App->stage05->spawnPos.x; 
+				p->initialPosition.y= y- App->stage05->spawnPos.y;
 				p->texture = tex; // texture
 				if (particle.collision_fx != nullptr)
 				{

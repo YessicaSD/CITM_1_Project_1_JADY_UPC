@@ -20,7 +20,7 @@ Enemy_Mech::Enemy_Mech(int x, int y, POWERUP_TYPE pu_t):Enemy(x,y,pu_t)
 	collider = App->collision->AddCollider({ x, y + 3, 24, 17 }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
 	finalPosition.x = x - App->stage05->spawnPos.x;
 	finalPosition.y = y - App->stage05->spawnPos.y;
-	resp = /*rand() %*/ 1;
+	resp = rand() % 1;
 
 	if (resp == 0)
 	{

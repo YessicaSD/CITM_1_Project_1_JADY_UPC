@@ -32,8 +32,9 @@ void Particle_Laser:: Move() {
 	if (going_up)
 	{
 		position.x = App->stage05->spawnPos.x + initialPosition.x;
-		if (PlayerPosition.y < position.y)
-			position.y -= speed.y;
+		position.y = initialPosition.y + App->stage05->spawnPos.y;
+		if (PlayerPosition.y < initialPosition.y + App->stage05->spawnPos.y)
+			initialPosition.y -= speed.y;
 		else
 			anim.speed = 0.2;
 		if (anim.GetCurrentFrameNum()==12)
