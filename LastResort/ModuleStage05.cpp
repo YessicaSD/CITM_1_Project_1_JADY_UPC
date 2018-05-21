@@ -141,6 +141,9 @@ bool Module5lvlScene::Start()
 	//- TEST ENEMIES
 	App->enemies->AddEnemy(PINATA_SPAWNER, 1167, 144);
 	App->enemies->AddEnemy(PINATA_SPAWNER, 1295, 144);
+	App->enemies->AddEnemy(PINATA, 140, 140);
+	App->enemies->AddEnemy(PINATA, 150, 150);
+	App->enemies->AddEnemy(PINATA, 130, 130);
 	//App->enemies->AddEnemy(OSCILATOR, 500, 0);
 
 	//- FINAL POSITION ENEMIES

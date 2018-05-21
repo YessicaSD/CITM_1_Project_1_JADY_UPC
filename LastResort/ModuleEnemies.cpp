@@ -147,6 +147,7 @@ update_status ModuleEnemies::PostUpdate()
 				enemies[i]->position.y > 0 + SCREEN_HEIGHT + DESPAWN_MARGIN_DOWN)
 			{
 				LOG("DeSpawning enemy at x: %d, y: %d", enemies[i]->position.x, enemies[i]->position.y);
+				enemies[i]->isDead = true;
 				delete enemies[i];
 				enemies[i] = nullptr;
 			}
@@ -165,6 +166,7 @@ bool ModuleEnemies::CleanUp()
 	{
 		if (enemies[i] != nullptr)
 		{
+			enemies[i]->isDead = true;
 			delete enemies[i];
 			enemies[i] = nullptr;
 		}
@@ -177,7 +179,7 @@ bool ModuleEnemies::CleanUp()
 			queue[i].pu_Type = POWERUP_TYPE::NOPOWERUP;
 			queue[i].counting = false;
 			queue[i].spawnTime = 0;
-			queue[i].pointer = nullptr;
+			
 	}
 
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
@@ -188,7 +190,7 @@ bool ModuleEnemies::CleanUp()
 			instaQueue[i].pu_Type = POWERUP_TYPE::NOPOWERUP;
 			instaQueue[i].counting = false;
 			instaQueue[i].spawnTime = 0;
-			/*instaQueue[i].pointer = nullptr;*/
+			
 		
 	}
 
@@ -346,6 +348,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 					App->powerups->AddPowerup( enemies[i]->position.x, enemies[i]->position.y, enemies[i]->powerUp_drop);
 				}
 				//---Delete enemie--------------------------
+				enemies[i]->isDead = true;
 				enemies[i]->OnCollision(c2);
 				delete enemies[i];
 				enemies[i] = nullptr;

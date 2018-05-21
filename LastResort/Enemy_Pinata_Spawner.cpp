@@ -24,7 +24,6 @@ Enemy_Pinata_Spawner::Enemy_Pinata_Spawner(int x, int y, POWERUP_TYPE pu_t) : En
 	openAnim.PushBack({ 156,119,64,19 });
 	openAnim.PushBack({ 156,100,64,19 });
 	openAnim.PushBack({ 156,81,64,19 });
-
 	openAnim.speed = 0.1f;
 	//Add collider----------------------------------------
 	collider = App->collision->AddCollider({ x, y, 32, 16 }, COLLIDER_TYPE::COLLIDER_ENEMY_HEAVY, (Module*)App->enemies);
@@ -33,7 +32,6 @@ Enemy_Pinata_Spawner::Enemy_Pinata_Spawner(int x, int y, POWERUP_TYPE pu_t) : En
 
 void Enemy_Pinata_Spawner::Move()
 {
-	uint i;
 	//Update position-------------------------------------------
 	position = App->stage05->spawnPos + fixedPos;
 	collider->SetPos(position.x, position.y);
@@ -42,11 +40,8 @@ void Enemy_Pinata_Spawner::Move()
 	//Enemies Spawning------------------------------------------
 	currentEnemies = 0;
 
-	for (i = 0; i < MAX_SPAWNED; ++i) {
+	for (int i = 0; i < MAX_SPAWNED; ++i) {
 
-		if (spawned[i] != nullptr && spawned[i]->isDead == true) {
-			spawned[i] = nullptr;
-		}
 		if (spawned[i] != nullptr && spawned[i]->isDead == false) {
 			currentEnemies += 1;
 
@@ -55,25 +50,35 @@ void Enemy_Pinata_Spawner::Move()
 
 	LOG("currentEnemies : %d", currentEnemies);
 
-	if (currentEnemies != 3) {
-		spawnFrames += 1;
-	}
-	
+
 	if (currentEnemies < 3 && spawnFrames > SPAWN_FRAMES - 60) {
 		currentState = OPEN;
 	}
 
 	if (currentEnemies < 3  && spawnFrames > SPAWN_FRAMES) {
 
-		for (i = 0; i < MAX_SPAWNED; ++i) {
+		for (int i = 0; i < MAX_SPAWNED; ++i) {
 			if (spawned[i] == nullptr) {
 				spawned[i] = App->enemies->InstaSpawn(PINATA, position.x, position.y);
+				spawnFrames = 0;
 				break;
 			}
 		}
-
-		spawnFrames = 0;
 	}
+
+	for (int i = 0; i < MAX_SPAWNED; ++i) {
+
+		if (spawned[i] != nullptr && spawned[i]->isDead == true) {
+			spawned[i] = nullptr;
+
+		}
+	}
+
+	if (currentEnemies != 3) {
+		spawnFrames += 1;
+	}
+	
+
 
 
 }
@@ -94,7 +99,6 @@ void Enemy_Pinata_Spawner::Draw(SDL_Texture* sprites) {
 		if (openAnim.finished == true) {
 			openAnim.Reset();
 			currentState = IDLE;
-			break;
 		}
 		currentAnim = openAnim.GetFrameEx();
 		break;

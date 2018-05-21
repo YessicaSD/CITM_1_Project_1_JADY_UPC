@@ -22,8 +22,10 @@ private:
 	Animation initAnim;
 	//Variables---------------------------
 	fPoint float_position;
-	int initialY;
-	int initialX;
+	iPoint fixedPos;
+
+	//int initialY;
+	//int initialX;
 	enum Direction {
 		NONE,
 		RIGHT,
