@@ -8,7 +8,7 @@
 - [ ] @alejandro61299 - Pinata spawn
 - [ ] @JaumeMontagut - Turret 1
 - [ ] @JaumeMontagut - Destroyable part
-- [ ] @YessicaSD - Outside turrets
+- [x] @YessicaSD - Outside turrets
 - [ ] @YessicaSD - Laser powerup
 
 0.8.3 (23/05/2018 23:59)
@@ -70,8 +70,8 @@
 	- Intergalactic fighters
 	- Missile launcher
 	- Missiles
-	- Piña spawn
-	- Piña
+	- PiÃ±a spawn
+	- PiÃ±a
 	- Add asteroids (big, small and medium)
 	- Lamella
 	- Final boss
