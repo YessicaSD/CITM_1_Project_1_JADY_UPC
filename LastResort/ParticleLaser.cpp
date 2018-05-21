@@ -8,23 +8,20 @@ Particle_Laser::Particle_Laser(Particle& p) : Particle(p)
 {
 	if (App->player1->isActive == true && App->player2->isActive == false)
 	{
-		PlayerPosition.x = App->player1->position.x;
 		PlayerPosition.y = App->player1->position.y;
 	}
 	else if (App->player1->isActive == false && App->player2->isActive == true)
 	{
-		PlayerPosition.x = App->player1->position.x;
 		PlayerPosition.y = App->player1->position.y;
 	}
 
 	if (App->player2->position.y > App->player1->position.y && App->player2->isActive==true)
 	{
-		PlayerPosition.x = App->player2->position.x;
+		
 		PlayerPosition.y = App->player2->position.y;
 	}
 	else if(App->player1->position.y > App->player2->position.y && App->player1->isActive == true)
 	{
-		PlayerPosition.x = App->player1->position.x;
 		PlayerPosition.y = App->player1->position.y;
 	}
 	going_up = true;
@@ -42,10 +39,18 @@ void Particle_Laser:: Move() {
 		if (anim.Finished())
 		{
 			going_up = false;
+
+			if (App->player1->isActive == true && App->player2->isActive == false)
+				PlayerPosition.x = App->player1->position.x;
+			else if (App->player1->isActive == false && App->player2->isActive == true)
+				PlayerPosition.x = App->player1->position.x;
+			if (App->player2->position.y > App->player1->position.y && App->player2->isActive == true)
+					PlayerPosition.x = App->player2->position.x;
+			else if (App->player1->position.y > App->player2->position.y && App->player1->isActive == true)
+						PlayerPosition.x = App->player1->position.x;
+
 			if (PlayerPosition.x > position.x)
-			{
-				go_right = true;
-			}
+			go_right = true;
 			else
 				go_left = true;
 		}
