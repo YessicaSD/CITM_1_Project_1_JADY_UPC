@@ -3,6 +3,44 @@
 ## Current roadmap
 
 0.8.2 (21/05/2018 23:59)
+- [x] @alejandro61299 - Pinata
+- [x] @alejandro61299 - Pinata spawn
+- [x] @YessicaSD - Outside turrets
+- [x] @JaumeMontagut - Unit bounce on terrain
+- [x] @YessicaSD - Adjust speed powerup
+
+0.8.3 (23/05/2018 23:59)
+- [ ] @JaumeMontagut - Ship rear
+- [ ] @JaumeMontagut - Unit trail
+- [ ] @YessicaSD - Mechs
+- [ ] @YessicaSD - Add asteroids (big, small and medium)
+- [ ] @alejandro61299 - G powerup
+- [ ] @JaumeMontagut - Turret 1
+- [ ] @JaumeMontagut - Destroyable part
+- [ ] @YessicaSD - Laser powerup
+
+0.8.4 (25/05/2018 23:59)
+- [ ] @JaumeMontagut - H powerup
+- [ ] @JaumeMontagut - Back ship turret
+- [ ] @YessicaSD - Missile launcher
+- [ ] @YessicaSD - Missiles
+- [ ] @YessicaSD - Inside turrets which shoot lasers
+- [ ] @alejandro61299 - Implement enemies with a  list
+
+0.9 (27/05/2018 23:59)
+- [ ] @alejandro61299 - Final boss
+- [ ] @alejandro61299 - Intergalactic fighters spawn
+- [ ] @alejandro61299 - Intergalactic fighters
+- [ ] @JaumeMontagut - Bar guardians
+- [ ] @JaumeMontagut - Lamella
+- [ ] @YessicaSD - Inside turrets which shoot balls
+- [ ] @YessicaSD - Ship motor
+- [ ] @YessicaSD - Metal bee
+- [ ] @YessicaSD - Missile follow turrets
+
+## Roadmap (21/05/2018)
+
+0.8.2 (21/05/2018 23:59)
 - [ ] @alejandro61299 - G powerup
 - [ ] @alejandro61299 - Pinata
 - [ ] @alejandro61299 - Pinata spawn
