@@ -162,13 +162,12 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(REDBATS, 404, -25, 1400);
 	App->enemies->AddEnemy(REDBATS, 404, -25, 1800);
 
-
-	/*App->enemies->AddEnemy(REDBATS, 390, -5);*/
-
 	App->enemies->AddEnemy(OUTDOOR_TURRET, 208, 13);
 	App->enemies->AddEnemy(OUTDOOR_TURRET, 248, 13);
 	App->enemies->AddEnemy(OUTDOOR_TURRET, 288, 13);
 	App->enemies->AddEnemy(OUTDOOR_TURRET, 328, 13);
+
+	App->enemies->AddEnemy(MECH, 739, 195, 1000);
 	
 
 	//Colliders--------------------------------------------------------------------------------------------------
