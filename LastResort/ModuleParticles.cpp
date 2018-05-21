@@ -170,7 +170,6 @@ bool ModuleParticles::Start()
 	//particles-----------------------------------------------
 	g_explosion02.texture = graphics;
 	//Powerups ---------------------------------------------------------------------
-	
 	Basic_LaserFx = App->audio->LoadSFX("Assets/014. Lasser_2-Center.WAV");
 	Basic_Laser.sfx = Basic_LaserFx;
 	//audios--------------------------------------------------
