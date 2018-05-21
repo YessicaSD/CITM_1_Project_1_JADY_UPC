@@ -28,6 +28,7 @@ public:
 	SDL_Texture* texture = nullptr;
 	Particle* collision_fx = nullptr;
 	iPoint position;
+	iPoint initialPosition;
 	iPoint speed;
 	Uint32 born = 0;
 	Uint32 life = 0;

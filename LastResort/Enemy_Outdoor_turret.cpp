@@ -28,7 +28,7 @@ void Enemy_Outdoor_turret::Move()
 	if (SDL_GetTicks() - StartTime > 2500)
 	{
 		/*App->enemies->AddEnemy(OUTDOOR_LASER, position_x, position_y);*/
-		App->particles->AddParticle(App->particles->LacerEnemyShot,position.x,position.y-30,App->particles->LaserTex,COLLIDER_ENEMY_SHOT,0, PARTICLE_LASER);
+		App->particles->AddParticle(App->particles->LacerEnemyShot,position.x+7,position.y-10,App->particles->LaserTex,COLLIDER_ENEMY_LIGHT,0, PARTICLE_LASER);
 		StartTime = SDL_GetTicks();
 	}
 }

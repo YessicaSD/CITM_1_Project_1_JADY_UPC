@@ -9,7 +9,9 @@ private:
 	Animation LaserAnim;
 	int initialY;
 	fPoint PlayerPosition;
-	fPoint InitialPosition;
+	bool going_up;
+	bool go_right;
+	bool go_left;
 public:
 
 	Particle_Laser();

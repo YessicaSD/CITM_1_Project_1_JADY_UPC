@@ -1,4 +1,5 @@
 #include <math.h>
+
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleTextures.h"
@@ -9,6 +10,7 @@
 #include "Player1.h"
 #include "Player2.h"
 #include "ParticleLaser.h"
+#include "ModuleStage05.h"
 #include "SDL/include/SDL_timer.h"
 
 ModuleParticles::ModuleParticles()
@@ -135,18 +137,23 @@ ModuleParticles::ModuleParticles()
 	LacerEnemyShot.anim.PushBack({ 52,27,6,32 });
 	LacerEnemyShot.anim.PushBack({ 42,27,10,29 });
 	LacerEnemyShot.anim.PushBack({ 30,27,10,29 });
-	LacerEnemyShot.anim.PushBack({ 14,43,16,16 });
-	LacerEnemyShot.anim.PushBack({ 0,27,14,15 });
-	LacerEnemyShot.anim.PushBack({ 37,9,16,16 });
 	LacerEnemyShot.anim.PushBack({ 22,9,15,16 });
+	LacerEnemyShot.anim.PushBack({ 14,43,16,16 });
+	LacerEnemyShot.anim.PushBack({ 22,9,15,16 });
+	LacerEnemyShot.anim.PushBack({ 14,43,16,16 });
+	LacerEnemyShot.anim.PushBack({ 22,9,15,16 });
+	LacerEnemyShot.anim.PushBack({ 14,43,16,16 });
+	LacerEnemyShot.anim.PushBack({ 22,9,15,16 });
+	LacerEnemyShot.anim.PushBack({ 14,43,16,16 });
+	LacerEnemyShot.anim.PushBack({ 36,9,16,16 });
 	LacerEnemyShot.anim.PushBack({ 0,8,22,16 });
-	LacerEnemyShot.anim.PushBack({ 32,0,29,10 });
 	LacerEnemyShot.anim.PushBack({ 32,0,29,10 });
 	LacerEnemyShot.anim.PushBack({ 0,0,32,6 });
 	LacerEnemyShot.anim.loop = false;
-	LacerEnemyShot.life = 2000;
-	LacerEnemyShot.anim.speed = 0.3f;
+	LacerEnemyShot.life = 5000;
+	LacerEnemyShot.anim.speed = 0.0f;
 	LacerEnemyShot.speed.y = 1;
+	LacerEnemyShot.speed.x = 1;
 	
 }
 
@@ -259,6 +266,7 @@ void ModuleParticles::AddParticle( Particle& particle, int x, int y, SDL_Texture
 				p->born = SDL_GetTicks() + delay;
 				p->position.x = x;
 				p->position.y = y;
+				p->initialPosition.x = x - App->stage05->spawnPos.x; 
 				p->texture = tex; // texture
 				if (particle.collision_fx != nullptr)
 				{
