@@ -301,6 +301,11 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			enemies[i]->scoreValue = 300;
 			enemies[i]->hp = 15;
 			break;
+		case ENEMY_TYPES::MECH:
+			enemies[i] = new Enemy_Outdoor_turret(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
+			enemies[i]->scoreValue = 300;
+			enemies[i]->hp = 2;
+			break;
 		
 		}
 	}
