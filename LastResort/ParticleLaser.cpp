@@ -36,7 +36,7 @@ void Particle_Laser:: Move() {
 			position.y -= speed.y;
 		else
 			anim.speed = 0.2;
-		if (anim.Finished())
+		if (anim.GetCurrentFrameNum()==12)
 		{
 			going_up = false;
 
@@ -67,4 +67,13 @@ void Particle_Laser:: Move() {
 
 
 
+};
+
+void Particle_Laser::Draw()
+{
+	if (going_up == true || go_left == true)
+		App->render->Blit(texture, position.x, position.y - anim.GetCurrentFrame().h / 2, &anim.GetFrame());
+	else
+		App->render->BlitEx(texture, position.x, position.y - anim.GetCurrentFrame().h / 2, &anim.GetFrame(), SDL_FLIP_HORIZONTAL);
+	
 }
