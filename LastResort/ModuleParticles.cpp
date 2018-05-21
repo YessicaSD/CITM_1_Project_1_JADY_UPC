@@ -164,6 +164,9 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading ModuleParticles assets ");
+	//Texture particle ----------------------------------------------------------------------
+	ParticleTexture= App->textures->Load("Assets/particles.png");
+
 	//textures-------------------------------------------------
 	graphics = App->textures->Load("Assets/General/Fx/Explosion_2.png");
 	LaserTex = App->textures->Load("Assets/General/Enemies/Laser_Niv5.png");
@@ -192,6 +195,7 @@ bool ModuleParticles::CleanUp()
 	//textures--------------------------------------------------
 	App->textures->Unload(graphics);
 	App->textures->Unload(LaserTex);
+	App->textures->Unload(ParticleTexture);
 	//audios---------------------------------------------------
 	App->audio->UnloadSFX(basic_shot_sfx);
 	App->audio->UnloadSFX(death_sfx);

@@ -73,6 +73,7 @@ public:
 
 	SDL_Texture* nml_sprites = nullptr;
 	SDL_Texture* dmg_sprites = nullptr;
+	
 };
 
 #endif // __ModuleEnemies_H__
