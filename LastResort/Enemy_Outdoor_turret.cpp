@@ -34,6 +34,6 @@ void Enemy_Outdoor_turret::Move()
 }
 Enemy_Outdoor_turret:: ~Enemy_Outdoor_turret()
 {
-	App->textures->Unload(LacerTex);
+	
 }
 
