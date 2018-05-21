@@ -51,7 +51,7 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_PLAYER][COLLIDER_POWERUP] = false;
 	matrix[COLLIDER_PLAYER][COLLIDER_GOD] = false;
 	matrix[COLLIDER_PLAYER][COLLIDER_HIT_DETECTION_WALL] = false;
-	matrix[COLLIDER_PLAYER][COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE] = false;
+	matrix[COLLIDER_PLAYER][COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE] = true;
 
 	//Collider enemy light----------------------------------------------
 	matrix[COLLIDER_ENEMY_LIGHT][COLLIDER_NONE] = false;
@@ -191,7 +191,7 @@ ModuleCollision::ModuleCollision()
 	// Collider shot industrictuble-------------------------------------------------------
 	matrix[COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE][COLLIDER_NONE] = false;
 	matrix[COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE][COLLIDER_WALL] = false;
-	matrix[COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE][COLLIDER_PLAYER] = true;
+	matrix[COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE][COLLIDER_PLAYER] = false;
 	matrix[COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE][COLLIDER_ENEMY_LIGHT] = false;
 	matrix[COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE][COLLIDER_ENEMY_HEAVY] = false;
 	matrix[COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE][COLLIDER_PLAYER_1_SHOT] = false;

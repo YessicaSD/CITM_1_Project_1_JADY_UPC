@@ -35,7 +35,7 @@ void Particle_Laser:: Move() {
 		if (PlayerPosition.y < position.y)
 			position.y -= speed.y;
 		else
-			anim.speed = 0.3;
+			anim.speed = 0.2;
 		if (anim.Finished())
 		{
 			going_up = false;

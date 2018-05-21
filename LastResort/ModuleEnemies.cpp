@@ -239,19 +239,7 @@ bool ModuleEnemies::InstaSpawn(ENEMY_TYPES type, int x, int y, POWERUP_TYPE powe
 	return ret;
 }
 
-//Gets deleted if you instaspawn in a position that's different to the camera
-//bool ModuleEnemies::InstaSpawn(ENEMY_TYPES type, int x, int y, POWERUP_TYPE powerup_type)
-//{
-//	EnemyInfo enemyInfo;
-//	enemyInfo.type = type;
-//	enemyInfo.x = x;
-//	enemyInfo.y = y;
-//	enemyInfo.delay = 0;
-//	enemyInfo.pu_Type = powerup_type;
-//	SpawnEnemy(enemyInfo);
-//
-//	return true;
-//}
+
 
 void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 {
