@@ -15,6 +15,10 @@ private:
 	iPoint targetPlayerPos;
 	float rotation;
 	iPoint fixedPos;
+
+	//					     E,  ESE,   SE,  SSE,    S,  SSW,   SW,  WSW,    W,  WNW,   NW,  NNW,    N,  NNE,   NE,  ENE
+	int spriteXOffset[16]{ -10,  -11,  -10,  -10,  -11,  -11,  -13,  -13,  -13,  -13,  -12,  -12,  -11,  -11,  -10,  -10 };
+	int spriteYOffset[16]{ -13,  -12,  -12,  -11,  -10,  -11,  -11,  -11,  -11,  -11,  -12,  -14,  -14,  -14,  -14,  -14 };
 };
 
 #endif // __ENEMY_ROTATING_TURRET_H__

@@ -31,7 +31,7 @@ Enemy_RotatingTurret::Enemy_RotatingTurret(int x, int y, POWERUP_TYPE pu_t) : En
 	fixedPos.x = x - App->stage05->spawnPos.x;
 	fixedPos.y = y - App->stage05->spawnPos.y;
 	//Collider
-	collider = App->collision->AddCollider({ x, y, 32, 16 }, COLLIDER_TYPE::COLLIDER_ENEMY_HEAVY, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ x, y, 26, 27 }, COLLIDER_TYPE::COLLIDER_ENEMY_HEAVY, (Module*)App->enemies);
 }
 
 void Enemy_RotatingTurret::Move()
@@ -74,5 +74,6 @@ void Enemy_RotatingTurret::Move()
 
 void Enemy_RotatingTurret::Draw(SDL_Texture* sprites)
 {
-	App->render->Blit(sprites, position.x, position.y, &rotatingTurretAnim.ReturnFrame(GetNearestAngle(rotation)));
+	int pushBackNumber = GetNearestAngle(rotation);
+	App->render->Blit(sprites, position.x + spriteXOffset[pushBackNumber], position.y + spriteYOffset[pushBackNumber], &rotatingTurretAnim.ReturnFrame(pushBackNumber));
 }
