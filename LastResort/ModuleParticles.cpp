@@ -152,8 +152,8 @@ ModuleParticles::ModuleParticles()
 	LacerEnemyShot.anim.loop = false;
 	LacerEnemyShot.life = 5000;
 	LacerEnemyShot.anim.speed = 0.0f;
-	LacerEnemyShot.speed.y = 2;
-	LacerEnemyShot.speed.x = 2;
+	LacerEnemyShot.speed.y = 3;
+	LacerEnemyShot.speed.x = 3;
 	
 }
 
