@@ -77,6 +77,10 @@ public:
 
 		return frames[(int)current_frame];
 	}
+	int GetCurrentFrameNum()
+	{
+		return current_frame;
+	}
 
 	bool Finished() const
 	{

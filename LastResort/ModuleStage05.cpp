@@ -223,8 +223,8 @@ update_status Module5lvlScene::Update()
 
 	//----------Stars Scroll----------------------------------------------
 
-	scroll.x -= 5;
-	scroll.y += cameraMovement.GetCurrentPosition().VectU().y;
+	scroll.x -= 10;
+	scroll.y += cameraMovement.GetCurrentPosition().VectU().y*2;
 	if (scroll.x <= -SCREEN_WIDTH)
 		scroll.x = 0;
 	if (scroll.y <= -SCREEN_HEIGHT)

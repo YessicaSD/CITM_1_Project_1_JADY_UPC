@@ -34,6 +34,7 @@ public:
 	Uint32 life = 0;
 	Mix_Chunk *sfx = nullptr;
 	virtual void Move();
+	virtual void Draw();
 	Particle();
 	Particle( Particle& p);
 	~Particle();
