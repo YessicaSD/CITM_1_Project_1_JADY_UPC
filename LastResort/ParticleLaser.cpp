@@ -29,14 +29,7 @@ Particle_Laser::Particle_Laser(Particle& p) : Particle(p)
 	}
 	going_up = true;
 
-	if (PlayerPosition.x > initialPosition.x+App->stage05->spawnPos.x)
-	{
-		go_right = true;
-	}
-	else
-	{
-		go_left = true;
-	}
+	
 }
 void Particle_Laser:: Move() {
 	if (going_up)
@@ -46,8 +39,17 @@ void Particle_Laser:: Move() {
 			position.y -= speed.y;
 		else
 			anim.speed = 0.3;
-		if(anim.Finished())
+		if (anim.Finished())
+		{
 			going_up = false;
+			if (PlayerPosition.x > position.x)
+			{
+				go_right = true;
+			}
+			else
+				go_left = true;
+		}
+			
 	}
 	
 
