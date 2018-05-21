@@ -68,8 +68,6 @@ void Enemy_RotatingTurret::Move()
 	//- Calculate rotation
 	rotation = CalculateRotationToPoint(position, targetPlayerPos);
 
-	LOG("Rotation: %f", rotation);
-
 	//- Shoot
 	//Shoot every x time? Or when it fixes the position?
 }

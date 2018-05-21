@@ -25,28 +25,28 @@ float CalculateRotationToPoint(iPoint originPos, iPoint targetPos)
 	//Fist quadrant
 	if (targetPos.x > originPos.x && targetPos.y > originPos.y)
 	{
-		return atan(targetPos.x - originPos.x / targetPos.y - originPos.y);
+		return atan((double)(targetPos.y - originPos.y) / (double)(targetPos.x - originPos.x));
 	}
 	//Second quadrant
 	else if (targetPos.x < originPos.x && targetPos.y > originPos.y)
 	{
-		return PI + atan(targetPos.x - originPos.x / targetPos.y - originPos.y);
+		return PI + atan((double)(targetPos.y - originPos.y) / (double)(targetPos.x - originPos.x));
 	}
 	//Third quadrant
 	else if (targetPos.x < originPos.x && targetPos.y < originPos.y)
 	{
-		return PI + atan(targetPos.x - originPos.x / targetPos.y - originPos.y);
+		return PI + atan((double)(targetPos.y - originPos.y) / (double)(targetPos.x - originPos.x));
 	}
 	//Fourth quadrant
 	else if (targetPos.x > originPos.x && targetPos.y < originPos.y)
 	{
-		return 2 * PI + atan(targetPos.x - originPos.x / targetPos.y - originPos.y);
+		return 2 * PI + atan((double)(targetPos.y - originPos.y) / (double)(targetPos.x - originPos.x));
 	}
 
 	//- In line
 	else if (targetPos.x == originPos.x && targetPos.y > originPos.y)
 	{
-		return angleValue[N];
+		return angleValue[S];
 	}
 	else if (targetPos.x < originPos.x && targetPos.y == originPos.y)
 	{
@@ -54,7 +54,7 @@ float CalculateRotationToPoint(iPoint originPos, iPoint targetPos)
 	}
 	else if (targetPos.x == originPos.x && targetPos.y < originPos.y)
 	{
-		return angleValue[S];
+		return angleValue[N];
 	}
 	else if (targetPos.x > originPos.x && targetPos.y == originPos.y)
 	{
