@@ -139,9 +139,8 @@ bool Module5lvlScene::Start()
 	//Enemies ---------------------------------------------------------------------------------------------------
 	//INFO: We'll calculate the x and y positions based on the position of the ship in Docs>ship.psd
 	//- TEST ENEMIES
-	App->enemies->AddEnemy(PINATA, 150, 110);
-	App->enemies->AddEnemy(PINATA, 100, 120);
-	App->enemies->AddEnemy(PINATA, 50, 120);
+	App->enemies->AddEnemy(PINATA_SPAWNER, 1167, 144);
+	App->enemies->AddEnemy(PINATA_SPAWNER, 1295, 144);
 	//App->enemies->AddEnemy(OSCILATOR, 500, 0);
 
 	//- FINAL POSITION ENEMIES

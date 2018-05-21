@@ -5,15 +5,16 @@
 
 
 #define MAX_SPAWNED 3
-#define SPAWN_FRAMES 180
+#define SPAWN_FRAMES 300
 
-class Enemy_Pinata;
+class Enemy;
 
 class Enemy_Pinata_Spawner : public Enemy
 {
 public:
 	Enemy_Pinata_Spawner(int x, int y, POWERUP_TYPE pu_t);
 	void Move();
+	void Draw(SDL_Texture* sprites);
 
 private:
 	iPoint fixedPos;
@@ -21,13 +22,12 @@ private:
 
 	enum animState {
 		IDLE,
-		FOLLOW,
-		ROTATE
+		OPEN,
 	} currentState = IDLE;
 
-	Enemy_Pinata* enemies[MAX_SPAWNED];
+	Enemy* spawned[MAX_SPAWNED];
 	int currentEnemies = 0;
-	int spawnFrames = SPAWN_FRAMES;
+	int spawnFrames = 0;
 	bool isSpawning = false;
 };
 

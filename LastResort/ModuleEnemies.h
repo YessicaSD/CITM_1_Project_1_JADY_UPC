@@ -56,11 +56,11 @@ public:
 	void OnCollision(Collider* c1, Collider* c2);
 
 	bool AddEnemy(ENEMY_TYPES type, int x, int y, Uint32 delay = 0, POWERUP_TYPE powerup_type = NOPOWERUP);
-	bool InstaSpawn(ENEMY_TYPES type, int x, int y, POWERUP_TYPE powerup_type = NOPOWERUP);
+	Enemy* InstaSpawn(ENEMY_TYPES type, int x, int y, POWERUP_TYPE powerup_type = NOPOWERUP);
 
 private:
 
-	void SpawnEnemy(const EnemyInfo& info);
+	Enemy* SpawnEnemy(const EnemyInfo& info);
 
 private:
 	EnemyInfo queue[MAX_ENEMIES];

@@ -218,30 +218,40 @@ bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, Uint32 delay, POWER
 
 	return ret;
 }
+//
+//bool ModuleEnemies::InstaSpawn(ENEMY_TYPES type, int x, int y, POWERUP_TYPE powerup_type)
+//{
+//	bool ret = false;
+//
+//	for (uint i = 0; i < MAX_ENEMIES; ++i)
+//	{
+//		if (instaQueue[i].type == ENEMY_TYPES::NO_TYPE)
+//		{
+//			instaQueue[i].type = type;
+//			instaQueue[i].x = x;
+//			instaQueue[i].y = y;
+//			instaQueue[i].pu_Type = powerup_type;
+//			ret = true;
+//			break;
+//		}
+//	}
+//
+//	return ret;
+//}
 
-bool ModuleEnemies::InstaSpawn(ENEMY_TYPES type, int x, int y, POWERUP_TYPE powerup_type)
+//Gets deleted if you instaspawn in a position that's different to the camera
+Enemy* ModuleEnemies::InstaSpawn(ENEMY_TYPES type, int x, int y, POWERUP_TYPE powerup_type)
 {
-	bool ret = false;
-
-	for (uint i = 0; i < MAX_ENEMIES; ++i)
-	{
-		if (instaQueue[i].type == ENEMY_TYPES::NO_TYPE)
-		{
-			instaQueue[i].type = type;
-			instaQueue[i].x = x;
-			instaQueue[i].y = y;
-			instaQueue[i].pu_Type = powerup_type;
-			ret = true;
-			break;
-		}
-	}
-
-	return ret;
+	EnemyInfo enemyInfo;
+	enemyInfo.type = type;
+	enemyInfo.x = x;
+	enemyInfo.y = y;
+	enemyInfo.delay = 0;
+	enemyInfo.pu_Type = powerup_type;
+	return SpawnEnemy(enemyInfo);
 }
 
-
-
-void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
+Enemy* ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 {
 	// find room for the new enemy
 	uint i = 0;
@@ -282,7 +292,7 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			enemies[i]->hp = 50;
 			break;
 		case ENEMY_TYPES::PINATA:
-			enemies[i] = new Enemy_Pinata(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
+			enemies[i] = new Enemy_Pinata(info.x , info.y , info.pu_Type);
 			enemies[i]->scoreValue = 200;
 			enemies[i]->hp = 1;
 			break;
@@ -303,7 +313,9 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			break;
 		
 		}
+		return enemies[i];
 	}
+	return nullptr;
 }
 
 void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)

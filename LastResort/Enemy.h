@@ -18,6 +18,7 @@ public:
 	iPoint position;
 	POWERUP_TYPE powerUp_drop;
 	//Statistics---------------------
+	bool isDead = false;
 	float hp;
 	int scoreValue;
 	//Damage properties--------------
