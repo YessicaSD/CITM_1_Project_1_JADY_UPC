@@ -21,7 +21,7 @@
 #include "Enemy_FrontTurret.h"
 #include "Enemy_Outdoor_turret.h"
 #include "Enemy_Outdoor_Laser.h"
-
+#include "Enemy_Mech.h"
 #define DAMAGE_FLASHING_INTERVAL 4
 
 ModuleEnemies::ModuleEnemies()
@@ -310,6 +310,11 @@ Enemy* ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			enemies[i] = new Enemy_Outdoor_turret(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
 			enemies[i]->scoreValue = 300;
 			enemies[i]->hp = 15;
+			break;
+		case ENEMY_TYPES::MECH:
+			enemies[i] = new Enemy_Mech(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
+			enemies[i]->scoreValue = 300;
+			enemies[i]->hp = 2;
 			break;
 		
 		}

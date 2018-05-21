@@ -1,4 +1,6 @@
 #include "Particle.h"
+#include "Application.h"
+#include "ModuleRender.h"
 #include "SDL\include\SDL_timer.h"
 Particle::Particle()
 {
@@ -51,4 +53,8 @@ bool Particle::Update()
 void Particle::Move() {
 	position.x += speed.x;
 	position.y += speed.y;
+}
+void Particle::Draw()
+{
+	App->render->Blit(texture, position.x, position.y - anim.GetCurrentFrame().h / 2, &anim.GetFrame());
 }

@@ -26,10 +26,6 @@ enum ShipFrames
 	MaxDown
 };
 
-
-
-
-
 class ModulePlayer : public Module
 {
 public:

@@ -231,7 +231,7 @@ update_status ModuleParticles::Update()
 		}
 		else if (SDL_GetTicks() >= p->born)
 		{
-			App->render->Blit(p->texture, p->position.x, p->position.y - p->anim.GetCurrentFrame().h/2, &p->anim.GetFrame());
+			p->Draw();
 		}
 	}
 	return UPDATE_CONTINUE;

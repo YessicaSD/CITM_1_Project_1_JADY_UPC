@@ -22,6 +22,7 @@ public:
 	};*/
 	Particle_Laser(Particle& p);
 	void Move();
+	void Draw();
 };
 
 #endif // __PARTICLE_LASER_H__
