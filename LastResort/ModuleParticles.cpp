@@ -154,7 +154,21 @@ ModuleParticles::ModuleParticles()
 	LacerEnemyShot.anim.speed = 0.0f;
 	LacerEnemyShot.speed.y = 3;
 	LacerEnemyShot.speed.x = 3;
-	
+
+	AsteroidDestroy.anim.PushBack({191,142,61,60});
+	AsteroidDestroy.anim.PushBack({ 128,142,63,62 });
+	AsteroidDestroy.anim.PushBack({ 64,142,64,64 });
+	AsteroidDestroy.anim.PushBack({ 0,142,64,64 });
+	AsteroidDestroy.anim.PushBack({ 185,78,64,64 });
+	AsteroidDestroy.anim.PushBack({ 123,78,62,64 });
+	AsteroidDestroy.anim.PushBack({ 62,78,61,59 });
+	AsteroidDestroy.anim.PushBack({ 0,78,62,62 });
+	AsteroidDestroy.anim.PushBack({ 178,15,62,63 });
+	AsteroidDestroy.anim.PushBack({ 116,15,62,63 });
+	AsteroidDestroy.anim.PushBack({ 55,15,61,63 });
+	AsteroidDestroy.anim.PushBack({ 0,15,55,63 });
+	AsteroidDestroy.anim.speed = 0.2f;
+
 }
 
 ModuleParticles::~ModuleParticles()

@@ -13,5 +13,5 @@ void Enemy_Big_Asteroid::Move()
 }
 void Enemy_Big_Asteroid::OnCollision(Collider* collider)
 {
-	
+	App->particles->AddParticle(App->particles->AsteroidDestroy, position.x, position.y, App->particles->ParticleTexture, COLLIDER_NONE, 0);
 }
