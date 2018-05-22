@@ -41,6 +41,7 @@ Application::Application()
 	modules[i++] = stage05 = new Module5lvlScene();
 	modules[i++] = stageFunctionality = new ModuleStageFunctionality();
 	modules[i++] = powerups = new ModulePowerups();
+	modules[i++] = enemies = new ModuleEnemies();
 	modules[i++] = unit1 = new ModuleUnit();
 	modules[i++] = unit2 = new ModuleUnit();
 	modules[i++] = particles = new ModuleParticles();//!IMPORTANT: Module particles must be after the level modules and before the player module (note that particles are always rendered behind the player ship)
@@ -50,7 +51,6 @@ Application::Application()
 	modules[i++] = gameoverScene = new ModuleGameOver();
 	modules[i++] = continueScene = new ModuleContinue();
 	modules[i++] = stageclearScene = new ModuleStageClear();
-	modules[i++] = enemies = new ModuleEnemies();
 	modules[i++] = player1 = new Player1();
 	modules[i++] = player2 = new Player2();
 	modules[i++] = collision = new ModuleCollision();
