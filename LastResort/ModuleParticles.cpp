@@ -154,7 +154,21 @@ ModuleParticles::ModuleParticles()
 	LacerEnemyShot.anim.speed = 0.0f;
 	LacerEnemyShot.speed.y = 3;
 	LacerEnemyShot.speed.x = 3;
-	
+
+	AsteroidDestroy.anim.PushBack({191,142,61,60});
+	AsteroidDestroy.anim.PushBack({ 128,142,63,62 });
+	AsteroidDestroy.anim.PushBack({ 64,142,64,64 });
+	AsteroidDestroy.anim.PushBack({ 0,142,64,64 });
+	AsteroidDestroy.anim.PushBack({ 185,78,64,64 });
+	AsteroidDestroy.anim.PushBack({ 123,78,62,64 });
+	AsteroidDestroy.anim.PushBack({ 62,78,61,59 });
+	AsteroidDestroy.anim.PushBack({ 0,78,62,62 });
+	AsteroidDestroy.anim.PushBack({ 178,15,62,63 });
+	AsteroidDestroy.anim.PushBack({ 116,15,62,63 });
+	AsteroidDestroy.anim.PushBack({ 55,15,61,63 });
+	AsteroidDestroy.anim.PushBack({ 0,15,55,63 });
+	AsteroidDestroy.anim.speed = 0.2f;
+
 }
 
 ModuleParticles::~ModuleParticles()
@@ -164,13 +178,15 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading ModuleParticles assets ");
+	//Texture particle ----------------------------------------------------------------------
+	ParticleTexture= App->textures->Load("Assets/particles.png");
+
 	//textures-------------------------------------------------
 	graphics = App->textures->Load("Assets/General/Fx/Explosion_2.png");
 	LaserTex = App->textures->Load("Assets/General/Enemies/Laser_Niv5.png");
 	//particles-----------------------------------------------
 	g_explosion02.texture = graphics;
 	//Powerups ---------------------------------------------------------------------
-	
 	Basic_LaserFx = App->audio->LoadSFX("Assets/014. Lasser_2-Center.WAV");
 	Basic_Laser.sfx = Basic_LaserFx;
 	//audios--------------------------------------------------
@@ -193,6 +209,7 @@ bool ModuleParticles::CleanUp()
 	//textures--------------------------------------------------
 	App->textures->Unload(graphics);
 	App->textures->Unload(LaserTex);
+	App->textures->Unload(ParticleTexture);
 	//audios---------------------------------------------------
 	App->audio->UnloadSFX(basic_shot_sfx);
 	App->audio->UnloadSFX(death_sfx);

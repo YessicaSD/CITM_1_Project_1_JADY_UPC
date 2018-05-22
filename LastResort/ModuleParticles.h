@@ -35,6 +35,8 @@ private:
 	Particle* active[MAX_ACTIVE_PARTICLES];
 
 public:
+	//PARTICLE PNG------------------------------------------
+	SDL_Texture * ParticleTexture;
 	//PLAYER------------------------------------------------
 
 	Particle basicShot;
@@ -59,6 +61,8 @@ public:
 
 	Particle LacerEnemyShot;
 	SDL_Texture* LaserTex;
+	Mix_Chunk* AsteroidDestroySfx;
+	Particle AsteroidDestroy;
 
 	//Mix_Chunk* g_explosion02_2sfx = nullptr;
 	//Mix_Chunk* g_explosion02_3sfx = nullptr;	

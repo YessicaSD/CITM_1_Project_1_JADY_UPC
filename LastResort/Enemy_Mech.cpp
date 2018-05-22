@@ -17,7 +17,7 @@ Enemy_Mech::Enemy_Mech(int x, int y, POWERUP_TYPE pu_t):Enemy(x,y,pu_t)
 	Mech.PushBack({ 110,488,32,35 });
 	Mech.speed = 0.2f;
 	animation = &Mech;
-	collider = App->collision->AddCollider({ x, y + 3, 24, 17 }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ x, y, 28, 35 }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
 	finalPosition.x = x - App->stage05->spawnPos.x;
 	finalPosition.y = y - App->stage05->spawnPos.y;
 	resp = rand() % 1;
@@ -62,7 +62,7 @@ void Enemy_Mech::Move()
 		if (finalPosition.x > limit_2)
 		{
 			finalPosition.x -= 0.5f;
-			if (animation->GetCurrentFrameNum() == 3)
+			if (animation->GetCurrentFrameNum() == 3 && finalPosition.x > limit_2 +10)
 				animation->current_frame = 0;
 		}
 		else

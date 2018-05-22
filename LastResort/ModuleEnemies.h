@@ -25,6 +25,7 @@ enum ENEMY_TYPES
 	FRONT_TURRET,
 	OUTDOOR_TURRET,
 	MECH,
+	BIG_ASTEROID,
 	MAX_ENEMY
 };
 
@@ -72,6 +73,7 @@ public:
 
 	SDL_Texture* nml_sprites = nullptr;
 	SDL_Texture* dmg_sprites = nullptr;
+	
 };
 
 #endif // __ModuleEnemies_H__
