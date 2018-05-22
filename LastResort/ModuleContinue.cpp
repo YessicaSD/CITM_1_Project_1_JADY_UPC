@@ -92,6 +92,7 @@ bool ModuleContinue::CleanUp() {
 	}
 	//UI----------------------------------------------------------------------------
 	App->ui->currentScene = NONE;
+	App->ui->HideUi();
 	return true;
 }
 

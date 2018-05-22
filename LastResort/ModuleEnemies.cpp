@@ -335,7 +335,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 {
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
-		if (enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
+		if (enemies[i] != nullptr && enemies[i]->collider == c1)
 		{
 			//Rest hp to enemies depending on the collider's damage
 			enemies[i]->hp -= c2->damage;  

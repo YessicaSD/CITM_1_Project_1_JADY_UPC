@@ -10,13 +10,14 @@ struct Collider;
 
 class Enemy
 {
-protected:
-	Animation* animation = nullptr;
-	Collider* collider = nullptr;
+
+
 
 public:
 	iPoint position;
 	POWERUP_TYPE powerUp_drop;
+	Animation* animation = nullptr;
+	Collider* collider = nullptr;
 	//Statistics---------------------
 	bool isDead = false;
 	float hp;

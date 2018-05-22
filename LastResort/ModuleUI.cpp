@@ -102,6 +102,7 @@ update_status ModuleUI::Update() {
 			case CONTINUE_SCENE:
 				credits -= 1;
 				App->player1->isActive = true;
+				HideUi();
 				App->player1->lives = 2;
 				App->stage05->currentCheckPoint = 0;
 				break;
