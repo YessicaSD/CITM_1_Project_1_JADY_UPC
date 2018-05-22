@@ -7,13 +7,9 @@ class Enemy_Outdoor_turret : public Enemy
 {
 private:
 	Animation OutdoorTurretAnim;
-	int initialY;
-	int position_y;
-	int position_x;
+	iPoint initalPosition;
 	Uint32 StartTime;
-	Uint32 CurrentTime;
 	
-	SDL_Texture *LacerTex;
 public:
 	Enemy_Outdoor_turret(int x, int y, POWERUP_TYPE pu_t);
 	~Enemy_Outdoor_turret();
