@@ -28,6 +28,7 @@ ModuleParticles::ModuleParticles()
 	basic_explosion.anim.PushBack({ 217,247, 12,12 }); //7
 	basic_explosion.anim.loop = false;
 	basic_explosion.anim.speed = 0.3f;
+
 	//Basic Shot Particle---------------------------------------
 	basicShot.anim.PushBack({ 0,247, 15,7 });
 	basicShot.anim.speed = 0.0f;
@@ -35,6 +36,7 @@ ModuleParticles::ModuleParticles()
 	basicShot.speed.y = 0;
 	basicShot.anim.loop = false;
 	basicShot.collision_fx = &basic_explosion;
+
 	//Basic shot particle---------------------------------------
 	unitShot.anim.PushBack({ 155, 288, 13, 13});
 	unitShot.anim.PushBack({ 170, 288, 13, 13 });
@@ -48,9 +50,8 @@ ModuleParticles::ModuleParticles()
 	unitShot.anim.speed = 0.3f;
 	unitShot.life = 2000;
 	unitShot.collision_fx = &unit_explosion;
-	//LaserShot particle 
-	
 
+	//LaserShot particle 
 	Basic_Laser.anim.PushBack({ 43,257,16,3 });
 	Basic_Laser.anim.PushBack({ 17,257,24,3 });
 	Basic_Laser.anim.PushBack({ 61,257,32,3 });
@@ -61,6 +62,7 @@ ModuleParticles::ModuleParticles()
 	Basic_Laser.anim.speed = 2.0f;
 	Basic_Laser.life = 2000;
 	Basic_Laser.speed.x = 10;
+
 	//Middle Boss shot particle------------------------------------
 	MiddleBossShot.anim.PushBack({232,248,18,17});
 	MiddleBossShot.anim.PushBack({ 232,267,17,17 });
@@ -90,8 +92,7 @@ ModuleParticles::ModuleParticles()
 	MiddleBosExplotion.anim.PushBack({ 237,434,22,25 });
 	MiddleBosExplotion.anim.speed = 0.2;
 	MiddleBossShot.collision_fx = &MiddleBosExplotion;
-	//unitShot.speed.x = 5;
-	//unitShot.speed.y = -5;//These speeds need to be changed depending in which way the orbit was when they were thrown
+
 	//Basic shot explosion--------------------------------------
 	unit_explosion.anim.PushBack({ 244, 263, 16, 16});
 	unit_explosion.anim.PushBack({ 226, 263, 16, 16});
@@ -102,6 +103,7 @@ ModuleParticles::ModuleParticles()
 	unit_explosion.anim.PushBack({ 208, 247, 14, 14});
 	unit_explosion.anim.loop = false;
 	unit_explosion.anim.speed = 0.3f;
+
 	//Death Explosion Particle----------------------------------
 	for (int i = 0; i < 5; ++i) {
 		death_explosion.anim.PushBack({ 244 + 32 * i ,288, 32,32 });
@@ -110,8 +112,6 @@ ModuleParticles::ModuleParticles()
 	death_explosion.anim.speed = 0.2f;
 	death_explosion.anim.loop = false;
 
-	
-	
 	//----------------------------------------------------------------------------------GENERAL---------------------------------------------------------------//
 	//General explosion 02 particle-----------------------------
 	g_explosion02.anim.PushBack({ 0,0,32,32 });
@@ -133,27 +133,27 @@ ModuleParticles::ModuleParticles()
 	g_explosion02.anim.loop = false;
 	g_explosion02.anim.speed = 0.3f;
 
-	//--------------------------------------------------------------------------------ENEMYS----------------------------------------------------------------------//
-	LacerEnemyShot.anim.PushBack({ 52,27,6,32 });
-	LacerEnemyShot.anim.PushBack({ 42,27,10,29 });
-	LacerEnemyShot.anim.PushBack({ 30,27,10,29 });
-	LacerEnemyShot.anim.PushBack({ 22,9,15,16 });
-	LacerEnemyShot.anim.PushBack({ 14,43,16,16 });
-	LacerEnemyShot.anim.PushBack({ 22,9,15,16 });
-	LacerEnemyShot.anim.PushBack({ 14,43,16,16 });
-	LacerEnemyShot.anim.PushBack({ 22,9,15,16 });
-	LacerEnemyShot.anim.PushBack({ 14,43,16,16 });
-	LacerEnemyShot.anim.PushBack({ 22,9,15,16 });
-	LacerEnemyShot.anim.PushBack({ 14,43,16,16 });
-	LacerEnemyShot.anim.PushBack({ 36,9,16,16 });
-	LacerEnemyShot.anim.PushBack({ 0,8,22,16 });
-	LacerEnemyShot.anim.PushBack({ 32,0,29,10 });
-	LacerEnemyShot.anim.PushBack({ 0,0,32,6 });
-	LacerEnemyShot.anim.loop = false;
-	LacerEnemyShot.life = 5000;
-	LacerEnemyShot.anim.speed = 0.0f;
-	LacerEnemyShot.speed.y = 3;
-	LacerEnemyShot.speed.x = 3;
+	//--------------------------------------------------------------------------------ENEMIES----------------------------------------------------------------------//
+	LaserEnemyShot.anim.PushBack({ 52,27,6,32 });
+	LaserEnemyShot.anim.PushBack({ 42,27,10,29 });
+	LaserEnemyShot.anim.PushBack({ 30,27,10,29 });
+	LaserEnemyShot.anim.PushBack({ 22,9,15,16 });
+	LaserEnemyShot.anim.PushBack({ 14,43,16,16 });
+	LaserEnemyShot.anim.PushBack({ 22,9,15,16 });
+	LaserEnemyShot.anim.PushBack({ 14,43,16,16 });
+	LaserEnemyShot.anim.PushBack({ 22,9,15,16 });
+	LaserEnemyShot.anim.PushBack({ 14,43,16,16 });
+	LaserEnemyShot.anim.PushBack({ 22,9,15,16 });
+	LaserEnemyShot.anim.PushBack({ 14,43,16,16 });
+	LaserEnemyShot.anim.PushBack({ 36,9,16,16 });
+	LaserEnemyShot.anim.PushBack({ 0,8,22,16 });
+	LaserEnemyShot.anim.PushBack({ 32,0,29,10 });
+	LaserEnemyShot.anim.PushBack({ 0,0,32,6 });
+	LaserEnemyShot.anim.loop = false;
+	LaserEnemyShot.life = 5000;
+	LaserEnemyShot.anim.speed = 0.0f;
+	LaserEnemyShot.speed.y = 3;
+	LaserEnemyShot.speed.x = 3;
 
 	AsteroidDestroy.anim.PushBack({191,142,61,60});
 	AsteroidDestroy.anim.PushBack({ 128,142,63,62 });

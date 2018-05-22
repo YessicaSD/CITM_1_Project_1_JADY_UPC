@@ -14,8 +14,6 @@ struct Collider;
 enum COLLIDER_TYPE;
 struct Mix_Chunk;
 
-
-
 class ModuleParticles : public Module
 {
 public:
@@ -35,10 +33,19 @@ private:
 	Particle* active[MAX_ACTIVE_PARTICLES];
 
 public:
-	//PARTICLE PNG------------------------------------------
+	//TEXTURES-----------------------------------------
 	SDL_Texture * ParticleTexture;
-	//PLAYER------------------------------------------------
+	SDL_Texture * LaserTex;
+	
+	//SFX----------------------------------------------
+	Mix_Chunk* AsteroidDestroySfx;
+	//Mix_Chunk* g_explosion02_2sfx = nullptr;
+	//Mix_Chunk* g_explosion02_3sfx = nullptr;	
+	//Mix_Chunk* g_explosion01_2sfx = nullptr;
+	//Mix_Chunk* g_explosion01_3sfx = nullptr;
 
+	//PARTICLES----------------------------------------
+	//- Player
 	Particle basicShot;
 	Particle basic_explosion; //Basic Shot Explosion
 	Mix_Chunk* basic_shot_sfx = nullptr;
@@ -48,26 +55,22 @@ public:
 	Mix_Chunk* death_sfx = nullptr;
 	Particle Basic_Laser;
 
-	//GENERAL-----------------------------------------------
+	//- General
 	Particle g_explosion01;
 	Particle g_explosion02;
 	Mix_Chunk* g_explosion01_1sfx = nullptr;
 	Mix_Chunk* g_explosion02_1sfx = nullptr;
 	Mix_Chunk* Basic_LaserFx = nullptr;
-	//Enemies------------------------------------------------
+
+	//- Enemies
 	Particle MiddleBossShot;
 	Particle MiddleBosExplotion;
-	iPoint VectorMiddleBossShots;
-
-	Particle LacerEnemyShot;
-	SDL_Texture* LaserTex;
-	Mix_Chunk* AsteroidDestroySfx;
+	Particle orangeBall;
+	Particle LaserEnemyShot;
 	Particle AsteroidDestroy;
 
-	//Mix_Chunk* g_explosion02_2sfx = nullptr;
-	//Mix_Chunk* g_explosion02_3sfx = nullptr;	
-	//Mix_Chunk* g_explosion01_2sfx = nullptr;
-	//Mix_Chunk* g_explosion01_3sfx = nullptr;
+	//- OTHER
+	iPoint VectorMiddleBossShots;
 };
 
 #endif // __MODULEPARTICLES_H__
