@@ -14,6 +14,14 @@ struct Collider;
 enum COLLIDER_TYPE;
 struct Mix_Chunk;
 
+enum PARTICLE_TYPE
+{
+	PARTICLE_REGULAR,
+	PARTICLE_LASER,
+	PARTICLE_FOLLOWS_BACKGROUND,//Follows background, but can have speed (in that case it will follow the background and move at that speed)
+	MAX_PARTICLE,//Always last
+};
+
 class ModuleParticles : public Module
 {
 public:
@@ -37,6 +45,7 @@ private:
 	//Helper functions
 	void AddRegularParticle(int, Particle&, int, int, SDL_Texture *, COLLIDER_TYPE, Uint32, PARTICLE_TYPE );
 	void AddLaserParticle(int, Particle&, int, int, SDL_Texture *, COLLIDER_TYPE, Uint32, PARTICLE_TYPE );
+	void AddFollowBackgroundParticle(int, Particle&, int, int, SDL_Texture *, COLLIDER_TYPE, Uint32, PARTICLE_TYPE);
 
 public:
 	//TEXTURES-----------------------------------------

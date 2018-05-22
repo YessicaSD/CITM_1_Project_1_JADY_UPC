@@ -12,6 +12,7 @@
 #include "ParticleLaser.h"
 #include "ModuleStage05.h"
 #include "SDL/include/SDL_timer.h"
+#include "Particle_OrangeBall.h"
 
 ModuleParticles::ModuleParticles()
 {
@@ -177,6 +178,7 @@ ModuleParticles::ModuleParticles()
 	orangeBall.anim.loop = true;
 	unitShot.collision_fx = &orangeBallExplosion;
 	orangeBall.life = 2000;
+	//Declare the speed to be what you want just before AddParticle
 
 	orangeBallExplosion.anim.PushBack({  1, 6,  8,  8 });
 	orangeBallExplosion.anim.PushBack({ 10, 6,  8,  8 });
@@ -246,8 +248,6 @@ bool ModuleParticles::CleanUp()
 
 update_status ModuleParticles::Update()
 {
-	
-
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
 		Particle* p = active[i];
@@ -257,7 +257,7 @@ update_status ModuleParticles::Update()
 			continue;
 		}	
 
-		if (p->Update() == false)
+		if (p->UpdateParticle() == false)
 		{
 			delete p;
 			active[i] = nullptr;
@@ -285,6 +285,8 @@ void ModuleParticles::AddParticle( Particle& particle, int x, int y, SDL_Texture
 			case PARTICLE_LASER:
 				AddLaserParticle(i, particle, x, y, tex, collider_type, delay, particle_type);
 				break;
+			case PARTICLE_FOLLOWS_BACKGROUND:
+				AddFollowBackgroundParticle(i, particle, x, y, tex, collider_type, delay, particle_type);
 			}			
 		}
 	}
@@ -319,6 +321,30 @@ void ModuleParticles::AddLaserParticle(int arrayPos, Particle& particle, int x, 
 	p->position.y = y;
 	p->initialPosition.x = x - App->stage05->spawnPos.x;
 	p->initialPosition.y = y - App->stage05->spawnPos.y;
+	p->texture = tex; // texture
+	if (particle.collision_fx != nullptr)
+	{
+		p->collision_fx = particle.collision_fx;
+	}
+	if (particle.sfx != nullptr)
+	{
+		App->audio->ControlSFX(particle.sfx, PLAY_AUDIO);
+	}
+	if (collider_type != COLLIDER_NONE)
+		//Updated for not spawn it since 1 frame on x,y animation rect values
+		p->collider = App->collision->AddCollider({ p->position.x, p->position.y ,p->anim.GetCurrentFrame().w, p->anim.GetCurrentFrame().h }, collider_type, this);
+	active[arrayPos] = p;
+}
+
+
+void ModuleParticles::AddFollowBackgroundParticle(int arrayPos, Particle& particle, int x, int y, SDL_Texture *tex, COLLIDER_TYPE collider_type, Uint32 delay, PARTICLE_TYPE particle_type)
+{
+	Particle* p = new Particle_OrangeBall(particle);
+	p->born = SDL_GetTicks() + delay;
+	p->position.x = x;
+	p->position.y = y;
+	//p->initialPosition.x = x - App->stage05->spawnPos.x;
+	//p->initialPosition.y = y - App->stage05->spawnPos.y;
 	p->texture = tex; // texture
 	if (particle.collision_fx != nullptr)
 	{

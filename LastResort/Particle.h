@@ -14,14 +14,6 @@ struct Collider;
 enum COLLIDER_TYPE;
 struct Mix_Chunk;
 
-
-enum PARTICLE_TYPE
-{
-	PARTICLE_REGULAR,
-	PARTICLE_LASER,
-	MAX_PARTICLE,
-
-};
 class Particle
 {
 public:
@@ -40,7 +32,7 @@ public:
 	Particle();
 	Particle( Particle& p);
 	~Particle();
-	bool Update();
+	bool UpdateParticle();
 	/*virtual void Move();*/
 };
 

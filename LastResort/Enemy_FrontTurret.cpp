@@ -28,9 +28,9 @@ void Enemy_FrontTurret::Move()
 	//Shoot
 	if(SDL_GetTicks() >= lastShotTime + (60/88)*1000)//60 = 60FPS. 88 = frames to shoot again. 1000 = 1000 ms is 1 s
 	{
-		App->particles->orangeBall.speed.x = cosf(7 * PI / 4) * shotSpeed;
-		App->particles->orangeBall.speed.y = sinf(7 * PI / 4) * shotSpeed;
-		App->particles->AddParticle(App->particles->orangeBall, position.x, position.y, App->particles->ParticleTexture, COLLIDER_TYPE::COLLIDER_ENEMY_SHOT, 0, PARTICLE_TYPE::PARTICLE_REGULAR);
+		App->particles->orangeBall.speed.x = -1;
+		App->particles->orangeBall.speed.y = -1;
+		App->particles->AddParticle(App->particles->orangeBall, position.x, position.y, App->particles->ParticleTexture, COLLIDER_TYPE::COLLIDER_ENEMY_SHOT, 0, PARTICLE_TYPE::PARTICLE_FOLLOWS_BACKGROUND);
 		lastShotTime = SDL_GetTicks();
 	}
 }

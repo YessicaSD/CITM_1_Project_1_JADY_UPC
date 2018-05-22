@@ -21,7 +21,7 @@ Particle::~Particle()
 		collider->to_delete = true;
 }
 
-bool Particle::Update()
+bool Particle::UpdateParticle()
 {
 
 	bool ret = true;
@@ -51,7 +51,8 @@ bool Particle::Update()
 	}
 	return ret;
 }
-void Particle::Move() {
+void Particle::Move()
+{
 	position.x += speed.x;
 	position.y += speed.y;
 }
