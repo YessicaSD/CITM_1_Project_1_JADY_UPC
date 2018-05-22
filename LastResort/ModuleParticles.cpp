@@ -170,6 +170,18 @@ ModuleParticles::ModuleParticles()
 	AsteroidDestroy.anim.PushBack({ 0,15,55,63 });
 	AsteroidDestroy.anim.speed = 0.2f;
 
+	MiddleAsteroidDestroy.anim.PushBack({0,206,24,40});
+	MiddleAsteroidDestroy.anim.PushBack({ 24,206,32,40 });
+	MiddleAsteroidDestroy.anim.PushBack({ 56,206,39,40 });
+	MiddleAsteroidDestroy.anim.PushBack({ 95,206,39,40 });
+	MiddleAsteroidDestroy.anim.PushBack({133,206,39,40 });
+	MiddleAsteroidDestroy.anim.PushBack({ 172,206,39,40 });
+	MiddleAsteroidDestroy.anim.PushBack({ 211,206,40,40 });
+	MiddleAsteroidDestroy.anim.PushBack({ 0,246,40,40 });
+	MiddleAsteroidDestroy.anim.PushBack({ 80,246,39,39 });
+	MiddleAsteroidDestroy.anim.PushBack({ 119,246,38,38 });
+	MiddleAsteroidDestroy.anim.speed = 0.2f;
+	
 	orangeBall.anim.PushBack({  1, 0, 5, 5 });
 	orangeBall.anim.PushBack({ 13, 0, 5, 5 });
 	orangeBall.anim.PushBack({ 25, 0, 5, 5 });
