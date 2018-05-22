@@ -169,6 +169,8 @@ ModuleParticles::ModuleParticles()
 	AsteroidDestroy.anim.PushBack({ 0,15,55,63 });
 	AsteroidDestroy.anim.speed = 0.2f;
 
+	MiddleAsteroidDestroy.anim.PushBack({});
+
 	orangeBall.anim.PushBack({  1, 0, 5, 5 });
 	orangeBall.anim.PushBack({ 13, 0, 5, 5 });
 	orangeBall.anim.PushBack({ 25, 0, 5, 5 });

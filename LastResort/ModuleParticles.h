@@ -75,6 +75,7 @@ public:
 	Particle orangeBallExplosion;
 	Particle LaserEnemyShot;
 	Particle AsteroidDestroy;
+	Particle MiddleAsteroidDestroy;
 
 	//- OTHER
 	iPoint VectorMiddleBossShots;
