@@ -28,12 +28,7 @@ public:
 	Enemy* spawned[MAX_SPAWNED];
 
 	int currentEnemies = 0;
-	//int spawnFrames = 0;
-	//bool isSpawning = false;
-
-	//Times
-	Uint32 lastSpawnTime = 0;
-	Uint32 spawnDelay = 1000;
+	
 };
 
 #endif // __ENEMY_MECH_SPAWNER_H__
