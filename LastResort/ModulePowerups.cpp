@@ -199,7 +199,7 @@ void ModulePowerups::OnCollision(Collider* c1, Collider* c2)
 
 			//Change unit type-----------------------------------------------------
 
-			if (powerups[i]->animation->current_frame == 0)
+			if ((int)powerups[i]->animation->current_frame == 0)
 			{
 				unitTarjet->MakeUnitOrange();
 			}
