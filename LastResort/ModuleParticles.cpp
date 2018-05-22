@@ -355,8 +355,8 @@ void ModuleParticles::AddFollowBackgroundParticle(int arrayPos, Particle& partic
 	p->born = SDL_GetTicks() + delay;
 	p->position.x = x;
 	p->position.y = y;
-	//p->initialPosition.x = x - App->stage05->spawnPos.x;
-	//p->initialPosition.y = y - App->stage05->spawnPos.y;
+	p->initialPosition.x = x - App->stage05->spawnPos.x;
+	p->initialPosition.y = y - App->stage05->spawnPos.y;
 	p->texture = tex; // texture
 	if (particle.collision_fx != nullptr)
 	{
