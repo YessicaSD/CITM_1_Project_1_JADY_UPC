@@ -1,25 +1,23 @@
-#ifndef __ENEMY_MECH_H__
-#define __ENEMY_MECH_H__
+#ifndef __ENEMY_MIDDLE_ASTEROID_H__
+#define __ENEMY_MIDDLE_ASTEROID_H__
 
 #include "Enemy.h"
 #include "ModuleParticles.h"
-class Enemy_Mech : public Enemy
+class Enemy_Middle_Asteroid : public Enemy
 {
 private:
-	Animation Mech;
+	Animation Middle_Asteroid;
 	fPoint finalPosition;
-	bool going_right;
-	bool going_left;
-	int resp;
-	int limit;
-	int limit_2;
+
 
 
 public:
-	Enemy_Mech(int x, int y, POWERUP_TYPE pu_t);
-	~Enemy_Mech() {};
+	Enemy_Middle_Asteroid(int x, int y, POWERUP_TYPE pu_t);
+	
 	void Move();
 	void Draw(SDL_Texture* sprites);
+	
+	void OnCollision(Collider*);
 };
 
-#endif // __ENEMY_MECH_H__
+#endif // __ENEMY_MIDDLE_ASTEROID_H__
