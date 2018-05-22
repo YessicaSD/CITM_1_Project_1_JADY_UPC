@@ -4,6 +4,7 @@
 #include "ModuleStage05.h"
 #include "Player1.h"
 #include "Player2.h"
+
 Particle_Laser::Particle_Laser(Particle& p) : Particle(p)
 {
 	if (App->player1->isActive == true && App->player2->isActive == false)

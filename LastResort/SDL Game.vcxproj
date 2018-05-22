@@ -14,7 +14,7 @@
     <ProjectGuid>{746CC4C3-787F-4B0E-AA66-E388FE3FF4F6}</ProjectGuid>
     <RootNamespace>SDLGame</RootNamespace>
     <ProjectName>LastResort</ProjectName>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -121,6 +121,7 @@
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleGMissile.h" />
     <ClInclude Include="ParticleLaser.h" />
+    <ClInclude Include="Particle_OrangeBall.h" />
     <ClInclude Include="Path.h" />
     <ClInclude Include="Player1.h" />
     <ClInclude Include="Player2.h" />
@@ -176,6 +177,7 @@
     <ClCompile Include="ModuleWindow.cpp" />
     <ClCompile Include="Enemy_Outdoor_turret.cpp" />
     <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="Particle_OrangeBall.cpp" />
     <ClCompile Include="Player1.cpp" />
     <ClCompile Include="Player2.cpp" />
     <ClCompile Include="Powerup.cpp" />
