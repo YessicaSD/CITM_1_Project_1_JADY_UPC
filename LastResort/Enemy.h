@@ -8,6 +8,7 @@
 struct SDL_Texture;
 struct Collider;
 
+
 class Enemy
 {
 
@@ -26,6 +27,7 @@ public:
 	int dmg_frames = 0;
 	int flashing_interval = -1;
 	bool isDamaged = false;
+	
 
 public:
 	Enemy(int x, int y, POWERUP_TYPE pu_t);

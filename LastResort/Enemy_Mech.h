@@ -10,10 +10,11 @@ private:
 	fPoint finalPosition;
 	bool going_right;
 	bool going_left;
-	SDL_Texture *LacerTex;
 	int resp;
 	int limit;
 	int limit_2;
+	
+
 public:
 	Enemy_Mech(int x, int y, POWERUP_TYPE pu_t);
 	~Enemy_Mech() {};

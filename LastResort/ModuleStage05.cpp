@@ -172,7 +172,8 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(OUTDOOR_TURRET, 1087, 29);
 	App->enemies->AddEnemy(OUTDOOR_TURRET, 1119, 29);
 	App->enemies->AddEnemy(OUTDOOR_TURRET, 1151, 29);
-	App->enemies->AddEnemy(MECH, 738, 195, 1000);
+	App->enemies->AddEnemy(MECH_SPAWNER, 738, 195/*, 1000*/);
+	//App->enemies->AddEnemy(MECH, 738, 195, 1000);
 	
 
 	//Colliders--------------------------------------------------------------------------------------------------
@@ -254,7 +255,7 @@ update_status Module5lvlScene::Update()
 		App->render->Blit(tilemapTex, tunnelPos.x, tunnelPos.y, &tunnelRect);
 	}
 	
-
+	
 
 	return UPDATE_CONTINUE;
 }
