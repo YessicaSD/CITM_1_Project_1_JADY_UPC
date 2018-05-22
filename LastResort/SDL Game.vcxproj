@@ -82,6 +82,7 @@
     <ClInclude Include="Enemy_FrontTurret.h" />
     <ClInclude Include="Enemy_Mech.h" />
     <ClInclude Include="Enemy_Mech_Spawner.h" />
+    <ClInclude Include="Enemy_Middle_Asteroid.h" />
     <ClInclude Include="Enemy_Oscilator.h" />
     <ClInclude Include="Enemy_Pinata.h" />
     <ClInclude Include="Enemy_Pinata_Spawner.h" />
@@ -139,6 +140,7 @@
     <ClCompile Include="Enemy_FrontTurret.cpp" />
     <ClCompile Include="Enemy_Mech.cpp" />
     <ClCompile Include="Enemy_Mech_Spawner.cpp" />
+    <ClCompile Include="Enemy_Middle_Asteroid.cpp" />
     <ClCompile Include="Enemy_Oscilator.cpp" />
     <ClCompile Include="Enemy_Pinata.cpp" />
     <ClCompile Include="Enemy_Pinata_Spawner.cpp" />
