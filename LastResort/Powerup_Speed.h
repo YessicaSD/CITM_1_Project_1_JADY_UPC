@@ -11,7 +11,7 @@ public:
 	Powerup_Speed(int x, int y);
 	Animation speedAnim;
 	
-	void OnCollision(Collider*);
+	void OnCollision(Collider*, ModulePlayer*);
 };
 
 #endif // __POWERUP_SPEED_H__

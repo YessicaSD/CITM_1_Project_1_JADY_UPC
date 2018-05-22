@@ -358,6 +358,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 				enemies[i]->isDamaged = true;
 				enemies[i]->flashing_interval = 0;
 			}
+			break; //TEST 
 		}
 	}
 }

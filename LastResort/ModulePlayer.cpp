@@ -268,7 +268,6 @@ void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
 	canMove = false;
 	playerAnimState = PlayerAnimationState::Death;
 	//Kill the unit
-	powerupUpgrades = 0;
 	currentPowerUp = POWERUP_TYPE::NOPOWERUP;
 
 	if (SDL_GetTicks() % 2)	//Sfx REMEMBER: Improve it for 1.0

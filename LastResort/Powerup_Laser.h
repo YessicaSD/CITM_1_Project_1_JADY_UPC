@@ -10,7 +10,7 @@ class Powerup_Laser : public Powerup
 public:
 	Powerup_Laser(int x, int y);
 	Animation laserAnim;
-	void OnCollision(Collider*);
+	void OnCollision(Collider*, ModulePlayer*);
 };
 
 #endif // __POWERUP_LASER_H__

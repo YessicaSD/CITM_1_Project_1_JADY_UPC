@@ -7,6 +7,11 @@
 #include "Powerup_Laser.h"
 #include "ModuleCollision.h"
 #include "ModuleAudio.h"
+#include "ModulePlayer.h"
+#include "Player1.h"
+#include "Player2.h"
+#include "ModuleUnit.h"
+
 
 ModulePowerups::ModulePowerups()
 {
@@ -54,7 +59,7 @@ update_status ModulePowerups::Update()
 			//- Sprite
 			if (powerups[i]->animation != nullptr)
 			{
-				App->render->Blit(powerupTx, powerups[i]->position.x, powerups[i]->position.y, &(powerups[i]->animation->GetCurrentFrame()));
+				App->render->Blit(powerupTx, powerups[i]->position.x, powerups[i]->position.y, &powerups[i]->animation->GetCurrentFrame());
 			}
 		}
 	}
@@ -107,43 +112,109 @@ bool ModulePowerups::AddPowerup(int x, int y, POWERUP_TYPE type)//x and y should
 
 	//Here we will have the code based on SpawnEnemy, because we'll be rendering the collider directly
 	//Find room for the new powerup
-	uint i = 0;
-	for (; powerups[i] != nullptr && i < MAX_POWERUPS; ++i);
 
-	if (i != MAX_POWERUPS)
-	{
-		switch (type)
-		{
-		case POWERUP_TYPE::SPEED:
-			powerups[i] = new Powerup_Speed(x, y);
-			break;
-		case POWERUP_TYPE::DESPEED:
-			powerups[i] = new Powerup_Speed(x, y);
-			break;
-		case POWERUP_TYPE::LASER:
-			powerups[i] = new Powerup_Laser(x, y);
-			break;
-		case POWERUP_TYPE::HOMING:
-			powerups[i] = new Powerup_Laser(x, y);
-			break;
-		case POWERUP_TYPE::GROUND:
-			powerups[i] = new Powerup_Laser(x, y);
+	for (uint i = 0; i < MAX_POWERUPS; ++i) {
+
+		if (powerups[i] == nullptr) {
+			switch (type)
+			{
+			case POWERUP_TYPE::SPEED:
+				powerups[i] = new Powerup_Speed(x, y);
+				powerups[i]->type = SPEED;
+				break;
+			case POWERUP_TYPE::DESPEED:
+				powerups[i] = new Powerup_Speed(x, y);
+				powerups[i]->type = DESPEED;
+				break;
+			case POWERUP_TYPE::LASER:
+				powerups[i] = new Powerup_Laser(x, y);
+				powerups[i]->type = LASER;
+				break;
+			case POWERUP_TYPE::HOMING:
+				powerups[i] = new Powerup_Laser(x, y);
+				powerups[i]->type = HOMING;
+				break;
+			case POWERUP_TYPE::GROUND:
+				powerups[i] = new Powerup_Laser(x, y);
+				powerups[i]->type = GROUND;
+				break;
+			}
 			break;
 		}
-		//For now, we'll have speed for despeed and laser for homing and ground
 	}
+
+	//For now, we'll have speed for despeed and laser for homing and ground
 	return ret;
 }
 
 void ModulePowerups::OnCollision(Collider* c1, Collider* c2)
 {
+
+	ModulePlayer* playerTarjet = nullptr;
+	ModuleUnit* unitTarjet = nullptr;
+
 	for (uint i = 0; i < MAX_POWERUPS; ++i)
 	{
-		if (powerups[i] != nullptr && powerups[i]->GetCollider() == c1)
+		if (powerups[i] != nullptr && c1 == powerups[i]->collider && (c2->type == COLLIDER_PLAYER || c2->type == COLLIDER_GOD) )
 		{
-			powerups[i]->OnCollision(c2);
+
+			//We find which player got this powerup----------------------------------
+
+			if (c2 == App->player1->playerCol) {
+				playerTarjet = App->player1;
+				unitTarjet = App->unit1;
+			}
+			else if (c2 == App->player2->playerCol) {
+				playerTarjet = App->player2;
+				unitTarjet = App->unit2;
+			}
+
+
+			//If powerup type is SPEED or DESPEED-----------------------------------
+
+			if (powerups[i]->type == SPEED || powerups[i]->type == DESPEED) {
+
+				powerups[i]->OnCollision(c2, playerTarjet);
+				delete powerups[i];
+				powerups[i] = nullptr;
+				break;
+
+			}
+
+			//We give it this powerup-----------------------------------------------
+
+			if (playerTarjet->powerupUpgrades < 3)
+			{
+				playerTarjet->powerupUpgrades++;
+			}
+			if (playerTarjet->powerupUpgrades == 1)
+			{
+				unitTarjet->Enable();
+				unitTarjet->playerToFollow = App->player1;
+				unitTarjet->position.x = App->player1->position.x + App->player1->playerCenter.x;
+				unitTarjet->position.y = App->player1->position.y + App->player1->playerCenter.y;
+				unitTarjet->power = 0;
+				unitTarjet->unitPhase == UnitPhase::positioning;
+			}
+
+			//Change unit type-----------------------------------------------------
+
+			if (powerups[i]->animation->current_frame == 0)
+			{
+				unitTarjet->MakeUnitOrange();
+			}
+			else
+			{
+				unitTarjet->MakeUnitBlue();
+			}
+
+			//Callback PowerUp OnCollision-----------------------------------------
+			powerups[i]->OnCollision(c2, playerTarjet);
+
+
 			delete powerups[i];
 			powerups[i] = nullptr;
+			break;
 		}
 	}
 }

@@ -13,6 +13,8 @@ struct SDL_Texture;
 struct Collider;
 enum COLLIDER_TYPE;
 struct Mix_Chunk;
+
+
 enum PARTICLE_TYPE
 {
 	PARTICLE_REGULAR,

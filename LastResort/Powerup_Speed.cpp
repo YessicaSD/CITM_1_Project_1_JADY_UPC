@@ -1,37 +1,27 @@
 #include "Application.h"
 #include "Powerup_Speed.h"
 #include "ModuleCollision.h"
-#include "Player1.h"
-#include "Player2.h"
+#include "ModulePlayer.h"
 #include "Globals.h"
 #include "ModuleAudio.h"
 Powerup_Speed::Powerup_Speed(int x, int y) : Powerup(x, y)
 {
 	//Push backs
 	speedAnim.PushBack({0, 64, 18, 21});
+
 	//We set the animation of the base class to be this animation
 	animation = &speedAnim;
 
 	collider = App->collision->AddCollider({ 0, 0, 18, 21 }, COLLIDER_TYPE::COLLIDER_POWERUP, (Module*)App->powerups);
 }
 
-void Powerup_Speed::OnCollision(Collider* col)
+void Powerup_Speed::OnCollision(Collider* col, ModulePlayer* playerTarjet)
 {
 	App->audio->ControlSFX(App->powerups->SpeedSfx, PLAY_AUDIO);
-	//We find which player got this powerup
-	if (col == App->player1->playerCol)
-	{
-		
-		App->player1->speedPowerup = true;
-		//We give it this powerup
-		if(App->player1->movementSpeed<3.0f)
-		App->player1->movementSpeed += 0.3f;//Test value. We should check what is the speed increase in the game.
-	}
-	else if (col == App->player2->playerCol)
-	{
-		App->player2->speedPowerup = true;
-		//We give it this powerup
-		if (App->player1->movementSpeed<3.0f)
-		App->player1->movementSpeed += 0.5f;//Test value. We should check what is the speed increase in the game.
-	}
+
+	playerTarjet->speedPowerup = true;
+	//We give it this powerup
+	if (playerTarjet->movementSpeed < 3.0f)
+		playerTarjet->movementSpeed += 0.3f;//Test value. We should check what is the speed increase in the game.
+
 }

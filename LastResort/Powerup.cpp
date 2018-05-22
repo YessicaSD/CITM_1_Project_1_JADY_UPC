@@ -18,7 +18,7 @@ const Collider* Powerup::GetCollider() const
 	return collider;
 }
 
-void Powerup::OnCollision(Collider* collider)
+void Powerup::OnCollision(Collider* collider, ModulePlayer* playerTarjet)
 {
 
 }
