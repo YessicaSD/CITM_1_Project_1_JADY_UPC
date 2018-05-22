@@ -4,7 +4,7 @@
 #include "ModuleRender.h"
 
 Enemy_Middle_Asteroid::Enemy_Middle_Asteroid(int x, int y, POWERUP_TYPE pu_t):Enemy(x,y,pu_t) {
-	Middle_Asteroid.PushBack({ 152,176,64,62 });
+	Middle_Asteroid.PushBack({ 250,334,40,39 });
 	animation = &Middle_Asteroid;
 	collider = App->collision->AddCollider({ x, y, 64, 62 }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
 };
