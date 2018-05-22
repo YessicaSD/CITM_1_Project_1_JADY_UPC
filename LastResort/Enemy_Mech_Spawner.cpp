@@ -27,7 +27,7 @@ Enemy_Mech_Spawner::Enemy_Mech_Spawner(int x, int y, POWERUP_TYPE pu_t) : Enemy(
 	initialPosition.x = x - App->stage05->spawnPos.x;
 	initialPosition.y = y - App->stage05->spawnPos.y;
 
-	collider = App->collision->AddCollider({ x, y , 10, 10 }, COLLIDER_TYPE::COLLIDER_NONE, (Module*)App->enemies);
+	/*collider = App->collision->AddCollider({ x, y , 10, 10 }, COLLIDER_TYPE::COLLIDER_NONE, (Module*)App->enemies);*/
 
 	LOG("Mech spawener created");
 }
@@ -83,8 +83,8 @@ void Enemy_Mech_Spawner::Move()
 
 void Enemy_Mech_Spawner::Draw(SDL_Texture* sprites)
 {
-		if (collider != nullptr)
-			collider->SetPos(position.x , position.y );
+		/*if (collider != nullptr)
+			collider->SetPos(position.x , position.y );*/
 
 		if (animation != nullptr)
 		{

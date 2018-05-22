@@ -56,5 +56,5 @@ void Particle::Move() {
 }
 void Particle::Draw()
 {
-	App->render->Blit(texture, position.x, position.y - anim.GetCurrentFrame().h / 2, &anim.GetFrame());
+	App->render->Blit(texture, position.x - anim.GetCurrentFrame().w / 2, position.y - anim.GetCurrentFrame().h / 2, &anim.GetFrame());
 }
