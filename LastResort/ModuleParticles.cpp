@@ -169,6 +169,24 @@ ModuleParticles::ModuleParticles()
 	AsteroidDestroy.anim.PushBack({ 0,15,55,63 });
 	AsteroidDestroy.anim.speed = 0.2f;
 
+	orangeBall.anim.PushBack({  1, 0, 5, 5 });
+	orangeBall.anim.PushBack({ 13, 0, 5, 5 });
+	orangeBall.anim.PushBack({ 25, 0, 5, 5 });
+	orangeBall.anim.PushBack({ 36, 0, 5, 5 });
+	orangeBall.anim.speed = 0.2;
+	orangeBall.anim.loop = true;
+	unitShot.collision_fx = &orangeBallExplosion;
+	orangeBall.life = 2000;
+
+	orangeBallExplosion.anim.PushBack({  1, 6,  8,  8 });
+	orangeBallExplosion.anim.PushBack({ 10, 6,  8,  8 });
+	orangeBallExplosion.anim.PushBack({ 19, 6,  8,  8 });
+	orangeBallExplosion.anim.PushBack({ 25, 5,  9,  9 });
+	orangeBallExplosion.anim.PushBack({ 42, 2, 11, 11 });
+	orangeBallExplosion.anim.PushBack({ 54, 1, 13, 13 });
+	orangeBallExplosion.anim.PushBack({ 68, 0, 15, 15 });
+	orangeBallExplosion.anim.speed = 0.2;
+	orangeBallExplosion.anim.loop = false;
 }
 
 ModuleParticles::~ModuleParticles()
@@ -178,10 +196,8 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading ModuleParticles assets ");
-	//Texture particle ----------------------------------------------------------------------
+	//Load textures
 	ParticleTexture= App->textures->Load("Assets/particles.png");
-
-	//textures-------------------------------------------------
 	graphics = App->textures->Load("Assets/General/Fx/Explosion_2.png");
 	LaserTex = App->textures->Load("Assets/General/Enemies/Laser_Niv5.png");
 	//particles-----------------------------------------------
@@ -196,7 +212,6 @@ bool ModuleParticles::Start()
 	death_explosion.sfx = death_sfx;
 	g_explosion01_1sfx = App->audio->LoadSFX("Assets/General/Fx/Explosion_1.wav");
 	g_explosion02_1sfx = App->audio->LoadSFX("Assets/General/Fx/Explosion_2.wav");
-
 	
 	return true;
 }
@@ -238,14 +253,16 @@ update_status ModuleParticles::Update()
 		Particle* p = active[i];
 
 		if (p == nullptr)
+		{
 			continue;
+		}	
 
 		if (p->Update() == false)
 		{
-			
 			delete p;
 			active[i] = nullptr;
 		}
+
 		else if (SDL_GetTicks() >= p->born)
 		{
 			p->Draw();
@@ -260,49 +277,61 @@ void ModuleParticles::AddParticle( Particle& particle, int x, int y, SDL_Texture
 	{
 		if (active[i] == nullptr)
 		{
-			if (particle_type == PARTICLE_REGULAR)
+			switch(particle_type)
 			{
-				Particle* p = new Particle(particle);
-				p->born = SDL_GetTicks() + delay;
-				p->position.x = x;
-				p->position.y = y;
-				p->texture = tex; // texture
-				if (particle.collision_fx != nullptr)
-				{p->collision_fx = particle.collision_fx;}
-				if (particle.sfx != nullptr)
-				{App->audio->ControlSFX(particle.sfx, PLAY_AUDIO);}
-				if (collider_type != COLLIDER_NONE)
-					//Updated for not spawn it since 1 frame on x,y animation rect values
-					p->collider = App->collision->AddCollider({ p->position.x, p->position.y ,p->anim.GetCurrentFrame().w, p->anim.GetCurrentFrame().h }, collider_type, this);
-				active[i] = p;
+			case PARTICLE_REGULAR:
+				AddRegularParticle(i, particle, x, y, tex, collider_type, delay, particle_type);
 				break;
-			}
-			if (particle_type == PARTICLE_LASER)
-			{
-				Particle* p = new Particle_Laser(particle);
-				p->born = SDL_GetTicks() + delay;
-				p->position.x = x;
-				p->position.y = y;
-				p->initialPosition.x = x - App->stage05->spawnPos.x; 
-				p->initialPosition.y= y- App->stage05->spawnPos.y;
-				p->texture = tex; // texture
-				if (particle.collision_fx != nullptr)
-				{
-					p->collision_fx = particle.collision_fx;
-				}
-				if (particle.sfx != nullptr)
-				{
-					App->audio->ControlSFX(particle.sfx, PLAY_AUDIO);
-				}
-				if (collider_type != COLLIDER_NONE)
-					//Updated for not spawn it since 1 frame on x,y animation rect values
-					p->collider = App->collision->AddCollider({ p->position.x, p->position.y ,p->anim.GetCurrentFrame().w, p->anim.GetCurrentFrame().h }, collider_type, this);
-				active[i] = p;
+			case PARTICLE_LASER:
+				AddLaserParticle(i, particle, x, y, tex, collider_type, delay, particle_type);
 				break;
-			}
-			
+			}			
 		}
 	}
+}
+
+void ModuleParticles::AddRegularParticle(int arrayPos, Particle& particle, int x, int y, SDL_Texture *tex, COLLIDER_TYPE collider_type, Uint32 delay, PARTICLE_TYPE particle_type)
+{
+	Particle* p = new Particle(particle);
+	p->born = SDL_GetTicks() + delay;
+	p->position.x = x;
+	p->position.y = y;
+	p->texture = tex; // texture
+	if (particle.collision_fx != nullptr)
+	{
+		p->collision_fx = particle.collision_fx;
+	}
+	if (particle.sfx != nullptr)
+	{
+		App->audio->ControlSFX(particle.sfx, PLAY_AUDIO);
+	}
+	if (collider_type != COLLIDER_NONE)
+		//Updated for not spawn it since 1 frame on x,y animation rect values
+		p->collider = App->collision->AddCollider({ p->position.x, p->position.y ,p->anim.GetCurrentFrame().w, p->anim.GetCurrentFrame().h }, collider_type, this);
+	active[arrayPos] = p;
+}
+
+void ModuleParticles::AddLaserParticle(int arrayPos, Particle& particle, int x, int y, SDL_Texture *tex, COLLIDER_TYPE collider_type, Uint32 delay, PARTICLE_TYPE particle_type)
+{
+	Particle* p = new Particle_Laser(particle);
+	p->born = SDL_GetTicks() + delay;
+	p->position.x = x;
+	p->position.y = y;
+	p->initialPosition.x = x - App->stage05->spawnPos.x;
+	p->initialPosition.y = y - App->stage05->spawnPos.y;
+	p->texture = tex; // texture
+	if (particle.collision_fx != nullptr)
+	{
+		p->collision_fx = particle.collision_fx;
+	}
+	if (particle.sfx != nullptr)
+	{
+		App->audio->ControlSFX(particle.sfx, PLAY_AUDIO);
+	}
+	if (collider_type != COLLIDER_NONE)
+		//Updated for not spawn it since 1 frame on x,y animation rect values
+		p->collider = App->collision->AddCollider({ p->position.x, p->position.y ,p->anim.GetCurrentFrame().w, p->anim.GetCurrentFrame().h }, collider_type, this);
+	active[arrayPos] = p;
 }
 
 void ModuleParticles::OnCollision(Collider* c1, Collider* c2)

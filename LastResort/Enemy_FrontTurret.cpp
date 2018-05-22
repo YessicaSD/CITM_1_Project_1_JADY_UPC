@@ -2,6 +2,8 @@
 #include "Enemy_FrontTurret.h"
 #include "ModuleCollision.h"
 #include "ModuleStage05.h"
+#include "ModuleParticles.h"
+#include "Rotation.h"
 
 Enemy_FrontTurret::Enemy_FrontTurret(int x, int y, POWERUP_TYPE pu_t) : Enemy(x, y, pu_t)
 {
@@ -22,5 +24,14 @@ void Enemy_FrontTurret::Move()
 	//We move the turret with the background
 	position.x = App->stage05->spawnPos.x + fixedX;
 	position.y = App->stage05->spawnPos.y + fixedY;
+
+	//Shoot
+	if(SDL_GetTicks() >= lastShotTime + (60/88)*1000)//60 = 60FPS. 88 = frames to shoot again. 1000 = 1000 ms is 1 s
+	{
+		App->particles->orangeBall.speed.x = cosf(7 * PI / 4) * shotSpeed;
+		App->particles->orangeBall.speed.y = sinf(7 * PI / 4) * shotSpeed;
+		App->particles->AddParticle(App->particles->orangeBall, position.x, position.y, App->particles->ParticleTexture, COLLIDER_TYPE::COLLIDER_ENEMY_SHOT, 0, PARTICLE_TYPE::PARTICLE_REGULAR);
+		lastShotTime = SDL_GetTicks();
+	}
 }
 

@@ -20,17 +20,23 @@ public:
 	ModuleParticles();
 	~ModuleParticles();
 
+	//Inherited functons
 	bool Start();
 	update_status Update();
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
 
+	//Module functions
 	void AddParticle(Particle& particle, int x, int y, SDL_Texture *tex ,COLLIDER_TYPE collider_type = COLLIDER_NONE, Uint32 delay = 0, PARTICLE_TYPE particle_type = PARTICLE_REGULAR);
 	
 
 private:
 	SDL_Texture* graphics = nullptr;
 	Particle* active[MAX_ACTIVE_PARTICLES];
+
+	//Helper functions
+	void AddRegularParticle(int, Particle&, int, int, SDL_Texture *, COLLIDER_TYPE, Uint32, PARTICLE_TYPE );
+	void AddLaserParticle(int, Particle&, int, int, SDL_Texture *, COLLIDER_TYPE, Uint32, PARTICLE_TYPE );
 
 public:
 	//TEXTURES-----------------------------------------
@@ -66,6 +72,7 @@ public:
 	Particle MiddleBossShot;
 	Particle MiddleBosExplotion;
 	Particle orangeBall;
+	Particle orangeBallExplosion;
 	Particle LaserEnemyShot;
 	Particle AsteroidDestroy;
 
