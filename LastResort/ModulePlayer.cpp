@@ -280,7 +280,9 @@ void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
 	
 }
 
-void  ModulePlayer::ShotInput() {
+void  ModulePlayer::ShotInput()
+{
+	//Shoot-------------------------------------------------------------------------
 	if (Shoot())
 	{
 		//- All of them shoot a basic shot
@@ -327,23 +329,12 @@ void  ModulePlayer::ShotInput() {
 
 		}*/
 	}
-	//Ship fire animation (in front of the ship)
-	if (shoot == true) {
-		if (currentPowerUp == POWERUP_TYPE::NOPOWERUP)
-		{
-			if (shotFire.finished == false)
-			{
-				isShooting = true;
-				App->render->Blit(PlayerTexture, position.x + 32, position.y + 1, &shotFire.GetFrameEx());
-			}
-			else
-			{
-				shotFire.finished = false;
-				isShooting = false;
-				shoot = false;
-			}
-		}
-		if (currentPowerUp == POWERUP_TYPE::LASER)
+
+	//Ship fire animation (in front of the ship)---------------------------------
+	if (shoot == true)
+	{
+		//Laser fire (laser is the only powerup which has a different animation when it shoots)
+		if (currentPowerUp == POWERUP_TYPE::LASER &&  powerupUpgrades > 1)
 		{
 			if (ShotLaserBasic.finished == false)
 			{
@@ -357,6 +348,7 @@ void  ModulePlayer::ShotInput() {
 				shoot = false;
 			}
 		}
+		//Basic fire
 		else
 		{
 			if (shotFire.finished == false)
@@ -371,12 +363,8 @@ void  ModulePlayer::ShotInput() {
 				shoot = false;
 			}
 		}
-		
 	}
 }
-
-
-
 
 void ModulePlayer::MovementInput() {
 
