@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleRender.h"
 #include "SDL\include\SDL_timer.h"
+#include "ModuleStage05.h"
 
 Particle::Particle()
 {
@@ -18,6 +19,7 @@ Particle::Particle(Particle& p, iPoint position, Uint32 delay)
 	this->born = SDL_GetTicks() + delay;
 	this->life = p.life;
 	this->texture = p.texture;//struct texture added
+	this->fixedPos = position - App->stage05->spawnPos;
 }
 
 Particle::~Particle()
