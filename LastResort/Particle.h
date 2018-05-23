@@ -18,7 +18,7 @@ class Particle
 {
 public:
 	Particle();
-	Particle(Particle& , iPoint, Uint32);
+	Particle(Particle& , iPoint, Uint32, COLLIDER_TYPE colType);
 	~Particle();
 
 	bool CheckParticleDeath();

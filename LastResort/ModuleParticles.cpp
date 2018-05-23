@@ -279,7 +279,7 @@ update_status ModuleParticles::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle(Particle& particle, int x, int y, SDL_Texture *tex, COLLIDER_TYPE collider_type, Uint32 delay, PARTICLE_TYPE particle_type)
+void ModuleParticles::AddParticle(Particle& particle, int x, int y, SDL_Texture *tex, COLLIDER_TYPE colType, Uint32 delay, PARTICLE_TYPE particle_type)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -290,20 +290,20 @@ void ModuleParticles::AddParticle(Particle& particle, int x, int y, SDL_Texture 
 			switch (particle_type)
 			{
 			case PARTICLE_REGULAR:
-				p = new Particle(particle, { x, y }, delay);
+				p = new Particle(particle, { x, y }, delay, colType);
 				break;
 			case PARTICLE_ORANGE_BALL:
-				p = new Particle_OrangeBall(particle, {x, y}, delay);
+				p = new Particle_OrangeBall(particle, {x, y}, delay, colType);
 				p->fixedPos.x = x - App->stage05->spawnPos.x;
 				p->fixedPos.y = y - App->stage05->spawnPos.y;
 				break;
 			case PARTICLE_LASER:
-				p = new Particle_Laser(particle, { x, y }, delay);
+				p = new Particle_Laser(particle, { x, y }, delay, colType);
 				p->fixedPos.x = x - App->stage05->spawnPos.x;
 				p->fixedPos.y = y - App->stage05->spawnPos.y;
 				break;
 			case PARTICLE_G_MISSILE:
-				p = new Particle_G_Missile(particle, { x, y }, delay);
+				p = new Particle_G_Missile(particle, { x, y }, delay, colType);
 				break;
 			}
 
@@ -315,15 +315,12 @@ void ModuleParticles::AddParticle(Particle& particle, int x, int y, SDL_Texture 
 
 			active[i] = p;
 			p->texture = tex; // texture
-
+			//Play audio
 			if (particle.sfx != nullptr)
 			{
 				App->audio->ControlSFX(particle.sfx, PLAY_AUDIO);
 			}
-			if (collider_type != COLLIDER_NONE)
-			{
-				p->collider = App->collision->AddCollider({ p->position.x, p->position.y ,p->anim.GetCurrentFrame().w, p->anim.GetCurrentFrame().h }, collider_type, this);
-			}
+
 			break;
 		}
 	}

@@ -7,7 +7,7 @@ class Particle_OrangeBall : public Particle
 {
 public:
 	Particle_OrangeBall();
-	Particle_OrangeBall(Particle&, iPoint, Uint32);
+	Particle_OrangeBall(Particle&, iPoint, Uint32, COLLIDER_TYPE colType);
 
 	void Move();
 	void Draw();

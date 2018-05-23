@@ -12,7 +12,7 @@ public:
 		if (collider != nullptr)
 			collider->to_delete = true;
 	};*/
-	Particle_Laser(Particle&, iPoint, Uint32);
+	Particle_Laser(Particle&, iPoint, Uint32, COLLIDER_TYPE colType);
 	void Move();
 	void Draw();
 
