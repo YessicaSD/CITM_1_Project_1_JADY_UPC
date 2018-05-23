@@ -343,6 +343,12 @@ Enemy* ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 				enemies[i]->hp = 5;
 				
 				break;
+		case ENEMY_TYPES::MIDDLE_ASTEROID:
+			enemies[i] = new Enemy_Big_Asteroid(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
+			enemies[i]->scoreValue = 100;
+			enemies[i]->hp = 1;
+
+			break;
 		
 		}
 		return enemies[i];

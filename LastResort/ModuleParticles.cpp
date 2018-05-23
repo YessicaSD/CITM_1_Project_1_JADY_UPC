@@ -314,7 +314,6 @@ void ModuleParticles::AddParticle( Particle& sentParticle, int x, int y, SDL_Tex
 void ModuleParticles::AssociateParticleValues(Particle* newParticle, Particle& sentParticle, int x, int y, SDL_Texture *tex, COLLIDER_TYPE collider_type, Uint32 delay, PARTICLE_TYPE particle_type)
 {
 	SDL_Rect currentFrame = newParticle->anim.GetCurrentFrame();
-
 	newParticle->born = SDL_GetTicks() + delay;
 	newParticle->position.x = x;
 	newParticle->position.y = y;

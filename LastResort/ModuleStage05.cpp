@@ -151,7 +151,7 @@ bool Module5lvlScene::Start()
 
 	App->enemies->AddEnemy(POWERDROPPER, -88, 260, 0, POWERUP_TYPE::LASER); //homing
 	App->enemies->AddEnemy(POWERDROPPER, 180, 280, 0, POWERUP_TYPE::LASER);
-	App->enemies->AddEnemy(BIG_ASTEROID, 250, 270);
+	App->enemies->AddEnemy(MIDDLE_ASTEROID, 250, 270);
 	App->enemies->AddEnemy(REDBATS, 250, 270);
 	App->enemies->AddEnemy(REDBATS, 275, 270);
 	App->enemies->AddEnemy(REDBATS, 300, 270);
