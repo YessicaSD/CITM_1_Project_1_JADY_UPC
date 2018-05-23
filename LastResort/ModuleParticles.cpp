@@ -10,6 +10,8 @@
 #include "Player1.h"
 #include "Player2.h"
 #include "ParticleLaser.h"
+#include "ParticleGMissile.h"
+
 #include "ModuleStage05.h"
 #include "SDL/include/SDL_timer.h"
 
@@ -242,7 +244,6 @@ update_status ModuleParticles::Update()
 
 		if (p->Update() == false)
 		{
-			
 			delete p;
 			active[i] = nullptr;
 		}
@@ -254,53 +255,53 @@ update_status ModuleParticles::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle( Particle& particle, int x, int y, SDL_Texture *tex,  COLLIDER_TYPE collider_type, Uint32 delay, PARTICLE_TYPE particle_type)
+void ModuleParticles::AddParticle(Particle& particle, int x, int y, SDL_Texture *tex, COLLIDER_TYPE collider_type, Uint32 delay, PARTICLE_TYPE particle_type)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
 		if (active[i] == nullptr)
 		{
-			if (particle_type == PARTICLE_REGULAR)
+			Particle* p = nullptr;
+
+			switch (particle_type)
 			{
-				Particle* p = new Particle(particle);
-				p->born = SDL_GetTicks() + delay;
-				p->position.x = x;
-				p->position.y = y;
-				p->texture = tex; // texture
-				if (particle.collision_fx != nullptr)
-				{p->collision_fx = particle.collision_fx;}
-				if (particle.sfx != nullptr)
-				{App->audio->ControlSFX(particle.sfx, PLAY_AUDIO);}
-				if (collider_type != COLLIDER_NONE)
-					//Updated for not spawn it since 1 frame on x,y animation rect values
-					p->collider = App->collision->AddCollider({ p->position.x, p->position.y ,p->anim.GetCurrentFrame().w, p->anim.GetCurrentFrame().h }, collider_type, this);
-				active[i] = p;
+			case PARTICLE_REGULAR:
+				p = new Particle(particle);
+				break;
+
+			case PARTICLE_LASER:
+				p = new Particle_Laser(particle);
+				p->initialPosition.x = x - App->stage05->spawnPos.x;
+				p->initialPosition.y = y - App->stage05->spawnPos.y;
+				break;
+			case PARTICLE_G_MISSILE:
+				p = new Particle_G_Missile();
+
+
+
+			default:
+				break;
 				break;
 			}
-			if (particle_type == PARTICLE_LASER)
+
+			active[i] = p;
+			p->born = SDL_GetTicks() + delay;
+			p->position.x = x;
+			p->position.y = y;
+			p->texture = tex; // texture
+			if (particle.collision_fx != nullptr)
 			{
-				Particle* p = new Particle_Laser(particle);
-				p->born = SDL_GetTicks() + delay;
-				p->position.x = x;
-				p->position.y = y;
-				p->initialPosition.x = x - App->stage05->spawnPos.x; 
-				p->initialPosition.y= y- App->stage05->spawnPos.y;
-				p->texture = tex; // texture
-				if (particle.collision_fx != nullptr)
-				{
-					p->collision_fx = particle.collision_fx;
-				}
-				if (particle.sfx != nullptr)
-				{
-					App->audio->ControlSFX(particle.sfx, PLAY_AUDIO);
-				}
-				if (collider_type != COLLIDER_NONE)
-					//Updated for not spawn it since 1 frame on x,y animation rect values
-					p->collider = App->collision->AddCollider({ p->position.x, p->position.y ,p->anim.GetCurrentFrame().w, p->anim.GetCurrentFrame().h }, collider_type, this);
-				active[i] = p;
-				break;
+				p->collision_fx = particle.collision_fx;
 			}
-			
+			if (particle.sfx != nullptr)
+			{
+				App->audio->ControlSFX(particle.sfx, PLAY_AUDIO);
+			}
+			if (collider_type != COLLIDER_NONE)
+			{
+				p->collider = App->collision->AddCollider({ p->position.x, p->position.y ,p->anim.GetCurrentFrame().w, p->anim.GetCurrentFrame().h }, collider_type, this);
+			}
+			break;
 		}
 	}
 }
@@ -312,8 +313,10 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 		// Always destroy particles that collide
 		if (active[i] != nullptr && active[i]->collider == c1)
 		{
-			if (active[i]->collision_fx != nullptr)
+			if (active[i]->collision_fx != nullptr) {
 				AddParticle(*active[i]->collision_fx, active[i]->position.x, active[i]->position.y, active[i]->texture);
+			}
+				
 			delete active[i];
 			active[i] = nullptr;
 			break;
