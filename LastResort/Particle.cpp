@@ -42,9 +42,9 @@ bool Particle::UpdateParticle()
 		collider->SetPos(position.x, position.y - anim.GetFrame().h / 2);
 		collider->SetMeasurements(anim.GetFrame().w, anim.GetFrame().h);
 		if (collider->type == COLLIDER_PLAYER_1_SHOT || COLLIDER_PLAYER_2_SHOT || COLLIDER_ENEMY_SHOT) {
-			if (position.x >  SCREEN_WIDTH+DESPAWN_MARGIN_RIGHT || position.x < 0- DESPAWN_MARGIN_LEFT)
+			if (position.x >  SCREEN_WIDTH || position.x < 0)
 				ret = false;
-			else if (position.y > SCREEN_HEIGHT+DESPAWN_MARGIN_DOWN || position.y < 0- DESPAWN_MARGIN_UP) {
+			else if (position.y > SCREEN_HEIGHT || position.y < 0) {
 				ret = false;
 			}
 		}
