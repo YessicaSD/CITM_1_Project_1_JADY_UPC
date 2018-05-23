@@ -25,8 +25,6 @@ Particle_Laser::Particle_Laser(Particle& p) : Particle(p)
 		PlayerPosition.y = App->player1->position.y;
 	}
 	going_up = true;
-
-	
 }
 void Particle_Laser:: Move() {
 	if (going_up)

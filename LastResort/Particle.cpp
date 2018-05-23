@@ -9,11 +9,16 @@ Particle::Particle()
 	speed.SetToZero();
 }
 
-Particle::Particle( Particle& p) :
-	anim(p.anim), position(p.position), speed(p.speed),
-	collision_fx(p.collision_fx), born(p.born), life(p.life), texture(p.texture) //struct texture added
-
-{}
+Particle::Particle(Particle& p)
+{
+	this->anim = p.anim;
+	this->position = p.position;
+	this->speed = p.speed;
+	this->collision_fx = p.collision_fx;
+	this->born = p.born;
+	this->life = p.life;
+	this->texture = p.texture;//struct texture added
+}
 
 Particle::~Particle()
 {
