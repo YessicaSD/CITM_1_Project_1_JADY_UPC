@@ -146,8 +146,8 @@ bool Module5lvlScene::Start()
 	//App->enemies->AddEnemy(PINATA, 130, 130);
 	//App->enemies->AddEnemy(OSCILATOR, 500, 0);
 
-	App->enemies->AddEnemy(MIDDLE_ASTEROID, 250, 270);
-	App->enemies->AddEnemy(BIG_ASTEROID, 250, 200);
+	/*App->enemies->AddEnemy(MIDDLE_ASTEROID, 250, 270);
+	App->enemies->AddEnemy(BIG_ASTEROID, 250, 200);*/
 
 	//- FINAL POSITION ENEMIES
 	App->enemies->AddEnemy(FRONT_TURRET, 47, 64);
