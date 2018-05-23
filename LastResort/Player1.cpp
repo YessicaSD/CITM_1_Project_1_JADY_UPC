@@ -145,6 +145,7 @@ bool Player1::MoveUp()
 //SHOOT INPUT
 bool Player1::Shoot()
 {
+	
 	return (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN ||  App->input->Controller1[SDL_CONTROLLER_BUTTON_B] == KEY_STATE::KEY_DOWN );
 }
 

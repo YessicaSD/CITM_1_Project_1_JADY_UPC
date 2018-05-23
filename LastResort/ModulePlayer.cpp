@@ -284,10 +284,13 @@ void  ModulePlayer::ShotInput() {
 	//Basic shoot-------------------------------------------------------------------
 	if (Shoot())
 	{
+		shoot = true;
+		App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
 		if(currentPowerUp == POWERUP_TYPE::NOPOWERUP)
 		{
 			//Basic shoot
-			App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
+			
+			
 		}
 		if (currentPowerUp == POWERUP_TYPE::LASER)
 		{
@@ -355,7 +358,7 @@ void  ModulePlayer::ShotInput() {
 		}*/
 	}
 	//----------Ship Fire-------------------------------------------
-	if (shoot == true) {
+ 	if (shoot == true) {
 		if (currentPowerUp == POWERUP_TYPE::NOPOWERUP)
 		{
 			if (shotFire.finished == false)
@@ -379,7 +382,7 @@ void  ModulePlayer::ShotInput() {
 			}
 			else
 			{
-				shotFire.finished = false;
+				ShotLaserBasic.finished = false;
 				isShooting = false;
 				shoot = false;
 			}
