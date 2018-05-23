@@ -294,13 +294,9 @@ void ModuleParticles::AddParticle(Particle& particle, int x, int y, SDL_Texture 
 				break;
 			case PARTICLE_ORANGE_BALL:
 				p = new Particle_OrangeBall(particle, {x, y}, delay, colType, tex);
-				p->fixedPos.x = x - App->stage05->spawnPos.x;
-				p->fixedPos.y = y - App->stage05->spawnPos.y;
 				break;
 			case PARTICLE_LASER:
 				p = new Particle_Laser(particle, { x, y }, delay, colType, tex);
-				p->fixedPos.x = x - App->stage05->spawnPos.x;
-				p->fixedPos.y = y - App->stage05->spawnPos.y;
 				break;
 			case PARTICLE_G_MISSILE:
 				p = new Particle_G_Missile(particle, { x, y }, delay, colType, tex);
