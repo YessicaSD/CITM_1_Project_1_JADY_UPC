@@ -50,6 +50,7 @@ bool ModulePlayer::Start()
 	//audios-------------------------------------------------------------------------
 	init_sfx = App->audio->LoadSFX("Assets/initial_sfx.wav");
 	//collider-----------------------------------------------------------------------
+	if (isActive)
 	playerCol = App->collision->AddCollider({ position.x, position.y + 2, 24, 8 }, COLLIDER_TYPE::COLLIDER_NONE, this);
 
 	return ret;
@@ -69,7 +70,11 @@ void ModulePlayer::Reappear() {
 	isInvincible = true;
 	invincibilityFrames = INVINCIBILITY_FRAMES;
 	//collider-----------------------------------------------------------------------
+	if(playerCol!=nullptr)
 	playerCol->type = COLLIDER_TYPE::COLLIDER_GOD;
+
+	else
+	playerCol = App->collision->AddCollider({ position.x, position.y + 2, 24, 8 }, COLLIDER_TYPE::COLLIDER_GOD, this);
 
 }
 
@@ -115,9 +120,13 @@ update_status ModulePlayer::Update()
 		else
 		{
 			//Go to god mode
-			playerCol->type = COLLIDER_GOD;
-			SDL_SetTextureColorMod(PlayerTexture, 255, 255, 150);
-			godMode = true;
+			if (playerCol != nullptr)
+			{
+				playerCol->type = COLLIDER_GOD;
+				SDL_SetTextureColorMod(PlayerTexture, 255, 255, 150);
+				godMode = true;
+			}
+			
 		}
 	}
 	//Shots----------------------------------------------------------------------------
@@ -280,31 +289,25 @@ void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
 	
 }
 
-void  ModulePlayer::ShotInput() {
-	//Basic shoot-------------------------------------------------------------------
+void  ModulePlayer::ShotInput()
+{
 	if (Shoot())
 	{
-		if(currentPowerUp == POWERUP_TYPE::NOPOWERUP)
-		{
-			//Basic shoot
-			App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
-		}
+		//- All of them shoot a basic shot
+		shoot = true;
+		App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
+		//- They have additional shots for some upgrades
 		if (currentPowerUp == POWERUP_TYPE::LASER)
 		{
-			switch(powerupUpgrades)
+			switch (powerupUpgrades)
 			{
-			case 1:
-				//Basic shoot
-				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
-				break;
 			case 2:
-				//Laser shot
+				//Basic laser
 				App->particles->AddParticle(App->particles->Basic_Laser, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
 				break;
 			case 3:
-				//Laser shot
-				App->particles->AddParticle(App->particles->Basic_Laser, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
 				//Laser rings
+				App->particles->AddParticle(App->particles->Basic_Laser, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
 				break;
 			}
 		}
@@ -312,18 +315,10 @@ void  ModulePlayer::ShotInput() {
 		{
 			switch (powerupUpgrades)
 			{
-			case 1:
-				//Basic shoot
-				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
-				break;
 			case 2:
-				//Basic shoot
-				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
 				//2 missiles on the sides
 				break;
 			case 3:
-				//Basic shoot
-				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
 				//6 missiles on the sides
 				break;
 			}
@@ -332,58 +327,41 @@ void  ModulePlayer::ShotInput() {
 		{
 			switch (powerupUpgrades)
 			{
-			case 1:
-				//Basic shoot
-				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position. y + 6, PlayerTexture, shot_colType, 0);
-				break;
 			case 2:
-				//Basic shoot
-				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
 				//Missiles up and down
 				break;
 			case 3:
-				//Basic shoot
-				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
 				//Missiles up and down that destoy the ground
 				break;
 			}
 		}
-	/*	if (isShooting == false) { shoot = true; }
+		/*	if (isShooting == false) { shoot = true; }
 		if (Controllshoot == true) {
-			Controllshoot = false;
+		Controllshoot = false;
 
 		}*/
 	}
-	//----------Ship Fire-------------------------------------------
-	if (shoot == true) {
-		if (currentPowerUp == POWERUP_TYPE::NOPOWERUP)
-		{
-			if (shotFire.finished == false)
-			{
-				isShooting = true;
-				App->render->Blit(PlayerTexture, position.x + 32, position.y + 1, &shotFire.GetFrameEx());
-			}
-			else
-			{
-				shotFire.finished = false;
-				isShooting = false;
-				shoot = false;
-			}
-		}
-		if (currentPowerUp == POWERUP_TYPE::LASER)
+
+	//Ship fire animation (in front of the ship)
+	if (shoot == true)
+	{
+		//- Laser ship fire. The laser powerup is the only one which has a different animation for the ship fire
+		if (currentPowerUp == POWERUP_TYPE::LASER && powerupUpgrades > 1)
 		{
 			if (ShotLaserBasic.finished == false)
 			{
 				isShooting = true;
-				App->render->Blit(PlayerTexture, position.x + 32, position.y + 1, &ShotLaserBasic.GetFrameEx());
+				App->render->Blit(PlayerTexture, position.x + 32, position.y + 3-ShotLaserBasic.GetFrame().h/2, &ShotLaserBasic.GetFrameEx());
 			}
 			else
 			{
-				shotFire.finished = false;
+				ShotLaserBasic.finished = false;
 				isShooting = false;
 				shoot = false;
 			}
 		}
+
+		//- Basic ship fire
 		else
 		{
 			if (shotFire.finished == false)
@@ -398,14 +376,11 @@ void  ModulePlayer::ShotInput() {
 				shoot = false;
 			}
 		}
-		
 	}
 }
 
-
-
-
-void ModulePlayer::MovementInput() {
+void ModulePlayer::MovementInput()
+{
 
 	if (MoveLeft() == true) {
 		//---------Movement-----------------------------------------------------------

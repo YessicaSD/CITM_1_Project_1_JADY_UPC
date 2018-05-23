@@ -20,6 +20,7 @@ ModuleParticles::ModuleParticles()
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 		active[i] = nullptr;
 	//PLAYER-----------------------------------------------------------------//
+
 	//Basic Shot Explosion Particle-----------------------------
 	basic_explosion.anim.PushBack({ 305,263, 16,16 }); //1
 	basic_explosion.anim.PushBack({ 287,263, 16,16 }); //2
@@ -242,7 +243,7 @@ update_status ModuleParticles::Update()
 		if (p == nullptr)
 			continue;
 
-		if (p->Update() == false)
+		if (p->CheckParticleDeath() == true)
 		{
 			delete p;
 			active[i] = nullptr;
@@ -250,6 +251,7 @@ update_status ModuleParticles::Update()
 		else if (SDL_GetTicks() >= p->born)
 		{
 			p->Draw();
+			p->Move();
 		}
 	}
 	return UPDATE_CONTINUE;
@@ -271,16 +273,16 @@ void ModuleParticles::AddParticle(Particle& particle, int x, int y, SDL_Texture 
 
 			case PARTICLE_LASER:
 				p = new Particle_Laser(particle);
-				p->initialPosition.x = x - App->stage05->spawnPos.x;
-				p->initialPosition.y = y - App->stage05->spawnPos.y;
+				p->fixedPos.x = x - App->stage05->spawnPos.x;
+				p->fixedPos.y = y - App->stage05->spawnPos.y;
 				break;
 			case PARTICLE_G_MISSILE:
 				p = new Particle_G_Missile();
-
-
-
-			default:
 				break;
+			}
+
+			if (p == nullptr) {
+				LOG("Particle cannot be spawneed")
 				break;
 			}
 

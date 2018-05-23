@@ -20,8 +20,8 @@ Powerup_Laser::Powerup_Laser(int x, int y) : Powerup(x, y)
 	collider = App->collision->AddCollider({ 0, 0, 31, 16 }, COLLIDER_TYPE::COLLIDER_POWERUP, (Module*)App->powerups);
 }
 
-void Powerup_Laser::OnCollision(Collider* col, ModulePlayer* playerTarjet)
+void Powerup_Laser::OnCollision(Collider* col, ModulePlayer* playerTarget)
 {
 	//Change powerup type---------------------------------------------------
-	playerTarjet->currentPowerUp = POWERUP_TYPE::LASER;
+	playerTarget->currentPowerUp = POWERUP_TYPE::LASER;
 }

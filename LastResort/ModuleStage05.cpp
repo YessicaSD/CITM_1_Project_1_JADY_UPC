@@ -114,7 +114,7 @@ bool Module5lvlScene::Start()
 	//Enable ---------------------------------------------------------------------
 	App->stageFunctionality->Enable();
 	App->stageFunctionality->currentStage = this;
-	App->ui->currentScene = STAGE_SCENE;
+	
 
 	//Positions--------------------------------------------------------------------------------------------------
 	if (currentCheckPoint == 0) {
@@ -139,19 +139,23 @@ bool Module5lvlScene::Start()
 	//Enemies ---------------------------------------------------------------------------------------------------
 	//INFO: We'll calculate the x and y positions based on the position of the ship in Docs>ship.psd
 	//- TEST ENEMIES
-	App->enemies->AddEnemy(PINATA_SPAWNER, 1167, 144);
-	App->enemies->AddEnemy(PINATA_SPAWNER, 1295, 144);
-	App->enemies->AddEnemy(PINATA, 140, 140);
-	App->enemies->AddEnemy(PINATA, 150, 150);
-	App->enemies->AddEnemy(PINATA, 130, 130);
+	//App->enemies->AddEnemy(PINATA_SPAWNER, 1167, 144);
+	//App->enemies->AddEnemy(PINATA_SPAWNER, 1295, 144);
+	//App->enemies->AddEnemy(PINATA, 140, 140);
+	//App->enemies->AddEnemy(PINATA, 150, 150);
+	//App->enemies->AddEnemy(PINATA, 130, 130);
 	//App->enemies->AddEnemy(OSCILATOR, 500, 0);
+
+	/*App->enemies->AddEnemy(MIDDLE_ASTEROID, 250, 270);
+	App->enemies->AddEnemy(BIG_ASTEROID, 250, 200);*/
 
 	//- FINAL POSITION ENEMIES
 	App->enemies->AddEnemy(FRONT_TURRET, 47, 64);
 
 	App->enemies->AddEnemy(POWERDROPPER, -88, 260, 0, POWERUP_TYPE::LASER); //homing
 	App->enemies->AddEnemy(POWERDROPPER, 180, 280, 0, POWERUP_TYPE::LASER);
-	App->enemies->AddEnemy(BIG_ASTEROID, 250, 270);
+
+	
 	App->enemies->AddEnemy(REDBATS, 250, 270);
 	App->enemies->AddEnemy(REDBATS, 275, 270);
 	App->enemies->AddEnemy(REDBATS, 300, 270);
@@ -172,8 +176,8 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(OUTDOOR_TURRET, 1087, 29);
 	App->enemies->AddEnemy(OUTDOOR_TURRET, 1119, 29);
 	App->enemies->AddEnemy(OUTDOOR_TURRET, 1151, 29);
-	App->enemies->AddEnemy(MECH_SPAWNER, 738, 195/*, 1000*/);
-	//App->enemies->AddEnemy(MECH, 738, 195, 1000);
+	App->enemies->AddEnemy(MECH_SPAWNER, 738, 192);
+	
 	
 
 	//Colliders--------------------------------------------------------------------------------------------------

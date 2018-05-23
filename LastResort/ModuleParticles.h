@@ -14,23 +14,37 @@ struct Collider;
 enum COLLIDER_TYPE;
 struct Mix_Chunk;
 
+enum PARTICLE_TYPE
+{
+	PARTICLE_REGULAR,
+	PARTICLE_LASER,
+	PARTICLE_G_MISSILE,
+	PARTICLE_ORANGE_BALL,//Follows background, but can have speed (in that case it will follow the background and move at that speed)
+	MAX_PARTICLE,//Always last
+};
+
 class ModuleParticles : public Module
 {
 public:
 	ModuleParticles();
 	~ModuleParticles();
 
+	//Inherited functons
 	bool Start();
 	update_status Update();
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
 
+	//Module functions
 	void AddParticle(Particle& particle, int x, int y, SDL_Texture *tex ,COLLIDER_TYPE collider_type = COLLIDER_NONE, Uint32 delay = 0, PARTICLE_TYPE particle_type = PARTICLE_REGULAR);
 	
 
 private:
 	SDL_Texture* graphics = nullptr;
 	Particle* active[MAX_ACTIVE_PARTICLES];
+
+	//Helper functions
+	void AssociateParticleValues(Particle *, Particle& , int, int, SDL_Texture *, COLLIDER_TYPE, Uint32, PARTICLE_TYPE);
 
 public:
 	//TEXTURES-----------------------------------------
@@ -66,8 +80,10 @@ public:
 	Particle MiddleBossShot;
 	Particle MiddleBosExplotion;
 	Particle orangeBall;
+	Particle orangeBallExplosion;
 	Particle LaserEnemyShot;
 	Particle AsteroidDestroy;
+	Particle MiddleAsteroidDestroy;
 
 	//- OTHER
 	iPoint VectorMiddleBossShots;

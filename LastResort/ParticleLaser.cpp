@@ -4,6 +4,7 @@
 #include "ModuleStage05.h"
 #include "Player1.h"
 #include "Player2.h"
+
 Particle_Laser::Particle_Laser(Particle& p) : Particle(p)
 {
 	if (App->player1->isActive == true && App->player2->isActive == false)
@@ -31,12 +32,14 @@ Particle_Laser::Particle_Laser(Particle& p) : Particle(p)
 void Particle_Laser:: Move() {
 	if (going_up)
 	{
-		position.x = App->stage05->spawnPos.x + initialPosition.x;
-		position.y = initialPosition.y + App->stage05->spawnPos.y;
-		if (PlayerPosition.y < initialPosition.y + App->stage05->spawnPos.y)
-			initialPosition.y -= speed.y;
+		position.x = App->stage05->spawnPos.x + fixedPos.x;
+		position.y = fixedPos.y + App->stage05->spawnPos.y;
+
+		if (PlayerPosition.y < fixedPos.y + App->stage05->spawnPos.y)
+			fixedPos.y -= speed.y;
 		else
 			anim.speed = 0.2;
+
 		if (anim.GetCurrentFrameNum()==12)
 		{
 			going_up = false;

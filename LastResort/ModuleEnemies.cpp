@@ -24,6 +24,7 @@
 #include "Enemy_Mech.h"
 #include "Enemy_Mech_Spawner.h"
 #include "Enemy_Big_Asteriod.h"
+#include "Enemy_Middle_Asteroid.h"
 #define DAMAGE_FLASHING_INTERVAL 4
 
 ModuleEnemies::ModuleEnemies()
@@ -73,23 +74,6 @@ update_status ModuleEnemies::PreUpdate()
 				SpawnEnemy(queue[i]);
 				queue[i].type = ENEMY_TYPES::NO_TYPE;
 				LOG("Spawning enemy at x: %d, y: %d", queue[i].x, queue[i].y);
-			}
-		}
-	}
-
-	//SPAWN WITHOUT MARGINS (instaQueue)-------------------------------------------------------------
-	for (uint i = 0; i < MAX_ENEMIES; ++i)
-	{
-		if (instaQueue[i].type != ENEMY_TYPES::NO_TYPE)
-		{
-			if (App->stage05->spawnPos.x + instaQueue[i].x < 0 + SCREEN_WIDTH &&
-				App->stage05->spawnPos.x + instaQueue[i].x > 0 &&
-				App->stage05->spawnPos.y + instaQueue[i].y > 0 &&
-				App->stage05->spawnPos.y + instaQueue[i].y < 0 + SCREEN_HEIGHT)
-			{
-				SpawnEnemy(instaQueue[i]);
-				instaQueue[i].type = ENEMY_TYPES::NO_TYPE;
-				LOG("Spawning enemy at x: %d, y: %d", instaQueue[i].x, instaQueue[i].y);
 			}
 		}
 	}
@@ -184,18 +168,6 @@ bool ModuleEnemies::CleanUp()
 			
 	}
 
-	for (uint i = 0; i < MAX_ENEMIES; ++i)
-	{
-
-			instaQueue[i].type = ENEMY_TYPES::NO_TYPE;
-			instaQueue[i].delay = 0;
-			instaQueue[i].pu_Type = POWERUP_TYPE::NOPOWERUP;
-			instaQueue[i].counting = false;
-			instaQueue[i].spawnTime = 0;
-			
-		
-	}
-
 	App->textures->Unload(nml_sprites);
 	App->textures->Unload(dmg_sprites);
 
@@ -222,26 +194,6 @@ bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, Uint32 delay, POWER
 
 	return ret;
 }
-//
-//bool ModuleEnemies::InstaSpawn(ENEMY_TYPES type, int x, int y, POWERUP_TYPE powerup_type)
-//{
-//	bool ret = false;
-//
-//	for (uint i = 0; i < MAX_ENEMIES; ++i)
-//	{
-//		if (instaQueue[i].type == ENEMY_TYPES::NO_TYPE)
-//		{
-//			instaQueue[i].type = type;
-//			instaQueue[i].x = x;
-//			instaQueue[i].y = y;
-//			instaQueue[i].pu_Type = powerup_type;
-//			ret = true;
-//			break;
-//		}
-//	}
-//
-//	return ret;
-//}
 
 //Gets deleted if you instaspawn in a position that's different to the camera
 Enemy* ModuleEnemies::InstaSpawn(ENEMY_TYPES type, int x, int y, POWERUP_TYPE powerup_type)
@@ -269,80 +221,85 @@ Enemy* ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			enemies[i] = new Enemy_Basic(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
 			enemies[i]->scoreValue = 100;
 			enemies[i]->hp = 1;
-			
 			break;
+
 		case ENEMY_TYPES::OSCILATOR:
 			enemies[i] = new Enemy_Oscilator(info.x + App->stage05->spawnPos.x, info.pu_Type);
 			enemies[i]->scoreValue = 100;
 			enemies[i]->hp = 5;
-			
 			break;
+
 		case ENEMY_TYPES::POWERDROPPER:
 			enemies[i] = new Enemy_PowerDropper(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
 			enemies[i]->scoreValue = 100;
 			enemies[i]->hp = 1;
-			
 			break;
+
 		case ENEMY_TYPES::METALCROW:
 			enemies[i] = new Enemy_MetalCraw(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
 			enemies[i]->scoreValue = 1000;
 			enemies[i]->hp = 50;
-			
 			break;
+
 		case  ENEMY_TYPES::REDBATS:
 			enemies[i] = new Enemy_RedBats(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
 			enemies[i]->scoreValue = 100;
 			enemies[i]->hp = 1;
-			
 			break;
+
 		case ENEMY_TYPES::ROTATING_TURRET:
 			enemies[i] = new Enemy_RotatingTurret(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
 			enemies[i]->scoreValue = 200;
 			enemies[i]->hp = 50;
-			
 			break;
+
 		case ENEMY_TYPES::PINATA:
 			enemies[i] = new Enemy_Pinata(info.x , info.y , info.pu_Type);
 			enemies[i]->scoreValue = 200;
 			enemies[i]->hp = 1;
-			
 			break;
+
 		case ENEMY_TYPES::PINATA_SPAWNER:
 			enemies[i] = new Enemy_Pinata_Spawner(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
 			enemies[i]->scoreValue = 200;
 			enemies[i]->hp = 5;
-			
 			break;
+
 		case ENEMY_TYPES::FRONT_TURRET:
 			enemies[i] = new Enemy_FrontTurret(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
 			enemies[i]->scoreValue = 200;
 			enemies[i]->hp = 5;
-			
 			break;
+
 		case ENEMY_TYPES::OUTDOOR_TURRET:
 			enemies[i] = new Enemy_Outdoor_turret(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
 			enemies[i]->scoreValue = 300;
 			enemies[i]->hp = 15;
-			
 			break;
+
 		case ENEMY_TYPES::MECH:
 			enemies[i] = new Enemy_Mech(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
 			enemies[i]->scoreValue = 300;
 			enemies[i]->hp = 2;
-			
 			break;
+
 		case ENEMY_TYPES::MECH_SPAWNER:
-				enemies[i] = new Enemy_Mech_Spawner(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
-				enemies[i]->scoreValue = 0;
-				enemies[i]->hp = 1;
-				
-				break;
+			enemies[i] = new Enemy_Mech_Spawner(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
+			enemies[i]->scoreValue = 0;
+			enemies[i]->hp = 1;
+			break;
+
 		case ENEMY_TYPES::BIG_ASTEROID:
-				enemies[i] = new Enemy_Big_Asteroid(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
-				enemies[i]->scoreValue = 100;
-				enemies[i]->hp = 5;
-				
-				break;
+			enemies[i] = new Enemy_Big_Asteroid(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
+			enemies[i]->scoreValue = 100;
+			enemies[i]->hp = 5;
+			break;
+
+		case ENEMY_TYPES::MIDDLE_ASTEROID:
+			enemies[i] = new Enemy_Middle_Asteroid(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
+			enemies[i]->scoreValue = 100;
+			enemies[i]->hp = 1;
+			break;
 		
 		}
 		return enemies[i];

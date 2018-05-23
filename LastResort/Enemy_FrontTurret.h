@@ -13,6 +13,8 @@ private:
 	Animation frontTurretAnim;
 	int fixedY;
 	int fixedX;
+	Uint32 lastShotTime = 0;
+	float shotSpeed = 1;
 };
 
 #endif // __ENEMY_FRONT_SHIP_TURRET_H__

@@ -154,6 +154,7 @@ public:
 			return frames[(int)current_frame];
 		}
 	}
+
 };
 
 #endif
