@@ -281,29 +281,18 @@ void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
 }
 
 void  ModulePlayer::ShotInput() {
-	//Basic shoot-------------------------------------------------------------------
 	if (Shoot())
 	{
-		if(currentPowerUp == POWERUP_TYPE::NOPOWERUP)
-		{
-			//Basic shoot
-			App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
-		}
+		//- All of them shoot a basic shot
+		App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
+		//- They have additional shots for some upgrades
 		if (currentPowerUp == POWERUP_TYPE::LASER)
 		{
 			switch(powerupUpgrades)
 			{
-			case 1:
-				//Basic shoot
-				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
-				break;
 			case 2:
-				//Laser shot
-				App->particles->AddParticle(App->particles->Basic_Laser, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
 				break;
 			case 3:
-				//Laser shot
-				App->particles->AddParticle(App->particles->Basic_Laser, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
 				//Laser rings
 				break;
 			}
@@ -312,18 +301,10 @@ void  ModulePlayer::ShotInput() {
 		{
 			switch (powerupUpgrades)
 			{
-			case 1:
-				//Basic shoot
-				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
-				break;
 			case 2:
-				//Basic shoot
-				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
 				//2 missiles on the sides
 				break;
 			case 3:
-				//Basic shoot
-				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
 				//6 missiles on the sides
 				break;
 			}
@@ -332,18 +313,10 @@ void  ModulePlayer::ShotInput() {
 		{
 			switch (powerupUpgrades)
 			{
-			case 1:
-				//Basic shoot
-				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position. y + 6, PlayerTexture, shot_colType, 0);
-				break;
 			case 2:
-				//Basic shoot
-				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
 				//Missiles up and down
 				break;
 			case 3:
-				//Basic shoot
-				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
 				//Missiles up and down that destoy the ground
 				break;
 			}
@@ -354,7 +327,7 @@ void  ModulePlayer::ShotInput() {
 
 		}*/
 	}
-	//----------Ship Fire-------------------------------------------
+	//Ship fire animation (in front of the ship)
 	if (shoot == true) {
 		if (currentPowerUp == POWERUP_TYPE::NOPOWERUP)
 		{
