@@ -15,8 +15,8 @@ Particle_OrangeBall::Particle_OrangeBall(Particle& p) : Particle(p)
 
 void Particle_OrangeBall::Move()
 {
-	fixedPos.x += 5;
-	fixedPos.y += 5;
+	fixedPos.x -= 5;
+	fixedPos.y -= 5;
 	position = App->stage05->spawnPos + fixedPos;
 };
 
