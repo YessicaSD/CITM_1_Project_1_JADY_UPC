@@ -26,7 +26,7 @@ void Enemy_FrontTurret::Move()
 	position.y = App->stage05->spawnPos.y + fixedY;
 
 	//Shoot
-	if(SDL_GetTicks() >= lastShotTime + (60/88)*1000)//60 = 60FPS. 88 = frames to shoot again. 1000 = 1000 ms is 1 s
+	if(SDL_GetTicks() >= lastShotTime + 3000)/*(60/88)*1000*///60 = 60FPS. 88 = frames to shoot again. 1000 = 1000 ms is 1 s
 	{
 		App->particles->orangeBall.speed.x = -1;
 		App->particles->orangeBall.speed.y = -1;

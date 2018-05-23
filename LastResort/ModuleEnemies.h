@@ -68,7 +68,6 @@ private:
 
 private:
 	EnemyInfo queue[MAX_ENEMIES];
-	EnemyInfo instaQueue[MAX_ENEMIES];//Enemies in this queue will spawn when they reach the screen, not when they reach the spawn area
 	Enemy* enemies[MAX_ENEMIES];
 
 public:
