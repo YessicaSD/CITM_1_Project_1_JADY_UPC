@@ -349,14 +349,12 @@ void ModuleUnit::Rotating()
 		&spinAnimation[turnAroundToRender].frame[(int)currentSpinFrame]);
 
 	//Shoot---------------------------------------------------------------------------------------------------
-	App->particles->unitShot.speed.x = unitProjectileSpeed * cosf(angleValue[turnAroundToRender]);
-	App->particles->unitShot.speed.y = unitProjectileSpeed * sinf(angleValue[turnAroundToRender]);
 	if (playerToFollow->Shoot() == true)
 	{
 		App->particles->AddParticle(
 			App->particles->unitShot,
-			(int)position.x + shotPosXDifferences[turnAroundToRender],
-			(int)position.y + shotPosYDifferences[turnAroundToRender],
+			{ (int)position.x + shotPosXDifferences[turnAroundToRender], (int)position.y + shotPosYDifferences[turnAroundToRender]},
+			{ (int)(unitProjectileSpeed * cosf(angleValue[turnAroundToRender])) , (int)(unitProjectileSpeed * sinf(angleValue[turnAroundToRender]))},
 			playerToFollow->PlayerTexture,
 			playerToFollow->shot_colType,
 			0);

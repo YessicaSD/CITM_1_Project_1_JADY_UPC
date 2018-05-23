@@ -36,8 +36,6 @@ ModuleParticles::ModuleParticles()
 	//Basic Shot Particle---------------------------------------
 	basicShot.anim.PushBack({ 0,247, 15,7 });
 	basicShot.anim.speed = 0.0f;
-	basicShot.speed.x = 12;
-	basicShot.speed.y = 0;
 	basicShot.anim.loop = false;
 	basicShot.collision_fx = &basic_explosion;
 
@@ -65,7 +63,6 @@ ModuleParticles::ModuleParticles()
 	Basic_Laser.anim.PushBack({ 17,247,56,3 });
 	Basic_Laser.anim.speed = 2.0f;
 	Basic_Laser.life = 2000;
-	Basic_Laser.speed.x = 10;
 
 	//Middle Boss shot particle------------------------------------
 	MiddleBossShot.anim.PushBack({232,248,18,17});
@@ -156,8 +153,6 @@ ModuleParticles::ModuleParticles()
 	LaserEnemyShot.anim.loop = false;
 	LaserEnemyShot.life = 5000;
 	LaserEnemyShot.anim.speed = 0.0f;
-	LaserEnemyShot.speed.y = 3;
-	LaserEnemyShot.speed.x = 3;
 
 	AsteroidDestroy.anim.PushBack({191,142,61,60});
 	AsteroidDestroy.anim.PushBack({ 128,142,63,62 });
@@ -279,7 +274,7 @@ update_status ModuleParticles::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle(Particle& particle, int x, int y, SDL_Texture *tex, COLLIDER_TYPE colType, Uint32 delay, PARTICLE_TYPE particle_type)
+void ModuleParticles::AddParticle(Particle& particle, iPoint position, iPoint speed, SDL_Texture *tex, COLLIDER_TYPE colType, Uint32 delay, PARTICLE_TYPE particle_type)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -290,16 +285,16 @@ void ModuleParticles::AddParticle(Particle& particle, int x, int y, SDL_Texture 
 			switch (particle_type)
 			{
 			case PARTICLE_REGULAR:
-				p = new Particle(particle, { x, y }, delay, colType, tex);
+				p = new Particle(particle, position, speed, delay, colType, tex);
 				break;
 			case PARTICLE_ORANGE_BALL:
-				p = new Particle_OrangeBall(particle, {x, y}, delay, colType, tex);
+				p = new Particle_OrangeBall(particle, position, speed, delay, colType, tex);
 				break;
 			case PARTICLE_LASER:
-				p = new Particle_Laser(particle, { x, y }, delay, colType, tex);
+				p = new Particle_Laser(particle, position, speed, delay, colType, tex);
 				break;
 			case PARTICLE_G_MISSILE:
-				p = new Particle_G_Missile(particle, { x, y }, delay, colType, tex);
+				p = new Particle_G_Missile(particle, position, speed, delay, colType, tex);
 				break;
 			}
 
@@ -324,8 +319,9 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 		// Always destroy particles that collide
 		if (active[i] != nullptr && active[i]->collider == c1)
 		{
-			if (active[i]->collision_fx != nullptr) {
-				AddParticle(*active[i]->collision_fx, active[i]->position.x, active[i]->position.y, active[i]->texture);
+			if (active[i]->collision_fx != nullptr)
+			{
+				AddParticle(*active[i]->collision_fx, { active[i]->position.x, active[i]->position.y }, { 0 , 0 } , active[i]->texture);
 			}
 				
 			delete active[i];

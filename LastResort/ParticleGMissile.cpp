@@ -6,7 +6,7 @@
 #include "Player2.h"
 
 
-Particle_G_Missile::Particle_G_Missile(Particle& p, iPoint position, Uint32 delay, COLLIDER_TYPE colType, SDL_Texture* tex):Particle(p, position, delay, colType, tex)
+Particle_G_Missile::Particle_G_Missile(Particle& p, iPoint position, iPoint speed, Uint32 delay, COLLIDER_TYPE colType, SDL_Texture* tex):Particle(p, position, speed, delay, colType, tex)
 {
 
 

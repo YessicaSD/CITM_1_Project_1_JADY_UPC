@@ -12,11 +12,11 @@ Particle::Particle()
 	speed.SetToZero();
 }
 
-Particle::Particle(Particle& p, iPoint position, Uint32 delay, COLLIDER_TYPE colType, SDL_Texture* tex)
+Particle::Particle(Particle& p, iPoint position, iPoint speed, Uint32 delay, COLLIDER_TYPE colType, SDL_Texture* tex)
 {
 	this->anim = p.anim;
 	this->position = position;
-	this->speed = p.speed;
+	this->speed = speed;
 	this->collision_fx = p.collision_fx;
 	this->born = SDL_GetTicks() + delay;
 	this->life = p.life;
