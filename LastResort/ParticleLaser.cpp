@@ -18,7 +18,6 @@ Particle_Laser::Particle_Laser(Particle& p) : Particle(p)
 
 	if (App->player2->position.y > App->player1->position.y && App->player2->isActive==true)
 	{
-		
 		PlayerPosition.y = App->player2->position.y;
 	}
 	else if(App->player1->position.y > App->player2->position.y && App->player1->isActive == true)
@@ -33,7 +32,7 @@ void Particle_Laser:: Move() {
 	if (going_up)
 	{
 		position.x = App->stage05->spawnPos.x + fixedPos.x;
-		position.y = fixedPos.y + App->stage05->spawnPos.y;
+		position.y = App->stage05->spawnPos.y + fixedPos.y;
 
 		if (PlayerPosition.y < fixedPos.y + App->stage05->spawnPos.y)
 			fixedPos.y -= speed.y;
@@ -68,8 +67,6 @@ void Particle_Laser:: Move() {
 	}
 	 if(go_left && going_up == false)
 		position.x -= speed.x;
-
-
 
 };
 

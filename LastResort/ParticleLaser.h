@@ -5,15 +5,7 @@
 
 class Particle_Laser : public Particle
 {
-private:
-	Animation LaserAnim;
-	int initialY;
-	fPoint PlayerPosition;
-	bool going_up;
-	bool go_right;
-	bool go_left;
 public:
-
 	Particle_Laser();
 	/*~Particle_Laser() {
 
@@ -23,6 +15,13 @@ public:
 	Particle_Laser(Particle& p);
 	void Move();
 	void Draw();
+
+private:
+	Animation LaserAnim;
+	fPoint PlayerPosition;
+	bool going_up;
+	bool go_right;
+	bool go_left;
 };
 
 #endif // __PARTICLE_LASER_H__

@@ -11,9 +11,6 @@ public:
 
 	void Move();
 	void Draw();
-
-private:
-	iPoint fixedPos;
 };
 
 #endif // __PARTICLE_ORANGE_BALL_H__

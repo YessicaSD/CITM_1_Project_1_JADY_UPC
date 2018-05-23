@@ -11,6 +11,7 @@
 #include "Player2.h"
 #include "ParticleLaser.h"
 #include "ParticleGMissile.h"
+#include "Particle_OrangeBall.h"
 
 #include "ModuleStage05.h"
 #include "SDL/include/SDL_timer.h"
@@ -172,6 +173,27 @@ ModuleParticles::ModuleParticles()
 	AsteroidDestroy.anim.PushBack({ 0,15,55,63 });
 	AsteroidDestroy.anim.speed = 0.2f;
 
+
+	//Orange ball
+	orangeBallExplosion.anim.PushBack({ 1, 6,  8,  8 });
+	orangeBallExplosion.anim.PushBack({ 10, 6,  8,  8 });
+	orangeBallExplosion.anim.PushBack({ 19, 6,  8,  8 });
+	orangeBallExplosion.anim.PushBack({ 25, 5,  9,  9 });
+	orangeBallExplosion.anim.PushBack({ 42, 2, 11, 11 });
+	orangeBallExplosion.anim.PushBack({ 54, 1, 13, 13 });
+	orangeBallExplosion.anim.PushBack({ 68, 0, 15, 15 });
+	orangeBallExplosion.anim.speed = 0.2;
+	orangeBallExplosion.anim.loop = false;
+	orangeBall.life = 10000;
+
+	orangeBall.anim.PushBack({ 1, 0, 5, 5 });
+	orangeBall.anim.PushBack({ 13, 0, 5, 5 });
+	orangeBall.anim.PushBack({ 25, 0, 5, 5 });
+	orangeBall.anim.PushBack({ 36, 0, 5, 5 });
+	orangeBall.anim.speed = 0.2;
+	orangeBall.anim.loop = true;
+	orangeBall.collision_fx = &orangeBallExplosion;
+	orangeBall.life = 10000;
 }
 
 ModuleParticles::~ModuleParticles()
@@ -250,8 +272,8 @@ update_status ModuleParticles::Update()
 		}
 		else if (SDL_GetTicks() >= p->born)
 		{
-			p->Draw();
 			p->Move();
+			p->Draw();
 		}
 	}
 	return UPDATE_CONTINUE;
@@ -270,7 +292,10 @@ void ModuleParticles::AddParticle(Particle& particle, int x, int y, SDL_Texture 
 			case PARTICLE_REGULAR:
 				p = new Particle(particle);
 				break;
-
+			case PARTICLE_ORANGE_BALL:
+				p = new Particle_OrangeBall(particle);
+				p->fixedPos.x = x - App->stage05->spawnPos.x;
+				p->fixedPos.y = y - App->stage05->spawnPos.y;
 			case PARTICLE_LASER:
 				p = new Particle_Laser(particle);
 				p->fixedPos.x = x - App->stage05->spawnPos.x;
@@ -281,7 +306,8 @@ void ModuleParticles::AddParticle(Particle& particle, int x, int y, SDL_Texture 
 				break;
 			}
 
-			if (p == nullptr) {
+			if (p == nullptr)
+			{
 				LOG("Particle cannot be spawneed")
 				break;
 			}
