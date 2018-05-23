@@ -16,9 +16,12 @@
 
 ModuleParticles::ModuleParticles()
 {
+	//Clear the array
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 		active[i] = nullptr;
-	//PLAYER-----------------------------------------------------------------//
+
+	//Push backs
+	//PLAYER-----------------------------------------------------------------
 	//Basic Shot Explosion Particle-----------------------------
 	basic_explosion.anim.PushBack({ 305,263, 16,16 }); //1
 	basic_explosion.anim.PushBack({ 287,263, 16,16 }); //2
@@ -262,22 +265,28 @@ update_status ModuleParticles::Update()
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
-		Particle* p = active[i];
-
-		if (p == nullptr)
+		//If there isn't a particle in that position of the array, go to the next particle in the array
+		if (active[i] == nullptr)
 		{
 			continue;
-		}	
-
-		if (p->UpdateParticle() == false)
-		{
-			delete p;
-			active[i] = nullptr;
 		}
 
-		else if (SDL_GetTicks() >= p->born)
+		//Check if it needs to be deleted
+		if (active[i]->CheckParticleDeath() == false)
 		{
-			p->Draw();
+			//Move
+			active[i]->Move();
+			//Draw
+			if (SDL_GetTicks() >= active[i]->born)
+			{
+				active[i]->Draw();
+			}
+		}
+		//Delete the particle
+		else
+		{
+			delete active[i];
+			active[i] = nullptr;
 		}
 	}
 	return UPDATE_CONTINUE;
@@ -334,8 +343,10 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 		// Always destroy particles that collide
 		if (active[i] != nullptr && active[i]->collider == c1)
 		{
+			// Add the collision particle where it collided
 			if (active[i]->collision_fx != nullptr)
 				AddParticle(*active[i]->collision_fx, active[i]->position.x, active[i]->position.y, active[i]->texture);
+			// Delete particle
 			delete active[i];
 			active[i] = nullptr;
 			break;
