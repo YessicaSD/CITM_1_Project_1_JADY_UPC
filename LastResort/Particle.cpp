@@ -9,10 +9,10 @@ Particle::Particle()
 	speed.SetToZero();
 }
 
-Particle::Particle(Particle& p)
+Particle::Particle(Particle& p, iPoint position)
 {
 	this->anim = p.anim;
-	this->position = p.position;
+	this->position = position;
 	this->speed = p.speed;
 	this->collision_fx = p.collision_fx;
 	this->born = p.born;

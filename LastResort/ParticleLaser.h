@@ -12,7 +12,7 @@ public:
 		if (collider != nullptr)
 			collider->to_delete = true;
 	};*/
-	Particle_Laser(Particle& p);
+	Particle_Laser(Particle&, iPoint);
 	void Move();
 	void Draw();
 

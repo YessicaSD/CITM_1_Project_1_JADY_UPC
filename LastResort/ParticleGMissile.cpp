@@ -6,11 +6,12 @@
 #include "Player2.h"
 
 
-Particle_G_Missile::Particle_G_Missile()
+Particle_G_Missile::Particle_G_Missile(Particle& p, iPoint position):Particle(p, position)
 {
 
 
 }
+
 void Particle_G_Missile::Move() {
 
 };

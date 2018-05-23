@@ -18,7 +18,7 @@ class Particle
 {
 public:
 	Particle();
-	Particle(Particle& p);
+	Particle(Particle& , iPoint);
 	~Particle();
 
 	bool CheckParticleDeath();

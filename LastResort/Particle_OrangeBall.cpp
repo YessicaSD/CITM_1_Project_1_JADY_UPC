@@ -8,7 +8,7 @@ Particle_OrangeBall::Particle_OrangeBall() : Particle()
 
 }
 
-Particle_OrangeBall::Particle_OrangeBall(Particle& p) : Particle(p)
+Particle_OrangeBall::Particle_OrangeBall(Particle& p, iPoint position) : Particle(p, position)
 {
 
 }

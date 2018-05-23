@@ -290,20 +290,20 @@ void ModuleParticles::AddParticle(Particle& particle, int x, int y, SDL_Texture 
 			switch (particle_type)
 			{
 			case PARTICLE_REGULAR:
-				p = new Particle(particle);
+				p = new Particle(particle, { x, y });
 				break;
 			case PARTICLE_ORANGE_BALL:
- 				p = new Particle_OrangeBall(particle);
+				p = new Particle_OrangeBall(particle, {x, y});
 				p->fixedPos.x = x - App->stage05->spawnPos.x;
 				p->fixedPos.y = y - App->stage05->spawnPos.y;
 				break;
 			case PARTICLE_LASER:
-				p = new Particle_Laser(particle);
+				p = new Particle_Laser(particle, { x, y });
 				p->fixedPos.x = x - App->stage05->spawnPos.x;
 				p->fixedPos.y = y - App->stage05->spawnPos.y;
 				break;
 			case PARTICLE_G_MISSILE:
-				p = new Particle_G_Missile();
+				p = new Particle_G_Missile(particle, { x, y });
 				break;
 			}
 
@@ -315,8 +315,6 @@ void ModuleParticles::AddParticle(Particle& particle, int x, int y, SDL_Texture 
 
 			active[i] = p;
 			p->born = SDL_GetTicks() + delay;
-			p->position.x = x;
-			p->position.y = y;
 			p->texture = tex; // texture
 			if (particle.collision_fx != nullptr)
 			{

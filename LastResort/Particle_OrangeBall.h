@@ -7,7 +7,7 @@ class Particle_OrangeBall : public Particle
 {
 public:
 	Particle_OrangeBall();
-	Particle_OrangeBall(Particle& p);
+	Particle_OrangeBall(Particle&, iPoint);
 
 	void Move();
 	void Draw();
