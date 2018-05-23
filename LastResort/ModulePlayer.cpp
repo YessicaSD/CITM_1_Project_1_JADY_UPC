@@ -285,6 +285,7 @@ void  ModulePlayer::ShotInput()
 	if (Shoot())
 	{
 		//- All of them shoot a basic shot
+		shoot = true;
 		App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
 		//- They have additional shots for some upgrades
 		if (currentPowerUp == POWERUP_TYPE::LASER)
@@ -293,9 +294,11 @@ void  ModulePlayer::ShotInput()
 			{
 			case 2:
 				//Basic laser
+				App->particles->AddParticle(App->particles->Basic_Laser, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
 				break;
 			case 3:
 				//Laser rings
+				App->particles->AddParticle(App->particles->Basic_Laser, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
 				break;
 			}
 		}
@@ -343,7 +346,7 @@ void  ModulePlayer::ShotInput()
 			}
 			else
 			{
-				shotFire.finished = false;
+				ShotLaserBasic.finished = false;
 				isShooting = false;
 				shoot = false;
 			}
