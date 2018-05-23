@@ -150,8 +150,8 @@ bool ModulePowerups::AddPowerup(int x, int y, POWERUP_TYPE type)//x and y should
 void ModulePowerups::OnCollision(Collider* c1, Collider* c2)
 {
 
-	ModulePlayer* playerTarjet = nullptr;
-	ModuleUnit* unitTarjet = nullptr;
+	ModulePlayer* playerTarget = nullptr;
+	ModuleUnit* unitTarget = nullptr;
 
 	for (uint i = 0; i < MAX_POWERUPS; ++i)
 	{
@@ -161,12 +161,12 @@ void ModulePowerups::OnCollision(Collider* c1, Collider* c2)
 			//We find which player got this powerup----------------------------------
 
 			if (c2 == App->player1->playerCol) {
-				playerTarjet = App->player1;
-				unitTarjet = App->unit1;
+				playerTarget = App->player1;
+				unitTarget = App->unit1;
 			}
 			else if (c2 == App->player2->playerCol) {
-				playerTarjet = App->player2;
-				unitTarjet = App->unit2;
+				playerTarget = App->player2;
+				unitTarget = App->unit2;
 			}
 
 
@@ -174,7 +174,7 @@ void ModulePowerups::OnCollision(Collider* c1, Collider* c2)
 
 			if (powerups[i]->type == SPEED || powerups[i]->type == DESPEED) {
 
-				powerups[i]->OnCollision(c2, playerTarjet);
+				powerups[i]->OnCollision(c2, playerTarget);
 				delete powerups[i];
 				powerups[i] = nullptr;
 				break;
@@ -183,33 +183,33 @@ void ModulePowerups::OnCollision(Collider* c1, Collider* c2)
 
 			//We give it this powerup-----------------------------------------------
 
-			if (playerTarjet->powerupUpgrades < 3)
+			if (playerTarget->powerupUpgrades < 3)
 			{
-				playerTarjet->powerupUpgrades++;
+				playerTarget->powerupUpgrades++;
 			}
-			if (playerTarjet->powerupUpgrades == 1)
+			if (playerTarget->powerupUpgrades == 1)
 			{
-				unitTarjet->Enable();
-				unitTarjet->playerToFollow = App->player1;
-				unitTarjet->position.x = App->player1->position.x + App->player1->playerCenter.x;
-				unitTarjet->position.y = App->player1->position.y + App->player1->playerCenter.y;
-				unitTarjet->power = 0;
-				unitTarjet->unitPhase == UnitPhase::positioning;
+				unitTarget->Enable();
+				unitTarget->playerToFollow = App->player1;
+				unitTarget->position.x = playerTarget->position.x + playerTarget->playerCenter.x;
+				unitTarget->position.y = playerTarget->position.y + playerTarget->playerCenter.x;
+				unitTarget->power = 0;
+				unitTarget->unitPhase == UnitPhase::positioning;
 			}
 
 			//Change unit type-----------------------------------------------------
 
 			if ((int)powerups[i]->animation->current_frame == 0)
 			{
-				unitTarjet->MakeUnitOrange();
+				unitTarget->MakeUnitOrange();
 			}
 			else
 			{
-				unitTarjet->MakeUnitBlue();
+				unitTarget->MakeUnitBlue();
 			}
 
 			//Callback PowerUp OnCollision-----------------------------------------
-			powerups[i]->OnCollision(c2, playerTarjet);
+			powerups[i]->OnCollision(c2, playerTarget);
 
 
 			delete powerups[i];
