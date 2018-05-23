@@ -4,6 +4,7 @@
 #include "SDL\include\SDL_timer.h"
 #include "ModuleStage05.h"
 #include "ModuleParticles.h"
+#include "ModuleAudio.h"
 
 Particle::Particle()
 {
@@ -22,8 +23,9 @@ Particle::Particle(Particle& p, iPoint position, Uint32 delay, COLLIDER_TYPE col
 	this->texture = tex;
 	this->fixedPos = position - App->stage05->spawnPos;
 	if (p.collision_fx != nullptr) { this->collision_fx = p.collision_fx; }
-	if (colType != COLLIDER_NONE) { this->collider = App->collision->AddCollider({ this->position.x, this->position.y ,this->anim.GetCurrentFrame().w, this->anim.GetCurrentFrame().h }, colType, (Module*)App->particles);
-	}
+	if (colType != COLLIDER_NONE) { this->collider = App->collision->AddCollider({ this->position.x, this->position.y ,this->anim.GetCurrentFrame().w, this->anim.GetCurrentFrame().h }, colType, (Module*)App->particles);	}
+	//Play audio
+	if (p.sfx != nullptr) { App->audio->ControlSFX(p.sfx, PLAY_AUDIO); }
 }
 
 Particle::~Particle()

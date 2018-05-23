@@ -303,17 +303,15 @@ void ModuleParticles::AddParticle(Particle& particle, int x, int y, SDL_Texture 
 				break;
 			}
 
+			//Check if the particle is still nullptr (that would mean it hasn't been created)
 			if (p == nullptr)
 			{
-				LOG("Particle cannot be spawned")
+				LOG("Particle could not be created.")
 				break;
 			}
 
+			//Associate new particle with a position in the array
 			active[i] = p;
-			p->texture = tex; // texture
-			//- Play audio
-			if (particle.sfx != nullptr) { App->audio->ControlSFX(particle.sfx, PLAY_AUDIO); }
-
 			break;
 		}
 	}
