@@ -196,12 +196,13 @@ bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, Uint32 delay, POWER
 }
 
 //Gets deleted if you instaspawn in a position that's different to the camera
-Enemy* ModuleEnemies::InstaSpawn(ENEMY_TYPES type, int x, int y, POWERUP_TYPE powerup_type)
+Enemy* ModuleEnemies::InstaSpawn(ENEMY_TYPES type, int x, int y, POWERUP_TYPE powerup_type, iPoint speed)
 {
 	EnemyInfo enemyInfo;
 	enemyInfo.type = type;
 	enemyInfo.x = x;
 	enemyInfo.y = y;
+	enemyInfo.speed = speed;
 	enemyInfo.delay = 0;
 	enemyInfo.pu_Type = powerup_type;
 	return SpawnEnemy(enemyInfo);

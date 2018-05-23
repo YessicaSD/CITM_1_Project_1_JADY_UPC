@@ -8,6 +8,7 @@
 #include "SDL\include\SDL.h"
 #include "MovPath.h"
 #include "SDL/include/SDL_timer.h"
+#include "Enemy_Middle_Asteroid.h"
 
 #define SHIP_COLLIDERS_NUM 47//The number of colliders the ship is made of (see Docs>shipColliders.psd)
 
@@ -63,6 +64,9 @@ public:
 	
 	//Music-----------------------------------
 	Mix_Music* lvl5Music = nullptr;
+
+	//Enemies--------------------------------
+	//Enemy asteroid1;
 };
 
 #endif
