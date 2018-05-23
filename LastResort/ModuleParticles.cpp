@@ -296,16 +296,20 @@ void ModuleParticles::AddParticle( Particle& sentParticle, int x, int y, SDL_Tex
 				p = new Particle(sentParticle);
 				AssociateParticleValues(p, sentParticle, x, y, tex, collider_type, delay, particle_type);
 				active[i] = p;
+				return;
 				break;
 			case PARTICLE_LASER:
 				p = new Particle_Laser(sentParticle);
 				AssociateParticleValues(p, sentParticle, x, y, tex, collider_type, delay, particle_type);
 				active[i] = p;
+				return;
 				break;
 			case PARTICLE_ORANGE_BALL:
 				p = new Particle_OrangeBall(sentParticle);
 				AssociateParticleValues(p, sentParticle, x, y, tex, collider_type, delay, particle_type);
 				active[i] = p;
+				return;
+				break;
 			}			
 		}
 	}
