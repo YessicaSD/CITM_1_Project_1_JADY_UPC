@@ -30,7 +30,7 @@ void Enemy_FrontTurret::Move()
 	{
 		App->particles->orangeBall.speed.x = -1;
 		App->particles->orangeBall.speed.y = -1;
-		App->particles->AddParticle(App->particles->orangeBall, position.x, position.y, App->particles->ParticleTexture, COLLIDER_TYPE::COLLIDER_ENEMY_SHOT, 0, PARTICLE_TYPE::PARTICLE_FOLLOWS_BACKGROUND);
+		App->particles->AddParticle(App->particles->orangeBall, position.x, position.y, App->particles->ParticleTexture, COLLIDER_TYPE::COLLIDER_ENEMY_SHOT, 0, PARTICLE_TYPE::PARTICLE_ORANGE_BALL);
 		lastShotTime = SDL_GetTicks();
 	}
 }

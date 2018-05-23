@@ -283,93 +283,47 @@ update_status ModuleParticles::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle( Particle& particle, int x, int y, SDL_Texture *tex,  COLLIDER_TYPE collider_type, Uint32 delay, PARTICLE_TYPE particle_type)
+void ModuleParticles::AddParticle( Particle& sentParticle, int x, int y, SDL_Texture *tex,  COLLIDER_TYPE collider_type, Uint32 delay, PARTICLE_TYPE particle_type)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
 		if (active[i] == nullptr)
 		{
+			Particle * p;
 			switch(particle_type)
 			{
 			case PARTICLE_REGULAR:
-				AddRegularParticle(i, particle, x, y, tex, collider_type, delay, particle_type);
+				p = new Particle(sentParticle);
+				AssociateParticleValues(p, sentParticle, x, y, tex, collider_type, delay, particle_type);
+				active[i] = p;
 				break;
 			case PARTICLE_LASER:
-				AddLaserParticle(i, particle, x, y, tex, collider_type, delay, particle_type);
+				p = new Particle_Laser(sentParticle);
+				AssociateParticleValues(p, sentParticle, x, y, tex, collider_type, delay, particle_type);
+				active[i] = p;
 				break;
-			case PARTICLE_FOLLOWS_BACKGROUND:
-				AddFollowBackgroundParticle(i, particle, x, y, tex, collider_type, delay, particle_type);
+			case PARTICLE_ORANGE_BALL:
+				p = new Particle_OrangeBall(sentParticle);
+				AssociateParticleValues(p, sentParticle, x, y, tex, collider_type, delay, particle_type);
+				active[i] = p;
 			}			
 		}
 	}
 }
 
-void ModuleParticles::AddRegularParticle(int arrayPos, Particle& particle, int x, int y, SDL_Texture *tex, COLLIDER_TYPE collider_type, Uint32 delay, PARTICLE_TYPE particle_type)
+void ModuleParticles::AssociateParticleValues(Particle* newParticle, Particle& sentParticle, int x, int y, SDL_Texture *tex, COLLIDER_TYPE collider_type, Uint32 delay, PARTICLE_TYPE particle_type)
 {
-	Particle* p = new Particle(particle);
-	p->born = SDL_GetTicks() + delay;
-	p->position.x = x;
-	p->position.y = y;
-	p->texture = tex; // texture
-	if (particle.collision_fx != nullptr)
-	{
-		p->collision_fx = particle.collision_fx;
-	}
-	if (particle.sfx != nullptr)
-	{
-		App->audio->ControlSFX(particle.sfx, PLAY_AUDIO);
-	}
-	if (collider_type != COLLIDER_NONE)
-		//Updated for not spawn it since 1 frame on x,y animation rect values
-		p->collider = App->collision->AddCollider({ p->position.x, p->position.y ,p->anim.GetCurrentFrame().w, p->anim.GetCurrentFrame().h }, collider_type, this);
-	active[arrayPos] = p;
-}
+	SDL_Rect currentFrame = newParticle->anim.GetCurrentFrame();
 
-void ModuleParticles::AddLaserParticle(int arrayPos, Particle& particle, int x, int y, SDL_Texture *tex, COLLIDER_TYPE collider_type, Uint32 delay, PARTICLE_TYPE particle_type)
-{
-	Particle* p = new Particle_Laser(particle);
-	p->born = SDL_GetTicks() + delay;
-	p->position.x = x;
-	p->position.y = y;
-	p->initialPosition.x = x - App->stage05->spawnPos.x;
-	p->initialPosition.y = y - App->stage05->spawnPos.y;
-	p->texture = tex; // texture
-	if (particle.collision_fx != nullptr)
-	{
-		p->collision_fx = particle.collision_fx;
-	}
-	if (particle.sfx != nullptr)
-	{
-		App->audio->ControlSFX(particle.sfx, PLAY_AUDIO);
-	}
-	if (collider_type != COLLIDER_NONE)
-		//Updated for not spawn it since 1 frame on x,y animation rect values
-		p->collider = App->collision->AddCollider({ p->position.x, p->position.y ,p->anim.GetCurrentFrame().w, p->anim.GetCurrentFrame().h }, collider_type, this);
-	active[arrayPos] = p;
-}
-
-
-void ModuleParticles::AddFollowBackgroundParticle(int arrayPos, Particle& particle, int x, int y, SDL_Texture *tex, COLLIDER_TYPE collider_type, Uint32 delay, PARTICLE_TYPE particle_type)
-{
-	Particle* p = new Particle_OrangeBall(particle);
-	p->born = SDL_GetTicks() + delay;
-	p->position.x = x;
-	p->position.y = y;
-	//p->initialPosition.x = x - App->stage05->spawnPos.x;
-	//p->initialPosition.y = y - App->stage05->spawnPos.y;
-	p->texture = tex; // texture
-	if (particle.collision_fx != nullptr)
-	{
-		p->collision_fx = particle.collision_fx;
-	}
-	if (particle.sfx != nullptr)
-	{
-		App->audio->ControlSFX(particle.sfx, PLAY_AUDIO);
-	}
-	if (collider_type != COLLIDER_NONE)
-		//Updated for not spawn it since 1 frame on x,y animation rect values
-		p->collider = App->collision->AddCollider({ p->position.x, p->position.y ,p->anim.GetCurrentFrame().w, p->anim.GetCurrentFrame().h }, collider_type, this);
-	active[arrayPos] = p;
+	newParticle->born = SDL_GetTicks() + delay;
+	newParticle->position.x = x;
+	newParticle->position.y = y;
+	newParticle->fixedPos.x = x - App->stage05->spawnPos.x;
+	newParticle->fixedPos.y = y - App->stage05->spawnPos.y;
+	newParticle->texture = tex;
+	if (sentParticle.collision_fx != nullptr) { newParticle->collision_fx = sentParticle.collision_fx; }
+	if (sentParticle.sfx != nullptr) { App->audio->ControlSFX(sentParticle.sfx, PLAY_AUDIO); }
+	if (collider_type != COLLIDER_NONE) { newParticle->collider = App->collision->AddCollider({ newParticle->position.x, newParticle->position.y ,currentFrame.w, currentFrame.h }, collider_type, this); }
 }
 
 void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
