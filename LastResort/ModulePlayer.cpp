@@ -282,7 +282,6 @@ void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
 
 void  ModulePlayer::ShotInput()
 {
-	//Shoot-------------------------------------------------------------------------
 	if (Shoot())
 	{
 		//- All of them shoot a basic shot
@@ -290,9 +289,10 @@ void  ModulePlayer::ShotInput()
 		//- They have additional shots for some upgrades
 		if (currentPowerUp == POWERUP_TYPE::LASER)
 		{
-			switch(powerupUpgrades)
+			switch (powerupUpgrades)
 			{
 			case 2:
+				//Basic laser
 				break;
 			case 3:
 				//Laser rings
@@ -323,18 +323,18 @@ void  ModulePlayer::ShotInput()
 				break;
 			}
 		}
-	/*	if (isShooting == false) { shoot = true; }
+		/*	if (isShooting == false) { shoot = true; }
 		if (Controllshoot == true) {
-			Controllshoot = false;
+		Controllshoot = false;
 
 		}*/
 	}
 
-	//Ship fire animation (in front of the ship)---------------------------------
+	//Ship fire animation (in front of the ship)
 	if (shoot == true)
 	{
-		//Laser fire (laser is the only powerup which has a different animation when it shoots)
-		if (currentPowerUp == POWERUP_TYPE::LASER &&  powerupUpgrades > 1)
+		//- Laser ship fire. The laser powerup is the only one which has a different animation for the ship fire
+		if (currentPowerUp == POWERUP_TYPE::LASER && powerupUpgrades > 1)
 		{
 			if (ShotLaserBasic.finished == false)
 			{
@@ -348,7 +348,8 @@ void  ModulePlayer::ShotInput()
 				shoot = false;
 			}
 		}
-		//Basic fire
+
+		//- Basic ship fire
 		else
 		{
 			if (shotFire.finished == false)
@@ -366,7 +367,8 @@ void  ModulePlayer::ShotInput()
 	}
 }
 
-void ModulePlayer::MovementInput() {
+void ModulePlayer::MovementInput()
+{
 
 	if (MoveLeft() == true) {
 		//---------Movement-----------------------------------------------------------
