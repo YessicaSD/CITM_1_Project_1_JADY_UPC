@@ -7,7 +7,7 @@ class Particle_OrangeBall : public Particle
 {
 public:
 	Particle_OrangeBall();
-	Particle_OrangeBall(Particle&, iPoint, Uint32, COLLIDER_TYPE colType);
+	Particle_OrangeBall(Particle&, iPoint, Uint32, COLLIDER_TYPE colType, SDL_Texture* tex);
 
 	void Move();
 	void Draw();

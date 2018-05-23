@@ -8,7 +8,7 @@ Particle_OrangeBall::Particle_OrangeBall() : Particle()
 
 }
 
-Particle_OrangeBall::Particle_OrangeBall(Particle& p, iPoint position, Uint32 delay, COLLIDER_TYPE colType) : Particle(p, position, delay, colType)
+Particle_OrangeBall::Particle_OrangeBall(Particle& p, iPoint position, Uint32 delay, COLLIDER_TYPE colType, SDL_Texture* tex) : Particle(p, position, delay, colType, tex)
 {
 
 }

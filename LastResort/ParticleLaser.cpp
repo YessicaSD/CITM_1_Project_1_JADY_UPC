@@ -5,7 +5,7 @@
 #include "Player1.h"
 #include "Player2.h"
 
-Particle_Laser::Particle_Laser(Particle& p, iPoint position, Uint32 delay, COLLIDER_TYPE colType) : Particle(p, position, delay, colType)
+Particle_Laser::Particle_Laser(Particle& p, iPoint position, Uint32 delay, COLLIDER_TYPE colType, SDL_Texture* tex) : Particle(p, position, delay, colType, tex)
 {
 	if (App->player1->isActive == true && App->player2->isActive == false)
 	{

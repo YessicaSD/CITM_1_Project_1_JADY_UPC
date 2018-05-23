@@ -18,7 +18,7 @@ class Particle
 {
 public:
 	Particle();
-	Particle(Particle& , iPoint, Uint32, COLLIDER_TYPE colType);
+	Particle(Particle& , iPoint, Uint32, COLLIDER_TYPE colType, SDL_Texture* tex);
 	~Particle();
 
 	bool CheckParticleDeath();

@@ -14,7 +14,7 @@ private:
 	bool go_left;
 public:
 
-	Particle_G_Missile(Particle&, iPoint, Uint32, COLLIDER_TYPE colType);
+	Particle_G_Missile(Particle&, iPoint, Uint32, COLLIDER_TYPE colType, SDL_Texture* tex);
 	void Move();
 	void Draw();
 };

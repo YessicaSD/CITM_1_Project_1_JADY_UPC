@@ -11,7 +11,7 @@ Particle::Particle()
 	speed.SetToZero();
 }
 
-Particle::Particle(Particle& p, iPoint position, Uint32 delay, COLLIDER_TYPE colType)
+Particle::Particle(Particle& p, iPoint position, Uint32 delay, COLLIDER_TYPE colType, SDL_Texture* tex)
 {
 	this->anim = p.anim;
 	this->position = position;
@@ -19,7 +19,7 @@ Particle::Particle(Particle& p, iPoint position, Uint32 delay, COLLIDER_TYPE col
 	this->collision_fx = p.collision_fx;
 	this->born = SDL_GetTicks() + delay;
 	this->life = p.life;
-	this->texture = p.texture;//struct texture added
+	this->texture = tex;
 	this->fixedPos = position - App->stage05->spawnPos;
 	if (p.collision_fx != nullptr) { this->collision_fx = p.collision_fx; }
 	if (colType != COLLIDER_NONE) { this->collider = App->collision->AddCollider({ this->position.x, this->position.y ,this->anim.GetCurrentFrame().w, this->anim.GetCurrentFrame().h }, colType, (Module*)App->particles);
