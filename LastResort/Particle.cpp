@@ -9,13 +9,13 @@ Particle::Particle()
 	speed.SetToZero();
 }
 
-Particle::Particle(Particle& p, iPoint position)
+Particle::Particle(Particle& p, iPoint position, Uint32 delay)
 {
 	this->anim = p.anim;
 	this->position = position;
 	this->speed = p.speed;
 	this->collision_fx = p.collision_fx;
-	this->born = p.born;
+	this->born = SDL_GetTicks() + delay;
 	this->life = p.life;
 	this->texture = p.texture;//struct texture added
 }

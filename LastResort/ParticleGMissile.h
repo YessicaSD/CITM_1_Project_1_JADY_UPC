@@ -14,7 +14,7 @@ private:
 	bool go_left;
 public:
 
-	Particle_G_Missile(Particle&, iPoint);
+	Particle_G_Missile(Particle&, iPoint, Uint32);
 	void Move();
 	void Draw();
 };

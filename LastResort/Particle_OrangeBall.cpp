@@ -8,7 +8,7 @@ Particle_OrangeBall::Particle_OrangeBall() : Particle()
 
 }
 
-Particle_OrangeBall::Particle_OrangeBall(Particle& p, iPoint position) : Particle(p, position)
+Particle_OrangeBall::Particle_OrangeBall(Particle& p, iPoint position, Uint32 delay) : Particle(p, position, delay)
 {
 
 }
