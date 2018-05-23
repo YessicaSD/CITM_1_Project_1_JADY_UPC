@@ -50,6 +50,7 @@ bool ModulePlayer::Start()
 	//audios-------------------------------------------------------------------------
 	init_sfx = App->audio->LoadSFX("Assets/initial_sfx.wav");
 	//collider-----------------------------------------------------------------------
+	if (isActive)
 	playerCol = App->collision->AddCollider({ position.x, position.y + 2, 24, 8 }, COLLIDER_TYPE::COLLIDER_NONE, this);
 
 	return ret;
@@ -69,7 +70,11 @@ void ModulePlayer::Reappear() {
 	isInvincible = true;
 	invincibilityFrames = INVINCIBILITY_FRAMES;
 	//collider-----------------------------------------------------------------------
+	if(playerCol!=nullptr)
 	playerCol->type = COLLIDER_TYPE::COLLIDER_GOD;
+
+	else
+	playerCol = App->collision->AddCollider({ position.x, position.y + 2, 24, 8 }, COLLIDER_TYPE::COLLIDER_GOD, this);
 
 }
 
@@ -115,9 +120,13 @@ update_status ModulePlayer::Update()
 		else
 		{
 			//Go to god mode
-			playerCol->type = COLLIDER_GOD;
-			SDL_SetTextureColorMod(PlayerTexture, 255, 255, 150);
-			godMode = true;
+			if (playerCol != nullptr)
+			{
+				playerCol->type = COLLIDER_GOD;
+				SDL_SetTextureColorMod(PlayerTexture, 255, 255, 150);
+				godMode = true;
+			}
+			
 		}
 	}
 	//Shots----------------------------------------------------------------------------
@@ -342,7 +351,7 @@ void  ModulePlayer::ShotInput()
 			if (ShotLaserBasic.finished == false)
 			{
 				isShooting = true;
-				App->render->Blit(PlayerTexture, position.x + 32, position.y + 4-ShotLaserBasic.GetFrame().h/2, &ShotLaserBasic.GetFrameEx());
+				App->render->Blit(PlayerTexture, position.x + 32, position.y + 3-ShotLaserBasic.GetFrame().h/2, &ShotLaserBasic.GetFrameEx());
 			}
 			else
 			{

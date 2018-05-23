@@ -48,6 +48,7 @@ bool ModuleStageFunctionality::Start()
 	App->collision->Enable();
 	App->enemies->Enable();
 	App->powerups->Enable();
+	App->ui->currentScene = STAGE_SCENE;
 	return true;
 }
 

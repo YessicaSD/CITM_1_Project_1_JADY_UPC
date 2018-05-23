@@ -114,7 +114,7 @@ bool Module5lvlScene::Start()
 	//Enable ---------------------------------------------------------------------
 	App->stageFunctionality->Enable();
 	App->stageFunctionality->currentStage = this;
-	App->ui->currentScene = STAGE_SCENE;
+	
 
 	//Positions--------------------------------------------------------------------------------------------------
 	if (currentCheckPoint == 0) {
