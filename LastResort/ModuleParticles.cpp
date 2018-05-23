@@ -309,16 +309,13 @@ void ModuleParticles::AddParticle(Particle& particle, int x, int y, SDL_Texture 
 
 			if (p == nullptr)
 			{
-				LOG("Particle cannot be spawneed")
+				LOG("Particle cannot be spawned")
 				break;
 			}
 
 			active[i] = p;
 			p->texture = tex; // texture
-			if (particle.collision_fx != nullptr)
-			{
-				p->collision_fx = particle.collision_fx;
-			}
+
 			if (particle.sfx != nullptr)
 			{
 				App->audio->ControlSFX(particle.sfx, PLAY_AUDIO);

@@ -20,6 +20,7 @@ Particle::Particle(Particle& p, iPoint position, Uint32 delay)
 	this->life = p.life;
 	this->texture = p.texture;//struct texture added
 	this->fixedPos = position - App->stage05->spawnPos;
+	if (p.collision_fx != nullptr) { this->collision_fx = p.collision_fx; }
 }
 
 Particle::~Particle()
