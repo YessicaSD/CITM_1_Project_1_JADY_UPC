@@ -342,7 +342,7 @@ void  ModulePlayer::ShotInput()
 			if (ShotLaserBasic.finished == false)
 			{
 				isShooting = true;
-				App->render->Blit(PlayerTexture, position.x + 32, position.y + 1, &ShotLaserBasic.GetFrameEx());
+				App->render->Blit(PlayerTexture, position.x + 32, position.y + 4-ShotLaserBasic.GetFrame().h/2, &ShotLaserBasic.GetFrameEx());
 			}
 			else
 			{
