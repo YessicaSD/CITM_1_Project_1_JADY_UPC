@@ -88,10 +88,10 @@ void Particle::Draw()
 	//Update the collider
 	if (collider != nullptr)//INFO: We check if the collider is nullptr because not all particles instanciate a collider
 	{
-		collider->SetPos(position.x - currentFrame.w / 2, position.y - currentFrame.h / 2);
+		collider->SetPos((int)position.x - currentFrame.w / 2, (int)position.y - currentFrame.h / 2);
 		collider->SetMeasurements(currentFrame.w, currentFrame.h);
 	}
 
 	//Draw the particle
-	App->render->Blit(this->texture, position.x - currentFrame.w / 2, position.y - currentFrame.h / 2, &currentFrame);
+	App->render->Blit(this->texture, (int)position.x - currentFrame.w / 2, (int)position.y - currentFrame.h / 2, &currentFrame);
 }

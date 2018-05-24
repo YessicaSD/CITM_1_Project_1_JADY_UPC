@@ -18,7 +18,7 @@ public:
 
 private:
 	Animation LaserAnim;
-	fPoint PlayerPosition;
+	fPoint playerPos;
 	bool going_up;
 	bool go_right;
 	bool go_left;
