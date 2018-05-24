@@ -160,7 +160,7 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(REDBATS, 275, 270);
 	App->enemies->AddEnemy(REDBATS, 300, 270);
 	App->enemies->AddEnemy(REDBATS, 325, 270);
-	App->enemies->AddEnemy(REDBATS, 350, 270);
+	App->enemies->AddEnemy(REDBATS, 325, 270,800);
 
 	App->enemies->AddEnemy(ROTATING_TURRET, 111, 176);
 	App->enemies->AddEnemy(ROTATING_TURRET, 159, 192);
