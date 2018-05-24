@@ -226,11 +226,11 @@ bool ModuleUnit::CleanUp()
 	App->textures->Unload(throwUnitOrangeTx);
 	App->textures->Unload(throwUnitBlueTx);
 	//If we have created a unit collider, we destroy it
-	if (unitCol != nullptr)           { unitCol->type = COLLIDER_TYPE::COLLIDER_NONE; }
-	if (hitDetectionUp != nullptr)    { hitDetectionUp->type = COLLIDER_TYPE::COLLIDER_NONE; }
-	if (hitDetectionDown != nullptr)  { hitDetectionDown->type = COLLIDER_TYPE::COLLIDER_NONE; }
-	if (hitDetectionLeft != nullptr)  { hitDetectionLeft->type = COLLIDER_TYPE::COLLIDER_NONE; }
-	if (hitDetectionRight != nullptr) { hitDetectionRight->type = COLLIDER_TYPE::COLLIDER_NONE; }
+	if (unitCol != nullptr)           { unitCol->type = COLLIDER_TYPE::COLLIDER_IGNORE_HIT; }
+	if (hitDetectionUp != nullptr)    { hitDetectionUp->type = COLLIDER_TYPE::COLLIDER_IGNORE_HIT; }
+	if (hitDetectionDown != nullptr)  { hitDetectionDown->type = COLLIDER_TYPE::COLLIDER_IGNORE_HIT; }
+	if (hitDetectionLeft != nullptr)  { hitDetectionLeft->type = COLLIDER_TYPE::COLLIDER_IGNORE_HIT; }
+	if (hitDetectionRight != nullptr) { hitDetectionRight->type = COLLIDER_TYPE::COLLIDER_IGNORE_HIT; }
 	//if (unitCol != nullptr)           { unitCol->to_delete = true; }
 	//if (hitDetectionUp != nullptr)    { hitDetectionUp->to_delete = true; }
 	//if (hitDetectionDown != nullptr)  { hitDetectionDown->to_delete = true; }

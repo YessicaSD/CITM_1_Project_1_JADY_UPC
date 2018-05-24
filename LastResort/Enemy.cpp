@@ -38,7 +38,7 @@ void Enemy::OnCollision(Collider* collider)
 {
 	//LOG("Collider %i ", collider->type);
 	//Explosion type REMEMBER: Improve it for 1.0-----------------------
-	App->particles->AddParticle(App->particles->g_explosion02, { position.x, position.y }, { 0 ,0 }, App->particles->g_explosion02.texture, COLLIDER_NONE, 0);
+	App->particles->AddParticle(App->particles->g_explosion02, { position.x, position.y }, { 0 ,0 }, App->particles->g_explosion02.texture, COLLIDER_IGNORE_HIT, 0);
 
 	//Sfx REMEMBER: Improve it for 1.0----------------------------------
 	if (SDL_GetTicks() % 2)

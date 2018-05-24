@@ -51,7 +51,7 @@ bool ModulePlayer::Start()
 	init_sfx = App->audio->LoadSFX("Assets/initial_sfx.wav");
 	//collider-----------------------------------------------------------------------
 	if (isActive)
-	playerCol = App->collision->AddCollider({ position.x, position.y + 2, 24, 8 }, COLLIDER_TYPE::COLLIDER_NONE, this);
+	playerCol = App->collision->AddCollider({ position.x, position.y + 2, 24, 8 }, COLLIDER_TYPE::COLLIDER_IGNORE_HIT, this);
 
 	return ret;
 }
@@ -440,7 +440,7 @@ void ModulePlayer::Winlvl()
 {
 	if (godMode == false)
 	{
-		playerCol->type = COLLIDER_NONE;
+		playerCol->type = COLLIDER_IGNORE_HIT;
 		godMode = true;
 	}
 

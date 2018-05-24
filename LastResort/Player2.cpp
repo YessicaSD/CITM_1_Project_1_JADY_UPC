@@ -197,7 +197,7 @@ void Player2::KillUnit()
 		    { (int)App->unit2->position.x, (int)App->unit2->position.y },
 		    { 0 , 0 },
 			App->particles->g_explosion02.texture,
-			COLLIDER_NONE,
+			COLLIDER_IGNORE_HIT,
 			0);//Explosion type REMEMBER: Improve it for 1.0
 	}
 	App->unit2->currentOrbit = App->unit2->currentTurnAround = angleValue[E];
