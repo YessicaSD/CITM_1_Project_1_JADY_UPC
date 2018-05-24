@@ -41,17 +41,17 @@ bool ModuleParticles::Start()
 	explosionTx = App->textures->Load("Assets/General/Fx/Explosion_2.png");
 	laserTx     = App->textures->Load("Assets/General/Enemies/Laser_Niv5.png");
 	//- Load audios
-	Basic_LaserFx      = App->audio->LoadSFX("Assets/014. Lasser_2-Center.WAV");
-	basic_shot_sfx     = App->audio->LoadSFX("Assets/004. Shot - center.wav");
-	death_sfx          = App->audio->LoadSFX("Assets/005. Death.wav");
+	basicLaserFx      = App->audio->LoadSFX("Assets/014. Lasser_2-Center.WAV");
+	basicShotSfx     = App->audio->LoadSFX("Assets/004. Shot - center.wav");
+	deathSfx          = App->audio->LoadSFX("Assets/005. Death.wav");
 	g_explosion01_1sfx = App->audio->LoadSFX("Assets/General/Fx/Explosion_1.wav");
 	g_explosion02_1sfx = App->audio->LoadSFX("Assets/General/Fx/Explosion_2.wav");
 	//- Initializate textures
 	g_explosion02.texture = explosionTx;
 	//- Initializate audios
-	Basic_Laser.sfx = Basic_LaserFx;
-	basicShot.sfx = basic_shot_sfx;
-	death_explosion.sfx = death_sfx;
+	basicLaser.sfx = basicLaserFx;
+	basicShot.sfx = basicShotSfx;
+	death_explosion.sfx = deathSfx;
 	return true;
 }
 
@@ -65,9 +65,9 @@ bool ModuleParticles::CleanUp()
 	App->textures->Unload(laserTx);
 	App->textures->Unload(particlesTx);
 	//audios---------------------------------------------------
-	App->audio->UnloadSFX(basic_shot_sfx);
-	App->audio->UnloadSFX(death_sfx);
-	App->audio->UnloadSFX(Basic_LaserFx);
+	App->audio->UnloadSFX(basicShotSfx);
+	App->audio->UnloadSFX(deathSfx);
+	App->audio->UnloadSFX(basicLaserFx);
 	App->audio->UnloadSFX(g_explosion01_1sfx);
 	App->audio->UnloadSFX(g_explosion02_1sfx);
 	//----------------------------------------------------------
@@ -208,15 +208,15 @@ void ModuleParticles::InitParticleValues()
 	unitShot.collision_fx = &unit_explosion;
 
 	//LaserShot particle 
-	Basic_Laser.anim.PushBack({ 43,257,16,3 });
-	Basic_Laser.anim.PushBack({ 17,257,24,3 });
-	Basic_Laser.anim.PushBack({ 61,257,32,3 });
-	Basic_Laser.anim.PushBack({ 83,252,40,3 });
-	Basic_Laser.anim.PushBack({ 17,252,64,3 });
-	Basic_Laser.anim.PushBack({ 75,247,48,3 });
-	Basic_Laser.anim.PushBack({ 17,247,56,3 });
-	Basic_Laser.anim.speed = 2.0f;
-	Basic_Laser.life = 2000;
+	basicLaser.anim.PushBack({ 43,257,16,3 });
+	basicLaser.anim.PushBack({ 17,257,24,3 });
+	basicLaser.anim.PushBack({ 61,257,32,3 });
+	basicLaser.anim.PushBack({ 83,252,40,3 });
+	basicLaser.anim.PushBack({ 17,252,64,3 });
+	basicLaser.anim.PushBack({ 75,247,48,3 });
+	basicLaser.anim.PushBack({ 17,247,56,3 });
+	basicLaser.anim.speed = 2.0f;
+	basicLaser.life = 2000;
 
 	//Middle Boss shot particle------------------------------------
 	MiddleBossShot.anim.PushBack({ 232,248,18,17 });
@@ -343,4 +343,12 @@ void ModuleParticles::InitParticleValues()
 	orangeBall.anim.loop = true;
 	orangeBall.collision_fx = &orangeBallExplosion;
 	orangeBall.life = 10000;
+
+	//Fireball
+	fireBall.anim.PushBack({ 1, 287, 64, 32 });
+	fireBall.anim.PushBack({ 1, 321, 59, 32 });
+	fireBall.anim.PushBack({ 1, 355, 53, 32 });
+	fireBall.anim.pingpong = true;
+	fireBall.anim.speed = 0.5f;
+	fireBall.life = 10000;
 }

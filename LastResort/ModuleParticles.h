@@ -63,19 +63,19 @@ public:
 	//- Player
 	Particle basicShot;
 	Particle basic_explosion; //Basic Shot Explosion
-	Mix_Chunk* basic_shot_sfx = nullptr;
+	Mix_Chunk* basicShotSfx = nullptr;
 	Particle unit_explosion;//Unit shot explosion
 	Particle unitShot;
 	Particle death_explosion;//Death explosion 
-	Mix_Chunk* death_sfx = nullptr;
-	Particle Basic_Laser;
+	Mix_Chunk* deathSfx = nullptr;
+	Particle basicLaser;
 
 	//- General
 	Particle g_explosion01;
 	Particle g_explosion02;
 	Mix_Chunk* g_explosion01_1sfx = nullptr;
 	Mix_Chunk* g_explosion02_1sfx = nullptr;
-	Mix_Chunk* Basic_LaserFx = nullptr;
+	Mix_Chunk* basicLaserFx = nullptr;
 
 	//- Enemies
 	Particle MiddleBossShot;
@@ -85,6 +85,7 @@ public:
 	Particle LaserEnemyShot;
 	Particle AsteroidDestroy;
 	Particle MiddleAsteroidDestroy;
+	Particle fireBall;
 
 	//- OTHER
 	iPoint VectorMiddleBossShots;

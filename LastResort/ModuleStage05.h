@@ -74,6 +74,9 @@ public:
 	iPoint shipPartPos;
 	const int fallSpeed = 1;
 
+	//Fireball front-------------------------
+	int fireballFrameCounter = 0;
+
 	//Enemies--------------------------------
 	int redBatsKilled = 0;
 	int rotatingTurretsKilled = 0;

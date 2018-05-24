@@ -303,11 +303,11 @@ void  ModulePlayer::ShotInput()
 			{
 			case 2:
 				//Basic laser
-				App->particles->AddParticle(App->particles->Basic_Laser, { (float)(position.x + 32), (float)(position.y + 6)}, {10, 0 }, PlayerTexture, shot_colType, 0);
+				App->particles->AddParticle(App->particles->basicLaser, { (float)(position.x + 32), (float)(position.y + 6)}, {10, 0 }, PlayerTexture, shot_colType, 0);
 				break;
 			case 3:
 				//Laser rings
-				App->particles->AddParticle(App->particles->Basic_Laser, { (float)(position.x + 32), (float)(position.y + 6) }, { 10, 0 }, PlayerTexture, shot_colType, 0);
+				App->particles->AddParticle(App->particles->basicLaser, { (float)(position.x + 32), (float)(position.y + 6) }, { 10, 0 }, PlayerTexture, shot_colType, 0);
 				break;
 			}
 		}

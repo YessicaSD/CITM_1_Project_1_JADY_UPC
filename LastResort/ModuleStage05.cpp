@@ -186,9 +186,6 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(OUTDOOR_TURRET, 1119, 29);
 	App->enemies->AddEnemy(OUTDOOR_TURRET, 1151, 29);
 	App->enemies->AddEnemy(MECH_SPAWNER, 738, 192);
-	
-	//asteroid1 = App->enemies->InstaSpawn(MIDDLE_ASTEROID, 100, 100);
-
 
 	//Colliders--------------------------------------------------------------------------------------------------
 	for(int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
@@ -273,6 +270,16 @@ update_status Module5lvlScene::Update()
 
 	//----------Ship part------------------------------------------------
 	RenderShipPart();
+	//----------Fireball front-------------------------------------------
+	if(fireballFrameCounter >= 72)
+	{
+		App->particles->AddParticle(App->particles->fireBall, { (float)spawnPos.x + 45, (float)spawnPos.y + 129 }, { -3, 0 }, App->particles->particlesTx, COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE, 0, PARTICLE_FOLLOW_BACKGROUND);
+		fireballFrameCounter = 0;
+	}
+	else
+	{
+		fireballFrameCounter++;
+	}
 
 	return UPDATE_CONTINUE;
 }
