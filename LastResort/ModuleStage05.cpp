@@ -158,7 +158,7 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(REDBATS, 275, 270);
 	App->enemies->AddEnemy(REDBATS, 300, 270);
 	App->enemies->AddEnemy(REDBATS, 325, 270);
-	App->enemies->AddEnemy(REDBATS, 325, 270);
+	App->enemies->AddEnemy(REDBATS, 350, 270);
 
 	App->enemies->AddEnemy(REDBATS, 325, -20);
 	App->enemies->AddEnemy(REDBATS, 400, -25);
