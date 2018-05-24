@@ -324,7 +324,7 @@ void ModuleCollision::DebugDraw()
 			App->render->DrawQuad(colliders[i]->rect, 255, 125, 125, alpha);
 			break;
 		case COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE: // magenta
-			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
+			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
 			break;
 		}
 	}

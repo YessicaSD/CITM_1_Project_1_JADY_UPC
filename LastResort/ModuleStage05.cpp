@@ -158,13 +158,15 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(REDBATS, 275, 270);
 	App->enemies->AddEnemy(REDBATS, 300, 270);
 	App->enemies->AddEnemy(REDBATS, 325, 270);
-	App->enemies->AddEnemy(REDBATS, 325, 270);
+	App->enemies->AddEnemy(REDBATS, 350, 270);
 
 	App->enemies->AddEnemy(REDBATS, 325, -20);
 	App->enemies->AddEnemy(REDBATS, 400, -25);
 	App->enemies->AddEnemy(REDBATS, 404, -25,800);
 	App->enemies->AddEnemy(REDBATS, 404, -25, 1400);
 	App->enemies->AddEnemy(REDBATS, 404, -25, 1800);
+
+	App->enemies->AddEnemy(REDBATS, 404, -80, 2000);
 
 	App->enemies->AddEnemy(FRONT_TURRET, 47, 64);
 

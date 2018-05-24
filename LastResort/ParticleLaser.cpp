@@ -79,8 +79,12 @@ void Particle_Laser::Draw()
 	SDL_Rect currentFrame = anim.GetCurrentFrame();
 
 	//Update the collider
-	collider->SetPos(position.x, position.y - currentFrame.h / 2);
-	collider->SetMeasurements(currentFrame.w, currentFrame.h);
+	if (collider != nullptr)
+	{
+		collider->SetPos(position.x, position.y - currentFrame.h / 2);
+		collider->SetMeasurements(currentFrame.w, currentFrame.h);
+	}
+	
 
 	//Render
 	if (going_up == true || go_left == true)
