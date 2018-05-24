@@ -236,7 +236,7 @@ Enemy* ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			enemies[i] = new Enemy_RedBats(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 1, 100, info.pu_Type);
 			break;
 		case ENEMY_TYPES::ROTATING_TURRET:
-			enemies[i] = new Enemy_RotatingTurret(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 50, 200, info.pu_Type);
+			enemies[i] = new Enemy_RotatingTurret(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 12, 200, info.pu_Type);
 			break;
 		case ENEMY_TYPES::PINATA:
 			enemies[i] = new Enemy_Pinata(info.x, info.y, 1, 200, info.pu_Type);

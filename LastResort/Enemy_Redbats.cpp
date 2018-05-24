@@ -57,7 +57,7 @@ void Enemy_RedBats::OnCollision(Collider* collider)
 	}
 
 	//Explosion type REMEMBER: Improve it for 1.0-----------------------
-	App->particles->AddParticle(App->particles->g_explosion02, { (float)position.x, (float)position.y }, { 0 ,0 }, App->particles->g_explosion02.texture, COLLIDER_IGNORE_HIT, 0);
+	App->particles->AddParticle(App->particles->g_explosion02, { (float)position.x, (float)position.y }, { 0, 0 }, App->particles->g_explosion02.texture, COLLIDER_IGNORE_HIT, 0);
 
 	//Sfx REMEMBER: Improve it for 1.0----------------------------------
 	if (SDL_GetTicks() % 2)
