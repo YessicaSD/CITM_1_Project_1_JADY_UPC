@@ -202,6 +202,27 @@ bool Module5lvlScene::Start()
 	return ret;
 }
 
+update_status Module5lvlScene::PreUpdate()
+{
+	//----------Stars Scroll----------------------------------------------
+
+	scroll.x -= 10;
+	scroll.y += cameraMovement.GetCurrentPosition().VectU().y * 2;
+	if (scroll.x <= -SCREEN_WIDTH)
+		scroll.x = 0;
+	if (scroll.y <= -SCREEN_HEIGHT)
+	{
+		scroll.y = 0;
+	}
+
+	App->render->Blit(StarsTexture, scroll.x, -scroll.y, NULL);
+	App->render->Blit(StarsTexture, scroll.x + SCREEN_WIDTH, -scroll.y, NULL);
+	App->render->Blit(StarsTexture, scroll.x, -scroll.y - SCREEN_HEIGHT, NULL);
+	App->render->Blit(StarsTexture, scroll.x + SCREEN_WIDTH, -scroll.y - SCREEN_HEIGHT, NULL);
+
+	return update_status::UPDATE_CONTINUE;
+};
+
 update_status Module5lvlScene::Update()
 {
 	
@@ -238,21 +259,6 @@ update_status Module5lvlScene::Update()
 
 	//Background----------------------------------------------------------------------------------------------------//
 
-	//----------Stars Scroll----------------------------------------------
-
-	scroll.x -= 10;
-	scroll.y += cameraMovement.GetCurrentPosition().VectU().y*2;
-	if (scroll.x <= -SCREEN_WIDTH)
-		scroll.x = 0;
-	if (scroll.y <= -SCREEN_HEIGHT)
-	{
-		scroll.y = 0;
-	}
-
-	App->render->Blit(StarsTexture, scroll.x, -scroll.y, NULL);
-	App->render->Blit(StarsTexture, scroll.x+SCREEN_WIDTH,- scroll.y, NULL);
-	App->render->Blit(StarsTexture, scroll.x, -scroll.y-SCREEN_HEIGHT, NULL);
-	App->render->Blit(StarsTexture, scroll.x + SCREEN_WIDTH,- scroll.y - SCREEN_HEIGHT, NULL);
 	
 	//----------SpaceShip-------------------------------------------------
 
