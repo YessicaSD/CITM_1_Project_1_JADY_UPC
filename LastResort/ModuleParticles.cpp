@@ -18,14 +18,19 @@
 
 ModuleParticles::ModuleParticles()
 {
+	//Clear the array
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
+	{
 		active[i] = nullptr;
+	}
 	
 	InitParticleValues();
 }
 
 ModuleParticles::~ModuleParticles()
-{}
+{
+
+}
 
 // Load assets
 bool ModuleParticles::Start()

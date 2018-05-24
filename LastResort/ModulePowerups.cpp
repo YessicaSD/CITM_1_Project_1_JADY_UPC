@@ -149,68 +149,56 @@ bool ModulePowerups::AddPowerup(int x, int y, POWERUP_TYPE type)//x and y should
 
 void ModulePowerups::OnCollision(Collider* c1, Collider* c2)
 {
-
-	ModulePlayer* playerTarget = nullptr;
-	ModuleUnit* unitTarget = nullptr;
+	ModulePlayer* targetPlayer = nullptr;
+	ModuleUnit* targetUnit = nullptr;
 
 	for (uint i = 0; i < MAX_POWERUPS; ++i)
 	{
 		if (powerups[i] != nullptr && c1 == powerups[i]->collider && (c2->type == COLLIDER_PLAYER || c2->type == COLLIDER_GOD) )
 		{
-
-			//We find which player got this powerup----------------------------------
-
-			if (c2 == App->player1->playerCol) {
-				playerTarget = App->player1;
-				unitTarget = App->unit1;
-			}
-			else if (c2 == App->player2->playerCol) {
-				playerTarget = App->player2;
-				unitTarget = App->unit2;
-			}
-
-
-			//If powerup type is SPEED or DESPEED-----------------------------------
-
-			if (powerups[i]->type == SPEED || powerups[i]->type == DESPEED) {
-
-				powerups[i]->OnCollision(c2, playerTarget);
-				delete powerups[i];
-				powerups[i] = nullptr;
-				break;
-
-			}
-
-			//We give it this powerup-----------------------------------------------
-
-			if (playerTarget->powerupUpgrades < 3)
+			//We find which player got this powerup
+			if (c2 == App->player1->playerCol)
 			{
-				playerTarget->powerupUpgrades++;
+				targetPlayer = App->player1;
+				targetUnit   = App->unit1;
 			}
-			if (playerTarget->powerupUpgrades == 1)
+			else if (c2 == App->player2->playerCol)
 			{
-				unitTarget->Enable();
-				unitTarget->playerToFollow = App->player1;
-				unitTarget->position.x = playerTarget->position.x + playerTarget->playerCenter.x;
-				unitTarget->position.y = playerTarget->position.y + playerTarget->playerCenter.x;
-				unitTarget->power = 0;
-				unitTarget->unitPhase == UnitPhase::positioning;
+				targetPlayer = App->player2;
+				targetUnit   = App->unit2;
 			}
 
-			//Change unit type-----------------------------------------------------
 
-			if ((int)powerups[i]->animation->current_frame == 0)
+			//If powerup type is Speed or Despeed
+			if (powerups[i]->type == SPEED || powerups[i]->type == DESPEED)
 			{
-				unitTarget->MakeUnitOrange();
+				//Simply call the powerup OnCollision
+				powerups[i]->OnCollision(c2, targetPlayer);
 			}
 			else
 			{
-				unitTarget->MakeUnitBlue();
+				//We give it this powerup
+				if (targetPlayer->powerupUpgrades < 3)
+				{
+					targetPlayer->powerupUpgrades++;
+				}
+				if (targetPlayer->powerupUpgrades == 1)
+				{
+					targetUnit->Enable();
+					targetUnit->playerToFollow = App->player1;
+					targetUnit->position.x = targetPlayer->position.x + targetPlayer->playerCenter.x;
+					targetUnit->position.y = targetPlayer->position.y + targetPlayer->playerCenter.x;
+					targetUnit->power = 0;
+					targetUnit->unitPhase == UnitPhase::positioning;
+				}
+
+				//Change unit color
+				if ((int)powerups[i]->animation->current_frame == 0) { targetUnit->MakeUnitOrange(); }
+				else { targetUnit->MakeUnitBlue(); }
+
+				//Call the specific powerup OnCollision
+				powerups[i]->OnCollision(c2, targetPlayer);
 			}
-
-			//Callback PowerUp OnCollision-----------------------------------------
-			powerups[i]->OnCollision(c2, playerTarget);
-
 
 			delete powerups[i];
 			powerups[i] = nullptr;
