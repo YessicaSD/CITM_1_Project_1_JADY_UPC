@@ -14,6 +14,12 @@ Particle::Particle()
 
 Particle::Particle(Particle& sentParticle, iPoint position, iPoint speed, Uint32 delay, COLLIDER_TYPE colType, SDL_Texture* tex)
 {
+	//- Values that always stay the same as sentParticle (those values are defined on ModuleParticles.cpp or they are the default ones)
+	this->anim = sentParticle.anim;
+	this->collision_fx = sentParticle.collision_fx;
+	this->life = sentParticle.life;
+	if (sentParticle.collision_fx != nullptr) { this->collision_fx = sentParticle.collision_fx; }
+
 	//- Values that vary depending on the parameters we pass in
 	this->position = position;
 	this->fixedPos = position - App->stage05->spawnPos;
@@ -25,12 +31,6 @@ Particle::Particle(Particle& sentParticle, iPoint position, iPoint speed, Uint32
 	}
 	this->texture = tex;
 
-	//- Values that always stay the same as sentParticle (those values are defined on ModuleParticles.cpp or they are the default ones)
-	this->anim = sentParticle.anim;
-	this->collision_fx = sentParticle.collision_fx;
-	this->life = sentParticle.life;
-	if (sentParticle.collision_fx != nullptr) { this->collision_fx = sentParticle.collision_fx; }
-	
 	//- Play audio
 	if (sentParticle.sfx != nullptr) { App->audio->ControlSFX(sentParticle.sfx, PLAY_AUDIO); }
 }

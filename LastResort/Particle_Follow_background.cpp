@@ -15,14 +15,18 @@ Particle_Follow_background::Particle_Follow_background(Particle& p, iPoint posit
 
 void Particle_Follow_background::Move()
 {
-	fixedPos.x -= 4;
-	fixedPos.y -= 4;
+	fixedPos.x -= speed.x;
+	fixedPos.y -= speed.y;
 	position = App->stage05->spawnPos + fixedPos;
 };
 
 void Particle_Follow_background::Draw()
 {
 	SDL_Rect currentFrame = anim.GetCurrentFrame();
+
+	//Update collider
 	collider->SetPos(position.x, position.y);
+
+	//Render
 	App->render->Blit(texture, position.x - currentFrame.w / 2, position.y - currentFrame.h / 2, &currentFrame);
 }
