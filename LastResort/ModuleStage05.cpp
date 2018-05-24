@@ -148,7 +148,7 @@ bool Module5lvlScene::Start()
 
 	/*App->enemies->AddEnemy(MIDDLE_ASTEROID, 250, 270);
 	*/
-	App->enemies->AddEnemy(LITTLE_ASTEROID, 250, 200, 0, NOPOWERUP, {1,1});
+	
 
 	//- FINAL POSITION ENEMIES
 	App->enemies->AddEnemy(POWERDROPPER, -88, 260, 0, POWERUP_TYPE::LASER); //homing
@@ -158,15 +158,20 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(REDBATS, 275, 270);
 	App->enemies->AddEnemy(REDBATS, 300, 270);
 	App->enemies->AddEnemy(REDBATS, 325, 270);
-	App->enemies->AddEnemy(REDBATS, 350, 270);
+	App->enemies->AddEnemy(REDBATS, 320, 270,800);
 
-	App->enemies->AddEnemy(REDBATS, 325, -20);
+	App->enemies->AddEnemy(REDBATS, 325, -25);
 	App->enemies->AddEnemy(REDBATS, 400, -25);
-	App->enemies->AddEnemy(REDBATS, 404, -25,800);
-	App->enemies->AddEnemy(REDBATS, 404, -25, 1400);
-	App->enemies->AddEnemy(REDBATS, 404, -25, 1800);
+	App->enemies->AddEnemy(REDBATS, 400, -25,800);
+	App->enemies->AddEnemy(REDBATS, 400, -25, 1400);
+	App->enemies->AddEnemy(REDBATS, 404, -25, 1900);
 
-	App->enemies->AddEnemy(REDBATS, 404, -80, 2000);
+	App->enemies->AddEnemy(REDBATS, 404, -80, 4000);
+	App->enemies->AddEnemy(REDBATS, 430, -80,0 );
+	App->enemies->AddEnemy(REDBATS, 455, -80, 0);
+	App->enemies->AddEnemy(REDBATS, 480, -80, 0);
+	App->enemies->AddEnemy(REDBATS, 500, -80, 0);
+	App->enemies->AddEnemy(REDBATS, 525, -80, 0);
 
 	App->enemies->AddEnemy(FRONT_TURRET, 47, 64);
 
