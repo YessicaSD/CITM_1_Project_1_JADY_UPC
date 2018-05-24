@@ -166,6 +166,8 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(REDBATS, 404, -25, 1400);
 	App->enemies->AddEnemy(REDBATS, 404, -25, 1800);
 
+	App->enemies->AddEnemy(REDBATS, 404, -80, 1800);
+
 	App->enemies->AddEnemy(FRONT_TURRET, 47, 64);
 
 	App->enemies->AddEnemy(OUTDOOR_TURRET, 208, 13);
