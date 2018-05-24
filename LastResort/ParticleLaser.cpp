@@ -76,11 +76,16 @@ void Particle_Laser:: Move()
 
 void Particle_Laser::Draw()
 {
-	collider->SetPos(position.x, position.y);
+	SDL_Rect currentFrame = anim.GetCurrentFrame();
 
+	//Update the collider
+	collider->SetPos(position.x, position.y);
+	collider->SetMeasurements(currentFrame.w, currentFrame.h);
+
+	//Render
 	if (going_up == true || go_left == true)
-		App->render->Blit(texture, position.x, position.y - anim.GetCurrentFrame().h / 2, &anim.GetFrame());
+		App->render->Blit(texture, position.x, position.y - currentFrame.h / 2, &currentFrame);
 	else
-		App->render->BlitEx(texture, position.x, position.y - anim.GetCurrentFrame().h / 2, &anim.GetFrame(), SDL_FLIP_HORIZONTAL);
+		App->render->BlitEx(texture, position.x, position.y - currentFrame.h / 2, &currentFrame, SDL_FLIP_HORIZONTAL);
 	
 }
