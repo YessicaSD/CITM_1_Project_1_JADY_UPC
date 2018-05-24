@@ -1,7 +1,8 @@
 #include "Enemy_Little_Asteroid.h"
 #include "ModuleRender.h"
 #include "Application.h"
-Enemy_Little_Asteroid::Enemy_Little_Asteroid(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t,iPoint speed) :Enemy(x, y, hp, scoreValue, pu_t,speed)
+
+Enemy_Little_Asteroid::Enemy_Little_Asteroid(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t, iPoint speed) : Enemy(x, y, hp, scoreValue, pu_t, speed)
 {
 	LittleAsteroid.PushBack({ 0,557,32,28 });
 	LittleAsteroid.PushBack({ 32,557,31,26 });

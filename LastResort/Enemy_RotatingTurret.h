@@ -6,7 +6,7 @@
 class Enemy_RotatingTurret : public Enemy
 {
 public:
-	Enemy_RotatingTurret(int, int, float, int, POWERUP_TYPE);
+	Enemy_RotatingTurret(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop);
 	void Move();
 	void Draw(SDL_Texture*);
 

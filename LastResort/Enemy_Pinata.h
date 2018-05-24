@@ -9,7 +9,7 @@ class ModulePlayer;
 class Enemy_Pinata : public Enemy
 {
 public:
-	Enemy_Pinata(int x, int y, float, int, POWERUP_TYPE pu_t);
+	Enemy_Pinata(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop);
 	void Move();
 	void Draw(SDL_Texture* sprites);
 	void CheckTarget() ;

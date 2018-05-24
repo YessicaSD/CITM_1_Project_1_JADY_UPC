@@ -10,7 +10,7 @@ private:
 	int initialY;
 
 public:
-	Enemy_Basic(int x, int y, float, int, POWERUP_TYPE pu_t);
+	Enemy_Basic(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop);
 	void Move();
 };
 

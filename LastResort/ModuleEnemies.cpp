@@ -263,7 +263,7 @@ Enemy* ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			enemies[i] = new Enemy_Middle_Asteroid(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 1, 100, info.pu_Type);
 			break;
 		case ENEMY_TYPES::LITTLE_ASTEROID:
-			enemies[i] = new Enemy_Little_Asteroid(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 1, 100, info.pu_Type,info.speed);
+			enemies[i] = new Enemy_Little_Asteroid(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 1, 100, info.pu_Type, info.speed);
 			break;
 		}
 		return enemies[i];

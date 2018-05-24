@@ -8,7 +8,7 @@ class Enemy_Big_Asteroid : public Enemy
 private:
 	Animation BigAsteroid;
 public:
-	Enemy_Big_Asteroid(int x, int y, float, int, POWERUP_TYPE pu_t);
+	Enemy_Big_Asteroid(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop);
 	~Enemy_Big_Asteroid() {};
 	void Move();
 	void Draw(SDL_Texture* sprites);

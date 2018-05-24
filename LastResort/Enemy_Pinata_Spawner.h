@@ -12,7 +12,7 @@ class Enemy;
 class Enemy_Pinata_Spawner : public Enemy
 {
 public:
-	Enemy_Pinata_Spawner(int x, int y, float, int, POWERUP_TYPE pu_t);
+	Enemy_Pinata_Spawner(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop);
 	void Move();
 	void Draw(SDL_Texture* sprites);
 
