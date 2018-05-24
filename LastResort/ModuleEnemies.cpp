@@ -25,6 +25,7 @@
 #include "Enemy_Mech_Spawner.h"
 #include "Enemy_Big_Asteriod.h"
 #include "Enemy_Middle_Asteroid.h"
+#include "Enemy_Little_Asteroid.h"
 #define DAMAGE_FLASHING_INTERVAL 4
 
 ModuleEnemies::ModuleEnemies()
@@ -299,6 +300,11 @@ Enemy* ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 
 		case ENEMY_TYPES::MIDDLE_ASTEROID:
 			enemies[i] = new Enemy_Middle_Asteroid(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
+			enemies[i]->scoreValue = 100;
+			enemies[i]->hp = 1;
+			break;
+		case ENEMY_TYPES::LITTLE_ASTEROID:
+			enemies[i] = new Enemy_Little_Asteroid(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type,info.speed);
 			enemies[i]->scoreValue = 100;
 			enemies[i]->hp = 1;
 			break;

@@ -2,7 +2,7 @@
 #define __PARTICLE_LASER_H__
 
 #include "Particle.h"
-
+#define PLAYER_Y 6
 class Particle_Laser : public Particle
 {
 public:
