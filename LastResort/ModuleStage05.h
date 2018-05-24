@@ -70,13 +70,16 @@ public:
 	//Music-----------------------------------
 	Mix_Music* lvl5Music = nullptr;
 
-	//Ship part------------------------------
+	//Ship part front-------------------------
 	SDL_Rect shipPartRect = { 2, 0, 251, 96 };
 	iPoint shipPartPos;
 	const int fallSpeed = 1;
 
 	//Fireball front-------------------------
 	int fireballFrameCounter = 0;
+
+	//Ship part rear-------------------------
+	SDL_Rect shipRearRect = { 0, 96, 128, 64};
 
 	//Enemies--------------------------------
 	int redBatsKilled = 0;

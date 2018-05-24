@@ -171,7 +171,6 @@ bool Module5lvlScene::Start()
 
 	App->enemies->AddEnemy(FRONT_TURRET, 47, 64);
 
-
 	App->enemies->AddEnemy(REDBATS, 325, -25);
 	App->enemies->AddEnemy(REDBATS, 400, -25);
 
@@ -299,6 +298,8 @@ update_status Module5lvlScene::Update()
 	{
 		fireballFrameCounter++;
 	}
+	//----------Ship rear------------------------------------------------
+	App->render->Blit(shipPartTx, spawnPos.x + 1246, spawnPos.y + 15, &shipRearRect);
 
 	return UPDATE_CONTINUE;
 }
