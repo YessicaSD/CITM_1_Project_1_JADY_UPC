@@ -33,10 +33,10 @@ void Enemy_FrontTurret::Move()
 		case 0:
 			LOG("Explosion 1");
 			//TO DO: Add explosion
-			ShootBall(position, { (int)(cos(angleValue[WNW] + angleSeparation * 0) * 5), (int)(sin(angleValue[WNW] + angleSeparation * 0) * 5) });
-			ShootBall(position, { (int)(cos(angleValue[WNW] + angleSeparation * 1) * 5), (int)(sin(angleValue[WNW] + angleSeparation * 1) * 5) });
-			ShootBall(position, { (int)(cos(angleValue[WNW] + angleSeparation * 2) * 5), (int)(sin(angleValue[WNW] + angleSeparation * 2) * 5) });
-			ShootBall(position, { (int)(cos(angleValue[WNW] + angleSeparation * 3) * 5), (int)(sin(angleValue[WNW] + angleSeparation * 3) * 5) });
+			ShootBall(position, { (int)(cos(angleValue[WNW] + angleSeparation * 0) * shootSpeed), (int)(sin(angleValue[WNW] + angleSeparation * 0) * shootSpeed) });
+			ShootBall(position, { (int)(cos(angleValue[WNW] + angleSeparation * 1) * shootSpeed), (int)(sin(angleValue[WNW] + angleSeparation * 1) * shootSpeed) });
+			ShootBall(position, { (int)(cos(angleValue[WNW] + angleSeparation * 2) * shootSpeed), (int)(sin(angleValue[WNW] + angleSeparation * 2) * shootSpeed) });
+			ShootBall(position, { (int)(cos(angleValue[WNW] + angleSeparation * 3) * shootSpeed), (int)(sin(angleValue[WNW] + angleSeparation * 3) * shootSpeed) });
 			shotStage++;
 			break;
 		case 1:
@@ -48,19 +48,19 @@ void Enemy_FrontTurret::Move()
 		case 2:
 			LOG("Explosion 3");
 			//TO DO: Add explosion
-			ShootBall(position, { (int)(cos(angleValue[NNW] + angleSeparation * 0) * 5), (int)(sin(angleValue[NNW] + angleSeparation * 0) * 5) });
-			ShootBall(position, { (int)(cos(angleValue[NNW] + angleSeparation * 1) * 5), (int)(sin(angleValue[NNW] + angleSeparation * 1) * 5) });
-			ShootBall(position, { (int)(cos(angleValue[NNW] + angleSeparation * 2) * 5), (int)(sin(angleValue[NNW] + angleSeparation * 2) * 5) });
-			ShootBall(position, { (int)(cos(angleValue[NNW] + angleSeparation * 3) * 5), (int)(sin(angleValue[NNW] + angleSeparation * 3) * 5) });
+			ShootBall(position, { (int)(cos(angleValue[NNW] + angleSeparation * 0) * shootSpeed), (int)(sin(angleValue[NNW] + angleSeparation * 0) * shootSpeed) });
+			ShootBall(position, { (int)(cos(angleValue[NNW] + angleSeparation * 1) * shootSpeed), (int)(sin(angleValue[NNW] + angleSeparation * 1) * shootSpeed) });
+			ShootBall(position, { (int)(cos(angleValue[NNW] + angleSeparation * 2) * shootSpeed), (int)(sin(angleValue[NNW] + angleSeparation * 2) * shootSpeed) });
+			ShootBall(position, { (int)(cos(angleValue[NNW] + angleSeparation * 3) * shootSpeed), (int)(sin(angleValue[NNW] + angleSeparation * 3) * shootSpeed) });
 			shotStage++;
 			break;
 		case 3:
 			LOG("Explosion 4");
 			//TO DO: Add explosion
-			ShootBall(position, { (int)(cos(angleValue[N] + angleSeparation * 0) * 5), (int)(sin(angleValue[N] + angleSeparation * 0) * 5) });
-			ShootBall(position, { (int)(cos(angleValue[N] + angleSeparation * 1) * 5), (int)(sin(angleValue[N] + angleSeparation * 1) * 5) });
-			ShootBall(position, { (int)(cos(angleValue[N] + angleSeparation * 2) * 5), (int)(sin(angleValue[N] + angleSeparation * 2) * 5) });
-			ShootBall(position, { (int)(cos(angleValue[N] + angleSeparation * 3) * 5), (int)(sin(angleValue[N] + angleSeparation * 3) * 5) });
+			ShootBall(position, { (int)(cos(angleValue[N] + angleSeparation * 0) * shootSpeed), (int)(sin(angleValue[N] + angleSeparation * 0) * shootSpeed) });
+			ShootBall(position, { (int)(cos(angleValue[N] + angleSeparation * 1) * shootSpeed), (int)(sin(angleValue[N] + angleSeparation * 1) * shootSpeed) });
+			ShootBall(position, { (int)(cos(angleValue[N] + angleSeparation * 2) * shootSpeed), (int)(sin(angleValue[N] + angleSeparation * 2) * shootSpeed) });
+			ShootBall(position, { (int)(cos(angleValue[N] + angleSeparation * 3) * shootSpeed), (int)(sin(angleValue[N] + angleSeparation * 3) * shootSpeed) });
 			shotStage = 0;
 			break;
 		}

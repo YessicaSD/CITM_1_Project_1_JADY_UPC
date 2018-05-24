@@ -85,7 +85,7 @@ void Particle::Draw()
 	SDL_Rect currentFrame = anim.GetCurrentFrame();
 
 	//Update the collider
-	if (collider != nullptr)
+	if (collider != nullptr)//INFO: We check if the collider is nullptr because not all particles instanciate a collider
 	{
 		collider->SetPos(position.x - currentFrame.w / 2, position.y - currentFrame.h / 2);
 		collider->SetMeasurements(currentFrame.w, currentFrame.h);

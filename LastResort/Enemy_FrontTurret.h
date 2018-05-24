@@ -18,9 +18,9 @@ private:
 	int fixedY;
 	int fixedX;
 	int frameCounter = 0;
-	float shotSpeed = 1;
 	int shotStage = 0;
 	float angleSeparation = 2 * PI / 32;
+	const float shootSpeed = 4;
 };
 
 #endif // __ENEMY_FRONT_SHIP_TURRET_H__

@@ -25,7 +25,10 @@ void Particle_Follow_background::Draw()
 	SDL_Rect currentFrame = anim.GetCurrentFrame();
 
 	//Update collider
-	collider->SetPos(position.x - currentFrame.w / 2, position.y - currentFrame.h / 2);
+	if(collider != nullptr)//INFO: We check if the collider is nullptr because not all particles instanciate a collider
+	{
+		collider->SetPos(position.x - currentFrame.w / 2, position.y - currentFrame.h / 2);
+	}	
 
 	//Render
 	App->render->Blit(texture, position.x - currentFrame.w / 2, position.y - currentFrame.h / 2, &currentFrame);
