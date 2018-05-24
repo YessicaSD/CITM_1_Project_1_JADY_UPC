@@ -80,6 +80,7 @@
     <ClInclude Include="Enemy_Basic.h" />
     <ClInclude Include="Enemy_Big_Asteriod.h" />
     <ClInclude Include="Enemy_FrontTurret.h" />
+    <ClInclude Include="Enemy_Little_Asteroid.h" />
     <ClInclude Include="Enemy_Mech.h" />
     <ClInclude Include="Enemy_Mech_Spawner.h" />
     <ClInclude Include="Enemy_Middle_Asteroid.h" />
@@ -139,6 +140,7 @@
     <ClCompile Include="Enemy_Basic.cpp" />
     <ClCompile Include="Enemy_Big_Asteriod.cpp" />
     <ClCompile Include="Enemy_FrontTurret.cpp" />
+    <ClCompile Include="Enemy_Little_Asteroid.cpp" />
     <ClCompile Include="Enemy_Mech.cpp" />
     <ClCompile Include="Enemy_Mech_Spawner.cpp" />
     <ClCompile Include="Enemy_Middle_Asteroid.cpp" />
