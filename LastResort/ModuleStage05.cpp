@@ -147,7 +147,8 @@ bool Module5lvlScene::Start()
 	//App->enemies->AddEnemy(OSCILATOR, 500, 0);
 
 	/*App->enemies->AddEnemy(MIDDLE_ASTEROID, 250, 270);
-	App->enemies->AddEnemy(BIG_ASTEROID, 250, 200);*/
+	*/
+	App->enemies->AddEnemy(LITTLE_ASTEROID, 250, 200, 0, NOPOWERUP, {1,1});
 
 	//- FINAL POSITION ENEMIES
 	App->enemies->AddEnemy(POWERDROPPER, -88, 260, 0, POWERUP_TYPE::LASER); //homing

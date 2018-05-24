@@ -14,20 +14,20 @@ Particle_Laser::Particle_Laser(Particle& p, iPoint position, iPoint speed, Uint3
 {
 	if (App->player1->isActive == true && App->player2->isActive == false)
 	{
-		PlayerPosition.y = App->player1->position.y;
+		PlayerPosition.y = App->player1->position.y+PLAYER_Y;
 	}
 	else if (App->player1->isActive == false && App->player2->isActive == true)
 	{
-		PlayerPosition.y = App->player1->position.y;
+		PlayerPosition.y = App->player1->position.y + PLAYER_Y;
 	}
 
 	if (App->player2->position.y > App->player1->position.y && App->player2->isActive==true)
 	{
-		PlayerPosition.y = App->player2->position.y;
+		PlayerPosition.y = App->player2->position.y + PLAYER_Y;
 	}
 	else if(App->player1->position.y > App->player2->position.y && App->player1->isActive == true)
 	{
-		PlayerPosition.y = App->player1->position.y;
+		PlayerPosition.y = App->player1->position.y + PLAYER_Y;
 	}
 	going_up = true;
 }

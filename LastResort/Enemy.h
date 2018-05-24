@@ -32,6 +32,7 @@ public:
 
 public:
 	Enemy(int x, int y, POWERUP_TYPE pu_t);
+	Enemy(int x, int y, POWERUP_TYPE pu_t,iPoint speed);
 	virtual ~Enemy();
 
 	const Collider* GetCollider() const;

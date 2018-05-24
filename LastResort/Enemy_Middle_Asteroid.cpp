@@ -11,9 +11,8 @@ Enemy_Middle_Asteroid::Enemy_Middle_Asteroid(int x, int y, POWERUP_TYPE pu_t):En
 
 void Enemy_Middle_Asteroid::Move()
 {
-	//position.x -= 2;
-	position.x += speed.x;
-	position.y += speed.y;
+	position.x -= 2;
+	
 }
 
 void Enemy_Middle_Asteroid::Draw(SDL_Texture* sprites) {

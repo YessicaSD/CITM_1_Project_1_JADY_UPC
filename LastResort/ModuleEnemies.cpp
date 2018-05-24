@@ -25,6 +25,7 @@
 #include "Enemy_Mech_Spawner.h"
 #include "Enemy_Big_Asteriod.h"
 #include "Enemy_Middle_Asteroid.h"
+#include "Enemy_Little_Asteroid.h"
 #define DAMAGE_FLASHING_INTERVAL 4
 
 ModuleEnemies::ModuleEnemies()
@@ -173,7 +174,7 @@ bool ModuleEnemies::CleanUp()
 	return true;
 }
 
-bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, Uint32 delay, POWERUP_TYPE powerup_type)
+bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, Uint32 delay, POWERUP_TYPE powerup_type, iPoint speed)
 {
 	bool ret = false;
 
@@ -186,6 +187,8 @@ bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, Uint32 delay, POWER
 			queue[i].y = y;
 			queue[i].delay = delay;
 			queue[i].pu_Type = powerup_type;
+			queue[i].speed = speed;
+
 			ret = true;
 			break;
 		}
@@ -195,7 +198,7 @@ bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, Uint32 delay, POWER
 }
 
 //Gets deleted if you instaspawn in a position that's different to the camera
-Enemy* ModuleEnemies::InstaSpawn(ENEMY_TYPES type, int x, int y, POWERUP_TYPE powerup_type, iPoint speed)
+Enemy* ModuleEnemies::InstaSpawn(ENEMY_TYPES type, int x, int y, POWERUP_TYPE powerup_type,  iPoint speed)
 {
 	EnemyInfo enemyInfo;
 	enemyInfo.type = type;
@@ -297,6 +300,11 @@ Enemy* ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 
 		case ENEMY_TYPES::MIDDLE_ASTEROID:
 			enemies[i] = new Enemy_Middle_Asteroid(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
+			enemies[i]->scoreValue = 100;
+			enemies[i]->hp = 1;
+			break;
+		case ENEMY_TYPES::LITTLE_ASTEROID:
+			enemies[i] = new Enemy_Little_Asteroid(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type,info.speed);
 			enemies[i]->scoreValue = 100;
 			enemies[i]->hp = 1;
 			break;

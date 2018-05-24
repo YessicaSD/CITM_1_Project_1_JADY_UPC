@@ -12,7 +12,8 @@
 
 Enemy::Enemy(int x, int y, POWERUP_TYPE pu_t) : position(x, y), powerUp_drop(pu_t)
 {}
-
+Enemy::Enemy(int x, int y, POWERUP_TYPE pu_t,iPoint speed) : position(x, y), powerUp_drop(pu_t),speed(speed)
+{}
 Enemy::~Enemy()
 {
 	if (collider != nullptr)
