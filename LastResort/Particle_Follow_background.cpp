@@ -15,8 +15,8 @@ Particle_Follow_background::Particle_Follow_background(Particle& p, iPoint posit
 
 void Particle_Follow_background::Move()
 {
-	fixedPos.x -= speed.x;
-	fixedPos.y -= speed.y;
+	fixedPos.x += speed.x;
+	fixedPos.y += speed.y;
 	position = App->stage05->spawnPos + fixedPos;
 };
 

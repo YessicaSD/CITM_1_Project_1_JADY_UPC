@@ -26,17 +26,62 @@ void Enemy_FrontTurret::Move()
 	position.y = App->stage05->spawnPos.y + fixedY;
 
 	//Shoot
-	if(SDL_GetTicks() >= lastShotTime + 3000)
+	if (frameCounter >= 88)//88 frames to spawn another row of projectiles
 	{
-		App->particles->AddParticle(
-			App->particles->orangeBall,
-		    { position.x, position.y },
-		    { 3 , 3 },
-			App->particles->particlesTx,
-			COLLIDER_TYPE::COLLIDER_ENEMY_SHOT,
-			0,
-			PARTICLE_TYPE::PARTICLE_FOLLOW_BACKGROUND);
-		lastShotTime = SDL_GetTicks();
+		switch (shotStage)
+		{
+		case 0:
+			LOG("Explosion 1");
+			//TO DO: Add explosion
+			ShootBall(position, { (int)(cos(angleValue[WNW] + angleSeparation * 0) * 5), (int)(sin(angleValue[WNW] + angleSeparation * 0) * 5) });
+			ShootBall(position, { (int)(cos(angleValue[WNW] + angleSeparation * 1) * 5), (int)(sin(angleValue[WNW] + angleSeparation * 1) * 5) });
+			ShootBall(position, { (int)(cos(angleValue[WNW] + angleSeparation * 2) * 5), (int)(sin(angleValue[WNW] + angleSeparation * 2) * 5) });
+			ShootBall(position, { (int)(cos(angleValue[WNW] + angleSeparation * 3) * 5), (int)(sin(angleValue[WNW] + angleSeparation * 3) * 5) });
+			shotStage++;
+			break;
+		case 1:
+			LOG("Explosion 2");
+			//Only explosion
+			//TO DO: Add explosion
+			shotStage++;
+			break;
+		case 2:
+			LOG("Explosion 3");
+			//TO DO: Add explosion
+			ShootBall(position, { (int)(cos(angleValue[NNW] + angleSeparation * 0) * 5), (int)(sin(angleValue[NNW] + angleSeparation * 0) * 5) });
+			ShootBall(position, { (int)(cos(angleValue[NNW] + angleSeparation * 1) * 5), (int)(sin(angleValue[NNW] + angleSeparation * 1) * 5) });
+			ShootBall(position, { (int)(cos(angleValue[NNW] + angleSeparation * 2) * 5), (int)(sin(angleValue[NNW] + angleSeparation * 2) * 5) });
+			ShootBall(position, { (int)(cos(angleValue[NNW] + angleSeparation * 3) * 5), (int)(sin(angleValue[NNW] + angleSeparation * 3) * 5) });
+			shotStage++;
+			break;
+		case 3:
+			LOG("Explosion 4");
+			//TO DO: Add explosion
+			ShootBall(position, { (int)(cos(angleValue[N] + angleSeparation * 0) * 5), (int)(sin(angleValue[N] + angleSeparation * 0) * 5) });
+			ShootBall(position, { (int)(cos(angleValue[N] + angleSeparation * 1) * 5), (int)(sin(angleValue[N] + angleSeparation * 1) * 5) });
+			ShootBall(position, { (int)(cos(angleValue[N] + angleSeparation * 2) * 5), (int)(sin(angleValue[N] + angleSeparation * 2) * 5) });
+			ShootBall(position, { (int)(cos(angleValue[N] + angleSeparation * 3) * 5), (int)(sin(angleValue[N] + angleSeparation * 3) * 5) });
+			shotStage = 0;
+			break;
+		}
+		frameCounter = 0;
 	}
+	else
+	{
+		frameCounter++;
+	}
+}
+
+void Enemy_FrontTurret::ShootBall(iPoint position, iPoint speed)
+{
+	//Shoot
+	App->particles->AddParticle(
+		App->particles->orangeBall,
+		{ position },
+		{ speed },
+		App->particles->particlesTx,
+		COLLIDER_TYPE::COLLIDER_ENEMY_SHOT,
+		0,
+		PARTICLE_TYPE::PARTICLE_FOLLOW_BACKGROUND);
 }
 
