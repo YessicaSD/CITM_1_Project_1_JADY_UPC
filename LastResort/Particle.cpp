@@ -12,20 +12,24 @@ Particle::Particle()
 	speed.SetToZero();
 }
 
-Particle::Particle(Particle& p, iPoint position, iPoint speed, Uint32 delay, COLLIDER_TYPE colType, SDL_Texture* tex)
+Particle::Particle(Particle& sentParticle, iPoint position, iPoint speed, Uint32 delay, COLLIDER_TYPE colType, SDL_Texture* tex)
 {
-	this->anim = p.anim;
+	//- Values that vary depending on the parameters we pass in
 	this->position = position;
-	this->speed = speed;
-	this->collision_fx = p.collision_fx;
-	this->born = SDL_GetTicks() + delay;
-	this->life = p.life;
-	this->texture = tex;
 	this->fixedPos = position - App->stage05->spawnPos;
-	if (p.collision_fx != nullptr) { this->collision_fx = p.collision_fx; }
-	if (colType != COLLIDER_NONE) { this->collider = App->collision->AddCollider({ this->position.x, this->position.y ,this->anim.GetCurrentFrame().w, this->anim.GetCurrentFrame().h }, colType, (Module*)App->particles);	}
-	//Play audio
-	if (p.sfx != nullptr) { App->audio->ControlSFX(p.sfx, PLAY_AUDIO); }
+	this->speed = speed;
+	this->born = SDL_GetTicks() + delay;
+	if (colType != COLLIDER_NONE) { this->collider = App->collision->AddCollider({ this->position.x, this->position.y ,this->anim.GetCurrentFrame().w, this->anim.GetCurrentFrame().h }, colType, (Module*)App->particles); }
+	this->texture = tex;
+
+	//- Values that always stay the same as sentParticle (those values are defined on ModuleParticles.cpp or they are the default ones)
+	this->anim = sentParticle.anim;
+	this->collision_fx = sentParticle.collision_fx;
+	this->life = sentParticle.life;
+	if (sentParticle.collision_fx != nullptr) { this->collision_fx = sentParticle.collision_fx; }
+	
+	//- Play audio
+	if (sentParticle.sfx != nullptr) { App->audio->ControlSFX(sentParticle.sfx, PLAY_AUDIO); }
 }
 
 Particle::~Particle()
@@ -75,13 +79,15 @@ void Particle::Move()
 
 void Particle::Draw()
 {
+	SDL_Rect currentFrame = anim.GetCurrentFrame();
+
 	//Update the collider
 	if (collider != nullptr)
 	{
-		collider->SetPos(position.x, position.y - anim.GetFrame().h / 2);
-		collider->SetMeasurements(anim.GetFrame().w, anim.GetFrame().h);
+		collider->SetPos(position.x - currentFrame.w / 2, position.y - currentFrame.h / 2);
+		collider->SetMeasurements(currentFrame.w, currentFrame.h);
 	}
 
 	//Draw the particle
-	App->render->Blit(texture, position.x - anim.GetCurrentFrame().w / 2, position.y - anim.GetCurrentFrame().h / 2, &anim.GetFrame());
+	App->render->Blit(this->texture, position.x - currentFrame.w / 2, position.y - currentFrame.h / 2, &currentFrame);
 }
