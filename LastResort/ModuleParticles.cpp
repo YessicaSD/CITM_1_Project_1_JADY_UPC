@@ -144,6 +144,7 @@ void ModuleParticles::AddParticle(Particle& particle, iPoint position, iPoint sp
 
 			//Associate new particle with a position in the array
 			active[i] = p;
+
 			break;
 		}
 	}

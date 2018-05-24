@@ -150,11 +150,8 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(BIG_ASTEROID, 250, 200);*/
 
 	//- FINAL POSITION ENEMIES
-	App->enemies->AddEnemy(FRONT_TURRET, 47, 64);
-
 	App->enemies->AddEnemy(POWERDROPPER, -88, 260, 0, POWERUP_TYPE::LASER); //homing
 	App->enemies->AddEnemy(POWERDROPPER, 180, 280, 0, POWERUP_TYPE::LASER);
-
 	
 	App->enemies->AddEnemy(REDBATS, 250, 270);
 	App->enemies->AddEnemy(REDBATS, 275, 270);
@@ -167,6 +164,8 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(REDBATS, 404, -25,800);
 	App->enemies->AddEnemy(REDBATS, 404, -25, 1400);
 	App->enemies->AddEnemy(REDBATS, 404, -25, 1800);
+
+	App->enemies->AddEnemy(FRONT_TURRET, 47, 64);
 
 	App->enemies->AddEnemy(OUTDOOR_TURRET, 208, 13);
 	App->enemies->AddEnemy(OUTDOOR_TURRET, 248, 13);

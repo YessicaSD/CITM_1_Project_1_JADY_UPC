@@ -20,6 +20,11 @@ Enemy_Outdoor_turret::Enemy_Outdoor_turret(int x, int y, POWERUP_TYPE pu_t) : En
 
 }
 
+Enemy_Outdoor_turret:: ~Enemy_Outdoor_turret()
+{
+
+}
+
 void Enemy_Outdoor_turret::Move()
 {
 	position.x = App->stage05->spawnPos.x+ initalPosition.x;
@@ -31,8 +36,3 @@ void Enemy_Outdoor_turret::Move()
 		StartTime = SDL_GetTicks();
 	}
 }
-Enemy_Outdoor_turret:: ~Enemy_Outdoor_turret()
-{
-	
-}
-

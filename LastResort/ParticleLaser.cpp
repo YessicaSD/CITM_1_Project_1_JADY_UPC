@@ -26,6 +26,7 @@ Particle_Laser::Particle_Laser(Particle& p, iPoint position, iPoint speed, Uint3
 	}
 	going_up = true;
 }
+
 void Particle_Laser:: Move() {
 	if (going_up)
 	{
@@ -70,6 +71,8 @@ void Particle_Laser:: Move() {
 
 void Particle_Laser::Draw()
 {
+	collider->SetPos(position.x, position.y);
+
 	if (going_up == true || go_left == true)
 		App->render->Blit(texture, position.x, position.y - anim.GetCurrentFrame().h / 2, &anim.GetFrame());
 	else
