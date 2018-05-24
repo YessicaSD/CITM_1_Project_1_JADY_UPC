@@ -20,8 +20,6 @@
 #include "ModuleUnit.h"
 #include "ModuleInput.h"
 
-
-
 Module5lvlScene::Module5lvlScene()
 {
 	shipRect = { 0,0 , 1423,288 };

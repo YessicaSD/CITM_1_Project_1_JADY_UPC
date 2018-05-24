@@ -91,12 +91,13 @@ update_status ModuleEnemies::Update()
 			enemies[i]->Move();
 		}
 
-	for (uint i = 0; i < MAX_ENEMIES; ++i) {
-		if (enemies[i] != nullptr) {
-
+	for (uint i = 0; i < MAX_ENEMIES; ++i)
+	{
+		if (enemies[i] != nullptr)
+		{
 			if (enemies[i]->isDamaged)
 			{
-				if (enemies[i]->flashing_interval %2) 
+				if (enemies[i]->flashing_interval %2)
 					enemies[i]->Draw(dmg_sprites);
 				else
 					enemies[i]->Draw(nml_sprites);
@@ -113,7 +114,8 @@ update_status ModuleEnemies::Update()
 				}
 
 			}
-			else {
+			else
+			{
 				enemies[i]->Draw(nml_sprites);
 			}
 		}

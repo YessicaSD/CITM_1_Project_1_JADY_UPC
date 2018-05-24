@@ -1,4 +1,4 @@
-# Roadmap
+﻿# Roadmap
 
 ## Current roadmap
 
@@ -10,22 +10,21 @@
 - [x] @YessicaSD - Adjust speed powerup
 
 0.8.3 (23/05/2018 23:59)
-- [ ] @JaumeMontagut - Ship rear
-- [ ] @JaumeMontagut - Unit trail
-- [ ] @YessicaSD - Mechs
-- [ ] @YessicaSD - Add asteroids (big, small and medium)
-- [ ] @alejandro61299 - G powerup
-- [ ] @JaumeMontagut - Turret 1
-- [ ] @JaumeMontagut - Destroyable part
-- [ ] @YessicaSD - Laser powerup
+- [x] @YessicaSD - Mechs
+- [x] @YessicaSD - Add asteroids (big, small and medium)
+- [x] @JaumeMontagut - Turret 1
+- [x] @JaumeMontagut - Destroyable part
+- [x] @JaumeMontagut - Ship rear
 
 0.8.4 (25/05/2018 23:59)
 - [ ] @JaumeMontagut - H powerup
 - [ ] @JaumeMontagut - Back ship turret
+- [ ] @JaumeMontagut - Unit trail
 - [ ] @YessicaSD - Missile launcher
 - [ ] @YessicaSD - Missiles
 - [ ] @YessicaSD - Inside turrets which shoot lasers
 - [ ] @alejandro61299 - Implement enemies with a  list
+- [ ] @alejandro61299 - G powerup
 
 0.9 (27/05/2018 23:59)
 - [ ] @alejandro61299 - Final boss
@@ -37,6 +36,7 @@
 - [ ] @YessicaSD - Ship motor
 - [ ] @YessicaSD - Metal bee
 - [ ] @YessicaSD - Missile follow turrets
+- [ ] @YessicaSD - Laser powerup
 
 ## Roadmap (21/05/2018)
 

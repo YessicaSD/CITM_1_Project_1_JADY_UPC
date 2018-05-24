@@ -71,11 +71,13 @@ void ModulePlayer::Reappear() {
 	invincibilityFrames = INVINCIBILITY_FRAMES;
 	//collider-----------------------------------------------------------------------
 	if(playerCol!=nullptr)
-	playerCol->type = COLLIDER_TYPE::COLLIDER_GOD;
-
-	else
-	playerCol = App->collision->AddCollider({ position.x, position.y + 2, 24, 8 }, COLLIDER_TYPE::COLLIDER_GOD, this);
-
+	{
+		playerCol->type = COLLIDER_TYPE::COLLIDER_GOD;
+	}
+	else 
+	{
+		playerCol = App->collision->AddCollider({ position.x, position.y + 2, 24, 8 }, COLLIDER_TYPE::COLLIDER_GOD, this);
+	}
 }
 
 bool ModulePlayer::CleanUp()
@@ -110,23 +112,23 @@ update_status ModulePlayer::Update()
 	//Debug Modes----------------------------------------------------------------------
 	if (App->input->keyboard[SDL_SCANCODE_F1] == KEY_STATE::KEY_DOWN)
 	{
-		if (godMode == true)
+		if (playerCol != nullptr)
 		{
-			//Go back to normal
-			playerCol->type = COLLIDER_PLAYER;
-			SDL_SetTextureColorMod(PlayerTexture, 255, 255, 255);
-			godMode = false;
-		}
-		else
-		{
-			//Go to god mode
-			if (playerCol != nullptr)
+			if (godMode == true)
 			{
+				//Go back to normal
+				playerCol->type = COLLIDER_PLAYER;
+				SDL_SetTextureColorMod(PlayerTexture, 255, 255, 255);
+				godMode = false;
+			}
+			else
+			{
+				//Go to god mode
 				playerCol->type = COLLIDER_GOD;
 				SDL_SetTextureColorMod(PlayerTexture, 255, 255, 150);
 				godMode = true;
+
 			}
-			
 		}
 	}
 	//Shots----------------------------------------------------------------------------
@@ -250,6 +252,7 @@ void ModulePlayer::ShipAnimation() {
 			deathAnim.Reset();
 			playerAnimState = None;
 			PlayerDies();
+			playerCol->type = COLLIDER_IGNORE_HIT;
 		}
 		else if (isDying)
 		{
@@ -260,8 +263,6 @@ void ModulePlayer::ShipAnimation() {
 
 	case None:
 		break;
-
-
 	}
 }
 
@@ -272,7 +273,6 @@ void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
 	App->particles->AddParticle(App->particles->death_explosion, { (float)position.x, (float)position.y }, { 0 ,0 }, PlayerTexture);
 
 	//Player variables--------------------------------------------------------------
-	playerCol->type = COLLIDER_GOD;
 	isDying = true;
 	canMove = false;
 	playerAnimState = PlayerAnimationState::Death;
