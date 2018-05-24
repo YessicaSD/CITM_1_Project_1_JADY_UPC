@@ -5,6 +5,11 @@
 #include "Player1.h"
 #include "Player2.h"
 
+Particle_Laser::Particle_Laser():Particle()
+{
+
+}
+
 Particle_Laser::Particle_Laser(Particle& p, iPoint position, iPoint speed, Uint32 delay, COLLIDER_TYPE colType, SDL_Texture* tex) : Particle(p, position, speed, delay, colType, tex)
 {
 	if (App->player1->isActive == true && App->player2->isActive == false)
@@ -27,7 +32,8 @@ Particle_Laser::Particle_Laser(Particle& p, iPoint position, iPoint speed, Uint3
 	going_up = true;
 }
 
-void Particle_Laser:: Move() {
+void Particle_Laser:: Move()
+{
 	if (going_up)
 	{
 		position.x = App->stage05->spawnPos.x + fixedPos.x;
@@ -66,7 +72,6 @@ void Particle_Laser:: Move() {
 	}
 	 if(go_left && going_up == false)
 		position.x -= speed.x;
-
 };
 
 void Particle_Laser::Draw()
