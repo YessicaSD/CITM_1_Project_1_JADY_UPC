@@ -11,7 +11,7 @@
 #include "Player2.h"
 #include "ParticleLaser.h"
 #include "ParticleGMissile.h"
-#include "Particle_OrangeBall.h"
+#include "Particle_Follow_background.h"
 
 #include "ModuleStage05.h"
 #include "SDL/include/SDL_timer.h"
@@ -287,8 +287,8 @@ void ModuleParticles::AddParticle(Particle& particle, iPoint position, iPoint sp
 			case PARTICLE_REGULAR:
 				p = new Particle(particle, position, speed, delay, colType, tex);
 				break;
-			case PARTICLE_ORANGE_BALL:
-				p = new Particle_OrangeBall(particle, position, speed, delay, colType, tex);
+			case PARTICLE_FOLLOW_BACKGROUND:
+				p = new Particle_Follow_background(particle, position, speed, delay, colType, tex);
 				break;
 			case PARTICLE_LASER:
 				p = new Particle_Laser(particle, position, speed, delay, colType, tex);

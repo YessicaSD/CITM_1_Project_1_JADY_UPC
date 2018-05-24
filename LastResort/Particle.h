@@ -36,7 +36,6 @@ public:
 	Uint32 born = 0;
 	Uint32 life = 0;
 	Mix_Chunk *sfx = nullptr;
-
 };
 
 #endif // __PARTICLES_H__

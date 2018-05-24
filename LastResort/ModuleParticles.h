@@ -16,10 +16,12 @@ struct Mix_Chunk;
 
 enum PARTICLE_TYPE
 {
+	//- Basic
 	PARTICLE_REGULAR,
+	PARTICLE_FOLLOW_BACKGROUND,//Follows background, but can have speed (in that case it will follow the background and move at that speed)
+	//- More complex
 	PARTICLE_LASER,
 	PARTICLE_G_MISSILE,
-	PARTICLE_ORANGE_BALL,//Follows background, but can have speed (in that case it will follow the background and move at that speed)
 	MAX_PARTICLE,//Always last
 };
 
