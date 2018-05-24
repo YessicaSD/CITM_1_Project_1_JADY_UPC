@@ -351,13 +351,20 @@ Collider* ModuleCollision::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, Module
 {
 	Collider* ret = nullptr;
 
-	for (uint i = 0; i < MAX_COLLIDERS; ++i)
+	uint i;
+	for (i = 0; i < MAX_COLLIDERS; ++i)
 	{
 		if (colliders[i] == nullptr)
 		{
 			ret = colliders[i] = new Collider(rect, type, callback);
-			break;
+			return ret;//Does the same as a break, but allows us to skip the last if
 		}
+	}
+
+	//If we get to max colliders, pop an error
+	if(i == MAX_COLLIDERS)
+	{
+		LOG("Max colliders reached!\n");
 	}
 
 	return ret;

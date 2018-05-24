@@ -13,7 +13,7 @@ private:
 
 public:
 
-	Enemy_RedBats(int x, int y, POWERUP_TYPE pu_t);
+	Enemy_RedBats(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop);
 	void Move();
 	void OnCollision(Collider*);
 };

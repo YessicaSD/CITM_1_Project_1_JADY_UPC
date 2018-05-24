@@ -194,7 +194,7 @@ void Player2::KillUnit()
 	{
 		App->particles->AddParticle(
 			App->particles->g_explosion02,
-		    { (int)App->unit2->position.x, (int)App->unit2->position.y },
+		    { App->unit2->position.x, App->unit2->position.y },
 		    { 0 , 0 },
 			App->particles->g_explosion02.texture,
 			COLLIDER_IGNORE_HIT,

@@ -126,11 +126,13 @@ bool Module5lvlScene::Start()
 	shipPos = shipOffset - cameraMovement.GetPosition();
 	spawnPos.x = (int)shipPos.x;
 	spawnPos.y = (int)shipPos.y;
+	shipPartPos = { 63, 160 };
 
 	//Texture ---------------------------------------------------------------------------------------------------
-	StarsTexture = App->textures->Load("Assets/lvl5/background/backgroundstars.png");
-	shipTex = App->textures->Load("Assets/lvl5/background/ship.png");
-	tilemapTex = App->textures->Load("Assets/lvl5/background/final.png");
+	starsTx    = App->textures->Load("Assets/lvl5/background/backgroundstars.png");
+	shipTx     = App->textures->Load("Assets/lvl5/background/ship.png");
+	tilemapTx  = App->textures->Load("Assets/lvl5/background/final.png");
+	shipPartTx = App->textures->Load("Assets/lvl5/background/ShipPart.png");
 
 	//Music -----------------------------------------------------------------------------------------------------
 	lvl5Music = App->audio->LoadMUS("Assets/lvl5/07-DON-T-TOUCH-ME-BABY-STAGE-5-1-_-FEAR-STAGE-5-2-_-LEGE.ogg");
@@ -150,7 +152,7 @@ bool Module5lvlScene::Start()
 	*/
 	
 
-	//- FINAL POSITION ENEMIES
+	//- FINAL POSITION ENEMIES (in order of appearance on the level)
 	App->enemies->AddEnemy(POWERDROPPER, -88, 260, 0, POWERUP_TYPE::LASER); //homing
 	App->enemies->AddEnemy(POWERDROPPER, 180, 280, 0, POWERUP_TYPE::LASER);
 	
@@ -158,10 +160,23 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(REDBATS, 275, 270);
 	App->enemies->AddEnemy(REDBATS, 300, 270);
 	App->enemies->AddEnemy(REDBATS, 325, 270);
+
 	App->enemies->AddEnemy(REDBATS, 320, 270,800);
+
+	App->enemies->AddEnemy(REDBATS, 325, 270,800);
+
+	App->enemies->AddEnemy(ROTATING_TURRET, 111, 176);
+	App->enemies->AddEnemy(ROTATING_TURRET, 159, 192);
+	App->enemies->AddEnemy(ROTATING_TURRET, 207, 209);
+	App->enemies->AddEnemy(ROTATING_TURRET, 255, 225);
+	App->enemies->AddEnemy(ROTATING_TURRET, 302, 241);
+
+	App->enemies->AddEnemy(FRONT_TURRET, 47, 64);
+
 
 	App->enemies->AddEnemy(REDBATS, 325, -25);
 	App->enemies->AddEnemy(REDBATS, 400, -25);
+
 	App->enemies->AddEnemy(REDBATS, 400, -25,800);
 	App->enemies->AddEnemy(REDBATS, 400, -25, 1400);
 	App->enemies->AddEnemy(REDBATS, 404, -25, 1900);
@@ -173,7 +188,11 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(REDBATS, 500, -80, 0);
 	App->enemies->AddEnemy(REDBATS, 525, -80, 0);
 
-	App->enemies->AddEnemy(FRONT_TURRET, 47, 64);
+	App->enemies->AddEnemy(REDBATS, 404, -25, 800);
+	App->enemies->AddEnemy(REDBATS, 404, -25, 1400);
+	App->enemies->AddEnemy(REDBATS, 404, -25, 1800);
+	App->enemies->AddEnemy(REDBATS, 404, -80, 2000);
+
 
 	App->enemies->AddEnemy(OUTDOOR_TURRET, 208, 13);
 	App->enemies->AddEnemy(OUTDOOR_TURRET, 248, 13);
@@ -184,9 +203,6 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(OUTDOOR_TURRET, 1119, 29);
 	App->enemies->AddEnemy(OUTDOOR_TURRET, 1151, 29);
 	App->enemies->AddEnemy(MECH_SPAWNER, 738, 192);
-	
-	//asteroid1 = App->enemies->InstaSpawn(MIDDLE_ASTEROID, 100, 100);
-
 
 	//Colliders--------------------------------------------------------------------------------------------------
 	for(int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
@@ -215,10 +231,10 @@ update_status Module5lvlScene::PreUpdate()
 		scroll.y = 0;
 	}
 
-	App->render->Blit(StarsTexture, scroll.x, -scroll.y, NULL);
-	App->render->Blit(StarsTexture, scroll.x + SCREEN_WIDTH, -scroll.y, NULL);
-	App->render->Blit(StarsTexture, scroll.x, -scroll.y - SCREEN_HEIGHT, NULL);
-	App->render->Blit(StarsTexture, scroll.x + SCREEN_WIDTH, -scroll.y - SCREEN_HEIGHT, NULL);
+	App->render->Blit(starsTx, scroll.x, -scroll.y, NULL);
+	App->render->Blit(starsTx, scroll.x + SCREEN_WIDTH, -scroll.y, NULL);
+	App->render->Blit(starsTx, scroll.x, -scroll.y - SCREEN_HEIGHT, NULL);
+	App->render->Blit(starsTx, scroll.x + SCREEN_WIDTH, -scroll.y - SCREEN_HEIGHT, NULL);
 
 	return update_status::UPDATE_CONTINUE;
 };
@@ -259,18 +275,31 @@ update_status Module5lvlScene::Update()
 
 	//Background----------------------------------------------------------------------------------------------------//
 
-	
+
 	//----------SpaceShip-------------------------------------------------
 
 	if (cameraMovement.currentMov <= 21)
 	{
-		App->render->Blit(shipTex, shipPos.x, shipPos.y, &shipRect);
+		App->render->Blit(shipTx, shipPos.x, shipPos.y, &shipRect);
 	}
 	//----------Final Tilemap--------------------------------------------
 
 	if (cameraMovement.currentMov > 21)
 	{
-		App->render->Blit(tilemapTex, tunnelPos.x, tunnelPos.y, &tunnelRect);
+		App->render->Blit(tilemapTx, tunnelPos.x, tunnelPos.y, &tunnelRect);
+	}
+
+	//----------Ship part------------------------------------------------
+	RenderShipPart();
+	//----------Fireball front-------------------------------------------
+	if(fireballFrameCounter >= 72)
+	{
+		App->particles->AddParticle(App->particles->fireBall, { (float)spawnPos.x + 45, (float)spawnPos.y + 129 }, { -3, 0 }, App->particles->particlesTx, COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE, 0, PARTICLE_FOLLOW_BACKGROUND);
+		fireballFrameCounter = 0;
+	}
+	else
+	{
+		fireballFrameCounter++;
 	}
 
 	return UPDATE_CONTINUE;
@@ -283,11 +312,24 @@ bool Module5lvlScene::CleanUp() {
 	App->audio->ControlMUS(lvl5Music, STOP_AUDIO);
 	App->audio->UnloadMUS(lvl5Music);
 	//Texture -----------------------------------------------------------------------
-	App->textures->Unload(StarsTexture);
-	App->textures->Unload(shipTex);
-	App->textures->Unload(tilemapTex);
+	App->textures->Unload(starsTx);
+	App->textures->Unload(shipTx);
+	App->textures->Unload(tilemapTx);
+	App->textures->Unload(shipPartTx);
 	//Modules-----------------------------------------------------------------------
 	App->stageFunctionality->Disable();
 	App->ui->currentScene = NONE;
 	return true;
+}
+
+void Module5lvlScene::RenderShipPart()
+{
+	if(spawnPos.y + shipPartPos.y< SCREEN_HEIGHT && spawnPos.x + shipPartPos.x > 0)
+	{
+		App->render->Blit(shipPartTx, spawnPos.x + shipPartPos.x, spawnPos.y + shipPartPos.y, &shipPartRect);
+		if (rotatingTurretsKilled >= 5)
+		{
+			shipPartPos.y += fallSpeed;
+		}
+	}
 }

@@ -10,9 +10,11 @@
 #include "ModuleStage05.h"
 
 
-Enemy::Enemy(int x, int y, POWERUP_TYPE pu_t) : position(x, y), powerUp_drop(pu_t)
+Enemy::Enemy(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t)
+	: position(x, y), hp(hp), scoreValue(scoreValue), powerUp_drop(pu_t)
 {}
-Enemy::Enemy(int x, int y, POWERUP_TYPE pu_t,iPoint speed) : position(x, y), powerUp_drop(pu_t),speed(speed)
+Enemy::Enemy(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t,iPoint speed)
+	: position(x, y), hp(hp), scoreValue(scoreValue), powerUp_drop(pu_t),speed(speed)
 {}
 Enemy::~Enemy()
 {
@@ -39,7 +41,7 @@ void Enemy::OnCollision(Collider* collider)
 {
 	//LOG("Collider %i ", collider->type);
 	//Explosion type REMEMBER: Improve it for 1.0-----------------------
-	App->particles->AddParticle(App->particles->g_explosion02, { position.x, position.y }, { 0 ,0 }, App->particles->g_explosion02.texture, COLLIDER_IGNORE_HIT, 0);
+	App->particles->AddParticle(App->particles->g_explosion02, { (float)position.x, (float)position.y }, { 0 ,0 }, App->particles->g_explosion02.texture, COLLIDER_IGNORE_HIT, 0);
 
 	//Sfx REMEMBER: Improve it for 1.0----------------------------------
 	if (SDL_GetTicks() % 2)

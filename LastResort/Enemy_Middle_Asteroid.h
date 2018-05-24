@@ -12,7 +12,7 @@ private:
 
 
 public:
-	Enemy_Middle_Asteroid(int x, int y, POWERUP_TYPE pu_t);
+	Enemy_Middle_Asteroid(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop);
 	
 	void Move();
 	void Draw(SDL_Texture* sprites);

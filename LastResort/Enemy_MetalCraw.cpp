@@ -10,7 +10,7 @@
 #include<math.h>
 
 //-------------------------------------------------------Torso--------------------------------------------------------------------------------------
-Enemy_MetalCraw::Enemy_MetalCraw(int x, int y, POWERUP_TYPE pu_t ) : Enemy(x, y, pu_t)
+Enemy_MetalCraw::Enemy_MetalCraw(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t ) : Enemy(x, y, hp, scoreValue, pu_t)
 {
 	torso.PushBack({ 254,373,42,54 });
 	torso.PushBack({ 138,372,42,59 });
@@ -53,10 +53,10 @@ void Enemy_MetalCraw::Move()
 		numparticles += 1;
 		if (numparticles <= 1)
 		{
-			App->particles->AddParticle(App->particles->MiddleBossShot, { position.x - 10, position.y - 10 }, { 0 ,0 }, App->enemies->nml_sprites, COLLIDER_ENEMY_LIGHT);
-			App->particles->AddParticle(App->particles->MiddleBossShot, { position.x + 50, position.y + 10 }, { 0 ,0 }, App->enemies->nml_sprites, COLLIDER_ENEMY_LIGHT);
-			App->particles->AddParticle(App->particles->MiddleBossShot, { position.x - 10, position.y + 50 }, { 0 ,0 }, App->enemies->nml_sprites, COLLIDER_ENEMY_LIGHT);
-			App->particles->AddParticle(App->particles->MiddleBossShot, { position.x + 50, position.y + 10 }, { 0 ,0 }, App->enemies->nml_sprites, COLLIDER_ENEMY_LIGHT);
+			App->particles->AddParticle(App->particles->MiddleBossShot, { (float)(position.x - 10), (float)(position.y - 10) }, { 0 ,0 }, App->enemies->nml_sprites, COLLIDER_ENEMY_LIGHT);
+			App->particles->AddParticle(App->particles->MiddleBossShot, { (float)(position.x + 50), (float)(position.y + 10) }, { 0 ,0 }, App->enemies->nml_sprites, COLLIDER_ENEMY_LIGHT);
+			App->particles->AddParticle(App->particles->MiddleBossShot, { (float)(position.x - 10), (float)(position.y + 50) }, { 0 ,0 }, App->enemies->nml_sprites, COLLIDER_ENEMY_LIGHT);
+			App->particles->AddParticle(App->particles->MiddleBossShot, { (float)(position.x + 50), (float)(position.y + 10) }, { 0 ,0 }, App->enemies->nml_sprites, COLLIDER_ENEMY_LIGHT);
 		}
 		App->particles->VectorMiddleBossShots.x = (position.x - App->player1->position.x) / (sqrt  (pow(position.x - App->player1->position.x, 2) + pow(position.y - App->player1->position.y, 2) ));
 		App->particles->VectorMiddleBossShots.y = (position.y - App->player1->position.y) / (sqrt(pow(position.x - App->player1->position.x, 2) + pow(position.y - App->player1->position.y, 2)));

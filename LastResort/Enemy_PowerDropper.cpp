@@ -2,7 +2,7 @@
 #include "Enemy_PowerDropper.h"
 #include "ModuleCollision.h"
 
-Enemy_PowerDropper::Enemy_PowerDropper(int x, int y, POWERUP_TYPE pu_t) : Enemy(x, y,  pu_t)
+Enemy_PowerDropper::Enemy_PowerDropper(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t) : Enemy(x, y, hp, scoreValue, pu_t)
 {
 		dropper.PushBack({ 0,218,32,26 });
 		dropper.PushBack({ 32,218,30,26 });

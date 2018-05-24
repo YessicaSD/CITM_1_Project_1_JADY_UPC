@@ -15,7 +15,7 @@ private:
 	int spawnFrames = 0;
 
 public:
-	Enemy_Mech_Spawner(int x, int y, POWERUP_TYPE pu_t);
+	Enemy_Mech_Spawner(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop);
 	~Enemy_Mech_Spawner() {};
 	void Move();
 	void Draw(SDL_Texture* sprites);

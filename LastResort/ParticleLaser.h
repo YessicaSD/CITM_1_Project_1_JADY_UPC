@@ -12,13 +12,13 @@ public:
 		if (collider != nullptr)
 			collider->to_delete = true;
 	};*/
-	Particle_Laser(Particle&, iPoint, iPoint, Uint32, COLLIDER_TYPE colType, SDL_Texture* tex);
+	Particle_Laser(Particle&, fPoint, fPoint, Uint32, COLLIDER_TYPE colType, SDL_Texture* tex);
 	void Move();
 	void Draw();
 
 private:
 	Animation LaserAnim;
-	fPoint PlayerPosition;
+	fPoint playerPos;
 	bool going_up;
 	bool go_right;
 	bool go_left;

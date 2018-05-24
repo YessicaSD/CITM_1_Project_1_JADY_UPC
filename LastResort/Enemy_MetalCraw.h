@@ -20,7 +20,7 @@ private:
 	int numparticles;
 public:
 
-	Enemy_MetalCraw(int x, int y, POWERUP_TYPE pu_t);
+	Enemy_MetalCraw(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop);
 
 	void Move();
 	void  Draw(SDL_Texture* sprites);

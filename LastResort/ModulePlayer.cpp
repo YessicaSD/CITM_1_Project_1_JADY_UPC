@@ -269,7 +269,7 @@ void ModulePlayer::ShipAnimation() {
 void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
 {
 	//Particles---------------------------------------------------------------------
-	App->particles->AddParticle(App->particles->death_explosion, { position.x, position.y }, { 0 ,0 }, PlayerTexture);
+	App->particles->AddParticle(App->particles->death_explosion, { (float)position.x, (float)position.y }, { 0 ,0 }, PlayerTexture);
 
 	//Player variables--------------------------------------------------------------
 	playerCol->type = COLLIDER_GOD;
@@ -295,7 +295,7 @@ void  ModulePlayer::ShotInput()
 	{
 		//- All of them shoot a basic shot
 		shoot = true;
-		App->particles->AddParticle(App->particles->basicShot, { position.x + 32, position.y + 6 }, { 12, 0 }, PlayerTexture, shot_colType, 0);
+		App->particles->AddParticle(App->particles->basicShot, { (float)(position.x + 32), (float)(position.y + 6) }, { 12, 0 }, PlayerTexture, shot_colType, 0);
 		//- They have additional shots for some upgrades
 		if (currentPowerUp == POWERUP_TYPE::LASER)
 		{
@@ -303,11 +303,11 @@ void  ModulePlayer::ShotInput()
 			{
 			case 2:
 				//Basic laser
-				App->particles->AddParticle(App->particles->Basic_Laser, { position.x + 32, position.y + 6 }, {10, 0 }, PlayerTexture, shot_colType, 0);
+				App->particles->AddParticle(App->particles->basicLaser, { (float)(position.x + 32), (float)(position.y + 6)}, {10, 0 }, PlayerTexture, shot_colType, 0);
 				break;
 			case 3:
 				//Laser rings
-				App->particles->AddParticle(App->particles->Basic_Laser, { position.x + 32, position.y + 6 }, { 10, 0 }, PlayerTexture, shot_colType, 0);
+				App->particles->AddParticle(App->particles->basicLaser, { (float)(position.x + 32), (float)(position.y + 6) }, { 10, 0 }, PlayerTexture, shot_colType, 0);
 				break;
 			}
 		}

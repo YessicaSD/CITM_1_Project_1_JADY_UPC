@@ -4,7 +4,7 @@
 #include "Particle.h"
 #include "ModuleStage05.h"
 
-Enemy_Mech_Spawner::Enemy_Mech_Spawner(int x, int y, POWERUP_TYPE pu_t) : Enemy(x, y, pu_t)
+Enemy_Mech_Spawner::Enemy_Mech_Spawner(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t) : Enemy(x, y, hp, scoreValue, pu_t)
 {
 	for (uint i = 0; i < MAX_SPAWNED; ++i)
 	{

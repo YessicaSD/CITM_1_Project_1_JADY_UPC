@@ -2,7 +2,7 @@
 #include "Enemy_Big_Asteriod.h"
 #include "ModuleCollision.h"
 #include "ModuleRender.h"
-Enemy_Big_Asteroid::Enemy_Big_Asteroid(int x, int y, POWERUP_TYPE pu_t) :Enemy(x,y, pu_t)
+Enemy_Big_Asteroid::Enemy_Big_Asteroid(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t) :Enemy(x ,y , hp, scoreValue, pu_t)
 {
 	BigAsteroid.PushBack({ 152,176,64,62 });
 	animation = &BigAsteroid;
@@ -26,5 +26,5 @@ void Enemy_Big_Asteroid::Draw(SDL_Texture* sprites)
 
 void Enemy_Big_Asteroid::OnCollision(Collider* collider)
 {
-	App->particles->AddParticle(App->particles->AsteroidDestroy, { position.x, position.y }, { 0 , 0 }, App->particles->particlesTx, COLLIDER_IGNORE_HIT, 0);
+	App->particles->AddParticle(App->particles->AsteroidDestroy, { (float)position.x, (float)position.y }, { 0 , 0 }, App->particles->particlesTx, COLLIDER_IGNORE_HIT, 0);
 }

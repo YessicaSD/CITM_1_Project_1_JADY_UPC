@@ -28,6 +28,9 @@ public:
 	update_status PreUpdate();
 	bool CleanUp();
 
+	//Other functions
+	void RenderShipPart();
+
 public:
 	//CheckPoint-----------------------------
 	int current_time= 0;
@@ -59,16 +62,25 @@ public:
 	Collider* frontShipCol1;
 
 	//Tetures---------------------------------
-	SDL_Texture * StarsTexture = nullptr;
-	SDL_Texture *shipTex = nullptr;
-	SDL_Texture *tilemapTex = nullptr;
+	SDL_Texture * starsTx = nullptr;
+	SDL_Texture * shipTx = nullptr;
+	SDL_Texture * tilemapTx = nullptr;
+	SDL_Texture * shipPartTx = nullptr;
 	
 	//Music-----------------------------------
 	Mix_Music* lvl5Music = nullptr;
 
+	//Ship part------------------------------
+	SDL_Rect shipPartRect = { 2, 0, 251, 96 };
+	iPoint shipPartPos;
+	const int fallSpeed = 1;
+
+	//Fireball front-------------------------
+	int fireballFrameCounter = 0;
+
 	//Enemies--------------------------------
-	//Enemy asteroid1;
 	int redBatsKilled = 0;
+	int rotatingTurretsKilled = 0;
 };
 
 #endif

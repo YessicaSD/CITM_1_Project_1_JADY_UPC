@@ -6,8 +6,9 @@
 #include "Player2.h"
 #include "ModuleStage05.h"
 #include "Rotation.h"
+#include "ModuleAudio.h"
 
-Enemy_RotatingTurret::Enemy_RotatingTurret(int x, int y, POWERUP_TYPE pu_t) : Enemy(x, y, pu_t)
+Enemy_RotatingTurret::Enemy_RotatingTurret(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t) : Enemy(x, y, hp, scoreValue, pu_t)
 {
 	//Animation
 	rotatingTurretAnim.PushBack({ 332,  0, 26, 27 });// 0 = E
@@ -69,11 +70,58 @@ void Enemy_RotatingTurret::Move()
 	rotation = CalculateRotationToPoint(position, targetPlayerPos);
 
 	//- Shoot
-	//Shoot every x time? Or when it fixes the position?
+	if(frameCounter >= 122)
+	{
+		ShootBall({ (float)position.x, (float)position.y }, { cosf(rotation), sinf(rotation)});
+		ShootBall({ (float)position.x, (float)position.y }, { cosf(rotation + shootSeparation), sinf(rotation + shootSeparation) });
+		ShootBall({ (float)position.x, (float)position.y }, { cosf(rotation - shootSeparation), sinf(rotation - shootSeparation) });
+		frameCounter = 0;
+	}
+	else
+	{
+		frameCounter++;
+	}
 }
 
 void Enemy_RotatingTurret::Draw(SDL_Texture* sprites)
 {
 	int pushBackNumber = GetNearestAngle(rotation);
+
+	//Update collider
+	collider->SetPos(position.x + spriteXOffset[pushBackNumber], position.y + spriteYOffset[pushBackNumber]);
+
+	//Blit
 	App->render->Blit(sprites, position.x + spriteXOffset[pushBackNumber], position.y + spriteYOffset[pushBackNumber], &rotatingTurretAnim.ReturnFrame(pushBackNumber));
+}
+
+void Enemy_RotatingTurret::ShootBall(fPoint position, fPoint speed)
+{
+	//Shoot
+	App->particles->AddParticle(
+		App->particles->orangeBall,
+		{ position },
+		{ speed },
+		App->particles->particlesTx,
+		COLLIDER_TYPE::COLLIDER_ENEMY_SHOT,
+		0,
+		PARTICLE_TYPE::PARTICLE_FOLLOW_BACKGROUND);
+}
+
+void Enemy_RotatingTurret::OnCollision(Collider* collider2)
+{
+	//Make the ship part fall if it is killed
+	App->stage05->rotatingTurretsKilled++;
+
+	//Explosion type REMEMBER: Improve it for 1.0-----------------------
+	App->particles->AddParticle(App->particles->g_explosion02, { (float)position.x, (float)position.y }, { 0, 0 }, App->particles->g_explosion02.texture, COLLIDER_IGNORE_HIT, 0);
+
+	//Sfx REMEMBER: Improve it for 1.0----------------------------------
+	if (SDL_GetTicks() % 2)
+	{
+		App->audio->ControlSFX(App->particles->g_explosion01_1sfx, PLAY_AUDIO);
+	}
+	else
+	{
+		App->audio->ControlSFX(App->particles->g_explosion02_1sfx, PLAY_AUDIO);
+	}
 }

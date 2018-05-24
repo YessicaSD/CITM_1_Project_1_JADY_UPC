@@ -353,8 +353,8 @@ void ModuleUnit::Rotating()
 	{
 		App->particles->AddParticle(
 			App->particles->unitShot,
-			{ (int)position.x + shotPosXDifferences[turnAroundToRender], (int)position.y + shotPosYDifferences[turnAroundToRender]},
-			{ (int)(unitProjectileSpeed * cosf(angleValue[turnAroundToRender])) , (int)(unitProjectileSpeed * sinf(angleValue[turnAroundToRender]))},
+			{ position.x + shotPosXDifferences[turnAroundToRender], position.y + shotPosYDifferences[turnAroundToRender]},
+			{ (unitProjectileSpeed * cosf(angleValue[turnAroundToRender])) , (unitProjectileSpeed * sinf(angleValue[turnAroundToRender]))},
 			playerToFollow->PlayerTexture,
 			playerToFollow->shot_colType,
 			0);

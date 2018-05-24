@@ -18,7 +18,7 @@ class Particle
 {
 public:
 	Particle();
-	Particle(Particle& , iPoint, iPoint, Uint32, COLLIDER_TYPE colType, SDL_Texture* tex);
+	Particle(Particle& , fPoint, fPoint, Uint32, COLLIDER_TYPE colType, SDL_Texture* tex);
 	~Particle();
 
 	bool CheckParticleDeath();
@@ -26,13 +26,13 @@ public:
 	virtual void Draw();
 
 public:
-	iPoint position;
-	iPoint fixedPos;
+	fPoint position;
+	fPoint fixedPos;
 	Collider * collider = nullptr;
 	Animation anim;
 	SDL_Texture* texture = nullptr;
 	Particle* collision_fx = nullptr;
-	iPoint speed;
+	fPoint speed;
 	Uint32 born = 0;
 	Uint32 life = 0;
 	Mix_Chunk *sfx = nullptr;

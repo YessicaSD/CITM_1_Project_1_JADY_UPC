@@ -5,7 +5,7 @@
 #include "ModuleParticles.h"
 #include "Rotation.h"
 
-Enemy_FrontTurret::Enemy_FrontTurret(int x, int y, POWERUP_TYPE pu_t) : Enemy(x, y, pu_t)
+Enemy_FrontTurret::Enemy_FrontTurret(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t) : Enemy(x, y, hp, scoreValue, pu_t)
 {
 	//Animation-----------------------------------------------
 	frontTurretAnim.PushBack({120, 458, 32, 24});
@@ -33,10 +33,10 @@ void Enemy_FrontTurret::Move()
 		case 0:
 			LOG("Explosion 1");
 			//TO DO: Add explosion
-			ShootBall(position, { (int)(cos(angleValue[WNW] + angleSeparation * 0) * shootSpeed), (int)(sin(angleValue[WNW] + angleSeparation * 0) * shootSpeed) });
-			ShootBall(position, { (int)(cos(angleValue[WNW] + angleSeparation * 1) * shootSpeed), (int)(sin(angleValue[WNW] + angleSeparation * 1) * shootSpeed) });
-			ShootBall(position, { (int)(cos(angleValue[WNW] + angleSeparation * 2) * shootSpeed), (int)(sin(angleValue[WNW] + angleSeparation * 2) * shootSpeed) });
-			ShootBall(position, { (int)(cos(angleValue[WNW] + angleSeparation * 3) * shootSpeed), (int)(sin(angleValue[WNW] + angleSeparation * 3) * shootSpeed) });
+			ShootBall({ (float)position.x, (float)position.y }, { cosf(angleValue[WNW] + angleSeparation * 0) * shootSpeed, sinf(angleValue[WNW] + angleSeparation * 0) * shootSpeed });
+			ShootBall({ (float)position.x, (float)position.y }, { cosf(angleValue[WNW] + angleSeparation * 1) * shootSpeed, sinf(angleValue[WNW] + angleSeparation * 1) * shootSpeed });
+			ShootBall({ (float)position.x, (float)position.y }, { cosf(angleValue[WNW] + angleSeparation * 2) * shootSpeed, sinf(angleValue[WNW] + angleSeparation * 2) * shootSpeed });
+			ShootBall({ (float)position.x, (float)position.y }, { cosf(angleValue[WNW] + angleSeparation * 3) * shootSpeed, sinf(angleValue[WNW] + angleSeparation * 3) * shootSpeed });
 			shotStage++;
 			break;
 		case 1:
@@ -48,19 +48,19 @@ void Enemy_FrontTurret::Move()
 		case 2:
 			LOG("Explosion 3");
 			//TO DO: Add explosion
-			ShootBall(position, { (int)(cos(angleValue[NNW] + angleSeparation * 0) * shootSpeed), (int)(sin(angleValue[NNW] + angleSeparation * 0) * shootSpeed) });
-			ShootBall(position, { (int)(cos(angleValue[NNW] + angleSeparation * 1) * shootSpeed), (int)(sin(angleValue[NNW] + angleSeparation * 1) * shootSpeed) });
-			ShootBall(position, { (int)(cos(angleValue[NNW] + angleSeparation * 2) * shootSpeed), (int)(sin(angleValue[NNW] + angleSeparation * 2) * shootSpeed) });
-			ShootBall(position, { (int)(cos(angleValue[NNW] + angleSeparation * 3) * shootSpeed), (int)(sin(angleValue[NNW] + angleSeparation * 3) * shootSpeed) });
+			ShootBall({ (float)position.x, (float)position.y }, { cosf(angleValue[NNW] + angleSeparation * 0) * shootSpeed, sinf(angleValue[NNW] + angleSeparation * 0) * shootSpeed });
+			ShootBall({ (float)position.x, (float)position.y }, { cosf(angleValue[NNW] + angleSeparation * 1) * shootSpeed, sinf(angleValue[NNW] + angleSeparation * 1) * shootSpeed });
+			ShootBall({ (float)position.x, (float)position.y }, { cosf(angleValue[NNW] + angleSeparation * 2) * shootSpeed, sinf(angleValue[NNW] + angleSeparation * 2) * shootSpeed });
+			ShootBall({ (float)position.x, (float)position.y }, { cosf(angleValue[NNW] + angleSeparation * 3) * shootSpeed, sinf(angleValue[NNW] + angleSeparation * 3) * shootSpeed });
 			shotStage++;
 			break;
 		case 3:
 			LOG("Explosion 4");
 			//TO DO: Add explosion
-			ShootBall(position, { (int)(cos(angleValue[N] + angleSeparation * 0) * shootSpeed), (int)(sin(angleValue[N] + angleSeparation * 0) * shootSpeed) });
-			ShootBall(position, { (int)(cos(angleValue[N] + angleSeparation * 1) * shootSpeed), (int)(sin(angleValue[N] + angleSeparation * 1) * shootSpeed) });
-			ShootBall(position, { (int)(cos(angleValue[N] + angleSeparation * 2) * shootSpeed), (int)(sin(angleValue[N] + angleSeparation * 2) * shootSpeed) });
-			ShootBall(position, { (int)(cos(angleValue[N] + angleSeparation * 3) * shootSpeed), (int)(sin(angleValue[N] + angleSeparation * 3) * shootSpeed) });
+			ShootBall({ (float)position.x, (float)position.y }, { cosf(angleValue[N] + angleSeparation * 0) * shootSpeed, sinf(angleValue[N] + angleSeparation * 0) * shootSpeed });
+			ShootBall({ (float)position.x, (float)position.y }, { cosf(angleValue[N] + angleSeparation * 1) * shootSpeed, sinf(angleValue[N] + angleSeparation * 1) * shootSpeed });
+			ShootBall({ (float)position.x, (float)position.y }, { cosf(angleValue[N] + angleSeparation * 2) * shootSpeed, sinf(angleValue[N] + angleSeparation * 2) * shootSpeed });
+			ShootBall({ (float)position.x, (float)position.y }, { cosf(angleValue[N] + angleSeparation * 3) * shootSpeed, sinf(angleValue[N] + angleSeparation * 3) * shootSpeed });
 			shotStage = 0;
 			break;
 		}
@@ -72,7 +72,7 @@ void Enemy_FrontTurret::Move()
 	}
 }
 
-void Enemy_FrontTurret::ShootBall(iPoint position, iPoint speed)
+void Enemy_FrontTurret::ShootBall(fPoint position, fPoint speed)
 {
 	//Shoot
 	App->particles->AddParticle(
