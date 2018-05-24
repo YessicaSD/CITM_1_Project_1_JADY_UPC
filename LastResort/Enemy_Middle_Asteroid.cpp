@@ -28,5 +28,5 @@ void Enemy_Middle_Asteroid::Draw(SDL_Texture* sprites) {
 
 void Enemy_Middle_Asteroid::OnCollision(Collider*) 
 {
-	App->particles->AddParticle(App->particles->MiddleAsteroidDestroy, { position.x, position.y }, { 0 ,0 }, App->particles->particlesTx, COLLIDER_IGNORE_HIT, 0);
+	App->particles->AddParticle(App->particles->MiddleAsteroidDestroy, { (float)position.x, (float)position.y }, { 0 ,0 }, App->particles->particlesTx, COLLIDER_IGNORE_HIT, 0);
 }

@@ -38,7 +38,7 @@ public:
 	void OnCollision(Collider* c1, Collider* c2);
 
 	//Module functions
-	void AddParticle(Particle& particle, iPoint position, iPoint speed, SDL_Texture *tex ,COLLIDER_TYPE collider_type = COLLIDER_IGNORE_HIT, Uint32 delay = 0, PARTICLE_TYPE particle_type = PARTICLE_FOLLOW_WORLD);
+	void AddParticle(Particle& particle, fPoint position, fPoint speed, SDL_Texture *tex ,COLLIDER_TYPE collider_type = COLLIDER_IGNORE_HIT, Uint32 delay = 0, PARTICLE_TYPE particle_type = PARTICLE_FOLLOW_WORLD);
 	
 
 private:

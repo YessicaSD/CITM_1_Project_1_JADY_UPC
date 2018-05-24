@@ -26,5 +26,5 @@ void Enemy_Big_Asteroid::Draw(SDL_Texture* sprites)
 
 void Enemy_Big_Asteroid::OnCollision(Collider* collider)
 {
-	App->particles->AddParticle(App->particles->AsteroidDestroy, { position.x, position.y }, { 0 , 0 }, App->particles->particlesTx, COLLIDER_IGNORE_HIT, 0);
+	App->particles->AddParticle(App->particles->AsteroidDestroy, { (float)position.x, (float)position.y }, { 0 , 0 }, App->particles->particlesTx, COLLIDER_IGNORE_HIT, 0);
 }

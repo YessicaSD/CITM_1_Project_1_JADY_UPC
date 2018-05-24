@@ -12,7 +12,7 @@ public:
 
 private:
 	//Helper functions
-	void ShootBall(iPoint position, iPoint speed);
+	void ShootBall(fPoint position, fPoint speed);
 
 	Animation frontTurretAnim;
 	int fixedY;

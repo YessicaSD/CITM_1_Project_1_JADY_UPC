@@ -12,7 +12,7 @@ Particle::Particle()
 	speed.SetToZero();
 }
 
-Particle::Particle(Particle& sentParticle, iPoint position, iPoint speed, Uint32 delay, COLLIDER_TYPE colType, SDL_Texture* tex)
+Particle::Particle(Particle& sentParticle, fPoint position, fPoint speed, Uint32 delay, COLLIDER_TYPE colType, SDL_Texture* tex)
 {
 	//- Values that always stay the same as sentParticle (those values are defined on ModuleParticles.cpp or they are the default ones)
 	this->anim = sentParticle.anim;
@@ -22,12 +22,13 @@ Particle::Particle(Particle& sentParticle, iPoint position, iPoint speed, Uint32
 
 	//- Values that vary depending on the parameters we pass in
 	this->position = position;
-	this->fixedPos = position - App->stage05->spawnPos;
+	this->fixedPos.x = position.x - (float)App->stage05->spawnPos.x;
+	this->fixedPos.y = position.y - (float)App->stage05->spawnPos.y;
 	this->speed = speed;
 	this->born = SDL_GetTicks() + delay;
 	if (colType != COLLIDER_IGNORE_HIT)
 	{
-		this->collider = App->collision->AddCollider({ this->position.x, this->position.y ,this->anim.GetCurrentFrame().w, this->anim.GetFrame().h }, colType, (Module*)App->particles);
+		this->collider = App->collision->AddCollider({ (int)this->position.x, (int)this->position.y ,this->anim.GetCurrentFrame().w, this->anim.GetFrame().h }, colType, (Module*)App->particles);
 	}
 	this->texture = tex;
 
