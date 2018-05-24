@@ -17,7 +17,7 @@ struct Mix_Chunk;
 enum PARTICLE_TYPE
 {
 	//- Basic
-	PARTICLE_REGULAR,
+	PARTICLE_FOLLOW_WORLD,
 	PARTICLE_FOLLOW_BACKGROUND,//Follows background, but can have speed (in that case it will follow the background and move at that speed)
 	//- More complex
 	PARTICLE_LASER,
@@ -38,17 +38,17 @@ public:
 	void OnCollision(Collider* c1, Collider* c2);
 
 	//Module functions
-	void AddParticle(Particle& particle, iPoint position, iPoint speed, SDL_Texture *tex ,COLLIDER_TYPE collider_type = COLLIDER_NONE, Uint32 delay = 0, PARTICLE_TYPE particle_type = PARTICLE_REGULAR);
+	void AddParticle(Particle& particle, iPoint position, iPoint speed, SDL_Texture *tex ,COLLIDER_TYPE collider_type = COLLIDER_NONE, Uint32 delay = 0, PARTICLE_TYPE particle_type = PARTICLE_FOLLOW_WORLD);
 	
 
 private:
-	SDL_Texture* graphics = nullptr;
+	SDL_Texture* explosionTx = nullptr;
 	Particle* active[MAX_ACTIVE_PARTICLES];
 
 public:
 	//TEXTURES-----------------------------------------
-	SDL_Texture * ParticleTexture;
-	SDL_Texture * LaserTex;
+	SDL_Texture * particlesTx;
+	SDL_Texture * laserTx;
 	
 	//SFX----------------------------------------------
 	Mix_Chunk* AsteroidDestroySfx;

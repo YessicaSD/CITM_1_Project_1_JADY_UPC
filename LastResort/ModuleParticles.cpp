@@ -198,26 +198,22 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading ModuleParticles assets ");
-	//Texture particle ----------------------------------------------------------------------
-	ParticleTexture= App->textures->Load("Assets/particles.png");
-
-	//textures-------------------------------------------------
-	graphics = App->textures->Load("Assets/General/Fx/Explosion_2.png");
-	LaserTex = App->textures->Load("Assets/General/Enemies/Laser_Niv5.png");
-	//particles-----------------------------------------------
-	g_explosion02.texture = graphics;
-	//Powerups ---------------------------------------------------------------------
-	Basic_LaserFx = App->audio->LoadSFX("Assets/014. Lasser_2-Center.WAV");
-	Basic_Laser.sfx = Basic_LaserFx;
-	//audios--------------------------------------------------
-	basic_shot_sfx = App->audio->LoadSFX("Assets/004. Shot - center.wav");
-	basicShot.sfx = basic_shot_sfx;
-	death_sfx = App->audio->LoadSFX("Assets/005. Death.wav");
-	death_explosion.sfx = death_sfx;
+	//- Load textures
+	particlesTx = App->textures->Load("Assets/particles.png");
+	explosionTx = App->textures->Load("Assets/General/Fx/Explosion_2.png");
+	laserTx     = App->textures->Load("Assets/General/Enemies/Laser_Niv5.png");
+	//- Load audios
+	Basic_LaserFx      = App->audio->LoadSFX("Assets/014. Lasser_2-Center.WAV");
+	basic_shot_sfx     = App->audio->LoadSFX("Assets/004. Shot - center.wav");
+	death_sfx          = App->audio->LoadSFX("Assets/005. Death.wav");
 	g_explosion01_1sfx = App->audio->LoadSFX("Assets/General/Fx/Explosion_1.wav");
 	g_explosion02_1sfx = App->audio->LoadSFX("Assets/General/Fx/Explosion_2.wav");
-
-	
+	//- Initializate textures
+	g_explosion02.texture = explosionTx;
+	//- Initializate audios
+	Basic_Laser.sfx = Basic_LaserFx;
+	basicShot.sfx = basic_shot_sfx;
+	death_explosion.sfx = death_sfx;
 	return true;
 }
 
@@ -227,9 +223,9 @@ bool ModuleParticles::CleanUp()
 	LOG("Unloading particles");
 	
 	//textures--------------------------------------------------
-	App->textures->Unload(graphics);
-	App->textures->Unload(LaserTex);
-	App->textures->Unload(ParticleTexture);
+	App->textures->Unload(explosionTx);
+	App->textures->Unload(laserTx);
+	App->textures->Unload(particlesTx);
 	//audios---------------------------------------------------
 	App->audio->UnloadSFX(basic_shot_sfx);
 	App->audio->UnloadSFX(death_sfx);
@@ -251,24 +247,27 @@ bool ModuleParticles::CleanUp()
 
 update_status ModuleParticles::Update()
 {
-	
-
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
-		Particle* p = active[i];
-
-		if (p == nullptr)
-			continue;
-
-		if (p->CheckParticleDeath() == true)
+		//If there isn't a particle in that position of the array, go to the next particle in the array
+		if (active[i] == nullptr)
 		{
-			delete p;
+			continue;
+		}	
+
+		//Check if it needs to be deleted
+		if (active[i]->CheckParticleDeath() == true)
+		{
+			//Delete the particle
+			delete active[i];
 			active[i] = nullptr;
 		}
-		else if (SDL_GetTicks() >= p->born)
+
+		else if (SDL_GetTicks() >= active[i]->born)
 		{
-			p->Move();
-			p->Draw();
+			//Update the particle
+			active[i]->Move();
+			active[i]->Draw();
 		}
 	}
 	return UPDATE_CONTINUE;
@@ -284,7 +283,7 @@ void ModuleParticles::AddParticle(Particle& particle, iPoint position, iPoint sp
 
 			switch (particle_type)
 			{
-			case PARTICLE_REGULAR:
+			case PARTICLE_FOLLOW_WORLD:
 				p = new Particle(particle, position, speed, delay, colType, tex);
 				break;
 			case PARTICLE_FOLLOW_BACKGROUND:
