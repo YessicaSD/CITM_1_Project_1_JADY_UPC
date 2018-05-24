@@ -79,7 +79,7 @@ void Particle_Laser::Draw()
 	SDL_Rect currentFrame = anim.GetCurrentFrame();
 
 	//Update the collider
-	collider->SetPos(position.x, position.y);
+	collider->SetPos(position.x, position.y - currentFrame.h / 2);
 	collider->SetMeasurements(currentFrame.w, currentFrame.h);
 
 	//Render
