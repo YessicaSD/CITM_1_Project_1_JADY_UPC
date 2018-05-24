@@ -69,11 +69,34 @@ void Enemy_RotatingTurret::Move()
 	rotation = CalculateRotationToPoint(position, targetPlayerPos);
 
 	//- Shoot
-	//Shoot every x time? Or when it fixes the position?
+	if(frameCounter >= 122)
+	{
+		ShootBall({ (float)position.x, (float)position.y }, { cosf(rotation), sinf(rotation)});
+		ShootBall({ (float)position.x, (float)position.y }, { cosf(rotation + shootSeparation), sinf(rotation + shootSeparation) });
+		ShootBall({ (float)position.x, (float)position.y }, { cosf(rotation - shootSeparation), sinf(rotation - shootSeparation) });
+		frameCounter = 0;
+	}
+	else
+	{
+		frameCounter++;
+	}
 }
 
 void Enemy_RotatingTurret::Draw(SDL_Texture* sprites)
 {
 	int pushBackNumber = GetNearestAngle(rotation);
 	App->render->Blit(sprites, position.x + spriteXOffset[pushBackNumber], position.y + spriteYOffset[pushBackNumber], &rotatingTurretAnim.ReturnFrame(pushBackNumber));
+}
+
+void Enemy_RotatingTurret::ShootBall(fPoint position, fPoint speed)
+{
+	//Shoot
+	App->particles->AddParticle(
+		App->particles->orangeBall,
+		{ position },
+		{ speed },
+		App->particles->particlesTx,
+		COLLIDER_TYPE::COLLIDER_ENEMY_SHOT,
+		0,
+		PARTICLE_TYPE::PARTICLE_FOLLOW_BACKGROUND);
 }
