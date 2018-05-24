@@ -173,7 +173,7 @@ bool ModuleEnemies::CleanUp()
 	return true;
 }
 
-bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, Uint32 delay, POWERUP_TYPE powerup_type)
+bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, Uint32 delay, POWERUP_TYPE powerup_type, iPoint speed)
 {
 	bool ret = false;
 
@@ -186,6 +186,8 @@ bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, Uint32 delay, POWER
 			queue[i].y = y;
 			queue[i].delay = delay;
 			queue[i].pu_Type = powerup_type;
+			queue[i].speed = speed;
+
 			ret = true;
 			break;
 		}
@@ -195,7 +197,7 @@ bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, Uint32 delay, POWER
 }
 
 //Gets deleted if you instaspawn in a position that's different to the camera
-Enemy* ModuleEnemies::InstaSpawn(ENEMY_TYPES type, int x, int y, POWERUP_TYPE powerup_type, iPoint speed)
+Enemy* ModuleEnemies::InstaSpawn(ENEMY_TYPES type, int x, int y, POWERUP_TYPE powerup_type,  iPoint speed)
 {
 	EnemyInfo enemyInfo;
 	enemyInfo.type = type;
