@@ -160,7 +160,7 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(REDBATS, 275, 270);
 	App->enemies->AddEnemy(REDBATS, 300, 270);
 	App->enemies->AddEnemy(REDBATS, 325, 270);
-	App->enemies->AddEnemy(REDBATS, 325, 270,700,SPEED);
+	App->enemies->AddEnemy(REDBATS, 325, 270);
 
 	App->enemies->AddEnemy(REDBATS, 325, -20);
 	App->enemies->AddEnemy(REDBATS, 400, -25);
@@ -259,8 +259,6 @@ update_status Module5lvlScene::Update()
 	{
 		App->render->Blit(tilemapTex, tunnelPos.x, tunnelPos.y, &tunnelRect);
 	}
-	
-	
 
 	return UPDATE_CONTINUE;
 }

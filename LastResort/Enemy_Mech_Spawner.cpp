@@ -42,9 +42,9 @@ void Enemy_Mech_Spawner::Move()
 	currentEnemies = 0;
 	for (int i = 0; i < MAX_SPAWNED; ++i) {
 
-		if (spawned[i] != nullptr && spawned[i]->isDead == false ) {
+		if (spawned[i] != nullptr && spawned[i]->isDead == false )
+		{
 			currentEnemies += 1;
-
 		}
 		else
 		{

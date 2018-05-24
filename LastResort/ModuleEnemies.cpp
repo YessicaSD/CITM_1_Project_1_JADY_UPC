@@ -165,7 +165,6 @@ bool ModuleEnemies::CleanUp()
 			queue[i].pu_Type = POWERUP_TYPE::NOPOWERUP;
 			queue[i].counting = false;
 			queue[i].spawnTime = 0;
-			
 	}
 
 	App->textures->Unload(nml_sprites);
@@ -330,7 +329,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 				if (enemies[i]->powerUp_drop != NOPOWERUP) {
 					App->powerups->AddPowerup( enemies[i]->position.x, enemies[i]->position.y, enemies[i]->powerUp_drop);
 				}
-				//---Delete enemie--------------------------
+				//---Delete enemy---------------------------
 				enemies[i]->isDead = true;
 				enemies[i]->OnCollision(c2);
 				delete enemies[i];

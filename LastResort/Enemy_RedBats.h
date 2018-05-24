@@ -15,5 +15,6 @@ public:
 
 	Enemy_RedBats(int x, int y, POWERUP_TYPE pu_t);
 	void Move();
+	void OnCollision(Collider*);
 };
 #endif // __ENEMY_REDBATS_H__

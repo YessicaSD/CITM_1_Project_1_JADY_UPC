@@ -40,25 +40,28 @@ void Enemy_Pinata_Spawner::Move()
 	//Enemies Spawning------------------------------------------
 	currentEnemies = 0;
 
-	for (int i = 0; i < MAX_SPAWNED; ++i) {
-
-		if (spawned[i] != nullptr && spawned[i]->isDead == false) {
+	for (int i = 0; i < MAX_SPAWNED; ++i)
+	{
+		if (spawned[i] != nullptr && spawned[i]->isDead == false)
+		{
 			currentEnemies += 1;
-
 		}
 	}
 
 	LOG("currentEnemies : %d", currentEnemies);
 
 
-	if (currentEnemies < 3 && spawnFrames > SPAWN_FRAMES - 60) {
+	if (currentEnemies < 3 && spawnFrames > SPAWN_FRAMES - 60)
+	{
 		currentState = OPEN;
 	}
 
-	if (currentEnemies < 3  && spawnFrames > SPAWN_FRAMES) {
-
-		for (int i = 0; i < MAX_SPAWNED; ++i) {
-			if (spawned[i] == nullptr) {
+	if (currentEnemies < 3  && spawnFrames > SPAWN_FRAMES)
+	{
+		for (int i = 0; i < MAX_SPAWNED; ++i)
+		{
+			if (spawned[i] == nullptr)
+			{
 				spawned[i] = App->enemies->InstaSpawn(PINATA, position.x, position.y);
 				spawnFrames = 0;
 				break;
@@ -66,11 +69,11 @@ void Enemy_Pinata_Spawner::Move()
 		}
 	}
 
-	for (int i = 0; i < MAX_SPAWNED; ++i) {
-
-		if (spawned[i] != nullptr && spawned[i]->isDead == true) {
+	for (int i = 0; i < MAX_SPAWNED; ++i)
+	{
+		if (spawned[i] != nullptr && spawned[i]->isDead == true)
+		{
 			spawned[i] = nullptr;
-
 		}
 	}
 

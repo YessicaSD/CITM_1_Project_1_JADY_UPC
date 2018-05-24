@@ -67,6 +67,7 @@ public:
 
 	//Enemies--------------------------------
 	//Enemy asteroid1;
+	int redBatsKilled = 0;
 };
 
 #endif
