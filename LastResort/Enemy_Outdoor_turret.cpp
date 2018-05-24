@@ -5,7 +5,7 @@
 #include "ModuleEnemies.h"
 #include "ModuleParticles.h"
 
-Enemy_Outdoor_turret::Enemy_Outdoor_turret(int x, int y, POWERUP_TYPE pu_t) : Enemy(x, y, pu_t)
+Enemy_Outdoor_turret::Enemy_Outdoor_turret(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t) : Enemy(x, y, hp, scoreValue, pu_t)
 {
 	OutdoorTurretAnim.PushBack({152,156,24,20});
 	OutdoorTurretAnim.loop = true;

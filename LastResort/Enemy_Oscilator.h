@@ -13,7 +13,7 @@ private:
 
 public:
 
-	Enemy_Oscilator(int x, POWERUP_TYPE pu_t);
+	Enemy_Oscilator(int x, float, int, POWERUP_TYPE pu_t);
 	void Move();
 };
 

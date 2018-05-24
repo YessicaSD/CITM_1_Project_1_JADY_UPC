@@ -7,7 +7,7 @@
 class Enemy_FrontTurret : public Enemy
 {
 public:
-	Enemy_FrontTurret(int x, int y, POWERUP_TYPE pu_t);
+	Enemy_FrontTurret(int x, int y, float, int, POWERUP_TYPE pu_t);
 	void Move();
 
 private:

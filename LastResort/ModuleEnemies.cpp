@@ -221,94 +221,50 @@ Enemy* ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 		switch (info.type)
 		{
 		case ENEMY_TYPES::BASIC:
-			enemies[i] = new Enemy_Basic(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
-			enemies[i]->scoreValue = 100;
-			enemies[i]->hp = 1;
+			enemies[i] = new Enemy_Basic(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 1, 100, info.pu_Type);
 			break;
-
 		case ENEMY_TYPES::OSCILATOR:
-			enemies[i] = new Enemy_Oscilator(info.x + App->stage05->spawnPos.x, info.pu_Type);
-			enemies[i]->scoreValue = 100;
-			enemies[i]->hp = 5;
+			enemies[i] = new Enemy_Oscilator(info.x + App->stage05->spawnPos.x, 5, 100, info.pu_Type);
 			break;
-
 		case ENEMY_TYPES::POWERDROPPER:
-			enemies[i] = new Enemy_PowerDropper(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
-			enemies[i]->scoreValue = 100;
-			enemies[i]->hp = 1;
+			enemies[i] = new Enemy_PowerDropper(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 1, 100, info.pu_Type);
 			break;
-
 		case ENEMY_TYPES::METALCROW:
-			enemies[i] = new Enemy_MetalCraw(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
-			enemies[i]->scoreValue = 1000;
-			enemies[i]->hp = 50;
+			enemies[i] = new Enemy_MetalCraw(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 50, 1000, info.pu_Type);
 			break;
-
 		case  ENEMY_TYPES::REDBATS:
-			enemies[i] = new Enemy_RedBats(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
-			enemies[i]->scoreValue = 100;
-			enemies[i]->hp = 1;
+			enemies[i] = new Enemy_RedBats(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 1, 100, info.pu_Type);
 			break;
-
 		case ENEMY_TYPES::ROTATING_TURRET:
-			enemies[i] = new Enemy_RotatingTurret(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
-			enemies[i]->scoreValue = 200;
-			enemies[i]->hp = 50;
+			enemies[i] = new Enemy_RotatingTurret(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 50, 200, info.pu_Type);
 			break;
-
 		case ENEMY_TYPES::PINATA:
-			enemies[i] = new Enemy_Pinata(info.x , info.y , info.pu_Type);
-			enemies[i]->scoreValue = 200;
-			enemies[i]->hp = 1;
+			enemies[i] = new Enemy_Pinata(info.x, info.y, 1, 200, info.pu_Type);
 			break;
-
 		case ENEMY_TYPES::PINATA_SPAWNER:
-			enemies[i] = new Enemy_Pinata_Spawner(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
-			enemies[i]->scoreValue = 200;
-			enemies[i]->hp = 5;
+			enemies[i] = new Enemy_Pinata_Spawner(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 5, 200, info.pu_Type);
 			break;
-
 		case ENEMY_TYPES::FRONT_TURRET:
-			enemies[i] = new Enemy_FrontTurret(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
-			enemies[i]->scoreValue = 200;
-			enemies[i]->hp = 5;
+			enemies[i] = new Enemy_FrontTurret(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 5, 200, info.pu_Type);
 			break;
-
 		case ENEMY_TYPES::OUTDOOR_TURRET:
-			enemies[i] = new Enemy_Outdoor_turret(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
-			enemies[i]->scoreValue = 300;
-			enemies[i]->hp = 15;
+			enemies[i] = new Enemy_Outdoor_turret(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 15, 300, info.pu_Type);
 			break;
-
 		case ENEMY_TYPES::MECH:
-			enemies[i] = new Enemy_Mech(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
-			enemies[i]->scoreValue = 300;
-			enemies[i]->hp = 2;
+			enemies[i] = new Enemy_Mech(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 2, 300, info.pu_Type);
 			break;
-
 		case ENEMY_TYPES::MECH_SPAWNER:
-			enemies[i] = new Enemy_Mech_Spawner(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
-			enemies[i]->scoreValue = 0;
-			enemies[i]->hp = 1;
+			enemies[i] = new Enemy_Mech_Spawner(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 1, 0, info.pu_Type);
 			break;
-
 		case ENEMY_TYPES::BIG_ASTEROID:
-			enemies[i] = new Enemy_Big_Asteroid(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
-			enemies[i]->scoreValue = 100;
-			enemies[i]->hp = 5;
+			enemies[i] = new Enemy_Big_Asteroid(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 5, 100, info.pu_Type);
 			break;
-
 		case ENEMY_TYPES::MIDDLE_ASTEROID:
-			enemies[i] = new Enemy_Middle_Asteroid(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type);
-			enemies[i]->scoreValue = 100;
-			enemies[i]->hp = 1;
+			enemies[i] = new Enemy_Middle_Asteroid(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 1, 100, info.pu_Type);
 			break;
 		case ENEMY_TYPES::LITTLE_ASTEROID:
-			enemies[i] = new Enemy_Little_Asteroid(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, info.pu_Type,info.speed);
-			enemies[i]->scoreValue = 100;
-			enemies[i]->hp = 1;
+			enemies[i] = new Enemy_Little_Asteroid(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 1, 100, info.pu_Type,info.speed);
 			break;
-		
 		}
 		return enemies[i];
 	}

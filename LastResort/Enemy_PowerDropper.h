@@ -13,7 +13,7 @@ private:
 
 public:
 
-	Enemy_PowerDropper(int x, int y, POWERUP_TYPE pu_t);
+	Enemy_PowerDropper(int x, int y, float, int, POWERUP_TYPE pu_t);
 
 	void Move();
 };

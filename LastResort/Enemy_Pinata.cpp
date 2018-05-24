@@ -8,7 +8,7 @@
 #include "MovPath.h"
 
 
-Enemy_Pinata::Enemy_Pinata(int x, int y, POWERUP_TYPE pu_t) : Enemy(x, y, pu_t)
+Enemy_Pinata::Enemy_Pinata(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t) : Enemy(x, y, hp, scoreValue, pu_t)
 {
 	//Position--------------------------------------
 	fixedPos.x = x - App->stage05->spawnPos.x;

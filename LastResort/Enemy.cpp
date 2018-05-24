@@ -10,9 +10,11 @@
 #include "ModuleStage05.h"
 
 
-Enemy::Enemy(int x, int y, POWERUP_TYPE pu_t) : position(x, y), powerUp_drop(pu_t)
+Enemy::Enemy(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t)
+	: position(x, y), hp(hp), scoreValue(scoreValue), powerUp_drop(pu_t)
 {}
-Enemy::Enemy(int x, int y, POWERUP_TYPE pu_t,iPoint speed) : position(x, y), powerUp_drop(pu_t),speed(speed)
+Enemy::Enemy(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t,iPoint speed)
+	: position(x, y), hp(hp), scoreValue(scoreValue), powerUp_drop(pu_t),speed(speed)
 {}
 Enemy::~Enemy()
 {

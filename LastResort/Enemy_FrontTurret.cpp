@@ -5,7 +5,7 @@
 #include "ModuleParticles.h"
 #include "Rotation.h"
 
-Enemy_FrontTurret::Enemy_FrontTurret(int x, int y, POWERUP_TYPE pu_t) : Enemy(x, y, pu_t)
+Enemy_FrontTurret::Enemy_FrontTurret(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t) : Enemy(x, y, hp, scoreValue, pu_t)
 {
 	//Animation-----------------------------------------------
 	frontTurretAnim.PushBack({120, 458, 32, 24});

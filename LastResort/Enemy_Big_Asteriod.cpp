@@ -2,7 +2,7 @@
 #include "Enemy_Big_Asteriod.h"
 #include "ModuleCollision.h"
 #include "ModuleRender.h"
-Enemy_Big_Asteroid::Enemy_Big_Asteroid(int x, int y, POWERUP_TYPE pu_t) :Enemy(x,y, pu_t)
+Enemy_Big_Asteroid::Enemy_Big_Asteroid(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t) :Enemy(x ,y , hp, scoreValue, pu_t)
 {
 	BigAsteroid.PushBack({ 152,176,64,62 });
 	animation = &BigAsteroid;

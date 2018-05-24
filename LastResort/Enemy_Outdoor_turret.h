@@ -11,7 +11,7 @@ private:
 	Uint32 StartTime;
 	
 public:
-	Enemy_Outdoor_turret(int x, int y, POWERUP_TYPE pu_t);
+	Enemy_Outdoor_turret(int x, int y, float, int, POWERUP_TYPE pu_t);
 	~Enemy_Outdoor_turret();
 	void Move();
 };

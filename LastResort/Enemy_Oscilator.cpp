@@ -2,7 +2,7 @@
 #include "Enemy_Oscilator.h"
 #include "ModuleCollision.h"
 
-Enemy_Oscilator::Enemy_Oscilator(int x, POWERUP_TYPE pu_t) : Enemy(x, original_y, pu_t)
+Enemy_Oscilator::Enemy_Oscilator(int x, float hp, int scoreValue, POWERUP_TYPE pu_t) : Enemy(x, original_y, hp, scoreValue, pu_t)
 {
 
 	//up

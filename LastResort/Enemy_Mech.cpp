@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-Enemy_Mech::Enemy_Mech(int x, int y, POWERUP_TYPE pu_t):Enemy(x,y,pu_t)
+Enemy_Mech::Enemy_Mech(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t):Enemy(x, y, hp, scoreValue, pu_t)
 {
 
 	Mech.PushBack({0,488,28,35});

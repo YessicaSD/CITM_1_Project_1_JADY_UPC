@@ -7,7 +7,7 @@
 #include "ModuleStage05.h"
 #include "Rotation.h"
 
-Enemy_RotatingTurret::Enemy_RotatingTurret(int x, int y, POWERUP_TYPE pu_t) : Enemy(x, y, pu_t)
+Enemy_RotatingTurret::Enemy_RotatingTurret(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t) : Enemy(x, y, hp, scoreValue, pu_t)
 {
 	//Animation
 	rotatingTurretAnim.PushBack({ 332,  0, 26, 27 });// 0 = E
