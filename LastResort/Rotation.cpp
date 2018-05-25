@@ -64,8 +64,8 @@ float CalculateRotationToPoint(iPoint originPos, iPoint targetPos)
 	//Same position
 	else if (targetPos.x == originPos.x && targetPos.y == originPos.y)
 	{
-		//If we're in the same position we return -1
-		return -1;
+		//If we're in the same position we return E
+		return angleValue[E];
 	}
 }
 

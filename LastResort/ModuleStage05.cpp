@@ -124,7 +124,9 @@ bool Module5lvlScene::Start()
 	shipPos = shipOffset - cameraMovement.GetPosition();
 	spawnPos.x = (int)shipPos.x;
 	spawnPos.y = (int)shipPos.y;
-	shipPartPos = { 63, 160 };
+
+	//Reset values that have changed from in last run------------------------------------------------------------
+	ResetValues();
 
 	//Texture ---------------------------------------------------------------------------------------------------
 	starsTx    = App->textures->Load("Assets/lvl5/background/backgroundstars.png");
@@ -336,6 +338,14 @@ bool Module5lvlScene::CleanUp() {
 	App->stageFunctionality->Disable();
 	App->ui->currentScene = NONE;
 	return true;
+}
+
+void Module5lvlScene::ResetValues()
+{
+	shipPartPos = { 63, 160 };
+	fireballFrameCounter = 0;
+	redBatsKilled = 0;
+	rotatingTurretsKilled = 0;
 }
 
 void Module5lvlScene::RenderShipPart()

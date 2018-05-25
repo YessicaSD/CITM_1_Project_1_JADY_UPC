@@ -31,6 +31,8 @@ public:
 	//Other functions
 	void RenderShipPart();
 
+	void ResetValues();
+
 public:
 	//CheckPoint-----------------------------
 	int current_time= 0;
@@ -58,10 +60,7 @@ public:
 	Collider* shipCollidersCol[SHIP_COLLIDERS_NUM];
 	SDL_Rect shipCollidersRect[SHIP_COLLIDERS_NUM];
 
-	//Colliders-------------------------------
-	Collider* frontShipCol1;
-
-	//Tetures---------------------------------
+	//Textures---------------------------------
 	SDL_Texture * starsTx = nullptr;
 	SDL_Texture * shipTx = nullptr;
 	SDL_Texture * tilemapTx = nullptr;
@@ -76,14 +75,14 @@ public:
 	const int fallSpeed = 1;
 
 	//Fireball front-------------------------
-	int fireballFrameCounter = 0;
+	int fireballFrameCounter;
 
 	//Ship part rear-------------------------
 	SDL_Rect shipRearRect = { 0, 96, 128, 64};
 
 	//Enemies--------------------------------
-	int redBatsKilled = 0;
-	int rotatingTurretsKilled = 0;
+	int redBatsKilled;
+	int rotatingTurretsKilled;
 };
 
 #endif

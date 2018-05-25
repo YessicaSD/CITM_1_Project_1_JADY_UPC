@@ -95,3 +95,12 @@ void Particle::Draw()
 	//Draw the particle
 	App->render->Blit(this->texture, (int)position.x - currentFrame.w / 2, (int)position.y - currentFrame.h / 2, &currentFrame);
 }
+
+void Particle::OnCollision(Collider* c2)
+{
+	// Add the collision particle where it collided
+	if (collision_fx != nullptr)
+	{
+		App->particles->AddParticle(*collision_fx, { position.x, position.y }, { 0 , 0 }, texture);
+	}
+}
