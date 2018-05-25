@@ -132,17 +132,21 @@ update_status ModulePlayer::Update()
 		}
 	}
 	//Shots----------------------------------------------------------------------------
-	if (canMove == true) {
+	if (canMove == true)
+	{
 		ShotInput();
 	}
+
 	//Lock the unit--------------------------------------------------------------------
 	if (Lock())
 	{
 		if (unitLocked == true) { unitLocked = false; }
 		else { unitLocked = true; }
 	}
+
 	//Collision------------------------------------------------------------------------
-	if (playerCol != nullptr) {
+	if (playerCol != nullptr)
+	{
 		playerCol->SetPos(position.x, position.y + 2); //We update the collider position
 	}
 
@@ -355,15 +359,14 @@ void  ModulePlayer::ShotInput()
 	//Laser PowerUp-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	if (shootLaser)
 	{
-		LOG("SHOTLASE_CURRENT_FRAME:%f", ShotLaserBasic.current_frame);
+		LOG("SHOT LASER CURRENT FRAME: %f", ShotLaserBasic.current_frame);
 			if (ShotLaserBasic.finished == false)
 			{
 				if (ShotLaserBasic.current_frame == 0)
 				{
 					App->particles->AddParticle(App->particles->basicLaser, { (float)(position.x + 32), (float)(position.y + 6) }, { 10, 0 }, PlayerTexture, shot_colType, 0);
-					
 				}
-				
+
 				switch (powerupUpgrades)
 				{
 				case 3:

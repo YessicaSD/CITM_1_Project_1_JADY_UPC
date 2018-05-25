@@ -5,16 +5,10 @@ This game has been created by 4 students of UPC, CITM on the Game Design and Dev
 We've used the original sprites and programmed the game from scratch in c++.
 You can find all the information and necessary material we used to recreate this game in our repository on Github.
 
-## About Last Resort
-Last Resort immerses us in a world where the apocalypse is approaching and we will try to stop it.
-In order to acomplish our mission, we pilot a spaceship with the help of a small drone , the "unit",
-and we will defeat all kinds of enemies.
-
-## Find project
+### Find project
 https://github.com/YessicaSD/Project_1_JADY_UPC
 
-## Credits
-
+### Credits
 - Management and programming: Jaume Montagut i Guix
 > _Find him on his webpage https://wadoren.wixsite.com/gamedev
 > _Github profile: https://github.com/JaumeMontagut_
@@ -30,6 +24,11 @@ https://github.com/YessicaSD/Project_1_JADY_UPC
 - Programming and code revision: Yessica Servin Dominguez          
 > _Find her on Instragram as @randomgerbit_
 > _Github profile: https://github.com/YessicaSD_
+
+## About Last Resort
+Last Resort immerses us in a world where the apocalypse is approaching and we will try to stop it.
+In order to acomplish our mission, we pilot a spaceship with the help of a small drone , the "unit",
+and we will defeat all kinds of enemies.
 
 ## Controls
 ### Controller:

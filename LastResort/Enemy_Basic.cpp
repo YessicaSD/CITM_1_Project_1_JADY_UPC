@@ -14,13 +14,13 @@ Enemy_Basic::Enemy_Basic(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu
 	animation = &basicenemy;
 
 	collider = App->collision->AddCollider({ x, y, 32, 16 }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
-	initialY = y - App->stage05->spawnPos.y;//We get the y position
+	fixedY = y - App->stage05->spawnPos.y;//We get the y position
 }
 
 void Enemy_Basic::Move()
 {
 
 	position.x -= 1;
-	position.y = initialY + App->stage05->spawnPos.y;//We fix the y position to be the same as the background
+	position.y = fixedY + App->stage05->spawnPos.y;//We fix the y position to be the same as the background
 }
 

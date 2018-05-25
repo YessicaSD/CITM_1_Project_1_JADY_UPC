@@ -27,6 +27,8 @@
 #include "Enemy_Middle_Asteroid.h"
 #include "Enemy_Little_Asteroid.h"
 #include "Enemy_Indoor_turret.h"
+#include "Enemy_RearTurret.h"
+
 #define DAMAGE_FLASHING_INTERVAL 4
 
 ModuleEnemies::ModuleEnemies()
@@ -269,8 +271,11 @@ Enemy* ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			enemies[i] = new Enemy_Little_Asteroid(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 1, 100, info.pu_Type, info.speed);
 			break;
 		case ENEMY_TYPES::INDOOR_TURRET:
-				enemies[i] = new Enemy_indoorTurret(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 1, 100, info.pu_Type, info.speed);
-				break;
+			enemies[i] = new Enemy_indoorTurret(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 1, 100, info.pu_Type, info.speed);
+			break;
+		case ENEMY_TYPES::REAR_TURRET:
+			enemies[i] = new Enemy_RearTurret(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 1, 100, info.pu_Type);
+			break;
 		}
 		return enemies[i];
 	}

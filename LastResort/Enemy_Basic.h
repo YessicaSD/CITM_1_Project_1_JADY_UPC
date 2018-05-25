@@ -7,7 +7,7 @@ class Enemy_Basic : public Enemy
 {
 private:
 	Animation basicenemy;
-	int initialY;
+	int fixedY;
 
 public:
 	Enemy_Basic(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop);
