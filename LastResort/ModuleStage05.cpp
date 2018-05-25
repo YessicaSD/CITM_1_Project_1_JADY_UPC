@@ -206,16 +206,14 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(INDOOR_TURRET, 624, 193, 0, NOPOWERUP, { 1,0 });
 	App->enemies->AddEnemy(INDOOR_TURRET, 672, 193, 0, NOPOWERUP, { 1,0 });
 	App->enemies->AddEnemy(INDOOR_TURRET, 800, 193, 0, NOPOWERUP, { 1,0 });
-	
-
-	
 	App->enemies->AddEnemy(INDOOR_TURRET, 511, 128, 0, NOPOWERUP, { 2,0 }); //RIGHT
 	App->enemies->AddEnemy(INDOOR_TURRET, 527, 80, 0, NOPOWERUP, { 2,0 }); 
-	
-
 	App->enemies->AddEnemy(INDOOR_TURRET, 431, 81, 0, NOPOWERUP, { 3,0 });//LEFT
 	App->enemies->AddEnemy(INDOOR_TURRET, 415, 127, 0, NOPOWERUP, { 3,0 });
 	App->enemies->AddEnemy(INDOOR_TURRET, 416, 176, 0, NOPOWERUP, { 3,0 });
+
+	App->enemies->AddEnemy(MISSILE_TURRET, 607, 33);
+	App->enemies->AddEnemy(MISSILE_TURRET, 639, 33);
 
 	
 
