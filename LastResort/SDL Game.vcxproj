@@ -125,6 +125,7 @@
     <ClInclude Include="ParticleGMissile.h" />
     <ClInclude Include="ParticleLaser.h" />
     <ClInclude Include="Particle_Follow_background.h" />
+    <ClInclude Include="Particle_HMissile.h" />
     <ClInclude Include="Path.h" />
     <ClInclude Include="Player1.h" />
     <ClInclude Include="Player2.h" />
@@ -183,6 +184,7 @@
     <ClCompile Include="ModuleWindow.cpp" />
     <ClCompile Include="Enemy_Outdoor_turret.cpp" />
     <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="Particle_HMissile.cpp" />
     <ClCompile Include="Particle_Follow_background.cpp" />
     <ClCompile Include="Player1.cpp" />
     <ClCompile Include="Player2.cpp" />

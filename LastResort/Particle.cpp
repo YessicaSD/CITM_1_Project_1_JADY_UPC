@@ -96,7 +96,7 @@ void Particle::Draw()
 	App->render->Blit(this->texture, (int)position.x - currentFrame.w / 2, (int)position.y - currentFrame.h / 2, &currentFrame);
 }
 
-void Particle::OnCollision(Collider* c2)
+void Particle::OnCollision(Collider* c1, Collider* c2)
 {
 	// Add the collision particle where it collided
 	if (collision_fx != nullptr)
