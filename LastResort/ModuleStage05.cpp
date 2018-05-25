@@ -148,8 +148,7 @@ bool Module5lvlScene::Start()
 	//App->enemies->AddEnemy(PINATA, 130, 130);
 	//App->enemies->AddEnemy(OSCILATOR, 500, 0);
 
-	/*App->enemies->AddEnemy(MIDDLE_ASTEROID, 250, 270);
-	*/
+
 	
 
 	//- FINAL POSITION ENEMIES (in order of appearance on the level)
@@ -160,10 +159,7 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(REDBATS, 275, 270);
 	App->enemies->AddEnemy(REDBATS, 300, 270);
 	App->enemies->AddEnemy(REDBATS, 325, 270);
-
-	App->enemies->AddEnemy(REDBATS, 320, 270,800);
-
-	App->enemies->AddEnemy(REDBATS, 325, 270,800);
+	App->enemies->AddEnemy(REDBATS, 325, 270,750);
 
 	App->enemies->AddEnemy(ROTATING_TURRET, 111, 176);
 	App->enemies->AddEnemy(ROTATING_TURRET, 159, 192);
