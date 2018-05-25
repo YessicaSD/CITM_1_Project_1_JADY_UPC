@@ -253,7 +253,7 @@ Enemy* ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			enemies[i] = new Enemy_Outdoor_turret(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 15, 300, info.pu_Type);
 			break;
 		case ENEMY_TYPES::MECH:
-			enemies[i] = new Enemy_Mech(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 2, 300, info.pu_Type);
+			enemies[i] = new Enemy_Mech(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 3, 300, info.pu_Type);
 			break;
 		case ENEMY_TYPES::MECH_SPAWNER:
 			enemies[i] = new Enemy_Mech_Spawner(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 1, 0, info.pu_Type);
