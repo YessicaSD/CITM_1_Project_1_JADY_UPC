@@ -23,7 +23,7 @@ public:
 
 	/*void Render(SDL_Texture* Texture, SDL_Rect* section);*/
 	bool Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section);
-	bool BlitEx(SDL_Texture* texture, int x, int y, SDL_Rect* section, SDL_RendererFlip axis = SDL_FLIP_HORIZONTAL);
+	bool BlitEx(SDL_Texture* texture, int x, int y, SDL_Rect* section, SDL_RendererFlip axis = SDL_FLIP_HORIZONTAL,double angle=NULL);
 	bool DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
 	void ResetMovedPosition();
