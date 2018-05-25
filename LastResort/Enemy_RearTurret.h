@@ -17,7 +17,7 @@ private:
 	SDL_Rect rearTurretRect;
 
 	//Movement
-	rearTurretMovement rearTurretMov;
+	rearTurretMovement rearTurretMov = move_static;
 	iPoint fixedPos;
 	int frameCounter = 0;
 	const int frameLimitStatic = 10;

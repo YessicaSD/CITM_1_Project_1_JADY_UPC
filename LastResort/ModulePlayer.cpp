@@ -385,9 +385,6 @@ void  ModulePlayer::ShotInput()
 
 		}*/
 	}
-
-
-
 }
 
 void ModulePlayer::MovementInput()

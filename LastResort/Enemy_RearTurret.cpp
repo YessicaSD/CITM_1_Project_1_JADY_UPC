@@ -27,7 +27,7 @@ void Enemy_RearTurret::Move()
 		//- Set the position
 		position = App->stage05->spawnPos + fixedPos;
 		//- Check if it needs to change state
-		if (frameCounter > frameLimitStatic) { rearTurretMov = move_forward; frameCounter = 0; }
+		if (frameCounter >= frameLimitStatic) { rearTurretMov = move_forward; frameCounter = 0; }
 		else { frameCounter++; }
 
 		break;
@@ -50,7 +50,7 @@ void Enemy_RearTurret::Move()
 			}
 		}
 		//- Check if it needs to change state
-		if (frameCounter > frameLimitStatic) { rearTurretMov = move_forward; frameCounter = 0; }
+		if (frameCounter >= frameLimitMove) { rearTurretMov = move_backward; frameCounter = 0; }
 		else { frameCounter++; }
 
 		break;
@@ -60,21 +60,23 @@ void Enemy_RearTurret::Move()
 		//- Set the position
 		position = App->stage05->spawnPos + fixedPos;
 		//- Check if it needs to change state
-		if (frameCounter > frameLimitStatic) { rearTurretMov = move_static; frameCounter = 0; }
+		if (frameCounter >= frameLimitMove) { rearTurretMov = move_static; frameCounter = 0; }
 		else { frameCounter++; }
 
 		break;
 
 	}
 
+	LOG("Rear turret position x: %f y %f", position.x, position.y);
+
 	//- Update the collider
-	collider->SetPos(position.x + rearTurretRect.w / 2, position.x + rearTurretRect.w / 2);
+	collider->SetPos(position.x - rearTurretRect.w / 2, position.y - rearTurretRect.h / 2);
 }
 
 void Enemy_RearTurret::Draw(SDL_Texture * sprites)
 {
 	//RENDER------------------------------------------------
-	App->render->Blit(sprites, position.x + rearTurretRect.w / 2, position.x + rearTurretRect.w / 2, &rearTurretRect);
+	App->render->Blit(sprites, position.x - rearTurretRect.w / 2, position.y - rearTurretRect.h / 2, &rearTurretRect);
 }
 
 void Enemy_RearTurret::rearTurretShoot()
