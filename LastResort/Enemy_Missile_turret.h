@@ -12,7 +12,7 @@ private:
 public:
 
 	Enemy_Missile_turret(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop);
-	int FrameCount;
+	int frameCount;
 	void Move();
 };
 

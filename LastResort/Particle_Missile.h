@@ -13,7 +13,13 @@ public:
 */
 private:
 	fPoint targetPlayerPos;
-	
+	int frameCount;
+	enum state
+	{
+		UP,
+		FOLLOW,
+
+	}missileState=UP;
 	
 };
 

@@ -22,6 +22,7 @@ enum PARTICLE_TYPE
 	//- More complex
 	PARTICLE_LASER,
 	PARTICLE_G_MISSILE,
+	PARTICLE_MISSILE,
 	MAX_PARTICLE,//Always last
 };
 
@@ -88,6 +89,7 @@ public:
 	Particle AsteroidDestroy;
 	Particle MiddleAsteroidDestroy;
 	Particle fireBall;
+	Particle Missile;
 
 	//- OTHER
 	iPoint VectorMiddleBossShots;

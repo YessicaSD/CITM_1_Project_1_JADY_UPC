@@ -12,7 +12,7 @@
 #include "ParticleLaser.h"
 #include "ParticleGMissile.h"
 #include "Particle_Follow_background.h"
-
+#include "Particle_Missile.h"
 #include "ModuleStage05.h"
 #include "SDL/include/SDL_timer.h"
 
@@ -132,6 +132,9 @@ void ModuleParticles::AddParticle(Particle& particle, fPoint position, fPoint sp
 				break;
 			case PARTICLE_G_MISSILE:
 				p = new Particle_G_Missile(particle, position, speed, delay, colType, tex);
+				break;
+			case PARTICLE_MISSILE:
+				p = new Particle_Missile(particle, position, speed, delay, colType, tex);
 				break;
 			}
 
@@ -359,4 +362,12 @@ void ModuleParticles::InitParticleValues()
 	fireBall.anim.pingpong = true;
 	fireBall.anim.speed = 0.5f;
 	fireBall.life = 10000;
+
+	//Missile 
+	Missile.anim.PushBack({157,246,15,8});
+	Missile.anim.PushBack({ 172,246,13,8 });
+	Missile.anim.speed = 0.5f;
+
+	Missile.life = 5000;
+
 }
