@@ -22,30 +22,27 @@ void Enemy_indoorTurret::Move()
 	position.y = fixedPos.y + App->stage05->spawnPos.y;
 
 	//Shoot---------------------------------------------------------------------------------------------------
-	if (frameCounter == 100)
+	if (frameCounter == 130)
 	{
 
 		//Target player -------------------------------------------------------------------------------------------------
 		if (App->player1->isActive==true && App->player2->isActive==false)
-		{
-			targetPlayerPos = { (float)App->player1->position.x,(float)App->player1->position.y };
-		}
+			targetPlayerPos = { App->player1->position.x,App->player1->position.y };
+
 		else if (App->player1->isActive == false && App->player2->isActive == true)
-		{
-			targetPlayerPos = { (float)App->player2->position.x,(float)App->player2->position.y };
-		}
+			targetPlayerPos = {App->player2->position.x,App->player2->position.y };
+	
 		else
 		{
 			if (position.DistanceTo(App->player1->position) < position.DistanceTo(App->player2->position))
-			{  targetPlayerPos = { (float)App->player1->position.x,(float)App->player1->position.y }; }
+			 targetPlayerPos = { App->player1->position.x,App->player1->position.y };
 
 			else
-			{ targetPlayerPos = { (float)App->player2->position.x,(float)App->player2->position.y };
-			}
+				targetPlayerPos = { App->player2->position.x,App->player2->position.y };
+			
 		}
-		fPosition = { (float)position.x,(float)position.y };
-		ParticleSpeed.UnitVector(targetPlayerPos, fPosition);
-
+		
+		ParticleSpeed.UnitVector({ (float)targetPlayerPos.x,(float)targetPlayerPos.y }, { (float)position.x,(float)position.y});
 		App->particles->AddParticle(App->particles->orangeBall, { (float)position.x,(float)position.y }, {ParticleSpeed.x,ParticleSpeed.y}, App->particles->particlesTx, COLLIDER_ENEMY_SHOT, 0, PARTICLE_FOLLOW_BACKGROUND);
 
 
@@ -59,44 +56,44 @@ void Enemy_indoorTurret::Draw(SDL_Texture* sprites)
 	if (speed.x == 0)
 	{
 		if (collider != nullptr)
-			collider->SetPos(position.x - animation->GetFrame().w / 2, position.y - animation->GetFrame().h / 2);
+			collider->SetPos(position.x - animation->GetFrame().w / 2, position.y - animation->GetFrame().h );
 
 		if (animation != nullptr)
-			App->render->Blit(sprites, position.x - animation->GetFrame().w / 2, position.y - animation->GetFrame().h / 2, &(animation->GetCurrentFrame()));
+			App->render->Blit(sprites, position.x - animation->GetFrame().w / 2, position.y - animation->GetFrame().h , &(animation->GetCurrentFrame()));
 	}
 	// Down 
 	if (speed.x==1)
 	{
 
 		if (collider != nullptr)
-			collider->SetPos(position.x - animation->GetFrame().w / 2, position.y - animation->GetFrame().h / 2);
+			collider->SetPos(position.x - animation->GetFrame().w / 2, position.y );
 
 		if (animation != nullptr)
-			App->render->BlitEx(sprites, position.x - animation->GetFrame().w / 2, position.y - animation->GetFrame().h / 2, &(animation->GetCurrentFrame()),SDL_FLIP_VERTICAL);
+			App->render->BlitEx(sprites, position.x - animation->GetFrame().w / 2, position.y , &(animation->GetCurrentFrame()),SDL_FLIP_VERTICAL);
 	}
 	if (speed.x == 2)
 	{
 		if (collider != nullptr)
 		{
-			collider->SetPos(position.x - animation->GetFrame().h / 2, position.y - animation->GetFrame().w / 2);
+			collider->SetPos(position.x , position.y - animation->GetFrame().w / 2);
 			collider->SetMeasurements(animation->GetFrame().h, animation->GetFrame().w);
 		}
 
 		if (animation != nullptr)
-			App->render->BlitEx(sprites, position.x - animation->GetFrame().w / 2, position.y - animation->GetFrame().h / 2, &(animation->GetCurrentFrame()), SDL_FLIP_NONE,90);
+			App->render->BlitEx(sprites, position.x -4, position.y - animation->GetFrame().h / 2, &(animation->GetCurrentFrame()), SDL_FLIP_NONE,90);
 
 	}
 	if (speed.x == 3)
 	{
 		if (collider != nullptr)
 		{
-			collider->SetPos(position.x - animation->GetFrame().h / 2, position.y - animation->GetFrame().w / 2);
+			collider->SetPos(position.x - animation->GetFrame().h, position.y - animation->GetFrame().w / 2);
 			collider->SetMeasurements(animation->GetFrame().h, animation->GetFrame().w);
 		}
 			
 
 		if (animation != nullptr)
-			App->render->BlitEx(sprites, position.x - animation->GetFrame().w / 2, position.y - animation->GetFrame().h / 2, &(animation->GetCurrentFrame()), SDL_FLIP_NONE, -90);
+			App->render->BlitEx(sprites, position.x - animation->GetFrame().w+4, position.y - animation->GetFrame().h / 2, &(animation->GetCurrentFrame()), SDL_FLIP_NONE, -90);
 
 	}
 
