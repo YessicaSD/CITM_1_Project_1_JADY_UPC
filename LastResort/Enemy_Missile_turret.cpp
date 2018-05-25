@@ -8,6 +8,7 @@ Enemy_Missile_turret::Enemy_Missile_turret(int x,int y, float hp, int scoreValue
 	animation = &turret;
 	fixedPos.x = x - App->stage05->spawnPos.x;
 	fixedPos.y = y - App->stage05->spawnPos.y;
+	collider = App->collision->AddCollider({ x, y, 24, 19 }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
 }
 void Enemy_Missile_turret::Move()
 {
