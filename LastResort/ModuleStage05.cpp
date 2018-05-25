@@ -200,6 +200,7 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(OUTDOOR_TURRET, 1119, 29);
 	App->enemies->AddEnemy(OUTDOOR_TURRET, 1151, 29);
 	App->enemies->AddEnemy(MECH_SPAWNER, 738, 192);
+	App->enemies->AddEnemy(INDOOR_TURRET, 575, 136);
 
 	//Colliders--------------------------------------------------------------------------------------------------
 	for(int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
