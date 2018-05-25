@@ -157,10 +157,14 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 		// Always destroy particles that collide
 		if (active[i] != nullptr && active[i]->collider == c1)
 		{
-			active[i]->OnCollision(c2);
-			// Delete particle
-			delete active[i];
-			active[i] = nullptr;
+			active[i]->OnCollision(c1, c2);
+
+			if(c1->type != COLLIDER_HIT_DETECTION_ENEMY)//Don't want to delete if what collided is a hit detection collider
+			{
+				// Delete particle
+				delete active[i];
+				active[i] = nullptr;
+			}
 			break;
 		}
 	}
