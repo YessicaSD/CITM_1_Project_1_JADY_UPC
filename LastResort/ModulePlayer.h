@@ -74,6 +74,8 @@ public:
 	bool unitLocked = false;
 	bool isShooting = false;
 	bool shoot = false;
+	bool shootLaser = false;
+	
 	//--------PowerUps-----------------------------
 	POWERUP_TYPE currentPowerUp = POWERUP_TYPE::NOPOWERUP;
 	int powerupUpgrades = 0;
