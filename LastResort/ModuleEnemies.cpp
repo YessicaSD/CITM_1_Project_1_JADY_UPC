@@ -271,7 +271,7 @@ Enemy* ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			enemies[i] = new Enemy_Little_Asteroid(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 1, 100, info.pu_Type, info.speed);
 			break;
 		case ENEMY_TYPES::INDOOR_TURRET:
-			enemies[i] = new Enemy_indoorTurret(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 1, 100, info.pu_Type, info.speed);
+			enemies[i] = new Enemy_indoorTurret(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 7, 300, info.pu_Type, info.speed);
 			break;
 		case ENEMY_TYPES::REAR_TURRET:
 			enemies[i] = new Enemy_RearTurret(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 1, 100, info.pu_Type);

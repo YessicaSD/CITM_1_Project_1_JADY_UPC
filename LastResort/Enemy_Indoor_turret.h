@@ -8,12 +8,13 @@ class Enemy_indoorTurret : public Enemy
 {
 public:
 	Enemy_indoorTurret(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop, iPoint speed);
-	/*void Move();
-	void Draw(SDL_Texture*);
-	void OnCollision(Collider*);*/
+	void Move();
+	void Draw(SDL_Texture*Tx);
+	//void OnCollision(Collider*);
 
 private:
 	//Helper functions
+	fPoint fixedPos;
 	Animation indoorTurretAnim;
 	iPoint targetPlayerPos;
 	int frameCounter;
