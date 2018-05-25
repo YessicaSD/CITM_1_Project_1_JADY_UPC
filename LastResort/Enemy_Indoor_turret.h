@@ -16,7 +16,7 @@ private:
 	//Helper functions
 	fPoint fixedPos;
 	Animation indoorTurretAnim;
-	fPoint targetPlayerPos;
+	iPoint targetPlayerPos;
 	fPoint ParticleSpeed;
 	fPoint fPosition;
 	int frameCounter=0;
