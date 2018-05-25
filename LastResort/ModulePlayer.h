@@ -75,6 +75,7 @@ public:
 	bool isShooting = false;
 	bool shoot = false;
 	bool shootLaser = false;
+	int LaserCount = 0;
 	
 	//--------PowerUps-----------------------------
 	POWERUP_TYPE currentPowerUp = POWERUP_TYPE::NOPOWERUP;
@@ -104,6 +105,7 @@ public:
 	//------------PowerUps--------------------------
 	Animation ShotLaserBasic;
 	Animation SpeedAnimation;
+	iPoint ShotPosition;
 	//------------Basic----------------------------
 	SDL_Rect *current_animation = nullptr; //pointer to the only one animation 
 	Animation shotFire;                    //Animation infront of ship when we are shooting basic shots

@@ -164,6 +164,55 @@ update_status ModulePlayer::Update()
 	{
 		Winlvl();
 	}
+
+	//SHOOT CONDITIONS -----------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+	//Ship fire animation (in front of the ship)
+	if (shoot == true)
+	{
+		//- Basic ship fire
+		if (shotFire.finished == false)
+		{
+			isShooting = true;
+			App->render->Blit(PlayerTexture, position.x + 32, position.y + 1, &shotFire.GetFrameEx());
+		}
+		else
+		{
+			shotFire.finished = false;
+			isShooting = false;
+			shoot = false;
+		}
+
+	}
+
+	//Laser PowerUp-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	if (shootLaser)
+	{
+		LOG("SHOTLASE_CURRENT_FRAME:%f", ShotLaserBasic.GetCurrentFrameNum());
+		if (ShotLaserBasic.finished == false)
+		{
+			if (ShotLaserBasic.current_frame == 0)
+			{
+				ShotPosition = position;
+				App->particles->AddParticle(App->particles->basicLaser, { (float)(ShotPosition.x + 32), (float)(ShotPosition.y + 6) }, { 10, 0 }, PlayerTexture, shot_colType, 0);
+
+			}
+
+			if (powerupUpgrades >= 3)
+			{
+				if(LaserCount==3|| LaserCount == 6|| LaserCount == 9)
+				{App->particles->AddParticle(App->particles->littleRings, { (float)(ShotPosition.x + 10), (float)(ShotPosition.y + 6) }, { 10, 0 }, PlayerTexture, shot_colType, 0);}
+				
+				
+			}
+			App->render->Blit(PlayerTexture, position.x + 32, position.y + 5 - ShotLaserBasic.GetFrame().h / 2, &ShotLaserBasic.GetFrameEx());
+			LaserCount += 1;
+		}
+		else
+		{	ShotLaserBasic.finished = false;
+			shootLaser = false;
+			LaserCount = 0;
+		}
+	}
 	return UPDATE_CONTINUE;
 }
 
@@ -334,69 +383,7 @@ void  ModulePlayer::ShotInput()
 		}*/
 	}
 
-	//Ship fire animation (in front of the ship)
-	if (shoot == true)
-	{
-		//- Basic ship fire
-			if (shotFire.finished == false)
-			{
-				isShooting = true;
-				App->render->Blit(PlayerTexture, position.x + 32, position.y + 1, &shotFire.GetFrameEx());
-			}
-			else
-			{
-				shotFire.finished = false;
-				isShooting = false;
-				shoot = false;
-			}
-		
-	}
-
-	//Laser PowerUp-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	if (shootLaser)
-	{
-		LOG("SHOTLASE_CURRENT_FRAME:%f", ShotLaserBasic.current_frame);
-			if (ShotLaserBasic.finished == false)
-			{
-				if (ShotLaserBasic.current_frame == 0)
-				{
-					App->particles->AddParticle(App->particles->basicLaser, { (float)(position.x + 32), (float)(position.y + 6) }, { 10, 0 }, PlayerTexture, shot_colType, 0);
-					
-				}
-				
-				switch (powerupUpgrades)
-				{
-				case 3:
-					//Laser rings
-					if (ShotLaserBasic.GetCurrentFrameNum() == 1.0f)
-					{
-						App->particles->AddParticle(App->particles->littleRings, { (float)(position.x + 32), (float)(position.y + 6) }, { 10, 0 }, PlayerTexture, shot_colType, 0);
-						
-					}
-					if (ShotLaserBasic.GetCurrentFrameNum() == 2.0f)
-					{
-						App->particles->AddParticle(App->particles->littleRings, { (float)(position.x + 10), (float)(position.y + 6) }, { 10, 0 }, PlayerTexture, shot_colType, 0);
-						
-					}
-					if (ShotLaserBasic.GetCurrentFrameNum() == 3.0f)
-					{
-						App->particles->AddParticle(App->particles->littleRings, { (float)(position.x - 10), (float)(position.y + 6) }, { 10, 0 }, PlayerTexture, shot_colType, 0);
-					}
-					break;
-				}
-
-				isShooting = true;
-				App->render->Blit(PlayerTexture, position.x + 32, position.y + 5 - ShotLaserBasic.GetFrame().h / 2, &ShotLaserBasic.GetFrameEx());
-			}
-			else
-			{
-				ShotLaserBasic.finished = false;
-				isShooting = false;
-				shootLaser = false;
-
-			}
-			
-	}
+	
 	
 }
 
