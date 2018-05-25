@@ -20,16 +20,16 @@
 
 ModulePlayer::ModulePlayer() //Constructor 
 {
-	SpeedAnimation.PushBack({  0, 0,32,31 });
+	SpeedAnimation.PushBack({ 0, 0,32,31 });
 	SpeedAnimation.PushBack({ 32, 0,32,32 });
 	SpeedAnimation.PushBack({ 64, 0,32,32 });
 	SpeedAnimation.PushBack({ 96, 0,32,32 });
-	SpeedAnimation.PushBack({  0,32,32,32 });
+	SpeedAnimation.PushBack({ 0,32,32,32 });
 	SpeedAnimation.PushBack({ 32,32,32,32 });
 	SpeedAnimation.PushBack({ 64,32,32,32 });
 	SpeedAnimation.PushBack({ 96,54,32,32 });
 	SpeedAnimation.PushBack({ 32,54,32,32 });
-	SpeedAnimation.PushBack({  0, 0, 0, 0 });
+	SpeedAnimation.PushBack({ 0, 0, 0, 0 });
 	SpeedAnimation.speed = 0.2f;
 	SpeedAnimation.loop = false;
 }
@@ -44,14 +44,14 @@ bool ModulePlayer::Start()
 
 	//position-----------------------------------------------------------------------
 	position = initPosition;//We set the position (before adding the collider) (note that the intial positions are set in Player1.h and Player2.h)
-	//variables----------------------------------------------------------------------
+							//variables----------------------------------------------------------------------
 	playerAnimState = PlayerAnimationState::None;
 	godMode = false;
 	//audios-------------------------------------------------------------------------
 	init_sfx = App->audio->LoadSFX("Assets/initial_sfx.wav");
 	//collider-----------------------------------------------------------------------
 	if (isActive)
-	playerCol = App->collision->AddCollider({ position.x, position.y + 2, 24, 8 }, COLLIDER_TYPE::COLLIDER_IGNORE_HIT, this);
+		playerCol = App->collision->AddCollider({ position.x, position.y + 2, 24, 8 }, COLLIDER_TYPE::COLLIDER_IGNORE_HIT, this);
 
 	return ret;
 }
@@ -70,11 +70,11 @@ void ModulePlayer::Reappear() {
 	isInvincible = true;
 	invincibilityFrames = INVINCIBILITY_FRAMES;
 	//collider-----------------------------------------------------------------------
-	if(playerCol!=nullptr)
+	if (playerCol != nullptr)
 	{
 		playerCol->type = COLLIDER_TYPE::COLLIDER_GOD;
 	}
-	else 
+	else
 	{
 		playerCol = App->collision->AddCollider({ position.x, position.y + 2, 24, 8 }, COLLIDER_TYPE::COLLIDER_GOD, this);
 	}
@@ -132,21 +132,17 @@ update_status ModulePlayer::Update()
 		}
 	}
 	//Shots----------------------------------------------------------------------------
-	if (canMove == true)
-	{
+	if (canMove == true) {
 		ShotInput();
 	}
-
 	//Lock the unit--------------------------------------------------------------------
 	if (Lock())
 	{
 		if (unitLocked == true) { unitLocked = false; }
 		else { unitLocked = true; }
 	}
-
 	//Collision------------------------------------------------------------------------
-	if (playerCol != nullptr)
-	{
+	if (playerCol != nullptr) {
 		playerCol->SetPos(position.x, position.y + 2); //We update the collider position
 	}
 
@@ -155,7 +151,7 @@ update_status ModulePlayer::Update()
 
 	if (speedPowerup == true)
 	{
-		App->render->Blit(SpeedAnimationTex, position.x - 32, position.y-9 , &SpeedAnimation.GetCurrentFrame());
+		App->render->Blit(SpeedAnimationTex, position.x - 32, position.y - 9, &SpeedAnimation.GetCurrentFrame());
 		if (SpeedAnimation.current_frame == 9)
 		{
 			SpeedAnimation.current_frame = 0;
@@ -203,16 +199,19 @@ update_status ModulePlayer::Update()
 
 			if (powerupUpgrades >= 3)
 			{
-				if(LaserCount==3|| LaserCount == 6|| LaserCount == 9)
-				{App->particles->AddParticle(App->particles->littleRings, { (float)(ShotPosition.x + 10), (float)(ShotPosition.y + 6) }, { 10, 0 }, PlayerTexture, shot_colType, 0);}
-				
-				
+				if (LaserCount == 3 || LaserCount == 6 || LaserCount == 9)
+				{
+					App->particles->AddParticle(App->particles->littleRings, { (float)(ShotPosition.x + 10), (float)(ShotPosition.y + 6) }, { 10, 0 }, PlayerTexture, shot_colType, 0);
+				}
+
+
 			}
 			App->render->Blit(PlayerTexture, position.x + 32, position.y + 5 - ShotLaserBasic.GetFrame().h / 2, &ShotLaserBasic.GetFrameEx());
 			LaserCount += 1;
 		}
 		else
-		{	ShotLaserBasic.finished = false;
+		{
+			ShotLaserBasic.finished = false;
 			shootLaser = false;
 			LaserCount = 0;
 		}
@@ -276,7 +275,7 @@ void ModulePlayer::ShipAnimation() {
 		}
 		//Draw ship--------------------------------------------------
 		if (isInvincible == true) {
-			if ((invincibilityFrames/2) % 2 == 0) {
+			if ((invincibilityFrames / 2) % 2 == 0) {
 				current_animation = &shipAnimBlack.frames[currentFrame];
 			}
 			else {
@@ -293,7 +292,7 @@ void ModulePlayer::ShipAnimation() {
 		else {
 			current_animation = &shipAnim.frames[currentFrame]; //It set the animation frame 
 		}
-	
+
 		App->render->Blit(PlayerTexture, position.x, position.y, current_animation);
 
 		break;
@@ -339,7 +338,7 @@ void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
 
 	KillUnit();
 	//Delete player collider--------------------------------------------------------
-	
+
 }
 
 void  ModulePlayer::ShotInput()
@@ -352,9 +351,9 @@ void  ModulePlayer::ShotInput()
 		//- They have additional shots for some upgrades
 		if (currentPowerUp == POWERUP_TYPE::LASER)
 		{
-			if(powerupUpgrades>1)
-			shootLaser = true;
-			
+			if (powerupUpgrades>1)
+				shootLaser = true;
+
 		}
 		if (currentPowerUp == POWERUP_TYPE::HOMING)
 		{
@@ -387,73 +386,8 @@ void  ModulePlayer::ShotInput()
 		}*/
 	}
 
-<<<<<<< HEAD
-	//Ship fire animation (in front of the ship)
-	if (shoot == true)
-	{
-		//- Basic ship fire
-			if (shotFire.finished == false)
-			{
-				isShooting = true;
-				App->render->Blit(PlayerTexture, position.x + 32, position.y + 1, &shotFire.GetFrameEx());
-			}
-			else
-			{
-				shotFire.finished = false;
-				isShooting = false;
-				shoot = false;
-			}
-		
-	}
 
-	//Laser PowerUp-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	if (shootLaser)
-	{
-		LOG("SHOT LASER CURRENT FRAME: %f", ShotLaserBasic.current_frame);
-			if (ShotLaserBasic.finished == false)
-			{
-				if (ShotLaserBasic.current_frame == 0)
-				{
-					App->particles->AddParticle(App->particles->basicLaser, { (float)(position.x + 32), (float)(position.y + 6) }, { 10, 0 }, PlayerTexture, shot_colType, 0);
-				}
 
-				switch (powerupUpgrades)
-				{
-				case 3:
-					//Laser rings
-					if (ShotLaserBasic.GetCurrentFrameNum() == 1.0f)
-					{
-						App->particles->AddParticle(App->particles->littleRings, { (float)(position.x + 32), (float)(position.y + 6) }, { 10, 0 }, PlayerTexture, shot_colType, 0);
-						
-					}
-					if (ShotLaserBasic.GetCurrentFrameNum() == 2.0f)
-					{
-						App->particles->AddParticle(App->particles->littleRings, { (float)(position.x + 10), (float)(position.y + 6) }, { 10, 0 }, PlayerTexture, shot_colType, 0);
-						
-					}
-					if (ShotLaserBasic.GetCurrentFrameNum() == 3.0f)
-					{
-						App->particles->AddParticle(App->particles->littleRings, { (float)(position.x - 10), (float)(position.y + 6) }, { 10, 0 }, PlayerTexture, shot_colType, 0);
-					}
-					break;
-				}
-
-				isShooting = true;
-				App->render->Blit(PlayerTexture, position.x + 32, position.y + 5 - ShotLaserBasic.GetFrame().h / 2, &ShotLaserBasic.GetFrameEx());
-			}
-			else
-			{
-				ShotLaserBasic.finished = false;
-				isShooting = false;
-				shootLaser = false;
-
-			}
-			
-	}
-=======
-	
->>>>>>> 7e8cbd9e6899f2217bccac4546cab4ad77e07442
-	
 }
 
 void ModulePlayer::MovementInput()
@@ -463,19 +397,25 @@ void ModulePlayer::MovementInput()
 		//---------Movement-----------------------------------------------------------
 		position.x -= (int)movementSpeed;
 		if (position.x < 0 + HORIZONTAL_MARGIN)
-		{ position.x = 0 + HORIZONTAL_MARGIN; }
+		{
+			position.x = 0 + HORIZONTAL_MARGIN;
+		}
 	}
 	if (MoveRight() == true) {
 		//---------Movement-----------------------------------------------------------
 		position.x += (int)movementSpeed;
 		if (position.x > SCREEN_WIDTH - playerwidth - HORIZONTAL_MARGIN)
-		{ position.x = SCREEN_WIDTH - playerwidth - HORIZONTAL_MARGIN; }
+		{
+			position.x = SCREEN_WIDTH - playerwidth - HORIZONTAL_MARGIN;
+		}
 	}
 	if (MoveUp() == true) {
 		//---------Movement-----------------------------------------------------------
 		position.y -= (int)movementSpeed;
 		if (position.y < 0 + VERTICAL_MARGIN)
-		{ position.y = 0 + VERTICAL_MARGIN; }
+		{
+			position.y = 0 + VERTICAL_MARGIN;
+		}
 
 		//---------Animation---------------------------------------------------------
 		yAxis -= keyPressSpeed;
@@ -489,8 +429,10 @@ void ModulePlayer::MovementInput()
 		//---------Movement-----------------------------------------------------------
 		position.y += (int)movementSpeed;
 		if (position.y > SCREEN_HEIGHT - playerheight - VERTICAL_MARGIN)
-		{ position.y = SCREEN_HEIGHT - playerheight - VERTICAL_MARGIN; }
-			
+		{
+			position.y = SCREEN_HEIGHT - playerheight - VERTICAL_MARGIN;
+		}
+
 		//---------Animation---------------------------------------------------------
 		yAxis += keyPressSpeed;
 		//We check that the yAxis doesn't get above 1
@@ -521,7 +463,7 @@ void ModulePlayer::Winlvl()
 		godMode = true;
 	}
 
-	
+
 	canMove = false;
 	Winposition();
 }
