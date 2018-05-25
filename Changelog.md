@@ -1,8 +1,31 @@
 # Changes
 
+## Changes in V0.8.3.0
+
+- Added  5  enemies: Piñatas, Piñata Spawners, Mechs, Turret 1 & Asteroids (big, small and medium)
+
+-Added Ship destroyable part
+
+- Several bugs solved
+
+## Changes in V.0.8.0.1
+
+- Works controller 2
+
+- Added enemies: Front ship turret
+
+- Now you can throw the Unit and inflict damage
+
+- Added Unit Orange Power ( try to throw the unit to any collider)
+
+- Added CheckPoints in Stage 05
+
+- Several bugs solved
+
 ## Changes in V0.8.0.0
 
 - Added enemies: Front ship turret 
+
 - Now you can throw the Unit and inflict damage
 
 - Added Unit Orange Power  ( try to throw the unit to any collider)
