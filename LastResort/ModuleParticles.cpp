@@ -207,6 +207,7 @@ void ModuleParticles::InitParticleValues()
 	unitShot.life = 2000;
 	unitShot.collision_fx = &unit_explosion;
 
+	//LASER POWERUP----------------------------------------------------//
 	//LaserShot particle 
 	basicLaser.anim.PushBack({ 43,257,16,3 });
 	basicLaser.anim.PushBack({ 17,257,24,3 });
@@ -217,6 +218,13 @@ void ModuleParticles::InitParticleValues()
 	basicLaser.anim.PushBack({ 17,247,56,3 });
 	basicLaser.anim.speed = 2.0f;
 	basicLaser.life = 2000;
+	//LittleRings -------------------------------------------------
+	littleRings.anim.PushBack({96,288,4,7});
+	littleRings.anim.PushBack({ 102,288,6,15 });
+	littleRings.anim.PushBack({ 110,288,11,31 });
+	littleRings.anim.speed = 0.5f;
+	littleRings.life = 2000;
+	littleRings.anim.loop = false;
 
 	//Middle Boss shot particle------------------------------------
 	MiddleBossShot.anim.PushBack({ 232,248,18,17 });

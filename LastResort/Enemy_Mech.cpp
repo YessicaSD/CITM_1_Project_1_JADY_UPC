@@ -49,7 +49,7 @@ void Enemy_Mech::Move()
 			if (finalPosition.x < limit)
 			{
 				finalPosition.x += 0.5f;
-				if (animation->GetCurrentFrameNum() == 3 && finalPosition.x < limit - 10)
+				if ((int)animation->GetCurrentFrameNum() == 3 && finalPosition.x < limit - 10)
 					animation->current_frame = 0;
 			}
 
@@ -65,7 +65,7 @@ void Enemy_Mech::Move()
 			if (finalPosition.x > limit_2)
 			{
 				finalPosition.x -= 0.5f;
-				if (animation->GetCurrentFrameNum() == 3 && finalPosition.x > limit_2 + 10)
+				if ((int)animation->GetCurrentFrameNum() == 3 && finalPosition.x > limit_2 + 10)
 					animation->current_frame = 0;
 			}
 			else

@@ -68,7 +68,9 @@ public:
 	Particle unitShot;
 	Particle death_explosion;//Death explosion 
 	Mix_Chunk* deathSfx = nullptr;
+
 	Particle basicLaser;
+	Particle littleRings;
 
 	//- General
 	Particle g_explosion01;

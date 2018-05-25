@@ -77,7 +77,7 @@ public:
 
 		return frames[(int)current_frame];
 	}
-	int GetCurrentFrameNum()
+	float GetCurrentFrameNum()
 	{
 		return current_frame;
 	}

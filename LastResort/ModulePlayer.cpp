@@ -299,17 +299,9 @@ void  ModulePlayer::ShotInput()
 		//- They have additional shots for some upgrades
 		if (currentPowerUp == POWERUP_TYPE::LASER)
 		{
-			switch (powerupUpgrades)
-			{
-			case 2:
-				//Basic laser
-				shootLaser = true;
-				break;
-			case 3:
-				//Laser rings
-				shootLaser = true;
-				break;
-			}
+			if(powerupUpgrades>1)
+			shootLaser = true;
+			
 		}
 		if (currentPowerUp == POWERUP_TYPE::HOMING)
 		{
@@ -360,16 +352,37 @@ void  ModulePlayer::ShotInput()
 		
 	}
 
+	//Laser PowerUp-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	if (shootLaser)
 	{
-		//- Laser ship fire. The laser powerup is the only one which has a different animation for the ship fire
-		if (currentPowerUp == POWERUP_TYPE::LASER && powerupUpgrades > 1)
-		{
+		LOG("SHOTLASE_CURRENT_FRAME:%f", ShotLaserBasic.current_frame);
 			if (ShotLaserBasic.finished == false)
 			{
 				if (ShotLaserBasic.current_frame == 0)
 				{
 					App->particles->AddParticle(App->particles->basicLaser, { (float)(position.x + 32), (float)(position.y + 6) }, { 10, 0 }, PlayerTexture, shot_colType, 0);
+					
+				}
+				
+				switch (powerupUpgrades)
+				{
+				case 3:
+					//Laser rings
+					if (ShotLaserBasic.GetCurrentFrameNum() == 1.0f)
+					{
+						App->particles->AddParticle(App->particles->littleRings, { (float)(position.x + 32), (float)(position.y + 6) }, { 10, 0 }, PlayerTexture, shot_colType, 0);
+						
+					}
+					if (ShotLaserBasic.GetCurrentFrameNum() == 2.0f)
+					{
+						App->particles->AddParticle(App->particles->littleRings, { (float)(position.x + 10), (float)(position.y + 6) }, { 10, 0 }, PlayerTexture, shot_colType, 0);
+						
+					}
+					if (ShotLaserBasic.GetCurrentFrameNum() == 3.0f)
+					{
+						App->particles->AddParticle(App->particles->littleRings, { (float)(position.x - 10), (float)(position.y + 6) }, { 10, 0 }, PlayerTexture, shot_colType, 0);
+					}
+					break;
 				}
 
 				isShooting = true;
@@ -382,7 +395,7 @@ void  ModulePlayer::ShotInput()
 				shootLaser = false;
 
 			}
-		}
+			
 	}
 	
 }

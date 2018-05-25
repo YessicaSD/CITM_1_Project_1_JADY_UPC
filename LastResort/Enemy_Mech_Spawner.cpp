@@ -36,8 +36,7 @@ void Enemy_Mech_Spawner::Move()
 {
 	position.x = App->stage05->spawnPos.x + initialPosition.x;
 	position.y = App->stage05->spawnPos.y + initialPosition.y;
-	LOG("current_fame:%i", animation->GetCurrentFrameNum());
-	LOG("speed %f", animation->speed);
+
 
 	currentEnemies = 0;
 	for (int i = 0; i < MAX_SPAWNED; ++i) {
@@ -61,7 +60,7 @@ void Enemy_Mech_Spawner::Move()
 	if (currentState == ANIMATION)
 	{
 		LOG("dentro de la animacion")
-			if (animation->GetCurrentFrameNum() == 7)
+			if ((int)animation->GetCurrentFrameNum() == 7)
 			{
 				for (int i = 0; i < 3; ++i)
 				{

@@ -48,7 +48,7 @@ void Particle_Laser:: Move()
 			anim.speed = 0.2;
 		}
 
-		if (anim.GetCurrentFrameNum()==12)
+		if (anim.GetCurrentFrameNum()>=12.0f)
 		{
 			going_up = false;
 
