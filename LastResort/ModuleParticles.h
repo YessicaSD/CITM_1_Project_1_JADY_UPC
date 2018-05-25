@@ -90,6 +90,7 @@ public:
 	Particle MiddleAsteroidDestroy;
 	Particle fireBall;
 	Particle Missile;
+	Particle MissileExplosion;
 
 	//- OTHER
 	iPoint VectorMiddleBossShots;

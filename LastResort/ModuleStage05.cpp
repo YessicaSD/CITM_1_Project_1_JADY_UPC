@@ -171,7 +171,6 @@ bool Module5lvlScene::Start()
 
 	App->enemies->AddEnemy(REDBATS, 325, -25);
 	App->enemies->AddEnemy(REDBATS, 400, -25);
-
 	App->enemies->AddEnemy(REDBATS, 400, -25,800);
 	App->enemies->AddEnemy(REDBATS, 400, -25, 1400);
 	App->enemies->AddEnemy(REDBATS, 404, -25, 1900);
@@ -182,12 +181,6 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(REDBATS, 480, -80, 0);
 	App->enemies->AddEnemy(REDBATS, 500, -80, 0);
 	App->enemies->AddEnemy(REDBATS, 525, -80, 0);
-
-	App->enemies->AddEnemy(REDBATS, 404, -25, 800);
-	App->enemies->AddEnemy(REDBATS, 404, -25, 1400);
-	App->enemies->AddEnemy(REDBATS, 404, -25, 1800);
-	App->enemies->AddEnemy(REDBATS, 404, -80, 2000);
-
 
 	App->enemies->AddEnemy(OUTDOOR_TURRET, 208, 13);
 	App->enemies->AddEnemy(OUTDOOR_TURRET, 248, 13);
@@ -212,8 +205,8 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(INDOOR_TURRET, 415, 127, 0, NOPOWERUP, { 3,0 });
 	App->enemies->AddEnemy(INDOOR_TURRET, 416, 176, 0, NOPOWERUP, { 3,0 });
 
-	App->enemies->AddEnemy(MISSILE_TURRET, 607, 33);
-	App->enemies->AddEnemy(MISSILE_TURRET, 639, 33);
+	App->enemies->AddEnemy(MISSILE_TURRET, 607, 29);
+	App->enemies->AddEnemy(MISSILE_TURRET, 639, 29);
 	App->enemies->AddEnemy(MISSILE_TURRET, 879, -3);
 	App->enemies->AddEnemy(MISSILE_TURRET, 911, -3);
 	App->enemies->AddEnemy(MISSILE_TURRET, 943, -3);
