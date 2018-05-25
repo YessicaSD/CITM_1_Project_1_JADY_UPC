@@ -3,6 +3,8 @@
 #include "Application.h"
 #include "ModuleCollision.h"
 #include "ModuleStage05.h"
+#include "Player1.h"
+#include "Player2.h"
 Enemy_indoorTurret::Enemy_indoorTurret(int x, int  y, float hp, int scoreValue, POWERUP_TYPE powerupDrop, iPoint speed) : Enemy( x, y, hp, scoreValue,powerupDrop,speed)
 {
 	indoorTurretAnim.PushBack({ 128,196,24,16 });
@@ -11,11 +13,45 @@ Enemy_indoorTurret::Enemy_indoorTurret(int x, int  y, float hp, int scoreValue, 
 	/*App->render->BlitEx();*/
 	fixedPos.x = x - App->stage05->spawnPos.x;
 	fixedPos.y = y - App->stage05->spawnPos.y;
+	frameCounter = 0;
 }
 void Enemy_indoorTurret::Move()
 {
+	//Turret position-------------------------------------------
 	position.x = fixedPos.x + App->stage05->spawnPos.x;
 	position.y = fixedPos.y + App->stage05->spawnPos.y;
+
+	//Shoot---------------------------------------------------------------------------------------------------
+	if (frameCounter == 100)
+	{
+
+		//Target player -------------------------------------------------------------------------------------------------
+		if (App->player1->isActive==true && App->player2->isActive==false)
+		{
+			targetPlayerPos = { (float)App->player1->position.x,(float)App->player1->position.y };
+		}
+		else if (App->player1->isActive == false && App->player2->isActive == true)
+		{
+			targetPlayerPos = { (float)App->player2->position.x,(float)App->player2->position.y };
+		}
+		else
+		{
+			if (position.DistanceTo(App->player1->position) < position.DistanceTo(App->player2->position))
+			{  targetPlayerPos = { (float)App->player1->position.x,(float)App->player1->position.y }; }
+
+			else
+			{ targetPlayerPos = { (float)App->player2->position.x,(float)App->player2->position.y };
+			}
+		}
+		fPosition = { (float)position.x,(float)position.y };
+		ParticleSpeed.UnitVector(targetPlayerPos, fPosition);
+
+		App->particles->AddParticle(App->particles->orangeBall, { (float)position.x,(float)position.y }, {ParticleSpeed.x,ParticleSpeed.y}, App->particles->particlesTx, COLLIDER_ENEMY_SHOT, 0, PARTICLE_FOLLOW_BACKGROUND);
+
+
+		frameCounter = 0;
+	}
+	frameCounter += 1;
 }
 void Enemy_indoorTurret::Draw(SDL_Texture* sprites)
 {
