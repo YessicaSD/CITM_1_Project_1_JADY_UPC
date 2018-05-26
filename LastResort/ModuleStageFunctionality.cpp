@@ -34,15 +34,7 @@ ModuleStageFunctionality::~ModuleStageFunctionality()
 
 bool ModuleStageFunctionality::Start()
 {
-	App->player1->Enable();
-	App->player2->Enable();
-	if (App->player1->isActive)
-		App->player1->Reappear();
-	if (App->player2->isActive)
-		App->player2->Reappear();
-	
 	//INFO: We'll add audios of the player and the unit here because if we did them on their own modules they would be loaded twice (one for player 1 and one for player 2)
-
 	//Player
 	//- Textures
 	PlayerTexture = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version		
@@ -54,10 +46,16 @@ bool ModuleStageFunctionality::Start()
 
 	//- Audio
 	releaseChargeSFX.sfx = App->audio->LoadSFX("Assets/Unit/ReleasingCharge.wav");
-	chargeSFX.sfx        = App->audio->LoadSFX("Assets/Unit/Charging.wav");
-	lockUnitSFX.sfx      = App->audio->LoadSFX("Assets/Unit/Lock.wav");
-	unlockUnitSFX.sfx    = App->audio->LoadSFX("Assets/Unit/Unlock.wav");
+	chargeSFX.sfx = App->audio->LoadSFX("Assets/Unit/Charging.wav");
+	lockUnitSFX.sfx = App->audio->LoadSFX("Assets/Unit/Lock.wav");
+	unlockUnitSFX.sfx = App->audio->LoadSFX("Assets/Unit/Unlock.wav");
 
+	App->player1->Enable();
+	App->player2->Enable();
+	if (App->player1->isActive)
+		App->player1->Reappear();
+	if (App->player2->isActive)
+		App->player2->Reappear();
 	App->ui->ShowUi();
 	App->particles->Enable();
 	App->collision->Enable();
@@ -88,8 +86,6 @@ bool ModuleStageFunctionality::CleanUp()
 	App->collision->Disable();
 	App->enemies->Disable();
 	App->powerups->Disable();
-	App->textures->Unload(PlayerTexture);
-	App->textures->Unload(SpeedAnimationTex);
 	return true;
 }
 

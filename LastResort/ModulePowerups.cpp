@@ -29,7 +29,8 @@ ModulePowerups::~ModulePowerups()
 bool ModulePowerups::Start()
 {
 	powerupTx = App->textures->Load("Assets/PowerUps/PowerUps.png");
-	SpeedSfx = App->audio->LoadSFX("Assets/PowerUps/019. Move speed upgrade.wav");
+	speedSFX = App->audio->LoadSFX("Assets/PowerUps/019. Move speed upgrade.wav");
+	getPowerupSFX = App->audio->LoadSFX("Assets/Powerups/GetPowerup.wav");
 	return true;
 }
 
@@ -95,7 +96,6 @@ bool ModulePowerups::CleanUp()
 	LOG("Freeing all powerups");
 
 	App->textures->Unload(powerupTx);
-
 	for (uint i = 0; i < MAX_POWERUPS; ++i)
 	{
 		if (powerups[i] != nullptr)
@@ -104,7 +104,9 @@ bool ModulePowerups::CleanUp()
 			powerups[i] = nullptr;
 		}
 	}
-	App->audio->UnloadSFX(SpeedSfx);
+	App->audio->UnloadSFX(speedSFX);
+	App->audio->UnloadSFX(getPowerupSFX);
+
 	return true;
 }
 
@@ -179,6 +181,9 @@ void ModulePowerups::OnCollision(Collider* c1, Collider* c2)
 			}
 			else
 			{
+				//Play the sound for getting a L, H or G powerup
+				App->audio->ControlSFX(getPowerupSFX, PLAY_AUDIO);
+
 				//We give it this powerup
 				if (targetPlayer->powerupUpgrades < 4)//There are a maximum of 4 upgrades for each powerup
 				{

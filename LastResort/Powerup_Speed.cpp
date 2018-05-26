@@ -17,7 +17,7 @@ Powerup_Speed::Powerup_Speed(int x, int y) : Powerup(x, y)
 
 void Powerup_Speed::OnCollision(Collider* col, ModulePlayer* playerTarjet)
 {
-	App->audio->ControlSFX(App->powerups->SpeedSfx, PLAY_AUDIO);
+	App->audio->ControlSFX(App->powerups->speedSFX, PLAY_AUDIO);
 
 	playerTarjet->speedPowerup = true;
 	//We give it this powerup

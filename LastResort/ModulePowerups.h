@@ -43,7 +43,8 @@ public:
 	void OnCollision(Collider* c1, Collider* c2);
 
 	bool AddPowerup(int, int, POWERUP_TYPE);
-	Mix_Chunk*SpeedSfx = nullptr;
+	Mix_Chunk * speedSFX = nullptr;
+	Mix_Chunk * getPowerupSFX = nullptr;
 private:
 	//We don't need a queue, because we'll render the powerups as soon as AddCollider gets called
 	Powerup* powerups[MAX_POWERUPS];
