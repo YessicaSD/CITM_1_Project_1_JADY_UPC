@@ -25,13 +25,13 @@ void Particle_G_Missile::UpdateColliders()
 	if (collider != nullptr)
 		collider->SetPos(position.x - 8, position.y - 8);
 	if (wallDetectorUp    != nullptr)
-		wallDetectorUp->SetPos(position.x - centerOffset, position.y - centerOffset - 7);
+		wallDetectorUp->SetPos((int)position.x - centerOffset, (int)position.y - centerOffset - 7);
 	if (wallDetectorDown  != nullptr)
-		wallDetectorDown->SetPos(position.x - centerOffset, position.y + centerOffset);
+		wallDetectorDown->SetPos((int)position.x - centerOffset, (int)position.y + centerOffset);
 	if (wallDetectorLeft  != nullptr)
-		wallDetectorLeft->SetPos(position.x - centerOffset - 7, position.y - centerOffset);
+		wallDetectorLeft->SetPos((int)position.x - centerOffset - 7, (int)position.y - centerOffset);
 	if (wallDetectorRight != nullptr)
-		wallDetectorRight->SetPos(position.x + centerOffset, position.y - centerOffset);
+		wallDetectorRight->SetPos((int)position.x + centerOffset, (int)position.y - centerOffset);
 }
 
 void Particle_G_Missile::Move() {

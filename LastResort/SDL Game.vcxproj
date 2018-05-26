@@ -133,6 +133,7 @@
     <ClInclude Include="Player2.h" />
     <ClInclude Include="Powerup.h" />
     <ClInclude Include="Powerup_G.h" />
+    <ClInclude Include="Powerup_Homing.h" />
     <ClInclude Include="Powerup_Laser.h" />
     <ClInclude Include="Powerup_Speed.h" />
     <ClInclude Include="ModuleStageFunctionality.h" />
@@ -194,6 +195,7 @@
     <ClCompile Include="Player2.cpp" />
     <ClCompile Include="Powerup.cpp" />
     <ClCompile Include="Powerup_G.cpp" />
+    <ClCompile Include="Powerup_Homing.cpp" />
     <ClCompile Include="Powerup_Laser.cpp" />
     <ClCompile Include="Powerup_Speed.cpp" />
     <ClCompile Include="ModuleStageFunctionality.cpp" />
