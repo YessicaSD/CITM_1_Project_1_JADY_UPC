@@ -1,6 +1,10 @@
 #include "Application.h"
 #include "Enemy_Ship_Motor.h"
 #include "ModuleStage05.h"
+#include "ModuleEnemies.h"
+#include "ModuleParticles.h"
+#include "SDL\include\SDL.h"
+#include "ModuleAudio.h"
 
 Enemy_Ship_Motor::Enemy_Ship_Motor(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop):Enemy( x, y,  hp, scoreValue, powerupDrop)
 {
@@ -26,6 +30,8 @@ Enemy_Ship_Motor::Enemy_Ship_Motor(int x, int y, float hp, int scoreValue, POWER
 	Ship_Part = {414,444,63,63};
 	collider = App->collision->AddCollider({ x, y, 57, 47 }, COLLIDER_TYPE::COLLIDER_IGNORE_HIT, (Module*)App->enemies);
 	stateMotor = CLOSE;
+	
+	MissileLaunch = App->enemies->InstaSpawn(MISSILE_LAUNCHER, 913, 224);
 
 }
 
@@ -75,4 +81,21 @@ void Enemy_Ship_Motor::Draw(SDL_Texture* sprites) {
 
 	App->render->Blit(sprites, position.x, position.y, &Ship_Part);
 
+}
+
+void Enemy_Ship_Motor::OnCollision(Collider* collider)
+{
+	App->particles->AddParticle(App->particles->g_explosion02, { (float)position.x, (float)position.y }, { 0 ,0 }, App->particles->g_explosion02.texture, COLLIDER_IGNORE_HIT, 0, PARTICLE_FOLLOW_BACKGROUND);
+
+	//Sfx REMEMBER: Improve it for 1.0----------------------------------
+	if (SDL_GetTicks() % 2)
+		App->audio->ControlSFX(App->particles->g_explosion01_1sfx, PLAY_AUDIO);
+	else
+		App->audio->ControlSFX(App->particles->g_explosion02_1sfx, PLAY_AUDIO);
+
+	if (hp == 0)
+	{
+		MissileLaunch->hp = 0;
+	}
+	
 }
