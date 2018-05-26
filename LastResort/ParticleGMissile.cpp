@@ -35,7 +35,9 @@ void Particle_G_Missile::UpdateColliders()
 }
 
 void Particle_G_Missile::Move() {
-	
+
+	UpdateColliders();
+
 	switch (moveState)
 	{
 	case air_State:
@@ -45,7 +47,6 @@ void Particle_G_Missile::Move() {
 		FtMovement();
 		break;
 	}
-	UpdateColliders();
 };
 
 void Particle_G_Missile::AirMovement()
@@ -60,16 +61,16 @@ void Particle_G_Missile::AirMovement()
 
 		speed.y += aceleration.y;
 
-		if (speed.y > 4.5f) {
-			speed.y = 4.5f;
+		if (speed.y > 3.9f) {
+			speed.y = 3.9f;
 		}
 
 	}
 	else {
 		speed.y -= aceleration.y;
 
-		if (speed.y < -4.5f) {
-			speed.y = -4.5f;
+		if (speed.y < -3.9f) {
+			speed.y = -3.9f;
 		}
 	}
 
@@ -186,7 +187,10 @@ void Particle_G_Missile::AirOnCollision(Collider* c1, Collider* c2) {
 		followTerrainDir = FollowingTerrainDirection::FTD_down;
 		colliderToFollow = c2;
 	}
+
 }
+
+
 void  Particle_G_Missile::FtOnCollision(Collider* c1, Collider* c2) {
 
 	if (c1 == wallDetectorUp)
