@@ -80,6 +80,7 @@ public:
 	Particle littleRingsExplotion;
 	Particle bigRings;
 	Particle bigRingsExplotion;
+	Particle hMissile;
 	Mix_Chunk* basicLaserFx = nullptr;
 
 	Particle groundMissile;

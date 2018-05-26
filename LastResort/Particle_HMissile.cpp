@@ -10,6 +10,10 @@ Particle_HMissile::Particle_HMissile() : Particle()
 
 Particle_HMissile::Particle_HMissile(Particle& p, fPoint position, fPoint speed, Uint32 delay, COLLIDER_TYPE colType, SDL_Texture* tex) : Particle(p, position, speed, delay, colType, tex)
 {
+	//Set up variables
+	hmissilePhase = steppingOut;
+	frameCounter = 0;
+
 	//Calculate variables
 	largestPossibleDistance = sqrt(pow(SCREEN_HEIGHT, 2) + pow(SCREEN_WIDTH, 2));
 	missilePartRect = { 0, 0, 14, 6 };
@@ -35,55 +39,76 @@ Particle_HMissile::Particle_HMissile(Particle& p, fPoint position, fPoint speed,
 
 	//Colliders
 	collider = App->collision->AddCollider({ (int)position.x - missilePartRect.w, (int)position.y - missilePartRect.h / 2,  missilePartRect.w, missilePartRect.h }, colType, (Module*)App->particles);
-	enemyDetectionCol = App->collision->AddCollider({(int)position.x, (int)position.y - hitDetectionRect.h/2, hitDetectionRect.w, hitDetectionRect.h}, COLLIDER_HIT_DETECTION_ENEMY, (Module*)App->particles);
 }
 
 //PHASE 1: Moving to position (stepping out)
 //PHASE 2: Go forward
 //TO DO: Change the animation depending on which phase it is
 
-
-//X position = at the front of the missile
-//Y position = at the center of the missile
-
 void Particle_HMissile::Move()
 {
 	//Get the current frame (we need it to adjust the position)
 	currentFrame = anim.GetCurrentFrame();
 
-	//Moves straight
-	position.x += speed.x;
-
-	//Checks if there is an enemy in range
-	if(distanceToTarget < largestPossibleDistance)
+	switch(hmissilePhase)
 	{
-		//Moves there
-		if(position.y < targetPos.y)
+	case steppingOut:
+		//Moves out from the player
+		position.y -= 1;//1 speed at which steps out
+
+		if(frameCounter >= 12)//12 = frames it steps out, then goes to moving forward
 		{
-			//Move up
-			if (position.y - speed.y < targetPos.y) { position.y -= speed.y; }
-			else { position.y = targetPos.y; }
-			
+			hmissilePhase = movingForward;
+			enemyDetectionCol = App->collision->AddCollider({ (int)position.x, (int)position.y - hitDetectionRect.h / 2, hitDetectionRect.w, hitDetectionRect.h }, COLLIDER_HIT_DETECTION_ENEMY, (Module*)App->particles);
+			anim = movingAnim;
+			frameCounter = 0;
 		}
-		else if(position.y > targetPos.y)
+		else
 		{
-			//Move down
-			if (position.y + speed.y > targetPos.y) { position.y += speed.y; }
-			else { position.y = targetPos.y; }
+			frameCounter++;
 		}
-		//else if (position.y == targetPos.y) { Do nothing }
+
+		break;
+	case movingForward:
+		//Moves straight
+		position.x += speed.x;
+
+		//Checks if there is an enemy in range
+		if (distanceToTarget < largestPossibleDistance)
+		{
+			//Moves there
+			if (position.y < targetPos.y)
+			{
+				//Move up
+				if (position.y - speed.y < targetPos.y) { position.y -= speed.y; }
+				else { position.y = targetPos.y; }
+
+			}
+			else if (position.y > targetPos.y)
+			{
+				//Move down
+				if (position.y + speed.y > targetPos.y) { position.y += speed.y; }
+				else { position.y = targetPos.y; }
+			}
+			//else if (position.y == targetPos.y) { Do nothing }
+		}
+
+		//Set up the distance for the next frame
+		distanceToTarget = largestPossibleDistance;
+
+		//Update enemy hit detection collider
+		enemyDetectionCol->SetPos((int)position.x, (int)position.y - hitDetectionRect.h / 2);
+		break;
 	}
 
-	//Set up the distance for the next frame
-	distanceToTarget = largestPossibleDistance;
-	
-	//Update colliders
+	//Update missile collider
+	collider->SetPos((int)position.x - missilePartRect.w, (int)position.y - missilePartRect.h / 2);
 };
 
 void Particle_HMissile::Draw()
 {
 	//Render
-	//(int)position.x - currentFrame.w, (int)position.y - currentFrame.h / 2, });
+	App->render->Blit(texture, position.x - currentFrame.w, position.y - currentFrame.h / 2, &currentFrame);
 }
 
 void Particle_HMissile::OnCollision(Collider* c1, Collider* c2)
@@ -117,5 +142,16 @@ void Particle_HMissile::OnCollisionParticle(Collider* c1, Collider* c2)
 	if (collision_fx != nullptr)
 	{
 		App->particles->AddParticle(*collision_fx, { position.x, position.y }, { 0 , 0 }, texture);
+	}
+}
+
+Particle_HMissile::~Particle_HMissile()
+{
+	if(collider != nullptr){
+		collider->to_delete = true;
+	}
+
+	if(enemyDetectionCol != nullptr){
+		enemyDetectionCol->to_delete = true;
 	}
 }

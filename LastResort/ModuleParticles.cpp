@@ -42,15 +42,15 @@ bool ModuleParticles::Start()
 	explosionTx = App->textures->Load("Assets/General/Fx/Explosion_2.png");
 	laserTx     = App->textures->Load("Assets/General/Enemies/Laser_Niv5.png");
 	//- Load audios
-	basicLaserFx      = App->audio->LoadSFX("Assets/014. Lasser_2-Center.WAV");
-	basicShotSfx     = App->audio->LoadSFX("Assets/004. Shot - center.wav");
-	deathSfx          = App->audio->LoadSFX("Assets/005. Death.wav");
+	basicLaserFx       = App->audio->LoadSFX("Assets/014. Lasser_2-Center.WAV");
+	basicShotSfx       = App->audio->LoadSFX("Assets/004. Shot - center.wav");
+	deathSfx           = App->audio->LoadSFX("Assets/005. Death.wav");
 	g_explosion01_1sfx = App->audio->LoadSFX("Assets/General/Fx/Explosion_1.wav");
 	g_explosion02_1sfx = App->audio->LoadSFX("Assets/General/Fx/Explosion_2.wav");
-	laserEnemyShot_sfx= App->audio->LoadSFX("Assets/General/Fx/lasers spawning.wav");
-	laserTravelling = App->audio->LoadSFX("Assets/General/Fx/lasers traveling.wav");
-	rocketExplosion= App->audio->LoadSFX("Assets/General/Fx/rocket explosion.wav");
-	rocket= App->audio->LoadSFX("Assets/General/Fx/rocket.wav");
+	laserEnemyShot_sfx = App->audio->LoadSFX("Assets/General/Fx/lasers spawning.wav");
+	laserTravelling    = App->audio->LoadSFX("Assets/General/Fx/lasers traveling.wav");
+	rocketExplosion    = App->audio->LoadSFX("Assets/General/Fx/rocket explosion.wav");
+	rocket             = App->audio->LoadSFX("Assets/General/Fx/rocket.wav");
 	//- Initializate textures
 	g_explosion02.texture = explosionTx;
 	//- Initializate audios
@@ -60,7 +60,7 @@ bool ModuleParticles::Start()
 	LaserEnemyShot.sfx = laserEnemyShot_sfx;
 	Missile.sfx = rocket;
 	MissileExplosion.sfx = rocketExplosion;
-		return true;
+	return true;
 }
 
 // Unload assets
@@ -145,7 +145,7 @@ Particle* ModuleParticles::AddParticle(Particle& particle, fPoint position, fPoi
 				p->hasCallback = true;
 				break;
 			case PARTICLE_H_MISSILE:
-				p = new Particle_G_Missile(particle, position, speed, delay, colType, tex);
+				p = new Particle_HMissile(particle, position, speed, delay, colType, tex);
 				p->hasCallback = true;
 				break;
 			case PARTICLE_MISSILE:
@@ -244,6 +244,7 @@ void ModuleParticles::InitParticleValues()
 	basicLaser.anim.PushBack({ 17,247,56,3 });
 	basicLaser.anim.speed = 2.0f;
 	basicLaser.life = 2000;
+
 	//LittleRings -------------------------------------------------
 	littleRings.anim.PushBack({96,288,4,7});
 	littleRings.anim.PushBack({ 102,288,6,15 });
@@ -277,7 +278,7 @@ void ModuleParticles::InitParticleValues()
 	bigRingsExplotion.anim.PushBack({ 205,337,18,47 });
 	bigRingsExplotion.anim.speed = 0.2f;
 
-	//G Missile particle------------------------------------------
+	//G Missile particle----------------------------------------
 
 	for (int i = 0; i < 5; ++i) {
 		groundMissile.anim.PushBack({ 0,283 + i * 16 ,16,16 });
@@ -297,6 +298,10 @@ void ModuleParticles::InitParticleValues()
 	gM_explosion.anim.PushBack({ 131 + 32, 2 * 32 ,32,32 });     
 	gM_explosion.anim.loop = false;
 	gM_explosion.anim.speed = 0.3f;
+
+	//H Missle particles----------------------------------------
+	hMissile.life = 2000;
+
 
 	//Basic shot explosion--------------------------------------
 	unit_explosion.anim.PushBack({ 244, 263, 16, 16 });
@@ -449,7 +454,4 @@ void ModuleParticles::InitParticleValues()
 	MissileExplosion.anim.PushBack({ 179,280,31,29 });
 	MissileExplosion.anim.PushBack({ 210,281,29,27 });
 	MissileExplosion.anim.speed = 0.2f;
-
-
-
 }

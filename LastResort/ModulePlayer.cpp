@@ -358,7 +358,6 @@ void  ModulePlayer::ShotInput()
 		{
 			if (powerupUpgrades>1)
 				shootLaser = true;
-
 		}
 		if (currentPowerUp == POWERUP_TYPE::HOMING)
 		{
@@ -366,8 +365,12 @@ void  ModulePlayer::ShotInput()
 			{
 			case 2:
 				//2 missiles on the sides
+				App->particles->AddParticle(App->particles->hMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2, 1 }, PlayerTexture, shot_colType, 0, PARTICLE_H_MISSILE);
 				break;
 			case 3:
+				//4 missiles on the sides
+				break;
+			case 4:
 				//6 missiles on the sides
 				break;
 			}
