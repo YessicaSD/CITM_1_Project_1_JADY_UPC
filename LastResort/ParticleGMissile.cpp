@@ -13,32 +13,25 @@ Particle_G_Missile::Particle_G_Missile(Particle& p, fPoint position, fPoint spee
 	collider->damage = 0;
 	aceleration = { 0.04f , 0.15f };
 
-	wallDetectorUp = App->collision->AddCollider({ (int)position.x - centerOffset, (int)position.y - centerOffset - 7 , 16,  7 }, COLLIDER_HIT_DETECTION_WALL, App->particles);
-	wallDetectorDown = App->collision->AddCollider({ (int)position.x - centerOffset, (int)position.y + centerOffset   , 16,  7 }, COLLIDER_HIT_DETECTION_WALL, App->particles);
-	wallDetectorLeft = App->collision->AddCollider({ (int)position.x - centerOffset - 7 ,(int)position.y - centerOffset , 7, 16 }, COLLIDER_HIT_DETECTION_WALL, App->particles);
-	wallDetectorRight = App->collision->AddCollider({ (int)position.x + centerOffset,  (int)position.y - centerOffset ,  7  ,16 }, COLLIDER_HIT_DETECTION_WALL, App->particles);
-
-
-
+	wallDetectorUp    = App->collision->AddCollider({ (int)position.x - centerOffset, (int)position.y - centerOffset - 7 , 16,  7 }, COLLIDER_HIT_DETECTION_WALL, (Module*)App->particles);
+	wallDetectorDown  = App->collision->AddCollider({ (int)position.x - centerOffset, (int)position.y + centerOffset   , 16,  7 }, COLLIDER_HIT_DETECTION_WALL, (Module*)App->particles);
+	wallDetectorLeft  = App->collision->AddCollider({ (int)position.x - centerOffset - 7 ,(int)position.y - centerOffset , 7, 16 }, COLLIDER_HIT_DETECTION_WALL, (Module*)App->particles);
+	wallDetectorRight = App->collision->AddCollider({ (int)position.x + centerOffset,  (int)position.y - centerOffset ,  7  ,16 }, COLLIDER_HIT_DETECTION_WALL, (Module*)App->particles);
 }
 
 void Particle_G_Missile::UpdateColliders()
 {
 
 	if (collider != nullptr)
-	{
 		collider->SetPos(position.x - 8, position.y - 8);
-	}
-	if (wallDetectorUp != nullptr)
+	if (wallDetectorUp    != nullptr)
 		wallDetectorUp->SetPos(position.x - centerOffset, position.y - centerOffset - 7);
-	if (wallDetectorDown != nullptr)
+	if (wallDetectorDown  != nullptr)
 		wallDetectorDown->SetPos(position.x - centerOffset, position.y + centerOffset);
-	if (wallDetectorLeft != nullptr)
+	if (wallDetectorLeft  != nullptr)
 		wallDetectorLeft->SetPos(position.x - centerOffset - 7, position.y - centerOffset);
 	if (wallDetectorRight != nullptr)
 		wallDetectorRight->SetPos(position.x + centerOffset, position.y - centerOffset);
-
-
 }
 
 void Particle_G_Missile::Move() {
@@ -54,14 +47,10 @@ void Particle_G_Missile::Move() {
 		FtMovement();
 		break;
 	}
-
-
-
 };
 
-void Particle_G_Missile::AirMovement() {
-
-
+void Particle_G_Missile::AirMovement()
+{
 	speed.x -= aceleration.x;
 
 	if (speed.x < 0.0f) {
@@ -72,21 +61,20 @@ void Particle_G_Missile::AirMovement() {
 
 		speed.y += aceleration.y;
 
-		if (speed.y > 4.5f) {
-			speed.y = 4.5f;
+		if (speed.y > 3.9f) {
+			speed.y = 3.9f;
 		}
 
 	}
 	else {
 		speed.y -= aceleration.y;
 
-		if (speed.y < -4.5f) {
-			speed.y = -4.5f;
+		if (speed.y < -3.9f) {
+			speed.y = -3.9f;
 		}
 	}
 
 	position += speed;
-
 }
 
 void Particle_G_Missile::FtMovement() {
@@ -160,8 +148,8 @@ void Particle_G_Missile::Draw()
 		App->render->BlitEx(texture, (int)position.x - 8, (int)position.y - 8, currentAnim, SDL_FLIP_VERTICAL);
 }
 
-void Particle_G_Missile::OnCollision(Collider* c1, Collider* c2) {
-
+void Particle_G_Missile::OnCollision(Collider* c1, Collider* c2)
+{
 	switch (moveState)
 	{
 	case air_State:
@@ -181,19 +169,19 @@ void Particle_G_Missile::AirOnCollision(Collider* c1, Collider* c2) {
 		followTerrainDir = FollowingTerrainDirection::FTD_right;
 		colliderToFollow = c2;
 	}
-	else if (c1 == wallDetectorLeft)
+	if (c1 == wallDetectorLeft)
 	{
 		moveState = ft_State;
 		followTerrainDir = FollowingTerrainDirection::FTD_down;
 		colliderToFollow = c2;
 	}
-	else if (c1 == wallDetectorDown)
+	if (c1 == wallDetectorDown)
 	{
 		moveState = ft_State;
 		followTerrainDir = FollowingTerrainDirection::FTD_right;
 		colliderToFollow = c2;
 	}
-	else if (c1 == wallDetectorRight)
+	if (c1 == wallDetectorRight)
 	{
 		moveState = ft_State;
 		followTerrainDir = FollowingTerrainDirection::FTD_down;
@@ -215,7 +203,7 @@ void  Particle_G_Missile::FtOnCollision(Collider* c1, Collider* c2) {
 			colliderToFollow = c2;
 		}
 	}
-	else if (c1 == wallDetectorLeft)
+	if (c1 == wallDetectorLeft)
 	{
 		//If it was moving left
 		if (followTerrainDir == FollowingTerrainDirection::FTD_left && c2 != colliderToFollow)
@@ -225,7 +213,7 @@ void  Particle_G_Missile::FtOnCollision(Collider* c1, Collider* c2) {
 			colliderToFollow = c2;
 		}
 	}
-	else if (c1 == wallDetectorDown)
+	if (c1 == wallDetectorDown)
 	{
 		//If it was moving down
 		if (followTerrainDir == FollowingTerrainDirection::FTD_down && c2 != colliderToFollow)
@@ -235,7 +223,7 @@ void  Particle_G_Missile::FtOnCollision(Collider* c1, Collider* c2) {
 			colliderToFollow = c2;
 		}
 	}
-	else if (c1 == wallDetectorRight)
+	if (c1 == wallDetectorRight)
 	{
 		//If it was moving right
 		if (followTerrainDir == FollowingTerrainDirection::FTD_right && c2 != colliderToFollow)

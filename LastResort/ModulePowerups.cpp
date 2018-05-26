@@ -179,7 +179,7 @@ void ModulePowerups::OnCollision(Collider* c1, Collider* c2)
 			else
 			{
 				//We give it this powerup
-				if (targetPlayer->powerupUpgrades < 3)
+				if (targetPlayer->powerupUpgrades < 4)
 				{
 					targetPlayer->powerupUpgrades++;
 				}

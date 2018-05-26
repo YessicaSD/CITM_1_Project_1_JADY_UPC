@@ -76,6 +76,8 @@ public:
 	Particle basicLaser; //Basic laser Shot
 	Particle littleRings;
 	Particle littleRingsExplotion;
+	Particle bigRings;
+	Particle bigRingsExplotion;
 	Mix_Chunk* basicLaserFx = nullptr;
 
 	Particle groundMissile;
