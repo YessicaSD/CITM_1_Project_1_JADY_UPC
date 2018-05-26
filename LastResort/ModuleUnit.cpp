@@ -382,10 +382,10 @@ void ModuleUnit::Rotating()
 	if(power > 0.1)
 	{
 		//Play the charging SFX
-		if(playedChargeSFX == false)
+		if(App->stageFunctionality->chargeSFX.hasPlayed == false)
 		{
-			App->audio->ControlSFX(App->stageFunctionality->chargeSFX, PLAY_AUDIO);
-			playedChargeSFX = true;
+			App->audio->ControlSFX(App->stageFunctionality->chargeSFX.sfx, PLAY_AUDIO);
+			App->stageFunctionality->chargeSFX.hasPlayed = true;
 		}
 
 		//Play the charging animation
@@ -406,12 +406,12 @@ void ModuleUnit::Rotating()
 			throwSpeed.x = cosf(currentOrbit) * throwingSpeed;
 			throwSpeed.y = sinf(currentOrbit) * throwingSpeed;
 			unitCol->SetDamage(12);
-			App->audio->ControlSFX(App->stageFunctionality->releaseChargeSFX, PLAY_AUDIO);
+			App->audio->ControlSFX(App->stageFunctionality->releaseChargeSFX.sfx, PLAY_AUDIO);
 			shootTime = SDL_GetTicks();
 		}
 		//If the player releases the button, we set the power to 0
 		power = 0;
-		playedChargeSFX = false;
+		App->stageFunctionality->chargeSFX.hasPlayed = false;
 	}
 }
 

@@ -135,8 +135,16 @@ update_status ModulePlayer::Update()
 	//Lock the unit--------------------------------------------------------------------
 	if (Lock())
 	{
-		if (unitLocked == true) { unitLocked = false; }
-		else { unitLocked = true; }
+		if (unitLocked == true)
+		{
+			App->audio->ControlSFX(App->stageFunctionality->unlockUnitSFX.sfx, PLAY_AUDIO);
+			unitLocked = false;
+		}
+		else
+		{
+			App->audio->ControlSFX(App->stageFunctionality->lockUnitSFX.sfx, PLAY_AUDIO);
+			unitLocked = true;
+		}
 	}
 	//Collision------------------------------------------------------------------------
 	if (playerCol != nullptr) {

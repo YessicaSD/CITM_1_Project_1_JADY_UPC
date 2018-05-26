@@ -7,6 +7,13 @@
 struct SDL_Texture;
 struct Mix_Chunk;
 
+//This struct makes not repeating sfx easier
+struct SFX
+{
+	Mix_Chunk * sfx = nullptr;
+	bool hasPlayed = false;
+};
+
 enum debuggingElement
 {
 	NOTHING = 0,
@@ -52,8 +59,10 @@ public:
 	SDL_Texture* PlayerTexture = nullptr;
 	SDL_Texture* SpeedAnimationTex = nullptr;
 	//SFX
-	Mix_Chunk * releaseChargeSFX = nullptr;
-	Mix_Chunk * chargeSFX = nullptr;
+	SFX releaseChargeSFX;
+	SFX chargeSFX;
+	SFX lockUnitSFX;
+	SFX unlockUnitSFX;
 };
 
 #endif // __ModuleStageFunctionality_H_H__
