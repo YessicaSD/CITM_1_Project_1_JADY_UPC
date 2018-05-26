@@ -19,11 +19,12 @@ class Particle
 public:
 	Particle();
 	Particle(Particle& , fPoint, fPoint, Uint32, COLLIDER_TYPE colType, SDL_Texture* tex);
-	~Particle();
+	virtual ~Particle();
 
 	bool CheckParticleDeath();
 	virtual void Move();
 	virtual void Draw();
+	virtual void OnCollision(Collider* c1, Collider* c2) {}
 
 public:
 	fPoint position;
@@ -36,6 +37,10 @@ public:
 	Uint32 born = 0;
 	Uint32 life = 0;
 	Mix_Chunk *sfx = nullptr;
+
+	bool flipY = false;
+	bool flipX = false;
+	bool callback = false;
 };
 
 #endif // __PARTICLES_H__

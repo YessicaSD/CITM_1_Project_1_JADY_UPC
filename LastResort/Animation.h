@@ -105,9 +105,9 @@ public:
 	{
 		current_frame += speed;
 		if (current_frame >= last_frame) {
-			current_frame = 0;
+
 			finished = true;
-			return frames[last_frame-1];
+		 	return frames[last_frame-1];
 		}
 		return frames[(int)current_frame];
 	}

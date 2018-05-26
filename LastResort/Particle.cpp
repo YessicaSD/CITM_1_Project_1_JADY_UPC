@@ -26,14 +26,18 @@ Particle::Particle(Particle& sentParticle, fPoint position, fPoint speed, Uint32
 	this->fixedPos.y = position.y - (float)App->stage05->spawnPos.y;
 	this->speed = speed;
 	this->born = SDL_GetTicks() + delay;
-	if (colType != COLLIDER_IGNORE_HIT)
-	{
-		this->collider = App->collision->AddCollider({ (int)this->position.x, (int)this->position.y ,this->anim.GetCurrentFrame().w, this->anim.GetFrame().h }, colType, (Module*)App->particles);
-	}
 	this->texture = tex;
 
 	//- Play audio
 	if (sentParticle.sfx != nullptr) { App->audio->ControlSFX(sentParticle.sfx, PLAY_AUDIO); }
+
+	if (colType != COLLIDER_IGNORE_HIT)
+	{
+		this->collider = App->collision->AddCollider({ (int)this->position.x, (int)this->position.y ,this->anim.GetCurrentFrame().w, this->anim.GetFrame().h }, colType, (Module*)App->particles);
+	}
+
+
+
 }
 
 Particle::~Particle()

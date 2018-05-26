@@ -22,6 +22,7 @@ enum PARTICLE_TYPE
 	//- More complex
 	PARTICLE_LASER,
 	PARTICLE_G_MISSILE,
+	PARTICLE_G_EXPLOSIONS,
 	MAX_PARTICLE,//Always last
 };
 
@@ -38,7 +39,7 @@ public:
 	void OnCollision(Collider* c1, Collider* c2);
 
 	//Module functions
-	void AddParticle(Particle& particle, fPoint position, fPoint speed, SDL_Texture *tex ,COLLIDER_TYPE collider_type = COLLIDER_IGNORE_HIT, Uint32 delay = 0, PARTICLE_TYPE particle_type = PARTICLE_FOLLOW_WORLD);
+	Particle* AddParticle(Particle& particle, fPoint position, fPoint speed, SDL_Texture *tex ,COLLIDER_TYPE collider_type = COLLIDER_IGNORE_HIT, Uint32 delay = 0, PARTICLE_TYPE particle_type = PARTICLE_FOLLOW_WORLD);
 	
 
 private:
@@ -64,20 +65,28 @@ public:
 	Particle basicShot;
 	Particle basic_explosion; //Basic Shot Explosion
 	Mix_Chunk* basicShotSfx = nullptr;
+
 	Particle unit_explosion;//Unit shot explosion
 	Particle unitShot;
+
 	Particle death_explosion;//Death explosion 
 	Mix_Chunk* deathSfx = nullptr;
 
-	Particle basicLaser;
+	//- PoweUps 
+	Particle basicLaser; //Basic laser Shot
 	Particle littleRings;
+	Mix_Chunk* basicLaserFx = nullptr;
+
+	Particle groundMissile;
+	Particle gM_explosions;
+
 
 	//- General
 	Particle g_explosion01;
 	Particle g_explosion02;
 	Mix_Chunk* g_explosion01_1sfx = nullptr;
 	Mix_Chunk* g_explosion02_1sfx = nullptr;
-	Mix_Chunk* basicLaserFx = nullptr;
+	
 
 	//- Enemies
 	Particle MiddleBossShot;

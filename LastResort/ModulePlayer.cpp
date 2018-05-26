@@ -369,10 +369,18 @@ void  ModulePlayer::ShotInput()
 		}
 		if (currentPowerUp == POWERUP_TYPE::GROUND)
 		{
+			Particle* p = nullptr;
+
 			switch (powerupUpgrades)
 			{
 			case 2:
-				//Missiles up and down
+				App->particles->AddParticle(App->particles->groundMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2.8f, 0.0f}, PlayerTexture, shot_colType, 0, PARTICLE_G_MISSILE);
+				p = App->particles->AddParticle(App->particles->groundMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2.8f, 0.0f }, PlayerTexture, shot_colType, 0, PARTICLE_G_MISSILE);
+				
+				if (p != nullptr) {
+					p->flipY = true;
+				}
+
 				break;
 			case 3:
 				//Missiles up and down that destoy the ground

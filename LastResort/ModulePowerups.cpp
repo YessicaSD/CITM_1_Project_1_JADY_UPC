@@ -5,6 +5,7 @@
 #include "Powerup.h"
 #include "Powerup_Speed.h"
 #include "Powerup_Laser.h"
+#include "Powerup_G.h"
 #include "ModuleCollision.h"
 #include "ModuleAudio.h"
 #include "ModulePlayer.h"
@@ -135,7 +136,7 @@ bool ModulePowerups::AddPowerup(int x, int y, POWERUP_TYPE type)//x and y should
 				powerups[i]->type = HOMING;
 				break;
 			case POWERUP_TYPE::GROUND:
-				powerups[i] = new Powerup_Laser(x, y);
+				powerups[i] = new Powerup_G(x, y);
 				powerups[i]->type = GROUND;
 				break;
 			}

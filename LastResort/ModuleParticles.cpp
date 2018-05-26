@@ -111,7 +111,7 @@ update_status ModuleParticles::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle(Particle& particle, fPoint position, fPoint speed, SDL_Texture *tex, COLLIDER_TYPE colType, Uint32 delay, PARTICLE_TYPE particle_type)
+Particle* ModuleParticles::AddParticle(Particle& particle, fPoint position, fPoint speed, SDL_Texture *tex, COLLIDER_TYPE colType, Uint32 delay, PARTICLE_TYPE particle_type)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -132,6 +132,7 @@ void ModuleParticles::AddParticle(Particle& particle, fPoint position, fPoint sp
 				break;
 			case PARTICLE_G_MISSILE:
 				p = new Particle_G_Missile(particle, position, speed, delay, colType, tex);
+				p->callback = true;
 				break;
 			}
 
@@ -139,24 +140,29 @@ void ModuleParticles::AddParticle(Particle& particle, fPoint position, fPoint sp
 			if (p == nullptr)
 			{
 				LOG("Particle could not be created.")
-				break;
+				return nullptr;
 			}
 
 			//Associate new particle with a position in the array
 			active[i] = p;
-
-			break;
+			return  active[i];
 		}
 	}
+	return nullptr;
 }
 
 void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
+		// Special particles that needs OnCollision checks
+		if (active[i] != nullptr && active[i]->callback == true) {
+			active[i]->OnCollision(c1, c2);
+			break;
 		// Always destroy particles that collide
 		if (active[i] != nullptr && active[i]->collider == c1)
 		{
+			}
 			// Add the collision particle where it collided
 			if (active[i]->collision_fx != nullptr)
 			{
@@ -174,7 +180,7 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 //- Push backs for its animation
 void ModuleParticles::InitParticleValues()
 {
-	//PLAYER-----------------------------------------------------------------//
+	//Player----------------------------------------------------------------------------//
 
 	//Basic Shot Explosion Particle-----------------------------
 	basic_explosion.anim.PushBack({ 305,263, 16,16 }); //1
@@ -207,8 +213,9 @@ void ModuleParticles::InitParticleValues()
 	unitShot.life = 2000;
 	unitShot.collision_fx = &unit_explosion;
 
-	//LASER POWERUP----------------------------------------------------//
-	//LaserShot particle 
+	//PowerUps---------------------------------------------------------------//
+
+	//LaserShot particle -------------------------------------------
 	basicLaser.anim.PushBack({ 43,257,16,3 });
 	basicLaser.anim.PushBack({ 17,257,24,3 });
 	basicLaser.anim.PushBack({ 61,257,32,3 });
@@ -226,35 +233,13 @@ void ModuleParticles::InitParticleValues()
 	littleRings.life = 2000;
 	littleRings.anim.loop = false;
 
-	//Middle Boss shot particle------------------------------------
-	MiddleBossShot.anim.PushBack({ 232,248,18,17 });
-	MiddleBossShot.anim.PushBack({ 232,267,17,17 });
-	MiddleBossShot.anim.PushBack({ 233,285,17,17 });
-	MiddleBossShot.anim.PushBack({ 232,303,18,17 });
-	MiddleBossShot.anim.PushBack({ 233,320,17,18 });
-	MiddleBossShot.anim.PushBack({ 233,320,17,18 });
-	MiddleBossShot.anim.PushBack({ 233,339,17,18 });
-	MiddleBossShot.anim.PushBack({ 232,358,18,17 });
-	MiddleBossShot.anim.PushBack({ 232,377,18,16 });
-	MiddleBossShot.anim.speed = 0.2f;
-	MiddleBossShot.life = 5000;
-	MiddleBossShot.speed.x = 1 * VectorMiddleBossShots.x;
-	MiddleBossShot.speed.y = 1 * VectorMiddleBossShots.y;
+	//G Missile particle------------------------------------------
 
-	//Middle Boss Explosition shot----------------------------------
-	MiddleBosExplotion.anim.PushBack({ 0,434,23,24 });
-	MiddleBosExplotion.anim.PushBack({ 24,434,23,24 });
-	MiddleBosExplotion.anim.PushBack({ 48,434,23,24 });
-	MiddleBosExplotion.anim.PushBack({ 72,434,23,24 });
-	MiddleBosExplotion.anim.PushBack({ 96,435,24,23 });
-	MiddleBosExplotion.anim.PushBack({ 121,434,24,24 });
-	MiddleBosExplotion.anim.PushBack({ 145,434,22,25 });
-	MiddleBosExplotion.anim.PushBack({ 168,434,22,25 });
-	MiddleBosExplotion.anim.PushBack({ 192,434,22,25 });
-	MiddleBosExplotion.anim.PushBack({ 214,434,22,25 });
-	MiddleBosExplotion.anim.PushBack({ 237,434,22,25 });
-	MiddleBosExplotion.anim.speed = 0.2;
-	MiddleBossShot.collision_fx = &MiddleBosExplotion;
+	for (int i = 0; i < 5; ++i) {
+		groundMissile.anim.PushBack({ 0,283 + i * 16 ,16,16 });
+	}
+	groundMissile.anim.speed = 0.2f;
+
 
 	//Basic shot explosion--------------------------------------
 	unit_explosion.anim.PushBack({ 244, 263, 16, 16 });
@@ -330,6 +315,35 @@ void ModuleParticles::InitParticleValues()
 	AsteroidDestroy.anim.PushBack({ 0,15,55,63 });
 	AsteroidDestroy.anim.speed = 0.2f;
 
+	//Middle Boss shot particle------------------------------------
+	MiddleBossShot.anim.PushBack({ 232,248,18,17 });
+	MiddleBossShot.anim.PushBack({ 232,267,17,17 });
+	MiddleBossShot.anim.PushBack({ 233,285,17,17 });
+	MiddleBossShot.anim.PushBack({ 232,303,18,17 });
+	MiddleBossShot.anim.PushBack({ 233,320,17,18 });
+	MiddleBossShot.anim.PushBack({ 233,320,17,18 });
+	MiddleBossShot.anim.PushBack({ 233,339,17,18 });
+	MiddleBossShot.anim.PushBack({ 232,358,18,17 });
+	MiddleBossShot.anim.PushBack({ 232,377,18,16 });
+	MiddleBossShot.anim.speed = 0.2f;
+	MiddleBossShot.life = 5000;
+	MiddleBossShot.speed.x = 1 * VectorMiddleBossShots.x;
+	MiddleBossShot.speed.y = 1 * VectorMiddleBossShots.y;
+
+	//Middle Boss Explosition shot----------------------------------
+	MiddleBosExplotion.anim.PushBack({ 0,434,23,24 });
+	MiddleBosExplotion.anim.PushBack({ 24,434,23,24 });
+	MiddleBosExplotion.anim.PushBack({ 48,434,23,24 });
+	MiddleBosExplotion.anim.PushBack({ 72,434,23,24 });
+	MiddleBosExplotion.anim.PushBack({ 96,435,24,23 });
+	MiddleBosExplotion.anim.PushBack({ 121,434,24,24 });
+	MiddleBosExplotion.anim.PushBack({ 145,434,22,25 });
+	MiddleBosExplotion.anim.PushBack({ 168,434,22,25 });
+	MiddleBosExplotion.anim.PushBack({ 192,434,22,25 });
+	MiddleBosExplotion.anim.PushBack({ 214,434,22,25 });
+	MiddleBosExplotion.anim.PushBack({ 237,434,22,25 });
+	MiddleBosExplotion.anim.speed = 0.2;
+	MiddleBossShot.collision_fx = &MiddleBosExplotion;
 
 	//Orange ball
 	orangeBallExplosion.anim.PushBack({ 1, 6,  8,  8 });
