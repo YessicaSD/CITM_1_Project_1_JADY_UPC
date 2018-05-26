@@ -42,7 +42,9 @@ void Particle_G_Missile::UpdateColliders()
 }
 
 void Particle_G_Missile::Move() {
-	
+
+	UpdateColliders();
+
 	switch (moveState)
 	{
 	case air_State:
@@ -53,7 +55,7 @@ void Particle_G_Missile::Move() {
 		break;
 	}
 
-	UpdateColliders();
+
 
 };
 
@@ -197,7 +199,10 @@ void Particle_G_Missile::AirOnCollision(Collider* c1, Collider* c2) {
 		followTerrainDir = FollowingTerrainDirection::FTD_down;
 		colliderToFollow = c2;
 	}
+
 }
+
+
 void  Particle_G_Missile::FtOnCollision(Collider* c1, Collider* c2) {
 
 	if (c1 == wallDetectorUp)
