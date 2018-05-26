@@ -19,6 +19,7 @@ Particle_HMissile::Particle_HMissile(Particle& p, fPoint position, fPoint speed,
 	missilePartRect = { 0, 0, 14, 6 };
 	hitDetectionRect = { 0, 0, SCREEN_WIDTH, 100};
 
+
 	//Animation
 	steppingOutAnim.PushBack({ 408, 247, 23,  6 });
 	steppingOutAnim.PushBack({ 424, 254, 27,  8 });
@@ -43,10 +44,18 @@ Particle_HMissile::Particle_HMissile(Particle& p, fPoint position, fPoint speed,
 
 //PHASE 1: Moving to position (stepping out)
 //PHASE 2: Go forward
-//TO DO: Change the animation depending on which phase it is
 
 void Particle_HMissile::Move()
 {
+	//In this way we don't calculate the steppingOutSpeed every frame (it's unnecessary)
+	//We would ideally do this in the constructor, but we don't have the information about the playerDistance there yet (it is associated later)
+	if(firstFrame)
+	{
+		if (position.y < position.y + distanceToPlayer) { steppingOutSpeed = 1; }
+		else { steppingOutSpeed = -1; }
+		firstFrame = false;
+	}
+
 	//Get the current frame (we need it to adjust the position)
 	currentFrame = anim.GetCurrentFrame();
 
@@ -54,9 +63,10 @@ void Particle_HMissile::Move()
 	{
 	case steppingOut:
 		//Moves out from the player
-		position.y -= 1;//1 speed at which steps out
+		position.y += steppingOutSpeed;
 
-		if(frameCounter >= 12)//12 = frames it steps out, then goes to moving forward
+		//Change when it has stopped stepping out
+		if(frameCounter >= distanceToPlayer / steppingOutSpeed)//Frames it will take to get to that position
 		{
 			hmissilePhase = movingForward;
 			enemyDetectionCol = App->collision->AddCollider({ (int)position.x, (int)position.y - hitDetectionRect.h / 2, hitDetectionRect.w, hitDetectionRect.h }, COLLIDER_HIT_DETECTION_ENEMY, (Module*)App->particles);
@@ -97,12 +107,18 @@ void Particle_HMissile::Move()
 		distanceToTarget = largestPossibleDistance;
 
 		//Update enemy hit detection collider
-		enemyDetectionCol->SetPos((int)position.x, (int)position.y - hitDetectionRect.h / 2);
+		if(collider != nullptr)
+		{
+			enemyDetectionCol->SetPos((int)position.x, (int)position.y - hitDetectionRect.h / 2);
+		}
 		break;
 	}
 
 	//Update missile collider
-	collider->SetPos((int)position.x - missilePartRect.w, (int)position.y - missilePartRect.h / 2);
+	if(collider != nullptr)
+	{
+		collider->SetPos((int)position.x - missilePartRect.w, (int)position.y - missilePartRect.h / 2);
+	}
 };
 
 void Particle_HMissile::Draw()
@@ -113,11 +129,11 @@ void Particle_HMissile::Draw()
 
 void Particle_HMissile::OnCollision(Collider* c1, Collider* c2)
 {
-	if(c1->type == COLLIDER_HIT_DETECTION_ENEMY)
+	if(c1 == enemyDetectionCol)
 	{
 		OnCollisionHitDetection(c1, c2);
 	}
-	else
+	else if (c1 == collider)
 	{
 		OnCollisionParticle(c1, c2);
 	}

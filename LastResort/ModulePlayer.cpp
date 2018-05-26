@@ -224,8 +224,8 @@ update_status ModulePlayer::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModulePlayer::ShipAnimation() {
-
+void ModulePlayer::ShipAnimation()
+{
 	switch (playerAnimState)
 	{
 	case Initial:
@@ -361,18 +361,33 @@ void  ModulePlayer::ShotInput()
 		}
 		if (currentPowerUp == POWERUP_TYPE::HOMING)
 		{
-			switch (powerupUpgrades)
+			if(powerupUpgrades > 1)
 			{
-			case 2:
-				//2 missiles on the sides
-				App->particles->AddParticle(App->particles->hMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2, 1 }, PlayerTexture, shot_colType, 0, PARTICLE_H_MISSILE);
-				break;
-			case 3:
-				//4 missiles on the sides
-				break;
-			case 4:
-				//6 missiles on the sides
-				break;
+				Particle * p1;
+				Particle * p2;
+				p1 = App->particles->AddParticle(App->particles->hMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2, 1 }, PlayerTexture, shot_colType, 0, PARTICLE_H_MISSILE);
+				p1->distanceToPlayer = 16;
+				p2 = App->particles->AddParticle(App->particles->hMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2, 1 }, PlayerTexture, shot_colType, 0, PARTICLE_H_MISSILE);
+				p2->distanceToPlayer = -16;
+			}
+			if(powerupUpgrades > 2)
+			{
+				Particle * p3;
+				Particle * p4;
+				p3 = App->particles->AddParticle(App->particles->hMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2, 1 }, PlayerTexture, shot_colType, 0, PARTICLE_H_MISSILE);
+				p3->distanceToPlayer = 24;
+				p4 = App->particles->AddParticle(App->particles->hMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2, 1 }, PlayerTexture, shot_colType, 0, PARTICLE_H_MISSILE);
+				p4->distanceToPlayer = -24;
+
+			}
+			if(powerupUpgrades > 3)
+			{
+				Particle * p5;
+				Particle * p6;
+				p5 = App->particles->AddParticle(App->particles->hMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2, 1 }, PlayerTexture, shot_colType, 0, PARTICLE_H_MISSILE);
+				p5->distanceToPlayer = 32;
+				p6 = App->particles->AddParticle(App->particles->hMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2, 1 }, PlayerTexture, shot_colType, 0, PARTICLE_H_MISSILE);
+				p6->distanceToPlayer = -32;
 			}
 		}
 		if (currentPowerUp == POWERUP_TYPE::GROUND)
