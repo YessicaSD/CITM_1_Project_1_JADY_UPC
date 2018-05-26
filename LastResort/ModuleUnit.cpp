@@ -12,6 +12,8 @@
 #include <math.h>
 #include "SDL\include\SDL.h"
 #include "Rotation.h"
+#include "ModuleAudio.h"
+#include "ModuleStageFunctionality.h"
 
 ModuleUnit::ModuleUnit() //Constructor 
 {
@@ -201,30 +203,38 @@ bool ModuleUnit::Start()
 {
 	bool ret = true;
 	LOG("Loading unit assets");
-	//Load assets
-	orangeUnitTx = App->textures->Load("Assets/Unit/OrangeUnitSpritesheet.png");
-	blueUnitTx = App->textures->Load("Assets/Unit/BlueUnitSpritesheet.png");
-	throwUnitOrangeTx = App->textures->Load("Assets/Unit/OrangeUnitThrow.png");
-	throwUnitBlueTx = App->textures->Load("Assets/Unit/BlueUnitThrow.png");
+	//Set up unit variables
 	currentOrbit = currentTurnAround = angleValue[E];
+
+	//Load textures
+	orangeUnitTx      = App->textures->Load("Assets/Unit/OrangeUnitSpritesheet.png");
+	blueUnitTx        = App->textures->Load("Assets/Unit/BlueUnitSpritesheet.png");
+	throwUnitOrangeTx = App->textures->Load("Assets/Unit/OrangeUnitThrow.png");
+	throwUnitBlueTx   = App->textures->Load("Assets/Unit/BlueUnitThrow.png");
+
+	//Add colliders
 	unitCol = App->collision->AddCollider({ (int)position.x - sphereDiameter/2, (int)position.y - sphereDiameter / 2, sphereDiameter, sphereDiameter}, COLLIDER_UNIT , this);
 	hitDetectionUp    = App->collision->AddCollider({ (int)position.x - sphereDiameter / 2, (int)position.y - sphereDiameter / 2 - (int)throwingSpeed, sphereDiameter,    (int)throwingSpeed }, COLLIDER_HIT_DETECTION_WALL, this);
 	hitDetectionDown  = App->collision->AddCollider({ (int)position.x - sphereDiameter / 2, (int)position.y + sphereDiameter / 2,                      sphereDiameter,    (int)throwingSpeed }, COLLIDER_HIT_DETECTION_WALL, this);
 	hitDetectionLeft  = App->collision->AddCollider({ (int)position.x - sphereDiameter / 2 - (int)throwingSpeed, (int)position.y - sphereDiameter / 2, (int)throwingSpeed, sphereDiameter    }, COLLIDER_HIT_DETECTION_WALL, this);
 	hitDetectionRight = App->collision->AddCollider({ (int)position.x + sphereDiameter / 2, (int)position.y - sphereDiameter / 2,                      (int)throwingSpeed, sphereDiameter    }, COLLIDER_HIT_DETECTION_WALL, this);
 	//INFO: throwing speed is the width / heigth because we want to snap it if the distance to it is less than what it travels
+
 	return ret;
 }
 
 bool ModuleUnit::CleanUp()
 {
 	LOG("Unloading unit assets");
+	//Unload textures
 	unitTx = nullptr;
 	App->textures->Unload(orangeUnitTx);
 	App->textures->Unload(blueUnitTx);
 	throwUnitTx = nullptr;
 	App->textures->Unload(throwUnitOrangeTx);
 	App->textures->Unload(throwUnitBlueTx);
+
+	//Destroy colliders
 	//If we have created a unit collider, we destroy it
 	if (unitCol != nullptr)           { unitCol->type = COLLIDER_TYPE::COLLIDER_IGNORE_HIT; }
 	if (hitDetectionUp != nullptr)    { hitDetectionUp->type = COLLIDER_TYPE::COLLIDER_IGNORE_HIT; }
@@ -371,6 +381,13 @@ void ModuleUnit::Rotating()
 
 	if(power > 0.1)
 	{
+		//Play the charging SFX
+		if(playedChargeSFX == false)
+		{
+			App->audio->ControlSFX(App->stageFunctionality->chargeSFX, PLAY_AUDIO);
+			playedChargeSFX = true;
+		}
+
 		//Play the charging animation
 		chargeFrame = chargeAnim.GetCurrentFrame();
 		App->render->Blit(
@@ -389,10 +406,12 @@ void ModuleUnit::Rotating()
 			throwSpeed.x = cosf(currentOrbit) * throwingSpeed;
 			throwSpeed.y = sinf(currentOrbit) * throwingSpeed;
 			unitCol->SetDamage(12);
+			App->audio->ControlSFX(App->stageFunctionality->releaseChargeSFX, PLAY_AUDIO);
 			shootTime = SDL_GetTicks();
 		}
 		//If the player releases the button, we set the power to 0
 		power = 0;
+		playedChargeSFX = false;
 	}
 }
 

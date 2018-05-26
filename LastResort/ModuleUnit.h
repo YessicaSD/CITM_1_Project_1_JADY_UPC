@@ -148,9 +148,8 @@ private:
 	//									    E, ESE,  SE, SSE,   S, SSW,  SW, WSW,   W, WNW,  NW, NNW,   N, NNE,  NE, ENE
 	int shotPosXDifferences[UNIT_AXIS] = { 15,  14,  12,   6,   0,  -5, -11, -13, -14, -13, -11,  -6,   0,   6,  11,  14 };//Helps us position the unit projectile at the top of its antenas
 	int shotPosYDifferences[UNIT_AXIS] = {  0,   7,  12,  14,  15,  14,  12,   6,   0,  -6, -11, -14, -14, -13, -10,  -6 };//Helps us position the unit projectile at the top of its antenas
+	bool playedChargeSFX = false;
 
-	//Return conditions
-	const int returnMargin = 80;
 
 	//Throwing
 	const float powerSpeed = 0.02f;
@@ -178,6 +177,8 @@ private:
 
 	//Returning
 	const float returningSpeed = 7;
+	//Return conditions
+	const int returnMargin = 80;
 
 	//Positioning
 	const float positioningSpeed = 7;

@@ -5,6 +5,7 @@
 #include "Globals.h"
 
 struct SDL_Texture;
+struct Mix_Chunk;
 
 enum debuggingElement
 {
@@ -47,8 +48,12 @@ public:
 
 	Module * currentStage = nullptr;
 
+	//Textures
 	SDL_Texture* PlayerTexture = nullptr;
 	SDL_Texture* SpeedAnimationTex = nullptr;
+	//SFX
+	Mix_Chunk * releaseChargeSFX = nullptr;
+	Mix_Chunk * chargeSFX = nullptr;
 };
 
 #endif // __ModuleStageFunctionality_H_H__

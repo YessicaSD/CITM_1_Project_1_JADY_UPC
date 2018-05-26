@@ -20,6 +20,7 @@
 #include "ModuleReady.h"
 #include "ModuleContinue.h"
 #include "ModuleUI.h"
+#include "ModuleAudio.h"
 
 ModuleStageFunctionality::ModuleStageFunctionality()
 {
@@ -40,9 +41,21 @@ bool ModuleStageFunctionality::Start()
 	if (App->player2->isActive)
 		App->player2->Reappear();
 	
-	//textures-----------------------------------------------------------------------
+	//INFO: We'll add audios of the player and the unit here because if we did them on their own modules they would be loaded twice (one for player 1 and one for player 2)
+
+	//Player
+	//- Textures
 	PlayerTexture = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version		
 	SpeedAnimationTex = App->textures->Load("Assets/Powerups/speed.png");
+	//- Audios
+
+	//Unit
+	//- Textures
+
+	//- Audio
+	releaseChargeSFX = App->audio->LoadSFX("Assets/Unit/ReleasingCharge.wav");
+	chargeSFX = App->audio->LoadSFX("Assets/Unit/Charging.wav");
+
 	App->ui->ShowUi();
 	App->particles->Enable();
 	App->collision->Enable();
@@ -54,6 +67,14 @@ bool ModuleStageFunctionality::Start()
 
 bool ModuleStageFunctionality::CleanUp()
 {
+	//Unload textures
+	App->textures->Unload(PlayerTexture);
+	App->textures->Unload(SpeedAnimationTex);
+
+	//Unload audios
+	App->audio->UnloadSFX(releaseChargeSFX);
+	App->audio->UnloadSFX(chargeSFX);
+
 	App->ui->HideUi();
 	App->player1->Disable();
 	App->player2->Disable();

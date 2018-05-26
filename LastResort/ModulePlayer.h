@@ -130,7 +130,6 @@ public:
 	//Audios------------------------------------------------------------------//
 	Mix_Chunk* init_sfx = nullptr;
 
-
 	//Win variables
 	bool winlvl;
 	int numLvlwin;
@@ -140,12 +139,6 @@ public:
 
 	int FadeToBlackAlfa;
 	SDL_Rect backgroundBlack;
-
-
-
-	
-	
-
 };
 
 #endif
