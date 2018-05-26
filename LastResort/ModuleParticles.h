@@ -86,6 +86,8 @@ public:
 	Particle g_explosion02;
 	Mix_Chunk* g_explosion01_1sfx = nullptr;
 	Mix_Chunk* g_explosion02_1sfx = nullptr;
+	Mix_Chunk* laserEnemyShot_sfx = nullptr;
+	Mix_Chunk* laserTravelling = nullptr;
 	
 
 	//- Enemies

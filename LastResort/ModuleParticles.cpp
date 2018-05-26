@@ -46,13 +46,17 @@ bool ModuleParticles::Start()
 	deathSfx          = App->audio->LoadSFX("Assets/005. Death.wav");
 	g_explosion01_1sfx = App->audio->LoadSFX("Assets/General/Fx/Explosion_1.wav");
 	g_explosion02_1sfx = App->audio->LoadSFX("Assets/General/Fx/Explosion_2.wav");
+	laserEnemyShot_sfx= App->audio->LoadSFX("Assets/General/Fx/lasers spawning.wav");
+	laserTravelling = App->audio->LoadSFX("Assets/General/Fx/lasers traveling.wav");
+
 	//- Initializate textures
 	g_explosion02.texture = explosionTx;
 	//- Initializate audios
 	basicLaser.sfx = basicLaserFx;
 	basicShot.sfx = basicShotSfx;
 	death_explosion.sfx = deathSfx;
-	return true;
+	LaserEnemyShot.sfx = laserEnemyShot_sfx;
+		return true;
 }
 
 // Unload assets
@@ -70,6 +74,8 @@ bool ModuleParticles::CleanUp()
 	App->audio->UnloadSFX(basicLaserFx);
 	App->audio->UnloadSFX(g_explosion01_1sfx);
 	App->audio->UnloadSFX(g_explosion02_1sfx);
+	App->audio->UnloadSFX(laserEnemyShot_sfx);
+
 	//----------------------------------------------------------
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -306,6 +312,7 @@ void ModuleParticles::InitParticleValues()
 	LaserEnemyShot.anim.loop = false;
 	LaserEnemyShot.life = 5000;
 	LaserEnemyShot.anim.speed = 0.0f;
+	
 
 	AsteroidDestroy.anim.PushBack({ 191,142,61,60 });
 	AsteroidDestroy.anim.PushBack({ 128,142,63,62 });

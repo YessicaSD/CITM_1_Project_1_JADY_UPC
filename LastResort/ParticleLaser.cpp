@@ -4,7 +4,7 @@
 #include "ModuleStage05.h"
 #include "Player1.h"
 #include "Player2.h"
-
+#include "ModuleAudio.h"
 Particle_Laser::Particle_Laser():Particle()
 {
 
@@ -30,6 +30,8 @@ Particle_Laser::Particle_Laser(Particle& p, fPoint position, fPoint speed, Uint3
 		playerPos.y = App->player1->position.y + PLAYER_Y;
 	}
 	going_up = true;
+
+		
 }
 
 void Particle_Laser:: Move()
@@ -65,6 +67,7 @@ void Particle_Laser:: Move()
 			go_right = true;
 			else
 				go_left = true;
+			App->audio->ControlSFX(App->particles->laserTravelling, PLAY_AUDIO);
 		}
 			
 	}
