@@ -12,7 +12,7 @@
 #include "ParticleLaser.h"
 #include "ParticleGMissile.h"
 #include "Particle_Follow_background.h"
-#include "ParticleHoming.h"
+#include "Particle_HMissile.h"
 #include "Particle_Missile.h"
 #include "ModuleStage05.h"
 #include "SDL/include/SDL_timer.h"
