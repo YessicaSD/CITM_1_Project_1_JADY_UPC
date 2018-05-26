@@ -85,9 +85,6 @@ bool ModulePlayer::CleanUp()
 	powerupUpgrades = 0;
 	currentPowerUp = POWERUP_TYPE::NOPOWERUP;
 	LOG("Unloading player assets");
-	////textures------------------------------------------------------------------
-	//App->textures->Unload(PlayerTexture);
-	//App->textures->Unload(SpeedAnimationTex);
 	//audios-------------------------------------------------------------------------
 	App->audio->UnloadSFX(init_sfx);
 	return true;
@@ -197,7 +194,7 @@ update_status ModulePlayer::Update()
 
 			}
 
-			if (powerupUpgrades >= 3)
+			if (powerupUpgrades == 3)
 			{
 				if (LaserCount == 3 || LaserCount == 6 || LaserCount == 9)
 				{
@@ -205,6 +202,13 @@ update_status ModulePlayer::Update()
 				}
 
 
+			}
+			if (powerupUpgrades >= 4)
+			{
+				if (LaserCount == 3 || LaserCount == 6 || LaserCount == 9)
+				{
+					App->particles->AddParticle(App->particles->bigRings, { (float)(ShotPosition.x + 10), (float)(ShotPosition.y + 6) }, { 10, 0 }, PlayerTexture, shot_colType, 0);
+				}
 			}
 			App->render->Blit(PlayerTexture, position.x + 32, position.y + 5 - ShotLaserBasic.GetFrame().h / 2, &ShotLaserBasic.GetFrameEx());
 			LaserCount += 1;
