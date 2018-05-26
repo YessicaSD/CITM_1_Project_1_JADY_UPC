@@ -21,7 +21,7 @@ public:
 	Particle(Particle& , fPoint, fPoint, Uint32, COLLIDER_TYPE colType, SDL_Texture* tex);
 	virtual ~Particle();
 
-	bool CheckParticleDeath();
+	virtual bool CheckParticleDeath();
 	virtual void Move();
 	virtual void Draw();
 	virtual void OnCollision(Collider* c1, Collider* c2);

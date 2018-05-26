@@ -46,13 +46,14 @@ public:
 private:
 	void InitParticleValues();
 
-	SDL_Texture* explosionTx = nullptr;
+	
 	Particle* active[MAX_ACTIVE_PARTICLES];
 
 public:
 	//TEXTURES-----------------------------------------
-	SDL_Texture * particlesTx;
-	SDL_Texture * laserTx;
+	SDL_Texture* explosionTx = nullptr;
+	SDL_Texture * particlesTx = nullptr;
+	SDL_Texture * laserTx = nullptr;
 	
 	//SFX----------------------------------------------
 	Mix_Chunk* AsteroidDestroySfx;
@@ -83,7 +84,7 @@ public:
 	Mix_Chunk* basicLaserFx = nullptr;
 
 	Particle groundMissile;
-	Particle gM_explosions;
+	Particle gM_explosion;
 
 
 	//- General

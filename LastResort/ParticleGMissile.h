@@ -4,20 +4,27 @@
 #include "Particle.h"
 #include "ModuleUnit.h"
 
-enum moveStates {
-	air_State,
-	ft_State
+enum gStates {
+	thrown_State,
+	terrainExplosions_State,
+	airExplosions_State
 };
+
+class ModulePlayer;
 
 class Particle_G_Missile : public Particle
 {
 public:
-	moveStates moveState = air_State;
+	gStates state = thrown_State;
 	fPoint aceleration;
 	SDL_Rect*  currentAnim = nullptr;
 
-	int followTerrainSpeed = 4;
+	ModulePlayer* playerTarget = nullptr;
+
+	int followTerrainSpeed = 2;
 	int centerOffset = 8;
+	int explosions;
+	int explosionFrames = 0;
 
 	Collider* wallDetectorUp = nullptr;
 	Collider* wallDetectorDown = nullptr;
@@ -32,15 +39,21 @@ public:
 	void Move();
 	void Draw();
 	void OnCollision(Collider* c1, Collider* c2);
+	~Particle_G_Missile();
 
 	void AirOnCollision(Collider* c1, Collider* c2);
 	void FtOnCollision(Collider* c1, Collider* c2);
 
+	bool CheckParticleDeath();
 	void UpdateColliders();
-	~Particle_G_Missile();
+	void ExplosionOn();
+	void ExplosionOff();
+
+
 
 	void AirMovement();
 	void FtMovement();
+	void AireExplosions();
 
 	//Following terrain
 	FollowingTerrainDirection followTerrainDir ;
