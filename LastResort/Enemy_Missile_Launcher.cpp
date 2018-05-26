@@ -13,11 +13,11 @@ Enemy_Missile_Launcher::Enemy_Missile_Launcher(int x, int y, float hp, int score
 void Enemy_Missile_Launcher::Move() {
 	position = fixedPos + App->stage05->spawnPos;
 
-	//if (frameCount == 150 /*&& position.x>0*/ && position. y>0)
-	//{
-	//	App->enemies->AddEnemy(MISSILE,fixedPos.x+100, fixedPos.y + 10);
- //		frameCount = 0;
-	//}
+	if (frameCount == 150 /*&& position.x>0*/ && position. y>0)
+	{
+		App->enemies->AddEnemy(MISSILE,fixedPos.x+100, fixedPos.y + 10);
+ 		frameCount = 0;
+	}
 
 
 	frameCount += 1;

@@ -28,6 +28,7 @@ ModulePowerups::~ModulePowerups()
 
 bool ModulePowerups::Start()
 {
+	LOG("Loading powerup module ");
 	powerupTx = App->textures->Load("Assets/PowerUps/PowerUps.png");
 	speedSFX = App->audio->LoadSFX("Assets/PowerUps/019. Move speed upgrade.wav");
 	getPowerupSFX = App->audio->LoadSFX("Assets/Powerups/GetPowerup.wav");

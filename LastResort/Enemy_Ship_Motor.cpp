@@ -70,23 +70,25 @@ void Enemy_Ship_Motor::Move()
 			frameCount = 0;
 		}
 	}
-	
+
+	if (hp == 0)
+	{
+		MissileLaunch->hp = 0;
+	}
 
 }
 void Enemy_Ship_Motor::Draw(SDL_Texture* sprites) {
 
-	if (collider != nullptr)
-		collider->SetPos(position.x, position.y +10);
-
-	
-	
 
 	if (animation != nullptr)
-		App->render->Blit(sprites, position.x, position.y +15  , &(animation->GetFrameEx()));
+		App->render->Blit(sprites, position.x-Ship_Part.w, position.y +15  , &(animation->GetFrameEx()));
+	if (collider != nullptr)
+		collider->SetPos(position.x- Ship_Part.w, position.y + 10);
 
 
-	App->render->Blit(sprites, position.x, position.y, &Ship_Part);
+	App->render->Blit(sprites, position.x-Ship_Part.w, position.y, &Ship_Part);
 
+	
 }
 
 void Enemy_Ship_Motor::OnCollision(Collider* collider)
@@ -99,9 +101,6 @@ void Enemy_Ship_Motor::OnCollision(Collider* collider)
 	else
 		App->audio->ControlSFX(App->particles->g_explosion02_1sfx, PLAY_AUDIO);
 
-	if (hp == 0)
-	{
-		MissileLaunch->hp = 0;
-	}
+	
 	
 }
