@@ -180,7 +180,7 @@ void ModulePowerups::OnCollision(Collider* c1, Collider* c2)
 			else
 			{
 				//We give it this powerup
-				if (targetPlayer->powerupUpgrades < 4)
+				if (targetPlayer->powerupUpgrades < 4)//There are a maximum of 4 upgrades for each powerup
 				{
 					targetPlayer->powerupUpgrades++;
 				}
