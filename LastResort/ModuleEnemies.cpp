@@ -31,6 +31,7 @@
 #include "Enemy_Missile_turret.h"
 #include "Enemy_Ship_Motor.h"
 #include "Enemy_Missile_Launcher.h"
+#include "Enemy_Missile.h"
 #define DAMAGE_FLASHING_INTERVAL 4
 
 ModuleEnemies::ModuleEnemies()
@@ -287,7 +288,9 @@ Enemy* ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 		case ENEMY_TYPES::MISSILE_LAUNCHER:
 			enemies[i] = new Enemy_Missile_Launcher(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 35, 3000, info.pu_Type);
 			break;
-
+			case ENEMY_TYPES::MISSILE:
+				enemies[i] = new Enemy_Missile(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 2, 200, info.pu_Type);
+				break;
 		}
 		return enemies[i];
 	}

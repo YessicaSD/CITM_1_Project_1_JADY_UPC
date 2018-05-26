@@ -7,7 +7,7 @@ class Enemy_Missile_Launcher : public Enemy
 {
 private:
 	Animation Missile_Launcher;
-	iPoint fixedPos2;
+	int frameCount = 0;
 	
 public:
 	Enemy_Missile_Launcher(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop);

@@ -18,6 +18,7 @@ private:
 	}stateMotor=CLOSE;
 	int frameCount=0;
 	Enemy* MissileLaunch;
+	bool spawn=true;
 
 public:
 
