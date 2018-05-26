@@ -133,6 +133,7 @@ Particle* ModuleParticles::AddParticle(Particle& particle, fPoint position, fPoi
 			case PARTICLE_G_MISSILE:
 				p = new Particle_G_Missile(particle, position, speed, delay, colType, tex);
 				p->callback = true;
+
 				break;
 			case PARTICLE_MISSILE:
 				p = new Particle_Missile(particle, position, speed, delay, colType, tex);

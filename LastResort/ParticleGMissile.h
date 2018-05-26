@@ -23,6 +23,7 @@ public:
 	Collider* wallDetectorDown = nullptr;
 	Collider* wallDetectorLeft = nullptr;
 	Collider* wallDetectorRight = nullptr;
+
 	Collider* colliderToFollow = nullptr;
 
 public:
@@ -42,7 +43,7 @@ public:
 	void FtMovement();
 
 	//Following terrain
-	FollowingTerrainDirection followTerrainDir;
+	FollowingTerrainDirection followTerrainDir ;
 	bool ColliderIsOnLeft();//Returns true if collider to follow is on the left of the unit
 	bool ColliderIsOnRight();//Returns true if collider to follow is on the right of the unit
 	bool ColliderIsAbove();//Returns true if collider to follow is above of the unit

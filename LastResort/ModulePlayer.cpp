@@ -371,21 +371,22 @@ void  ModulePlayer::ShotInput()
 		{
 			Particle* p = nullptr;
 
-			switch (powerupUpgrades)
-			{
-			case 2:
-				App->particles->AddParticle(App->particles->groundMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2.8f, 0.0f}, PlayerTexture, shot_colType, 0, PARTICLE_G_MISSILE);
-				p = App->particles->AddParticle(App->particles->groundMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2.8f, 0.0f }, PlayerTexture, shot_colType, 0, PARTICLE_G_MISSILE);
-				
-				if (p != nullptr) {
-					p->flipY = true;
-				}
+			
+			App->particles->AddParticle(App->particles->groundMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2.8f, 0.0f }, PlayerTexture, shot_colType, 0, PARTICLE_G_MISSILE);
+			p = App->particles->AddParticle(App->particles->groundMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2.8f, 0.0f }, PlayerTexture, shot_colType, 0, PARTICLE_G_MISSILE);
 
-				break;
-			case 3:
-				//Missiles up and down that destoy the ground
-				break;
+			if (p != nullptr) {
+				p->flipY = true;
 			}
+
+			//switch (powerupUpgrades)
+			//{
+			//case 2:
+			//	break;
+			//case 3:
+			//	break;
+			//}
+
 		}
 		/*	if (isShooting == false) { shoot = true; }
 		if (Controllshoot == true) {

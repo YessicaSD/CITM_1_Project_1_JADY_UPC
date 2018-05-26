@@ -30,11 +30,11 @@ void Particle_G_Missile::UpdateColliders()
 		collider->SetPos(position.x - 8, position.y - 8);
 	}
 	if (wallDetectorUp != nullptr)
-		wallDetectorUp->SetPos(position.x - centerOffset, position.y - centerOffset - 4);
+		wallDetectorUp->SetPos(position.x - centerOffset, position.y - centerOffset - 7);
 	if (wallDetectorDown != nullptr)
 		wallDetectorDown->SetPos(position.x - centerOffset, position.y + centerOffset);
 	if (wallDetectorLeft != nullptr)
-		wallDetectorLeft->SetPos(position.x - centerOffset - 4, position.y - centerOffset);
+		wallDetectorLeft->SetPos(position.x - centerOffset - 7, position.y - centerOffset);
 	if (wallDetectorRight != nullptr)
 		wallDetectorRight->SetPos(position.x + centerOffset, position.y - centerOffset);
 
@@ -91,55 +91,55 @@ void Particle_G_Missile::FtMovement() {
 
 	switch (followTerrainDir)
 	{
-	case FTD_up:
-		//Set the position
-		position.y -= followTerrainSpeed;
-		if (ColliderIsOnRight()) { position.x = colliderToFollow->rect.x - centerOffset; }
-		else if (ColliderIsOnLeft()) { position.x = colliderToFollow->rect.x + colliderToFollow->rect.w + centerOffset; }
-		//Check if it runs out of collider
-		if (position.y + centerOffset < colliderToFollow->rect.y)
-		{
-			if (ColliderIsOnRight()) { followTerrainDir = FollowingTerrainDirection::FTD_right; }
-			else if (ColliderIsOnLeft()) { followTerrainDir = FollowingTerrainDirection::FTD_left; }
+		case FTD_up:
+			//Set the position
+			position.y -= followTerrainSpeed;
+			if (ColliderIsOnRight()) { position.x = colliderToFollow->rect.x - centerOffset; }
+			else if (ColliderIsOnLeft()) { position.x = colliderToFollow->rect.x + colliderToFollow->rect.w + centerOffset; }
+			//Check if it runs out of collider
+			if (position.y + centerOffset < colliderToFollow->rect.y)
+			{
+				if (ColliderIsOnRight()) { followTerrainDir = FollowingTerrainDirection::FTD_right; }
+				else if (ColliderIsOnLeft()) { followTerrainDir = FollowingTerrainDirection::FTD_left; }
+			}
+			break;
+		case FTD_down:
+			//Set the position
+			position.y += followTerrainSpeed;
+			if (ColliderIsOnRight()) { position.x = colliderToFollow->rect.x - centerOffset; }
+			else if (ColliderIsOnLeft()) { position.x = colliderToFollow->rect.x + colliderToFollow->rect.w + centerOffset; }
+			//Check if it runs out of collider
+			if (position.y - centerOffset > colliderToFollow->rect.y + colliderToFollow->rect.h)
+			{
+				if (ColliderIsOnRight()) { followTerrainDir = FollowingTerrainDirection::FTD_right; }
+				else if (ColliderIsOnLeft()) { followTerrainDir = FollowingTerrainDirection::FTD_left; }
+			}
+			break;
+		case FTD_left:
+			//Set the position
+			position.x -= followTerrainSpeed;
+			if (ColliderIsAbove()) { position.y = colliderToFollow->rect.y + colliderToFollow->rect.h + centerOffset; }
+			else if (ColliderIsBellow()) { position.y = colliderToFollow->rect.y - centerOffset; }
+			//Check if it runs out of collider
+			if (position.x + centerOffset < colliderToFollow->rect.x)
+			{
+				if (ColliderIsAbove()) { followTerrainDir = FollowingTerrainDirection::FTD_up; }
+				else if (ColliderIsBellow()) { followTerrainDir = FollowingTerrainDirection::FTD_down; }
+			}
+			break;
+		case FTD_right:
+			//Set the position
+			position.x += followTerrainSpeed;
+			if (ColliderIsAbove()) { position.y = colliderToFollow->rect.y + colliderToFollow->rect.h + centerOffset; }
+			else if (ColliderIsBellow()) { position.y = colliderToFollow->rect.y - centerOffset; }
+			//Check if it runs out of collider
+			if (position.x - centerOffset > colliderToFollow->rect.x + colliderToFollow->rect.w)
+			{
+				if (ColliderIsAbove()) { followTerrainDir = FollowingTerrainDirection::FTD_up; }
+				else if (ColliderIsBellow()) { followTerrainDir = FollowingTerrainDirection::FTD_down; }
+			}
+			break;
 		}
-		break;
-	case FTD_down:
-		//Set the position
-		position.y += followTerrainSpeed;
-		if (ColliderIsOnRight()) { position.x = colliderToFollow->rect.x - centerOffset; }
-		else if (ColliderIsOnLeft()) { position.x = colliderToFollow->rect.x + colliderToFollow->rect.w + centerOffset; }
-		//Check if it runs out of collider
-		if (position.y - centerOffset > colliderToFollow->rect.y + colliderToFollow->rect.h)
-		{
-			if (ColliderIsOnRight()) { followTerrainDir = FollowingTerrainDirection::FTD_right; }
-			else if (ColliderIsOnLeft()) { followTerrainDir = FollowingTerrainDirection::FTD_left; }
-		}
-		break;
-	case FTD_left:
-		//Set the position
-		position.x -= followTerrainSpeed;
-		if (ColliderIsAbove()) { position.y = colliderToFollow->rect.y + colliderToFollow->rect.h + centerOffset; }
-		else if (ColliderIsBellow()) { position.y = colliderToFollow->rect.y - centerOffset; }
-		//Check if it runs out of collider
-		if (position.x + centerOffset < colliderToFollow->rect.x)
-		{
-			if (ColliderIsAbove()) { followTerrainDir = FollowingTerrainDirection::FTD_up; }
-			else if (ColliderIsBellow()) { followTerrainDir = FollowingTerrainDirection::FTD_down; }
-		}
-		break;
-	case FTD_right:
-		//Set the position
-		position.x += followTerrainSpeed;
-		if (ColliderIsAbove()) { position.y = colliderToFollow->rect.y + colliderToFollow->rect.h + centerOffset; }
-		else if (ColliderIsBellow()) { position.y = colliderToFollow->rect.y - centerOffset; }
-		//Check if it runs out of collider
-		if (position.x - centerOffset > colliderToFollow->rect.x + colliderToFollow->rect.w)
-		{
-			if (ColliderIsAbove()) { followTerrainDir = FollowingTerrainDirection::FTD_up; }
-			else if (ColliderIsBellow()) { followTerrainDir = FollowingTerrainDirection::FTD_down; }
-		}
-		break;
-	}
 }
 
 
