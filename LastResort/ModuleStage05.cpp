@@ -50,6 +50,13 @@ Module5lvlScene::Module5lvlScene()
 	cameraMovement.PushBack({ 1108, 182 }, 240);    //14      //22 
 	cameraMovement.PushBack(2160);                  //Pause   //23
 	cameraMovement.PushBack({ 2151, 182 }, 2160);   //15      //24
+
+	//Animations--------------------------------------------------------------------------------------------------
+
+	bossAnim.PushBack({ 0,0,168, 224 });
+	bossAnim.PushBack({ 168,0,168, 224 });
+	bossAnim.PushBack({ 168*2,0,168, 224 });
+	bossAnim.speed = 0.3f;
 	
 	//Colliders--------------------------------------------------------------------------------------------------
 	shipCollidersRect[ 0] = {  304, 208, 750,  16 };
@@ -129,12 +136,15 @@ bool Module5lvlScene::Start()
 	ResetValues();
 
 	//Texture ---------------------------------------------------------------------------------------------------
+
 	starsTx    = App->textures->Load("Assets/lvl5/background/backgroundstars.png");
 	shipTx     = App->textures->Load("Assets/lvl5/background/ship.png");
 	tilemapTx  = App->textures->Load("Assets/lvl5/background/final.png");
 	shipPartTx = App->textures->Load("Assets/lvl5/background/ShipPart.png");
+	bossTx = App->textures->Load("Assets/lvl5/background/boss.png");
 
 	//Music -----------------------------------------------------------------------------------------------------
+
 	lvl5Music = App->audio->LoadMUS("Assets/lvl5/07-DON-T-TOUCH-ME-BABY-STAGE-5-1-_-FEAR-STAGE-5-2-_-LEGE.ogg");
 	App->audio->ControlMUS(lvl5Music, PLAY_AUDIO);
 
@@ -267,6 +277,8 @@ update_status Module5lvlScene::Update()
 	backgroundPoint = cameraMovement.GetCurrentPosition();
 	shipPos = shipOffset - backgroundPoint;
 	tunnelPos = tunnelOffset - backgroundPoint;
+	bossPos = bossOffSet - backgroundPoint;
+
 	spawnPos.x = (int)shipPos.x;
 	spawnPos.y = (int)shipPos.y;
 
@@ -302,9 +314,19 @@ update_status Module5lvlScene::Update()
 		App->render->Blit(tilemapTx, tunnelPos.x, tunnelPos.y, &tunnelRect);
 	}
 
+	//----------Final Boss-----------------------------------------------
+
+	if (cameraMovement.currentMov > 21)
+	{
+		App->render->Blit(bossTx, bossPos.x, bossPos.y, &bossAnim.LoopAnimation());
+	}
+
 	//----------Ship part------------------------------------------------
+
 	RenderShipPart();
+
 	//----------Fireball front-------------------------------------------
+
 	if(fireballFrameCounter >= 72)
 	{
 		App->particles->AddParticle(App->particles->fireBall, { (float)spawnPos.x + 45, (float)spawnPos.y + 129 }, { -3, 0 }, App->particles->particlesTx, COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE, 0, PARTICLE_FOLLOW_BACKGROUND);
@@ -315,6 +337,7 @@ update_status Module5lvlScene::Update()
 		fireballFrameCounter++;
 	}
 	//----------Ship rear------------------------------------------------
+
 	App->render->Blit(shipPartTx, spawnPos.x + 1246, spawnPos.y + 15, &shipRearRect);
 
 	return UPDATE_CONTINUE;

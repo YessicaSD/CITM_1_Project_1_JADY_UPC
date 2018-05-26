@@ -41,14 +41,18 @@ public:
 	int currentMov = 0;
 
 	//Points----------------------------------
+	MovePath cameraMovement;
 	dPoint backgroundPoint;//The position that we directly move with the path
 	dPoint shipPos;//We'll use this position to instantiate enemies. Position at which we blit the ship (see Docs>ship.psd). 
 	dPoint tunnelPos;
-	MovePath cameraMovement;
+	dPoint bossPos;
+	iPoint spawnPos;//The position from which we spawn enemies, in this stage it's going to be the same as shipPos (because it's easy for us to get the positions from that psd)
+
 	dPoint shipOffset = { 444, -240 };
 	dPoint tunnelOffset = { 1856, -58 };
+	dPoint bossOffSet = { 2731, -58 };
+
 	dPoint scroll;
-	iPoint spawnPos;//The position from which we spawn enemies, in this stage it's going to be the same as shipPos (because it's easy for us to get the positions from that psd)
 
 	//Rectangles-------------------------------
 	SDL_Rect shipRect;
@@ -63,9 +67,13 @@ public:
 	//Textures---------------------------------
 	SDL_Texture * starsTx = nullptr;
 	SDL_Texture * shipTx = nullptr;
-	SDL_Texture * tilemapTx = nullptr;
 	SDL_Texture * shipPartTx = nullptr;
+	SDL_Texture * tilemapTx = nullptr;
+	SDL_Texture * bossTx = nullptr;
 	
+	//Animations------------------------------
+	Animation bossAnim;
+
 	//Music-----------------------------------
 	Mix_Music* lvl5Music = nullptr;
 
