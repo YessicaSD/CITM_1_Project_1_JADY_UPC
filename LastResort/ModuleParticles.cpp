@@ -48,8 +48,8 @@ bool ModuleParticles::Start()
 	g_explosion02_1sfx = App->audio->LoadSFX("Assets/General/Fx/Explosion_2.wav");
 	laserEnemyShot_sfx= App->audio->LoadSFX("Assets/General/Fx/lasers spawning.wav");
 	laserTravelling = App->audio->LoadSFX("Assets/General/Fx/lasers traveling.wav");
-rocketExplosion= App->audio->LoadSFX("Assets/General/Fx/rocket explosion.wav");
-rocket= App->audio->LoadSFX("Assets/General/Fx/rocket.wav");
+	rocketExplosion= App->audio->LoadSFX("Assets/General/Fx/rocket explosion.wav");
+	rocket= App->audio->LoadSFX("Assets/General/Fx/rocket.wav");
 	//- Initializate textures
 	g_explosion02.texture = explosionTx;
 	//- Initializate audios
@@ -141,7 +141,7 @@ Particle* ModuleParticles::AddParticle(Particle& particle, fPoint position, fPoi
 				break;
 			case PARTICLE_G_MISSILE:
 				p = new Particle_G_Missile(particle, position, speed, delay, colType, tex);
-				p->callback = true;
+				p->hasCallback = true;
 
 				break;
 			case PARTICLE_MISSILE:
@@ -169,18 +169,18 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
 		// Special particles that needs OnCollision checks
-		if (active[i] != nullptr && active[i]->callback == true) {
+		if (active[i] != nullptr && active[i]->hasCallback == true)
+		{
 			active[i]->OnCollision(c1, c2);
 			break;
 		}
+
 		// Always destroy particles that collide
 		if (active[i] != nullptr && active[i]->collider == c1)
 		{
-
 			active[i]->OnCollision(c1, c2);
 
-			if(c1->type != COLLIDER_HIT_DETECTION_ENEMY)//Don't want to delete if what collided is a hit detection collider
-
+			if(c1->type != COLLIDER_HIT_DETECTION_ENEMY && c1->type != COLLIDER_HIT_DETECTION_WALL)//Don't want to delete if what collided is a hit detection collider
 			{
 				// Delete particle
 				delete active[i];

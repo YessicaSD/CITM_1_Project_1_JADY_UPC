@@ -41,7 +41,7 @@ public:
 
 	bool flipY = false;
 	bool flipX = false;
-	bool callback = false;
+	bool hasCallback = false;
 };
 
 #endif // __PARTICLES_H__
