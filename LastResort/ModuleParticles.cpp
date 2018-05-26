@@ -172,24 +172,19 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
-		// Special particles that needs OnCollision checks
+		// Special particles that needs OnCollision checks (for example, H and G missiles)
 		if (active[i] != nullptr && active[i]->hasCallback == true)
 		{
 			active[i]->OnCollision(c1, c2);
 			continue;
 		}
 
-		// Always destroy particles that collide
+		// Destroy if it's the particle's collider what collided
 		if (active[i] != nullptr && active[i]->collider == c1)
 		{
 			active[i]->OnCollision(c1, c2);
-
-			if(c1->type != COLLIDER_HIT_DETECTION_ENEMY && c1->type != COLLIDER_HIT_DETECTION_WALL)//Don't want to delete if what collided is a hit detection collider
-			{
-				// Delete particle
-				delete active[i];
-				active[i] = nullptr;
-			}
+			delete active[i];
+			active[i] = nullptr;
 			break;
 		}
 	}

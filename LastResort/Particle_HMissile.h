@@ -47,6 +47,9 @@ private:
 	SDL_Rect currentFrame;
 	SDL_Rect missilePartRect;
 	SDL_Rect hitDetectionRect;
+
+	int steppingOutSpeed;
+	bool firstFrame = true;
 };
 
 #endif // __PARTICLE_ORANGE_BALL_H__
