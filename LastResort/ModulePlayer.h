@@ -71,7 +71,6 @@ public:
 	bool isInvincible = false;
 	bool isDying;
 	bool canMove;
-	bool unitLocked = false;
 	bool isShooting = false;
 	bool shoot = false;
 	bool shootLaser = false;

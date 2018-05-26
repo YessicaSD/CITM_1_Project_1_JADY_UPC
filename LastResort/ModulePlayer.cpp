@@ -132,20 +132,6 @@ update_status ModulePlayer::Update()
 	if (canMove == true) {
 		ShotInput();
 	}
-	//Lock the unit--------------------------------------------------------------------
-	if (Lock())
-	{
-		if (unitLocked == true)
-		{
-			App->audio->ControlSFX(App->stageFunctionality->unlockUnitSFX.sfx, PLAY_AUDIO);
-			unitLocked = false;
-		}
-		else
-		{
-			App->audio->ControlSFX(App->stageFunctionality->lockUnitSFX.sfx, PLAY_AUDIO);
-			unitLocked = true;
-		}
-	}
 	//Collision------------------------------------------------------------------------
 	if (playerCol != nullptr) {
 		playerCol->SetPos(position.x, position.y + 2); //We update the collider position
