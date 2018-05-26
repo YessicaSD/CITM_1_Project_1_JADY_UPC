@@ -282,7 +282,7 @@ Enemy* ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			enemies[i] = new Enemy_Missile_turret(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 7, 300, info.pu_Type);
 			break;
 		case ENEMY_TYPES::SHIP_MOTOR:
-			enemies[i] = new Enemy_Ship_Motor(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 7, 300, info.pu_Type);
+			enemies[i] = new Enemy_Ship_Motor(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 100, 2000, info.pu_Type);
 			break;
 
 		}
