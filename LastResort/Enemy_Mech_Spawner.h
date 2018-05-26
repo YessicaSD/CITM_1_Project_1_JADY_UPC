@@ -2,10 +2,15 @@
 #define __ENEMY_MECH_SPAWNER_H__
 
 #include "Enemy.h"
-#include "ModuleParticles.h"
 
 #define MAX_SPAWNED 3
 #define SPAWN_FRAMES 300
+
+enum animState
+{
+	IDLE,
+	ANIMATION,
+} ;
 
 class Enemy_Mech_Spawner : public Enemy
 {
@@ -20,13 +25,8 @@ public:
 	void Move();
 	void Draw(SDL_Texture* sprites);
 
-	enum animState {
-		IDLE,
-		ANIMATION,
-	} currentState = ANIMATION;
-
+	animState currentState = ANIMATION;
 	Enemy* spawned[MAX_SPAWNED];
-
 	int currentEnemies = 0;
 	
 };
