@@ -24,7 +24,7 @@ Enemy_Ship_Motor::Enemy_Ship_Motor(int x, int y, float hp, int scoreValue, POWER
 	Ship_Motor.loop = true;
 	animation = &Ship_Motor;
 	Ship_Part = {414,444,63,63};
-	collider = App->collision->AddCollider({ x, y, 57, 47 }, COLLIDER_TYPE::COLLIDER_ENEMY_HEAVY, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ x, y, 57, 47 }, COLLIDER_TYPE::COLLIDER_IGNORE_HIT, (Module*)App->enemies);
 	stateMotor = CLOSE;
 
 }
@@ -42,6 +42,7 @@ void Enemy_Ship_Motor::Move()
 			animation->loop = 0;
 			stateMotor = OPEN;
 			Ship_Motor.speed = 0.2f;
+			collider->type = COLLIDER_ENEMY_HEAVY;
 		}
 		frameCount += 1;
 	}
@@ -50,6 +51,7 @@ void Enemy_Ship_Motor::Move()
 
 		if(Ship_Motor.finished)
 		{
+			collider->type = COLLIDER_IGNORE_HIT;
 			Ship_Motor.Reset();
 			stateMotor = CLOSE;
 			Ship_Motor.speed = 0.0f;
