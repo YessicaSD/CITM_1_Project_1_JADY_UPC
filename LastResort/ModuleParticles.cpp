@@ -256,6 +256,23 @@ void ModuleParticles::InitParticleValues()
 	littleRingsExplotion.anim.PushBack({ 197,247,11,31 });
 	littleRingsExplotion.anim.speed = 0.2f;
 
+	//BigRings ---------------------------------------------------
+	bigRings.anim.PushBack({ 96,288,4,7 });
+	bigRings.anim.PushBack({ 102,288,6,15 });
+	bigRings.anim.PushBack({ 110,288,11,31 });
+	bigRings.anim.PushBack({ 123,288,16,47 });
+	bigRings.anim.speed = 0.5f;
+	bigRings.life = 2000;
+	bigRings.anim.loop = false;
+	bigRings.collision_fx = &bigRingsExplotion;
+
+	bigRingsExplotion.anim.PushBack({185,288,16,47});
+	bigRingsExplotion.anim.PushBack({ 203,288,17,47 });
+	bigRingsExplotion.anim.PushBack({ 222,288,17,47 });
+	bigRingsExplotion.anim.PushBack({ 185,337,18,47 });
+	bigRingsExplotion.anim.PushBack({ 205,337,18,47 });
+	bigRingsExplotion.anim.speed = 0.2f;
+
 	//G Missile particle------------------------------------------
 
 	for (int i = 0; i < 5; ++i) {
