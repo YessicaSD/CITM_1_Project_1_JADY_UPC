@@ -12,6 +12,7 @@
 #include "ParticleLaser.h"
 #include "ParticleGMissile.h"
 #include "Particle_Follow_background.h"
+#include "ParticleHoming.h"
 #include "Particle_Missile.h"
 #include "ModuleStage05.h"
 #include "SDL/include/SDL_timer.h"
@@ -142,7 +143,10 @@ Particle* ModuleParticles::AddParticle(Particle& particle, fPoint position, fPoi
 			case PARTICLE_G_MISSILE:
 				p = new Particle_G_Missile(particle, position, speed, delay, colType, tex);
 				p->hasCallback = true;
-
+				break;
+			case PARTICLE_H_MISSILE:
+				p = new Particle_G_Missile(particle, position, speed, delay, colType, tex);
+				p->hasCallback = true;
 				break;
 			case PARTICLE_MISSILE:
 				p = new Particle_Missile(particle, position, speed, delay, colType, tex);
