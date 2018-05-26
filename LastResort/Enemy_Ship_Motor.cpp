@@ -31,7 +31,7 @@ Enemy_Ship_Motor::Enemy_Ship_Motor(int x, int y, float hp, int scoreValue, POWER
 	collider = App->collision->AddCollider({ x, y, 57, 47 }, COLLIDER_TYPE::COLLIDER_IGNORE_HIT, (Module*)App->enemies);
 	stateMotor = CLOSE;
 	
-	MissileLaunch = App->enemies->InstaSpawn(MISSILE_LAUNCHER, 913, 224);
+	 App->enemies->AddEnemy(MISSILE_LAUNCHER, 913, 224);
 
 }
 
