@@ -144,3 +144,14 @@ void Particle_HMissile::OnCollisionParticle(Collider* c1, Collider* c2)
 		App->particles->AddParticle(*collision_fx, { position.x, position.y }, { 0 , 0 }, texture);
 	}
 }
+
+Particle_HMissile::~Particle_HMissile()
+{
+	if(collider != nullptr){
+		collider->to_delete = true;
+	}
+
+	if(enemyDetectionCol != nullptr){
+		enemyDetectionCol->to_delete = true;
+	}
+}

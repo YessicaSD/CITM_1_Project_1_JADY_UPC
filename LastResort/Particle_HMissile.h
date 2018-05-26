@@ -23,6 +23,7 @@ class Particle_HMissile : public Particle
 public:
 	Particle_HMissile();
 	Particle_HMissile(Particle&, fPoint, fPoint, Uint32, COLLIDER_TYPE colType, SDL_Texture* tex);
+	~Particle_HMissile();
 
 	void Move();
 	void Draw();
