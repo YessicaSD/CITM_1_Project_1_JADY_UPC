@@ -53,8 +53,13 @@ bool Particle::CheckParticleDeath()
 	{
 		if ((SDL_GetTicks() - born) > life)
 		{
+			if (collision_fx!=nullptr)
+			{
+				App->particles->AddParticle(*collision_fx, { position.x, position.y }, { 0 , 0 }, texture);
+			}
 			return true;
 		}
+		
 	}
 
 	//2- Check if its animation has finished

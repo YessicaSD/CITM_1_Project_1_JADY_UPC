@@ -212,6 +212,7 @@ update_status ModulePlayer::Update()
 		else
 		{
 			ShotLaserBasic.finished = false;
+			ShotLaserBasic.current_frame = 0;
 			shootLaser = false;
 			LaserCount = 0;
 		}

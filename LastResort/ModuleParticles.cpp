@@ -48,7 +48,8 @@ bool ModuleParticles::Start()
 	g_explosion02_1sfx = App->audio->LoadSFX("Assets/General/Fx/Explosion_2.wav");
 	laserEnemyShot_sfx= App->audio->LoadSFX("Assets/General/Fx/lasers spawning.wav");
 	laserTravelling = App->audio->LoadSFX("Assets/General/Fx/lasers traveling.wav");
-
+rocketExplosion= App->audio->LoadSFX("Assets/General/Fx/rocket explosion.wav");
+rocket= App->audio->LoadSFX("Assets/General/Fx/rocket.wav");
 	//- Initializate textures
 	g_explosion02.texture = explosionTx;
 	//- Initializate audios
@@ -56,6 +57,8 @@ bool ModuleParticles::Start()
 	basicShot.sfx = basicShotSfx;
 	death_explosion.sfx = deathSfx;
 	LaserEnemyShot.sfx = laserEnemyShot_sfx;
+	Missile.sfx = rocket;
+	MissileExplosion.sfx = rocketExplosion;
 		return true;
 }
 
@@ -225,7 +228,7 @@ void ModuleParticles::InitParticleValues()
 	unitShot.life = 2000;
 	unitShot.collision_fx = &unit_explosion;
 
-	//PowerUps---------------------------------------------------------------//
+	//-----------------------------------------------------------------------------------PowerUps-------------------------------------------------------------------------------------//
 
 	//LaserShot particle -------------------------------------------
 	basicLaser.anim.PushBack({ 43,257,16,3 });
@@ -244,6 +247,14 @@ void ModuleParticles::InitParticleValues()
 	littleRings.anim.speed = 0.5f;
 	littleRings.life = 2000;
 	littleRings.anim.loop = false;
+	littleRings.collision_fx = &littleRingsExplotion;
+
+	littleRingsExplotion.anim.PushBack({149,247,11,31});
+	littleRingsExplotion.anim.PushBack({ 162,247,11,31 });
+	littleRingsExplotion.anim.PushBack({ 175,247,11,31 });
+	littleRingsExplotion.anim.PushBack({ 186,247,11,31 });
+	littleRingsExplotion.anim.PushBack({ 197,247,11,31 });
+	littleRingsExplotion.anim.speed = 0.2f;
 
 	//G Missile particle------------------------------------------
 
@@ -295,8 +306,8 @@ void ModuleParticles::InitParticleValues()
 
 	//--------------------------------------------------------------------------------ENEMIES----------------------------------------------------------------------//
 	LaserEnemyShot.anim.PushBack({ 52,27,6,32 });
-	LaserEnemyShot.anim.PushBack({ 42,27,10,29 });
-	LaserEnemyShot.anim.PushBack({ 30,27,10,29 });
+	LaserEnemyShot.anim.PushBack({ 42,27,10,32 });
+	LaserEnemyShot.anim.PushBack({ 30,27,12,29 });
 	LaserEnemyShot.anim.PushBack({ 22,9,15,16 });
 	LaserEnemyShot.anim.PushBack({ 14,43,16,16 });
 	LaserEnemyShot.anim.PushBack({ 22,9,15,16 });

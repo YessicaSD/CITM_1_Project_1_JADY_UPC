@@ -75,6 +75,7 @@ public:
 	//- PoweUps 
 	Particle basicLaser; //Basic laser Shot
 	Particle littleRings;
+	Particle littleRingsExplotion;
 	Mix_Chunk* basicLaserFx = nullptr;
 
 	Particle groundMissile;
@@ -88,7 +89,8 @@ public:
 	Mix_Chunk* g_explosion02_1sfx = nullptr;
 	Mix_Chunk* laserEnemyShot_sfx = nullptr;
 	Mix_Chunk* laserTravelling = nullptr;
-	
+	Mix_Chunk* rocketExplosion = nullptr;
+	Mix_Chunk* rocket = nullptr;
 
 	//- Enemies
 	Particle MiddleBossShot;
