@@ -172,7 +172,7 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 		if (active[i] != nullptr && active[i]->hasCallback == true)
 		{
 			active[i]->OnCollision(c1, c2);
-			break;
+			continue;
 		}
 
 		// Always destroy particles that collide
