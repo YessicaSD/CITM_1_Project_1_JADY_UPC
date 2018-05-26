@@ -132,12 +132,6 @@ update_status ModulePlayer::Update()
 	if (canMove == true) {
 		ShotInput();
 	}
-	//Lock the unit--------------------------------------------------------------------
-	if (Lock())
-	{
-		if (unitLocked == true) { unitLocked = false; }
-		else { unitLocked = true; }
-	}
 	//Collision------------------------------------------------------------------------
 	if (playerCol != nullptr) {
 		playerCol->SetPos(position.x, position.y + 2); //We update the collider position

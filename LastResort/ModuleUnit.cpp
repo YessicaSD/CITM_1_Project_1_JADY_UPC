@@ -285,43 +285,57 @@ void ModuleUnit::Rotating()
 	turningAround = false;
 
 	//Conditions for movement-----------------------------------------------------------------------------
-	if (playerToFollow->MoveLeft() == true)
+	if (playerToFollow->MoveLeft())
 	{
 		orbiting = true;
 		turningAround = true;
 		//- The unit goes to the right (the unit always goes to the opposite direction that we're moving to)
 		targetOrbit = angleValue[E];
 	}
-	if (playerToFollow->MoveRight() == true)
+	if (playerToFollow->MoveRight())
 	{
 		orbiting = true;
 		turningAround = true;
 		//- The unit goes to the left (the unit always goes to the opposite direction that we're moving to)
 		targetOrbit = angleValue[W];
 	}
-	if (playerToFollow->MoveUp() == true)
+	if (playerToFollow->MoveUp())
 	{
 		orbiting = true;
 		turningAround = true;
 		//- The unit moves down (the unit always goes to the opposite direction that we're moving to)
 		targetOrbit = angleValue[S];
 		//- We check if a part from going down, it's also going to one of the sides (for the diagonals)
-		if (playerToFollow->MoveLeft() == true) { targetOrbit -= PI / 4; }
-		if (playerToFollow->MoveRight() == true) { targetOrbit += PI / 4; }
+		if (playerToFollow->MoveLeft())  { targetOrbit -= PI / 4; }
+		if (playerToFollow->MoveRight()) { targetOrbit += PI / 4; }
 	}
-	if (playerToFollow->MoveDown() == true)
+	if (playerToFollow->MoveDown())
 	{
 		orbiting = true;
 		turningAround = true;
 		//- The unit goes up (the unit always goes to the opposite direction that we're moving to)
 		targetOrbit = angleValue[N];
 		//- We check if a part from going up, it's also going to one of the sides (for the diagonals)
-		if (playerToFollow->MoveLeft() == true) { targetOrbit += PI / 4; }
-		if (playerToFollow->MoveRight() == true) { targetOrbit -= PI / 4; }
+		if (playerToFollow->MoveLeft())  { targetOrbit += PI / 4; }
+		if (playerToFollow->MoveRight()) { targetOrbit -= PI / 4; }
+	}
+
+	if (playerToFollow->Lock())
+	{
+		if(locked == true)
+		{
+			App->audio->ControlSFX(App->stageFunctionality->unlockUnitSFX.sfx, PLAY_AUDIO);
+			locked = false;
+		}
+		else
+		{
+			App->audio->ControlSFX(App->stageFunctionality->lockUnitSFX.sfx, PLAY_AUDIO);
+			locked = true;
+		}
 	}
 
 	//If the ball is locked it won't rotate around the player ship
-	if (playerToFollow->unitLocked == true) { orbiting = false; }
+	if (locked == true) { orbiting = false; }
 
 	//Move the orbit to the target rotation---------------------------------------------------------------
 	//- Orbit around the player
@@ -382,10 +396,10 @@ void ModuleUnit::Rotating()
 	if(power > 0.1)
 	{
 		//Play the charging SFX
-		if(playedChargeSFX == false)
+		if(App->stageFunctionality->chargeSFX.hasPlayed == false)
 		{
-			App->audio->ControlSFX(App->stageFunctionality->chargeSFX, PLAY_AUDIO);
-			playedChargeSFX = true;
+			App->audio->ControlSFX(App->stageFunctionality->chargeSFX.sfx, PLAY_AUDIO);
+			App->stageFunctionality->chargeSFX.hasPlayed = true;
 		}
 
 		//Play the charging animation
@@ -406,12 +420,12 @@ void ModuleUnit::Rotating()
 			throwSpeed.x = cosf(currentOrbit) * throwingSpeed;
 			throwSpeed.y = sinf(currentOrbit) * throwingSpeed;
 			unitCol->SetDamage(12);
-			App->audio->ControlSFX(App->stageFunctionality->releaseChargeSFX, PLAY_AUDIO);
+			App->audio->ControlSFX(App->stageFunctionality->releaseChargeSFX.sfx, PLAY_AUDIO);
 			shootTime = SDL_GetTicks();
 		}
 		//If the player releases the button, we set the power to 0
 		power = 0;
-		playedChargeSFX = false;
+		App->stageFunctionality->chargeSFX.hasPlayed = false;
 	}
 }
 

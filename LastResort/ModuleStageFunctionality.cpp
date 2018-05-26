@@ -53,8 +53,10 @@ bool ModuleStageFunctionality::Start()
 	//- Textures
 
 	//- Audio
-	releaseChargeSFX = App->audio->LoadSFX("Assets/Unit/ReleasingCharge.wav");
-	chargeSFX = App->audio->LoadSFX("Assets/Unit/Charging.wav");
+	releaseChargeSFX.sfx = App->audio->LoadSFX("Assets/Unit/ReleasingCharge.wav");
+	chargeSFX.sfx        = App->audio->LoadSFX("Assets/Unit/Charging.wav");
+	lockUnitSFX.sfx      = App->audio->LoadSFX("Assets/Unit/Lock.wav");
+	unlockUnitSFX.sfx    = App->audio->LoadSFX("Assets/Unit/Unlock.wav");
 
 	App->ui->ShowUi();
 	App->particles->Enable();
@@ -72,8 +74,10 @@ bool ModuleStageFunctionality::CleanUp()
 	App->textures->Unload(SpeedAnimationTex);
 
 	//Unload audios
-	App->audio->UnloadSFX(releaseChargeSFX);
-	App->audio->UnloadSFX(chargeSFX);
+	App->audio->UnloadSFX(releaseChargeSFX.sfx);
+	App->audio->UnloadSFX(chargeSFX.sfx);
+	App->audio->UnloadSFX(lockUnitSFX.sfx);
+	App->audio->UnloadSFX(unlockUnitSFX.sfx);
 
 	App->ui->HideUi();
 	App->player1->Disable();
