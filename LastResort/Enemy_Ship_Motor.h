@@ -17,12 +17,13 @@ private:
 
 	}stateMotor=CLOSE;
 	int frameCount=0;
+	Enemy* MissileLaunch;
 
 public:
 
 	Enemy_Ship_Motor(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop);
 	void Move();
 	void Draw(SDL_Texture*);
-	/*void OnCollision(Collider*);*/
+	void OnCollision(Collider*);
 };
 #endif // __ENEMY_SHIP_THING_H__
