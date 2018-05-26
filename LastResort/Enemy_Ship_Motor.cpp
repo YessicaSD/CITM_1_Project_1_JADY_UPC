@@ -19,13 +19,58 @@ Enemy_Ship_Motor::Enemy_Ship_Motor(int x, int y, float hp, int scoreValue, POWER
 	}
 	Ship_Motor.PushBack({ 303,444,54,47 });
 	Ship_Motor.PushBack({ 357,444,57,47 });
-	Ship_Motor.speed = 0.2f;
+	Ship_Motor.PushBack({ 303,53,57,47 });
+	Ship_Motor.speed = 0.0f;
+	Ship_Motor.loop = true;
 	animation = &Ship_Motor;
+	Ship_Part = {414,444,63,63};
+	collider = App->collision->AddCollider({ x, y, 57, 47 }, COLLIDER_TYPE::COLLIDER_ENEMY_HEAVY, (Module*)App->enemies);
+	stateMotor = CLOSE;
 
 }
 
 void Enemy_Ship_Motor::Move()
 {
 	position = fixedPos + App->stage05->spawnPos;
+
+	LOG("Current_Frame:%f", animation->GetCurrentFrameNum());
+	LOG("SPEED:%f", animation->GetCurrentFrameNum());
+	if (stateMotor == CLOSE)
+	{
+		if (frameCount == 150)
+		{
+			animation->loop = 0;
+			stateMotor = OPEN;
+			Ship_Motor.speed = 0.2f;
+		}
+		frameCount += 1;
+	}
+	if (stateMotor == OPEN)
+	{
+
+		if(Ship_Motor.finished)
+		{
+			Ship_Motor.Reset();
+			stateMotor = CLOSE;
+			Ship_Motor.speed = 0.0f;
+			frameCount = 0;
+		}
+	}
+	
+
+}
+void Enemy_Ship_Motor::Draw(SDL_Texture* sprites) {
+
+	if (collider != nullptr)
+		collider->SetPos(position.x, position.y +10);
+
+	
+	
+
+	if (animation != nullptr)
+		App->render->Blit(sprites, position.x, position.y +15  , &(animation->GetFrameEx()));
+
+
+	App->render->Blit(sprites, position.x, position.y, &Ship_Part);
 
 }
