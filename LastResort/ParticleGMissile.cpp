@@ -366,10 +366,8 @@ bool Particle_G_Missile::ColliderIsBellow()
 }
 
 
-bool Particle_G_Missile::CheckParticleDeath() {
-
-	
-
+bool Particle_G_Missile::CheckParticleDeath()
+{
 	if (explosions == 0) {
 		return true;
 	}
