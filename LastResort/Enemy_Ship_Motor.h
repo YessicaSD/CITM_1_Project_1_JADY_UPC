@@ -7,12 +7,14 @@ class Enemy_Ship_Motor : public Enemy
 {
 private:
 	
-	Animation Ship_Thing;
+	Animation Ship_Motor;
+	int i, j;
 
 public:
 
 	Enemy_Ship_Motor(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop);
-	/*void Move();
-	void OnCollision(Collider*);*/
+	void Move();
+
+	/*void OnCollision(Collider*);*/
 };
 #endif // __ENEMY_SHIP_THING_H__
