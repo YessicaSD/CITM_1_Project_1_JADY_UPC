@@ -124,7 +124,9 @@ bool Module5lvlScene::Start()
 	shipPos = shipOffset - cameraMovement.GetPosition();
 	spawnPos.x = (int)shipPos.x;
 	spawnPos.y = (int)shipPos.y;
-	shipPartPos = { 63, 160 };
+
+	//Reset values that have changed from in last run------------------------------------------------------------
+	ResetValues();
 
 	//Texture ---------------------------------------------------------------------------------------------------
 	starsTx    = App->textures->Load("Assets/lvl5/background/backgroundstars.png");
@@ -145,8 +147,7 @@ bool Module5lvlScene::Start()
 	//App->enemies->AddEnemy(PINATA, 130, 130);
 	//App->enemies->AddEnemy(OSCILATOR, 500, 0);
 
-	/*App->enemies->AddEnemy(MIDDLE_ASTEROID, 250, 270);
-	*/
+
 	
 
 	//- FINAL POSITION ENEMIES (in order of appearance on the level)
@@ -157,10 +158,7 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(REDBATS, 275, 270);
 	App->enemies->AddEnemy(REDBATS, 300, 270);
 	App->enemies->AddEnemy(REDBATS, 325, 270);
-
-	App->enemies->AddEnemy(REDBATS, 320, 270,800);
-
-	App->enemies->AddEnemy(REDBATS, 325, 270,800);
+	App->enemies->AddEnemy(REDBATS, 325, 270,750);
 
 	App->enemies->AddEnemy(ROTATING_TURRET, 111, 176);
 	App->enemies->AddEnemy(ROTATING_TURRET, 159, 192);
@@ -172,7 +170,6 @@ bool Module5lvlScene::Start()
 
 	App->enemies->AddEnemy(REDBATS, 325, -25);
 	App->enemies->AddEnemy(REDBATS, 400, -25);
-
 	App->enemies->AddEnemy(REDBATS, 400, -25,800);
 	App->enemies->AddEnemy(REDBATS, 400, -25, 1400);
 	App->enemies->AddEnemy(REDBATS, 404, -25, 1900);
@@ -183,12 +180,6 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(REDBATS, 480, -80, 0);
 	App->enemies->AddEnemy(REDBATS, 500, -80, 0);
 	App->enemies->AddEnemy(REDBATS, 525, -80, 0);
-
-	App->enemies->AddEnemy(REDBATS, 404, -25, 800);
-	App->enemies->AddEnemy(REDBATS, 404, -25, 1400);
-	App->enemies->AddEnemy(REDBATS, 404, -25, 1800);
-	App->enemies->AddEnemy(REDBATS, 404, -80, 2000);
-
 
 	App->enemies->AddEnemy(OUTDOOR_TURRET, 208, 13);
 	App->enemies->AddEnemy(OUTDOOR_TURRET, 248, 13);
@@ -201,17 +192,25 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(MECH_SPAWNER, 738, 192);
 
 	//This enemy use speed as a parameter of rotation
-	App->enemies->AddEnemy(INDOOR_TURRET, 575, 136);                        //up ->{0,0}
-	App->enemies->AddEnemy(INDOOR_TURRET, 527, 201, 0, NOPOWERUP, { 1,0 }); //down
-	App->enemies->AddEnemy(INDOOR_TURRET, 624, 201, 0, NOPOWERUP, { 1,0 });
-	App->enemies->AddEnemy(INDOOR_TURRET, 672, 201, 0, NOPOWERUP, { 1,0 });
-	App->enemies->AddEnemy(INDOOR_TURRET, 800, 201, 0, NOPOWERUP, { 1,0 });
-	App->enemies->AddEnemy(INDOOR_TURRET, 800, 201, 0, NOPOWERUP, { 1,0 });
-	App->enemies->AddEnemy(INDOOR_TURRET, 519, 129, 0, NOPOWERUP, { 2,0 }); //left
-	App->enemies->AddEnemy(INDOOR_TURRET, 535, 81, 0, NOPOWERUP, { 2,0 }); 
-	App->enemies->AddEnemy(INDOOR_TURRET, 423, 81, 0, NOPOWERUP, { 3,0 });//RIGHT
-	App->enemies->AddEnemy(INDOOR_TURRET, 407, 127, 0, NOPOWERUP, { 3,0 });
-	App->enemies->AddEnemy(INDOOR_TURRET, 407, 176, 0, NOPOWERUP, { 3,0 });
+
+	App->enemies->AddEnemy(INDOOR_TURRET, 575, 145);                        //up ->{0,0}
+
+	App->enemies->AddEnemy(INDOOR_TURRET, 527, 193, 0, NOPOWERUP, { 1,0 }); //down
+	App->enemies->AddEnemy(INDOOR_TURRET, 624, 193, 0, NOPOWERUP, { 1,0 });
+	App->enemies->AddEnemy(INDOOR_TURRET, 672, 193, 0, NOPOWERUP, { 1,0 });
+	App->enemies->AddEnemy(INDOOR_TURRET, 800, 193, 0, NOPOWERUP, { 1,0 });
+	App->enemies->AddEnemy(INDOOR_TURRET, 511, 128, 0, NOPOWERUP, { 2,0 }); //RIGHT
+	App->enemies->AddEnemy(INDOOR_TURRET, 527, 80, 0, NOPOWERUP, { 2,0 }); 
+	App->enemies->AddEnemy(INDOOR_TURRET, 431, 81, 0, NOPOWERUP, { 3,0 });//LEFT
+	App->enemies->AddEnemy(INDOOR_TURRET, 415, 127, 0, NOPOWERUP, { 3,0 });
+	App->enemies->AddEnemy(INDOOR_TURRET, 416, 176, 0, NOPOWERUP, { 3,0 });
+
+	App->enemies->AddEnemy(MISSILE_TURRET, 607, 29);
+	App->enemies->AddEnemy(MISSILE_TURRET, 639, 29);
+	App->enemies->AddEnemy(MISSILE_TURRET, 879, -3);
+	App->enemies->AddEnemy(MISSILE_TURRET, 911, -3);
+	App->enemies->AddEnemy(MISSILE_TURRET, 943, -3);
+	App->enemies->AddEnemy(MISSILE_TURRET, 975, -3);
 
 	App->enemies->AddEnemy(REAR_TURRET, 1357, 41);
 
@@ -336,6 +335,14 @@ bool Module5lvlScene::CleanUp() {
 	App->stageFunctionality->Disable();
 	App->ui->currentScene = NONE;
 	return true;
+}
+
+void Module5lvlScene::ResetValues()
+{
+	shipPartPos = { 63, 160 };
+	fireballFrameCounter = 0;
+	redBatsKilled = 0;
+	rotatingTurretsKilled = 0;
 }
 
 void Module5lvlScene::RenderShipPart()

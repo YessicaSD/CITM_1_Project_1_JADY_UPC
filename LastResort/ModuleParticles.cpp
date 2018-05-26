@@ -12,7 +12,7 @@
 #include "ParticleLaser.h"
 #include "ParticleGMissile.h"
 #include "Particle_Follow_background.h"
-
+#include "Particle_Missile.h"
 #include "ModuleStage05.h"
 #include "SDL/include/SDL_timer.h"
 
@@ -134,6 +134,9 @@ Particle* ModuleParticles::AddParticle(Particle& particle, fPoint position, fPoi
 				p = new Particle_G_Missile(particle, position, speed, delay, colType, tex);
 				p->callback = true;
 				break;
+			case PARTICLE_MISSILE:
+				p = new Particle_Missile(particle, position, speed, delay, colType, tex);
+				break;
 			}
 
 			//Check if the particle is still nullptr (that would mean it hasn't been created)
@@ -159,18 +162,20 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 		if (active[i] != nullptr && active[i]->callback == true) {
 			active[i]->OnCollision(c1, c2);
 			break;
+		}
 		// Always destroy particles that collide
 		if (active[i] != nullptr && active[i]->collider == c1)
 		{
-			}
-			// Add the collision particle where it collided
-			if (active[i]->collision_fx != nullptr)
+
+			active[i]->OnCollision(c1, c2);
+
+			if(c1->type != COLLIDER_HIT_DETECTION_ENEMY)//Don't want to delete if what collided is a hit detection collider
+
 			{
-				AddParticle(*active[i]->collision_fx, { active[i]->position.x, active[i]->position.y }, { 0 , 0 } , active[i]->texture);
+				// Delete particle
+				delete active[i];
+				active[i] = nullptr;
 			}
-			// Delete particle
-			delete active[i];
-			active[i] = nullptr;
 			break;
 		}
 	}
@@ -373,4 +378,25 @@ void ModuleParticles::InitParticleValues()
 	fireBall.anim.pingpong = true;
 	fireBall.anim.speed = 0.5f;
 	fireBall.life = 10000;
+
+	//Missile 
+	Missile.anim.PushBack({157,246,15,8});
+	Missile.anim.PushBack({ 172,246,13,8 });
+	Missile.anim.speed = 0.5f;
+	Missile.life = 5000;
+	Missile.collision_fx = &MissileExplosion;
+	
+	MissileExplosion.anim.PushBack({ 157,254,21,19 });
+	MissileExplosion.anim.PushBack({ 178,254,27,27 });
+	MissileExplosion.anim.PushBack({ 205,254,30,30 });
+	MissileExplosion.anim.PushBack({ 235,254,31,32 });
+	MissileExplosion.anim.PushBack({ 267,254,28,31 });
+	MissileExplosion.anim.PushBack({ 295,254,31,31 });
+	MissileExplosion.anim.PushBack({ 326,254,30,31 });
+	MissileExplosion.anim.PushBack({ 179,280,31,29 });
+	MissileExplosion.anim.PushBack({ 210,281,29,27 });
+	MissileExplosion.anim.speed = 0.2f;
+
+
+
 }

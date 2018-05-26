@@ -22,6 +22,7 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_IGNORE_HIT][COLLIDER_GOD] = false;
 	matrix[COLLIDER_IGNORE_HIT][COLLIDER_HIT_DETECTION_WALL] = false;
 	matrix[COLLIDER_IGNORE_HIT][COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE] = false;
+	matrix[COLLIDER_IGNORE_HIT][COLLIDER_HIT_DETECTION_ENEMY] = false;
 
 	//Collider wall-----------------------------------------------------
 	matrix[COLLIDER_WALL][COLLIDER_IGNORE_HIT] = false;
@@ -37,6 +38,7 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_WALL][COLLIDER_GOD] = false;
 	matrix[COLLIDER_WALL][COLLIDER_HIT_DETECTION_WALL] = false;
 	matrix[COLLIDER_WALL][COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE] = false;
+	matrix[COLLIDER_WALL][COLLIDER_HIT_DETECTION_ENEMY] = false;
 
 	//Collider player---------------------------------------------------
 	matrix[COLLIDER_PLAYER][COLLIDER_IGNORE_HIT] = false;
@@ -52,6 +54,7 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_PLAYER][COLLIDER_GOD] = false;
 	matrix[COLLIDER_PLAYER][COLLIDER_HIT_DETECTION_WALL] = false;
 	matrix[COLLIDER_PLAYER][COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_HIT_DETECTION_ENEMY] = false;
 
 	//Collider enemy light----------------------------------------------
 	matrix[COLLIDER_ENEMY_LIGHT][COLLIDER_IGNORE_HIT] = false;
@@ -67,6 +70,7 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_ENEMY_LIGHT][COLLIDER_GOD] = false;
 	matrix[COLLIDER_ENEMY_LIGHT][COLLIDER_HIT_DETECTION_WALL] = false;
 	matrix[COLLIDER_ENEMY_LIGHT][COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE] = false;
+	matrix[COLLIDER_ENEMY_LIGHT][COLLIDER_HIT_DETECTION_ENEMY] = false;
 
 	//Collider enemy heavy----------------------------------------------
 	matrix[COLLIDER_ENEMY_HEAVY][COLLIDER_IGNORE_HIT] = false;
@@ -82,6 +86,7 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_ENEMY_HEAVY][COLLIDER_GOD] = false;
 	matrix[COLLIDER_ENEMY_HEAVY][COLLIDER_HIT_DETECTION_WALL] = false;
 	matrix[COLLIDER_ENEMY_HEAVY][COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE] = false;
+	matrix[COLLIDER_ENEMY_HEAVY][COLLIDER_HIT_DETECTION_ENEMY] = false;
 
 	//Collider player 1 shot--------------------------------------------
 	matrix[COLLIDER_PLAYER_1_SHOT][COLLIDER_IGNORE_HIT] = false;
@@ -97,6 +102,7 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_PLAYER_1_SHOT][COLLIDER_GOD] = false;
 	matrix[COLLIDER_PLAYER_1_SHOT][COLLIDER_HIT_DETECTION_WALL] = false;
 	matrix[COLLIDER_PLAYER_1_SHOT][COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE] = false;
+	matrix[COLLIDER_PLAYER_1_SHOT][COLLIDER_HIT_DETECTION_ENEMY] = false;
 
 	//Collider player 2 shot--------------------------------------------
 	matrix[COLLIDER_PLAYER_2_SHOT][COLLIDER_IGNORE_HIT] = false;
@@ -112,6 +118,7 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_PLAYER_2_SHOT][COLLIDER_GOD] = false;
 	matrix[COLLIDER_PLAYER_2_SHOT][COLLIDER_HIT_DETECTION_WALL] = false;
 	matrix[COLLIDER_PLAYER_2_SHOT][COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE] = false;
+	matrix[COLLIDER_PLAYER_2_SHOT][COLLIDER_HIT_DETECTION_ENEMY] = false;
 
 	//Collider enemy shot-----------------------------------------------
 	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_IGNORE_HIT] = false;
@@ -127,6 +134,7 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_GOD] = false;
 	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_HIT_DETECTION_WALL] = false;
 	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE] = false;
+	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_HIT_DETECTION_ENEMY] = false;
 
 	//Collider unit-----------------------------------------------------
 	matrix[COLLIDER_UNIT][COLLIDER_IGNORE_HIT] = false;
@@ -142,6 +150,7 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_UNIT][COLLIDER_GOD] = false;
 	matrix[COLLIDER_UNIT][COLLIDER_HIT_DETECTION_WALL] = false;
 	matrix[COLLIDER_UNIT][COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE] = false;
+	matrix[COLLIDER_UNIT][COLLIDER_HIT_DETECTION_ENEMY] = false;
 
 	//Collider powerup--------------------------------------------------
 	matrix[COLLIDER_POWERUP][COLLIDER_IGNORE_HIT] = false;
@@ -157,6 +166,7 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_POWERUP][COLLIDER_GOD] = true;
 	matrix[COLLIDER_POWERUP][COLLIDER_HIT_DETECTION_WALL] = false;
 	matrix[COLLIDER_POWERUP][COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE] = false;
+	matrix[COLLIDER_POWERUP][COLLIDER_HIT_DETECTION_ENEMY] = false;
 
 	//Collider god------------------------------------------------------
 	matrix[COLLIDER_GOD][COLLIDER_IGNORE_HIT] = false;
@@ -172,6 +182,7 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_GOD][COLLIDER_GOD] = false;	
 	matrix[COLLIDER_GOD][COLLIDER_HIT_DETECTION_WALL] = false;
 	matrix[COLLIDER_GOD][COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE] = false;
+	matrix[COLLIDER_GOD][COLLIDER_HIT_DETECTION_ENEMY] = false;
 
 	//Collider hit detection wall---------------------------------------
 	matrix[COLLIDER_HIT_DETECTION_WALL][COLLIDER_IGNORE_HIT] = false;
@@ -187,6 +198,7 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_HIT_DETECTION_WALL][COLLIDER_GOD] = false;
 	matrix[COLLIDER_HIT_DETECTION_WALL][COLLIDER_HIT_DETECTION_WALL] = false;
 	matrix[COLLIDER_HIT_DETECTION_WALL][COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE] = false;
+	matrix[COLLIDER_HIT_DETECTION_WALL][COLLIDER_HIT_DETECTION_ENEMY] = false;
 
 	// Collider shot industrictuble-------------------------------------------------------
 	matrix[COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE][COLLIDER_IGNORE_HIT] = false;
@@ -202,7 +214,24 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE][COLLIDER_GOD] = false;
 	matrix[COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE][COLLIDER_HIT_DETECTION_WALL] = false;
 	matrix[COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE][COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE] = false;
+	matrix[COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE][COLLIDER_HIT_DETECTION_ENEMY] = false;
 
+
+	// Collider hit detection enemy-------------------------------------------------------
+	matrix[COLLIDER_HIT_DETECTION_ENEMY][COLLIDER_IGNORE_HIT] = false;
+	matrix[COLLIDER_HIT_DETECTION_ENEMY][COLLIDER_WALL] = false;
+	matrix[COLLIDER_HIT_DETECTION_ENEMY][COLLIDER_PLAYER] = false;
+	matrix[COLLIDER_HIT_DETECTION_ENEMY][COLLIDER_ENEMY_LIGHT] = true;
+	matrix[COLLIDER_HIT_DETECTION_ENEMY][COLLIDER_ENEMY_HEAVY] = true;
+	matrix[COLLIDER_HIT_DETECTION_ENEMY][COLLIDER_PLAYER_1_SHOT] = false;
+	matrix[COLLIDER_HIT_DETECTION_ENEMY][COLLIDER_PLAYER_2_SHOT] = false;
+	matrix[COLLIDER_HIT_DETECTION_ENEMY][COLLIDER_ENEMY_SHOT] = false;
+	matrix[COLLIDER_HIT_DETECTION_ENEMY][COLLIDER_UNIT] = false;
+	matrix[COLLIDER_HIT_DETECTION_ENEMY][COLLIDER_POWERUP] = false;
+	matrix[COLLIDER_HIT_DETECTION_ENEMY][COLLIDER_GOD] = false;
+	matrix[COLLIDER_HIT_DETECTION_ENEMY][COLLIDER_HIT_DETECTION_WALL] = false;
+	matrix[COLLIDER_HIT_DETECTION_ENEMY][COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE] = false;
+	matrix[COLLIDER_HIT_DETECTION_ENEMY][COLLIDER_HIT_DETECTION_ENEMY] = false;
 }
 
 // Destructor
@@ -211,8 +240,6 @@ ModuleCollision::~ModuleCollision()
 
 update_status ModuleCollision::PreUpdate()
 {
-	//LOG("Matrix powerup and god %d", matrix[COLLIDER_POWERUP][COLLIDER_GOD]);
-
 	// Remove all colliders scheduled for deletion---------------------------------------------
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
@@ -265,7 +292,6 @@ update_status ModuleCollision::PreUpdate()
 // Called before render is available
 update_status ModuleCollision::Update()
 {
-
 	DebugDraw();
 
 	return UPDATE_CONTINUE;
@@ -325,6 +351,9 @@ void ModuleCollision::DebugDraw()
 			break;
 		case COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE: // magenta
 			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
+			break;
+		case COLLIDER_HIT_DETECTION_ENEMY:
+			App->render->DrawQuad(colliders[i]->rect, 255, 125, 125, alpha);
 			break;
 		}
 	}

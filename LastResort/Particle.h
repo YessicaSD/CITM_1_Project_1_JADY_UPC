@@ -24,7 +24,8 @@ public:
 	bool CheckParticleDeath();
 	virtual void Move();
 	virtual void Draw();
-	virtual void OnCollision(Collider* c1, Collider* c2) {}
+	virtual void OnCollision(Collider* c1, Collider* c2);
+
 
 public:
 	fPoint position;
