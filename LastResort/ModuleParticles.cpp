@@ -283,7 +283,20 @@ void ModuleParticles::InitParticleValues()
 		groundMissile.anim.PushBack({ 0,283 + i * 16 ,16,16 });
 	}
 	groundMissile.anim.speed = 0.2f;
+	groundMissile.anim.loop = false;
+	
 
+	for (int j = 0; j < 2; ++j) {
+		 
+		for (int i = 0; i < 6; ++i) {
+			gM_explosion.anim.PushBack({ 131 + i* 32, j*32 ,32,32 });
+		}
+	}
+
+	gM_explosion.anim.PushBack({ 131, 2 * 32 ,32,32 });
+	gM_explosion.anim.PushBack({ 131 + 32, 2 * 32 ,32,32 });     
+	gM_explosion.anim.loop = false;
+	gM_explosion.anim.speed = 0.3f;
 
 	//Basic shot explosion--------------------------------------
 	unit_explosion.anim.PushBack({ 244, 263, 16, 16 });
