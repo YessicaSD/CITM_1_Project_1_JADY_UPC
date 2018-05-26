@@ -17,6 +17,7 @@ class Enemy
 public:
 	iPoint position;
 	iPoint speed;//Not all enemies use this parameter to move, but its very helpful for those who do
+	iPoint fixedPos;
 	POWERUP_TYPE powerUp_drop;
 	Animation* animation = nullptr;
 	Collider* collider = nullptr;
