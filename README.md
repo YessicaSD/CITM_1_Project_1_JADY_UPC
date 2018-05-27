@@ -59,8 +59,8 @@ and we will defeat all kinds of enemies.
 - **Left arrow**: Move left.
 - **Down arrow**: Move down.
 - **Right arrow**: Move right.
-- **Rigth Ctrl**: Shoot.
-- **Rigth Shift**: Lock the unit.
+- **Right Ctrl**: Shoot.
+- **Right Shift**: Lock the unit.
 
 #### Debug functionality
 ##### Basic:
