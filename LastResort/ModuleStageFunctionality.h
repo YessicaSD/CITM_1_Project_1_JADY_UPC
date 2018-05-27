@@ -39,22 +39,22 @@ public:
 	void GoToScene();
 
 public:
+	//Advanced debugger------------------------------------------------
+	debuggingElement debugElem = NOTHING;
+	//- Selected element
 	int selectedScene = 1;
 	int selectedCheckpoint = 0;
 	int selectedEnemy = 0;
 	int selectedPowerup = 0;
-
-	//Bools that indicate us if the player has pressed another letter before this one
+	//- Bools that indicate us if the player has pressed another letter before this one
 	bool pressedNumScene = false;
 	bool pressedNumCheckpoint = false;
 	bool pressedNumEnemy = false;
 	bool pressedNumPowerup = false;
-
-	//Bools that indicate us what is the last element you're debugging
-	debuggingElement debugElem = NOTHING;
-
+	//- Other
 	Module * currentStage = nullptr;
 
+	//Assets------------------------------------------------------------
 	//Textures
 	SDL_Texture* PlayerTexture = nullptr;
 	SDL_Texture* SpeedAnimationTex = nullptr;
@@ -63,6 +63,9 @@ public:
 	SFX chargeSFX;
 	SFX lockUnitSFX;
 	SFX unlockUnitSFX;
+
+	//Other-------------------------------------------------------------
+	bool godMode = false;
 };
 
 #endif // __ModuleStageFunctionality_H_H__

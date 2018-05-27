@@ -84,8 +84,6 @@ public:
 	bool laserPowerUp = false;
 	bool missilesPowerUp = false;
 	bool bombsPowerUp = false;
-	//-------Debug Modes--------------------------
-	bool godMode;
 
 	//Animations---------------------------------------------------------------//
 	enum PlayerAnimationState

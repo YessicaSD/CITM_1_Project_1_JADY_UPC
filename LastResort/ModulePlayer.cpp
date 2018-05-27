@@ -44,11 +44,13 @@ bool ModulePlayer::Start()
 
 	//position-----------------------------------------------------------------------
 	position = initPosition;//We set the position (before adding the collider) (note that the intial positions are set in Player1.h and Player2.h)
-							//variables----------------------------------------------------------------------
+							
+	//variables----------------------------------------------------------------------
 	playerAnimState = PlayerAnimationState::None;
-	godMode = false;
+
 	//audios-------------------------------------------------------------------------
 	init_sfx = App->audio->LoadSFX("Assets/initial_sfx.wav");
+
 	//collider-----------------------------------------------------------------------
 	if (isActive)
 		playerCol = App->collision->AddCollider({ position.x, position.y + 2, 24, 8 }, COLLIDER_TYPE::COLLIDER_IGNORE_HIT, this);
@@ -106,28 +108,7 @@ update_status ModulePlayer::Update()
 {
 	PlayerTexture = App->stageFunctionality->PlayerTexture;
 	SpeedAnimationTex = App->stageFunctionality->SpeedAnimationTex;
-	//Debug Modes----------------------------------------------------------------------
-	if (App->input->keyboard[SDL_SCANCODE_F1] == KEY_STATE::KEY_DOWN)
-	{
-		if (playerCol != nullptr)
-		{
-			if (godMode == true)
-			{
-				//Go back to normal
-				playerCol->type = COLLIDER_PLAYER;
-				SDL_SetTextureColorMod(PlayerTexture, 255, 255, 255);
-				godMode = false;
-			}
-			else
-			{
-				//Go to god mode
-				playerCol->type = COLLIDER_GOD;
-				SDL_SetTextureColorMod(PlayerTexture, 255, 255, 150);
-				godMode = true;
 
-			}
-		}
-	}
 	//Shots----------------------------------------------------------------------------
 	if (canMove == true) {
 		ShotInput();
@@ -285,7 +266,7 @@ void ModulePlayer::ShipAnimation()
 			if (invincibilityFrames < 0) {
 				isInvincible = false;
 				//We change the collider type when spawning if god mode is not active
-				if (godMode == false) { playerCol->type = COLLIDER_PLAYER; }
+				if (App->stageFunctionality->godMode == false) { playerCol->type = COLLIDER_PLAYER; }
 			}
 		}
 		else {
@@ -480,12 +461,11 @@ void ModulePlayer::MovementInput()
 
 void ModulePlayer::Winlvl()
 {
-	if (godMode == false)
+	if (App->stageFunctionality->godMode == false)
 	{
 		playerCol->type = COLLIDER_IGNORE_HIT;
-		godMode = true;
+		App->stageFunctionality->godMode = true;
 	}
-
 
 	canMove = false;
 	Winposition();
