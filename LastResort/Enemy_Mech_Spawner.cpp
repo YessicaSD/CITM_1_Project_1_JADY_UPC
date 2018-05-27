@@ -10,6 +10,7 @@ Enemy_Mech_Spawner::Enemy_Mech_Spawner(int x, int y, float hp, int scoreValue, P
 	{
 		spawned[i] = nullptr;
 	};
+
 	MechAppear.PushBack({ 0,0,0,0 });
 	MechAppear.PushBack({ 0,523,32,34 });
 	MechAppear.PushBack({ 32,523,32,34 });
