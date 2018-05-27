@@ -57,7 +57,7 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_PLAYER][COLLIDER_HIT_DETECTION_WALL] = false;
 	matrix[COLLIDER_PLAYER][COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_HIT_DETECTION_ENEMY] = false;
-	matrix[COLLIDER_PLAYER][COLLIDER_ENEMY_SHOT2] = false;
+	matrix[COLLIDER_PLAYER][COLLIDER_ENEMY_SHOT2] = true;
 
 
 	//Collider enemy light----------------------------------------------

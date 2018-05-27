@@ -20,7 +20,7 @@ void Particle_Missile::Move()
 	{
 		speed = { 0,-2 };
 		fixedPos += speed;
-		if (frameCount == 40)
+		if (frameCount == 20)
 			missileState = FOLLOW;
 		frameCount += 1;
 	}
@@ -42,6 +42,8 @@ void Particle_Missile::Move()
 				targetPlayerPos = { (float)App->player2->position.x,(float)App->player2->position.y };
 
 		}
+		targetPlayerPos.x += 20;
+		targetPlayerPos.y += 10;
 		speed.UnitVector(targetPlayerPos, position);
 		fixedPos.x += speed.x*2;
 		fixedPos.y += speed.y * 2;
