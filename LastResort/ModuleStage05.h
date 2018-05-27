@@ -9,9 +9,10 @@
 #include "MovPath.h"
 #include "SDL/include/SDL_timer.h"
 #include "Enemy_Middle_Asteroid.h"
+#include "ModuleAudio.h"
 
-#define SHIP_COLLIDERS_NUM 47//The number of colliders the ship is made of (see Docs>shipColliders.psd)
-
+#define SHIP_COLLIDERS_NUM 48//The number of colliders the ship is made of (see Docs>shipColliders.psd)
+#define CHECKPOIN_NUMBER 25
 
 typedef struct _Mix_Music Mix_Music;
 
@@ -30,8 +31,13 @@ public:
 
 	//Other functions
 	void RenderShipPart();
-
+	void UpdateShipColliders();
+	void FireballFrontShip();
 	void ResetValues();
+	void ShipRear();
+
+	//Draw things
+	void RenderShip();
 
 public:
 	//CheckPoint-----------------------------
@@ -39,6 +45,7 @@ public:
 	int start_time = 0;
 	int currentCheckPoint = 0;
 	int currentMov = 0;
+	bool reachedCheckpoint[24];
 
 	//Points----------------------------------
 	MovePath cameraMovement;

@@ -106,6 +106,7 @@ Module5lvlScene::Module5lvlScene()
 	shipCollidersRect[44] = {  863, 224,  51,  32 };
 	shipCollidersRect[45] = {  863, 256, 175,  21 };
 	shipCollidersRect[46] = {  863, 277, 158,  10 };
+	shipCollidersRect[47] = { 1257,  34, 105,  29 };
 }
 
 bool Module5lvlScene::Start()
@@ -141,7 +142,7 @@ bool Module5lvlScene::Start()
 	shipTx     = App->textures->Load("Assets/lvl5/background/ship.png");
 	tilemapTx  = App->textures->Load("Assets/lvl5/background/final.png");
 	shipPartTx = App->textures->Load("Assets/lvl5/background/ShipPart.png");
-	bossTx = App->textures->Load("Assets/lvl5/background/boss.png");
+	bossTx     = App->textures->Load("Assets/lvl5/background/boss.png");
 
 	//Music -----------------------------------------------------------------------------------------------------
 
@@ -230,7 +231,7 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(SHIP_MOTOR, 1119, 225);
 
 	//Colliders--------------------------------------------------------------------------------------------------
-	for(int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
+	for(int i = 0; i < SHIP_COLLIDERS_NUM - 1; ++i)
 	{
 		shipCollidersCol[i] = App->collision->AddCollider(
 		   {shipCollidersRect[i].x + (int)shipPos.x,
@@ -239,6 +240,13 @@ bool Module5lvlScene::Start()
 			shipCollidersRect[i].h },
 			COLLIDER_TYPE::COLLIDER_WALL);
 	}
+	//Different case (it is an enemy heavy type collider)
+	shipCollidersCol[47] = App->collision->AddCollider(
+	{ shipCollidersRect[47].x + (int)shipPos.x,
+		shipCollidersRect[47].y + (int)shipPos.y,
+		shipCollidersRect[47].w,
+		shipCollidersRect[47].h },
+		COLLIDER_TYPE::COLLIDER_ENEMY_HEAVY);
 
 	return ret;
 }
@@ -267,10 +275,9 @@ update_status Module5lvlScene::PreUpdate()
 
 update_status Module5lvlScene::Update()
 {
-	
 	//provisional-----------------------------
-
 	current_time = SDL_GetTicks() - start_time ;
+
 	if (App->input->keyboard[SDL_SCANCODE_E] == KEY_DOWN)
 	{
 		if (pauseCamera == false) {
@@ -281,14 +288,13 @@ update_status Module5lvlScene::Update()
 	}
 
 	
-	//Updates----------------------------------------------------------------------------------------------------//
-
+	//Updates----------------------------------------------------------------------------------------------------
 	//----------Update Points--------------------------------------------
+
 	if (pauseCamera == false)
 		backgroundPoint = cameraMovement.GetCurrentPosition();
 	else
 		backgroundPoint = cameraMovement.GetPosition();
-
 
 	shipPos = shipOffset - backgroundPoint;
 	tunnelPos = tunnelOffset - backgroundPoint;
@@ -297,63 +303,240 @@ update_status Module5lvlScene::Update()
 	spawnPos.x = (int)shipPos.x;
 	spawnPos.y = (int)shipPos.y;
 
-	//----------Update CheckPoint----------------------------------------
-
+	//- Update game checkpoints (there are only 2, one at the start of the game and the other at the beggining of the asteroids section)
 	if (cameraMovement.currentMov  > 21) 
 		currentCheckPoint = 1;
 	else 
 		currentCheckPoint = 0;
 
-	//----------Update Colliders-----------------------------------------
-
-	for (int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
+	//- The mega checkpoint switch--------------------------------------
+	LOG("Current check point %i", cameraMovement.currentMov);
+	switch(cameraMovement.currentMov)
 	{
-		shipCollidersCol[i]->SetPos(
-			shipCollidersRect[i].x + (int)shipPos.x,
-			shipCollidersRect[i].y + (int)shipPos.y);
+	case 0:
+		if(reachedCheckpoint[0] == false)
+		{
+			reachedCheckpoint[0] = true;
+		}
+		UpdateShipColliders();
+
+		break;
+	case 1:
+		if (reachedCheckpoint[1] == false)
+		{
+			reachedCheckpoint[1] = true;
+		}
+		UpdateShipColliders();
+
+		break;
+	case 2:
+		if (reachedCheckpoint[2] == false)
+		{
+			reachedCheckpoint[2] = true;
+		}
+		UpdateShipColliders();
+
+		break;
+	case 3:
+		if (reachedCheckpoint[3] == false)
+		{
+			reachedCheckpoint[3] = true;
+		}
+		UpdateShipColliders();
+		FireballFrontShip();
+
+		break;
+	case 4:
+		if (reachedCheckpoint[4] == false)
+		{
+			reachedCheckpoint[4] = true;
+		}
+		UpdateShipColliders();
+		FireballFrontShip();
+
+		break;
+	case 5:
+		if (reachedCheckpoint[5] == false)
+		{
+			reachedCheckpoint[5] = true;
+		}
+		UpdateShipColliders();
+
+		break;
+	case 6:
+		if (reachedCheckpoint[6] == false)
+		{
+			reachedCheckpoint[6] = true;
+		}
+		UpdateShipColliders();
+
+		break;
+	case 7:
+		if (reachedCheckpoint[7] == false)
+		{
+			reachedCheckpoint[7] = true;
+		}
+		UpdateShipColliders();
+
+		break;
+	case 8:
+		if (reachedCheckpoint[8] == false)
+		{
+			reachedCheckpoint[8] = true;
+		}
+		UpdateShipColliders();
+
+		break;
+	case 9:
+		if (reachedCheckpoint[9] == false)
+		{
+			reachedCheckpoint[9] = true;
+		}
+		UpdateShipColliders();
+
+		break;
+	case 10:
+		if (reachedCheckpoint[10] == false)
+		{
+			reachedCheckpoint[10] = true;
+		}
+		UpdateShipColliders();
+
+		break;
+	case 11:
+		if (reachedCheckpoint[11] == false)
+		{
+			reachedCheckpoint[11] = true;
+		}
+		UpdateShipColliders();
+
+		break;
+	case 12:
+		if (reachedCheckpoint[12] == false)
+		{
+			reachedCheckpoint[12] = true;
+		}
+		UpdateShipColliders();
+
+		break;
+	case 13:
+		if (reachedCheckpoint[13] == false)
+		{
+			reachedCheckpoint[13] = true;
+		}
+		UpdateShipColliders();
+
+		break;
+	case 14:
+		if (reachedCheckpoint[14] == false)
+		{
+			reachedCheckpoint[14] = true;
+		}
+		UpdateShipColliders();
+
+		break;
+	case 15:
+		if (reachedCheckpoint[15] == false)
+		{
+			reachedCheckpoint[15] = true;
+		}
+		UpdateShipColliders();
+
+		break;
+	case 16:
+		if (reachedCheckpoint[16] == false)
+		{
+			reachedCheckpoint[16] = true;
+		}
+		UpdateShipColliders();
+
+		break;
+	case 17:
+		if (reachedCheckpoint[17] == false)
+		{
+			reachedCheckpoint[17] = true;
+		}
+		UpdateShipColliders();
+
+		break;
+	case 18:
+		if (reachedCheckpoint[18] == false)
+		{
+			reachedCheckpoint[18] = true;
+		}
+		UpdateShipColliders();
+
+		break;
+	case 19:
+		if (reachedCheckpoint[19] == false)
+		{
+			reachedCheckpoint[19] = true;
+		}
+		UpdateShipColliders();
+
+		break;
+	case 20:
+		if (reachedCheckpoint[20] == false)
+		{
+			reachedCheckpoint[20] = true;
+		}
+		UpdateShipColliders();
+
+		break;
+	case 21:
+		if (reachedCheckpoint[21] == false)
+		{
+			reachedCheckpoint[21] = true;
+		}
+		UpdateShipColliders();
+
+		break;
+	case 22:
+		if (reachedCheckpoint[22] == false)
+		{
+			reachedCheckpoint[22] = true;
+			//Delete ship colliders
+			//Add final part colliders
+		}
+
+		break;
+	case 23:
+		if (reachedCheckpoint[23] == false)
+		{
+			reachedCheckpoint[23] = true;
+		}
+		//Update final part colliders
+
+		break;
+	case 24:
+		if (reachedCheckpoint[24] == false)
+		{
+			reachedCheckpoint[24] = true;
+		}
+		//Update final part colliders
+
+		break;
 	}
 
-	//Background----------------------------------------------------------------------------------------------------//
+	
 
-
-	//----------SpaceShip-------------------------------------------------
-
+	//Background---------------------------------------------------------
+	//----------SpaceShip------------------------------------------------
+	//----------Ship part------------------------------------------------
 	if (cameraMovement.currentMov <= 21)
 	{
-		App->render->Blit(shipTx, shipPos.x, shipPos.y, &shipRect);
+		RenderShip();
+		RenderShipPart();
+		ShipRear();
 	}
-	//----------Final Tilemap--------------------------------------------
 
+	//----------Final Tilemap--------------------------------------------
+	//----------Final Boss-----------------------------------------------
 	if (cameraMovement.currentMov > 21)
 	{
 		App->render->Blit(tilemapTx, tunnelPos.x, tunnelPos.y, &tunnelRect);
-	}
-
-	//----------Final Boss-----------------------------------------------
-
-	if (cameraMovement.currentMov > 21)
-	{
 		App->render->Blit(bossTx, bossPos.x, bossPos.y, &bossAnim.LoopAnimation());
 	}
-
-	//----------Ship part------------------------------------------------
-
-	RenderShipPart();
-
-	//----------Fireball front-------------------------------------------
-
-	if(fireballFrameCounter >= 72)
-	{
-		App->particles->AddParticle(App->particles->fireBall, { (float)spawnPos.x + 45, (float)spawnPos.y + 129 }, { -3, 0 }, App->particles->particlesTx, COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE, 0, PARTICLE_FOLLOW_BACKGROUND);
-		fireballFrameCounter = 0;
-	}
-	else
-	{
-		fireballFrameCounter++;
-	}
-	//----------Ship rear------------------------------------------------
-
-	App->render->Blit(shipPartTx, spawnPos.x + 1246, spawnPos.y + 15, &shipRearRect);
 
 	return UPDATE_CONTINUE;
 }
@@ -381,6 +564,11 @@ void Module5lvlScene::ResetValues()
 	fireballFrameCounter = 0;
 	redBatsKilled = 0;
 	rotatingTurretsKilled = 0;
+
+	for(int i = 0; i < CHECKPOIN_NUMBER; ++i)
+	{
+		reachedCheckpoint[i] = false;
+	}
 }
 
 void Module5lvlScene::RenderShipPart()
@@ -393,4 +581,37 @@ void Module5lvlScene::RenderShipPart()
 			shipPartPos.y += fallSpeed;
 		}
 	}
+}
+
+void Module5lvlScene::RenderShip()
+{
+	App->render->Blit(shipTx, shipPos.x, shipPos.y, &shipRect);
+}
+
+void Module5lvlScene::UpdateShipColliders()
+{
+	for (int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
+	{
+		shipCollidersCol[i]->SetPos(
+			shipCollidersRect[i].x + (int)shipPos.x,
+			shipCollidersRect[i].y + (int)shipPos.y);
+	}
+}
+
+void Module5lvlScene::FireballFrontShip()
+{
+	if (fireballFrameCounter >= 72)
+	{
+		App->particles->AddParticle(App->particles->fireBall, { (float)spawnPos.x + 45, (float)spawnPos.y + 129 }, { -3, 0 }, App->particles->particlesTx, COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE, 0, PARTICLE_FOLLOW_BACKGROUND);
+		fireballFrameCounter = 0;
+	}
+	else
+	{
+		fireballFrameCounter++;
+	}
+}
+
+void Module5lvlScene::ShipRear()
+{
+	App->render->Blit(shipPartTx, spawnPos.x + 1246, spawnPos.y + 15, &shipRearRect);
 }

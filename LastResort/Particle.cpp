@@ -35,9 +35,6 @@ Particle::Particle(Particle& sentParticle, fPoint position, fPoint speed, Uint32
 	{
 		this->collider = App->collision->AddCollider({ (int)this->position.x, (int)this->position.y ,this->anim.GetCurrentFrame().w, this->anim.GetFrame().h }, colType, (Module*)App->particles);
 	}
-
-
-
 }
 
 Particle::~Particle()

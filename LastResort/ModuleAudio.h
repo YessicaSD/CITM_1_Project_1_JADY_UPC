@@ -11,6 +11,13 @@
 
 typedef struct _Mix_Music Mix_Music;
 
+//This struct makes not repeating sfx easier
+struct SFX
+{
+	Mix_Chunk * sfx = nullptr;
+	bool hasPlayed = false;
+};
+
 enum Audio_State {
 	PLAY_AUDIO,
 	STOP_AUDIO, 

@@ -148,8 +148,8 @@ public:
 		currentMov = checkpoint;
 		movFinished = false;
 
-		for (int i = 0; i < checkpoint; ++i) {
-
+		for (int i = 0; i < checkpoint; ++i)
+		{
 			if (i == 0) {
 				position.x += (movements[i].finalPoint.x - originPoint.x);
 				position.y += (movements[i].finalPoint.y - originPoint.y);

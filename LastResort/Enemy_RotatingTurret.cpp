@@ -67,7 +67,7 @@ void Enemy_RotatingTurret::Move()
 	}
 
 	//- Calculate rotation
-	rotation = CalculateRotationToPoint(position, targetPlayerPos);
+	rotation = AbsoluteRotation(position, targetPlayerPos);
 
 	//- Shoot
 	if(frameCounter >= 122)
