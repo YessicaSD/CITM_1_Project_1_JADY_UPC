@@ -106,6 +106,7 @@ Module5lvlScene::Module5lvlScene()
 	shipCollidersRect[44] = {  863, 224,  51,  32 };
 	shipCollidersRect[45] = {  863, 256, 175,  21 };
 	shipCollidersRect[46] = {  863, 277, 158,  10 };
+	shipCollidersRect[47] = { 1257,  34, 105,  29 };
 }
 
 bool Module5lvlScene::Start()
@@ -141,7 +142,7 @@ bool Module5lvlScene::Start()
 	shipTx     = App->textures->Load("Assets/lvl5/background/ship.png");
 	tilemapTx  = App->textures->Load("Assets/lvl5/background/final.png");
 	shipPartTx = App->textures->Load("Assets/lvl5/background/ShipPart.png");
-	bossTx = App->textures->Load("Assets/lvl5/background/boss.png");
+	bossTx     = App->textures->Load("Assets/lvl5/background/boss.png");
 
 	//Music -----------------------------------------------------------------------------------------------------
 
@@ -230,7 +231,7 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(SHIP_MOTOR, 1119, 225);
 
 	//Colliders--------------------------------------------------------------------------------------------------
-	for(int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
+	for(int i = 0; i < SHIP_COLLIDERS_NUM - 1; ++i)
 	{
 		shipCollidersCol[i] = App->collision->AddCollider(
 		   {shipCollidersRect[i].x + (int)shipPos.x,
@@ -239,6 +240,13 @@ bool Module5lvlScene::Start()
 			shipCollidersRect[i].h },
 			COLLIDER_TYPE::COLLIDER_WALL);
 	}
+	//Different case (it is an enemy heavy type collider)
+	shipCollidersCol[47] = App->collision->AddCollider(
+	{ shipCollidersRect[47].x + (int)shipPos.x,
+		shipCollidersRect[47].y + (int)shipPos.y,
+		shipCollidersRect[47].w,
+		shipCollidersRect[47].h },
+		COLLIDER_TYPE::COLLIDER_ENEMY_HEAVY);
 
 	return ret;
 }
@@ -471,6 +479,8 @@ update_status Module5lvlScene::Update()
 		if (reachedCheckpoint[22] == false)
 		{
 			reachedCheckpoint[22] = true;
+			//Delete ship colliders
+			//Add final part colliders
 		}
 
 		break;
@@ -479,6 +489,7 @@ update_status Module5lvlScene::Update()
 		{
 			reachedCheckpoint[23] = true;
 		}
+		//Update final part colliders
 
 		break;
 	case 24:
@@ -486,6 +497,7 @@ update_status Module5lvlScene::Update()
 		{
 			reachedCheckpoint[24] = true;
 		}
+		//Update final part colliders
 
 		break;
 	}
@@ -536,6 +548,11 @@ void Module5lvlScene::ResetValues()
 	fireballFrameCounter = 0;
 	redBatsKilled = 0;
 	rotatingTurretsKilled = 0;
+
+	for(int i = 0; i < CHECKPOIN_NUMBER; ++i)
+	{
+		reachedCheckpoint[i] = false;
+	}
 }
 
 void Module5lvlScene::RenderShipPart()
