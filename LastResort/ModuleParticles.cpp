@@ -441,7 +441,7 @@ void ModuleParticles::InitParticleValues()
 	//Missile.anim.PushBack({ 198,246,15,8 }); //5 
 	//Missile.anim.PushBack({ 176,307,8,15 }); //6 //DOWN
 	//Missile.anim.PushBack({ 172,315,8,13 }); //7 
-	Missile.anim.speed = 0.5f;
+	Missile.anim.speed = 1.0f;
 	Missile.life = 5000;
 	Missile.collision_fx = &MissileExplosion;
 	
