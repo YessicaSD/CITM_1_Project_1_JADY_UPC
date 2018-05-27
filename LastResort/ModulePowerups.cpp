@@ -193,7 +193,7 @@ void ModulePowerups::OnCollision(Collider* c1, Collider* c2)
 				if (targetPlayer->powerupUpgrades == 1)
 				{
 					targetUnit->Enable();
-					targetUnit->playerToFollow = App->player1;
+					targetUnit->playerToFollow = targetPlayer;
 					targetUnit->position.x = targetPlayer->position.x + targetPlayer->playerCenter.x;
 					targetUnit->position.y = targetPlayer->position.y + targetPlayer->playerCenter.x;
 					targetUnit->power = 0;
