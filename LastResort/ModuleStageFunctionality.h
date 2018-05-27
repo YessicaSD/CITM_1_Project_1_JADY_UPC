@@ -3,16 +3,10 @@
 
 #include "Module.h"
 #include "Globals.h"
+#include "ModuleAudio.h"
 
 struct SDL_Texture;
 struct Mix_Chunk;
-
-//This struct makes not repeating sfx easier
-struct SFX
-{
-	Mix_Chunk * sfx = nullptr;
-	bool hasPlayed = false;
-};
 
 enum debuggingElement
 {
