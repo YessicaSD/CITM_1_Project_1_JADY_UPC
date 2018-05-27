@@ -107,7 +107,7 @@ void Particle_HMissile::Move()
 		distanceToTarget = largestPossibleDistance;
 
 		//Update enemy hit detection collider
-		if(collider != nullptr)
+		if(enemyDetectionCol != nullptr)
 		{
 			enemyDetectionCol->SetPos((int)position.x, (int)position.y - hitDetectionRect.h / 2);
 		}

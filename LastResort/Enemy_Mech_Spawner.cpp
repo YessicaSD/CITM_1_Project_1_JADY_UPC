@@ -59,21 +59,20 @@ void Enemy_Mech_Spawner::Move()
 
 	if (currentState == ANIMATION)
 	{
-		LOG("dentro de la animacion")
-			if ((int)animation->GetCurrentFrameNum() == 7)
+		if ((int)animation->GetCurrentFrameNum() == 7)
+		{
+			for (int i = 0; i < 3; ++i)
 			{
-				for (int i = 0; i < 3; ++i)
+				if (spawned[i] == nullptr)
 				{
-					if (spawned[i] == nullptr)
-					{
-						spawned[i] = App->enemies->InstaSpawn(ENEMY_TYPES::MECH, initialPosition.x, initialPosition.y);
-						break;
-					}
+					spawned[i] = App->enemies->InstaSpawn(ENEMY_TYPES::MECH, initialPosition.x, initialPosition.y);
+					break;
 				}
-				animation->current_frame = 0;
-				currentState = IDLE;
-				animation->speed = 0.0f;
 			}
+			animation->current_frame = 0;
+			currentState = IDLE;
+			animation->speed = 0.0f;
+		}
 	}
 
 
