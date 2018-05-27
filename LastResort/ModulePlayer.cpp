@@ -284,10 +284,11 @@ void ModulePlayer::ShipAnimation()
 			deathAnim.Reset();
 			playerAnimState = None;
 			PlayerDies();
-			playerCol->type = COLLIDER_IGNORE_HIT;
+			
 		}
 		else if (isDying)
 		{
+			playerCol->type = COLLIDER_IGNORE_HIT;
 			current_animation = &deathAnim.GetFrameEx();
 			App->render->Blit(PlayerTexture, position.x + 32 - current_animation->w, position.y + 6 - current_animation->h / 2, current_animation);
 		}

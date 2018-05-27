@@ -10,14 +10,10 @@
 
 ModuleAudio::ModuleAudio() : Module()
 {
-	
 	for (uint i = 0; i < MAX_MUSICS; ++i)
 		musics[i] = nullptr;
 	for (uint i = 0; i < MAX_SOUNDEFECTS; ++i)
 		sfx[i] = nullptr;
-
-	//musics = new Music[MAX_MUSICS];
-	//sfx = new Sfx[MAX_SOUNDEFECTS];
 }
 
 ModuleAudio::~ModuleAudio() {}
@@ -34,9 +30,12 @@ bool ModuleAudio::Init()
 		LOG("Could not initialize Mixer lib. Mix_Init: %s", Mix_GetError());
 		ret = false;
 	}
+
 	else {
-		Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
-		Mix_VolumeMusic(GENERAL_MUSIC_VOLUME);
+		if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) == 0)
+			Mix_VolumeMusic(GENERAL_MUSIC_VOLUME);
+		else
+			LOG("Could not Open Audio. Mix_Error: %s", Mix_GetError());
 	}
 
 
@@ -69,14 +68,12 @@ bool ModuleAudio::CleanUp()
 	for (uint i = 0; i < MAX_SOUNDEFECTS; ++i) {
 		if (sfx[i] != nullptr) {
 			Mix_FreeChunk(sfx[i]);
-			break;
 		}
 	}
 
 	for (uint i = 0; i < MAX_MUSICS; ++i) {
 		if (musics[i] != nullptr) {
 			Mix_FreeMusic(musics[i]);
-			break;
 		}
 	}
 
@@ -217,6 +214,7 @@ bool ModuleAudio::ControlSFX(Mix_Chunk* chunk, Audio_State state) {
 	for (uint i = 0; i < MAX_SOUNDEFECTS; ++i) {
 		if (sfx[i] == chunk) {
 			sfx_found = true;
+			break;
 		}
 	}
 

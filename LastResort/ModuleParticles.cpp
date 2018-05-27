@@ -455,4 +455,12 @@ void ModuleParticles::InitParticleValues()
 	MissileExplosion.anim.PushBack({ 179,280,31,29 });
 	MissileExplosion.anim.PushBack({ 210,281,29,27 });
 	MissileExplosion.anim.speed = 0.2f;
+
+	//Intergalactic fighter shot----------------------------------
+
+	i_f_Shot.anim.PushBack({ 90,0 ,48,6 });
+	i_f_Shot.anim.speed = 0.0f;
+	i_f_Shot.life = 5000;
+	i_f_Shot.anim.loop = false;
+
 }

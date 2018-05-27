@@ -6,7 +6,7 @@
 #include "SDL_mixer\include\SDL_mixer.h"
 
 #define MAX_MUSICS 8
-#define MAX_SOUNDEFECTS 20
+#define MAX_SOUNDEFECTS 50
 
 
 typedef struct _Mix_Music Mix_Music;

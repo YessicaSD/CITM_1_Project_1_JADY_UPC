@@ -6,14 +6,19 @@
 #include "Player2.h"
 #include "ModuleStage05.h"
 #include "MovPath.h"
+#include <stdlib.h>
 
 #define INTERGALACTIC_SPEED_FRAMES 30
 
 Enemy_Intergalactic_F::Enemy_Intergalactic_F(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t) : Enemy(x, y, hp, scoreValue, pu_t)
 {
+	shootFrames = rand() %120 + 120;
+
 	//Position--------------------------------------
+
 	fixedPos.x = x - App->stage05->spawnPos.x;
 	fixedPos.y = y - App->stage05->spawnPos.y;
+
 	//Movement--------------------------------------
 	enemyMov.originPoint = { -39, 50 };
 
@@ -27,6 +32,11 @@ Enemy_Intergalactic_F::Enemy_Intergalactic_F(int x, int y, float hp, int scoreVa
 
 	enemyMov.loop = true;
 	//Animations------------------------------------
+
+	shotAnim.PushBack({ 669, 96,16,16 });
+	shotAnim.PushBack({ 685 , 96,48,48 });
+	shotAnim.speed = 0.2;
+
 
 	for (int i = 0; i < 4; ++i) {
 		moveRAnim.PushBack({ 669 - i * 48, 48,48,48 });
@@ -124,8 +134,21 @@ void Enemy_Intergalactic_F::Move()
 		float_position.y = App->stage05->spawnPos.y + fixedPos.y + enemyMov.GetPosition().y;
 		float_position.x = App->stage05->spawnPos.x + fixedPos.x + enemyMov.GetPosition().x;
 
+		//Shots logic-----------------------------------------------------------------
 
+		if (currentFrames > shootFrames && currentFrames != -1) {
+			currentFrames = -1;
+			isShooting = true;
+			if (currentDir == RIGHT)
+				App->particles->AddParticle(App->particles->i_f_Shot, { (float)(position.x -24), (float)(position.y - 8) }, { 2.8f, 0.0f }, App->particles->particlesTx, COLLIDER_ENEMY_SHOT, 0, PARTICLE_FOLLOW_WORLD);
+			else
+				App->particles->AddParticle(App->particles->i_f_Shot, { (float)(position.x - 24), (float)(position.y -8) }, {- 2.8f, 0.0f }, App->particles->particlesTx, COLLIDER_ENEMY_SHOT, 0, PARTICLE_FOLLOW_WORLD);
+
+		}
+		else
+			++currentFrames;
 		break;
+
 	case ROTATE:
 		//Not move
 		break;
@@ -143,11 +166,29 @@ void Enemy_Intergalactic_F::Draw(SDL_Texture* sprites)
 	switch (currentState)
 	{
 	case MOVE:
-		if (currentDir == RIGHT)
+
+		if (currentDir == RIGHT) {
 			currentAnim = moveRAnim.LoopAnimation();
+		}
+			
 		else if (currentDir == LEFT) {
 			currentAnim = moveLAnim.LoopAnimation();
 		}
+
+		if (isShooting == true) {
+
+			if (currentDir == RIGHT)
+				App->render->BlitEx(sprites, position.x +16, position.y - 14, &shotAnim.GetFrameEx());
+			else
+				App->render->Blit(sprites, position.x - 32, position.y - 14, &shotAnim.GetFrameEx());
+
+			if (shotAnim.finished == true) {
+				shotAnim.Reset(); 
+				isShooting = false;
+				currentFrames = 0;
+			} 
+		}
+
 
 		break;
 	case ROTATE:

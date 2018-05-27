@@ -98,6 +98,7 @@ public:
 	Mix_Chunk* rocket = nullptr;
 
 	//- Enemies
+	Particle i_f_Shot;
 	Particle MiddleBossShot;
 	Particle MiddleBosExplotion;
 	Particle orangeBall;

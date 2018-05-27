@@ -4,7 +4,7 @@
 #include "ModuleRender.h"
 #include "ModuleStage05.h"
 #include <stdlib.h>
-#include <time.h>
+
 
 Enemy_Mech::Enemy_Mech(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t):Enemy(x, y, hp, scoreValue, pu_t)
 {

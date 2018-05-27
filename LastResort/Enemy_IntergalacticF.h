@@ -21,9 +21,13 @@ private:
 	Animation moveLAnim;
 	Animation rotateRAnim;
 	Animation rotateLAnim;
+	Animation shotAnim;
 
 	//Variables---------------------------
 	fPoint float_position;
+	int shootFrames;
+	int currentFrames = 0;
+	bool isShooting = false;
 
 	enum Direction {
 		NONE,

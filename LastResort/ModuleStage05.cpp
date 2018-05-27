@@ -237,6 +237,8 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(MISSILE_TURRET, 943, -3);
 	App->enemies->AddEnemy(MISSILE_TURRET, 975, -3);
 
+	App->enemies->AddEnemy(IF_SPAWNER, 735, 31);
+
 	App->enemies->AddEnemy(REAR_TURRET, 1357, 41);
 
 	App->enemies->AddEnemy(PINATA_SPAWNER, 1167, 144);
@@ -335,7 +337,7 @@ update_status Module5lvlScene::Update()
 		currentCheckPoint = 0;
 
 	//- The mega checkpoint switch--------------------------------------
-	LOG("Current check point %i", cameraMovement.currentMov);
+	/*LOG("Current check point %i", cameraMovement.currentMov);*/
 	switch(cameraMovement.currentMov)
 	{
 	case 0:
