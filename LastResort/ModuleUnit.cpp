@@ -396,11 +396,11 @@ void ModuleUnit::Rotating()
 	if(power > 0.1)
 	{
 		//Play the charging SFX
-		if(App->stageFunctionality->chargeSFX.hasPlayed == false)
-		{
-			App->audio->ControlSFX(App->stageFunctionality->chargeSFX.sfx, PLAY_AUDIO);
-			App->stageFunctionality->chargeSFX.hasPlayed = true;
-		}
+		//if(App->stageFunctionality->chargeSFX.hasPlayed == false)
+		//{
+		//	App->audio->ControlSFX(App->stageFunctionality->chargeSFX.sfx, PLAY_AUDIO);
+		//	App->stageFunctionality->chargeSFX.hasPlayed = true;
+		//}
 
 		//Play the charging animation
 		chargeFrame = chargeAnim.GetCurrentFrame();
@@ -425,7 +425,7 @@ void ModuleUnit::Rotating()
 		}
 		//If the player releases the button, we set the power to 0
 		power = 0;
-		App->stageFunctionality->chargeSFX.hasPlayed = false;
+		//App->stageFunctionality->chargeSFX.hasPlayed = false;
 	}
 }
 
@@ -819,7 +819,7 @@ void ModuleUnit::CheckReturnTime()
 
 void ModuleUnit::CheckPlayerClose()
 {
-	if(sqrt(pow(position.x - playerToFollow->position.x + playerToFollow->playerCenter.x, 2) + pow(position.y - playerToFollow->position.y + playerToFollow->playerCenter.y, 2)) < 20)//20 = distance to return
+	if(sqrt(pow(position.x - (playerToFollow->position.x + playerToFollow->playerCenter.x), 2) + pow(position.y - (playerToFollow->position.y + playerToFollow->playerCenter.y), 2)) < 20)//20 = distance to return
 	{
 		unitPhase = UnitPhase::returning;
 	}

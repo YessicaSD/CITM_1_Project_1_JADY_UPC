@@ -138,7 +138,7 @@ Particle* ModuleParticles::AddParticle(Particle& particle, fPoint position, fPoi
 				p = new Particle_Follow_background(particle, position, speed, delay, colType, tex);
 				break;
 			case PARTICLE_LASER:
-				p = new Particle_Laser(particle, position, speed, delay, colType, tex);
+				p = new Particle_EnemyLaser(particle, position, speed, delay, colType, tex);
 				break;
 			case PARTICLE_G_MISSILE:
 				p = new Particle_G_Missile(particle, position, speed, delay, colType, tex);
@@ -295,7 +295,7 @@ void ModuleParticles::InitParticleValues()
 	gM_explosion.anim.speed = 0.3f;
 
 	//H Missle particles----------------------------------------
-	hMissile.life = 2000;
+	hMissile.life = 4000;
 
 
 	//Basic shot explosion--------------------------------------

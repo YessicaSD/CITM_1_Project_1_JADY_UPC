@@ -5,12 +5,12 @@
 #include "Player1.h"
 #include "Player2.h"
 #include "ModuleAudio.h"
-Particle_Laser::Particle_Laser():Particle()
+Particle_EnemyLaser::Particle_EnemyLaser():Particle()
 {
 
 }
 
-Particle_Laser::Particle_Laser(Particle& p, fPoint position, fPoint speed, Uint32 delay, COLLIDER_TYPE colType, SDL_Texture* tex) : Particle(p, position, speed, delay, colType, tex)
+Particle_EnemyLaser::Particle_EnemyLaser(Particle& p, fPoint position, fPoint speed, Uint32 delay, COLLIDER_TYPE colType, SDL_Texture* tex) : Particle(p, position, speed, delay, colType, tex)
 {
 	if (App->player1->isActive == true && App->player2->isActive == false)
 	{
@@ -34,7 +34,7 @@ Particle_Laser::Particle_Laser(Particle& p, fPoint position, fPoint speed, Uint3
 		
 }
 
-void Particle_Laser:: Move()
+void Particle_EnemyLaser:: Move()
 {
 	if (going_up)
 	{
@@ -83,7 +83,7 @@ void Particle_Laser:: Move()
 	}
 };
 
-void Particle_Laser::Draw()
+void Particle_EnemyLaser::Draw()
 {
 	SDL_Rect currentFrame = anim.GetCurrentFrame();
 
