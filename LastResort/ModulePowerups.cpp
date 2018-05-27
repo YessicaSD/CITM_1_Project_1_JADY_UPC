@@ -195,9 +195,9 @@ void ModulePowerups::OnCollision(Collider* c1, Collider* c2)
 					targetUnit->Enable();
 					targetUnit->playerToFollow = targetPlayer;
 					targetUnit->position.x = targetPlayer->position.x + targetPlayer->playerCenter.x;
-					targetUnit->position.y = targetPlayer->position.y + targetPlayer->playerCenter.x;
+					targetUnit->position.y = targetPlayer->position.y + targetPlayer->playerCenter.y;
 					targetUnit->power = 0;
-					targetUnit->unitPhase == UnitPhase::positioning;
+					targetUnit->unitPhase = UnitPhase::returning;
 				}
 
 				//Change unit color
