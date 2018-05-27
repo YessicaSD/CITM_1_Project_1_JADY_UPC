@@ -5,6 +5,7 @@
 #include "ModuleStage05.h"
 Particle_Missile::Particle_Missile(Particle& p, fPoint position, fPoint speed, Uint32 delay, COLLIDER_TYPE colType, SDL_Texture* tex) :Particle(p, position, speed, delay, colType, tex)
 {
+	
 	fixedPos.x = position.x -(float)App->stage05->spawnPos.x ;
 	fixedPos.y = position.y -(float)App->stage05->spawnPos.y ;
 	
@@ -12,10 +13,13 @@ Particle_Missile::Particle_Missile(Particle& p, fPoint position, fPoint speed, U
 
 void Particle_Missile::Move() 
 {
+
+	
 	if (missileState == UP)
 	{
-		fixedPos.y -= 1;
-		if (frameCount == 50)
+		speed = { 0,-1 };
+		fixedPos += speed;
+		if (frameCount == 40)
 			missileState = FOLLOW;
 		frameCount += 1;
 	}
@@ -40,6 +44,11 @@ void Particle_Missile::Move()
 		speed.UnitVector(targetPlayerPos, position);
 		fixedPos += speed;
 
+	}
+
+	if (speed.y <= -0.9f && anim.GetCurrentFrameNum() > 3 || anim.GetCurrentFrameNum() < 2)
+	{
+		anim.current_frame = 2;
 	}
 
 	position.x = (float)App->stage05->spawnPos.x + fixedPos.x;
