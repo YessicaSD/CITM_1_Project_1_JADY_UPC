@@ -227,7 +227,7 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(PINATA_SPAWNER, 1167, 144);
 	App->enemies->AddEnemy(PINATA_SPAWNER, 1295, 144);
 
-	App->enemies->AddEnemy(SHIP_MOTOR, 1118, 160);
+	App->enemies->AddEnemy(SHIP_MOTOR, 1119, 225);
 
 	//Colliders--------------------------------------------------------------------------------------------------
 	for(int i = 0; i < SHIP_COLLIDERS_NUM; ++i)

@@ -322,6 +322,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 				//---Delete enemy---------------------------
 				enemies[i]->isDead = true;
 				enemies[i]->OnCollision(c2);
+
 				delete enemies[i];
 				enemies[i] = nullptr;
 			}

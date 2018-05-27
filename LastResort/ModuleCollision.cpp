@@ -109,7 +109,7 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_PLAYER_1_SHOT][COLLIDER_HIT_DETECTION_WALL] = false;
 	matrix[COLLIDER_PLAYER_1_SHOT][COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE] = false;
 	matrix[COLLIDER_PLAYER_1_SHOT][COLLIDER_HIT_DETECTION_ENEMY] = false;
-	matrix[COLLIDER_PLAYER_1_SHOT][COLLIDER_ENEMY_SHOT2] = false;
+	matrix[COLLIDER_PLAYER_1_SHOT][COLLIDER_ENEMY_SHOT2] = true;
 
 	//Collider player 2 shot--------------------------------------------
 	matrix[COLLIDER_PLAYER_2_SHOT][COLLIDER_IGNORE_HIT] = false;

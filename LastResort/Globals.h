@@ -38,7 +38,7 @@ typedef unsigned int uint;
 #define GENERAL_SFX_VOLUME 20 //0 to 100   //Optimum 20
 
 //----------Spawning----------------
-const int SPAWN_MARGIN_LEFT = 25;
+const int SPAWN_MARGIN_LEFT = 20;
 const int SPAWN_MARGIN_RIGHT = 20;
 const int SPAWN_MARGIN_UP = 20;
 const int SPAWN_MARGIN_DOWN = 10;

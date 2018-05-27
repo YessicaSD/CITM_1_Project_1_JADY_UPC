@@ -28,7 +28,7 @@ Enemy_Ship_Motor::Enemy_Ship_Motor(int x, int y, float hp, int scoreValue, POWER
 	Ship_Motor.loop = true;
 	animation = &Ship_Motor;
 	Ship_Part = {414,444,63,63};
-	collider = App->collision->AddCollider({ x, y, 57, 47 }, COLLIDER_TYPE::COLLIDER_IGNORE_HIT, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ x, y, 50, 40 }, COLLIDER_TYPE::COLLIDER_ENEMY_HEAVY, (Module*)App->enemies);
 	stateMotor = CLOSE;
 	
 	
@@ -71,22 +71,19 @@ void Enemy_Ship_Motor::Move()
 		}
 	}
 
-	if (hp == 0)
-	{
-		MissileLaunch->hp = 0;
-	}
+	
 
 }
 void Enemy_Ship_Motor::Draw(SDL_Texture* sprites) {
 
 
 	if (animation != nullptr)
-		App->render->Blit(sprites, position.x-Ship_Part.w, position.y +15  , &(animation->GetFrameEx()));
+		App->render->Blit(sprites, position.x-Ship_Part.w, position.y +15 - Ship_Part.h, &(animation->GetFrameEx()));
 	if (collider != nullptr)
-		collider->SetPos(position.x- Ship_Part.w, position.y + 10);
+		collider->SetPos(position.x- Ship_Part.w, position.y + 15 - Ship_Part.h);
 
 
-	App->render->Blit(sprites, position.x-Ship_Part.w, position.y, &Ship_Part);
+	App->render->Blit(sprites, position.x-Ship_Part.w, position.y - Ship_Part.h, &Ship_Part);
 
 	
 }
@@ -101,6 +98,11 @@ void Enemy_Ship_Motor::OnCollision(Collider* collider)
 	else
 		App->audio->ControlSFX(App->particles->g_explosion02_1sfx, PLAY_AUDIO);
 
-	
+	if (MissileLaunch != nullptr && MissileLaunch->isDead != true)
+	{
+		MissileLaunch->hp = 0;
+		//---Delete enemy---------------------------
+		App->particles->AddParticle(App->particles->littleRings, { (float)MissileLaunch->position.x,(float)MissileLaunch->position.y }, { 0,0 }, App->particles->explosionTx, COLLIDER_WALL);
+	}
 	
 }
