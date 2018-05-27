@@ -157,7 +157,7 @@ bool Module5lvlScene::Start()
 	//App->enemies->AddEnemy(PINATA, 130, 130);
 	//App->enemies->AddEnemy(OSCILATOR, 500, 0);
 
-
+	App->enemies->InstaSpawn(INTERGALACTIC_F, 300, 200);
 	
 
 	//- FINAL POSITION ENEMIES (in order of appearance on the level)
@@ -248,7 +248,7 @@ update_status Module5lvlScene::PreUpdate()
 	//----------Stars Scroll----------------------------------------------
 
 	scroll.x -= 10;
-	scroll.y += cameraMovement.GetCurrentPosition().VectU().y * 2;
+	scroll.y += cameraMovement.GetPosition().VectU().y * 2;
 	if (scroll.x <= -SCREEN_WIDTH)
 		scroll.x = 0;
 	if (scroll.y <= -SCREEN_HEIGHT)
@@ -261,6 +261,7 @@ update_status Module5lvlScene::PreUpdate()
 	App->render->Blit(starsTx, scroll.x, -scroll.y - SCREEN_HEIGHT, NULL);
 	App->render->Blit(starsTx, scroll.x + SCREEN_WIDTH, -scroll.y - SCREEN_HEIGHT, NULL);
 
+
 	return update_status::UPDATE_CONTINUE;
 };
 
@@ -270,13 +271,25 @@ update_status Module5lvlScene::Update()
 	//provisional-----------------------------
 
 	current_time = SDL_GetTicks() - start_time ;
+	if (App->input->keyboard[SDL_SCANCODE_E] == KEY_DOWN)
+	{
+		if (pauseCamera == false) {
+			pauseCamera = true;
+		}
+		else
+			pauseCamera = false;
+	}
 
 	
 	//Updates----------------------------------------------------------------------------------------------------//
 
 	//----------Update Points--------------------------------------------
+	if (pauseCamera == false)
+		backgroundPoint = cameraMovement.GetCurrentPosition();
+	else
+		backgroundPoint = cameraMovement.GetPosition();
 
-	backgroundPoint = cameraMovement.GetCurrentPosition();
+
 	shipPos = shipOffset - backgroundPoint;
 	tunnelPos = tunnelOffset - backgroundPoint;
 	bossPos = bossOffSet - backgroundPoint;

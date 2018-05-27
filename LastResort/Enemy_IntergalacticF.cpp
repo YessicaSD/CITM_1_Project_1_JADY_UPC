@@ -7,6 +7,7 @@
 #include "ModuleStage05.h"
 #include "MovPath.h"
 
+#define INTERGALACTIC_SPEED_FRAMES 30
 
 Enemy_Intergalactic_F::Enemy_Intergalactic_F(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t) : Enemy(x, y, hp, scoreValue, pu_t)
 {
@@ -14,34 +15,44 @@ Enemy_Intergalactic_F::Enemy_Intergalactic_F(int x, int y, float hp, int scoreVa
 	fixedPos.x = x - App->stage05->spawnPos.x;
 	fixedPos.y = y - App->stage05->spawnPos.y;
 	//Movement--------------------------------------
-	pinataMov.originPoint = { 0,0 };
-	pinataMov.PushBack({ 0,90 }, 150);
-	pinataMov.PushBack({ -10 ,85 }, 15);
+	enemyMov.originPoint = { 0,0 };
+
+	enemyMov.PushBack({ -39,50 }, INTERGALACTIC_SPEED_FRAMES);
+
+	enemyMov.PushBack({ -10,27 }, INTERGALACTIC_SPEED_FRAMES);
+
+	enemyMov.PushBack({  0 , 0 }, INTERGALACTIC_SPEED_FRAMES);
+
+	enemyMov.PushBack({ -10,-27 }, INTERGALACTIC_SPEED_FRAMES);
+
+	enemyMov.PushBack({ -39,-50 }, INTERGALACTIC_SPEED_FRAMES);
+
+	enemyMov.loop = true;
 	//Animations------------------------------------
-	moveRAnim.PushBack({ 0, 0,0,0 });   //1
-	moveRAnim.PushBack({ 0, 0,0,0 });   //2
-	moveRAnim.PushBack({ 0, 0,0,0 });   //3
+
+	for (int i = 0; i < 4; ++i) {
+		moveRAnim.PushBack({ 669 - i * 48, 48,48,48 });
+	}
 	moveRAnim.speed = 0.3f;
 
-	moveLAnim.PushBack({ 0, 0,0,0 });   //1
-	moveLAnim.PushBack({ 0, 0,0,0 });   //2
-	moveLAnim.PushBack({ 0, 0,0,0 });   //3
+	for (int i = 0; i < 4; ++i) {
+		moveLAnim.PushBack({ 669 - i * 48, 0,48,48 });
+	}
 	moveLAnim.speed = 0.3f;
 
-	rotateRAnim.PushBack({ 0, 0,0,0 }); //1
-	rotateRAnim.PushBack({ 0, 0,0,0 });  //2
-	rotateRAnim.PushBack({ 0, 0,0,0 });  //3
+	for (int i = 0; i < 3; ++i) {
+		rotateRAnim.PushBack({ 525 + i * 48, 96 ,48, 48 });
+	}
 	rotateRAnim.speed = 0.1f;
 
-	rotateLAnim.PushBack({ 0, 0,0,0 });  //1
-	rotateLAnim.PushBack({ 0, 0,0,0 });  //2
-	rotateLAnim.PushBack({ 0, 0,0,0 });  //2
-	rotateLAnim.PushBack({ 0, 0,0,0 });  //3
+	for (int i = 0; i < 3; ++i) {
+		rotateLAnim.PushBack({ 621 - i * 48, 96,48,48 });
+	}
 	rotateLAnim.speed = 0.1f;
 
 
 	//Add collider--------------------------------
-	collider = App->collision->AddCollider({ x, y, 32, 30 }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ x - 20, y- 20, 40, 40 }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
 }
 
 
@@ -90,7 +101,7 @@ void Enemy_Intergalactic_F::CheckDirection() {
 	if (lastDir == NONE) {
 		lastDir = currentDir;
 	}
-	else if (lastDir != currentDir && currentState != IDLE) {
+	else if (lastDir != currentDir ) {
 		currentState = ROTATE;
 		lastDir = currentDir;
 	}
@@ -110,10 +121,10 @@ void Enemy_Intergalactic_F::Move()
 		CheckTarget();
 		CheckDirection();
 
-		pinataMov.GetCurrentPosition();
-		float_position.y = App->stage05->spawnPos.y + fixedPos.y + pinataMov.GetPosition().y;
+		enemyMov.GetCurrentPosition();
 
-		float_position.x = App->stage05->spawnPos.x + fixedPos.x - pinataMov.GetPosition().x;
+		float_position.y = App->stage05->spawnPos.y + fixedPos.y + enemyMov.GetPosition().y;
+		float_position.x = App->stage05->spawnPos.x + fixedPos.x - enemyMov.GetPosition().x;
 
 
 		break;
@@ -127,10 +138,9 @@ void Enemy_Intergalactic_F::Move()
 void Enemy_Intergalactic_F::Draw(SDL_Texture* sprites)
 {
 	SDL_Rect currentAnim;
-	blitEx = false;
 
 	if (collider != nullptr)
-		collider->SetPos(position.x, position.y);
+		collider->SetPos(position.x - 20,  position.y - 20);
 
 	switch (currentState)
 	{
@@ -165,14 +175,8 @@ void Enemy_Intergalactic_F::Draw(SDL_Texture* sprites)
 		break;
 	}
 
-	////Check direction for flip blit or not----------------------------------
-	//if (currentDir == RIGHT)
-	//	blitEx = true;
-	//else
-	//	blitEx = false;
-
 	//Draw------------------------------------------------------------------
 
-	App->render->Blit(sprites, position.x, position.y, &currentAnim);
+	App->render->Blit(sprites, position.x - 24, position.y -24, &currentAnim);
 
 }

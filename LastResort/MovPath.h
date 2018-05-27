@@ -22,11 +22,17 @@ public:
 	dPoint originPoint;
 	int currentMov = 0;
 	bool movFinished = false;
+	bool loop = false;
+
 private:
 	Movements movements[MAX_MOVEMENTS];
 	int currentFrame = 0;
 	dPoint position;
 	uint last_mov = 0;
+	enum LoopState {
+		HEAD, 
+		RETURN
+	} state = HEAD;
 
 public:
 	MovePath() {}
@@ -71,25 +77,62 @@ public:
 
 	dPoint GetCurrentPosition()
 	{
-		//LOG("current frame :  %i", currentFrame);
-		//LOG("position : (%i,%i)", position.x, position.y);
+		movFinished = false;
 
-		if (currentFrame < movements[currentMov].frames)
+		switch (state)
 		{
-			movFinished = false;
-			position.x += movements[currentMov].speed.x;
-			position.y += movements[currentMov].speed.y;
-			++currentFrame;
+		case MovePath::HEAD:
+
+			if (currentFrame < movements[currentMov].frames)
+			{
+				position.x += movements[currentMov].speed.x;
+				position.y += movements[currentMov].speed.y;
+				++currentFrame;
+			}
+			else if (currentMov >= (int)last_mov) {
+				movFinished = true;
+
+				if (loop == true) {
+					movFinished = false;
+					state = RETURN;
+					currentFrame = 0;
+					currentMov = last_mov - 1;
+				}
+
+				return position;
+			}
+			else {
+				currentFrame = 0;
+				++currentMov;
+			}
+
+			break;
+		case MovePath::RETURN:
+
+			if (currentFrame < movements[currentMov].frames)
+			{
+				position.x -= movements[currentMov].speed.x;
+				position.y -= movements[currentMov].speed.y;
+				++currentFrame;
+			}
+			else if (currentMov > 0) {
+
+					state = HEAD;
+					currentFrame = 0;
+					currentMov =  0;
+			
+				return position;
+			}
+
+			else {
+				currentFrame = 0;
+				--currentMov;
+			}
+
+
+			break;
 		}
-		else if (currentMov >= (int)last_mov) {
-			movFinished = true;
-			return position;
-		}
-		else {
-			movFinished = false;
-			currentFrame = 0;
-			++currentMov;
-		}
+
 		return position;
 	}
 

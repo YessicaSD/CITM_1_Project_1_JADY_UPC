@@ -42,6 +42,7 @@ public:
 
 	//Points----------------------------------
 	MovePath cameraMovement;
+	bool pauseCamera = false;
 	dPoint backgroundPoint;//The position that we directly move with the path
 	dPoint shipPos;//We'll use this position to instantiate enemies. Position at which we blit the ship (see Docs>ship.psd). 
 	dPoint tunnelPos;

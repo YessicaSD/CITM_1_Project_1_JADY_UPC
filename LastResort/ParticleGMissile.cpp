@@ -234,17 +234,28 @@ void Particle_G_Missile::FtMovement() {
 
 void Particle_G_Missile::Draw()
 {
-	if (anim.finished) {
-		currentAnim = &anim.frames[4];
+	switch (state)
+	{
+	case thrown_State:
+		if (anim.finished) {
+			currentAnim = &anim.frames[4];
+		}
+		else {
+			currentAnim = &anim.GetFrameEx();
+		}
+
+		if (flipY == false)
+			App->render->Blit(texture, (int)position.x - 8, (int)position.y - 8, currentAnim);
+		else
+			App->render->BlitEx(texture, (int)position.x - 8, (int)position.y - 8, currentAnim, SDL_FLIP_VERTICAL);
+
+		break;
+
+	default:
+
+		break;
 	}
-	else {
-		currentAnim = &anim.GetFrameEx();
-	}
-	
-	if (flipY == false)
-		App->render->Blit(texture, (int)position.x - 8, (int)position.y - 8, currentAnim);
-	else 
-		App->render->BlitEx(texture, (int)position.x - 8, (int)position.y - 8, currentAnim, SDL_FLIP_VERTICAL);
+
 }
 
 void Particle_G_Missile::OnCollision(Collider* c1, Collider* c2)

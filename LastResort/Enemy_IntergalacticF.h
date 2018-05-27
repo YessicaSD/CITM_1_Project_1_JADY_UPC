@@ -24,22 +24,20 @@ private:
 
 	//Variables---------------------------
 	fPoint float_position;
+	iPoint fixedPos;
 	
 	enum Direction {
 		NONE,
 		RIGHT,
 		LEFT
-	} currentDir = NONE, lastDir = NONE;
+	} currentDir = RIGHT, lastDir = RIGHT;
 
 	enum MoveState {
-		IDLE,
 		MOVE,
 		ROTATE
-	} currentState = IDLE;
+	} currentState = MOVE;
 
-	MovePath pinataMov;
-
-	bool blitEx = false;
+	MovePath enemyMov;
 	ModulePlayer* currentTarget = nullptr;
 	ModulePlayer* lastTarget = nullptr;
 };
