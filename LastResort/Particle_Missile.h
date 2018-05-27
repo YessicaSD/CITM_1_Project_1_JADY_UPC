@@ -9,8 +9,8 @@ public:
 	
 	Particle_Missile(Particle&, fPoint, fPoint, Uint32, COLLIDER_TYPE colType, SDL_Texture* tex);
 	void Move();
-	/*void Draw();
-*/
+	void Draw();
+
 private:
 	fPoint targetPlayerPos;
 	int frameCount;
