@@ -18,9 +18,9 @@ void Particle_Missile::Move()
 	
 	if (missileState == UP)
 	{
-		speed = { 0,-1 };
+		speed = { 0,-2 };
 		fixedPos += speed;
-		if (frameCount == 40)
+		if (frameCount == 20)
 			missileState = FOLLOW;
 		frameCount += 1;
 	}
@@ -42,8 +42,11 @@ void Particle_Missile::Move()
 				targetPlayerPos = { (float)App->player2->position.x,(float)App->player2->position.y };
 
 		}
+		targetPlayerPos.x += 20;
+		targetPlayerPos.y += 10;
 		speed.UnitVector(targetPlayerPos, position);
-		fixedPos += speed;
+		fixedPos.x += speed.x*2;
+		fixedPos.y += speed.y * 2;
 
 	}
 
@@ -80,6 +83,11 @@ void Particle_Missile::Draw()
 		collider->SetMeasurements(currentFrame.w, currentFrame.h);
 	}
 
+	if(missileState == FOLLOW)
 	//Draw the particle
-	App->render->BlitEx(this->texture, (int)position.x - currentFrame.w / 2, (int)position.y - currentFrame.h / 2, &currentFrame, SDL_FLIP_NONE, (AbsoluteRotation({ (int)position.x, (int)position.y }, { (int)targetPlayerPos.x, (int)targetPlayerPos.y }))*180/PI);
+	App->render->BlitEx(this->texture, (int)position.x - currentFrame.w / 2, (int)position.y - currentFrame.h / 2, &anim.GetCurrentFrame(), SDL_FLIP_NONE, (AbsoluteRotation({ (int)position.x, (int)position.y }, { (int)targetPlayerPos.x, (int)targetPlayerPos.y }))*180/PI);
+	else
+	{
+		App->render->BlitEx(this->texture, (int)position.x - currentFrame.w / 2, (int)position.y - currentFrame.h / 2, &anim.GetCurrentFrame(), SDL_FLIP_NONE, -90);
+	}
 }

@@ -12,6 +12,7 @@
 #include "ModuleAudio.h"
 
 #define SHIP_COLLIDERS_NUM 48//The number of colliders the ship is made of (see Docs>shipColliders.psd)
+#define FINAL_COLLIDERS_NUM 13//The number of colliders the final part is made of (see Docs>finalPartColliders.psd)
 #define CHECKPOIN_NUMBER 25
 
 typedef struct _Mix_Music Mix_Music;
@@ -32,6 +33,7 @@ public:
 	//Other functions
 	void RenderShipPart();
 	void UpdateShipColliders();
+	void UpdateFinalColliders();
 	void FireballFrontShip();
 	void ResetValues();
 	void ShipRear();
@@ -45,7 +47,7 @@ public:
 	int start_time = 0;
 	int currentCheckPoint = 0;
 	int currentMov = 0;
-	bool reachedCheckpoint[24];
+	bool reachedCheckpoint[CHECKPOIN_NUMBER];
 
 	//Points----------------------------------
 	MovePath cameraMovement;
@@ -71,6 +73,9 @@ public:
 	//Spaceship colliders
 	Collider* shipCollidersCol[SHIP_COLLIDERS_NUM];
 	SDL_Rect shipCollidersRect[SHIP_COLLIDERS_NUM];
+	//Final part colliders
+	Collider* finalCollidersCol[FINAL_COLLIDERS_NUM];
+	SDL_Rect finalCollidersRect[FINAL_COLLIDERS_NUM];
 
 	//Textures---------------------------------
 	SDL_Texture * starsTx = nullptr;

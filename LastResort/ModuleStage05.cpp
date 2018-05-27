@@ -107,6 +107,20 @@ Module5lvlScene::Module5lvlScene()
 	shipCollidersRect[45] = {  863, 256, 175,  21 };
 	shipCollidersRect[46] = {  863, 277, 158,  10 };
 	shipCollidersRect[47] = { 1257,  34, 105,  29 };
+
+	finalCollidersRect[0]  = { 1414, 182,  95, 44 };
+	finalCollidersRect[1]  = { 1414, 362,  95, 44 };
+	finalCollidersRect[2]  = { 1446, 226,  49, 33 };
+	finalCollidersRect[3]  = { 1446, 329,  49, 33 };
+	finalCollidersRect[4]  = { 1509, 182, 946, 30 };
+	finalCollidersRect[5]  = { 1509, 376, 946, 30 };
+	finalCollidersRect[6]  = { 2112, 212,  61, 49 };
+	finalCollidersRect[7]  = { 2112, 327,  61, 49 };
+	finalCollidersRect[8]  = { 2320, 250, 135, 12 };
+	finalCollidersRect[9]  = { 2320, 326, 135, 12 };
+	finalCollidersRect[10] = { 2350, 212, 105, 38 };
+	finalCollidersRect[11] = { 2350, 338, 105, 38 };
+	finalCollidersRect[12] = { 2365, 262,  90, 64 };
 }
 
 bool Module5lvlScene::Start()
@@ -230,7 +244,7 @@ bool Module5lvlScene::Start()
 
 	App->enemies->AddEnemy(SHIP_MOTOR, 1119, 225);
 
-	//Colliders--------------------------------------------------------------------------------------------------
+	//Ship colliders-----------------------------------------------------------------------------------------
 	for(int i = 0; i < SHIP_COLLIDERS_NUM - 1; ++i)
 	{
 		shipCollidersCol[i] = App->collision->AddCollider(
@@ -247,6 +261,17 @@ bool Module5lvlScene::Start()
 		shipCollidersRect[47].w,
 		shipCollidersRect[47].h },
 		COLLIDER_TYPE::COLLIDER_ENEMY_HEAVY);
+
+	//Final colliders----------------------------------------------------------------------------------------
+	for (int i = 0; i < FINAL_COLLIDERS_NUM; ++i)
+	{
+		finalCollidersCol[i] = App->collision->AddCollider(
+		{ finalCollidersRect[i].x + (int)shipPos.x,
+			finalCollidersRect[i].y + (int)shipPos.y,
+			finalCollidersRect[i].w,
+			finalCollidersRect[i].h },
+			COLLIDER_TYPE::COLLIDER_WALL);
+	}
 
 	return ret;
 }
@@ -505,7 +530,7 @@ update_status Module5lvlScene::Update()
 		{
 			reachedCheckpoint[23] = true;
 		}
-		//Update final part colliders
+		UpdateFinalColliders();
 
 		break;
 	case 24:
@@ -514,6 +539,7 @@ update_status Module5lvlScene::Update()
 			reachedCheckpoint[24] = true;
 		}
 		//Update final part colliders
+		UpdateFinalColliders();
 
 		break;
 	}
@@ -595,6 +621,16 @@ void Module5lvlScene::UpdateShipColliders()
 		shipCollidersCol[i]->SetPos(
 			shipCollidersRect[i].x + (int)shipPos.x,
 			shipCollidersRect[i].y + (int)shipPos.y);
+	}
+}
+
+void Module5lvlScene::UpdateFinalColliders()
+{
+	for (int i = 0; i < FINAL_COLLIDERS_NUM; ++i)
+	{
+		finalCollidersCol[i]->SetPos(
+			finalCollidersRect[i].x + (int)shipPos.x,
+			finalCollidersRect[i].y + (int)shipPos.y);
 	}
 }
 
