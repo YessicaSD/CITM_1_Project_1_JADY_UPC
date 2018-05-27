@@ -385,8 +385,6 @@ bool Particle_G_Missile::CheckParticleDeath()
 }
 
 
-
-
 Particle_G_Missile::~Particle_G_Missile()
 {
 	if (collider != nullptr)

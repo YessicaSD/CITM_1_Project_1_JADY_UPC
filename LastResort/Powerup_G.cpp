@@ -19,8 +19,8 @@ Powerup_G::Powerup_G(int x, int y) : Powerup(x, y)
 	collider = App->collision->AddCollider({ 0, 0, 31, 16 }, COLLIDER_TYPE::COLLIDER_POWERUP, (Module*)App->powerups);
 }
 
-void Powerup_G::OnCollision(Collider* col, ModulePlayer* playerTarjet)
+void Powerup_G::OnCollision(Collider* col, ModulePlayer* targetPlayer)
 {
 	//Change powerup type---------------------------------------------------
-	playerTarjet->currentPowerUp = POWERUP_TYPE::GROUND;
+	targetPlayer->currentPowerUp = POWERUP_TYPE::GROUND;
 }
