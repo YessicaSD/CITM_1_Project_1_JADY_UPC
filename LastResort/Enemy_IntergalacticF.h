@@ -24,8 +24,7 @@ private:
 
 	//Variables---------------------------
 	fPoint float_position;
-	iPoint fixedPos;
-	
+
 	enum Direction {
 		NONE,
 		RIGHT,

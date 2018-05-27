@@ -28,7 +28,7 @@ private:
 	Movements movements[MAX_MOVEMENTS];
 	int currentFrame = 0;
 	dPoint position;
-	uint last_mov = 0;
+	int last_mov = 0;
 	enum LoopState {
 		HEAD, 
 		RETURN
@@ -83,13 +83,7 @@ public:
 		{
 		case MovePath::HEAD:
 
-			if (currentFrame < movements[currentMov].frames)
-			{
-				position.x += movements[currentMov].speed.x;
-				position.y += movements[currentMov].speed.y;
-				++currentFrame;
-			}
-			else if (currentMov >= (int)last_mov) {
+			if (currentMov >= last_mov) {
 				movFinished = true;
 
 				if (loop == true) {
@@ -101,6 +95,14 @@ public:
 
 				return position;
 			}
+
+			else if (currentFrame < movements[currentMov].frames)
+			{
+				position.x += movements[currentMov].speed.x;
+				position.y += movements[currentMov].speed.y;
+				++currentFrame;
+			}
+
 			else {
 				currentFrame = 0;
 				++currentMov;
@@ -108,28 +110,25 @@ public:
 
 			break;
 		case MovePath::RETURN:
+			if (currentMov < 0) {
 
-			if (currentFrame < movements[currentMov].frames)
+				state = HEAD;
+				currentFrame = 0;
+				currentMov = 0;
+
+				return position;
+			}
+			else if (currentFrame < movements[currentMov].frames)
 			{
 				position.x -= movements[currentMov].speed.x;
 				position.y -= movements[currentMov].speed.y;
 				++currentFrame;
-			}
-			else if (currentMov > 0) {
-
-					state = HEAD;
-					currentFrame = 0;
-					currentMov =  0;
-			
-				return position;
 			}
 
 			else {
 				currentFrame = 0;
 				--currentMov;
 			}
-
-
 			break;
 		}
 

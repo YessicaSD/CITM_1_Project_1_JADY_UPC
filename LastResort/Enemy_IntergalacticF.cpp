@@ -15,9 +15,7 @@ Enemy_Intergalactic_F::Enemy_Intergalactic_F(int x, int y, float hp, int scoreVa
 	fixedPos.x = x - App->stage05->spawnPos.x;
 	fixedPos.y = y - App->stage05->spawnPos.y;
 	//Movement--------------------------------------
-	enemyMov.originPoint = { 0,0 };
-
-	enemyMov.PushBack({ -39,50 }, INTERGALACTIC_SPEED_FRAMES);
+	enemyMov.originPoint = { -39, 50 };
 
 	enemyMov.PushBack({ -10,27 }, INTERGALACTIC_SPEED_FRAMES);
 
@@ -124,7 +122,7 @@ void Enemy_Intergalactic_F::Move()
 		enemyMov.GetCurrentPosition();
 
 		float_position.y = App->stage05->spawnPos.y + fixedPos.y + enemyMov.GetPosition().y;
-		float_position.x = App->stage05->spawnPos.x + fixedPos.x - enemyMov.GetPosition().x;
+		float_position.x = App->stage05->spawnPos.x + fixedPos.x + enemyMov.GetPosition().x;
 
 
 		break;
