@@ -3,16 +3,16 @@
 
 #include "Particle.h"
 #define PLAYER_Y 6
-class Particle_Laser : public Particle
+class Particle_EnemyLaser : public Particle
 {
 public:
-	Particle_Laser();
+	Particle_EnemyLaser();
 	/*~Particle_Laser() {
 
 		if (collider != nullptr)
 			collider->to_delete = true;
 	};*/
-	Particle_Laser(Particle&, fPoint, fPoint, Uint32, COLLIDER_TYPE colType, SDL_Texture* tex);
+	Particle_EnemyLaser(Particle&, fPoint, fPoint, Uint32, COLLIDER_TYPE colType, SDL_Texture* tex);
 	void Move();
 	void Draw();
 
