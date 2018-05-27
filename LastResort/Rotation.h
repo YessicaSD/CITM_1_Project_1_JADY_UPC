@@ -54,7 +54,7 @@ float const angleValue[16]
 };
 
 void LimitRotation(float &);
-float CalculateRotationToPoint(iPoint, iPoint);
+float AbsoluteRotation(iPoint, iPoint);
 void RotateTo(float, float&, float);//Increases a rotation until it reaches its target rotation
 int GetNearestAngle(float); //Returns one of the 16 enum values corresponding to the angle it is
 

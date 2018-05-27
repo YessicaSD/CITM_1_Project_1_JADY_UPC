@@ -20,7 +20,7 @@ void LimitRotation(float &rotation)
 
 //This function calculates the rotation to a point, from an origin position
 //Returns -1 if the targetPos is the same as origin
-float CalculateRotationToPoint(iPoint originPos, iPoint targetPos)
+float AbsoluteRotation(iPoint originPos, iPoint targetPos)
 {
 	//Fist quadrant
 	if (targetPos.x > originPos.x && targetPos.y > originPos.y)
