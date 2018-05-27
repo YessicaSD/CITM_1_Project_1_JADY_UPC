@@ -68,12 +68,14 @@ bool ModuleAudio::CleanUp()
 	for (uint i = 0; i < MAX_SOUNDEFECTS; ++i) {
 		if (sfx[i] != nullptr) {
 			Mix_FreeChunk(sfx[i]);
+			sfx[i] = nullptr;
 		}
 	}
 
 	for (uint i = 0; i < MAX_MUSICS; ++i) {
 		if (musics[i] != nullptr) {
 			Mix_FreeMusic(musics[i]);
+			musics[i] = nullptr;
 		}
 	}
 
@@ -180,6 +182,7 @@ bool ModuleAudio::ControlMUS(Mix_Music* music, Audio_State state) {
 	for (uint i = 0; i <MAX_MUSICS ; ++i) {
 		if (musics[i] == music) {
 			music_found = true;
+			break;
 		}
 	}
 	

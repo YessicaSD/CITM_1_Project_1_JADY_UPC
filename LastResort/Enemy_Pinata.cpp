@@ -32,7 +32,7 @@ Enemy_Pinata::Enemy_Pinata(int x, int y, float hp, int scoreValue, POWERUP_TYPE 
 	initAnim.PushBack({ 223, 138,40,38 });  //2
 	initAnim.speed = 0.1f;
 	//Add collider--------------------------------
-	collider = App->collision->AddCollider({ x, y, 32, 30 }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ x-14 , y-14, 28, 28 }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
 }
 
 
@@ -150,7 +150,7 @@ void Enemy_Pinata::Draw(SDL_Texture* sprites)
 	blitEx = false;
 
 	if (collider != nullptr)
-		collider->SetPos(position.x , position.y );
+		collider->SetPos(position.x -14 , position.y -14 );
 
 	switch (currentState)
 	{
@@ -188,10 +188,10 @@ void Enemy_Pinata::Draw(SDL_Texture* sprites)
 
 	//Draw------------------------------------------------------------------
 	if (!blitEx) {
-		App->render->Blit(sprites, position.x, position.y, &currentAnim);
+		App->render->Blit(sprites, position.x - 16, position.y - 15, &currentAnim);
 	}
 	else {
-		App->render->BlitEx(sprites, position.x, position.y, &currentAnim, SDL_FLIP_HORIZONTAL);
+		App->render->BlitEx(sprites, position.x- 16, position.y -16, &currentAnim, SDL_FLIP_HORIZONTAL);
 	}
 		
 

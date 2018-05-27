@@ -26,7 +26,7 @@ Enemy_Pinata_Spawner::Enemy_Pinata_Spawner(int x, int y, float hp, int scoreValu
 	openAnim.PushBack({ 156,81,64,19 });
 	openAnim.speed = 0.1f;
 	//Add collider----------------------------------------
-	collider = App->collision->AddCollider({ x, y, 32, 16 }, COLLIDER_TYPE::COLLIDER_ENEMY_HEAVY, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ x, y, 64, 19 }, COLLIDER_TYPE::COLLIDER_ENEMY_HEAVY, (Module*)App->enemies);
 
 }
 
@@ -62,7 +62,7 @@ void Enemy_Pinata_Spawner::Move()
 		{
 			if (spawned[i] == nullptr)
 			{
-				spawned[i] = App->enemies->InstaSpawn(PINATA, position.x, position.y);
+				spawned[i] = App->enemies->InstaSpawn(PINATA, position.x +32, position.y +10);
 				spawnFrames = 0;
 				break;
 			}

@@ -34,7 +34,7 @@ Enemy_Intergalactic_F::Enemy_Intergalactic_F(int x, int y, float hp, int scoreVa
 	//Animations------------------------------------
 
 	shotAnim.PushBack({ 669, 96,16,16 });
-	shotAnim.PushBack({ 685 , 96,48,48 });
+	shotAnim.PushBack({ 685 , 96,16,16 });
 	shotAnim.speed = 0.2;
 
 
@@ -140,9 +140,9 @@ void Enemy_Intergalactic_F::Move()
 			currentFrames = -1;
 			isShooting = true;
 			if (currentDir == RIGHT)
-				App->particles->AddParticle(App->particles->i_f_Shot, { (float)(position.x -24), (float)(position.y - 8) }, { 2.8f, 0.0f }, App->particles->particlesTx, COLLIDER_ENEMY_SHOT, 0, PARTICLE_FOLLOW_WORLD);
+				App->particles->AddParticle(App->particles->i_f_Shot, { (float)(position.x -24), (float)(position.y - 8) }, { 2.8f, 0.0f }, App->particles->particlesTx, COLLIDER_ENEMY_SHOT2, 0, PARTICLE_FOLLOW_WORLD);
 			else
-				App->particles->AddParticle(App->particles->i_f_Shot, { (float)(position.x - 24), (float)(position.y -8) }, {- 2.8f, 0.0f }, App->particles->particlesTx, COLLIDER_ENEMY_SHOT, 0, PARTICLE_FOLLOW_WORLD);
+				App->particles->AddParticle(App->particles->i_f_Shot, { (float)(position.x - 24), (float)(position.y -8) }, {- 2.8f, 0.0f }, App->particles->particlesTx, COLLIDER_ENEMY_SHOT2, 0, PARTICLE_FOLLOW_WORLD);
 
 		}
 		else
