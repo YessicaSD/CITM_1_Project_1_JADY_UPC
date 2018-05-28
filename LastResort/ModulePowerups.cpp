@@ -54,22 +54,6 @@ update_status ModulePowerups::LogicUpdate()
 			}
 		}
 	}
-	return UPDATE_CONTINUE;
-}
-
-update_status ModulePowerups::RenderUpdate2()
-{
-	//Render the powerups
-	for (uint i = 0; i < MAX_POWERUPS; ++i)
-	{
-		if (powerups[i] != nullptr)
-		{
-			if (powerups[i]->animation != nullptr)
-			{
-				App->render->Blit(powerupTx, powerups[i]->position.x, powerups[i]->position.y, &powerups[i]->animation->GetCurrentFrame());
-			}
-		}
-	}
 
 	//Check camera position to decide what to despawn
 	for (uint i = 0; i < MAX_POWERUPS; ++i)
@@ -84,6 +68,23 @@ update_status ModulePowerups::RenderUpdate2()
 				LOG("DeSpawning powerup at x: %d, y: %d", powerups[i]->position.x, powerups[i]->position.y);
 				delete powerups[i];
 				powerups[i] = nullptr;
+			}
+		}
+	}
+
+	return UPDATE_CONTINUE;
+}
+
+update_status ModulePowerups::RenderUpdate2()
+{
+	//Render the powerups
+	for (uint i = 0; i < MAX_POWERUPS; ++i)
+	{
+		if (powerups[i] != nullptr)
+		{
+			if (powerups[i]->animation != nullptr)
+			{
+				App->render->Blit(powerupTx, powerups[i]->position.x, powerups[i]->position.y, &powerups[i]->animation->GetCurrentFrame());
 			}
 		}
 	}
