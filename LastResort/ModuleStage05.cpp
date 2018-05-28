@@ -163,6 +163,9 @@ bool Module5lvlScene::Start()
 	lvl5Music = App->audio->LoadMUS("Assets/lvl5/07-DON-T-TOUCH-ME-BABY-STAGE-5-1-_-FEAR-STAGE-5-2-_-LEGE.ogg");
 	App->audio->ControlAudio(lvl5Music, PLAY_AUDIO);
 
+	fallShipPartSFX.sfx = App->audio->LoadSFX("Assets/lvl5/background/shipPartFalling.wav");
+
+
 	//Enemies ---------------------------------------------------------------------------------------------------
 	//INFO: We'll calculate the x and y positions based on the position of the ship in Docs>ship.psd
 	//- TEST ENEMIES
@@ -576,6 +579,7 @@ bool Module5lvlScene::CleanUp() {
 	//audios------------------------------------------------------------------------
 	App->audio->ControlAudio(lvl5Music, STOP_AUDIO);
 	App->audio->UnloadMUS(lvl5Music);
+	App->audio->UnloadSFX(fallShipPartSFX.sfx);
 	//Texture -----------------------------------------------------------------------
 	App->textures->Unload(starsTx);
 	App->textures->Unload(shipTx);
@@ -602,13 +606,15 @@ void Module5lvlScene::ResetValues()
 
 void Module5lvlScene::RenderShipPart()
 {
-	if(spawnPos.y + shipPartPos.y< SCREEN_HEIGHT && spawnPos.x + shipPartPos.x > 0)
+	App->render->Blit(shipPartTx, spawnPos.x + shipPartPos.x, spawnPos.y + shipPartPos.y, &shipPartRect);
+	if (rotatingTurretsKilled >= 5)
 	{
-		App->render->Blit(shipPartTx, spawnPos.x + shipPartPos.x, spawnPos.y + shipPartPos.y, &shipPartRect);
-		if (rotatingTurretsKilled >= 5)
+		if (fallShipPartSFX.hasPlayed == false)
 		{
-			shipPartPos.y += fallSpeed;
+			App->audio->ControlAudio(fallShipPartSFX.sfx, PLAY_AUDIO);
+			fallShipPartSFX.hasPlayed = true;
 		}
+		shipPartPos.y += fallSpeed;
 	}
 }
 

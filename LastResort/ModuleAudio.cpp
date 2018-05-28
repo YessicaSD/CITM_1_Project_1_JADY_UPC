@@ -34,7 +34,7 @@ bool ModuleAudio::Init()
 	else {
 		Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
 		Mix_VolumeMusic(GENERAL_MUSIC_VOLUME);
-		Mix_AllocateChannels(16);
+		
 	}
 
 
@@ -113,7 +113,7 @@ Mix_Chunk*  ModuleAudio::LoadSFX(const char* path) {
 	Mix_Chunk *chunk = nullptr;
 	chunk = Mix_LoadWAV(path);
 
-	if (chunk != nullptr)
+	if (chunk != NULL)
 	{
 		for (int i = 0; i < MAX_SOUNDEFECTS; ++i)
 		{
@@ -135,36 +135,42 @@ Mix_Chunk*  ModuleAudio::LoadSFX(const char* path) {
 void ModuleAudio::UnloadMUS(Mix_Music * music) {
 
 
-	if (music != nullptr)
+	bool unloaded = false;
+
+	for (int i = 0; i < MAX_MUSICS; ++i)
 	{
-		for (int i = 0; i < MAX_MUSICS; ++i)
+		if (musics[i] == music && music != nullptr)
 		{
-			if (musics[i] == music)
-			{
-				Mix_FreeMusic(music);
-				musics[i] = nullptr;
-				break;
-			}
+			Mix_FreeMusic(music);
+			musics[i] = nullptr;
+			unloaded = true;
+			break;
 		}
 	}
+
+	if (unloaded == false) {
+		LOG("Cannot unload music Error: Music Not Found");
+	}
+
 }
 
 void ModuleAudio::UnloadSFX(Mix_Chunk * sound_fx) {
 
+	bool unloaded = false;
 
-	bool ret = false;
-
-	if (sound_fx != nullptr)
+	for (int i = 0; i < MAX_MUSICS; ++i)
 	{
-		for (int i = 0; i < MAX_MUSICS; ++i)
+		if (sfx[i] == sound_fx && sound_fx != nullptr)
 		{
-			if (sfx[i] == sound_fx)
-			{
-				Mix_FreeChunk(sound_fx);
-				sfx[i] = nullptr;
-				break;
-			}
+			Mix_FreeChunk(sound_fx);
+			sfx[i] = nullptr;
+			unloaded = true;
+			break;
 		}
+	}
+
+	if (unloaded == false) {
+		LOG("Cannot unload sfx Error: Music Not Found");
 	}
 }
 
@@ -172,8 +178,8 @@ void ModuleAudio::UnloadSFX(Mix_Chunk * sound_fx) {
 void ModuleAudio::ControlAudio(Mix_Music* music, Audio_State state) {
 
 
-
 	for (uint i = 0; i < MAX_MUSICS; ++i) {
+
 		if (musics[i] == music && music != nullptr) {
 
 			switch (state)
@@ -189,8 +195,9 @@ void ModuleAudio::ControlAudio(Mix_Music* music, Audio_State state) {
 					Mix_PauseMusic();
 				break;
 			}
+			break;
 		}
-		break;
+		
 	}
 }
 
@@ -215,6 +222,7 @@ void ModuleAudio::ControlAudio(Mix_Chunk* chunk, Audio_State state) {
 
 				break;
 			}
+			break;
 		}
 	}
 }
