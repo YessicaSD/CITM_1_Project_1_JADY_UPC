@@ -68,6 +68,8 @@ and we will defeat all kinds of enemies.
 - **F2**: Show collision boxes.
 - **F3**: Pause/Play game.
 - **F4**: Frame forward (only when the game is paused).
+- **F9**: Show / Hide back layer
+- **F10**: Show / Hide middle layer
 
 ##### Camera:
 - **Numpad 7**: Zoom in.
