@@ -91,6 +91,7 @@ public:
 	//Music-----------------------------------
 	Music* lvl5Music = nullptr;
 	Sfx * fallShipPartSFX;
+	Sfx * fireballSFX;
 
 	//Ship part front-------------------------
 	SDL_Rect shipPartRect = { 2, 0, 251, 96 };

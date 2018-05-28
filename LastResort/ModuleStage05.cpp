@@ -151,7 +151,6 @@ bool Module5lvlScene::Start()
 	ResetValues();
 
 	//Texture ---------------------------------------------------------------------------------------------------
-
 	starsTx    = App->textures->Load("Assets/lvl5/background/backgroundstars.png");
 	shipTx     = App->textures->Load("Assets/lvl5/background/ship.png");
 	tilemapTx  = App->textures->Load("Assets/lvl5/background/final.png");
@@ -159,11 +158,11 @@ bool Module5lvlScene::Start()
 	bossTx     = App->textures->Load("Assets/lvl5/background/boss.png");
 
 	//Music -----------------------------------------------------------------------------------------------------
-
-	lvl5Music = App->audio->LoadMUS("Assets/lvl5/07-DON-T-TOUCH-ME-BABY-STAGE-5-1-_-FEAR-STAGE-5-2-_-LEGE.ogg");
-	App->audio->ControlAudio(lvl5Music, PLAY_AUDIO);
-
+	lvl5Music       = App->audio->LoadMUS("Assets/lvl5/07-DON-T-TOUCH-ME-BABY-STAGE-5-1-_-FEAR-STAGE-5-2-_-LEGE.ogg");
 	fallShipPartSFX = App->audio->LoadSFX("Assets/lvl5/background/shipPartFalling.wav");
+	fireballSFX     = App->audio->LoadSFX("Assets/lvl5/background/Fireball.wav");
+
+	App->audio->ControlAudio(lvl5Music, PLAY_AUDIO);
 
 
 	//Enemies ---------------------------------------------------------------------------------------------------
@@ -580,6 +579,7 @@ bool Module5lvlScene::CleanUp() {
 	App->audio->ControlAudio(lvl5Music, STOP_AUDIO);
 	App->audio->UnloadMUS(lvl5Music);
 	App->audio->UnloadSFX(fallShipPartSFX);
+	App->audio->UnloadSFX(fireballSFX);
 	//Texture -----------------------------------------------------------------------
 	App->textures->Unload(starsTx);
 	App->textures->Unload(shipTx);
@@ -649,6 +649,7 @@ void Module5lvlScene::FireballFrontShip()
 	if (fireballFrameCounter >= 72)
 	{
 		App->particles->AddParticle(App->particles->fireBall, { (float)spawnPos.x + 45, (float)spawnPos.y + 129 }, { -3, 0 }, App->particles->particlesTx, COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE, 0, PARTICLE_FOLLOW_BACKGROUND);
+		App->audio->ControlAudio(fireballSFX, PLAY_AUDIO);
 		fireballFrameCounter = 0;
 	}
 	else
