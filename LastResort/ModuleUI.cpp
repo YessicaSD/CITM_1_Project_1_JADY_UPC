@@ -53,11 +53,16 @@ bool ModuleUI::CleanUp() {
 	return true;
 }
 
-update_status  ModuleUI::InputUpdate() { 
+update_status  ModuleUI::InputUpdate()
+{ 
 
 	return update_status::UPDATE_CONTINUE;
 }
 
+update_status ModuleUI::LogicUpdate()
+{
+	return update_status::UPDATE_CONTINUE;
+}
 
 update_status ModuleUI::RenderUpdate2()
 {

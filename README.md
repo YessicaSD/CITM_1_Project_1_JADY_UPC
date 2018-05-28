@@ -86,7 +86,7 @@ and we will defeat all kinds of enemies.
 ##### Advanced:
 How to use advanced debugging?
 1. DEBUG:
-   - Release the **F5** key to go to a stage.
+   - Release the **F5** key to go to a scene.
    - Release the **F6** key to go to a checkpoint.
    - Release the **F7** key to spawn an enemy in front of the player's 1 ship.
    - Release the **F8** key to spawn a powerup in front of the player's 1 ship.
@@ -96,7 +96,7 @@ How to use advanced debugging?
    - **Hold F7** to select enemies, and **type the number** of the enemy you want to spawn in front of the player's 1 ship (see debug enemies table).
    - **Hold F8** to select powerups, and **type the number** of the powerup you want to spawn in front of the player's 1 ship (see debug powerups table).
 
-###### Stages debug table:
+###### Scenes debug table:
 	- 1: Stage 1
 	- 2: Stage 2
 	- 5: Stage 5

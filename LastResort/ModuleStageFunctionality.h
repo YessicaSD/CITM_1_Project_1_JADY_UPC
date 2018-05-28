@@ -53,11 +53,11 @@ public:
 	SDL_Texture* PlayerTexture = nullptr;
 	SDL_Texture* SpeedAnimationTex = nullptr;
 	//SFX
-	Sfx * releaseChargeSFX;
-	Sfx * chargeSFX;
-	Sfx * lockUnitSFX;
-	Sfx * unlockUnitSFX;
-	Sfx * bounceUnitSFX;
+	Sfx * releaseChargeSFX = nullptr;
+	Sfx * chargeSFX = nullptr;
+	Sfx * lockUnitSFX = nullptr;
+	Sfx * unlockUnitSFX = nullptr;
+	Sfx * bounceUnitSFX = nullptr;
 	Sfx* init_sfx = nullptr;
 
 	//Other-------------------------------------------------------------
