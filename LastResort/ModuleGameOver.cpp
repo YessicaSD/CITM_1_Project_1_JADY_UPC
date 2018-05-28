@@ -96,7 +96,8 @@ update_status ModuleGameOver::LogicUpdate() {
 	if (current_time >= 0 && current_time < 1400) {
 
 		SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, (int)blackAlpha);
-		SDL_RenderFillRect(App->render->renderer, &black_rect);
+		App->render->DrawQuad( black_rect, 0, 0, 0,(int)blackAlpha );
+		//SDL_RenderFillRect(App->render->renderer, &black_rect);//Previous
 		blackAlpha = MAX_ALPHA - (current_time) / (1400 / 255);
 		if (blackAlpha < MIN_ALPHA) {
 			blackAlpha = MIN_ALPHA;
@@ -106,7 +107,8 @@ update_status ModuleGameOver::LogicUpdate() {
 	if (current_time >= 1400 && current_time < 2800) {
 		SDL_SetRenderDrawBlendMode(App->render->renderer, SDL_BLENDMODE_ADD);
 		SDL_SetRenderDrawColor(App->render->renderer, 255, 255, 255, (int)whiteAlpha);
-		SDL_RenderFillRect(App->render->renderer, &white_rect);
+		App->render->DrawQuad(white_rect, 255, 255, 255, (int)whiteAlpha);
+		//SDL_RenderFillRect(App->render->renderer, &white_rect);
 		SDL_SetRenderDrawBlendMode(App->render->renderer, SDL_BLENDMODE_BLEND);
 
 		whiteAlpha = (current_time - 1400) / (1400 / 255);
@@ -117,7 +119,8 @@ update_status ModuleGameOver::LogicUpdate() {
 	if (current_time >= 2800 && current_time < 4200) {
 
 		SDL_SetRenderDrawColor(App->render->renderer, 255, 255, 255, (int)whiteAlpha);
-		SDL_RenderFillRect(App->render->renderer, &white_rect);
+		App->render->DrawQuad(white_rect, 255, 255, 255, (int)whiteAlpha);
+		//SDL_RenderFillRect(App->render->renderer, &white_rect);
 
 		whiteAlpha = MAX_ALPHA - (current_time - 2800) / (1400 / 255);
 		if (whiteAlpha < MIN_ALPHA) {
