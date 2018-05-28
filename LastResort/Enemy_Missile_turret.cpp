@@ -22,4 +22,6 @@ void Enemy_Missile_turret::Move()
 
 	frameCount += 1;
 
+	if (collider != nullptr)
+		collider->SetPos(position.x, position.y);
 }

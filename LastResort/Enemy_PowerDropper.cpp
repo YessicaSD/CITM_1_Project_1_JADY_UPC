@@ -36,6 +36,7 @@ void Enemy_PowerDropper::Move()
 
 	position.y = int(float(original_y) + (20.0f * sinf(wave)));
 	position.x -= 3;
-	
 
+	if (collider != nullptr)
+		collider->SetPos(position.x, position.y);
 }

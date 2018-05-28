@@ -42,6 +42,9 @@ void Enemy_RedBats::Move()
 	position.y = int(float(original_y) + (18.0f * sinf(wave)));
 	position.x -= 2;
 
+	//Set the collider position
+	if (collider != nullptr)
+		collider->SetPos(position.x, position.y);
 }
 
 void Enemy_RedBats::OnCollision(Collider* collider)

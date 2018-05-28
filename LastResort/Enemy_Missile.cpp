@@ -17,14 +17,12 @@ void Enemy_Missile::Move()
 	fixedPos.x += speed.x;
 	position = fixedPos + App->stage05->spawnPos;
 
+	if (collider != nullptr)
+		collider->SetPos(position.x - animation->GetFrame().w, position.y - animation->GetFrame().h / 2);
 }
 
 void Enemy_Missile::Draw(SDL_Texture* sprites)
 {
-
-	if (collider != nullptr)
-		collider->SetPos(position.x - animation->GetFrame().w, position.y - animation->GetFrame().h / 2);
-
 	if (animation != nullptr)
 		App->render->Blit(sprites, position.x-animation->GetFrame().w, position.y - animation->GetFrame().h/2, &(animation->GetCurrentFrame()));
 }

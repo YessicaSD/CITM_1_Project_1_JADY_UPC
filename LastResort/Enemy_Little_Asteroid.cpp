@@ -20,12 +20,12 @@ Enemy_Little_Asteroid::Enemy_Little_Asteroid(int x, int y, float hp, int scoreVa
 void Enemy_Little_Asteroid::Move()
 {
 	position += speed;
+
+	if (collider != nullptr)
+		collider->SetPos(position.x - animation->GetFrame().w / 2, position.y - animation->GetFrame().h / 2);
 }
 void Enemy_Little_Asteroid::Draw(SDL_Texture* sprites)
 {
-	if (collider != nullptr)
-		collider->SetPos(position.x - animation->GetFrame().w / 2, position.y - animation->GetFrame().h / 2);
-
 	if (animation != nullptr)
 	{
 		App->render->Blit(sprites, position.x - animation->GetFrame().w / 2, position.y - animation->GetFrame().h / 2, &(animation->GetCurrentFrame()));

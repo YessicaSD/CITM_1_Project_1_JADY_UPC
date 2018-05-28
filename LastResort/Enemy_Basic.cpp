@@ -21,5 +21,8 @@ void Enemy_Basic::Move()
 {
 	position.x -= 1;
 	position.y = fixedY + App->stage05->spawnPos.y;//We fix the y position to be the same as the background
+
+	if (collider != nullptr)
+		collider->SetPos(position.x, position.y);
 }
 

@@ -49,52 +49,55 @@ void Enemy_indoorTurret::Move()
 		frameCounter = 0;
 	}
 	frameCounter += 1;
-}
-void Enemy_indoorTurret::Draw(SDL_Texture* sprites)
-{
-	//Up turrot 
-	if (speed.x == 0)
+
+	//Set collider position
+	switch(speed.x)
 	{
+	case 0:
 		if (collider != nullptr)
-			collider->SetPos(position.x - animation->GetFrame().w / 2, position.y - animation->GetFrame().h );
-
-		if (animation != nullptr)
-			App->render->Blit(sprites, position.x - animation->GetFrame().w / 2, position.y - animation->GetFrame().h , &(animation->GetCurrentFrame()));
-	}
-	// Down 
-	if (speed.x==1)
-	{
-
+			collider->SetPos(position.x - animation->GetFrame().w / 2, position.y - animation->GetFrame().h);
+		break;
+	case 1:
 		if (collider != nullptr)
-			collider->SetPos(position.x - animation->GetFrame().w / 2, position.y );
-
-		if (animation != nullptr)
-			App->render->BlitEx(sprites, position.x - animation->GetFrame().w / 2, position.y , &(animation->GetCurrentFrame()),SDL_FLIP_VERTICAL);
-	}
-	if (speed.x == 2)
-	{
+			collider->SetPos(position.x - animation->GetFrame().w / 2, position.y);
+		break;
+	case 2:
 		if (collider != nullptr)
 		{
-			collider->SetPos(position.x , position.y - animation->GetFrame().w / 2);
+			collider->SetPos(position.x, position.y - animation->GetFrame().w / 2);
 			collider->SetMeasurements(animation->GetFrame().h, animation->GetFrame().w);
 		}
-
-		if (animation != nullptr)
-			App->render->BlitEx(sprites, position.x -4, position.y - animation->GetFrame().h / 2, &(animation->GetCurrentFrame()), SDL_FLIP_NONE,90);
-
-	}
-	if (speed.x == 3)
-	{
+		break;
+	case 3:
 		if (collider != nullptr)
 		{
 			collider->SetPos(position.x - animation->GetFrame().h, position.y - animation->GetFrame().w / 2);
 			collider->SetMeasurements(animation->GetFrame().h, animation->GetFrame().w);
 		}
-			
-
-		if (animation != nullptr)
-			App->render->BlitEx(sprites, position.x - animation->GetFrame().w+4, position.y - animation->GetFrame().h / 2, &(animation->GetCurrentFrame()), SDL_FLIP_NONE, -90);
-
+		break;
 	}
+}
 
+void Enemy_indoorTurret::Draw(SDL_Texture* sprites)
+{
+	//Draw
+	switch (speed.x)
+	{
+	case 0:
+		if (animation != nullptr)
+			App->render->Blit(sprites, position.x - animation->GetFrame().w / 2, position.y - animation->GetFrame().h, &(animation->GetCurrentFrame()));
+		break;
+	case 1:
+		if (animation != nullptr)
+			App->render->BlitEx(sprites, position.x - animation->GetFrame().w / 2, position.y, &(animation->GetCurrentFrame()), SDL_FLIP_VERTICAL);
+		break;
+	case 2:
+		if (animation != nullptr)
+			App->render->BlitEx(sprites, position.x - 4, position.y - animation->GetFrame().h / 2, &(animation->GetCurrentFrame()), SDL_FLIP_NONE, 90);
+		break;
+	case 3:
+		if (animation != nullptr)
+			App->render->BlitEx(sprites, position.x - animation->GetFrame().w + 4, position.y - animation->GetFrame().h / 2, &(animation->GetCurrentFrame()), SDL_FLIP_NONE, -90);
+		break;
+	}
 }

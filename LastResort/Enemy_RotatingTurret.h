@@ -28,6 +28,7 @@ private:
 	const float shootSpeeed = 4;
 	const float shootSeparation = 2 * PI / 32;
 	int frameCounter;
+	int pushBackNumber;
 };
 
 #endif // __ENEMY_ROTATING_TURRET_H__

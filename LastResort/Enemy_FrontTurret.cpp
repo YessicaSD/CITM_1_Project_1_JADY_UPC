@@ -70,6 +70,9 @@ void Enemy_FrontTurret::Move()
 	{
 		frameCounter++;
 	}
+
+	if (collider != nullptr)
+		collider->SetPos(position.x, position.y);
 }
 
 void Enemy_FrontTurret::ShootBall(fPoint position, fPoint speed)

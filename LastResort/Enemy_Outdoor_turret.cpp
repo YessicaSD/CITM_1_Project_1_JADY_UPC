@@ -15,9 +15,6 @@ Enemy_Outdoor_turret::Enemy_Outdoor_turret(int x, int y, float hp, int scoreValu
 	collider = App->collision->AddCollider({ x, y+3, 24, 17 }, COLLIDER_TYPE::COLLIDER_ENEMY_HEAVY, (Module*)App->enemies);
 	StartTime = SDL_GetTicks();
 	//Particle ------------------------------------------------------------------------
-
-
-
 }
 
 Enemy_Outdoor_turret:: ~Enemy_Outdoor_turret()
@@ -35,4 +32,7 @@ void Enemy_Outdoor_turret::Move()
 		App->particles->AddParticle(App->particles->LaserEnemyShot, { (float)(position.x + 7), (float)(position.y - 10) }, { 3 , 3 }, App->particles->laserTx, COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE, 0, PARTICLE_LASER);
 		StartTime = SDL_GetTicks();
 	}
+
+	if (collider != nullptr)
+		collider->SetPos(position.x, position.y);
 }

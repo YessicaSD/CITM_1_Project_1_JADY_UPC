@@ -143,15 +143,16 @@ void Enemy_Pinata::Move()
 		break;
 	}
 	position = { (int)float_position.x, (int)float_position.y };
+
+	//Set the collider position
+	if (collider != nullptr)
+		collider->SetPos(position.x - 14, position.y - 14);
 }
 
 void Enemy_Pinata::Draw(SDL_Texture* sprites)
 {
 	SDL_Rect currentAnim;
 	blitEx = false;
-
-	if (collider != nullptr)
-		collider->SetPos(position.x -14 , position.y -14 );
 
 	switch (currentState)
 	{

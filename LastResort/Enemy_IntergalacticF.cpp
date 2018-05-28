@@ -156,14 +156,14 @@ void Enemy_Intergalactic_F::Move()
 		break;
 	}
 	position = { (int)float_position.x, (int)float_position.y };
+
+	if (collider != nullptr)
+		collider->SetPos(position.x - 20, position.y - 20);
 }
 
 void Enemy_Intergalactic_F::Draw(SDL_Texture* sprites)
 {
 	SDL_Rect currentAnim;
-
-	if (collider != nullptr)
-		collider->SetPos(position.x - 20,  position.y - 20);
 
 	switch (currentState)
 	{

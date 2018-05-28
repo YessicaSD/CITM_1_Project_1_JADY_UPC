@@ -57,4 +57,6 @@ void Enemy_Oscilator::Move()
 	position.y = int((float(original_y) + (60.0f * sinf(wave))));
 	position.x -= 2;
 	
+	if (collider != nullptr)
+		collider->SetPos(position.x, position.y);
 }

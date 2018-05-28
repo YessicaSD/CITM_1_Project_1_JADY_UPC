@@ -21,17 +21,13 @@ void Enemy_Missile_Launcher::Move() {
 
 
 	frameCount += 1;
+
+	if (collider != nullptr)
+		collider->SetPos(position.x + 1, position.y + 1);
 }
-void Enemy_Missile_Launcher::Draw(SDL_Texture* sprites) {
 
-
+void Enemy_Missile_Launcher::Draw(SDL_Texture* sprites)
+{
 	if (animation != nullptr)
 		App->render->Blit(sprites, position.x , position.y , &(animation->GetCurrentFrame()));
-	if (collider != nullptr)
-		collider->SetPos(position.x+1 , position.y +1);
-
-
-	
-
-
 }

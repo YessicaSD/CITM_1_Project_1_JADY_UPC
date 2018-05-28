@@ -71,21 +71,17 @@ void Enemy_Ship_Motor::Move()
 		}
 	}
 
-	
+	if (collider != nullptr)
+		collider->SetPos(position.x - Ship_Part.w, position.y + 15 - Ship_Part.h);
 
 }
-void Enemy_Ship_Motor::Draw(SDL_Texture* sprites) {
 
-
+void Enemy_Ship_Motor::Draw(SDL_Texture* sprites)
+{
 	if (animation != nullptr)
 		App->render->Blit(sprites, position.x-Ship_Part.w, position.y +15 - Ship_Part.h, &(animation->GetFrameEx()));
-	if (collider != nullptr)
-		collider->SetPos(position.x- Ship_Part.w, position.y + 15 - Ship_Part.h);
-
 
 	App->render->Blit(sprites, position.x-Ship_Part.w, position.y - Ship_Part.h, &Ship_Part);
-
-	
 }
 
 void Enemy_Ship_Motor::OnCollision(Collider* collider)

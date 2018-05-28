@@ -81,15 +81,15 @@ void Enemy_RotatingTurret::Move()
 	{
 		frameCounter++;
 	}
+
+	pushBackNumber = GetNearestAngle(rotation);
+
+	//Update collider
+	collider->SetPos(position.x + spriteXOffset[pushBackNumber], position.y + spriteYOffset[pushBackNumber]);
 }
 
 void Enemy_RotatingTurret::Draw(SDL_Texture* sprites)
 {
-	int pushBackNumber = GetNearestAngle(rotation);
-
-	//Update collider
-	collider->SetPos(position.x + spriteXOffset[pushBackNumber], position.y + spriteYOffset[pushBackNumber]);
-
 	//Blit
 	App->render->Blit(sprites, position.x + spriteXOffset[pushBackNumber], position.y + spriteYOffset[pushBackNumber], &rotatingTurretAnim.ReturnFrame(pushBackNumber));
 }

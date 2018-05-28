@@ -12,13 +12,13 @@ Enemy_Middle_Asteroid::Enemy_Middle_Asteroid(int x, int y, float hp, int scoreVa
 void Enemy_Middle_Asteroid::Move()
 {
 	position.x -= 2;
-	
-}
 
-void Enemy_Middle_Asteroid::Draw(SDL_Texture* sprites) {
 	if (collider != nullptr)
 		collider->SetPos(position.x - animation->GetFrame().w / 2, position.y - animation->GetFrame().h / 2);
+}
 
+void Enemy_Middle_Asteroid::Draw(SDL_Texture* sprites)
+{
 	if (animation != nullptr)
 	{
 		App->render->Blit(sprites, position.x - animation->GetFrame().w / 2, position.y - animation->GetFrame().h / 2, &(animation->GetCurrentFrame()));

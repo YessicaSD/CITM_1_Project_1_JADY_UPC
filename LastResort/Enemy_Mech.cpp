@@ -43,47 +43,46 @@ Enemy_Mech::Enemy_Mech(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t
 void Enemy_Mech::Move()
 {
 
-	
-		if (going_right)
+	if (going_right)
+	{
+		if (finalPosition.x < limit)
 		{
-			if (finalPosition.x < limit)
-			{
-				finalPosition.x += 0.5f;
-				if ((int)animation->GetCurrentFrameNum() == 3 && finalPosition.x < limit - 10)
-					animation->current_frame = 0;
-			}
+			finalPosition.x += 0.5f;
+			if ((int)animation->GetCurrentFrameNum() == 3 && finalPosition.x < limit - 10)
+				animation->current_frame = 0;
+		}
 
 
-			else
-			{
-				going_right = false;
-				going_left = true;
-			}
+		else
+		{
+			going_right = false;
+			going_left = true;
+		}
+	}
+	else
+	{
+		if (finalPosition.x > limit_2)
+		{
+			finalPosition.x -= 0.5f;
+			if ((int)animation->GetCurrentFrameNum() == 3 && finalPosition.x > limit_2 + 10)
+				animation->current_frame = 0;
 		}
 		else
 		{
-			if (finalPosition.x > limit_2)
-			{
-				finalPosition.x -= 0.5f;
-				if ((int)animation->GetCurrentFrameNum() == 3 && finalPosition.x > limit_2 + 10)
-					animation->current_frame = 0;
-			}
-			else
-			{
-				going_right = true;
-				going_left = false;
-			}
+			going_right = true;
+			going_left = false;
 		}
-		position.x = App->stage05->spawnPos.x + finalPosition.x;
-		position.y = App->stage05->spawnPos.y + finalPosition.y;
-	
-	
+	}
+	position.x = App->stage05->spawnPos.x + finalPosition.x;
+	position.y = App->stage05->spawnPos.y + finalPosition.y;
+
+	if (collider != nullptr)
+		collider->SetPos(position.x - animation->GetFrame().w / 2, position.y - animation->GetFrame().h);
 };
 void Enemy_Mech::Draw(SDL_Texture* sprites)
 {
 
-	if (collider != nullptr)
-		collider->SetPos(position.x-animation->GetFrame().w/2, position.y-animation->GetFrame().h);
+	
 
 	if (animation != nullptr)
 	{

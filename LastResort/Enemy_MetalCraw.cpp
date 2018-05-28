@@ -67,15 +67,12 @@ void Enemy_MetalCraw::Move()
 		position.x -= 1.0f;
 	}
 	
-
+	if (collider != nullptr)
+		collider->SetPos(position.x, position.y);
 
 }
 void  Enemy_MetalCraw::Draw(SDL_Texture* sprites)
 {
-
-	if (collider != nullptr)
-		collider->SetPos(position.x, position.y);
-
 	if (animation != nullptr)
 	{
 		App->render->Blit(sprites, position.x-9 , position.y + 9, &(Lights.GetCurrentFrame()));
@@ -89,7 +86,5 @@ void  Enemy_MetalCraw::Draw(SDL_Texture* sprites)
 
 		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
 	}
-		
-
 }
 
