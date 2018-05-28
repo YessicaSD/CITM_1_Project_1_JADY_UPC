@@ -3,7 +3,7 @@
 #include "Application.h"
 #include "ModuleRender.h"
 #include "ModuleStage05.h"
-#include <stdlib.h>
+
 
 
 Enemy_Mech::Enemy_Mech(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t):Enemy(x, y, hp, scoreValue, pu_t)
@@ -21,7 +21,7 @@ Enemy_Mech::Enemy_Mech(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t
 
 	finalPosition.x = x - App->stage05->spawnPos.x;
 	finalPosition.y = y - App->stage05->spawnPos.y;
-	resp = rand() % 2;
+	resp = SDL_GetTicks() % 2;
 
 	if (resp == 0)
 	{

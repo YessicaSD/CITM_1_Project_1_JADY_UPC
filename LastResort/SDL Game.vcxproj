@@ -99,6 +99,7 @@
     <ClInclude Include="Enemy_Ship_Motor.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Enemy_Indoor_turret.h" />
+    <ClInclude Include="Enemy_InsideTurretLaserh.h" />
     <ClInclude Include="MemLeaks.h" />
     <ClInclude Include="Enemy_MetalCraw.h" />
     <ClInclude Include="Module.h" />
@@ -172,6 +173,7 @@
     <ClCompile Include="Enemy_Ship_Motor.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="Enemy_Indoor_turret.cpp" />
+    <ClCompile Include="Enemy_InsideTurretLaser.cpp" />
     <ClCompile Include="ParticleGMissile.cpp" />
     <ClCompile Include="Particle_EnemyLaser.cpp" />
     <ClCompile Include="Main.cpp" />

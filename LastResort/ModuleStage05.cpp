@@ -232,6 +232,8 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(INDOOR_TURRET, 415, 127, 0, NOPOWERUP, { 3,0 });
 	App->enemies->AddEnemy(INDOOR_TURRET, 416, 176, 0, NOPOWERUP, { 3,0 });
 
+	App->enemies->AddEnemy(INDOOR_TURRET_LASER, 616, 112);
+	App->enemies->AddEnemy(INDOOR_TURRET_LASER, 856, 112);
 	App->enemies->AddEnemy(MISSILE_TURRET, 607, 29);
 	App->enemies->AddEnemy(MISSILE_TURRET, 639, 29);
 	App->enemies->AddEnemy(MISSILE_TURRET, 879, -3);
