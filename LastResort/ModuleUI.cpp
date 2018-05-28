@@ -59,8 +59,8 @@ update_status  ModuleUI::InputUpdate() {
 }
 
 
-update_status ModuleUI::LogicUpdate() {
-
+update_status ModuleUI::RenderUpdate2()
+{
 	//Credits functionality------------------------------------------------------------------------------//
 
 	//-------Add credits-----------------------------------------------
@@ -86,7 +86,6 @@ update_status ModuleUI::LogicUpdate() {
 			switch (currentScene)
 			{
 			case TITLE_SCENE:
-				LOG("F1");
 				credits -= 1;
 				HideUi();
 				App->player1->isActive = true;

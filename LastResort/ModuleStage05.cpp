@@ -315,7 +315,7 @@ update_status Module5lvlScene::LogicUpdate()
 		currentCheckPoint = 0;
 
 	//- The mega checkpoint switch--------------------------------------
-	LOG("Current check point %i", cameraMovement.currentMov);
+	//LOG("Current check point %i", cameraMovement.currentMov);
 	switch(cameraMovement.currentMov)
 	{
 	case 0:

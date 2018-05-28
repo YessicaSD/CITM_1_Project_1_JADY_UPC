@@ -36,7 +36,7 @@ Enemy_Pinata::Enemy_Pinata(int x, int y, float hp, int scoreValue, POWERUP_TYPE 
 }
 
 
-//Check tarjet player------------------------------------------------
+//Check target player------------------------------------------------
 
 void Enemy_Pinata:: CheckTarget() {
 
@@ -97,13 +97,14 @@ void Enemy_Pinata::Move()
 	switch (currentState)
 	{
 	case IDLE:
-
 		if (pinataMov.currentMov == 1) {
 			CheckTarget();
 			CheckDirection();
 		}
 
-		if (pinataMov.movFinished) {
+		if (pinataMov.movFinished)
+		{
+			renderLayer = 2;
 			currentState = FOLLOW;
 			break;
 		}
