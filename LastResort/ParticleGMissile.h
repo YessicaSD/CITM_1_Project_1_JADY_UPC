@@ -53,7 +53,7 @@ public:
 
 	void AirMovement();
 	void FtMovement();
-	void AireExplosions();
+	void AirExplosions();
 
 	//Following terrain
 	FollowingTerrainDirection followTerrainDir ;
