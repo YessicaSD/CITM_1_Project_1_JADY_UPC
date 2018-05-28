@@ -70,19 +70,17 @@ void Particle_Missile::Move()
 	//	anim.current_frame = 6;
 	//}
 
-}
-
-void Particle_Missile::Draw()
-{
-	SDL_Rect currentFrame = anim.GetCurrentFrame();
-
 	//Update the collider
+	currentFrame = anim.GetCurrentFrame();
 	if (collider != nullptr)//INFO: We check if the collider is nullptr because not all particles instanciate a collider
 	{
 		collider->SetPos((int)position.x - currentFrame.w / 2, (int)position.y - currentFrame.h / 2);
 		collider->SetMeasurements(currentFrame.w, currentFrame.h);
 	}
+}
 
+void Particle_Missile::Draw()
+{
 	if(missileState == FOLLOW)
 	//Draw the particle
 	App->render->BlitEx(this->texture, (int)position.x - currentFrame.w / 2, (int)position.y - currentFrame.h / 2, &anim.GetCurrentFrame(), SDL_FLIP_NONE, (AbsoluteRotation({ (int)position.x, (int)position.y }, { (int)targetPlayerPos.x, (int)targetPlayerPos.y }))*180/PI);

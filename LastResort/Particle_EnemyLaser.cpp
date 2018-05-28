@@ -81,24 +81,22 @@ void Particle_EnemyLaser:: Move()
 	{
 		position.x -= speed.x;
 	}
-};
-
-void Particle_EnemyLaser::Draw()
-{
-	SDL_Rect currentFrame = anim.GetCurrentFrame();
 
 	//Update the collider
+	currentFrame = anim.GetCurrentFrame();
+
 	if (collider != nullptr)
 	{
 		collider->SetPos((int)position.x, (int)position.y - currentFrame.h / 2);
 		collider->SetMeasurements(currentFrame.w, currentFrame.h);
 	}
-	
+};
 
+void Particle_EnemyLaser::Draw()
+{
 	//Render
 	if (going_up == true || go_left == true)
 		App->render->Blit(texture, (int)position.x, (int)position.y - currentFrame.h / 2, &currentFrame);
 	else
 		App->render->BlitEx(texture, (int)position.x, (int)position.y - currentFrame.h / 2, &currentFrame, SDL_FLIP_HORIZONTAL);
-	
 }

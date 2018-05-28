@@ -44,6 +44,9 @@ public:
 	bool flipX = false;
 	bool hasCallback = false;
 	int distanceToPlayer = 0;//used for the H missiles
+
+protected:
+	SDL_Rect currentFrame;
 };
 
 #endif // __PARTICLES_H__

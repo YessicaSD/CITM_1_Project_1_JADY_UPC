@@ -73,7 +73,6 @@ void Particle_G_Missile::ExplosionOff() {
 
 void Particle_G_Missile::UpdateColliders()
 {
-
 	if (collider != nullptr)
 		collider->SetPos((int)position.x - 18, (int)position.y -18);
 	if (wallDetectorUp    != nullptr)
@@ -86,10 +85,8 @@ void Particle_G_Missile::UpdateColliders()
 		wallDetectorRight->SetPos((int)position.x + centerOffset, (int)position.y - centerOffset);
 }
 
-void Particle_G_Missile::Move() {
-
-
-
+void Particle_G_Missile::Move()
+{
 	switch (state)
 	{
 	case thrown_State:
@@ -99,17 +96,15 @@ void Particle_G_Missile::Move() {
 		FtMovement();
 		break;
 	case airExplosions_State:
-		AireExplosions();
+		AirExplosions();
 		break;
 	}
 
 	UpdateColliders();
-
 };
 
-void  Particle_G_Missile::AireExplosions() {
-
-
+void  Particle_G_Missile::AirExplosions()
+{
 	if (flipY == false) {
 		position.y += 2;
 	}
