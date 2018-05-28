@@ -40,7 +40,7 @@ bool ModuleStageFunctionality::Start()
 	PlayerTexture = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version		
 	SpeedAnimationTex = App->textures->Load("Assets/Powerups/speed.png");
 	//- Audios
-
+	init_sfx = App->audio->LoadSFX("Assets/initial_sfx.wav");
 	//Unit
 	//- Textures
 
@@ -78,6 +78,7 @@ bool ModuleStageFunctionality::CleanUp()
 	App->audio->UnloadSFX(lockUnitSFX);
 	App->audio->UnloadSFX(unlockUnitSFX);
 	App->audio->UnloadSFX(bounceUnitSFX);
+	App->audio->UnloadSFX(init_sfx);
 
 	App->ui->HideUi();
 	App->player1->Disable();

@@ -58,6 +58,7 @@ public:
 	Sfx * lockUnitSFX;
 	Sfx * unlockUnitSFX;
 	Sfx * bounceUnitSFX;
+	Sfx* init_sfx = nullptr;
 
 	//Other-------------------------------------------------------------
 	bool godMode = false;

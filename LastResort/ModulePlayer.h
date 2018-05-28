@@ -124,8 +124,6 @@ public:
 	//Colliders---------------------------------------------------------------//
 	Collider* playerCol = nullptr;
 	COLLIDER_TYPE shot_colType;
-	//Audios------------------------------------------------------------------//
-	Sfx* init_sfx = nullptr;
 
 	//Win variables
 	bool winlvl;

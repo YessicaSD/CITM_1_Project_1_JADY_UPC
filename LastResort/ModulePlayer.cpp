@@ -48,9 +48,6 @@ bool ModulePlayer::Start()
 	//variables----------------------------------------------------------------------
 	playerAnimState = PlayerAnimationState::None;
 
-	//audios-------------------------------------------------------------------------
-	init_sfx = App->audio->LoadSFX("Assets/initial_sfx.wav");
-
 	//collider-----------------------------------------------------------------------
 	if (isActive)
 		playerCol = App->collision->AddCollider({ position.x, position.y + 2, 24, 8 }, COLLIDER_TYPE::COLLIDER_IGNORE_HIT, this);
@@ -87,8 +84,6 @@ bool ModulePlayer::CleanUp()
 	powerupUpgrades = 0;
 	currentPowerUp = POWERUP_TYPE::NOPOWERUP;
 	LOG("Unloading player assets");
-	//audios-------------------------------------------------------------------------
-	App->audio->UnloadSFX(init_sfx);
 	return true;
 }
 
@@ -208,7 +203,7 @@ void ModulePlayer::ShipAnimation()
 		current_animation = &initAnim.GetFrameEx();
 		if (initAnim.current_frame == 0)
 		{
-			App->audio->ControlAudio(init_sfx, PLAY_AUDIO);
+			App->audio->ControlAudio(App->stageFunctionality->init_sfx, PLAY_AUDIO);
 		}
 
 		if (initAnim.finished == true)
