@@ -101,6 +101,12 @@ update_status Application::LogicUpdate()
 		ret = modules[i]->IsEnabled() ? modules[i]->LogicUpdate() : UPDATE_CONTINUE;
 
 	for (int i = 0; i < NUM_MODULES && ret == UPDATE_CONTINUE; ++i)
+		ret = modules[i]->IsEnabled() ? modules[i]->RenderUpdate0() : UPDATE_CONTINUE;
+
+	for (int i = 0; i < NUM_MODULES && ret == UPDATE_CONTINUE; ++i)
+		ret = modules[i]->IsEnabled() ? modules[i]->RenderUpdate1() : UPDATE_CONTINUE;
+
+	for (int i = 0; i < NUM_MODULES && ret == UPDATE_CONTINUE; ++i)
 		ret = modules[i]->IsEnabled() ? modules[i]->RenderUpdate2() : UPDATE_CONTINUE;
 
 	//Pause game
