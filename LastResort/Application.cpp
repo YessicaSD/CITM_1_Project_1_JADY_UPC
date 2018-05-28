@@ -98,15 +98,33 @@ update_status Application::LogicUpdate()
 	for (int i = 0; i < NUM_MODULES && ret == UPDATE_CONTINUE; ++i)
 		ret = modules[i]->IsEnabled() ? modules[i]->LogicUpdate() : UPDATE_CONTINUE;
 
-	for (int i = 0; i < NUM_MODULES && ret == UPDATE_CONTINUE; ++i)
-		ret = modules[i]->IsEnabled() ? modules[i]->RenderUpdate0() : UPDATE_CONTINUE;
+	if(showLayer0)
+	{
+		for (int i = 0; i < NUM_MODULES && ret == UPDATE_CONTINUE; ++i)
+			ret = modules[i]->IsEnabled() ? modules[i]->RenderUpdate0() : UPDATE_CONTINUE;
+	}
 
-	for (int i = 0; i < NUM_MODULES && ret == UPDATE_CONTINUE; ++i)
-		ret = modules[i]->IsEnabled() ? modules[i]->RenderUpdate1() : UPDATE_CONTINUE;
+	if(showLayer1)
+	{
+		for (int i = 0; i < NUM_MODULES && ret == UPDATE_CONTINUE; ++i)
+			ret = modules[i]->IsEnabled() ? modules[i]->RenderUpdate1() : UPDATE_CONTINUE;
+	}
 
 	for (int i = 0; i < NUM_MODULES && ret == UPDATE_CONTINUE; ++i)
 		ret = modules[i]->IsEnabled() ? modules[i]->RenderUpdate2() : UPDATE_CONTINUE;
 
+	//DEBUGGING------------------------------------------------------
+	//Show layers
+	if(input->keyboard[SDL_SCANCODE_F9] == KEY_STATE::KEY_DOWN)
+	{
+		if (showLayer0 == true) { showLayer0 = false; }
+		else { showLayer0 = true; }
+	}
+	if (input->keyboard[SDL_SCANCODE_F10] == KEY_STATE::KEY_DOWN)
+	{
+		if (showLayer1 == true) { showLayer1 = false; }
+		else { showLayer1 = true; }
+	}
 	//Pause game
 	if (input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN)
 	{

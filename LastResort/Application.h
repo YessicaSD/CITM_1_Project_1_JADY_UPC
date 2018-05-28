@@ -81,6 +81,8 @@ private:
 	//Custom variables
 	bool pauseExecution = false;
 	bool pauseNextFrame = false;
+	bool showLayer0 = true;
+	bool showLayer1 = true;
 };
 
 // Global var made extern for Application ---
