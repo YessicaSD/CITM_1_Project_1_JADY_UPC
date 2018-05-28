@@ -36,6 +36,8 @@ public:
 	//Inherited functons
 	bool Start();
 	update_status LogicUpdate();
+	update_status RenderUpdate0();
+	update_status RenderUpdate1();
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
 

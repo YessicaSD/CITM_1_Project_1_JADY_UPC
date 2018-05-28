@@ -278,28 +278,6 @@ bool Module5lvlScene::Start()
 	return ret;
 }
 
-update_status Module5lvlScene::InputUpdate()
-{
-	//----------Stars Scroll----------------------------------------------
-
-	scroll.x -= 10;
-	scroll.y += cameraMovement.GetPosition().VectU().y * 2;
-	if (scroll.x <= -SCREEN_WIDTH)
-		scroll.x = 0;
-	if (scroll.y <= -SCREEN_HEIGHT)
-	{
-		scroll.y = 0;
-	}
-
-	App->render->Blit(starsTx, scroll.x, -scroll.y, NULL);
-	App->render->Blit(starsTx, scroll.x + SCREEN_WIDTH, -scroll.y, NULL);
-	App->render->Blit(starsTx, scroll.x, -scroll.y - SCREEN_HEIGHT, NULL);
-	App->render->Blit(starsTx, scroll.x + SCREEN_WIDTH, -scroll.y - SCREEN_HEIGHT, NULL);
-
-
-	return update_status::UPDATE_CONTINUE;
-};
-
 update_status Module5lvlScene::LogicUpdate()
 {
 	//provisional-----------------------------
@@ -548,9 +526,31 @@ update_status Module5lvlScene::LogicUpdate()
 
 		break;
 	}
+	return UPDATE_CONTINUE;
+}
 
-	
+update_status Module5lvlScene::RenderUpdate0()
+{
+	//----------Stars Scroll----------------------------------------------
+	scroll.x -= 10;
+	scroll.y += cameraMovement.GetPosition().VectU().y * 2;
+	if (scroll.x <= -SCREEN_WIDTH)
+		scroll.x = 0;
+	if (scroll.y <= -SCREEN_HEIGHT)
+	{
+		scroll.y = 0;
+	}
 
+	App->render->Blit(starsTx, scroll.x, -scroll.y, NULL);
+	App->render->Blit(starsTx, scroll.x + SCREEN_WIDTH, -scroll.y, NULL);
+	App->render->Blit(starsTx, scroll.x, -scroll.y - SCREEN_HEIGHT, NULL);
+	App->render->Blit(starsTx, scroll.x + SCREEN_WIDTH, -scroll.y - SCREEN_HEIGHT, NULL);
+
+	return UPDATE_CONTINUE;
+}
+
+update_status Module5lvlScene::RenderUpdate1()
+{
 	//Background---------------------------------------------------------
 	//----------SpaceShip------------------------------------------------
 	//----------Ship part------------------------------------------------
@@ -560,7 +560,6 @@ update_status Module5lvlScene::LogicUpdate()
 		RenderShipPart();
 		ShipRear();
 	}
-
 	//----------Final Tilemap--------------------------------------------
 	//----------Final Boss-----------------------------------------------
 	if (cameraMovement.currentMov > 21)
@@ -568,7 +567,6 @@ update_status Module5lvlScene::LogicUpdate()
 		App->render->Blit(tilemapTx, tunnelPos.x, tunnelPos.y, &tunnelRect);
 		App->render->Blit(bossTx, bossPos.x, bossPos.y, &bossAnim.LoopAnimation());
 	}
-
 	return UPDATE_CONTINUE;
 }
 

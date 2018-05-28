@@ -28,14 +28,11 @@
 Application::Application()
 {
 	int i = 0;
-	//General modules------------------------------------------
 	modules[i++] = window = new ModuleWindow();
-	modules[i++] = render = new ModuleRender();
 	modules[i++] = input = new ModuleInput();
 	modules[i++] = textures = new ModuleTextures();
 	modules[i++] = fonts = new ModuleFonts();
 	modules[i++] = audio = new ModuleAudio();
-	//Other modules--------------------------------------------
 	modules[i++] = stage01 = new ModuleStage01();
 	modules[i++] = stage02 = new Module2lvlScene();
 	modules[i++] = stage05 = new Module5lvlScene();
@@ -56,6 +53,7 @@ Application::Application()
 	modules[i++] = collision = new ModuleCollision();
 	modules[i++] = fade = new ModuleFadeToBlack();// !IMPORTANT! Remmember: fade always needs to be before module ui
 	modules[i++] = ui = new ModuleUI();
+	modules[i++] = render = new ModuleRender();
 
 }
 

@@ -29,8 +29,8 @@ ModulePowerups::~ModulePowerups()
 bool ModulePowerups::Start()
 {
 	LOG("Loading powerup module ");
-	powerupTx = App->textures->Load("Assets/PowerUps/PowerUps.png");
-	speedSFX = App->audio->LoadSFX("Assets/PowerUps/019. Move speed upgrade.wav");
+	powerupTx     = App->textures->Load("Assets/PowerUps/PowerUps.png");
+	speedSFX      = App->audio->LoadSFX("Assets/PowerUps/019. Move speed upgrade.wav");
 	getPowerupSFX = App->audio->LoadSFX("Assets/Powerups/GetPowerup.wav");
 	return true;
 }
@@ -42,28 +42,15 @@ update_status ModulePowerups::LogicUpdate()
 	{
 		if (powerups[i] != nullptr)
 		{
-			//- Collider
+			//- Move
 			if (powerups[i]->collider != nullptr)
 			{
 				powerups[i]->position.x -= (int)moveSpeed;
 			}
-		}
-	}
-
-	//Render the powerups
-	for (uint i = 0; i < MAX_POWERUPS; ++i)
-	{
-		if (powerups[i] != nullptr)
-		{
-			//- Collider
+			//- Adjust collider
 			if (powerups[i]->collider != nullptr)
 			{
 				powerups[i]->collider->SetPos(powerups[i]->position.x, powerups[i]->position.y);
-			}
-			//- Sprite
-			if (powerups[i]->animation != nullptr)
-			{
-				App->render->Blit(powerupTx, powerups[i]->position.x, powerups[i]->position.y, &powerups[i]->animation->GetCurrentFrame());
 			}
 		}
 	}
@@ -72,6 +59,18 @@ update_status ModulePowerups::LogicUpdate()
 
 update_status ModulePowerups::RenderUpdate2()
 {
+	//Render the powerups
+	for (uint i = 0; i < MAX_POWERUPS; ++i)
+	{
+		if (powerups[i] != nullptr)
+		{
+			if (powerups[i]->animation != nullptr)
+			{
+				App->render->Blit(powerupTx, powerups[i]->position.x, powerups[i]->position.y, &powerups[i]->animation->GetCurrentFrame());
+			}
+		}
+	}
+
 	//Check camera position to decide what to despawn
 	for (uint i = 0; i < MAX_POWERUPS; ++i)
 	{

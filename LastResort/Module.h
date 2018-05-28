@@ -20,7 +20,7 @@ public:
 	virtual update_status RenderUpdate0()	{ return update_status::UPDATE_CONTINUE; }
 	virtual update_status RenderUpdate1()	{ return update_status::UPDATE_CONTINUE; }
 	virtual update_status RenderUpdate2() 	{ return update_status::UPDATE_CONTINUE; }
-	virtual bool CleanUp()				{ return true; }
+	virtual bool CleanUp()					{ return true; }
 
 	// Module activation ---
 	bool IsEnabled() const { return enabled; }

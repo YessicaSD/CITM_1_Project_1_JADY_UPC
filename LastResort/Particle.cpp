@@ -19,6 +19,7 @@ Particle::Particle(Particle& sentParticle, fPoint position, fPoint speed, Uint32
 	this->collision_fx = sentParticle.collision_fx;
 	this->life = sentParticle.life;
 	if (sentParticle.collision_fx != nullptr) { this->collision_fx = sentParticle.collision_fx; }
+	this->renderLayer = sentParticle.renderLayer;
 
 	//- Values that vary depending on the parameters we pass in
 	this->position = position;

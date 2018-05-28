@@ -27,7 +27,8 @@ public:
 
 	bool Start();
 	update_status LogicUpdate();
-	update_status InputUpdate();
+	update_status RenderUpdate0();
+	update_status RenderUpdate1();
 	bool CleanUp();
 
 	//Other functions

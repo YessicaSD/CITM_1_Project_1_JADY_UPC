@@ -65,6 +65,7 @@ public:
 	bool Start();
 	update_status InputUpdate();
 	update_status LogicUpdate();
+	update_status RenderUpdate1();
 	update_status RenderUpdate2();
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);

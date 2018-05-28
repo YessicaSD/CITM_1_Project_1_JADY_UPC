@@ -99,18 +99,22 @@ update_status ModuleEnemies::LogicUpdate()
 		{
 			enemies[i]->Move();
 		}
+	return UPDATE_CONTINUE;
+}
 
+update_status ModuleEnemies::RenderUpdate1()
+{
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
 		if (enemies[i] != nullptr)
 		{
 			if (enemies[i]->isDamaged)
 			{
-				if (enemies[i]->flashing_interval %2)
+				if (enemies[i]->flashing_interval % 2)
 					enemies[i]->Draw(dmg_sprites);
 				else
 					enemies[i]->Draw(nml_sprites);
-					
+
 				enemies[i]->dmg_frames += 1;
 
 				if (enemies[i]->dmg_frames > 3) {
@@ -129,6 +133,7 @@ update_status ModuleEnemies::LogicUpdate()
 			}
 		}
 	}
+
 	return UPDATE_CONTINUE;
 }
 

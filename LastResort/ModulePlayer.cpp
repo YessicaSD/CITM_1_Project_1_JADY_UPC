@@ -104,7 +104,7 @@ update_status ModulePlayer::InputUpdate()
 	return UPDATE_CONTINUE;
 }
 
-update_status ModulePlayer::LogicUpdate()
+update_status ModulePlayer::RenderUpdate2()
 {
 	PlayerTexture = App->stageFunctionality->PlayerTexture;
 	SpeedAnimationTex = App->stageFunctionality->SpeedAnimationTex;
@@ -196,6 +196,7 @@ update_status ModulePlayer::LogicUpdate()
 			LaserCount = 0;
 		}
 	}
+
 	return UPDATE_CONTINUE;
 }
 

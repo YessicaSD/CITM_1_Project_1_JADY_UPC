@@ -115,7 +115,50 @@ update_status ModuleParticles::LogicUpdate()
 		{
 			//Update the particle
 			active[i]->Move();
-			active[i]->Draw();
+		}
+	}
+	return UPDATE_CONTINUE;
+}
+
+update_status ModuleParticles::RenderUpdate0()
+{
+	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
+	{
+		//If there isn't a particle in that position of the array, go to the next particle in the array
+		if (active[i] == nullptr)
+		{
+			continue;
+		}
+
+		if (SDL_GetTicks() >= active[i]->born)
+		{
+			if(active[i]->renderLayer == 0)
+			{
+				//Draw the particle on layer 0
+				active[i]->Draw();
+			}
+		}
+	}
+	return UPDATE_CONTINUE;
+}
+
+update_status ModuleParticles::RenderUpdate1()
+{
+	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
+	{
+		//If there isn't a particle in that position of the array, go to the next particle in the array
+		if (active[i] == nullptr)
+		{
+			continue;
+		}
+
+		if (SDL_GetTicks() >= active[i]->born)
+		{
+			if (active[i]->renderLayer == 1)
+			{
+				//Draw the particle on layer 1
+				active[i]->Draw();
+			}
 		}
 	}
 	return UPDATE_CONTINUE;
@@ -192,6 +235,7 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 
 //Each new particle has to initializate:
 //- Push backs for its animation
+//- Render layer. 0 = behind the ship, 1 = in front of the ship. Is 1 by default
 void ModuleParticles::InitParticleValues()
 {
 	//Player----------------------------------------------------------------------------//
@@ -431,6 +475,7 @@ void ModuleParticles::InitParticleValues()
 	fireBall.anim.pingpong = true;
 	fireBall.anim.speed = 0.5f;
 	fireBall.life = 10000;
+	fireBall.renderLayer = 0;
 
 	//Missile 
 	Missile.anim.PushBack({157,246,15,8}); //0 //RIGHT

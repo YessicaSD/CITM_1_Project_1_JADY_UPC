@@ -5,14 +5,12 @@
 
 #define MAX_POWERUPS 20
 
+//MODULE POWERUPS EXPLANATION------------------------------------------------
 //This module follows the structure of the module enemies
 //But it doesn't spawn. It only moves, renders and despawns powerups
-
-//Because powerups are spawned via AddPowerup when an enemy dies
-struct Mix_Chunk;
-
 //Because powerups are directly spawned via AddPowerup when an enemy dies
 
+struct Mix_Chunk;
 
 enum POWERUP_TYPE
 {
@@ -45,14 +43,11 @@ public:
 	bool AddPowerup(int, int, POWERUP_TYPE);
 	Mix_Chunk * speedSFX = nullptr;
 	Mix_Chunk * getPowerupSFX = nullptr;
+
 private:
 	//We don't need a queue, because we'll render the powerups as soon as AddCollider gets called
 	Powerup* powerups[MAX_POWERUPS];
 	SDL_Texture* powerupTx = nullptr;
 	const float moveSpeed = 1;
-
-	//Speed powerups -------------
-	
-
 };
 #endif

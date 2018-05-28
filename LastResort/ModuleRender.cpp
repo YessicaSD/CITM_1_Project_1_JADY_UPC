@@ -104,14 +104,8 @@ update_status ModuleRender::InputUpdate()
 	return update_status::UPDATE_CONTINUE;
 }
 
-update_status ModuleRender::LogicUpdate()	
-{	
-	return update_status::UPDATE_CONTINUE;
-}
-
 update_status ModuleRender::RenderUpdate2()
 {
-	
 	//- INFO: Border width is multiplied by zoomedOutSize to mantain its size across all the zoomed out modes
 	int borderWidth = DEFAULT_BORDER_WIDTH * zoomedOutSize;
 

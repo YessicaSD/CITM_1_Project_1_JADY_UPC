@@ -38,6 +38,7 @@ public:
 	Uint32 born = 0;
 	Uint32 life = 0;
 	Mix_Chunk *sfx = nullptr;
+	int renderLayer = 1;
 
 	bool flipY = false;
 	bool flipX = false;
