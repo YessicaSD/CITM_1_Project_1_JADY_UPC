@@ -289,13 +289,9 @@ update_status Module5lvlScene::LogicUpdate()
 
 	if (App->input->keyboard[SDL_SCANCODE_E] == KEY_DOWN)
 	{
-		if (pauseCamera == false) {
-			pauseCamera = true;
-		}
-		else
-			pauseCamera = false;
+		if (pauseCamera == false) { pauseCamera = true; }
+		else { pauseCamera = false; }
 	}
-
 	
 	//Updates----------------------------------------------------------------------------------------------------
 	//----------Update Points--------------------------------------------
@@ -650,7 +646,7 @@ void Module5lvlScene::FireballFrontShip()
 {
 	if (fireballFrameCounter >= 72)
 	{
-		App->particles->AddParticle(App->particles->fireBall, { (float)spawnPos.x + 45, (float)spawnPos.y + 129 }, { -3, 0 }, App->particles->particlesTx, COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE, 0, PARTICLE_FOLLOW_BACKGROUND);
+		App->particles->AddParticle(App->particles->fireBall, { (float)spawnPos.x + 45, (float)spawnPos.y + 129 }, { -3, 0 }, App->particles->particlesTx, COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE, 0, PARTICLE_FIREBALL);
 		App->audio->ControlAudio(fireballSFX, PLAY_AUDIO);
 		fireballFrameCounter = 0;
 	}

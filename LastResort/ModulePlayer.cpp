@@ -51,7 +51,6 @@ bool ModulePlayer::Start()
 	//collider-----------------------------------------------------------------------
 	if (isActive)
 		playerCol = App->collision->AddCollider({ position.x, position.y + 2, 24, 8 }, COLLIDER_TYPE::COLLIDER_IGNORE_HIT, this);
-
 	return ret;
 }
 
@@ -62,7 +61,6 @@ void ModulePlayer::Reappear() {
 	playerAnimState = PlayerAnimationState::Initial;
 	powerupUpgrades = 0;
 	currentPowerUp = POWERUP_TYPE::NOPOWERUP;
-	isShooting = false;
 	shoot = false;
 	canMove = false;
 	isDying = false;
@@ -93,37 +91,24 @@ update_status ModulePlayer::InputUpdate()
 {
 	//Movement-------------------------------------------------------------------------
 	if (canMove == true)
-		MovementInput();
-	//If the movement is not on preupdate, the player will move after the unit, causing weird visual effects
-
+	{
+		PlayerMovement();
+	}
+	//INFO: If the movement is not on preupdate, the player will move after the unit, causing weird visual effects
+	//Collision------------------------------------------------------------------------
+	if (playerCol != nullptr)
+	{
+		playerCol->SetPos(position.x, position.y + 2); //We update the collider position
+	}
 	return UPDATE_CONTINUE;
 }
 
-update_status ModulePlayer::RenderUpdate2()
+update_status ModulePlayer::LogicUpdate()
 {
-	PlayerTexture = App->stageFunctionality->PlayerTexture;
-	SpeedAnimationTex = App->stageFunctionality->SpeedAnimationTex;
 
-	//Shots----------------------------------------------------------------------------
-	if (canMove == true) {
-		ShotInput();
-	}
-	//Collision------------------------------------------------------------------------
-	if (playerCol != nullptr) {
-		playerCol->SetPos(position.x, position.y + 2); //We update the collider position
-	}
-
-	//Ship Animation-------------------------------------------------------------------
-	ShipAnimation();
-
-	if (speedPowerup == true)
+	if (canMove == true)
 	{
-		App->render->Blit(SpeedAnimationTex, position.x - 32, position.y - 9, &SpeedAnimation.GetCurrentFrame());
-		if (SpeedAnimation.current_frame == 9)
-		{
-			SpeedAnimation.current_frame = 0;
-			speedPowerup = false;
-		}
+		ShotInput();
 	}
 
 	//Winlvl
@@ -132,35 +117,49 @@ update_status ModulePlayer::RenderUpdate2()
 		Winlvl();
 	}
 
-	//SHOOT CONDITIONS -----------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-	//Ship fire animation (in front of the ship)
+	return UPDATE_CONTINUE;
+}
+
+update_status ModulePlayer::RenderUpdate2()
+{
+	//Ship Animation-------------------------------------------------------------------
+	ShipAnimation();
+
+	//Speed animation------------------------------------------------------------------
+	if (speedPowerup == true)
+	{
+		App->render->Blit(App->stageFunctionality->SpeedAnimationTex, position.x - 32, position.y - 9, &SpeedAnimation.GetCurrentFrame());
+		if (SpeedAnimation.current_frame == 9)
+		{
+			SpeedAnimation.current_frame = 0;
+			speedPowerup = false;
+		}
+	}
+
+	//Ship fire animation (in front of the ship)---------------------------------------
 	if (shoot == true)
 	{
-		//- Basic ship fire
 		if (shotFire.finished == false)
 		{
-			isShooting = true;
-			App->render->Blit(PlayerTexture, position.x + 32, position.y + 1, &shotFire.GetFrameEx());
+			App->render->Blit(App->stageFunctionality->PlayerTexture, position.x + 32, position.y + 1, &shotFire.GetFrameEx());
 		}
 		else
 		{
 			shotFire.finished = false;
-			isShooting = false;
 			shoot = false;
 		}
 
 	}
 
-	//Laser PowerUp-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	//Laser PowerUp---------------------------------------------------------------------
 	if (shootLaser)
 	{
-		LOG("SHOTLASE_CURRENT_FRAME:%f", ShotLaserBasic.GetCurrentFrameNum());
 		if (ShotLaserBasic.finished == false)
 		{
 			if (ShotLaserBasic.current_frame == 0)
 			{
 				ShotPosition = position;
-				App->particles->AddParticle(App->particles->basicLaser, { (float)(ShotPosition.x + 32), (float)(ShotPosition.y + 6) }, { 10, 0 }, PlayerTexture, shot_colType, 0);
+				App->particles->AddParticle(App->particles->basicLaser, { (float)(ShotPosition.x + 32), (float)(ShotPosition.y + 6) }, { 10, 0 }, App->stageFunctionality->PlayerTexture, shot_colType, 0);
 
 			}
 
@@ -168,7 +167,7 @@ update_status ModulePlayer::RenderUpdate2()
 			{
 				if (LaserCount == 3 || LaserCount == 6 || LaserCount == 9)
 				{
-					App->particles->AddParticle(App->particles->littleRings, { (float)(ShotPosition.x + 10), (float)(ShotPosition.y + 6) }, { 10, 0 }, PlayerTexture, shot_colType, 0);
+					App->particles->AddParticle(App->particles->littleRings, { (float)(ShotPosition.x + 10), (float)(ShotPosition.y + 6) }, { 10, 0 }, App->stageFunctionality->PlayerTexture, shot_colType, 0);
 				}
 
 
@@ -177,10 +176,10 @@ update_status ModulePlayer::RenderUpdate2()
 			{
 				if (LaserCount == 3 || LaserCount == 6 || LaserCount == 9)
 				{
-					App->particles->AddParticle(App->particles->bigRings, { (float)(ShotPosition.x + 10), (float)(ShotPosition.y + 6) }, { 10, 0 }, PlayerTexture, shot_colType, 0);
+					App->particles->AddParticle(App->particles->bigRings, { (float)(ShotPosition.x + 10), (float)(ShotPosition.y + 6) }, { 10, 0 }, App->stageFunctionality->PlayerTexture, shot_colType, 0);
 				}
 			}
-			App->render->Blit(PlayerTexture, position.x + 32, position.y + 5 - ShotLaserBasic.GetFrame().h / 2, &ShotLaserBasic.GetFrameEx());
+			App->render->Blit(App->stageFunctionality->PlayerTexture, position.x + 32, position.y + 5 - ShotLaserBasic.GetFrame().h / 2, &ShotLaserBasic.GetFrameEx());
 			LaserCount += 1;
 		}
 		else
@@ -216,11 +215,11 @@ void ModulePlayer::ShipAnimation()
 		//Draw ship---------------------------------------------------
 		if (initAnim.current_frame > 4)
 		{
-			App->render->Blit(PlayerTexture, position.x + 32 - (current_animation->w), position.y + 6 - (current_animation->h / 2), current_animation);
+			App->render->Blit(App->stageFunctionality->PlayerTexture, position.x + 32 - (current_animation->w), position.y + 6 - (current_animation->h / 2), current_animation);
 		}
 		else
 		{
-			App->render->Blit(PlayerTexture, position.x - 40, position.y + 6 - (current_animation->h / 2), current_animation);
+			App->render->Blit(App->stageFunctionality->PlayerTexture, position.x - 40, position.y + 6 - (current_animation->h / 2), current_animation);
 		}
 		break;
 
@@ -269,7 +268,7 @@ void ModulePlayer::ShipAnimation()
 			current_animation = &shipAnim.frames[currentFrame]; //It set the animation frame 
 		}
 
-		App->render->Blit(PlayerTexture, position.x, position.y, current_animation);
+		App->render->Blit(App->stageFunctionality->PlayerTexture, position.x, position.y, current_animation);
 
 		break;
 
@@ -286,7 +285,7 @@ void ModulePlayer::ShipAnimation()
 		{
 			playerCol->type = COLLIDER_IGNORE_HIT;
 			current_animation = &deathAnim.GetFrameEx();
-			App->render->Blit(PlayerTexture, position.x + 32 - current_animation->w, position.y + 6 - current_animation->h / 2, current_animation);
+			App->render->Blit(App->stageFunctionality->PlayerTexture, position.x + 32 - current_animation->w, position.y + 6 - current_animation->h / 2, current_animation);
 		}
 		break;
 
@@ -299,7 +298,7 @@ void ModulePlayer::ShipAnimation()
 void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
 {
 	//Particles---------------------------------------------------------------------
-	App->particles->AddParticle(App->particles->death_explosion, { (float)position.x, (float)position.y }, { 0 ,0 }, PlayerTexture);
+	App->particles->AddParticle(App->particles->death_explosion, { (float)position.x, (float)position.y }, { 0 ,0 }, App->stageFunctionality->PlayerTexture);
 
 	//Player variables--------------------------------------------------------------
 	isDying = true;
@@ -324,7 +323,7 @@ void  ModulePlayer::ShotInput()
 	{
 		//- All of them shoot a basic shot
 		shoot = true;
-		App->particles->AddParticle(App->particles->basicShot, { (float)(position.x + 32), (float)(position.y + 6) }, { 12, 0 }, PlayerTexture, shot_colType, 0);
+		App->particles->AddParticle(App->particles->basicShot, { (float)(position.x + 32), (float)(position.y + 6) }, { 12, 0 }, App->stageFunctionality->PlayerTexture, shot_colType, 0);
 		//- They have additional shots for some upgrades
 		if (currentPowerUp == POWERUP_TYPE::LASER)
 		{
@@ -337,27 +336,27 @@ void  ModulePlayer::ShotInput()
 			{
 				Particle * p1;
 				Particle * p2;
-				p1 = App->particles->AddParticle(App->particles->hMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2, 1 }, PlayerTexture, shot_colType, 0, PARTICLE_H_MISSILE);
+				p1 = App->particles->AddParticle(App->particles->hMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2, 1 }, App->stageFunctionality->PlayerTexture, shot_colType, 0, PARTICLE_H_MISSILE);
 				if (p1 != nullptr) { p1->distanceToPlayer = 16; }
-				p2 = App->particles->AddParticle(App->particles->hMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2, 1 }, PlayerTexture, shot_colType, 0, PARTICLE_H_MISSILE);
+				p2 = App->particles->AddParticle(App->particles->hMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2, 1 }, App->stageFunctionality->PlayerTexture, shot_colType, 0, PARTICLE_H_MISSILE);
 				if (p2 != nullptr) { p2->distanceToPlayer = -16; }
 			}
 			if(powerupUpgrades > 2)
 			{
 				Particle * p3;
 				Particle * p4;
-				p3 = App->particles->AddParticle(App->particles->hMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2, 1 }, PlayerTexture, shot_colType, 0, PARTICLE_H_MISSILE);
+				p3 = App->particles->AddParticle(App->particles->hMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2, 1 }, App->stageFunctionality->PlayerTexture, shot_colType, 0, PARTICLE_H_MISSILE);
 				if (p3 != nullptr) { p3->distanceToPlayer = 24; }
-				p4 = App->particles->AddParticle(App->particles->hMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2, 1 }, PlayerTexture, shot_colType, 0, PARTICLE_H_MISSILE);
+				p4 = App->particles->AddParticle(App->particles->hMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2, 1 }, App->stageFunctionality->PlayerTexture, shot_colType, 0, PARTICLE_H_MISSILE);
 				if (p4 != nullptr) { p4->distanceToPlayer = -24; }
 			}
 			if(powerupUpgrades > 3)
 			{
 				Particle * p5;
 				Particle * p6;
-				p5 = App->particles->AddParticle(App->particles->hMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2, 1 }, PlayerTexture, shot_colType, 0, PARTICLE_H_MISSILE);
+				p5 = App->particles->AddParticle(App->particles->hMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2, 1 }, App->stageFunctionality->PlayerTexture, shot_colType, 0, PARTICLE_H_MISSILE);
 				if (p5 != nullptr) { p5->distanceToPlayer = 32; }
-				p6 = App->particles->AddParticle(App->particles->hMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2, 1 }, PlayerTexture, shot_colType, 0, PARTICLE_H_MISSILE);
+				p6 = App->particles->AddParticle(App->particles->hMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2, 1 }, App->stageFunctionality->PlayerTexture, shot_colType, 0, PARTICLE_H_MISSILE);
 				if (p6 != nullptr) { p6->distanceToPlayer = -32; }
 			}
 		}
@@ -366,8 +365,8 @@ void  ModulePlayer::ShotInput()
 			Particle* p = nullptr;
 
 			
-			App->particles->AddParticle(App->particles->groundMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2.8f, 0.0f }, PlayerTexture, shot_colType, 0, PARTICLE_G_MISSILE);
-			p = App->particles->AddParticle(App->particles->groundMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2.8f, 0.0f }, PlayerTexture, shot_colType, 0, PARTICLE_G_MISSILE);
+			App->particles->AddParticle(App->particles->groundMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2.8f, 0.0f }, App->stageFunctionality->PlayerTexture, shot_colType, 0, PARTICLE_G_MISSILE);
+			p = App->particles->AddParticle(App->particles->groundMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2.8f, 0.0f }, App->stageFunctionality->PlayerTexture, shot_colType, 0, PARTICLE_G_MISSILE);
 
 			if (p != nullptr) {
 				p->flipY = true;
@@ -382,15 +381,10 @@ void  ModulePlayer::ShotInput()
 			//}
 
 		}
-		/*	if (isShooting == false) { shoot = true; }
-		if (Controllshoot == true) {
-		Controllshoot = false;
-
-		}*/
 	}
 }
 
-void ModulePlayer::MovementInput()
+void ModulePlayer::PlayerMovement()
 {
 
 	if (MoveLeft() == true) {

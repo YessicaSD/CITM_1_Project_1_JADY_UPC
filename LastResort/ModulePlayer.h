@@ -26,6 +26,14 @@ enum ShipFrames
 	MaxDown
 };
 
+enum PlayerAnimationState
+{
+	Initial,
+	Movement,
+	Death,
+	None
+};
+
 class ModulePlayer : public Module
 {
 public:
@@ -34,13 +42,14 @@ public:
 
 	bool Start();
 	update_status InputUpdate();
+	update_status LogicUpdate();
 	update_status RenderUpdate2();
 	bool CleanUp();
 	void OnCollision(Collider*, Collider*);
 
 	//Added-----------------------------
 	void Reappear();
-	void MovementInput(); 
+	void PlayerMovement(); 
 	void ShotInput();  
 	void ShipAnimation();
 
@@ -66,12 +75,11 @@ public:
 	iPoint initPosition;
 	float movementSpeed = 2;
 	//--------States--------------------------------
-	bool isActive = false; //If user pays for a game with this player
+	bool isActive = false; //If you can play with this ship
 	bool isAppearing;
 	bool isInvincible = false;
 	bool isDying;
 	bool canMove;
-	bool isShooting = false;
 	bool shoot = false;
 	bool shootLaser = false;
 	int LaserCount = 0;
@@ -81,18 +89,9 @@ public:
 	int powerupUpgrades = 0;
 	bool unitPowerUp = false;
 	bool speedPowerup = false;
-	bool laserPowerUp = false;
-	bool missilesPowerUp = false;
-	bool bombsPowerUp = false;
-
-	//Animations---------------------------------------------------------------//
-	enum PlayerAnimationState
-	{
-		Initial,
-		Movement,
-		Death,
-		None
-	};
+	//bool laserPowerUp = false;
+	//bool missilesPowerUp = false;
+	//bool bombsPowerUp = false;
 	//------------States----------------------------
 	PlayerAnimationState playerAnimState;
 	Animation initAnim;
@@ -117,10 +116,6 @@ public:
 	float const transitionLimit = 0.5f;//This indicates when the ship will transition from its idle animation to its transition animation
 	float const MaxLimit = 0.90f;//This indicates when the ship will transition from its transition animation to its max animation
 	iPoint playerCenter = { 16, 6 };//Useful to make the unit rotate around the center of the player
-
-	//Textures----------------------------------------------------------------//
-	SDL_Texture* PlayerTexture = nullptr;
-	SDL_Texture* SpeedAnimationTex = nullptr;
 	//Colliders---------------------------------------------------------------//
 	Collider* playerCol = nullptr;
 	COLLIDER_TYPE shot_colType;
