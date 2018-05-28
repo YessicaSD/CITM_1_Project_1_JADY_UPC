@@ -10,7 +10,7 @@ Particle_Fireball::Particle_Fireball() : Particle()
 
 Particle_Fireball::Particle_Fireball(Particle& p, fPoint position, fPoint speed, Uint32 delay, COLLIDER_TYPE colType, SDL_Texture* tex) : Particle(p, position, speed, delay, colType, tex)
 {
-
+	collider->SetMeasurements(46, 26);
 }
 
 void Particle_Fireball::Move()
@@ -25,7 +25,7 @@ void Particle_Fireball::Move()
 	currentFrame = anim.GetCurrentFrame();
 	if (collider != nullptr)//INFO: We check if the collider is nullptr because not all particles instanciate a collider
 	{
-		collider->SetPos((int)position.x, (int)position.y - currentFrame.h / 2);
+		collider->SetPos((int)position.x + 2, (int)position.y - currentFrame.h / 2 + 3);
 	}
 };
 
