@@ -65,6 +65,7 @@ public:
 	bool Start();
 	update_status InputUpdate();
 	update_status LogicUpdate();
+	update_status RenderUpdate0();
 	update_status RenderUpdate1();
 	update_status RenderUpdate2();
 	bool CleanUp();
@@ -76,6 +77,7 @@ public:
 private:
 
 	Enemy* SpawnEnemy(const EnemyInfo& info);
+	void RenderEnemy(Enemy*);
 
 private:
 	EnemyInfo queue[MAX_ENEMIES];

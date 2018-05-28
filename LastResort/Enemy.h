@@ -29,7 +29,7 @@ public:
 	int dmg_frames = 0;
 	int flashing_interval = -1;
 	bool isDamaged = false;
-	int renderLayer = 0;
+	int renderLayer = 1;
 
 	//Enemy ------
 	Enemy* enemySpawned;

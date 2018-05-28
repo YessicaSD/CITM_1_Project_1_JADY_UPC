@@ -7,6 +7,9 @@
 
 Enemy_RearTurret::Enemy_RearTurret(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t) : Enemy(x, y, hp, scoreValue, pu_t)
 {
+	//Render layer
+	renderLayer = 0;
+
 	//Animation
 	rearTurretRect = { 223, 213, 32, 32 };
 

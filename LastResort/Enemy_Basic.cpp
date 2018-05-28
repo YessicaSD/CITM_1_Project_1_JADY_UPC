@@ -19,7 +19,6 @@ Enemy_Basic::Enemy_Basic(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu
 
 void Enemy_Basic::Move()
 {
-
 	position.x -= 1;
 	position.y = fixedY + App->stage05->spawnPos.y;//We fix the y position to be the same as the background
 }
