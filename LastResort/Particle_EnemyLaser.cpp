@@ -67,7 +67,7 @@ void Particle_EnemyLaser:: Move()
 			go_right = true;
 			else
 				go_left = true;
-			App->audio->ControlSFX(App->particles->laserTravelling, PLAY_AUDIO);
+			App->audio->ControlAudio(App->particles->laserTravelling, PLAY_AUDIO);
 		}
 			
 	}

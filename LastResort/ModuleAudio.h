@@ -14,6 +14,7 @@ typedef struct _Mix_Music Mix_Music;
 //This struct makes not repeating sfx easier
 struct SFX
 {
+	int position = 0;
 	Mix_Chunk * sfx = nullptr;
 	bool hasPlayed = false;
 };
@@ -42,20 +43,22 @@ public:
 	update_status LogicUpdate();
 	bool CleanUp();
 
-	Mix_Chunk* const LoadSFX(const char* path);
-	Mix_Music* const LoadMUS(const char* path);
-	bool ControlMUS (Mix_Music* music, Audio_State state);
-	bool ControlSFX(Mix_Chunk* chunk, Audio_State state);
-	bool UnloadMUS(Mix_Music* music);
-	bool UnloadSFX(Mix_Chunk* chunk);
+	Mix_Chunk*  LoadSFX(const char* path);
+	Mix_Music*  LoadMUS(const char* path);
+
+	void ControlAudio (Mix_Music* music, Audio_State state);
+	void ControlAudio(Mix_Chunk* chunk, Audio_State state);
+
+	void UnloadMUS(Mix_Music* music);
+	void UnloadSFX(Mix_Chunk* chunk);
+
 private: 
 
 	Mix_Music* musics[MAX_MUSICS];
 	Mix_Chunk* sfx[MAX_SOUNDEFECTS];
 	int volumeMUS = GENERAL_MUSIC_VOLUME;
 	int volumeSFX= GENERAL_SFX_VOLUME;
-	uint last_chunk = 0;
-	uint last_music = 0;
+
 };
 
 

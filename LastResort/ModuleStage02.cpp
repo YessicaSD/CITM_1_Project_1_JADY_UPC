@@ -48,7 +48,7 @@ bool Module2lvlScene::Start()
 	BckSpam= App->textures->Load("Assets/lvl2/Backgroundlvl2Spritesheet.png");
 	//audios------------------------------------------------------------------------
 	lvl2Music = App->audio->LoadMUS("Assets/lvl2/04-THE-RUINS-OF-METRO-STAGE-2-_-TYRANNICAL-BOSS-2-.ogg");
-	App->audio->ControlMUS(lvl2Music, PLAY_AUDIO);
+	App->audio->ControlAudio(lvl2Music, PLAY_AUDIO);
 
 	return ret;
 }
@@ -78,7 +78,7 @@ bool Module2lvlScene::CleanUp() {
 	App->textures->Unload(lvl2ground);
 	App->textures->Unload(BckSpam);
 	//audios------------------------------------------------------------------------
-	App->audio->ControlMUS(lvl2Music, STOP_AUDIO);
+	App->audio->ControlAudio(lvl2Music, STOP_AUDIO);
 	App->audio->UnloadMUS(lvl2Music);
 
 	//Modules-----------------------------------------------------------------------

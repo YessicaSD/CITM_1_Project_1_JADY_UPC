@@ -71,7 +71,7 @@ bool ModuleNeoGeo::Start()
 
 
 	neogeoMusic = App->audio->LoadMUS("Assets/NeoGeo/NeoGeoSong.ogg");
-	App->audio->ControlMUS(neogeoMusic, PLAY_AUDIO);
+	App->audio->ControlAudio(neogeoMusic, PLAY_AUDIO);
 	return ret;
 }
 update_status ModuleNeoGeo::LogicUpdate()
@@ -190,7 +190,7 @@ bool ModuleNeoGeo::CleanUp() {
 	App->textures->Unload(neogeoTx);
 	App->textures->Unload(snkTx);
 	App->textures->Unload(proGearSpecTx);
-	App->audio->ControlMUS(neogeoMusic, STOP_AUDIO);
+	App->audio->ControlAudio(neogeoMusic, STOP_AUDIO);
 	App->audio->UnloadMUS(neogeoMusic);
 
 	return true;

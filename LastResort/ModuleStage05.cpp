@@ -161,7 +161,7 @@ bool Module5lvlScene::Start()
 	//Music -----------------------------------------------------------------------------------------------------
 
 	lvl5Music = App->audio->LoadMUS("Assets/lvl5/07-DON-T-TOUCH-ME-BABY-STAGE-5-1-_-FEAR-STAGE-5-2-_-LEGE.ogg");
-	App->audio->ControlMUS(lvl5Music, PLAY_AUDIO);
+	App->audio->ControlAudio(lvl5Music, PLAY_AUDIO);
 
 	//Enemies ---------------------------------------------------------------------------------------------------
 	//INFO: We'll calculate the x and y positions based on the position of the ship in Docs>ship.psd
@@ -574,7 +574,7 @@ bool Module5lvlScene::CleanUp() {
 
 	LOG("Unloading stage 05 scene");
 	//audios------------------------------------------------------------------------
-	App->audio->ControlMUS(lvl5Music, STOP_AUDIO);
+	App->audio->ControlAudio(lvl5Music, STOP_AUDIO);
 	App->audio->UnloadMUS(lvl5Music);
 	//Texture -----------------------------------------------------------------------
 	App->textures->Unload(starsTx);

@@ -65,10 +65,10 @@ void Enemy_RedBats::OnCollision(Collider* collider)
 	//Sfx REMEMBER: Improve it for 1.0----------------------------------
 	if (SDL_GetTicks() % 2)
 	{
-		App->audio->ControlSFX(App->particles->g_explosion01_1sfx, PLAY_AUDIO);
+		App->audio->ControlAudio(App->particles->g_explosion01_1sfx, PLAY_AUDIO);
 	}
 	else
 	{
-		App->audio->ControlSFX(App->particles->g_explosion02_1sfx, PLAY_AUDIO);
+		App->audio->ControlAudio(App->particles->g_explosion02_1sfx, PLAY_AUDIO);
 	}
 }

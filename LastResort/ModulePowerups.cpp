@@ -183,7 +183,7 @@ void ModulePowerups::OnCollision(Collider* c1, Collider* c2)
 			else
 			{
 				//Play the sound for getting a L, H or G powerup
-				App->audio->ControlSFX(getPowerupSFX, PLAY_AUDIO);
+				App->audio->ControlAudio(getPowerupSFX, PLAY_AUDIO);
 
 				//We give it this powerup
 				if (targetPlayer->powerupUpgrades < 4)//There are a maximum of 4 upgrades for each powerup

@@ -287,7 +287,7 @@ update_status ModuleUnit::RenderUpdate2()
 			//Play the charging SFX
 			//if(App->stageFunctionality->chargeSFX.hasPlayed == false)
 			//{
-			//	App->audio->ControlSFX(App->stageFunctionality->chargeSFX.sfx, PLAY_AUDIO);
+			//	App->audio->ControlAudio(App->stageFunctionality->chargeSFX.sfx, PLAY_AUDIO);
 			//	App->stageFunctionality->chargeSFX.hasPlayed = true;
 			//}
 			chargeFrame = chargeAnim.GetCurrentFrame();
@@ -377,12 +377,12 @@ void ModuleUnit::Rotating()
 	{
 		if(locked == true)
 		{
-			App->audio->ControlSFX(App->stageFunctionality->unlockUnitSFX.sfx, PLAY_AUDIO);
+			App->audio->ControlAudio(App->stageFunctionality->unlockUnitSFX.sfx, PLAY_AUDIO);
 			locked = false;
 		}
 		else
 		{
-			App->audio->ControlSFX(App->stageFunctionality->lockUnitSFX.sfx, PLAY_AUDIO);
+			App->audio->ControlAudio(App->stageFunctionality->lockUnitSFX.sfx, PLAY_AUDIO);
 			locked = true;
 		}
 	}
@@ -439,7 +439,7 @@ void ModuleUnit::Rotating()
 		
 		//if(App->stageFunctionality->chargeSFX.hasPlayed == false)
 		//{
-		//	App->audio->ControlSFX(App->stageFunctionality->chargeSFX.sfx, PLAY_AUDIO);
+		//	App->audio->ControlAudio(App->stageFunctionality->chargeSFX.sfx, PLAY_AUDIO);
 		//	App->stageFunctionality->chargeSFX.hasPlayed = true;
 		//}
 	}
@@ -453,7 +453,7 @@ void ModuleUnit::Rotating()
 			throwSpeed.x = cosf(currentOrbit) * throwingSpeed;
 			throwSpeed.y = sinf(currentOrbit) * throwingSpeed;
 			unitCol->SetDamage(12);
-			App->audio->ControlSFX(App->stageFunctionality->releaseChargeSFX.sfx, PLAY_AUDIO);
+			App->audio->ControlAudio(App->stageFunctionality->releaseChargeSFX.sfx, PLAY_AUDIO);
 			shootTime = SDL_GetTicks();
 		}
 		//If the player releases the button, we set the power to 0
