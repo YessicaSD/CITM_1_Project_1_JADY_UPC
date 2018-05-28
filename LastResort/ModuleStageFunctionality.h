@@ -6,7 +6,7 @@
 #include "ModuleAudio.h"
 
 struct SDL_Texture;
-struct Mix_Chunk;
+struct Sfx;
 
 enum debuggingElement
 {
@@ -53,10 +53,10 @@ public:
 	SDL_Texture* PlayerTexture = nullptr;
 	SDL_Texture* SpeedAnimationTex = nullptr;
 	//SFX
-	SFX releaseChargeSFX;
-	SFX chargeSFX;
-	SFX lockUnitSFX;
-	SFX unlockUnitSFX;
+	Sfx releaseChargeSFX;
+	Sfx chargeSFX;
+	Sfx lockUnitSFX;
+	Sfx unlockUnitSFX;
 
 	//Other-------------------------------------------------------------
 	bool godMode = false;

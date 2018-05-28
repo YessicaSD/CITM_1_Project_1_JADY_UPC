@@ -7,7 +7,7 @@
 
 struct SDL_Texture;
 struct SDL_Rect;
-struct Mix_Chunk;
+struct Sfx;
 class ModulePlayer;
 
 
@@ -58,7 +58,7 @@ public:
 	char *str_credits = nullptr;
 	char *str_debug = nullptr;
 	//Audios-------------------------------------
-	Mix_Chunk*coinsSfx=nullptr;
+	Sfx*coinsSfx=nullptr;
 	//Textures------------------------------------
 	SDL_Texture *uiTex = nullptr;
 	//Rectangles---------------------------------

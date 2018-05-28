@@ -4,7 +4,7 @@
 #include "Powerup.h"
 
 struct Collider;
-struct Mix_Chunk;
+struct Sfx;
 class Powerup_Speed : public Powerup
 {
 public:

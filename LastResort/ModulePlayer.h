@@ -15,7 +15,7 @@
 struct SDL_Texture;
 struct Collider; //SHOT
 class Particle;
-struct Mix_Chunk;
+struct Sfx;
 
 enum ShipFrames
 {
@@ -125,7 +125,7 @@ public:
 	Collider* playerCol = nullptr;
 	COLLIDER_TYPE shot_colType;
 	//Audios------------------------------------------------------------------//
-	Mix_Chunk* init_sfx = nullptr;
+	Sfx* init_sfx = nullptr;
 
 	//Win variables
 	bool winlvl;

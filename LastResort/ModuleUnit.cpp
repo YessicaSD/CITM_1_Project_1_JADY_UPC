@@ -377,12 +377,12 @@ void ModuleUnit::Rotating()
 	{
 		if(locked == true)
 		{
-			App->audio->ControlAudio(App->stageFunctionality->unlockUnitSFX.sfx, PLAY_AUDIO);
+			/*App->audio->ControlAudio(App->stageFunctionality->unlockUnitSFX.sfx, PLAY_AUDIO);*/  //HERE
 			locked = false;
 		}
 		else
 		{
-			App->audio->ControlAudio(App->stageFunctionality->lockUnitSFX.sfx, PLAY_AUDIO);
+			/*App->audio->ControlAudio(App->stageFunctionality->lockUnitSFX.sfx, PLAY_AUDIO);*/  //HERE
 			locked = true;
 		}
 	}
@@ -453,7 +453,7 @@ void ModuleUnit::Rotating()
 			throwSpeed.x = cosf(currentOrbit) * throwingSpeed;
 			throwSpeed.y = sinf(currentOrbit) * throwingSpeed;
 			unitCol->SetDamage(12);
-			App->audio->ControlAudio(App->stageFunctionality->releaseChargeSFX.sfx, PLAY_AUDIO);
+			/*App->audio->ControlAudio(App->stageFunctionality->releaseChargeSFX.sfx, PLAY_AUDIO);*/  //HERE
 			shootTime = SDL_GetTicks();
 		}
 		//If the player releases the button, we set the power to 0

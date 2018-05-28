@@ -4,7 +4,7 @@
 #include "Module.h"
 #include "Animation.h"
 #include "Globals.h"
-typedef struct _Mix_Music Mix_Music;
+struct  Music;
 
 struct SDL_Texture;
 
@@ -53,7 +53,7 @@ public:
 	char*str_time;
 	float speed = 0.3f;
 	//audios
-	Mix_Music* Titlemusic = nullptr;
+	Music* Titlemusic = nullptr;
 };
 
 #endif // __MODULEGAMETITLE_H__

@@ -16,7 +16,10 @@ ModuleAudio::ModuleAudio() : Module()
 		sfx[i] = nullptr;
 }
 
-ModuleAudio::~ModuleAudio() {}
+ModuleAudio::~ModuleAudio() {
+	Mix_CloseAudio();
+	Mix_Quit();
+}
 
 bool ModuleAudio::Init()
 {
@@ -66,73 +69,70 @@ bool ModuleAudio::CleanUp()
 
 	for (uint i = 0; i < MAX_SOUNDEFECTS; ++i) {
 		if (sfx[i] != nullptr) {
-			Mix_FreeChunk(sfx[i]);
+
+			Mix_FreeChunk(sfx[i]->audio);
+			delete sfx[i];
 			sfx[i] = nullptr;
 		}
 	}
 
 	for (uint i = 0; i < MAX_MUSICS; ++i) {
 		if (musics[i] != nullptr) {
-			Mix_FreeMusic(musics[i]);
+
+			Mix_FreeMusic(musics[i]->audio);
+			delete musics[i];
 			musics[i] = nullptr;
 		}
 	}
 
-	Mix_CloseAudio();
-	Mix_Quit();
 
 	return true;
 }
 
 
-Mix_Music*  ModuleAudio::LoadMUS(const char* path) {
+Music*  ModuleAudio::LoadMUS(const char* path) {
 
 	Mix_Music *music = nullptr;
 
 	music = Mix_LoadMUS(path);
 
-	if (music != nullptr)
+	for (int i = 0; i < MAX_MUSICS; ++i)
 	{
-		for (int i = 0; i < MAX_MUSICS; ++i)
+		if (musics[i] == nullptr)
 		{
-			if (musics[i] == nullptr)
-			{
-				musics[i] = music;
-				return music;
-			}
+			musics[i] = new Music;
+			musics[i]->audio = music;
+			return musics[i];
 		}
 	}
-	else
-		LOG("Unable to load music Mix Error: %s\n", Mix_GetError());
 
-	return music;
+	LOG("Unable to load music Mix Error: %s\n", Mix_GetError());
+	return nullptr;
 }
 
-Mix_Chunk*  ModuleAudio::LoadSFX(const char* path) {
+Sfx*  ModuleAudio::LoadSFX(const char* path) {
 
 	Mix_Chunk *chunk = nullptr;
 	chunk = Mix_LoadWAV(path);
 
-	if (chunk != NULL)
+
+	for (int i = 0; i < MAX_SOUNDEFECTS; ++i)
 	{
-		for (int i = 0; i < MAX_SOUNDEFECTS; ++i)
+		if (sfx[i] == nullptr)
 		{
-			if (sfx[i] == nullptr)
-			{
-				sfx[i] = chunk;
-				Mix_VolumeChunk(sfx[i], volumeSFX);
-				return chunk;
-			}
+			sfx[i] = new Sfx;
+			sfx[i]->audio = chunk;
+			Mix_VolumeChunk(sfx[i]->audio, volumeSFX);
+			return sfx[i];
 		}
 	}
-	else
-		LOG("Unable to load sfx Mix Error: %s\n", Mix_GetError());
 
-	return chunk;
+	LOG("Unable to load music Mix Error: %s\n", Mix_GetError());
+	return nullptr;
 }
 
 
-void ModuleAudio::UnloadMUS(Mix_Music * music) {
+void ModuleAudio::UnloadMUS(Music * music) {
 
 
 	bool unloaded = false;
@@ -141,7 +141,8 @@ void ModuleAudio::UnloadMUS(Mix_Music * music) {
 	{
 		if (musics[i] == music && music != nullptr)
 		{
-			Mix_FreeMusic(music);
+			Mix_FreeMusic(musics[i]->audio);
+			delete musics[i];
 			musics[i] = nullptr;
 			unloaded = true;
 			break;
@@ -154,7 +155,7 @@ void ModuleAudio::UnloadMUS(Mix_Music * music) {
 
 }
 
-void ModuleAudio::UnloadSFX(Mix_Chunk * sound_fx) {
+void ModuleAudio::UnloadSFX(Sfx * sound_fx) {
 
 	bool unloaded = false;
 
@@ -162,7 +163,8 @@ void ModuleAudio::UnloadSFX(Mix_Chunk * sound_fx) {
 	{
 		if (sfx[i] == sound_fx && sound_fx != nullptr)
 		{
-			Mix_FreeChunk(sound_fx);
+			Mix_FreeChunk(sfx[i]->audio);
+			delete sfx[i];
 			sfx[i] = nullptr;
 			unloaded = true;
 			break;
@@ -175,7 +177,7 @@ void ModuleAudio::UnloadSFX(Mix_Chunk * sound_fx) {
 }
 
 
-void ModuleAudio::ControlAudio(Mix_Music* music, Audio_State state) {
+void ModuleAudio::ControlAudio(Music* music, Audio_State state) {
 
 
 	for (uint i = 0; i < MAX_MUSICS; ++i) {
@@ -186,7 +188,7 @@ void ModuleAudio::ControlAudio(Mix_Music* music, Audio_State state) {
 			{
 			case PLAY_AUDIO:
 				if (!Mix_PlayingMusic())
-					Mix_PlayMusic(musics[i], 3);
+					Mix_PlayMusic(musics[i]->audio, 3);
 				else
 					LOG("Music is already playing");
 				break;
@@ -201,7 +203,7 @@ void ModuleAudio::ControlAudio(Mix_Music* music, Audio_State state) {
 	}
 }
 
-void ModuleAudio::ControlAudio(Mix_Chunk* chunk, Audio_State state) {
+void ModuleAudio::ControlAudio(Sfx* chunk, Audio_State state) {
 
 
 	for (uint i = 0; i < MAX_SOUNDEFECTS; ++i) {
@@ -212,7 +214,7 @@ void ModuleAudio::ControlAudio(Mix_Chunk* chunk, Audio_State state) {
 			{
 			case PLAY_AUDIO:
 
-				if (Mix_PlayChannel(-1, sfx[i], 0) == -1) {
+				if (Mix_PlayChannel(-1, sfx[i]->audio, 0) == -1) {
 					LOG("Unable to play SFX Mix Error: %s\n", Mix_GetError());
 				}
 

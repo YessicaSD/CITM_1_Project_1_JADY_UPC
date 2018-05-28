@@ -7,7 +7,7 @@
 #include "p2Point.h"
 
 struct SDL_Texture;
-typedef struct _Mix_Music Mix_Music;
+struct  Music;
 
 class ModuleStage01 : public Module
 {
@@ -59,7 +59,7 @@ public:
 	uint randoms[27];
 	uint frame;
 	//Audios
-	Mix_Music* music_01 = nullptr;
+	Music* music_01 = nullptr;
 
 	SDL_Texture* groundAndTunel = nullptr;
 	SDL_Texture* PurpleBuildings = nullptr;
