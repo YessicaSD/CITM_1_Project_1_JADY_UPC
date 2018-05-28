@@ -13,4 +13,4 @@ public:
 	void Draw();
 };
 
-#endif // __PARTICLE_ORANGE_BALL_H__
+#endif // __PARTICLE_FOLLOW_BACKGROUND_H__

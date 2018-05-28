@@ -131,6 +131,7 @@
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleGMissile.h" />
     <ClInclude Include="Particle_EnemyLaser.h" />
+    <ClInclude Include="Particle_Fireball.h" />
     <ClInclude Include="Particle_Follow_background.h" />
     <ClInclude Include="Particle_HMissile.h" />
     <ClInclude Include="Particle_Missile.h" />
@@ -200,6 +201,7 @@
     <ClCompile Include="ModuleWindow.cpp" />
     <ClCompile Include="Enemy_Outdoor_turret.cpp" />
     <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="Particle_Fireball.cpp" />
     <ClCompile Include="Particle_Follow_background.cpp" />
     <ClCompile Include="Particle_HMissile.cpp" />
     <ClCompile Include="Particle_Missile.cpp" />

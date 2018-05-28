@@ -14,6 +14,7 @@
 #include "Particle_Follow_background.h"
 #include "Particle_HMissile.h"
 #include "Particle_Missile.h"
+#include "Particle_Fireball.h"
 #include "ModuleStage05.h"
 #include "SDL/include/SDL_timer.h"
 
@@ -185,6 +186,9 @@ Particle* ModuleParticles::AddParticle(Particle& particle, fPoint position, fPoi
 				break;
 			case PARTICLE_MISSILE:
 				p = new Particle_Missile(particle, position, speed, delay, colType, tex);
+				break;
+			case PARTICLE_FIREBALL:
+				p = new Particle_Fireball(particle, position, speed, delay, colType, tex);
 				break;
 			}
 
