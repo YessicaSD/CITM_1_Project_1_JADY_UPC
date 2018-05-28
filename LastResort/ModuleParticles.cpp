@@ -95,28 +95,32 @@ bool ModuleParticles::CleanUp()
 
 update_status ModuleParticles::LogicUpdate()
 {
+	//Move particles
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
-		//If there isn't a particle in that position of the array, go to the next particle in the array
-		if (active[i] == nullptr)
+		if (active[i] != nullptr)
 		{
-			continue;
-		}	
-
-		//Check if it needs to be deleted
-		if (active[i]->CheckParticleDeath() == true)
-		{
-			//Delete the particle
-			delete active[i];
-			active[i] = nullptr;
-		}
-
-		else if (SDL_GetTicks() >= active[i]->born)
-		{
-			//Update the particle
-			active[i]->Move();
+			if (SDL_GetTicks() >= active[i]->born)
+			{
+				//Update the particle
+				active[i]->Move();
+			}
 		}
 	}
+
+	//Check if it needs to be deleted
+	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
+	{
+		if (active[i] != nullptr)
+		{
+			if (active[i]->CheckParticleDeath() == true)
+			{
+				delete active[i];
+				active[i] = nullptr;
+			}
+		}
+	}
+
 	return UPDATE_CONTINUE;
 }
 
@@ -124,15 +128,9 @@ update_status ModuleParticles::RenderUpdate0()
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
-		//If there isn't a particle in that position of the array, go to the next particle in the array
-		if (active[i] == nullptr)
+		if (active[i] != nullptr)
 		{
-			continue;
-		}
-
-		if (SDL_GetTicks() >= active[i]->born)
-		{
-			if(active[i]->renderLayer == 0)
+			if (SDL_GetTicks() >= active[i]->born && active[i]->renderLayer == 0)
 			{
 				//Draw the particle on layer 0
 				active[i]->Draw();
@@ -146,15 +144,9 @@ update_status ModuleParticles::RenderUpdate1()
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
-		//If there isn't a particle in that position of the array, go to the next particle in the array
-		if (active[i] == nullptr)
+		if (active[i] != nullptr)
 		{
-			continue;
-		}
-
-		if (SDL_GetTicks() >= active[i]->born)
-		{
-			if (active[i]->renderLayer == 1)
+			if (SDL_GetTicks() >= active[i]->born && active[i]->renderLayer == 1)
 			{
 				//Draw the particle on layer 1
 				active[i]->Draw();
