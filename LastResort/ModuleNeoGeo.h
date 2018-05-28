@@ -8,7 +8,7 @@
 #define NEOGEOWIDTH 227
 
 struct SDL_Texture;
-typedef struct _Mix_Music Mix_Music;
+struct  Music;
 
 class ModuleNeoGeo : public Module
 {
@@ -63,7 +63,7 @@ public:
 	const int snkHeight = 19;
 
 	//Music
-	Mix_Music * neogeoMusic = nullptr;
+	Music * neogeoMusic = nullptr;
 };
 
 #endif // __MODULENEOGEO_H__

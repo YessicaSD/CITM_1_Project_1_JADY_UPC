@@ -12,7 +12,7 @@
 struct SDL_Texture;
 struct Collider;
 enum COLLIDER_TYPE;
-struct Mix_Chunk;
+struct Sfx;
 
 enum PARTICLE_TYPE
 {
@@ -58,7 +58,7 @@ public:
 	SDL_Texture * laserTx = nullptr;
 	
 	//SFX----------------------------------------------
-	Mix_Chunk* AsteroidDestroySfx;
+	Sfx* AsteroidDestroySfx;
 	//Mix_Chunk* g_explosion02_2sfx = nullptr;
 	//Mix_Chunk* g_explosion02_3sfx = nullptr;	
 	//Mix_Chunk* g_explosion01_2sfx = nullptr;
@@ -68,13 +68,13 @@ public:
 	//- Player
 	Particle basicShot;
 	Particle basic_explosion; //Basic Shot Explosion
-	Mix_Chunk* basicShotSfx = nullptr;
+	Sfx* basicShotSfx = nullptr;
 
 	Particle unit_explosion;//Unit shot explosion
 	Particle unitShot;
 
 	Particle death_explosion;//Death explosion 
-	Mix_Chunk* deathSfx = nullptr;
+	Sfx* deathSfx = nullptr;
 
 	//- PoweUps 
 	Particle basicLaser; //Basic laser Shot
@@ -83,7 +83,7 @@ public:
 	Particle bigRings;
 	Particle bigRingsExplotion;
 	Particle hMissile;
-	Mix_Chunk* basicLaserFx = nullptr;
+	Sfx* basicLaserFx = nullptr;
 
 	Particle groundMissile;
 	Particle gM_explosion;
@@ -92,12 +92,12 @@ public:
 	//- General
 	Particle g_explosion01;
 	Particle g_explosion02;
-	Mix_Chunk* g_explosion01_1sfx = nullptr;
-	Mix_Chunk* g_explosion02_1sfx = nullptr;
-	Mix_Chunk* laserEnemyShot_sfx = nullptr;
-	Mix_Chunk* laserTravelling = nullptr;
-	Mix_Chunk* rocketExplosion = nullptr;
-	Mix_Chunk* rocket = nullptr;
+	Sfx* g_explosion01_1sfx = nullptr;
+	Sfx* g_explosion02_1sfx = nullptr;
+	Sfx* laserEnemyShot_sfx = nullptr;
+	Sfx* laserTravelling = nullptr;
+	Sfx* rocketExplosion = nullptr;
+	Sfx* rocket = nullptr;
 
 	//- Enemies
 	Particle i_f_Shot;

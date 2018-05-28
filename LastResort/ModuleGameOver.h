@@ -4,7 +4,7 @@
 #include "Globals.h"
 #include "Animation.h"
 struct SDL_Texture;
-typedef struct _Mix_Music Mix_Music;
+struct  Music;
 
 class ModuleGameOver : public Module
 {

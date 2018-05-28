@@ -15,7 +15,7 @@
 #define FINAL_COLLIDERS_NUM 13//The number of colliders the final part is made of (see Docs>finalPartColliders.psd)
 #define CHECKPOIN_NUMBER 25
 
-typedef struct _Mix_Music Mix_Music;
+struct  Music;
 
 class Module5lvlScene : public Module
 {
@@ -89,8 +89,8 @@ public:
 	Animation bossAnim;
 
 	//Music-----------------------------------
-	Mix_Music* lvl5Music = nullptr;
-	SFX fallShipPartSFX;
+	Music* lvl5Music = nullptr;
+	Sfx fallShipPartSFX;
 
 	//Ship part front-------------------------
 	SDL_Rect shipPartRect = { 2, 0, 251, 96 };

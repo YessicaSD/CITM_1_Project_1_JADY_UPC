@@ -51,7 +51,7 @@ bool ModuleStageClear::Start()
 	SDL_RenderFillRect(App->render->renderer, &backgroundBlack);
 
 	lvlComplitedMusic = App->audio->LoadMUS("Assets/General/Fx/Stage clear.ogg");
-	App->audio->ControlMUS(lvlComplitedMusic, PLAY_AUDIO);
+	App->audio->ControlAudio(lvlComplitedMusic, PLAY_AUDIO);
 
 	start_time = SDL_GetTicks();
 
@@ -61,7 +61,7 @@ bool ModuleStageClear::Start()
 bool ModuleStageClear::CleanUp()
 {
 	//Remove all memory leaks
-	App->audio->ControlMUS(lvlComplitedMusic, STOP_AUDIO);
+	App->audio->ControlAudio(lvlComplitedMusic, STOP_AUDIO);
 	App->audio->UnloadMUS(lvlComplitedMusic);
 
 	LOG("Unloading ready scene");

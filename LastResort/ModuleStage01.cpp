@@ -76,7 +76,7 @@ bool ModuleStage01::Start()
 
 	//audios------------------------------------------------------------------------
 	music_01 = App->audio->LoadMUS("Assets/stage1.ogg");
-	App->audio->ControlMUS(music_01, PLAY_AUDIO);
+	App->audio->ControlAudio(music_01, PLAY_AUDIO);
 
 	//Enable------------------------------------------------------------------------
 	App->stageFunctionality->Enable();
@@ -211,7 +211,7 @@ bool ModuleStage01::CleanUp()
 	App->textures->Unload(bckgndLightsTx);
 	App->textures->Unload(tunnelLightsTx);
 	//audios------------------------------------------------------------------------
-	App->audio->ControlMUS(music_01, STOP_AUDIO);
+	App->audio->ControlAudio(music_01, STOP_AUDIO);
 	App->audio->UnloadMUS(music_01);
 	//Modules-----------------------------------------------------------------------
 	App->stageFunctionality->Disable();

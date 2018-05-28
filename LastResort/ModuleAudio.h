@@ -5,33 +5,32 @@
 #include "Module.h"
 #include "SDL_mixer\include\SDL_mixer.h"
 
-#define MAX_MUSICS 8
-#define MAX_SOUNDEFECTS 50
+#define MAX_MUSICS 10
+#define MAX_SOUNDEFECTS 100
 
 
 typedef struct _Mix_Music Mix_Music;
-
-//This struct makes not repeating sfx easier
-struct SFX
-{
-	Mix_Chunk * sfx = nullptr;
-	bool hasPlayed = false;
-};
 
 enum Audio_State {
 	PLAY_AUDIO,
 	STOP_AUDIO, 
 };
 
-//struct Music {
-//	Mix_Music * music;
-//	char *name;
-//};
-//
-//struct Sfx {
-//	Mix_Chunk *chunk;
-//	char *name;
-//};
+struct Music {
+	int id = 0;
+	Mix_Music * audio = nullptr;
+	bool hasPlayed = false;
+	const char* name = nullptr;
+	
+};
+
+struct Sfx {
+	int id = 0;
+	Mix_Chunk *audio = nullptr;
+	bool hasPlayed = false;
+	const char* name = nullptr;
+};
+
 
 class ModuleAudio : public Module {
 public:
@@ -42,20 +41,23 @@ public:
 	update_status LogicUpdate();
 	bool CleanUp();
 
-	Mix_Chunk* const LoadSFX(const char* path);
-	Mix_Music* const LoadMUS(const char* path);
-	bool ControlMUS (Mix_Music* music, Audio_State state);
-	bool ControlSFX(Mix_Chunk* chunk, Audio_State state);
-	bool UnloadMUS(Mix_Music* music);
-	bool UnloadSFX(Mix_Chunk* chunk);
+	Sfx*  LoadSFX(const char* path);
+	Music*  LoadMUS(const char* path);
+
+	bool ControlAudio (Music* music, Audio_State state);
+	bool ControlAudio(Sfx* chunk, Audio_State state);
+
+	bool UnloadMUS(Music* music);
+	bool UnloadSFX(Sfx* chunk);
+
 private: 
 
-	Mix_Music* musics[MAX_MUSICS];
-	Mix_Chunk* sfx[MAX_SOUNDEFECTS];
+	Music* musics[MAX_MUSICS];
+	Sfx* sfx[MAX_SOUNDEFECTS];
 	int volumeMUS = GENERAL_MUSIC_VOLUME;
 	int volumeSFX= GENERAL_SFX_VOLUME;
-	uint last_chunk = 0;
-	uint last_music = 0;
+	int sfxID =0;
+	int musicID = 0;
 };
 
 

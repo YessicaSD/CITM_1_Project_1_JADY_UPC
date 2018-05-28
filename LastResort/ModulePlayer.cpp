@@ -208,7 +208,7 @@ void ModulePlayer::ShipAnimation()
 		current_animation = &initAnim.GetFrameEx();
 		if (initAnim.current_frame == 0)
 		{
-			App->audio->ControlSFX(init_sfx, PLAY_AUDIO);
+			App->audio->ControlAudio(init_sfx, PLAY_AUDIO);
 		}
 
 		if (initAnim.finished == true)
@@ -314,9 +314,9 @@ void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
 	currentPowerUp = POWERUP_TYPE::NOPOWERUP;
 
 	if (SDL_GetTicks() % 2)	//Sfx REMEMBER: Improve it for 1.0
-		App->audio->ControlSFX(App->particles->g_explosion01_1sfx, PLAY_AUDIO);
+		App->audio->ControlAudio(App->particles->g_explosion01_1sfx, PLAY_AUDIO);
 	else
-		App->audio->ControlSFX(App->particles->g_explosion02_1sfx, PLAY_AUDIO);
+		App->audio->ControlAudio(App->particles->g_explosion02_1sfx, PLAY_AUDIO);
 
 	KillUnit();
 	//Delete player collider--------------------------------------------------------

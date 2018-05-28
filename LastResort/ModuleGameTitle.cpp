@@ -39,7 +39,7 @@ bool ModuleGameTitle:: Start()
 	T10Texture = App->textures->Load("Assets/LastResortTitle/T10.png");
 	//audios--------------------------------------------------------------------------------
 	Titlemusic=App->audio->LoadMUS("Assets/LastResortTitle/02-LAST-RESORT-TITLE.ogg");
-	App->audio->ControlMUS(Titlemusic, PLAY_AUDIO);
+	App->audio->ControlAudio(Titlemusic, PLAY_AUDIO);
 	//UI-------------------------------------------------------------------------------------
 	App->ui->currentScene = TITLE_SCENE;
 	App->ui->ShowUi();
@@ -86,7 +86,7 @@ bool ModuleGameTitle::CleanUp() {
 	App->textures->Unload(R9Texture);
 	App->textures->Unload(T10Texture);
 	//audios------------------------------------------------------------------------
-	App->audio->ControlMUS(Titlemusic, STOP_AUDIO);
+	App->audio->ControlAudio(Titlemusic, STOP_AUDIO);
 	App->audio->UnloadMUS(Titlemusic);
 
 	//Reset variables---------------------------------------------------------------
@@ -153,7 +153,7 @@ update_status ModuleGameTitle::LogicUpdate() {
 		}
 		App->fonts->BlitText(50, 150, 0, str_time);
 		--time;
-		App->audio->ControlMUS(Titlemusic, STOP_AUDIO);
+		App->audio->ControlAudio(Titlemusic, STOP_AUDIO);
 	}*/
 
 	if (App->player1->isActive == true || App->player2->isActive == true)

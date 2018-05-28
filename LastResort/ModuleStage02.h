@@ -6,7 +6,7 @@
 #include "Animation.h"
 #include "Globals.h"
 #include "SDL\include\SDL.h"
-typedef struct _Mix_Music Mix_Music;
+struct  Music;
 class Module2lvlScene : public Module
 {
 public:
@@ -25,7 +25,7 @@ public:
 
 	SDL_Rect  BckSpamRect;
 	SDL_Rect  BckSpamRect2;
-	Mix_Music* lvl2Music = nullptr;
+	Music* lvl2Music = nullptr;
 
 };
 

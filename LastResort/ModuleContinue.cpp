@@ -67,7 +67,7 @@ bool ModuleContinue::Start() {
 	continueTex = App->textures->Load("Assets/Continue/continue.png");
 	//audios------------------------------------------------------------------------
 	continue_and_go = App->audio->LoadMUS("Assets/Continue/continue_and_go.ogg");
-	App->audio->ControlMUS(continue_and_go, PLAY_AUDIO);
+	App->audio->ControlAudio(continue_and_go, PLAY_AUDIO);
 	//animations--------------------------------------------------------------------
 	numbersAnim.current_frame = 9;
 	for (int x = 0; x < 8; ++x) {
@@ -87,7 +87,7 @@ bool ModuleContinue::CleanUp() {
 	App->textures->Unload(continueTex);
 	//audios------------------------------------------------------------------------
 	if (time_finished == false) {
-		App->audio->ControlMUS(continue_and_go, STOP_AUDIO);
+		App->audio->ControlAudio(continue_and_go, STOP_AUDIO);
 		App->audio->UnloadMUS(continue_and_go);
 	}
 	//UI----------------------------------------------------------------------------

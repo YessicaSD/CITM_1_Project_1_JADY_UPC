@@ -12,7 +12,7 @@
 struct SDL_Texture;
 struct Collider;
 enum COLLIDER_TYPE;
-struct Mix_Chunk;
+struct Sfx;
 
 class Particle
 {
@@ -37,7 +37,7 @@ public:
 	fPoint speed;
 	Uint32 born = 0;
 	Uint32 life = 0;
-	Mix_Chunk *sfx = nullptr;
+	Sfx *sfx = nullptr;
 	int renderLayer = 1;
 
 	bool flipY = false;

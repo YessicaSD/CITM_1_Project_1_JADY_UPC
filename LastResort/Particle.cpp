@@ -30,7 +30,7 @@ Particle::Particle(Particle& sentParticle, fPoint position, fPoint speed, Uint32
 	this->texture = tex;
 
 	//- Play audio
-	if (sentParticle.sfx != nullptr) { App->audio->ControlSFX(sentParticle.sfx, PLAY_AUDIO); }
+	if (sentParticle.sfx != nullptr) { App->audio->ControlAudio(sentParticle.sfx, PLAY_AUDIO); }
 
 	if (colType != COLLIDER_IGNORE_HIT)
 	{
