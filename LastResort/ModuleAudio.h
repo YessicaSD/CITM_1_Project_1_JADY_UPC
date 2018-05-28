@@ -5,14 +5,11 @@
 #include "Module.h"
 #include "SDL_mixer\include\SDL_mixer.h"
 
-#define MAX_MUSICS 8
-#define MAX_SOUNDEFECTS 60
+#define MAX_MUSICS 10
+#define MAX_SOUNDEFECTS 100
 
 
 typedef struct _Mix_Music Mix_Music;
-
-
-//This struct makes not repeating sfx easier
 
 enum Audio_State {
 	PLAY_AUDIO,
@@ -23,6 +20,7 @@ struct Music {
 	int id = 0;
 	Mix_Music * audio = nullptr;
 	bool hasPlayed = false;
+	const char* name = nullptr;
 	
 };
 
@@ -30,6 +28,7 @@ struct Sfx {
 	int id = 0;
 	Mix_Chunk *audio = nullptr;
 	bool hasPlayed = false;
+	const char* name = nullptr;
 };
 
 
@@ -45,11 +44,11 @@ public:
 	Sfx*  LoadSFX(const char* path);
 	Music*  LoadMUS(const char* path);
 
-	void ControlAudio (Music* music, Audio_State state);
-	void ControlAudio(Sfx* chunk, Audio_State state);
+	bool ControlAudio (Music* music, Audio_State state);
+	bool ControlAudio(Sfx* chunk, Audio_State state);
 
-	void UnloadMUS(Music* music);
-	void UnloadSFX(Sfx* chunk);
+	bool UnloadMUS(Music* music);
+	bool UnloadSFX(Sfx* chunk);
 
 private: 
 
@@ -57,7 +56,8 @@ private:
 	Sfx* sfx[MAX_SOUNDEFECTS];
 	int volumeMUS = GENERAL_MUSIC_VOLUME;
 	int volumeSFX= GENERAL_SFX_VOLUME;
-
+	int sfxID =0;
+	int musicID = 0;
 };
 
 
