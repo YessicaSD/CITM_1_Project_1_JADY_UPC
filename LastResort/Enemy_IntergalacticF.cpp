@@ -12,6 +12,8 @@
 
 Enemy_Intergalactic_F::Enemy_Intergalactic_F(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t) : Enemy(x, y, hp, scoreValue, pu_t)
 {
+	renderLayer = 0;
+
 	shootFrames = rand() %120 + 120;
 
 	//Position--------------------------------------
@@ -140,9 +142,9 @@ void Enemy_Intergalactic_F::Move()
 			currentFrames = -1;
 			isShooting = true;
 			if (currentDir == RIGHT)
-				App->particles->AddParticle(App->particles->i_f_Shot, { (float)(position.x -24), (float)(position.y - 8) }, { 2.8f, 0.0f }, App->particles->particlesTx, COLLIDER_ENEMY_SHOT2, 0, PARTICLE_FOLLOW_WORLD);
+				App->particles->AddParticle(App->particles->i_f_Shot, { (float)(position.x -24), (float)(position.y - 8) }, { 2.8f, 0.0f }, App->particles->particlesTx, COLLIDER_ENEMY_SHOT, 0, PARTICLE_FOLLOW_WORLD);
 			else
-				App->particles->AddParticle(App->particles->i_f_Shot, { (float)(position.x - 24), (float)(position.y -8) }, {- 2.8f, 0.0f }, App->particles->particlesTx, COLLIDER_ENEMY_SHOT2, 0, PARTICLE_FOLLOW_WORLD);
+				App->particles->AddParticle(App->particles->i_f_Shot, { (float)(position.x - 24), (float)(position.y -8) }, {- 2.8f, 0.0f }, App->particles->particlesTx, COLLIDER_ENEMY_SHOT, 0, PARTICLE_FOLLOW_WORLD);
 
 		}
 		else
