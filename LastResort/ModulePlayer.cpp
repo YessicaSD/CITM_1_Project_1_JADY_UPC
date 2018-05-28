@@ -170,7 +170,6 @@ update_status ModulePlayer::RenderUpdate2()
 					App->particles->AddParticle(App->particles->littleRings, { (float)(ShotPosition.x + 10), (float)(ShotPosition.y + 6) }, { 10, 0 }, App->stageFunctionality->PlayerTexture, shot_colType, 0);
 				}
 
-
 			}
 			if (powerupUpgrades >= 4)
 			{

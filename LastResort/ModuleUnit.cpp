@@ -419,7 +419,7 @@ void ModuleUnit::Rotating()
 			App->particles->unitShot,
 			{ position.x + shotPosXDifferences[turnAroundToRender], position.y + shotPosYDifferences[turnAroundToRender]},
 			{ (unitProjectileSpeed * cosf(angleValue[turnAroundToRender])) , (unitProjectileSpeed * sinf(angleValue[turnAroundToRender]))},
-			playerToFollow->PlayerTexture,
+			App->stageFunctionality->PlayerTexture,
 			playerToFollow->shot_colType,
 			0);
 	}
