@@ -377,12 +377,12 @@ void ModuleUnit::Rotating()
 	{
 		if(locked == true)
 		{
-			/*App->audio->ControlAudio(App->stageFunctionality->unlockUnitSFX.sfx, PLAY_AUDIO);*/  //HERE
+			App->audio->ControlAudio(App->stageFunctionality->unlockUnitSFX, PLAY_AUDIO);
 			locked = false;
 		}
 		else
 		{
-			/*App->audio->ControlAudio(App->stageFunctionality->lockUnitSFX.sfx, PLAY_AUDIO);*/  //HERE
+			App->audio->ControlAudio(App->stageFunctionality->lockUnitSFX, PLAY_AUDIO);
 			locked = true;
 		}
 	}
@@ -453,7 +453,7 @@ void ModuleUnit::Rotating()
 			throwSpeed.x = cosf(currentOrbit) * throwingSpeed;
 			throwSpeed.y = sinf(currentOrbit) * throwingSpeed;
 			unitCol->SetDamage(12);
-			/*App->audio->ControlAudio(App->stageFunctionality->releaseChargeSFX.sfx, PLAY_AUDIO);*/  //HERE
+			App->audio->ControlAudio(App->stageFunctionality->releaseChargeSFX, PLAY_AUDIO);
 			shootTime = SDL_GetTicks();
 		}
 		//If the player releases the button, we set the power to 0
@@ -752,6 +752,7 @@ void ModuleUnit::OnCollisionBouncingOnTerrain(Collider* collider1, Collider* col
 		}
 	}
 
+	App->audio->ControlAudio(App->stageFunctionality->bounceUnitSFX, PLAY_AUDIO);
 	CheckHitHeavyEnemy(collider1, collider2);
 }
 

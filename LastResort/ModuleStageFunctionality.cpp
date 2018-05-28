@@ -44,11 +44,12 @@ bool ModuleStageFunctionality::Start()
 	//Unit
 	//- Textures
 
-	//- Audio  //HERE
-	//releaseChargeSFX.sfx = App->audio->LoadSFX("Assets/Unit/ReleasingCharge.wav");
-	//chargeSFX.sfx = App->audio->LoadSFX("Assets/Unit/Charging.wav");
-	//lockUnitSFX.sfx = App->audio->LoadSFX("Assets/Unit/Lock.wav");
-	//unlockUnitSFX.sfx = App->audio->LoadSFX("Assets/Unit/Unlock.wav");
+	//- Audio
+	releaseChargeSFX = App->audio->LoadSFX("Assets/Unit/ReleasingCharge.wav");
+	chargeSFX        = App->audio->LoadSFX("Assets/Unit/Charging.wav");
+	lockUnitSFX      = App->audio->LoadSFX("Assets/Unit/Lock.wav");
+	unlockUnitSFX    = App->audio->LoadSFX("Assets/Unit/Unlock.wav");
+	bounceUnitSFX    = App->audio->LoadSFX("Assets/Unit/Bounce.wav");
 
 	App->player1->Enable();
 	App->player2->Enable();
@@ -71,11 +72,12 @@ bool ModuleStageFunctionality::CleanUp()
 	App->textures->Unload(PlayerTexture);
 	App->textures->Unload(SpeedAnimationTex);
 
-	//Unload audios  //HERE
-	//App->audio->UnloadSFX(releaseChargeSFX.sfx);
-	//App->audio->UnloadSFX(chargeSFX.sfx);
-	//App->audio->UnloadSFX(lockUnitSFX.sfx);
-	//App->audio->UnloadSFX(unlockUnitSFX.sfx);
+	//Unload audios
+	App->audio->UnloadSFX(releaseChargeSFX);
+	App->audio->UnloadSFX(chargeSFX);
+	App->audio->UnloadSFX(lockUnitSFX);
+	App->audio->UnloadSFX(unlockUnitSFX);
+	App->audio->UnloadSFX(bounceUnitSFX);
 
 	App->ui->HideUi();
 	App->player1->Disable();

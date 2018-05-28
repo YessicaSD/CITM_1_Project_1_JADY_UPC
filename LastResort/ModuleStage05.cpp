@@ -163,7 +163,7 @@ bool Module5lvlScene::Start()
 	lvl5Music = App->audio->LoadMUS("Assets/lvl5/07-DON-T-TOUCH-ME-BABY-STAGE-5-1-_-FEAR-STAGE-5-2-_-LEGE.ogg");
 	App->audio->ControlAudio(lvl5Music, PLAY_AUDIO);
 
-	/*fallShipPartSFX.sfx = App->audio->LoadSFX("Assets/lvl5/background/shipPartFalling.wav");*/  //HERE
+	fallShipPartSFX = App->audio->LoadSFX("Assets/lvl5/background/shipPartFalling.wav");
 
 
 	//Enemies ---------------------------------------------------------------------------------------------------
@@ -579,7 +579,7 @@ bool Module5lvlScene::CleanUp() {
 	//audios------------------------------------------------------------------------
 	App->audio->ControlAudio(lvl5Music, STOP_AUDIO);
 	App->audio->UnloadMUS(lvl5Music);
-	//App->audio->UnloadSFX(fallShipPartSFX.sfx);  //HERE
+	App->audio->UnloadSFX(fallShipPartSFX);
 	//Texture -----------------------------------------------------------------------
 	App->textures->Unload(starsTx);
 	App->textures->Unload(shipTx);
@@ -609,11 +609,12 @@ void Module5lvlScene::RenderShipPart()
 	App->render->Blit(shipPartTx, spawnPos.x + shipPartPos.x, spawnPos.y + shipPartPos.y, &shipPartRect);
 	if (rotatingTurretsKilled >= 5)
 	{
-		if (fallShipPartSFX.hasPlayed == false)
-		{
-			/*App->audio->ControlAudio(fallShipPartSFX.sfx, PLAY_AUDIO);*/  //HERE
-			fallShipPartSFX.hasPlayed = true;
-		}
+		//HERE
+		//if (fallShipPartSFX.hasPlayed == false)
+		//{
+		//	App->audio->ControlAudio(fallShipPartSFX.sfx, PLAY_AUDIO);
+		//	fallShipPartSFX.hasPlayed = true;
+		//}
 		shipPartPos.y += fallSpeed;
 	}
 }

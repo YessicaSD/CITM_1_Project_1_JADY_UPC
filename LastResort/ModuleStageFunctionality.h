@@ -53,10 +53,11 @@ public:
 	SDL_Texture* PlayerTexture = nullptr;
 	SDL_Texture* SpeedAnimationTex = nullptr;
 	//SFX
-	Sfx releaseChargeSFX;
-	Sfx chargeSFX;
-	Sfx lockUnitSFX;
-	Sfx unlockUnitSFX;
+	Sfx * releaseChargeSFX;
+	Sfx * chargeSFX;
+	Sfx * lockUnitSFX;
+	Sfx * unlockUnitSFX;
+	Sfx * bounceUnitSFX;
 
 	//Other-------------------------------------------------------------
 	bool godMode = false;
