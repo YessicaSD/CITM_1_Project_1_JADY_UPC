@@ -4,8 +4,7 @@
 #include "SDL/include/SDL.h"
 #pragma comment( lib, "SDL/libx86/SDL2.lib" )
 #pragma comment( lib, "SDL/libx86/SDL2main.lib" )
-#include <time.h>
-#include <stdio.h>
+
 enum main_states
 {
 	MAIN_CREATION,
@@ -19,7 +18,7 @@ Application* App = nullptr;
 
 int main(int argc, char* argv[])
 {
-	srand(time(NULL));
+	
 	ReportMemoryLeaks();
 
 	int main_return = EXIT_FAILURE;
