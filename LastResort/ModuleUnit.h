@@ -80,6 +80,7 @@ public:
 	//Inherited functions from Module class
 	bool Start();
 	update_status LogicUpdate();
+	update_status RenderUpdate2();
 	bool CleanUp();
 	void OnCollision(Collider*, Collider*);
 

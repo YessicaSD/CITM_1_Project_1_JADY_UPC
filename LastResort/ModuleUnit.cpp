@@ -276,6 +276,59 @@ update_status ModuleUnit::LogicUpdate()
 	return UPDATE_CONTINUE;
 }
 
+update_status ModuleUnit::RenderUpdate2()
+{
+	if     (unitPhase == UnitPhase::rotating||
+			unitPhase == UnitPhase::positioning)
+	{
+		//Render the charging animation
+		if (power > 0.1)
+		{
+			//Play the charging SFX
+			//if(App->stageFunctionality->chargeSFX.hasPlayed == false)
+			//{
+			//	App->audio->ControlSFX(App->stageFunctionality->chargeSFX.sfx, PLAY_AUDIO);
+			//	App->stageFunctionality->chargeSFX.hasPlayed = true;
+			//}
+			chargeFrame = chargeAnim.GetCurrentFrame();
+			App->render->Blit(
+				throwUnitTx,
+				(int)position.x - chargeXOffset[(int)chargeAnim.current_frame],
+				(int)position.y - chargeYOffset[(int)chargeAnim.current_frame],
+				&chargeFrame);
+		}
+
+		//Render the unit
+		//- Increase the animation current frame
+		currentSpinFrame += spinSpeed;
+
+		//- Limit the animation frames
+		if (currentSpinFrame >= SPIN_FRAMES) { currentSpinFrame = 0; }
+
+		//- Render
+		App->render->Blit(
+			unitTx,
+			(int)position.x - spriteXDifferences[turnAroundToRender],
+			(int)position.y - spriteYDifferences[turnAroundToRender],
+			&spinAnimation[turnAroundToRender].frame[(int)currentSpinFrame]);
+	}
+
+	else if(unitPhase == UnitPhase::throwing ||
+			unitPhase == UnitPhase::followingTerrain||
+			unitPhase == UnitPhase::bouncingOnTerrain||
+			unitPhase == UnitPhase::returning)
+	{
+		throwFrame = throwAnim.GetCurrentFrame();
+		App->render->Blit(
+			throwUnitTx,
+			(int)position.x - throwFrame.w / 2,
+			(int)position.y - throwFrame.h / 2,
+			&throwFrame);
+	}
+
+	return UPDATE_CONTINUE;
+}
+
 void ModuleUnit::Rotating()
 {
 	//Initial set up--------------------------------------------------------------------------------------
@@ -359,19 +412,6 @@ void ModuleUnit::Rotating()
 	//Update the collider position (after having set its position)--------------------------------------------
 	UpdateUnitColliders();
 
-	//Increase the animation current frame--------------------------------------------------------------------
-	currentSpinFrame += spinSpeed;
-
-	//- Limit the animation frames
-	if (currentSpinFrame >= SPIN_FRAMES) { currentSpinFrame = 0; }
-
-	//Set the rotation and render (all in the same place)-----------------------------------------------------
-	App->render->Blit(
-		unitTx,
-		(int)position.x - spriteXDifferences[turnAroundToRender],
-		(int)position.y - spriteYDifferences[turnAroundToRender],
-		&spinAnimation[turnAroundToRender].frame[(int)currentSpinFrame]);
-
 	//Shoot---------------------------------------------------------------------------------------------------
 	if (playerToFollow->Shoot() == true)
 	{
@@ -393,22 +433,15 @@ void ModuleUnit::Rotating()
 		if (power > 1) { power = 1; }
 	}
 
-	if(power > 0.1)
+	//- Play the charging SFX
+	if (power > 0.1)
 	{
-		//Play the charging SFX
+		
 		//if(App->stageFunctionality->chargeSFX.hasPlayed == false)
 		//{
 		//	App->audio->ControlSFX(App->stageFunctionality->chargeSFX.sfx, PLAY_AUDIO);
 		//	App->stageFunctionality->chargeSFX.hasPlayed = true;
 		//}
-
-		//Play the charging animation
-		chargeFrame = chargeAnim.GetCurrentFrame();
-		App->render->Blit(
-			throwUnitTx,
-			(int)position.x - chargeXOffset[(int)chargeAnim.current_frame],
-			(int)position.y - chargeYOffset[(int)chargeAnim.current_frame],
-			&chargeFrame);
 	}
 
 	if (playerToFollow->ReleaseCharge())
@@ -438,14 +471,6 @@ void ModuleUnit::Throwing()
 	//- Check return conditions-----------------------------------------------
 	CheckOutOfScreen();
 	CheckReturnTime();
-
-	//Render------------------------------------------------------------------
-	throwFrame = throwAnim.GetCurrentFrame();
-	App->render->Blit(
-		throwUnitTx,
-		(int)position.x - throwFrame.w / 2,
-		(int)position.y - throwFrame.h / 2,
-		&throwFrame);
 }
 
 void ModuleUnit::FollowingTerrain()
@@ -508,14 +533,6 @@ void ModuleUnit::FollowingTerrain()
 	CheckPlayerClose();
 	CheckOutOfScreen();
 	CheckReturnTime();
-
-	//Render------------------------------------------------------------------
-	throwFrame = throwAnim.GetCurrentFrame();
-	App->render->Blit(
-		throwUnitTx,
-		(int)position.x - throwFrame.w / 2,
-		(int)position.y - throwFrame.h / 2,
-		&throwFrame);
 }
 
 void ModuleUnit::BouncingOnTerrain()
@@ -528,14 +545,6 @@ void ModuleUnit::BouncingOnTerrain()
 	CheckPlayerClose();
 	CheckOutOfScreen();
 	CheckReturnTime();
-
-	//Render------------------------------------------------------------------
-	throwFrame = throwAnim.GetCurrentFrame();
-	App->render->Blit(
-		throwUnitTx,
-		(int)position.x - throwFrame.w / 2,
-		(int)position.y - throwFrame.h / 2,
-		&throwFrame);
 }
 
 
@@ -566,14 +575,6 @@ void ModuleUnit::Returning()
 		radius = 0;
 		unitPhase = UnitPhase::positioning;
 	}
-
-	//RENDER------------------------------------------------------------------
-	throwFrame = throwAnim.GetCurrentFrame();
-	App->render->Blit(
-		throwUnitTx,
-		(int)position.x - throwFrame.w / 2,
-		(int)position.y - throwFrame.h / 2,
-		&throwFrame);
 }
 
 void ModuleUnit::Positioning()
