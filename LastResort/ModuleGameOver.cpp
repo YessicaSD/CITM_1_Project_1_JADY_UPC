@@ -75,7 +75,7 @@ bool ModuleGameOver::CleanUp() {
 	return true;
 }
 
-update_status ModuleGameOver::Update() {
+update_status ModuleGameOver::LogicUpdate() {
 	//Timer---------------------------------------------------------------------
 	current_time = SDL_GetTicks() - start_time;
 	//Normal GameOver , Metal GameOve & Black Metal GameOverr---------------------

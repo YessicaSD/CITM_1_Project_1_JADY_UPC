@@ -53,13 +53,13 @@ bool ModuleUI::CleanUp() {
 	return true;
 }
 
-update_status  ModuleUI::PreUpdate() { 
+update_status  ModuleUI::InputUpdate() { 
 
 	return update_status::UPDATE_CONTINUE;
 }
 
 
-update_status ModuleUI::Update() {
+update_status ModuleUI::LogicUpdate() {
 
 	//Credits functionality------------------------------------------------------------------------------//
 

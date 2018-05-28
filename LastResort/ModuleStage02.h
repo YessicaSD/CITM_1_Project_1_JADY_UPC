@@ -16,7 +16,7 @@ public:
 	};
 
 	bool Start();
-	update_status Update();
+	update_status LogicUpdate();
 	bool CleanUp();
 public:
 	SDL_Texture * lvl2Text;

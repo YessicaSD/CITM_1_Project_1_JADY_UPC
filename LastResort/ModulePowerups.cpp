@@ -35,7 +35,7 @@ bool ModulePowerups::Start()
 	return true;
 }
 
-update_status ModulePowerups::Update()
+update_status ModulePowerups::LogicUpdate()
 {
 	//Move the powerups
 	for (uint i = 0; i < MAX_POWERUPS; ++i)
@@ -70,7 +70,7 @@ update_status ModulePowerups::Update()
 	return UPDATE_CONTINUE;
 }
 
-update_status ModulePowerups::PostUpdate()
+update_status ModulePowerups::RenderUpdate2()
 {
 	//Check camera position to decide what to despawn
 	for (uint i = 0; i < MAX_POWERUPS; ++i)

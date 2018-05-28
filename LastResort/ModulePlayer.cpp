@@ -94,7 +94,7 @@ bool ModulePlayer::CleanUp()
 
 
 
-update_status ModulePlayer::PreUpdate()
+update_status ModulePlayer::InputUpdate()
 {
 	//Movement-------------------------------------------------------------------------
 	if (canMove == true)
@@ -104,7 +104,7 @@ update_status ModulePlayer::PreUpdate()
 	return UPDATE_CONTINUE;
 }
 
-update_status ModulePlayer::Update()
+update_status ModulePlayer::LogicUpdate()
 {
 	PlayerTexture = App->stageFunctionality->PlayerTexture;
 	SpeedAnimationTex = App->stageFunctionality->SpeedAnimationTex;

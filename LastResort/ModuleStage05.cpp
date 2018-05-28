@@ -278,7 +278,7 @@ bool Module5lvlScene::Start()
 	return ret;
 }
 
-update_status Module5lvlScene::PreUpdate()
+update_status Module5lvlScene::InputUpdate()
 {
 	//----------Stars Scroll----------------------------------------------
 
@@ -300,7 +300,7 @@ update_status Module5lvlScene::PreUpdate()
 	return update_status::UPDATE_CONTINUE;
 };
 
-update_status Module5lvlScene::Update()
+update_status Module5lvlScene::LogicUpdate()
 {
 	//provisional-----------------------------
 	current_time = SDL_GetTicks() - start_time ;
@@ -337,7 +337,7 @@ update_status Module5lvlScene::Update()
 		currentCheckPoint = 0;
 
 	//- The mega checkpoint switch--------------------------------------
-	/*LOG("Current check point %i", cameraMovement.currentMov);*/
+	LOG("Current check point %i", cameraMovement.currentMov);
 	switch(cameraMovement.currentMov)
 	{
 	case 0:
@@ -376,6 +376,7 @@ update_status Module5lvlScene::Update()
 	case 4:
 		if (reachedCheckpoint[4] == false)
 		{
+			redBatsKilled = 0;
 			reachedCheckpoint[4] = true;
 		}
 		UpdateShipColliders();
@@ -457,6 +458,7 @@ update_status Module5lvlScene::Update()
 	case 14:
 		if (reachedCheckpoint[14] == false)
 		{
+			redBatsKilled = 0;
 			reachedCheckpoint[14] = true;
 		}
 		UpdateShipColliders();
@@ -505,6 +507,7 @@ update_status Module5lvlScene::Update()
 	case 20:
 		if (reachedCheckpoint[20] == false)
 		{
+			redBatsKilled = 0;
 			reachedCheckpoint[20] = true;
 		}
 		UpdateShipColliders();

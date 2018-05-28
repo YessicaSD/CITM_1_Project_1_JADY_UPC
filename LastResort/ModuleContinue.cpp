@@ -96,7 +96,7 @@ bool ModuleContinue::CleanUp() {
 	return true;
 }
 
-update_status ModuleContinue::Update() {
+update_status ModuleContinue::LogicUpdate() {
 	//Background--------------------------------------------------------------------
 	if (rest_bgAlpha) {
 		bgAlpha = bgAlpha - BgAlphaSpeed;

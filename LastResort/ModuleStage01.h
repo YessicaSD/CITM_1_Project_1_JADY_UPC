@@ -16,7 +16,7 @@ public:
 	~ModuleStage01();
 
 	bool Start();
-	update_status Update();
+	update_status LogicUpdate();
 	bool CleanUp();
 
 	//Supportive functions

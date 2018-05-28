@@ -16,9 +16,9 @@ public:
 	~ModuleRender();
 
 	bool Init();
-	update_status PostUpdate();
-	update_status Update();
-	update_status PreUpdate();
+	update_status RenderUpdate2();
+	update_status LogicUpdate();
+	update_status InputUpdate();
 	bool CleanUp();
 
 	/*void Render(SDL_Texture* Texture, SDL_Rect* section);*/

@@ -249,7 +249,7 @@ bool ModuleUnit::CleanUp()
 	return true;
 }
 
-update_status ModuleUnit::Update()
+update_status ModuleUnit::LogicUpdate()
 {
 	switch (unitPhase)
 	{

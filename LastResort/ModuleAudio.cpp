@@ -42,7 +42,7 @@ bool ModuleAudio::Init()
 	return ret;
 }
 
-update_status ModuleAudio::Update() {
+update_status ModuleAudio::LogicUpdate() {
 
 	if (App->input->keyboard[SDL_SCANCODE_KP_PLUS] == KEY_STATE::KEY_DOWN) {
 		volumeMUS += 5;

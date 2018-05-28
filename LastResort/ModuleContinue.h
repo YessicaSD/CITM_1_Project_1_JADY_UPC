@@ -12,7 +12,7 @@ public:
 	~ModuleContinue();
 
 	bool Start();
-	update_status Update();
+	update_status LogicUpdate();
 	bool CleanUp();
 private:
 	bool time_finished = false;

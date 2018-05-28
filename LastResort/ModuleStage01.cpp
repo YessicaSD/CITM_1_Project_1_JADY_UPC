@@ -223,7 +223,7 @@ bool ModuleStage01::CleanUp()
 
 
 // Update: draw background
-update_status ModuleStage01::Update()
+update_status ModuleStage01::LogicUpdate()
 {
 	//Time 
 	Current_time = SDL_GetTicks();

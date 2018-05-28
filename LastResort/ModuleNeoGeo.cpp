@@ -74,7 +74,7 @@ bool ModuleNeoGeo::Start()
 	App->audio->ControlMUS(neogeoMusic, PLAY_AUDIO);
 	return ret;
 }
-update_status ModuleNeoGeo::Update()
+update_status ModuleNeoGeo::LogicUpdate()
 {
 	//We change the scene if the player presses enter
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_LCTRL] == KEY_DOWN || App->input->Controller1[SDL_CONTROLLER_BUTTON_A] == KEY_DOWN || App->input->Controller1[SDL_CONTROLLER_BUTTON_B] == KEY_DOWN || App->input->Controller1[SDL_CONTROLLER_BUTTON_Y] == KEY_DOWN)

@@ -63,7 +63,7 @@ bool ModuleStageReady::CleanUp()
 
 // Update: draw background
 
-update_status ModuleStageReady::Update()
+update_status ModuleStageReady::LogicUpdate()
 {
 	// Draw everything
 

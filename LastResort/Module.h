@@ -13,11 +13,13 @@ public:
 	virtual ~Module() {}
 
 	// Game execution phases ---
-	virtual bool Init()					{ return true; }
-	virtual bool Start()				{ return true; }
-	virtual update_status PreUpdate()	{ return update_status::UPDATE_CONTINUE; }
-	virtual update_status Update()		{ return update_status::UPDATE_CONTINUE; }
-	virtual update_status PostUpdate() 	{ return update_status::UPDATE_CONTINUE; }
+	virtual bool Init()						{ return true; }
+	virtual bool Start()					{ return true; }
+	virtual update_status InputUpdate()		{ return update_status::UPDATE_CONTINUE; }
+	virtual update_status LogicUpdate()		{ return update_status::UPDATE_CONTINUE; }
+	virtual update_status RenderUpdate0()	{ return update_status::UPDATE_CONTINUE; }
+	virtual update_status RenderUpdate1()	{ return update_status::UPDATE_CONTINUE; }
+	virtual update_status RenderUpdate2() 	{ return update_status::UPDATE_CONTINUE; }
 	virtual bool CleanUp()				{ return true; }
 
 	// Module activation ---

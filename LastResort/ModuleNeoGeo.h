@@ -17,7 +17,7 @@ public:
 	~ModuleNeoGeo();
 
 	bool Start();
-	update_status Update();
+	update_status LogicUpdate();
 	bool CleanUp();
 
 public:

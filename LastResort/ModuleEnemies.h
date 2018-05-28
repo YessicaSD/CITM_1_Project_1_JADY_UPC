@@ -63,9 +63,9 @@ public:
 	~ModuleEnemies();
 
 	bool Start();
-	update_status PreUpdate();
-	update_status Update();
-	update_status PostUpdate();
+	update_status InputUpdate();
+	update_status LogicUpdate();
+	update_status RenderUpdate2();
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
 

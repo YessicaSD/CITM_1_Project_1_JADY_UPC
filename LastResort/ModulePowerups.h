@@ -37,8 +37,8 @@ public:
 	~ModulePowerups();
 
 	bool Start();
-	update_status Update();//We grab all our powerups and we render them
-	update_status PostUpdate();
+	update_status LogicUpdate();//We grab all our powerups and we render them
+	update_status RenderUpdate2();
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
 

@@ -24,7 +24,7 @@ public:
 	~ModuleInput();
 
 	bool Init();
-	update_status PreUpdate();
+	update_status InputUpdate();
 	bool CleanUp();
 
 public:

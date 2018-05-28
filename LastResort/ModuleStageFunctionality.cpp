@@ -89,7 +89,7 @@ bool ModuleStageFunctionality::CleanUp()
 	return true;
 }
 
-update_status ModuleStageFunctionality::PreUpdate()
+update_status ModuleStageFunctionality::InputUpdate()
 {
 	Debugging();
 	return UPDATE_CONTINUE;

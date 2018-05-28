@@ -97,7 +97,7 @@ bool ModuleGameTitle::CleanUp() {
 
 	return true;
 }
-update_status ModuleGameTitle::Update() {
+update_status ModuleGameTitle::LogicUpdate() {
 	//timer------------------------------------------------------------------------
 	current_time = SDL_GetTicks() - start_time; //current time init 0 and increment from star_time 
 

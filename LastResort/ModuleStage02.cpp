@@ -52,7 +52,7 @@ bool Module2lvlScene::Start()
 
 	return ret;
 }
-update_status Module2lvlScene::Update() {
+update_status Module2lvlScene::LogicUpdate() {
 	int speedcamera = 5;
 	float backgroundspeed=0.2f;
 	float groundspeed = 0.3f;

@@ -13,7 +13,7 @@ public:
 	~ModuleGameOver();
 
 	bool Start();
-	update_status Update();
+	update_status LogicUpdate();
 	bool CleanUp();
 private:
 	int current_time = 0;

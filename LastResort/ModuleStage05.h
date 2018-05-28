@@ -26,8 +26,8 @@ public:
 	};
 
 	bool Start();
-	update_status Update();
-	update_status PreUpdate();
+	update_status LogicUpdate();
+	update_status InputUpdate();
 	bool CleanUp();
 
 	//Other functions

@@ -39,7 +39,7 @@ public:
 	~ModuleAudio();
 	
 	bool Init();
-	update_status Update();
+	update_status LogicUpdate();
 	bool CleanUp();
 
 	Mix_Chunk* const LoadSFX(const char* path);

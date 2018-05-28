@@ -93,7 +93,7 @@ bool ModuleParticles::CleanUp()
 	return true;
 }
 
-update_status ModuleParticles::Update()
+update_status ModuleParticles::LogicUpdate()
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{

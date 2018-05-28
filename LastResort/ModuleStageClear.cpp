@@ -73,7 +73,7 @@ bool ModuleStageClear::CleanUp()
 
 // Update: draw background
 
-update_status ModuleStageClear::Update()
+update_status ModuleStageClear::LogicUpdate()
 {
 	// Draw everything
 	current_time = SDL_GetTicks() - start_time;

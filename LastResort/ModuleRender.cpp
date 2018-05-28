@@ -59,7 +59,7 @@ void ModuleRender::ResetMovedPosition()
 }
 
 // Called every draw update
-update_status ModuleRender::PreUpdate()
+update_status ModuleRender::InputUpdate()
 {
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 	SDL_RenderClear(renderer);
@@ -104,12 +104,12 @@ update_status ModuleRender::PreUpdate()
 	return update_status::UPDATE_CONTINUE;
 }
 
-update_status ModuleRender::Update()	
+update_status ModuleRender::LogicUpdate()	
 {	
 	return update_status::UPDATE_CONTINUE;
 }
 
-update_status ModuleRender::PostUpdate()
+update_status ModuleRender::RenderUpdate2()
 {
 	
 	//- INFO: Border width is multiplied by zoomedOutSize to mantain its size across all the zoomed out modes

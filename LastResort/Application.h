@@ -74,7 +74,7 @@ public:
 	~Application();
 
 	bool Init();
-	update_status Update();
+	update_status LogicUpdate();
 	bool CleanUp();
 
 private:

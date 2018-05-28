@@ -271,7 +271,7 @@ ModuleCollision::ModuleCollision()
 ModuleCollision::~ModuleCollision()
 {}
 
-update_status ModuleCollision::PreUpdate()
+update_status ModuleCollision::InputUpdate()
 {
 	// Remove all colliders scheduled for deletion---------------------------------------------
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
@@ -323,7 +323,7 @@ update_status ModuleCollision::PreUpdate()
 }
 
 // Called before render is available
-update_status ModuleCollision::Update()
+update_status ModuleCollision::LogicUpdate()
 {
 	DebugDraw();
 

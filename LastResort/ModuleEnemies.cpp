@@ -58,7 +58,7 @@ bool ModuleEnemies::Start()
 	return true;
 }
 
-update_status ModuleEnemies::PreUpdate()
+update_status ModuleEnemies::InputUpdate()
 {
 	//SPAWN WITH MARGINS (queue)---------------------------------------------------------------------
 	//- Check if the enemy is inside the "spawn area (viewport + spawn margin)" to spawn it
@@ -92,7 +92,7 @@ update_status ModuleEnemies::PreUpdate()
 }
 
 // Called before render is available
-update_status ModuleEnemies::Update()
+update_status ModuleEnemies::LogicUpdate()
 {
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 		if (enemies[i] != nullptr)
@@ -132,7 +132,7 @@ update_status ModuleEnemies::Update()
 	return UPDATE_CONTINUE;
 }
 
-update_status ModuleEnemies::PostUpdate()
+update_status ModuleEnemies::RenderUpdate2()
 {
 	//Check if the enemy is outside the "spawn area (viewport + despawn margin)" to despawn it---------------------------------------------------------------------------
 	for (uint i = 0; i < MAX_ENEMIES; ++i)

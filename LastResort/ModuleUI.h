@@ -33,8 +33,8 @@ public:
 	~ModuleUI();
 
 	bool Start();
-	update_status PreUpdate();
-	update_status Update();
+	update_status InputUpdate();
+	update_status LogicUpdate();
 	bool CleanUp();
 
 	void HideUi();
