@@ -325,7 +325,7 @@ update_status ModuleCollision::LogicUpdate()
 }
 
 // Called before render is available
-update_status ModuleCollision::RenderUpdate2()
+update_status ModuleCollision::ScreenUpdate()
 {
 	DebugDraw();
 

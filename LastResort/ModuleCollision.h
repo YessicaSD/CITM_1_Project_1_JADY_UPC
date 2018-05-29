@@ -67,7 +67,7 @@ public:
 	~ModuleCollision();
 
 	update_status LogicUpdate();
-	update_status RenderUpdate2();
+	update_status ScreenUpdate();
 	bool CleanUp() override;
 
 	Collider* AddCollider(SDL_Rect rect, COLLIDER_TYPE type, Module* callback = nullptr);

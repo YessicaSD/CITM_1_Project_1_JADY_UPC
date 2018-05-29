@@ -104,20 +104,20 @@ update_status ModuleRender::InputUpdate()
 	return update_status::UPDATE_CONTINUE;
 }
 
-update_status ModuleRender::RenderUpdate2()
+update_status ModuleRender::ScreenUpdate()
 {
 	//- INFO: Border width is multiplied by zoomedOutSize to mantain its size across all the zoomed out modes
 	int borderWidth = DEFAULT_BORDER_WIDTH * zoomedOutSize;
 
 	//Render the spawn and despawn area--------------------------------------------------------------------------------------------------
-	if(showSpawnArea)
+	if (showSpawnArea)
 	{
 		//Spawn area
 		App->render->DrawQuad({ -SPAWN_MARGIN_LEFT, -SPAWN_MARGIN_UP, SCREEN_WIDTH + SPAWN_MARGIN_LEFT + SPAWN_MARGIN_RIGHT, SPAWN_MARGIN_UP }, 255, 165, 0, 50);//Up
 		App->render->DrawQuad({ -SPAWN_MARGIN_LEFT, SCREEN_HEIGHT, SCREEN_WIDTH + SPAWN_MARGIN_LEFT + SPAWN_MARGIN_RIGHT, SPAWN_MARGIN_DOWN }, 255, 165, 0, 50);//Down
 		App->render->DrawQuad({ -SPAWN_MARGIN_LEFT, 0, SPAWN_MARGIN_LEFT, SCREEN_HEIGHT }, 255, 165, 0, 50);//Left
 		App->render->DrawQuad({ SCREEN_WIDTH, 0, SPAWN_MARGIN_RIGHT, SCREEN_HEIGHT }, 255, 165, 0, 50);//Right
-		//Despawn area
+																									   //Despawn area
 		App->render->DrawQuad({ -DESPAWN_MARGIN_LEFT, -DESPAWN_MARGIN_UP, SCREEN_WIDTH + DESPAWN_MARGIN_LEFT + DESPAWN_MARGIN_RIGHT, DESPAWN_MARGIN_UP }, 255, 0, 0, 50);//Up
 		App->render->DrawQuad({ -DESPAWN_MARGIN_LEFT, SCREEN_HEIGHT, SCREEN_WIDTH + DESPAWN_MARGIN_LEFT + DESPAWN_MARGIN_RIGHT, DESPAWN_MARGIN_DOWN }, 255, 0, 0, 50);//Down
 		App->render->DrawQuad({ -DESPAWN_MARGIN_LEFT, 0, DESPAWN_MARGIN_LEFT, SCREEN_HEIGHT }, 255, 0, 0, 50);//Left
@@ -144,10 +144,10 @@ update_status ModuleRender::RenderUpdate2()
 	}
 
 	//Render the grids-------------------------------------------------------------------------------------------------------------------
-	if(showWorldGrid)
+	if (showWorldGrid)
 	{
 		//X marks
-		for(int i = -AXIS_LENGTH; i <= AXIS_LENGTH; i += 100)
+		for (int i = -AXIS_LENGTH; i <= AXIS_LENGTH; i += 100)
 		{
 			App->render->DrawQuad({ -borderWidth / 2 + i, -AXIS_LENGTH / 2, borderWidth, AXIS_LENGTH }, 123, 123, 255, 50);
 		}
@@ -172,11 +172,6 @@ update_status ModuleRender::RenderUpdate2()
 	//Right border
 	App->render->DrawQuad({ SCREEN_WIDTH, 0, borderWidth, SCREEN_HEIGHT }, 255, 255, 255, 255);
 
-	return update_status::UPDATE_CONTINUE;
-}
-
-update_status ModuleRender::ScreenUpdate()
-{
 	SDL_RenderPresent(renderer);
 	return update_status::UPDATE_CONTINUE;
 }

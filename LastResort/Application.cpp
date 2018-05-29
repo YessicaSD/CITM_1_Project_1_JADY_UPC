@@ -116,10 +116,8 @@ update_status Application::Update()
 			ret = modules[i]->IsEnabled() ? modules[i]->RenderUpdate2() : UPDATE_CONTINUE;
 	}
 
-	if(ret == UPDATE_CONTINUE)
-	{
-		ret = render->IsEnabled() ? render->ScreenUpdate() : UPDATE_CONTINUE;
-	}
+	for (int i = 0; i < NUM_MODULES && ret == UPDATE_CONTINUE; ++i)
+		ret = modules[i]->IsEnabled() ? modules[i]->ScreenUpdate() : UPDATE_CONTINUE;
 
 	//DEBUGGING------------------------------------------------------
 	//Show layers
