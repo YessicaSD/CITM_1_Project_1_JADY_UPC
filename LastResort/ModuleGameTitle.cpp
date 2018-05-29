@@ -27,18 +27,18 @@ bool ModuleGameTitle:: Start()
 	bool ret = true;
 	start_time = SDL_GetTicks(); //fixed the real time that we start this module
 	//textures--------------------------------------------------------------------------------
-	L1Texture= App->textures->Load("Assets/LastResortTitle/L1Atlas.1.png");
-	A2Texture = App->textures->Load("Assets/LastResortTitle/A2.png");
-	S3Texture = App->textures->Load("Assets/LastResortTitle/S3.png");
-	T4Texture = App->textures->Load("Assets/LastResortTitle/T4.png");
-	R5Texture = App->textures->Load("Assets/LastResortTitle/R5.png");
-	E6Texture = App->textures->Load("Assets/LastResortTitle/E6.png");
-	S7Texture = App->textures->Load("Assets/LastResortTitle/S7.png");
-	O8Texture = App->textures->Load("Assets/LastResortTitle/O8.png");
-	R9Texture = App->textures->Load("Assets/LastResortTitle/R9.png"); //2LASTCHAR
-	T10Texture = App->textures->Load("Assets/LastResortTitle/T10.png");
+	L1Texture= App->textures->Load("Assets/Scenes/LastResortTitle/L1Atlas.1.png");
+	A2Texture = App->textures->Load("Assets/Scenes/LastResortTitle/A2.png");
+	S3Texture = App->textures->Load("Assets/Scenes/LastResortTitle/S3.png");
+	T4Texture = App->textures->Load("Assets/Scenes/LastResortTitle/T4.png");
+	R5Texture = App->textures->Load("Assets/Scenes/LastResortTitle/R5.png");
+	E6Texture = App->textures->Load("Assets/Scenes/LastResortTitle/E6.png");
+	S7Texture = App->textures->Load("Assets/Scenes/LastResortTitle/S7.png");
+	O8Texture = App->textures->Load("Assets/Scenes/LastResortTitle/O8.png");
+	R9Texture = App->textures->Load("Assets/Scenes/LastResortTitle/R9.png"); //2LASTCHAR
+	T10Texture = App->textures->Load("Assets/Scenes/LastResortTitle/T10.png");
 	//audios--------------------------------------------------------------------------------
-	Titlemusic=App->audio->LoadMUS("Assets/LastResortTitle/02-LAST-RESORT-TITLE.ogg");
+	Titlemusic=App->audio->LoadMUS("Assets/Scenes/LastResortTitle/02-LAST-RESORT-TITLE.ogg");
 	App->audio->ControlAudio(Titlemusic, PLAY_AUDIO);
 	//UI-------------------------------------------------------------------------------------
 	App->ui->currentScene = TITLE_SCENE;

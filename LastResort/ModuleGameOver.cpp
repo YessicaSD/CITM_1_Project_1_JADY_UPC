@@ -57,7 +57,7 @@ bool ModuleGameOver::Start() {
 	blackAlpha = MAX_ALPHA;
 	black_go_Alpha = MIN_ALPHA;
 	//textures-----------------------------------------------------------------------
-	goTex = App->textures->Load("Assets/GameOver.png");
+	goTex = App->textures->Load("Assets/Scenes/GameOver/GameOver.png");
 	App->ui->showUI = false;
 	return ret;
 }

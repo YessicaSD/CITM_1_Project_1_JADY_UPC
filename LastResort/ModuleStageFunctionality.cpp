@@ -37,10 +37,10 @@ bool ModuleStageFunctionality::Start()
 	//INFO: We'll add audios of the player and the unit here because if we did them on their own modules they would be loaded twice (one for player 1 and one for player 2)
 	//Player
 	//- Textures
-	PlayerTexture = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version		
+	PlayerTexture = App->textures->Load("Assets/Player/SpaceShip_player1.png"); // arcade version		
 	SpeedAnimationTex = App->textures->Load("Assets/Powerups/speed.png");
 	//- Audios
-	init_sfx = App->audio->LoadSFX("Assets/initial_sfx.wav");
+	init_sfx = App->audio->LoadSFX("Assets/Player/initial_sfx.wav");
 	//Unit
 	//- Textures
 

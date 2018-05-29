@@ -39,19 +39,19 @@ bool ModuleParticles::Start()
 {
 	LOG("Loading ModuleParticles assets ");
 	//- Load textures
-	particlesTx = App->textures->Load("Assets/particles.png");
-	explosionTx = App->textures->Load("Assets/General/Fx/Explosion_2.png");
-	laserTx     = App->textures->Load("Assets/General/Enemies/Laser_Niv5.png");
+	particlesTx = App->textures->Load("Assets/Particles/particles.png");
+	explosionTx = App->textures->Load("Assets/Particles/Explosion_2.png");
+	laserTx     = App->textures->Load("Assets/Particles/Laser_Lvl5.png");
 	//- Load audios
-	basicLaserFx       = App->audio->LoadSFX("Assets/014. Lasser_2-Center.WAV");
-	basicShotSfx       = App->audio->LoadSFX("Assets/004. Shot - center.wav");
-	deathSfx           = App->audio->LoadSFX("Assets/005. Death.wav");
-	g_explosion01_1sfx = App->audio->LoadSFX("Assets/General/Fx/Explosion_1.wav");
-	g_explosion02_1sfx = App->audio->LoadSFX("Assets/General/Fx/Explosion_2.wav");
-	laserEnemyShot_sfx = App->audio->LoadSFX("Assets/General/Fx/lasers spawning.wav");
-	laserTravelling    = App->audio->LoadSFX("Assets/General/Fx/lasers traveling.wav");
-	rocketExplosion    = App->audio->LoadSFX("Assets/General/Fx/rocket explosion.wav");
-	rocket             = App->audio->LoadSFX("Assets/General/Fx/rocket.wav");
+	basicLaserFx       = App->audio->LoadSFX("Assets/Powerups/014. Lasser_2-Center.WAV");
+	basicShotSfx       = App->audio->LoadSFX("Assets/Player/004. Shot - center.wav");
+	deathSfx           = App->audio->LoadSFX("Assets/Player/005. Death.wav");
+	g_explosion01_1sfx = App->audio->LoadSFX("Assets/Particles/Explosion_1.wav");
+	g_explosion02_1sfx = App->audio->LoadSFX("Assets/Particles/Explosion_2.wav");
+	laserEnemyShot_sfx = App->audio->LoadSFX("Assets/Particles/lasers spawning.wav");
+	laserTravelling    = App->audio->LoadSFX("Assets/Particles/lasers traveling.wav");
+	rocketExplosion    = App->audio->LoadSFX("Assets/Particles/rocket explosion.wav");
+	rocket             = App->audio->LoadSFX("Assets/Particles/rocket.wav");
 	//- Initializate textures
 	g_explosion02.texture = explosionTx;
 	//- Initializate audios

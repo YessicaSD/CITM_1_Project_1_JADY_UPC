@@ -44,13 +44,13 @@ bool ModuleStageClear::Start()
 	LOG("Loading background assets");
 	bool ret = true;
 
-	backgroundStageClear1 = App->textures->Load("Assets/UI.png");
-	Players_Texture = App->textures->Load("Assets/SpaceShip_player1.png");
+	backgroundStageClear1 = App->textures->Load("Assets/UI/UI.png");
+	Players_Texture = App->textures->Load("Assets/Player/SpaceShip_player1.png");
 
 	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, 255);
 	SDL_RenderFillRect(App->render->renderer, &backgroundBlack);
 
-	lvlComplitedMusic = App->audio->LoadMUS("Assets/General/Fx/Stage clear.ogg");
+	lvlComplitedMusic = App->audio->LoadMUS("Assets/Scenes/StageClear/Stage clear.ogg");
 	App->audio->ControlAudio(lvlComplitedMusic, PLAY_AUDIO);
 
 	start_time = SDL_GetTicks();

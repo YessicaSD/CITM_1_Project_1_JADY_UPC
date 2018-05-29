@@ -28,9 +28,9 @@ bool ModuleNeoGeo::Start()
 	LOG("Loading background assets");
 	bool ret = true;
 
-	neogeoTx = App->textures->Load("Assets/NeoGeo/NeoGeoLogo.png");
-	proGearSpecTx = App->textures->Load("Assets/NeoGeo/Max330ProGearSpec.png");
-	snkTx = App->textures->Load("Assets/NeoGeo/SNK.png");
+	neogeoTx = App->textures->Load("Assets/Scenes/NeoGeo/NeoGeoLogo.png");
+	proGearSpecTx = App->textures->Load("Assets/Scenes/NeoGeo/Max330ProGearSpec.png");
+	snkTx = App->textures->Load("Assets/Scenes/NeoGeo/SNK.png");
 
 	for(int i = 0; i < neogeoWidth * 2; i += neogeoWidth)
 	{
@@ -70,7 +70,7 @@ bool ModuleNeoGeo::Start()
 	snkAnim.speed = 0.5f;
 
 
-	neogeoMusic = App->audio->LoadMUS("Assets/NeoGeo/NeoGeoSong.ogg");
+	neogeoMusic = App->audio->LoadMUS("Assets/Scenes/NeoGeo/NeoGeoSong.ogg");
 	App->audio->ControlAudio(neogeoMusic, PLAY_AUDIO);
 	return ret;
 }

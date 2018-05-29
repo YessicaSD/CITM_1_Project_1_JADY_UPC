@@ -151,16 +151,16 @@ bool Module5lvlScene::Start()
 	ResetValues();
 
 	//Texture ---------------------------------------------------------------------------------------------------
-	starsTx    = App->textures->Load("Assets/lvl5/background/backgroundstars.png");
-	shipTx     = App->textures->Load("Assets/lvl5/background/ship.png");
-	tilemapTx  = App->textures->Load("Assets/lvl5/background/final.png");
-	shipPartTx = App->textures->Load("Assets/lvl5/background/ShipPart.png");
-	bossTx     = App->textures->Load("Assets/lvl5/background/boss.png");
+	starsTx    = App->textures->Load("Assets/Scenes/lvl5/background/backgroundstars.png");
+	shipTx     = App->textures->Load("Assets/Scenes/lvl5/background/ship.png");
+	tilemapTx  = App->textures->Load("Assets/Scenes/lvl5/background/final.png");
+	shipPartTx = App->textures->Load("Assets/Scenes/lvl5/background/ShipPart.png");
+	bossTx     = App->textures->Load("Assets/Scenes/lvl5/background/boss.png");
 
 	//Music -----------------------------------------------------------------------------------------------------
-	lvl5Music       = App->audio->LoadMUS("Assets/lvl5/07-DON-T-TOUCH-ME-BABY-STAGE-5-1-_-FEAR-STAGE-5-2-_-LEGE.ogg");
-	fallShipPartSFX = App->audio->LoadSFX("Assets/lvl5/background/shipPartFalling.wav");
-	fireballSFX     = App->audio->LoadSFX("Assets/lvl5/background/Fireball.wav");
+	lvl5Music       = App->audio->LoadMUS("Assets/Scenes/lvl5/07-DON-T-TOUCH-ME-BABY-STAGE-5-1-_-FEAR-STAGE-5-2-_-LEGE.ogg");
+	fallShipPartSFX = App->audio->LoadSFX("Assets/Scenes/lvl5/background/shipPartFalling.wav");
+	fireballSFX     = App->audio->LoadSFX("Assets/Scenes/lvl5/background/Fireball.wav");
 
 	App->audio->ControlAudio(lvl5Music, PLAY_AUDIO);
 

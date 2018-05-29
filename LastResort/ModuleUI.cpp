@@ -37,7 +37,7 @@ bool ModuleUI::Start() {
 	//textures----------------------------------------------------------------------
 	uiTex = App->textures->Load("Assets/UI.png");
 	//audios------------------------------------------------------------------------
-	coinsSfx = App->audio->LoadSFX("Assets/General/Fx/001. Coin inserted.wav");
+	coinsSfx = App->audio->LoadSFX("Assets/Scenes/001. Coin inserted.wav");
 	return ret;
 }
 

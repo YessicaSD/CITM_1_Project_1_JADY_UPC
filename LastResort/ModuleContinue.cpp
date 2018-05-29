@@ -63,10 +63,10 @@ bool ModuleContinue::Start() {
 	bgAlpha = MAX_ALPHA;
 	rest_bgAlpha = true;
 	//textures-----------------------------------------------------------------------
-	backgroundTex = App->textures->Load("Assets/Continue/backgrounds.png");
-	continueTex = App->textures->Load("Assets/Continue/continue.png");
+	backgroundTex = App->textures->Load("Assets/Scenes/Continue/backgrounds.png");
+	continueTex = App->textures->Load("Assets/Scenes/Continue/continue.png");
 	//audios------------------------------------------------------------------------
-	continue_and_go = App->audio->LoadMUS("Assets/Continue/continue_and_go.ogg");
+	continue_and_go = App->audio->LoadMUS("Assets/Scenes/Continue/continue_and_go.ogg");
 	App->audio->ControlAudio(continue_and_go, PLAY_AUDIO);
 	//animations--------------------------------------------------------------------
 	numbersAnim.current_frame = 9;

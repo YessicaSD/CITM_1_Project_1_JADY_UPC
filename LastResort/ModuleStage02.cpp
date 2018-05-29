@@ -43,11 +43,11 @@ bool Module2lvlScene::Start()
 	//App->player1->Reset_Positions();
 	//App->player2->Reset_Positions();
 
-	lvl2Text = App->textures->Load("Assets/lvl2/Background_2.png");
-	lvl2ground = App->textures->Load("Assets/lvl2/Foreground_2.png");
-	BckSpam= App->textures->Load("Assets/lvl2/Backgroundlvl2Spritesheet.png");
+	lvl2Text = App->textures->Load("Assets/Scenes/lvl2/Background_2.png");
+	lvl2ground = App->textures->Load("Assets/Scenes/lvl2/Foreground_2.png");
+	BckSpam= App->textures->Load("Assets/Scenes/lvl2/Backgroundlvl2Spritesheet.png");
 	//audios------------------------------------------------------------------------
-	lvl2Music = App->audio->LoadMUS("Assets/lvl2/04-THE-RUINS-OF-METRO-STAGE-2-_-TYRANNICAL-BOSS-2-.ogg");
+	lvl2Music = App->audio->LoadMUS("Assets/Scenes/lvl2/04-THE-RUINS-OF-METRO-STAGE-2-_-TYRANNICAL-BOSS-2-.ogg");
 	App->audio->ControlAudio(lvl2Music, PLAY_AUDIO);
 
 	return ret;

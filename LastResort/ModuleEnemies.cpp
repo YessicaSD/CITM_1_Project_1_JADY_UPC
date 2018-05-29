@@ -52,8 +52,8 @@ bool ModuleEnemies::Start()
 {
 	// Create a prototype for each enemy available so we can copy them around
 	 //ALL IN 1 PNG
-	nml_sprites = App->textures->Load("Assets/General/Enemies/Enemies1.png");
-    dmg_sprites = App->textures->Load("Assets/General/Enemies/Enemies1_white.png");
+	nml_sprites = App->textures->Load("Assets/Enemies/Enemies1.png");
+    dmg_sprites = App->textures->Load("Assets/Enemies/Enemies1_white.png");
 	
 	return true;
 }

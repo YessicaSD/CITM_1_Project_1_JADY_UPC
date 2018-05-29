@@ -64,18 +64,18 @@ bool ModuleStage01::Start()
 	bool ret = true;
 
 	//textures-----------------------------------------------------------------------
-	groundAndTunel = App->textures->Load("Assets/TileMaplvl1Ground&Tunel.png");
-	PurpleBuildings = App->textures->Load("Assets/midGroundBuildingsFull.png");
-	BackgroundBuildings = App->textures->Load("Assets/firstCameraMovBuilding04.png");
-	LasersTx = App->textures->Load("Assets/Lasers_bg.png");
-	Boss1Background = App->textures->Load("Assets/StaticBackground.png");
-	bckgndLightsTx = App->textures->Load("Assets/BackgroundLights.png");
-	midgndLightsTx = App->textures->Load("Assets/MidgroundLights.png");
-	tunnelLightsTx = App->textures->Load("Assets/TunnelLights.png");
-	streetLightsTx = App->textures->Load("Assets/StreetLights.png");
+	groundAndTunel      = App->textures->Load("Assets/Scenes/lvl1/TileMaplvl1Ground&Tunel.png");
+	PurpleBuildings     = App->textures->Load("Assets/Scenes/lvl1/midGroundBuildingsFull.png");
+	BackgroundBuildings = App->textures->Load("Assets/Scenes/lvl1/firstCameraMovBuilding04.png");
+	LasersTx            = App->textures->Load("Assets/Scenes/lvl1/Lasers_bg.png");
+	Boss1Background     = App->textures->Load("Assets/Scenes/lvl1/StaticBackground.png");
+	bckgndLightsTx      = App->textures->Load("Assets/Scenes/lvl1/BackgroundLights.png");
+	midgndLightsTx      = App->textures->Load("Assets/Scenes/lvl1/MidgroundLights.png");
+	tunnelLightsTx      = App->textures->Load("Assets/Scenes/lvl1/TunnelLights.png");
+	streetLightsTx      = App->textures->Load("Assets/Scenes/lvl1/StreetLights.png");
 
 	//audios------------------------------------------------------------------------
-	music_01 = App->audio->LoadMUS("Assets/stage1.ogg");
+	music_01 = App->audio->LoadMUS("Assets/Scenes/lvl1/Stage1.ogg");
 	App->audio->ControlAudio(music_01, PLAY_AUDIO);
 
 	//Enable------------------------------------------------------------------------
