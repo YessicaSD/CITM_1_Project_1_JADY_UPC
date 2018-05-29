@@ -35,7 +35,7 @@ bool ModuleUI::Start() {
 	//Fonts-------------------------------------------------------------------------
 	App->fonts->Load("Assets/Fonts/blue_chars.png", "0123456789[]ABCDEFGHIJKLMNOPQRSTUVWXYZ_-.,&#", 1); //font id = 0
 	//textures----------------------------------------------------------------------
-	uiTex = App->textures->Load("Assets/UI.png");
+	uiTex = App->textures->Load("Assets/UI/UI.png");
 	//audios------------------------------------------------------------------------
 	coinsSfx = App->audio->LoadSFX("Assets/Scenes/001. Coin inserted.wav");
 	return ret;

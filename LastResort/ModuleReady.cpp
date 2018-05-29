@@ -44,7 +44,7 @@ bool ModuleStageReady::Start()
 	LOG("Loading Ready Scene assets");
 	bool ret = true;
 
-	backgroundReady = App->textures->Load("Assets/UI.png");
+	backgroundReady = App->textures->Load("Assets/UI/UI.png");
 	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, 255);
 	SDL_RenderFillRect(App->render->renderer, &backgroundBlack);
 	start_time = SDL_GetTicks();
