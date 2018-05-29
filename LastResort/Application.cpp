@@ -41,7 +41,7 @@ Application::Application()
 	modules[i++] = enemies = new ModuleEnemies();
 	modules[i++] = unit1 = new ModuleUnit();
 	modules[i++] = unit2 = new ModuleUnit();
-	modules[i++] = particles = new ModuleParticles();//!IMPORTANT: Module particles must be after the level modules and before the player module (note that particles are always rendered behind the player ship)
+	modules[i++] = particles = new ModuleParticles();
 	modules[i++] = neogeoScene = new ModuleNeoGeo();
 	modules[i++] = titleScene = new ModuleGameTitle();
 	modules[i++] = readyScene = new ModuleStageReady();
@@ -50,10 +50,10 @@ Application::Application()
 	modules[i++] = stageclearScene = new ModuleStageClear();
 	modules[i++] = player1 = new Player1();
 	modules[i++] = player2 = new Player2();
-	modules[i++] = collision = new ModuleCollision();
-	modules[i++] = fade = new ModuleFadeToBlack();// !IMPORTANT! Remmember: fade always needs to be before module ui
+	modules[i++] = collision = new ModuleCollision();//!IMPORTANT: Collision needs to be the last of the modules which move colliders (like player, enemies...) because it calculates collisions after they have moved their colliders
+	modules[i++] = fade = new ModuleFadeToBlack();// !IMPORTANT: Fade needs to be before module ui
 	modules[i++] = ui = new ModuleUI();
-	modules[i++] = render = new ModuleRender();
+	modules[i++] = render = new ModuleRender();//!IMPORTANT: Module render always needs to be the last because it's the one that does SetRenderPresent()
 
 }
 

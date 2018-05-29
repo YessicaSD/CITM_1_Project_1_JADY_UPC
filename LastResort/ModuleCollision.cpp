@@ -269,20 +269,12 @@ ModuleCollision::ModuleCollision()
 
 // Destructor
 ModuleCollision::~ModuleCollision()
-{}
-
-update_status ModuleCollision::InputUpdate()
 {
-	// Remove all colliders scheduled for deletion---------------------------------------------
-	for (uint i = 0; i < MAX_COLLIDERS; ++i)
-	{
-		if (colliders[i] != nullptr && colliders[i]->to_delete == true)
-		{
-			delete colliders[i];
-			colliders[i] = nullptr;
-		}
-	}
 
+}
+
+update_status ModuleCollision::LogicUpdate()
+{
 	// Calculate collisions
 	Collider* c1;
 	Collider* c2;
@@ -314,8 +306,18 @@ update_status ModuleCollision::InputUpdate()
 				if (matrix[c2->type][c1->type] && c2->callback)
 				{
 					c2->callback->OnCollision(c2, c1);
-				}		
+				}
 			}
+		}
+	}
+
+	// Remove all colliders scheduled for deletion---------------------------------------------
+	for (uint i = 0; i < MAX_COLLIDERS; ++i)
+	{
+		if (colliders[i] != nullptr && colliders[i]->to_delete == true)
+		{
+			delete colliders[i];
+			colliders[i] = nullptr;
 		}
 	}
 
