@@ -268,17 +268,6 @@ bool Module5lvlScene::Start()
 		shipCollidersRect[47].h },
 		COLLIDER_TYPE::COLLIDER_ENEMY_HEAVY);
 
-	//Final colliders----------------------------------------------------------------------------------------
-	for (int i = 0; i < FINAL_COLLIDERS_NUM; ++i)
-	{
-		finalCollidersCol[i] = App->collision->AddCollider(
-		{ finalCollidersRect[i].x + (int)shipPos.x,
-			finalCollidersRect[i].y + (int)shipPos.y,
-			finalCollidersRect[i].w,
-			finalCollidersRect[i].h },
-			COLLIDER_TYPE::COLLIDER_WALL);
-	}
-
 	return ret;
 }
 
@@ -507,9 +496,22 @@ update_status Module5lvlScene::LogicUpdate()
 	case 22:
 		if (reachedCheckpoint[22] == false)
 		{
-			reachedCheckpoint[22] = true;
 			//Delete ship colliders
+			for(int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
+			{
+				shipCollidersCol[i]->to_delete;
+			}
 			//Add final part colliders
+			for (int i = 0; i < FINAL_COLLIDERS_NUM; ++i)
+			{
+				finalCollidersCol[i] = App->collision->AddCollider(
+				{ finalCollidersRect[i].x + (int)shipPos.x,
+					finalCollidersRect[i].y + (int)shipPos.y,
+					finalCollidersRect[i].w,
+					finalCollidersRect[i].h },
+					COLLIDER_TYPE::COLLIDER_WALL);
+			}
+			reachedCheckpoint[22] = true;
 		}
 
 		break;
