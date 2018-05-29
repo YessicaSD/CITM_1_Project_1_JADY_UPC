@@ -18,6 +18,7 @@ public:
 	bool Init();
 	update_status InputUpdate();
 	update_status RenderUpdate2();
+	update_status ScreenUpdate();
 	bool CleanUp();
 
 	/*void Render(SDL_Texture* Texture, SDL_Rect* section);*/

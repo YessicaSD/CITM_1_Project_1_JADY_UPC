@@ -68,8 +68,7 @@ and we will defeat all kinds of enemies.
 - **F2**: Show collision boxes.
 - **F3**: Pause/Play game.
 - **F4**: Frame forward (only when the game is paused).
-- **F9**: Show / Hide back layer
-- **F10**: Show / Hide middle layer
+- **F9**: Stop movement.
 
 ##### Camera:
 - **Numpad 7**: Zoom in.
@@ -82,6 +81,9 @@ and we will defeat all kinds of enemies.
 - **Numpad /**: Show world grid (which has marks every 100 units).
 - **Numpad (*)**: Show background grid (which has marks every 100 units).
 - **Numpad .**: Show spawn area (in orange) and despawn area (in red).
+- **Numpad 1**: Show / Hide back layer
+- **Numpad 2**: Show / Hide middle layer
+- **Numpad 3**: Show / Hide front layer
 
 ##### Advanced:
 How to use advanced debugging?

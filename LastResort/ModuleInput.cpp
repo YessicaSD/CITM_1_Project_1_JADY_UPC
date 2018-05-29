@@ -60,8 +60,6 @@ bool ModuleInput::Init()
 		ret = false;
 	}
 	
-
-	
 	return ret;
 }
 
@@ -144,7 +142,7 @@ update_status ModuleInput::InputUpdate()
 
 	SDL_PollEvent(&event);
 	if (event.type == SDL_QUIT)
-	        return update_status::UPDATE_STOP;
+		return update_status::UPDATE_STOP;
 	
 	if (keyboard[SDL_SCANCODE_ESCAPE])
 		return update_status::UPDATE_STOP;

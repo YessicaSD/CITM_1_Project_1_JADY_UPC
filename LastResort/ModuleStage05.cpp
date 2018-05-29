@@ -287,7 +287,8 @@ update_status Module5lvlScene::LogicUpdate()
 	//provisional-----------------------------
 	current_time = SDL_GetTicks() - start_time ;
 
-	if (App->input->keyboard[SDL_SCANCODE_E] == KEY_DOWN)
+	//Stop path debugging
+	if (App->input->keyboard[SDL_SCANCODE_F9] == KEY_DOWN)
 	{
 		if (pauseCamera == false) { pauseCamera = true; }
 		else { pauseCamera = false; }

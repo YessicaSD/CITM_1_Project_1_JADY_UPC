@@ -74,7 +74,7 @@ public:
 	~Application();
 
 	bool Init();
-	update_status LogicUpdate();
+	update_status Update();
 	bool CleanUp();
 
 private:
@@ -83,6 +83,7 @@ private:
 	bool pauseNextFrame = false;
 	bool showLayer0 = true;
 	bool showLayer1 = true;
+	bool showLayer2 = true;
 };
 
 // Global var made extern for Application ---

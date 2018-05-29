@@ -172,6 +172,11 @@ update_status ModuleRender::RenderUpdate2()
 	//Right border
 	App->render->DrawQuad({ SCREEN_WIDTH, 0, borderWidth, SCREEN_HEIGHT }, 255, 255, 255, 255);
 
+	return update_status::UPDATE_CONTINUE;
+}
+
+update_status ModuleRender::ScreenUpdate()
+{
 	SDL_RenderPresent(renderer);
 	return update_status::UPDATE_CONTINUE;
 }

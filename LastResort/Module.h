@@ -20,6 +20,7 @@ public:
 	virtual update_status RenderUpdate0()	{ return update_status::UPDATE_CONTINUE; }
 	virtual update_status RenderUpdate1()	{ return update_status::UPDATE_CONTINUE; }
 	virtual update_status RenderUpdate2() 	{ return update_status::UPDATE_CONTINUE; }
+	virtual update_status ScreenUpdate()    { return update_status::UPDATE_CONTINUE; }//Performed only in module render (last module). Does SetRenderPresent().
 	virtual bool CleanUp()					{ return true; }
 
 	// Module activation ---

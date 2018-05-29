@@ -88,7 +88,7 @@ bool Application::Init()
 	return ret;
 }
 
-update_status Application::LogicUpdate()
+update_status Application::Update()
 {
 	update_status ret = UPDATE_CONTINUE;
 
@@ -109,21 +109,34 @@ update_status Application::LogicUpdate()
 		for (int i = 0; i < NUM_MODULES && ret == UPDATE_CONTINUE; ++i)
 			ret = modules[i]->IsEnabled() ? modules[i]->RenderUpdate1() : UPDATE_CONTINUE;
 	}
+	
+	if(showLayer2)
+	{
+		for (int i = 0; i < NUM_MODULES && ret == UPDATE_CONTINUE; ++i)
+			ret = modules[i]->IsEnabled() ? modules[i]->RenderUpdate2() : UPDATE_CONTINUE;
+	}
 
-	for (int i = 0; i < NUM_MODULES && ret == UPDATE_CONTINUE; ++i)
-		ret = modules[i]->IsEnabled() ? modules[i]->RenderUpdate2() : UPDATE_CONTINUE;
+	if(ret == UPDATE_CONTINUE)
+	{
+		ret = render->IsEnabled() ? render->ScreenUpdate() : UPDATE_CONTINUE;
+	}
 
 	//DEBUGGING------------------------------------------------------
 	//Show layers
-	if(input->keyboard[SDL_SCANCODE_F9] == KEY_STATE::KEY_DOWN)
+	if(input->keyboard[SDL_SCANCODE_KP_1] == KEY_STATE::KEY_DOWN)
 	{
 		if (showLayer0 == true) { showLayer0 = false; }
 		else { showLayer0 = true; }
 	}
-	if (input->keyboard[SDL_SCANCODE_F10] == KEY_STATE::KEY_DOWN)
+	if (input->keyboard[SDL_SCANCODE_KP_2] == KEY_STATE::KEY_DOWN)
 	{
 		if (showLayer1 == true) { showLayer1 = false; }
 		else { showLayer1 = true; }
+	}
+	if (input->keyboard[SDL_SCANCODE_KP_3] == KEY_STATE::KEY_DOWN)
+	{
+		if (showLayer2 == true) { showLayer2 = false; }
+		else { showLayer2 = true; }
 	}
 	//Pause game
 	if (input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN)
