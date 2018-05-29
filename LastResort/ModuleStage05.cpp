@@ -315,7 +315,7 @@ update_status Module5lvlScene::LogicUpdate()
 		currentCheckPoint = 0;
 
 	//- The mega checkpoint switch--------------------------------------
-	//LOG("Current check point %i", cameraMovement.currentMov);
+	LOG("Current check point %i", cameraMovement.currentMov);
 	switch(cameraMovement.currentMov)
 	{
 	case 0:
@@ -440,6 +440,7 @@ update_status Module5lvlScene::LogicUpdate()
 			reachedCheckpoint[14] = true;
 		}
 		UpdateShipColliders();
+		FirebarsRearShip();
 
 		break;
 	case 15:
@@ -448,6 +449,7 @@ update_status Module5lvlScene::LogicUpdate()
 			reachedCheckpoint[15] = true;
 		}
 		UpdateShipColliders();
+		FirebarsRearShip();
 
 		break;
 	case 16:
@@ -456,6 +458,7 @@ update_status Module5lvlScene::LogicUpdate()
 			reachedCheckpoint[16] = true;
 		}
 		UpdateShipColliders();
+		FirebarsRearShip();
 
 		break;
 	case 17:
@@ -464,6 +467,7 @@ update_status Module5lvlScene::LogicUpdate()
 			reachedCheckpoint[17] = true;
 		}
 		UpdateShipColliders();
+		FirebarsRearShip();
 
 		break;
 	case 18:
@@ -659,4 +663,19 @@ void Module5lvlScene::FireballFrontShip()
 void Module5lvlScene::ShipRear()
 {
 	App->render->Blit(shipPartTx, spawnPos.x + 1246, spawnPos.y + 15, &shipRearRect);
+}
+
+void Module5lvlScene::FirebarsRearShip()
+{
+	if (firebarsFrameCounter >= 120)
+	{
+		App->particles->AddParticle(App->particles->fireBar, { (float)spawnPos.x + 1422, (float)spawnPos.y +  99 }, { 4, 0 }, App->particles->particlesTx, COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE, 0, PARTICLE_FOLLOW_BACKGROUND);
+		App->particles->AddParticle(App->particles->fireBar, { (float)spawnPos.x + 1422, (float)spawnPos.y + 138 }, { 4, 0 }, App->particles->particlesTx, COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE, 0, PARTICLE_FOLLOW_BACKGROUND);
+		//App->audio->ControlAudio(, PLAY_AUDIO);//PLAY FIREBARS AUDIO
+		firebarsFrameCounter = 0;
+	}
+	else
+	{
+		firebarsFrameCounter++;
+	}
 }

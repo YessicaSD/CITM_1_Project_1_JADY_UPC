@@ -473,6 +473,16 @@ void ModuleParticles::InitParticleValues()
 	fireBall.life = 10000;
 	fireBall.renderLayer = 0;
 
+	//Firebar
+	fireBar.anim.PushBack({ 253,   0, 80, 40 });
+	fireBar.anim.PushBack({ 253,  41, 80, 40 });
+	fireBar.anim.PushBack({ 253,  82, 80, 42 });
+	fireBar.anim.PushBack({ 253, 125, 80, 40 });
+	fireBar.anim.speed = 0.25f;
+	fireBar.anim.loop = true;
+	fireBar.life = 10000;
+	fireBar.renderLayer = 0;
+
 	//Missile 
 	Missile.anim.PushBack({157,246,15,8}); //0 //RIGHT
 	Missile.anim.PushBack({ 172,246,13,8 }); //1

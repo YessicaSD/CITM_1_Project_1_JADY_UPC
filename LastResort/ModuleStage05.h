@@ -36,11 +36,10 @@ public:
 	void UpdateShipColliders();
 	void UpdateFinalColliders();
 	void FireballFrontShip();
-	void ResetValues();
+	void FirebarsRearShip();
 	void ShipRear();
-
-	//Draw things
 	void RenderShip();
+	void ResetValues();
 
 public:
 	//CheckPoint-----------------------------
@@ -100,6 +99,9 @@ public:
 
 	//Fireball front-------------------------
 	int fireballFrameCounter;
+
+	//Firebars rear--------------------------
+	int firebarsFrameCounter;
 
 	//Ship part rear-------------------------
 	SDL_Rect shipRearRect = { 0, 96, 128, 64};

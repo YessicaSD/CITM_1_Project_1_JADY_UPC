@@ -110,6 +110,7 @@ public:
 	Particle AsteroidDestroy;
 	Particle MiddleAsteroidDestroy;
 	Particle fireBall;
+	Particle fireBar;
 	Particle Missile;
 	Particle MissileExplosion;
 
