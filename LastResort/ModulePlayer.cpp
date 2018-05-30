@@ -117,6 +117,44 @@ update_status ModulePlayer::LogicUpdate()
 		Winlvl();
 	}
 
+	if (shootLaser)
+	{
+		if (ShotLaserBasic.finished == false)
+		{
+			if (ShotLaserBasic.current_frame == 0)
+			{
+				ShotPosition = position;
+				App->particles->AddParticle(App->particles->basicLaser, { (float)(ShotPosition.x + 32), (float)(ShotPosition.y + 6) }, { 10, 0 }, App->stageFunctionality->PlayerTexture, shot_colType, 0);
+
+			}
+
+			if (powerupUpgrades == 3)
+			{
+				if (LaserCount == 3 || LaserCount == 6 || LaserCount == 9)
+				{
+					App->particles->AddParticle(App->particles->littleRings, { (float)(ShotPosition.x + 10), (float)(ShotPosition.y + 6) }, { 10, 0 }, App->stageFunctionality->PlayerTexture, shot_colType, 0);
+				}
+
+			}
+			if (powerupUpgrades >= 4)
+			{
+				if (LaserCount == 3 || LaserCount == 6 || LaserCount == 9)
+				{
+					App->particles->AddParticle(App->particles->bigRings, { (float)(ShotPosition.x + 10), (float)(ShotPosition.y + 6) }, { 10, 0 }, App->stageFunctionality->PlayerTexture, shot_colType, 0);
+				}
+			}
+		
+			LaserCount += 1;
+		}
+		else
+		{
+			ShotLaserBasic.finished = false;
+			ShotLaserBasic.current_frame = 0;
+			shootLaser = false;
+			LaserCount = 0;
+		}
+	}
+
 	return UPDATE_CONTINUE;
 }
 
@@ -156,37 +194,9 @@ update_status ModulePlayer::RenderUpdate2()
 	{
 		if (ShotLaserBasic.finished == false)
 		{
-			if (ShotLaserBasic.current_frame == 0)
-			{
-				ShotPosition = position;
-				App->particles->AddParticle(App->particles->basicLaser, { (float)(ShotPosition.x + 32), (float)(ShotPosition.y + 6) }, { 10, 0 }, App->stageFunctionality->PlayerTexture, shot_colType, 0);
-
-			}
-
-			if (powerupUpgrades == 3)
-			{
-				if (LaserCount == 3 || LaserCount == 6 || LaserCount == 9)
-				{
-					App->particles->AddParticle(App->particles->littleRings, { (float)(ShotPosition.x + 10), (float)(ShotPosition.y + 6) }, { 10, 0 }, App->stageFunctionality->PlayerTexture, shot_colType, 0);
-				}
-
-			}
-			if (powerupUpgrades >= 4)
-			{
-				if (LaserCount == 3 || LaserCount == 6 || LaserCount == 9)
-				{
-					App->particles->AddParticle(App->particles->bigRings, { (float)(ShotPosition.x + 10), (float)(ShotPosition.y + 6) }, { 10, 0 }, App->stageFunctionality->PlayerTexture, shot_colType, 0);
-				}
-			}
+			
 			App->render->Blit(App->stageFunctionality->PlayerTexture, position.x + 32, position.y + 5 - ShotLaserBasic.GetFrame().h / 2, &ShotLaserBasic.GetFrameEx());
-			LaserCount += 1;
-		}
-		else
-		{
-			ShotLaserBasic.finished = false;
-			ShotLaserBasic.current_frame = 0;
-			shootLaser = false;
-			LaserCount = 0;
+		
 		}
 	}
 
