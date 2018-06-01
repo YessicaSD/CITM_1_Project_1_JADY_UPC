@@ -16,7 +16,7 @@ void LimitRotation(float &rotation)
 	}
 }
 
-//TO DO: Try to implement it with templates
+//TO DO: Implement it with templates
 
 //This function calculates the rotation to a point, from an origin position
 //Returns -1 if the targetPos is the same as origin

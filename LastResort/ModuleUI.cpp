@@ -30,8 +30,8 @@ ModuleUI::ModuleUI() {
 }
 ModuleUI:: ~ModuleUI() {}
 
-bool ModuleUI::Start() {/*
-	*/LOG("Loading Module UI assets");
+bool ModuleUI::Start() {
+	LOG("Loading Module UI assets");
 	bool ret = true;
 	//Fonts-------------------------------------------------------------------------
 	App->fonts->Load("Assets/Fonts/blue_chars.png", "0123456789[]ABCDEFGHIJKLMNOPQRSTUVWXYZ_-.,&#", 1); //font id = 0
@@ -43,7 +43,7 @@ bool ModuleUI::Start() {/*
 }
 
 bool ModuleUI::CleanUp() {
- 	/*LOG("Unloading Module UI assets");*/
+ 	LOG("Unloading Module UI assets");
 	//Fonts-------------------------------------------------------------------------
 	App->fonts->UnLoad(0);
 	//textures----------------------------------------------------------------------

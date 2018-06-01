@@ -856,32 +856,48 @@ void ModuleUnit::TrailLogic()
 {
 	//Update position-------------------------------------------------
 	//INFO: Each trail sprite is placed in the position of the last
-	if(trailFrameCounter >= 1)
+	if(renderTrail)
 	{
-		trailPos[3] = trailPos[2];
+		trailPos[3] = intermediatePos2;
+		intermediatePos2 =  trailPos[2];
 		trailPos[2] = trailPos[1];
-		trailPos[1] = trailPos[0];
+		trailPos[1] = intermediatePos1;
+		intermediatePos1 = trailPos[0];
 		trailPos[0] = lastUnitPos;
 		lastUnitPos.x = (float)position.x;
 		lastUnitPos.y = (float)position.y;
-		trailFrameCounter = 0;
+
+		//Update rotation-------------------------------------------------
+		for (int i = 0; i < 4; ++i)
+		{
+			//- Add rotation
+			trailRotation[i] += trailRotationSpeed;
+			//- Limit rotation (make sure it doesn't get over 2 * PI)
+			if (trailRotation[i] > 2 * PI)
+			{
+				trailRotation[i] -= 2 * PI;
+			}
+		}
+
+		//Stop rendering when 2 frames have passed
+		trailFrameCounter++;
+		if(trailFrameCounter >= 2)
+		{
+			trailFrameCounter = 0;
+			renderTrail = false;
+		}
 	}
 	else
 	{
+		//Render when 2 frames have passed
 		trailFrameCounter++;
-	}
-
-	//Update rotation-------------------------------------------------
-	for (int i = 0; i < 4; ++i)
-	{
-		//- Add rotation
-		trailRotation[i] += trailRotationSpeed;
-		//- Limit rotation (make sure it doesn't get over 2 * PI)
-		if(trailRotation[i] > 2 * PI)
+		if (trailFrameCounter >= 2)
 		{
-			trailRotation[i] -= 2 * PI;
+			trailFrameCounter = 0;
+			renderTrail = true;
 		}
 	}
+
 }
 
 void ModuleUnit::TrailRender()
@@ -891,7 +907,6 @@ void ModuleUnit::TrailRender()
 		//TO DO: If it looks weird, get squares of the same size (because rotation position will be different depending at which point they are)
 		for(int i = 3; i >= 0; --i)
 		{
-			LOG("Trail position x: %f, y:%f", trailPos[i].x, trailPos[i].y);
 			App->render->BlitEx(throwUnitTx, trailPos[i].x - trailAnim[i].w / 2, trailPos[i].y - trailAnim[i].h / 2, &trailAnim[i], SDL_FLIP_NONE, trailRotation[i] * 180 / PI);
 		}
 		renderTrail = false;
@@ -908,6 +923,12 @@ void ModuleUnit::PlaceTrailOnUnit()
 	lastUnitPos.x = (float)position.x;
 	lastUnitPos.y = (float)position.y;
 
+	intermediatePos1.x = (float)position.x;
+	intermediatePos1.y = (float)position.y;
+
+	intermediatePos2.x = (float)position.x;
+	intermediatePos2.y = (float)position.y;
+
 	for(int i = 0; i < 4; ++i)
 	{
 		trailPos[i].x = (float)position.x;
@@ -921,4 +942,5 @@ void ModuleUnit::PlaceTrailOnUnit()
 	trailRotation[3] = angleValue[N];
 
 	renderTrail = true;
+	renderTrailCounter = 0;
 }

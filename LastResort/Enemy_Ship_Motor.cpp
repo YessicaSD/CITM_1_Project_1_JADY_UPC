@@ -45,8 +45,6 @@ void Enemy_Ship_Motor::Move()
 	
 	position = fixedPos + App->stage05->spawnPos;
 
-	LOG("Current_Frame:%f", animation->GetCurrentFrameNum());
-	LOG("SPEED:%f", animation->GetCurrentFrameNum());
 	if (stateMotor == CLOSE)
 	{
 		if (frameCount == 150)

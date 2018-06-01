@@ -28,6 +28,7 @@ public:
 	void Move();
 	void Draw();
 	void OnCollision(Collider*, Collider*);
+	bool CheckParticleDeath();
 
 private:
 	void OnCollisionHitDetection(Collider*, Collider*);
@@ -50,6 +51,7 @@ private:
 
 	int steppingOutSpeed;
 	bool firstFrame = true;
+	bool destroyMissile = false;
 };
 
 #endif // __PARTICLE_ORANGE_BALL_H__

@@ -90,7 +90,6 @@ public:
 	Particle groundMissile;
 	Particle gM_explosion;
 
-
 	//- General
 	Particle g_explosion01;
 	Particle g_explosion02;
@@ -103,12 +102,12 @@ public:
 
 	//- Enemies
 	Particle i_f_Shot;
-	Particle MiddleBossShot;
-	Particle MiddleBosExplotion;
+	Particle middleBossShot;
+	Particle middleBosExplosion;
 	Particle orangeBall;
 	Particle orangeBallExplosion;
-	Particle LaserEnemyShot;
-	Particle AsteroidDestroy;
+	Particle laserEnemyShot;
+	Particle asteroidDestroy;
 	Particle MiddleAsteroidDestroy;
 	Particle fireBall;
 	Particle fireBar;

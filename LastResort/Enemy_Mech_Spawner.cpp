@@ -30,7 +30,7 @@ Enemy_Mech_Spawner::Enemy_Mech_Spawner(int x, int y, float hp, int scoreValue, P
 
 	//It doesn't have a collider because it doesn't need to collide with anything
 
-	LOG("Mech spawener created");
+	
 }
 
 void Enemy_Mech_Spawner::Move()
