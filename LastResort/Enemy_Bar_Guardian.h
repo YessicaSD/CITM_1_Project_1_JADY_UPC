@@ -21,7 +21,8 @@ public:
 
 private:
 	BarGuardianPhases phase = barGuard_Up;
-	const int moveSpeed = 1;
+	const float moveSpeed = 0.5f;
+	float accumulatedY = 0;//Helps us move the barGuardian with float speed, although it its position is iPoint and not fPoint
 	bool eyeOpen = false;
 	Animation eyeAnim;
 	SDL_Rect topBarAnim;

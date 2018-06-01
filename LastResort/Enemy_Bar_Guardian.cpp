@@ -23,18 +23,28 @@ void Enemy_BarGuardian::Move()
 	switch(phase)
 	{
 	case barGuard_Up:
-		position.y -= moveSpeed;
+		accumulatedY -= moveSpeed;
+		if(accumulatedY <= -1)
+		{
+			position.y -= 1;
+			accumulatedY += 1;
+		}
 		//Go down if it reaches the top
-		if(position.y <= 0 + 10)
+		if(position.y <= 0 + 63)//INFO: 63 = Offset at which it changed direction
 		{
 			phase = barGuard_Down;
 		}
 		break;
 
 	case barGuard_Down:
-		position.y += moveSpeed;
+		accumulatedY += moveSpeed;
+		if (accumulatedY >= 1)
+		{
+			position.y += 1;
+			accumulatedY -= 1;
+		}
 		//Go up if it reaches the bottom
-		if (position.y >= SCREEN_HEIGHT - 10)
+		if (position.y >= SCREEN_HEIGHT - 63)
 		{
 			phase = barGuard_Up;
 		}
