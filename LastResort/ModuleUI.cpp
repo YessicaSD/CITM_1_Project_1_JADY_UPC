@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <string.h>
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleUI.h"
@@ -14,8 +16,7 @@
 #include "ModuleStage05.h"
 #include "ModuleReady.h"
 #include "ModuleUnit.h"
-#include <stdio.h>
-#include <string.h>
+
 
 
 ModuleUI::ModuleUI() {
@@ -161,26 +162,40 @@ update_status ModuleUI::RenderUpdate2()
 	str_score_p2 = new char[MAX_NUMBERS_SCORE];
 	str_lives_p1 = new char[4];
 	str_lives_p2 = new char[4];
-	str_credits = new char[15];
-	str_debug = new char[3];
+	str_credits = new char[16];
+	str_debug = new char[8];
 
-	snprintf(str_lives_p1, 4 * sizeof(str_lives_p1), "%d", App->player1->lives);
-	snprintf(str_lives_p2, 4 * sizeof(str_lives_p2), "%d", App->player2->lives);
-	snprintf(str_score_p1, 4 * sizeof(str_score_p1), "%d", App->player1->score);
-	snprintf(str_score_p2, 4 * sizeof(str_score_p2), "%d", App->player2->score);
-
+	snprintf(str_lives_p1, 4 * sizeof(str_lives_p1), "%i", App->player1->lives);
+	snprintf(str_lives_p2, 4 * sizeof(str_lives_p2), "%i", App->player2->lives);
+	snprintf(str_score_p1, 4 * sizeof(str_score_p1), "%i", App->player1->score);
+	snprintf(str_score_p2, 4 * sizeof(str_score_p2), "%i", App->player2->score);
+	snprintf(str_credits, 4 * sizeof(str_credits), "%i", credits);
+	
 	//Draw UI----------------------------------------------------------------------------------------//
-	if (credits<2)
-		snprintf(str_credits, 4 * sizeof(str_credits), "CREDIT  0%i", credits);
-	else if (credits<10)
-		snprintf(str_credits, 4 * sizeof(str_credits), "CREDITS 0%i", credits);
-	else
-		snprintf(str_credits, 4 * sizeof(str_credits), "CREDITS %i", credits);
+	
+
 
 	if (showUI)
 	{
 		//------Common--------------------------------------------------
-		App->fonts->BlitText(208, 216, 0, str_credits);
+		
+		if (credits < 2) {
+
+			App->fonts->BlitText(208, 216, 0, "CREDIT__0");
+			App->fonts->BlitText(272, 216, 0, str_credits);
+		}
+
+		else if (credits < 10) {
+			App->fonts->BlitText(208, 216, 0, "CREDITS_0");
+			App->fonts->BlitText(280, 216, 0, str_credits);
+		}
+
+		else {
+			App->fonts->BlitText(208, 216, 0, "CREDITS");
+			App->fonts->BlitText(272, 216, 0, str_credits);
+
+		}
+
 		if (App->player1->isActive == true || App->player2->isActive == true)
 		{
 			App->render->Blit(uiTex, 112, 16, &top);

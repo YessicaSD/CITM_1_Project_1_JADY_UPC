@@ -135,6 +135,7 @@
     <ClInclude Include="Particle_Fireball.h" />
     <ClInclude Include="Particle_Follow_background.h" />
     <ClInclude Include="Particle_HMissile.h" />
+    <ClInclude Include="Particle_Indoor_Laser.h" />
     <ClInclude Include="Particle_Missile.h" />
     <ClInclude Include="Path.h" />
     <ClInclude Include="Player1.h" />
@@ -206,6 +207,7 @@
     <ClCompile Include="Particle_Fireball.cpp" />
     <ClCompile Include="Particle_Follow_background.cpp" />
     <ClCompile Include="Particle_HMissile.cpp" />
+    <ClCompile Include="Particle_Indoor_Laser.cpp" />
     <ClCompile Include="Particle_Missile.cpp" />
     <ClCompile Include="Player1.cpp" />
     <ClCompile Include="Player2.cpp" />

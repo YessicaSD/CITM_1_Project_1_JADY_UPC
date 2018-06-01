@@ -486,12 +486,6 @@ void ModuleParticles::InitParticleValues()
 	//Missile 
 	Missile.anim.PushBack({157,246,15,8}); //0 //RIGHT
 	Missile.anim.PushBack({ 172,246,13,8 }); //1
-	//Missile.anim.PushBack({ 172,272,8,13}); //2 //UP ---
-	//Missile.anim.PushBack({ 172,285,8,15 }); //3
-	//Missile.anim.PushBack({ 185,246,13,8 }); //4 //LEFT
-	//Missile.anim.PushBack({ 198,246,15,8 }); //5 
-	//Missile.anim.PushBack({ 176,307,8,15 }); //6 //DOWN
-	//Missile.anim.PushBack({ 172,315,8,13 }); //7 
 	Missile.anim.speed = 1.0f;
 	Missile.life = 5000;
 	Missile.collision_fx = &MissileExplosion;
@@ -513,5 +507,7 @@ void ModuleParticles::InitParticleValues()
 	i_f_Shot.anim.speed = 0.0f;
 	i_f_Shot.life = 5000;
 	i_f_Shot.anim.loop = false;
+
+	IndoorLaser.anim.PushBack({ 141,0,80,6 });
 
 }

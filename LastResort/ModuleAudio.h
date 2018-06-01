@@ -17,7 +17,7 @@ enum Audio_State {
 };
 
 struct Music {
-	int id = 0;
+	int  id;
 	Mix_Music * audio = nullptr;
 	bool hasPlayed = false;
 	const char* name = nullptr;
@@ -25,10 +25,11 @@ struct Music {
 };
 
 struct Sfx {
-	int id = 0;
+	int  id;
 	Mix_Chunk *audio = nullptr;
 	bool hasPlayed = false;
 	const char* name = nullptr;
+
 };
 
 

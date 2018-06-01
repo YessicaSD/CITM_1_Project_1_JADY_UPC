@@ -150,10 +150,11 @@ bool ModuleAudio::UnloadMUS(Music * music) {
 	{
 		if (musics[i] != nullptr  && musics[i]->id == music->id )
 		{
+			LOG(" Unload music ID  %i name: :  %s ", music->id, music->name);
 			Mix_FreeMusic(musics[i]->audio);
-
 			delete musics[i];
 			musics[i] = nullptr;
+			music = nullptr;
 			return true;
 		}
 	}
@@ -176,22 +177,26 @@ bool ModuleAudio::UnloadSFX(Sfx * sound_fx) {
 		return false;
 	}
 
-	for (int i = 0; i < MAX_MUSICS; ++i)
+	for (int i = 0; i < MAX_SOUNDEFECTS; ++i)
 	{
-		if (sfx[i] != nullptr && sfx[i]->id == sound_fx->id )
+		if (sfx[i] != nullptr  && sfx[i] == sound_fx)
 		{
+			LOG(" Unload sfx ID  %i name: :  %s ", sound_fx->id, sound_fx->name);
 			Mix_FreeChunk(sfx[i]->audio);
 			delete sfx[i];
 			sfx[i] = nullptr;
+			sound_fx = nullptr;
 			return true;
 		}
+
 	}
 
 	if (sound_fx != nullptr) {
 		LOG("Cannot unload sfx ID  %i name: :  %s ", sound_fx->id, sound_fx->name);
 	}
 	else
-		LOG("Cannot unload sfx Error:	Sfx* is nullptr");
+		LOG("Cannot unload sfx Error:Sfx* is nullptr");
+	
 
 	return false;
 }

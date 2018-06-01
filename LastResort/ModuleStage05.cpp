@@ -174,7 +174,7 @@ bool Module5lvlScene::Start()
 	//App->enemies->AddEnemy(PINATA, 130, 130);
 	//App->enemies->AddEnemy(OSCILATOR, 500, 0);
 
-	App->enemies->InstaSpawn(INTERGALACTIC_F, 300, 200);
+	//App->enemies->InstaSpawn(INTERGALACTIC_F, 300, 200);
 	
 
 	//- FINAL POSITION ENEMIES (in order of appearance on the level)
