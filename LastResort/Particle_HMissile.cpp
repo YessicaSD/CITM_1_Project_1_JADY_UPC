@@ -139,6 +139,26 @@ void Particle_HMissile::OnCollision(Collider* c1, Collider* c2)
 	}
 }
 
+bool Particle_HMissile::CheckParticleDeath()
+{
+	//If it collides with something
+	if(destroyMissile)
+	{
+		return true;
+	}
+
+	//2- Check if it out of the screen margins
+	if (position.x >  SCREEN_WIDTH + DESPAWN_MARGIN_RIGHT ||
+		position.x < 0 - DESPAWN_MARGIN_LEFT ||
+		position.y > SCREEN_HEIGHT + DESPAWN_MARGIN_DOWN ||
+		position.y < 0 - DESPAWN_MARGIN_UP)
+	{
+		return true;
+	}
+
+	return false;
+}
+
 void Particle_HMissile::OnCollisionHitDetection(Collider* c1, Collider* c2)
 {
 	//Calculate the distance from the current point to the collider
@@ -157,8 +177,10 @@ void Particle_HMissile::OnCollisionParticle(Collider* c1, Collider* c2)
 	// Add the collision particle where it collided
 	if (collision_fx != nullptr)
 	{
-		App->particles->AddParticle(*collision_fx, { position.x, position.y }, { 0 , 0 }, texture);
+		App->particles->AddParticle(*collision_fx, { position.x, position.y }, { 0 , 0 }, App->particles->particlesTx);
 	}
+
+	destroyMissile = true;
 }
 
 Particle_HMissile::~Particle_HMissile()

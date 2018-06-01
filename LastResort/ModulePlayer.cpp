@@ -345,27 +345,27 @@ void  ModulePlayer::ShotInput()
 			{
 				Particle * p1;
 				Particle * p2;
-				p1 = App->particles->AddParticle(App->particles->hMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2, 1 }, App->stageFunctionality->PlayerTexture, shot_colType, 0, PARTICLE_H_MISSILE);
+				p1 = App->particles->AddParticle(App->particles->hMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 4, 2 }, App->stageFunctionality->PlayerTexture, shot_colType, 0, PARTICLE_H_MISSILE);
 				if (p1 != nullptr) { p1->distanceToPlayer = 16; }
-				p2 = App->particles->AddParticle(App->particles->hMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2, 1 }, App->stageFunctionality->PlayerTexture, shot_colType, 0, PARTICLE_H_MISSILE);
+				p2 = App->particles->AddParticle(App->particles->hMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 4, 2 }, App->stageFunctionality->PlayerTexture, shot_colType, 0, PARTICLE_H_MISSILE);
 				if (p2 != nullptr) { p2->distanceToPlayer = -16; }
 			}
 			if(powerupUpgrades > 2)
 			{
 				Particle * p3;
 				Particle * p4;
-				p3 = App->particles->AddParticle(App->particles->hMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2, 1 }, App->stageFunctionality->PlayerTexture, shot_colType, 0, PARTICLE_H_MISSILE);
+				p3 = App->particles->AddParticle(App->particles->hMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 4, 2 }, App->stageFunctionality->PlayerTexture, shot_colType, 0, PARTICLE_H_MISSILE);
 				if (p3 != nullptr) { p3->distanceToPlayer = 24; }
-				p4 = App->particles->AddParticle(App->particles->hMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2, 1 }, App->stageFunctionality->PlayerTexture, shot_colType, 0, PARTICLE_H_MISSILE);
+				p4 = App->particles->AddParticle(App->particles->hMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 4, 2 }, App->stageFunctionality->PlayerTexture, shot_colType, 0, PARTICLE_H_MISSILE);
 				if (p4 != nullptr) { p4->distanceToPlayer = -24; }
 			}
 			if(powerupUpgrades > 3)
 			{
 				Particle * p5;
 				Particle * p6;
-				p5 = App->particles->AddParticle(App->particles->hMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2, 1 }, App->stageFunctionality->PlayerTexture, shot_colType, 0, PARTICLE_H_MISSILE);
+				p5 = App->particles->AddParticle(App->particles->hMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 4, 2 }, App->stageFunctionality->PlayerTexture, shot_colType, 0, PARTICLE_H_MISSILE);
 				if (p5 != nullptr) { p5->distanceToPlayer = 32; }
-				p6 = App->particles->AddParticle(App->particles->hMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 2, 1 }, App->stageFunctionality->PlayerTexture, shot_colType, 0, PARTICLE_H_MISSILE);
+				p6 = App->particles->AddParticle(App->particles->hMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 4, 2 }, App->stageFunctionality->PlayerTexture, shot_colType, 0, PARTICLE_H_MISSILE);
 				if (p6 != nullptr) { p6->distanceToPlayer = -32; }
 			}
 		}

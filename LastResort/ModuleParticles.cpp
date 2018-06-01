@@ -59,7 +59,7 @@ bool ModuleParticles::Start()
 	basicLaser.sfx = basicLaserFx;
 	basicShot.sfx = basicShotSfx;
 	death_explosion.sfx = deathSfx;
-	LaserEnemyShot.sfx = laserEnemyShot_sfx;
+	laserEnemyShot.sfx = laserEnemyShot_sfx;
 	Missile.sfx = rocket;
 	MissileExplosion.sfx = rocketExplosion;
 	return true;
@@ -383,69 +383,68 @@ void ModuleParticles::InitParticleValues()
 	g_explosion02.anim.speed = 0.3f;
 
 	//--------------------------------------------------------------------------------ENEMIES----------------------------------------------------------------------//
-	LaserEnemyShot.anim.PushBack({ 52,27,6,32 });
-	LaserEnemyShot.anim.PushBack({ 42,27,10,32 });
-	LaserEnemyShot.anim.PushBack({ 30,27,12,29 });
-	LaserEnemyShot.anim.PushBack({ 22,9,15,16 });
-	LaserEnemyShot.anim.PushBack({ 14,43,16,16 });
-	LaserEnemyShot.anim.PushBack({ 22,9,15,16 });
-	LaserEnemyShot.anim.PushBack({ 14,43,16,16 });
-	LaserEnemyShot.anim.PushBack({ 22,9,15,16 });
-	LaserEnemyShot.anim.PushBack({ 14,43,16,16 });
-	LaserEnemyShot.anim.PushBack({ 22,9,15,16 });
-	LaserEnemyShot.anim.PushBack({ 14,43,16,16 });
-	LaserEnemyShot.anim.PushBack({ 36,9,16,16 });
-	LaserEnemyShot.anim.PushBack({ 0,8,22,16 });
-	LaserEnemyShot.anim.PushBack({ 32,0,29,10 });
-	LaserEnemyShot.anim.PushBack({ 0,0,32,6 });
-	LaserEnemyShot.anim.loop = false;
-	LaserEnemyShot.life = 5000;
-	LaserEnemyShot.anim.speed = 0.0f;
-	
+	laserEnemyShot.anim.PushBack({ 52,27,6,32 });
+	laserEnemyShot.anim.PushBack({ 42,27,10,32 });
+	laserEnemyShot.anim.PushBack({ 30,27,12,29 });
+	laserEnemyShot.anim.PushBack({ 22,9,15,16 });
+	laserEnemyShot.anim.PushBack({ 14,43,16,16 });
+	laserEnemyShot.anim.PushBack({ 22,9,15,16 });
+	laserEnemyShot.anim.PushBack({ 14,43,16,16 });
+	laserEnemyShot.anim.PushBack({ 22,9,15,16 });
+	laserEnemyShot.anim.PushBack({ 14,43,16,16 });
+	laserEnemyShot.anim.PushBack({ 22,9,15,16 });
+	laserEnemyShot.anim.PushBack({ 14,43,16,16 });
+	laserEnemyShot.anim.PushBack({ 36,9,16,16 });
+	laserEnemyShot.anim.PushBack({ 0,8,22,16 });
+	laserEnemyShot.anim.PushBack({ 32,0,29,10 });
+	laserEnemyShot.anim.PushBack({ 0,0,32,6 });
+	laserEnemyShot.anim.loop = false;
+	laserEnemyShot.life = 5000;
+	laserEnemyShot.anim.speed = 0.0f;
 
-	AsteroidDestroy.anim.PushBack({ 191,142,61,60 });
-	AsteroidDestroy.anim.PushBack({ 128,142,63,62 });
-	AsteroidDestroy.anim.PushBack({ 64,142,64,64 });
-	AsteroidDestroy.anim.PushBack({ 0,142,64,64 });
-	AsteroidDestroy.anim.PushBack({ 185,78,64,64 });
-	AsteroidDestroy.anim.PushBack({ 123,78,62,64 });
-	AsteroidDestroy.anim.PushBack({ 62,78,61,59 });
-	AsteroidDestroy.anim.PushBack({ 0,78,62,62 });
-	AsteroidDestroy.anim.PushBack({ 178,15,62,63 });
-	AsteroidDestroy.anim.PushBack({ 116,15,62,63 });
-	AsteroidDestroy.anim.PushBack({ 55,15,61,63 });
-	AsteroidDestroy.anim.PushBack({ 0,15,55,63 });
-	AsteroidDestroy.anim.speed = 0.2f;
+	asteroidDestroy.anim.PushBack({ 191,142,61,60 });
+	asteroidDestroy.anim.PushBack({ 128,142,63,62 });
+	asteroidDestroy.anim.PushBack({ 64,142,64,64 });
+	asteroidDestroy.anim.PushBack({ 0,142,64,64 });
+	asteroidDestroy.anim.PushBack({ 185,78,64,64 });
+	asteroidDestroy.anim.PushBack({ 123,78,62,64 });
+	asteroidDestroy.anim.PushBack({ 62,78,61,59 });
+	asteroidDestroy.anim.PushBack({ 0,78,62,62 });
+	asteroidDestroy.anim.PushBack({ 178,15,62,63 });
+	asteroidDestroy.anim.PushBack({ 116,15,62,63 });
+	asteroidDestroy.anim.PushBack({ 55,15,61,63 });
+	asteroidDestroy.anim.PushBack({ 0,15,55,63 });
+	asteroidDestroy.anim.speed = 0.2f;
 
 	//Middle Boss shot particle------------------------------------
-	MiddleBossShot.anim.PushBack({ 232,248,18,17 });
-	MiddleBossShot.anim.PushBack({ 232,267,17,17 });
-	MiddleBossShot.anim.PushBack({ 233,285,17,17 });
-	MiddleBossShot.anim.PushBack({ 232,303,18,17 });
-	MiddleBossShot.anim.PushBack({ 233,320,17,18 });
-	MiddleBossShot.anim.PushBack({ 233,320,17,18 });
-	MiddleBossShot.anim.PushBack({ 233,339,17,18 });
-	MiddleBossShot.anim.PushBack({ 232,358,18,17 });
-	MiddleBossShot.anim.PushBack({ 232,377,18,16 });
-	MiddleBossShot.anim.speed = 0.2f;
-	MiddleBossShot.life = 5000;
-	MiddleBossShot.speed.x = 1 * VectorMiddleBossShots.x;
-	MiddleBossShot.speed.y = 1 * VectorMiddleBossShots.y;
+	middleBossShot.anim.PushBack({ 232,248,18,17 });
+	middleBossShot.anim.PushBack({ 232,267,17,17 });
+	middleBossShot.anim.PushBack({ 233,285,17,17 });
+	middleBossShot.anim.PushBack({ 232,303,18,17 });
+	middleBossShot.anim.PushBack({ 233,320,17,18 });
+	middleBossShot.anim.PushBack({ 233,320,17,18 });
+	middleBossShot.anim.PushBack({ 233,339,17,18 });
+	middleBossShot.anim.PushBack({ 232,358,18,17 });
+	middleBossShot.anim.PushBack({ 232,377,18,16 });
+	middleBossShot.anim.speed = 0.2f;
+	middleBossShot.life = 5000;
+	middleBossShot.speed.x = 1 * VectorMiddleBossShots.x;
+	middleBossShot.speed.y = 1 * VectorMiddleBossShots.y;
 
 	//Middle Boss Explosition shot----------------------------------
-	MiddleBosExplotion.anim.PushBack({ 0,434,23,24 });
-	MiddleBosExplotion.anim.PushBack({ 24,434,23,24 });
-	MiddleBosExplotion.anim.PushBack({ 48,434,23,24 });
-	MiddleBosExplotion.anim.PushBack({ 72,434,23,24 });
-	MiddleBosExplotion.anim.PushBack({ 96,435,24,23 });
-	MiddleBosExplotion.anim.PushBack({ 121,434,24,24 });
-	MiddleBosExplotion.anim.PushBack({ 145,434,22,25 });
-	MiddleBosExplotion.anim.PushBack({ 168,434,22,25 });
-	MiddleBosExplotion.anim.PushBack({ 192,434,22,25 });
-	MiddleBosExplotion.anim.PushBack({ 214,434,22,25 });
-	MiddleBosExplotion.anim.PushBack({ 237,434,22,25 });
-	MiddleBosExplotion.anim.speed = 0.2;
-	MiddleBossShot.collision_fx = &MiddleBosExplotion;
+	middleBosExplosion.anim.PushBack({ 0,434,23,24 });
+	middleBosExplosion.anim.PushBack({ 24,434,23,24 });
+	middleBosExplosion.anim.PushBack({ 48,434,23,24 });
+	middleBosExplosion.anim.PushBack({ 72,434,23,24 });
+	middleBosExplosion.anim.PushBack({ 96,435,24,23 });
+	middleBosExplosion.anim.PushBack({ 121,434,24,24 });
+	middleBosExplosion.anim.PushBack({ 145,434,22,25 });
+	middleBosExplosion.anim.PushBack({ 168,434,22,25 });
+	middleBosExplosion.anim.PushBack({ 192,434,22,25 });
+	middleBosExplosion.anim.PushBack({ 214,434,22,25 });
+	middleBosExplosion.anim.PushBack({ 237,434,22,25 });
+	middleBosExplosion.anim.speed = 0.2;
+	middleBossShot.collision_fx = &middleBosExplosion;
 
 	//Orange ball
 	orangeBallExplosion.anim.PushBack({ 1, 6,  8,  8 });
@@ -505,6 +504,8 @@ void ModuleParticles::InitParticleValues()
 	MissileExplosion.anim.PushBack({ 210,281,29,27 });
 	MissileExplosion.anim.speed = 0.2f;
 
+	hMissile.collision_fx = &MissileExplosion;
+
 	//Intergalactic fighter shot----------------------------------
 
 	i_f_Shot.anim.PushBack({ 90,0 ,48,6 });
@@ -514,6 +515,4 @@ void ModuleParticles::InitParticleValues()
 
 	indoorLaser.anim.PushBack({ 141,0,80,6 });
 	indoorLaser.life = 5000;
-
-
 }

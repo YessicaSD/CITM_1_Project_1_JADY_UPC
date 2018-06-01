@@ -205,7 +205,7 @@ private:
 	iPoint intermediatePos2;
 	float trailRotation[4] = {0};
 	SDL_Rect trailAnim[4];
-	const float trailRotationSpeed = PI / 16;//16 axis, but it gets rendered every 2 frames
+	const float trailRotationSpeed = PI / 8;
 	bool renderTrail;
 	int renderTrailCounter = 0;
 	int trailFrameCounter = 0;

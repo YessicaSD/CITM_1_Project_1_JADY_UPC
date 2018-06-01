@@ -867,6 +867,18 @@ void ModuleUnit::TrailLogic()
 		lastUnitPos.x = (float)position.x;
 		lastUnitPos.y = (float)position.y;
 
+		//Update rotation-------------------------------------------------
+		for (int i = 0; i < 4; ++i)
+		{
+			//- Add rotation
+			trailRotation[i] += trailRotationSpeed;
+			//- Limit rotation (make sure it doesn't get over 2 * PI)
+			if (trailRotation[i] > 2 * PI)
+			{
+				trailRotation[i] -= 2 * PI;
+			}
+		}
+
 		//Stop rendering when 2 frames have passed
 		trailFrameCounter++;
 		if(trailFrameCounter >= 2)
@@ -886,17 +898,6 @@ void ModuleUnit::TrailLogic()
 		}
 	}
 
-	//Update rotation-------------------------------------------------
-	for (int i = 0; i < 4; ++i)
-	{
-		//- Add rotation
-		trailRotation[i] += trailRotationSpeed;
-		//- Limit rotation (make sure it doesn't get over 2 * PI)
-		if(trailRotation[i] > 2 * PI)
-		{
-			trailRotation[i] -= 2 * PI;
-		}
-	}
 }
 
 void ModuleUnit::TrailRender()
