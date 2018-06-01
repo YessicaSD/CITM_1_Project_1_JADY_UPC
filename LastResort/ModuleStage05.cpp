@@ -235,7 +235,8 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(INDOOR_TURRET_LASER, 856, 112, 0, NOPOWERUP, { -3,0 });
 	App->enemies->AddEnemy(MISSILE_TURRET, 607, 29);
 	App->enemies->AddEnemy(MISSILE_TURRET, 639, 29);
-	App->enemies->AddEnemy(MISSILE_TURRET, 879, -3);
+
+	
 	App->enemies->AddEnemy(MISSILE_TURRET, 911, -3);
 	App->enemies->AddEnemy(MISSILE_TURRET, 943, -3);
 	App->enemies->AddEnemy(MISSILE_TURRET, 975, -3);
@@ -401,6 +402,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 11:
 		if (reachedCheckpoint[11] == false)
 		{
+			
 			reachedCheckpoint[11] = true;
 		}
 		UpdateShipColliders();
@@ -409,8 +411,11 @@ update_status Module5lvlScene::LogicUpdate()
 	case 12:
 		if (reachedCheckpoint[12] == false)
 		{
+			App->enemies->AddEnemy(MISSILE_TURRET, 879, -3);
+			
 			reachedCheckpoint[12] = true;
 		}
+		
 		UpdateShipColliders();
 
 		break;

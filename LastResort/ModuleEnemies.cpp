@@ -83,6 +83,7 @@ update_status ModuleEnemies::InputUpdate()
 			{
 				SpawnEnemy(queue[i]);
 				queue[i].type = ENEMY_TYPES::NO_TYPE;
+				queue[i].counting = false;
 				LOG("Spawning enemy at x: %d, y: %d", queue[i].x, queue[i].y);
 			}
 		}
@@ -114,6 +115,7 @@ update_status ModuleEnemies::LogicUpdate()
 			{
 				LOG("DeSpawning enemy at x: %d, y: %d", enemies[i]->position.x, enemies[i]->position.y);
 				enemies[i]->isDead = true;
+				
 				delete enemies[i];
 				enemies[i] = nullptr;
 			}
