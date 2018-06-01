@@ -205,6 +205,6 @@ private:
 	SDL_Rect trailAnim[4];
 	const float trailRotationSpeed = PI / 16;//16 axis, but it gets rendered every 2 frames
 	bool renderTrail;
-	int trailFrameCounter = 0;
+	int trailFrameCounter = 1;
 };
 #endif

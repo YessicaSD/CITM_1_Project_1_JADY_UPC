@@ -16,7 +16,7 @@
 #include "ModuleUI.h"
 #include "ModuleReady.h"
 #include "ModuleFonts.h"
-#include <stdio.h>
+
 
 ModuleGameTitle::~ModuleGameTitle()
 {}
