@@ -87,17 +87,16 @@ void Particle_HMissile::Move()
 		if (distanceToTarget < largestPossibleDistance)
 		{
 			//Moves there
-			if (position.y < targetPos.y)
-			{
-				//Move up
-				if (position.y - speed.y < targetPos.y) { position.y -= speed.y; }
-				else { position.y = targetPos.y; }
-
-			}
-			else if (position.y > targetPos.y)
+			if (targetPos.y > position.y)
 			{
 				//Move down
-				if (position.y + speed.y > targetPos.y) { position.y += speed.y; }
+				if (targetPos.y > position.y + speed.y) { position.y += speed.y; }
+				else { position.y = targetPos.y; }
+			}
+			else if (targetPos.y < position.y)
+			{
+				//Move up
+				if (targetPos.y < position.y - speed.y) { position.y -= speed.y; }
 				else { position.y = targetPos.y; }
 			}
 			//else if (position.y == targetPos.y) { Do nothing }
@@ -169,6 +168,8 @@ void Particle_HMissile::OnCollisionHitDetection(Collider* c1, Collider* c2)
 	if (distanceToEnemy < distanceToTarget)
 	{
 		distanceToTarget = distanceToEnemy;
+		targetPos.x = c2->rect.x;
+		targetPos.y = c2->rect.y;
 	}
 }
 
