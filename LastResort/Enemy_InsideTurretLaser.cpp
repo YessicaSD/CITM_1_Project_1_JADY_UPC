@@ -14,9 +14,9 @@ void Enemy_Inside_Turret_Laser::Move() {
 	{
 		framecount = 0;
 		if(speed.x>0)
-		App->particles->AddParticle(App->particles->indoorLaser, { (float)position.x+animation->GetFrame().w/2,(float)position.y }, { (float)speed.x, (float)speed.y }, App->particles->particlesTx, COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE, 0, PARTICLE_INDOOR_LASER);
+		App->particles->AddParticle(App->particles->indoorLaser, { (float)position.x+animation->GetFrame().w/2,(float)position.y -2 }, { (float)speed.x, (float)speed.y }, App->particles->particlesTx, COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE, 0, PARTICLE_INDOOR_LASER);
 		else
-			App->particles->AddParticle(App->particles->indoorLaser, { (float)position.x - animation->GetFrame().w / 2,(float)position.y }, { (float)speed.x, (float)speed.y }, App->particles->particlesTx, COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE, 0, PARTICLE_INDOOR_LASER);
+			App->particles->AddParticle(App->particles->indoorLaser, { (float)position.x - animation->GetFrame().w / 2,(float)position.y-2 }, { (float)speed.x, (float)speed.y }, App->particles->particlesTx, COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE, 0, PARTICLE_INDOOR_LASER);
 	}
 		
 	position = fixedPos + App->stage05->spawnPos;

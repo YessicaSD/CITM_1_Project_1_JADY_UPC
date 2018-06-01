@@ -50,7 +50,18 @@ void Particle_Indoor_Laser::Move()
 	}
 	if (stateLaser == DECREASE)
 	{
+		if(animation.w>0)
 		animation.w -= labs(speed.x);
+	}
+
+	if (collider != nullptr)
+	{
+		if (speed.x > 0)
+		collider->SetPos((int)position.x-animation.w, (int)position.y);
+		else
+			collider->SetPos((int)position.x , (int)position.y);
+		
+		collider->SetMeasurements(animation.w, animation.h);
 	}
 }
 void Particle_Indoor_Laser::Draw()
