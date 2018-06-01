@@ -4,7 +4,7 @@
 #include "ModuleRender.h"
 #include "ModuleFonts.h"
 
-#include <string.h>
+#include <string>
 
 // Constructor
 ModuleFonts::ModuleFonts() : Module()
@@ -77,7 +77,8 @@ void ModuleFonts::UnLoad(int font_id)
 	}
 }
 
-// Render text using a bitmap font
+
+
 void ModuleFonts::BlitText(int x, int y, int font_id, const char* text) const
 {
 	if (text == nullptr || font_id < 0 || font_id >= MAX_FONTS || fonts[font_id].graphic == nullptr)

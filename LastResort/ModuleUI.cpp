@@ -1,6 +1,7 @@
-#include <stdio.h>
-#include <string.h>
+
 #include "Globals.h"
+#include <stdio.h>
+#include <string> 
 #include "Application.h"
 #include "ModuleUI.h"
 #include "ModuleTextures.h"
@@ -17,7 +18,7 @@
 #include "ModuleReady.h"
 #include "ModuleUnit.h"
 
-
+using namespace std;
 
 ModuleUI::ModuleUI() {
 	lives_score_p1 = { 0,0,32,16};
@@ -56,6 +57,7 @@ bool ModuleUI::CleanUp() {
 
 update_status  ModuleUI::InputUpdate()
 {
+	
 	//Credits functionality------------------------------------------------------------------------------//
 	//-------Add credits-----------------------------------------------
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_LCTRL] == KEY_DOWN || App->input->Controller1[SDL_CONTROLLER_BUTTON_Y] == KEY_DOWN || App->input->Controller2[SDL_CONTROLLER_BUTTON_Y] == KEY_DOWN)
@@ -158,35 +160,40 @@ update_status ModuleUI::LogicUpdate()
 
 update_status ModuleUI::RenderUpdate2()
 {
-	str_score_p1 = new char[MAX_NUMBERS_SCORE];
-	str_score_p2 = new char[MAX_NUMBERS_SCORE];
-	str_lives_p1 = new char[4];
-	str_lives_p2 = new char[4];
-	str_credits = new char[16];
-	str_debug = new char[8];
-
-	snprintf(str_lives_p1, 4 * sizeof(str_lives_p1), "%i", App->player1->lives);
-	snprintf(str_lives_p2, 4 * sizeof(str_lives_p2), "%i", App->player2->lives);
-	snprintf(str_score_p1, 4 * sizeof(str_score_p1), "%i", App->player1->score);
-	snprintf(str_score_p2, 4 * sizeof(str_score_p2), "%i", App->player2->score);
-	snprintf(str_credits, 4 * sizeof(str_credits), "%i", credits);
+	char const*str_score_p1 = nullptr;
+	char const*str_score_p2 = nullptr;
+	char const*str_lives_p1 = nullptr;
+	char const*str_lives_p2 = nullptr;
+	char const*str_credits = nullptr;
+	char const *str_debug = nullptr;
+	
+	string lives_p1 = to_string(App->player1->lives);
+	string lives_p2 = to_string(App->player2->lives);
+	string score_p1 = to_string(App->player1->score);
+	string score_p2 = to_string(App->player2->score);
+	string credits_ = to_string(credits);
+	string debug;
+	
+	str_score_p1 = lives_p1.c_str();
+	str_score_p2 = lives_p2.c_str();
+	str_lives_p1 = score_p1.c_str();
+	str_lives_p2 = score_p2.c_str();
+	str_credits = credits_.c_str();
 	
 	//Draw UI----------------------------------------------------------------------------------------//
 	
-
-
 	if (showUI)
 	{
 		//------Common--------------------------------------------------
 		
 		if (credits < 2) {
 
-			App->fonts->BlitText(208, 216, 0, "CREDIT__0");
-			App->fonts->BlitText(272, 216, 0, str_credits);
+			App->fonts->BlitText(208, 216, 0, "CREDIT  0");
+			App->fonts->BlitText(280, 216, 0, str_credits);
 		}
 
 		else if (credits < 10) {
-			App->fonts->BlitText(208, 216, 0, "CREDITS_0");
+			App->fonts->BlitText(208, 216, 0, "CREDITS 0");
 			App->fonts->BlitText(280, 216, 0, str_credits);
 		}
 
@@ -243,34 +250,39 @@ update_status ModuleUI::RenderUpdate2()
 			}
 		}
 
-		//Debug-------------------------------------------------------
+	//	Debug-------------------------------------------------------
 		switch (App->stageFunctionality->debugElem)
 		{
 		case NOTHING:
 			break;
 		case SCENES:
-			snprintf(str_debug, 4 * sizeof(str_debug), "%i", App->stageFunctionality->selectedScene);
+			debug = to_string(App->stageFunctionality->selectedScene);
+			str_debug = debug.c_str();
+
 			App->fonts->BlitText( SCREEN_WIDTH / 2 - 15 * App->fonts->GetCharWidth(0) / 2, SCREEN_HEIGHT - 45,
 				0, "SELECTING SCENE");//15 number of letters in SELECTING SCENE
 			App->fonts->BlitText( SCREEN_WIDTH / 2 -  3 * App->fonts->GetCharWidth(0) / 2, SCREEN_HEIGHT - 35,
 				0, str_debug);
 			break;
 		case CHECKPOINTS:
-			snprintf(str_debug, 4 * sizeof(str_debug), "%i", App->stageFunctionality->selectedCheckpoint);
+			debug = to_string(App->stageFunctionality->selectedCheckpoint);
+			str_debug = debug.c_str();
 			App->fonts->BlitText( SCREEN_WIDTH / 2 - 20 * App->fonts->GetCharWidth(0) / 2, SCREEN_HEIGHT - 45,
 				0, "SELECTING CHECKPOINT");
 			App->fonts->BlitText( SCREEN_WIDTH / 2 -  3 * App->fonts->GetCharWidth(0) / 2, SCREEN_HEIGHT - 35,
 				0, str_debug);
 			break;
 		case ENEMIES:
-			snprintf(str_debug, 4 * sizeof(str_debug), "%i", App->stageFunctionality->selectedEnemy);
+			debug = to_string(App->stageFunctionality->selectedEnemy);
+			str_debug = debug.c_str();
 			App->fonts->BlitText( SCREEN_WIDTH / 2 - 15 * App->fonts->GetCharWidth(0) / 2, SCREEN_HEIGHT - 45,
 				0, "SELECTING ENEMY");
 			App->fonts->BlitText( SCREEN_WIDTH / 2 -  3 * App->fonts->GetCharWidth(0) / 2, SCREEN_HEIGHT - 35,
 				0, str_debug);
 			break;
 		case POWERUPS:
-			snprintf(str_debug, 4 * sizeof(str_debug), "%i", App->stageFunctionality->selectedPowerup);
+			debug = to_string(App->stageFunctionality->selectedPowerup);
+			str_debug = debug.c_str();
 			App->fonts->BlitText( SCREEN_WIDTH / 2 - 17 * App->fonts->GetCharWidth(0) / 2, SCREEN_HEIGHT - 45,
 				0, "SELECTING POWERUP");
 			App->fonts->BlitText( SCREEN_WIDTH / 2 -  3 * App->fonts->GetCharWidth(0) / 2, SCREEN_HEIGHT - 35,
@@ -278,21 +290,6 @@ update_status ModuleUI::RenderUpdate2()
 			break;
 		}
 	}
-
-
-	delete[](str_score_p1);
-	delete[](str_score_p2);
-	delete[](str_lives_p1);
-	delete[](str_lives_p2);
-	delete[](str_credits);
-	delete[](str_debug);
-
-	str_score_p1 = nullptr;
-	str_score_p2 = nullptr;
-	str_lives_p1 = nullptr;
-	str_lives_p2 = nullptr;
-	str_credits = nullptr;
-	str_debug = nullptr;
 
 	return UPDATE_CONTINUE;
 }

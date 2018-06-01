@@ -52,12 +52,8 @@ public:
 	bool showUI = false;
 	int credits = 0;
 
-	char *str_score_p1 = nullptr;
-	char *str_score_p2 = nullptr;
-	char *str_lives_p1 = nullptr;
-	char *str_lives_p2 = nullptr;
-	char *str_credits = nullptr;
-	char *str_debug = nullptr;
+	
+
 	//Audios-------------------------------------
 	Sfx*coinsSfx=nullptr;
 	//Textures------------------------------------
