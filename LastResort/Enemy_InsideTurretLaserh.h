@@ -9,8 +9,9 @@ private:
 	Animation turret;
 
 public:
-	Enemy_Inside_Turret_Laser(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop);
+	Enemy_Inside_Turret_Laser(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop, iPoint speed);
 	void Move();
+	void Draw(SDL_Texture* sprites);
 };
 
 #endif // __ENEMY_INSIDE_TURRET_LASER_H__
