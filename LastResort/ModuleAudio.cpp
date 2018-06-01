@@ -37,6 +37,7 @@ bool ModuleAudio::Init()
 	else {
 		Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
 		Mix_VolumeMusic(GENERAL_MUSIC_VOLUME);
+		Mix_AllocateChannels(10);
 		
 	}
 
@@ -148,7 +149,7 @@ bool ModuleAudio::UnloadMUS(Music * music) {
 
 	for ( int i = 0; i < MAX_MUSICS; ++i)
 	{
-		if (musics[i] != nullptr  && musics[i]->id == music->id )
+		if (musics[i] != nullptr  && musics[i] == music )
 		{
 			LOG(" Unload music:  %s ", music->name);
 			Mix_FreeMusic(musics[i]->audio);
