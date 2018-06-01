@@ -219,8 +219,7 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(MECH_SPAWNER, 738, 192);
 
 	//This enemy use speed as a parameter of rotation
-
-	App->enemies->AddEnemy(INDOOR_TURRET, 575, 145);                        //up ->{0,0}
+	App->enemies->AddEnemy(INDOOR_TURRET, 575, 145); //up ->{0,0}
 	App->enemies->AddEnemy(INDOOR_TURRET, 527, 193, 0, NOPOWERUP, { 1,0 }); //down
 	App->enemies->AddEnemy(INDOOR_TURRET, 624, 193, 0, NOPOWERUP, { 1,0 });
 	App->enemies->AddEnemy(INDOOR_TURRET, 672, 193, 0, NOPOWERUP, { 1,0 });
@@ -236,7 +235,6 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(MISSILE_TURRET, 607, 29);
 	App->enemies->AddEnemy(MISSILE_TURRET, 639, 29);
 
-	
 	App->enemies->AddEnemy(MISSILE_TURRET, 911, -3);
 	App->enemies->AddEnemy(MISSILE_TURRET, 943, -3);
 	App->enemies->AddEnemy(MISSILE_TURRET, 975, -3);
@@ -244,6 +242,12 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(IF_SPAWNER, 735, 31);
 
 	App->enemies->AddEnemy(REAR_TURRET, 1357, 41);
+
+	App->enemies->AddEnemy(REDBATS,1616 , 30);
+	App->enemies->AddEnemy(REDBATS, 1616, 30,500);
+	App->enemies->AddEnemy(REDBATS, 1616, 30, 1000);
+	App->enemies->AddEnemy(REDBATS, 1616, 30, 1500);
+	App->enemies->AddEnemy(REDBATS, 1616, 30, 2000);
 
 	App->enemies->AddEnemy(PINATA_SPAWNER, 1167, 144);
 	App->enemies->AddEnemy(PINATA_SPAWNER, 1295, 144);
@@ -449,6 +453,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 16:
 		if (reachedCheckpoint[16] == false)
 		{
+			
 			reachedCheckpoint[16] = true;
 		}
 		UpdateShipColliders();
@@ -458,6 +463,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 17:
 		if (reachedCheckpoint[17] == false)
 		{
+			redBatsKilled = 0;
 			reachedCheckpoint[17] = true;
 		}
 		UpdateShipColliders();
