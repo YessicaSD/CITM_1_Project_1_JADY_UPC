@@ -113,6 +113,7 @@ public:
 	Particle fireBar;
 	Particle Missile;
 	Particle MissileExplosion;
+	Particle IndoorLaser;
 
 	//- OTHER
 	iPoint VectorMiddleBossShots;
