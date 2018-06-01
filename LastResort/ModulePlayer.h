@@ -49,8 +49,8 @@ public:
 
 	//Added-----------------------------
 	void Reappear();
-	void PlayerMovement(); 
-	void ShotInput();  
+	void MovementLogic(); 
+	void ShootingLogic();  
 	void ShipAnimation();
 
 	//Functions that will be rewritten in each player
@@ -92,6 +92,8 @@ public:
 	//bool laserPowerUp = false;
 	//bool missilesPowerUp = false;
 	//bool bombsPowerUp = false;
+	int gCounter = 0;
+	int hCounter = 0;
 	//------------States----------------------------
 	PlayerAnimationState playerAnimState;
 	Animation initAnim;
@@ -116,6 +118,7 @@ public:
 	float const transitionLimit = 0.5f;//This indicates when the ship will transition from its idle animation to its transition animation
 	float const MaxLimit = 0.90f;//This indicates when the ship will transition from its transition animation to its max animation
 	iPoint playerCenter = { 16, 6 };//Useful to make the unit rotate around the center of the player
+
 	//Colliders---------------------------------------------------------------//
 	Collider* playerCol = nullptr;
 	COLLIDER_TYPE shot_colType;

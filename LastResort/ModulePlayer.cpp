@@ -92,7 +92,7 @@ update_status ModulePlayer::InputUpdate()
 	//Movement-------------------------------------------------------------------------
 	if (canMove == true)
 	{
-		PlayerMovement();
+		MovementLogic();
 	}
 	//INFO: If the movement is not on preupdate, the player will move after the unit, causing weird visual effects
 	//Collision------------------------------------------------------------------------
@@ -108,7 +108,7 @@ update_status ModulePlayer::LogicUpdate()
 
 	if (canMove == true)
 	{
-		ShotInput();
+		ShootingLogic();
 	}
 
 	//Winlvl
@@ -116,45 +116,6 @@ update_status ModulePlayer::LogicUpdate()
 	{
 		Winlvl();
 	}
-
-	if (shootLaser)
-	{
-		if (ShotLaserBasic.finished == false)
-		{
-			if (ShotLaserBasic.current_frame == 0)
-			{
-				ShotPosition = position;
-				App->particles->AddParticle(App->particles->basicLaser, { (float)(ShotPosition.x + 32), (float)(ShotPosition.y + 6) }, { 10, 0 }, App->stageFunctionality->PlayerTexture, shot_colType, 0);
-
-			}
-
-			if (powerupUpgrades == 3)
-			{
-				if (LaserCount == 3 || LaserCount == 6 || LaserCount == 9)
-				{
-					App->particles->AddParticle(App->particles->littleRings, { (float)(ShotPosition.x + 10), (float)(ShotPosition.y + 6) }, { 10, 0 }, App->stageFunctionality->PlayerTexture, shot_colType, 0);
-				}
-
-			}
-			if (powerupUpgrades >= 4)
-			{
-				if (LaserCount == 3 || LaserCount == 6 || LaserCount == 9)
-				{
-					App->particles->AddParticle(App->particles->bigRings, { (float)(ShotPosition.x + 10), (float)(ShotPosition.y + 6) }, { 10, 0 }, App->stageFunctionality->PlayerTexture, shot_colType, 0);
-				}
-			}
-		
-			LaserCount += 1;
-		}
-		else
-		{
-			ShotLaserBasic.finished = false;
-			ShotLaserBasic.current_frame = 0;
-			shootLaser = false;
-			LaserCount = 0;
-		}
-	}
-
 	return UPDATE_CONTINUE;
 }
 
@@ -326,7 +287,7 @@ void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
 
 }
 
-void  ModulePlayer::ShotInput()
+void  ModulePlayer::ShootingLogic()
 {
 	if (Shoot())
 	{
@@ -339,7 +300,7 @@ void  ModulePlayer::ShotInput()
 			if (powerupUpgrades>1)
 				shootLaser = true;
 		}
-		if (currentPowerUp == POWERUP_TYPE::HOMING)
+		if (currentPowerUp == POWERUP_TYPE::HOMING && hCounter >= 80)
 		{
 			if(powerupUpgrades > 1)
 			{
@@ -368,8 +329,9 @@ void  ModulePlayer::ShotInput()
 				p6 = App->particles->AddParticle(App->particles->hMissile, { (float)(position.x + 16), (float)(position.y + 6) }, { 4, 2 }, App->stageFunctionality->PlayerTexture, shot_colType, 0, PARTICLE_H_MISSILE);
 				if (p6 != nullptr) { p6->distanceToPlayer = -32; }
 			}
+			hCounter = 0;
 		}
-		if (currentPowerUp == POWERUP_TYPE::GROUND)
+		if (currentPowerUp == POWERUP_TYPE::GROUND && gCounter >= 80)
 		{
 			Particle* p = nullptr;
 
@@ -388,12 +350,56 @@ void  ModulePlayer::ShotInput()
 			//case 3:
 			//	break;
 			//}
-
+			gCounter = 0;
 		}
 	}
+
+	//Limit the use of powerups------------------------------------------------
+	//- Laser
+	if (shootLaser)
+	{
+		if (ShotLaserBasic.finished == false)
+		{
+			if (ShotLaserBasic.current_frame == 0)
+			{
+				ShotPosition = position;
+				App->particles->AddParticle(App->particles->basicLaser, { (float)(ShotPosition.x + 32), (float)(ShotPosition.y + 6) }, { 10, 0 }, App->stageFunctionality->PlayerTexture, shot_colType, 0);
+
+			}
+
+			if (powerupUpgrades == 3)
+			{
+				if (LaserCount == 3 || LaserCount == 6 || LaserCount == 9)
+				{
+					App->particles->AddParticle(App->particles->littleRings, { (float)(ShotPosition.x + 10), (float)(ShotPosition.y + 6) }, { 10, 0 }, App->stageFunctionality->PlayerTexture, shot_colType, 0);
+				}
+
+			}
+			if (powerupUpgrades >= 4)
+			{
+				if (LaserCount == 3 || LaserCount == 6 || LaserCount == 9)
+				{
+					App->particles->AddParticle(App->particles->bigRings, { (float)(ShotPosition.x + 10), (float)(ShotPosition.y + 6) }, { 10, 0 }, App->stageFunctionality->PlayerTexture, shot_colType, 0);
+				}
+			}
+
+			LaserCount += 1;
+		}
+		else
+		{
+			ShotLaserBasic.finished = false;
+			ShotLaserBasic.current_frame = 0;
+			shootLaser = false;
+			LaserCount = 0;
+		}
+	}
+	//-H
+	hCounter++;
+	//-G
+	gCounter++;
 }
 
-void ModulePlayer::PlayerMovement()
+void ModulePlayer::MovementLogic()
 {
 
 	if (MoveLeft() == true) {
