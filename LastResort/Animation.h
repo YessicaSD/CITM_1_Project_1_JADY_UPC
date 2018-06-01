@@ -36,6 +36,13 @@ public:
 	{
 		SDL_memcpy(&frames, anim.frames, sizeof(frames));
 	}
+	void ResizeFrame(int frameNum,int position_x, int position_y, int measure_x, int measure_y)
+	{
+		frames[frameNum].x = (int)position_x;
+		frames[frameNum].y = (int)position_y;
+		frames[frameNum].w = (int)measure_x;
+		frames[frameNum].h = (int)measure_y;
+	}
 
 	void PushBack(const SDL_Rect& rect)
 	{

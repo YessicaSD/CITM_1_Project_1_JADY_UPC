@@ -15,6 +15,7 @@
 #include "Particle_HMissile.h"
 #include "Particle_Missile.h"
 #include "Particle_Fireball.h"
+#include "Particle_Indoor_Laser.h"
 #include "ModuleStage05.h"
 #include "SDL/include/SDL_timer.h"
 
@@ -189,6 +190,9 @@ Particle* ModuleParticles::AddParticle(Particle& particle, fPoint position, fPoi
 				break;
 			case PARTICLE_FIREBALL:
 				p = new Particle_Fireball(particle, position, speed, delay, colType, tex);
+				break;
+			case PARTICLE_INDOOR_LASER:
+				p = new Particle_Indoor_Laser(particle, position, speed, delay, colType, tex);
 				break;
 			}
 
@@ -508,6 +512,8 @@ void ModuleParticles::InitParticleValues()
 	i_f_Shot.life = 5000;
 	i_f_Shot.anim.loop = false;
 
-	IndoorLaser.anim.PushBack({ 141,0,80,6 });
+	indoorLaser.anim.PushBack({ 141,0,80,6 });
+	indoorLaser.life = 5000;
+
 
 }

@@ -25,6 +25,7 @@ enum PARTICLE_TYPE
 	PARTICLE_H_MISSILE,
 	PARTICLE_MISSILE,
 	PARTICLE_FIREBALL,
+	PARTICLE_INDOOR_LASER,
 	MAX_PARTICLE,//Always last
 };
 
@@ -113,7 +114,7 @@ public:
 	Particle fireBar;
 	Particle Missile;
 	Particle MissileExplosion;
-	Particle IndoorLaser;
+	Particle indoorLaser;
 
 	//- OTHER
 	iPoint VectorMiddleBossShots;
