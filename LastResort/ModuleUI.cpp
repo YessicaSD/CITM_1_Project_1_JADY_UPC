@@ -54,20 +54,8 @@ bool ModuleUI::CleanUp() {
 }
 
 update_status  ModuleUI::InputUpdate()
-{ 
-
-	return update_status::UPDATE_CONTINUE;
-}
-
-update_status ModuleUI::LogicUpdate()
-{
-	return update_status::UPDATE_CONTINUE;
-}
-
-update_status ModuleUI::RenderUpdate2()
 {
 	//Credits functionality------------------------------------------------------------------------------//
-
 	//-------Add credits-----------------------------------------------
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_LCTRL] == KEY_DOWN || App->input->Controller1[SDL_CONTROLLER_BUTTON_Y] == KEY_DOWN || App->input->Controller2[SDL_CONTROLLER_BUTTON_Y] == KEY_DOWN)
 	{
@@ -101,7 +89,6 @@ update_status ModuleUI::RenderUpdate2()
 				App->player1->isActive = true;
 				App->player1->lives = 2;
 				App->player1->Reappear();
-				
 				break;
 			case CONTINUE_SCENE:
 				credits -= 1;
@@ -111,23 +98,22 @@ update_status ModuleUI::RenderUpdate2()
 				App->stage05->currentCheckPoint = 0;
 				break;
 			default:
-				LOG("F1 default");
+				LOG("1 default");
 				break;
 			}
 		}
 	}
 	//----------------------2 pressed---------------------
-	if (App->input->keyboard[SDL_SCANCODE_2] == KEY_DOWN  && 
+	if (App->input->keyboard[SDL_SCANCODE_2] == KEY_DOWN &&
 		(App->input->keyboard[SDL_SCANCODE_F5] == KEY_IDLE &&
-		App->input->keyboard[SDL_SCANCODE_F6] == KEY_IDLE &&
-		App->input->keyboard[SDL_SCANCODE_F7] == KEY_IDLE &&
-		App->input->keyboard[SDL_SCANCODE_F8] == KEY_IDLE ||
-		App->input->Controller2[SDL_CONTROLLER_BUTTON_B] == KEY_DOWN))
+			App->input->keyboard[SDL_SCANCODE_F6] == KEY_IDLE &&
+			App->input->keyboard[SDL_SCANCODE_F7] == KEY_IDLE &&
+			App->input->keyboard[SDL_SCANCODE_F8] == KEY_IDLE ||
+			App->input->Controller2[SDL_CONTROLLER_BUTTON_B] == KEY_DOWN))
 	{
 		switch (currentScene)
 		{
 		case TITLE_SCENE:
-			
 			if (credits >= 2)
 			{
 				HideUi();
@@ -144,7 +130,7 @@ update_status ModuleUI::RenderUpdate2()
 				App->player2->isActive = true;
 				App->player2->lives = 2;
 				App->player2->Reappear();
-				
+
 				credits -= 1;
 			}
 			break;
@@ -157,11 +143,20 @@ update_status ModuleUI::RenderUpdate2()
 			}
 			break;
 		default:
-			LOG("F2 default");
+			LOG("2 default");
 			break;
 		}
 	}
+	return update_status::UPDATE_CONTINUE;
+}
 
+update_status ModuleUI::LogicUpdate()
+{
+	return update_status::UPDATE_CONTINUE;
+}
+
+update_status ModuleUI::RenderUpdate2()
+{
 	str_score_p1 = new char[MAX_NUMBERS_SCORE];
 	str_score_p2 = new char[MAX_NUMBERS_SCORE];
 	str_lives_p1 = new char[4];
@@ -174,25 +169,25 @@ update_status ModuleUI::RenderUpdate2()
 	snprintf(str_score_p1, 4 * sizeof(str_score_p1), "%d", App->player1->score);
 	snprintf(str_score_p2, 4 * sizeof(str_score_p2), "%d", App->player2->score);
 
-	if(credits<2)
+	//Draw UI----------------------------------------------------------------------------------------//
+	if (credits<2)
 		snprintf(str_credits, 4 * sizeof(str_credits), "CREDIT  0%i", credits);
 	else if (credits<10)
 		snprintf(str_credits, 4 * sizeof(str_credits), "CREDITS 0%i", credits);
 	else
 		snprintf(str_credits, 4 * sizeof(str_credits), "CREDITS %i", credits);
 
-	//Draw UI----------------------------------------------------------------------------------------//
-
-
-	if (showUI == true) {
+	if (showUI)
+	{
 		//------Common--------------------------------------------------
 		App->fonts->BlitText(208, 216, 0, str_credits);
 		if (App->player1->isActive == true || App->player2->isActive == true)
-		App->render->Blit(uiTex, 112, 16, &top);
+		{
+			App->render->Blit(uiTex, 112, 16, &top);
+		}
 		//------Player 1------------------------------------------------
-
-		if (App->player1->isActive == true) {
-
+		if (App->player1->isActive == true)
+		{
 			//-----------Static UI-----------------------
 			App->render->Blit(uiTex, 16, 16, &lives_score_p1);
 			App->render->Blit(uiTex, 24, 208, &pow);
@@ -234,7 +229,6 @@ update_status ModuleUI::RenderUpdate2()
 		}
 
 		//Debug-------------------------------------------------------
-
 		switch (App->stageFunctionality->debugElem)
 		{
 		case NOTHING:
@@ -277,23 +271,23 @@ update_status ModuleUI::RenderUpdate2()
 	delete[](str_lives_p2);
 	delete[](str_credits);
 	delete[](str_debug);
+
 	str_score_p1 = nullptr;
 	str_score_p2 = nullptr;
 	str_lives_p1 = nullptr;
 	str_lives_p2 = nullptr;
 	str_credits = nullptr;
+	str_debug = nullptr;
 
 	return UPDATE_CONTINUE;
 }
 
-void ModuleUI::ShowUi() {
-	if (showUI == false) {
-		showUI = true;
-	}
+void ModuleUI::ShowUi()
+{
+	if (showUI == false) { showUI = true; }
 	
 }
-void ModuleUI::HideUi() {
-	if (showUI == true) {
-		showUI = false;
-	}
+void ModuleUI::HideUi()
+{
+	if (showUI == true) { showUI = false; }
 }
