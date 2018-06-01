@@ -1,6 +1,5 @@
 
 #include "Globals.h"
-#include <stdio.h>
 #include <string> 
 #include "Application.h"
 #include "ModuleUI.h"
