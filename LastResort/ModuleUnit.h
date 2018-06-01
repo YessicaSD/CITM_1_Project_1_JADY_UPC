@@ -84,6 +84,11 @@ public:
 	bool CleanUp();
 	void OnCollision(Collider*, Collider*);
 
+	//Change color
+	void MakeUnitBlue();
+	void MakeUnitOrange();
+
+private:
 	//Unit phases (executed inside update)
 	void Rotating();//Here we'll check for input, rotate the unit, and render it
 	void Throwing();
@@ -109,9 +114,11 @@ public:
 	bool ColliderIsAbove();//Returns true if collider to follow is above of the unit
 	bool ColliderIsBellow();//Returns true if collider to follow is bellow of the unit
 
-	//Change color
-	void MakeUnitBlue();
-	void MakeUnitOrange();
+
+	//Trail VFX (sprite that follows the unit when it is throwing, followingTerrain, bouncingOnTerrain or returning)
+	void PlaceTrailOnUnit();
+	void TrailLogic();
+	void TrailRender();
 
 	//Other helper functions
 	void UpdateUnitColliders();
@@ -190,5 +197,14 @@ private:
 	SDL_Texture* throwUnitTx = nullptr;
 	SDL_Texture* throwUnitOrangeTx = nullptr;
 	SDL_Texture* throwUnitBlueTx = nullptr;
+
+	//Trail
+	iPoint trailPos[4];
+	iPoint lastUnitPos;
+	float trailRotation[4] = {0};
+	SDL_Rect trailAnim[4];
+	const float trailRotationSpeed = PI / 32;//16 axis, but it gets rendered every 2 frames
+	bool renderTrail;
+	int trailFrameCounter = 0;
 };
 #endif

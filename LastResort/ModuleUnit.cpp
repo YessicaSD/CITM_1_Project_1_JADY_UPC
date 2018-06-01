@@ -192,6 +192,11 @@ ModuleUnit::ModuleUnit() //Constructor
 	throwAnim.PushBack({ 156, 0, 20, 20 });
 	throwAnim.speed = 0.1f;
 	throwAnim.loop = true;
+	//Trail
+	trailAnim[0] = {  1, 122, 24, 30 };
+	trailAnim[1] = { 25, 122, 28, 34 };
+	trailAnim[2] = { 53, 122, 32, 38 };
+	trailAnim[3] = { 85, 122, 36, 32 };
 }
 
 ModuleUnit::~ModuleUnit()
@@ -318,6 +323,9 @@ update_status ModuleUnit::RenderUpdate2()
 			unitPhase == UnitPhase::bouncingOnTerrain||
 			unitPhase == UnitPhase::returning)
 	{
+		//Render the trail
+		TrailRender();
+		//Render the unit
 		throwFrame = throwAnim.GetCurrentFrame();
 		App->render->Blit(
 			throwUnitTx,
@@ -450,6 +458,7 @@ void ModuleUnit::Rotating()
 		{
 			//Throw
 			unitPhase = UnitPhase::throwing;
+			PlaceTrailOnUnit();
 			throwSpeed.x = cosf(currentOrbit) * throwingSpeed;
 			throwSpeed.y = sinf(currentOrbit) * throwingSpeed;
 			unitCol->SetDamage(12);
@@ -471,6 +480,8 @@ void ModuleUnit::Throwing()
 	//- Check return conditions-----------------------------------------------
 	CheckOutOfScreen();
 	CheckReturnTime();
+
+	TrailLogic();
 }
 
 void ModuleUnit::FollowingTerrain()
@@ -533,6 +544,8 @@ void ModuleUnit::FollowingTerrain()
 	CheckPlayerClose();
 	CheckOutOfScreen();
 	CheckReturnTime();
+
+	TrailLogic();
 }
 
 void ModuleUnit::BouncingOnTerrain()
@@ -545,6 +558,8 @@ void ModuleUnit::BouncingOnTerrain()
 	CheckPlayerClose();
 	CheckOutOfScreen();
 	CheckReturnTime();
+
+	TrailLogic();
 }
 
 
@@ -575,6 +590,8 @@ void ModuleUnit::Returning()
 		radius = 0;
 		unitPhase = UnitPhase::positioning;
 	}
+
+	TrailLogic();
 }
 
 void ModuleUnit::Positioning()
@@ -833,4 +850,68 @@ void ModuleUnit::CheckHitHeavyEnemy(Collider* collider1, Collider* collider2)
 	{
 		unitPhase = UnitPhase::returning;
 	}
+}
+
+void ModuleUnit::TrailLogic()
+{
+	//Update position-------------------------------------------------
+	//INFO: Each trail sprite is placed in the position of the last
+	trailPos[3] = trailPos[2];
+	trailPos[2] = trailPos[1];
+	trailPos[1] = trailPos[0];
+	trailPos[0] = lastUnitPos;
+	lastUnitPos.x = (float)position.x;
+	lastUnitPos.y = (float)position.y;
+
+
+	//Update rotation-------------------------------------------------
+	for (int i = 0; i < 4; ++i)
+	{
+		//- Add rotation
+		trailRotation[i] += trailRotationSpeed;
+		//- Limit rotation (make sure it doesn't get over 2 * PI)
+		if(trailRotation[i] > 2 * PI)
+		{
+			trailRotation[i] -= 2 * PI;
+		}
+	}
+}
+
+void ModuleUnit::TrailRender()
+{
+	if(renderTrail)//Trail only renders every 2 frames
+	{
+		//TO DO: If it looks weird, get squares of the same size (because rotation position will be different depending at which point they are)
+		for(int i = 3; i >= 0; --i)
+		{
+			LOG("Trail position x: %f, y:%f", trailPos[i].x, trailPos[i].y);
+			App->render->BlitEx(throwUnitTx, trailPos[i].x - trailAnim[i].w / 2, trailPos[i].y - trailAnim[i].h / 2, &trailAnim[i], SDL_FLIP_NONE, trailRotation[i] * 180 / PI);
+		}
+		renderTrail = false;
+	}
+	else
+	{
+		renderTrail = true;//Set it to true for the next frame
+	}
+}
+
+void ModuleUnit::PlaceTrailOnUnit()
+{
+	//Position
+	lastUnitPos.x = (float)position.x;
+	lastUnitPos.y = (float)position.y;
+
+	for(int i = 0; i < 4; ++i)
+	{
+		trailPos[i].x = (float)position.x;
+		trailPos[i].y = (float)position.y;
+	}
+
+	//Rotation
+	trailRotation[0] = angleValue[NNE];
+	trailRotation[1] = angleValue[NE];
+	trailRotation[2] = angleValue[ENE];
+	trailRotation[3] = angleValue[N];
+
+	renderTrail = true;
 }
