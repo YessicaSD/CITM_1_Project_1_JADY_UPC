@@ -856,13 +856,15 @@ void ModuleUnit::TrailLogic()
 {
 	//Update position-------------------------------------------------
 	//INFO: Each trail sprite is placed in the position of the last
-	trailPos[3] = trailPos[2];
-	trailPos[2] = trailPos[1];
-	trailPos[1] = trailPos[0];
-	trailPos[0] = lastUnitPos;
-	lastUnitPos.x = (float)position.x;
-	lastUnitPos.y = (float)position.y;
-
+	if(renderTrail == false)
+	{
+		trailPos[3] = trailPos[2];
+		trailPos[2] = trailPos[1];
+		trailPos[1] = trailPos[0];
+		trailPos[0] = lastUnitPos;
+		lastUnitPos.x = (float)position.x;
+		lastUnitPos.y = (float)position.y;
+	}
 
 	//Update rotation-------------------------------------------------
 	for (int i = 0; i < 4; ++i)
