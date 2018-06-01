@@ -856,7 +856,7 @@ void ModuleUnit::TrailLogic()
 {
 	//Update position-------------------------------------------------
 	//INFO: Each trail sprite is placed in the position of the last
-	if(renderTrail == false)
+	if(trailFrameCounter >= 1)
 	{
 		trailPos[3] = trailPos[2];
 		trailPos[2] = trailPos[1];
@@ -864,6 +864,11 @@ void ModuleUnit::TrailLogic()
 		trailPos[0] = lastUnitPos;
 		lastUnitPos.x = (float)position.x;
 		lastUnitPos.y = (float)position.y;
+		trailFrameCounter = 0;
+	}
+	else
+	{
+		trailFrameCounter++;
 	}
 
 	//Update rotation-------------------------------------------------
