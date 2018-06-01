@@ -8,7 +8,7 @@
 
 Enemy_Mech::Enemy_Mech(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t):Enemy(x, y, hp, scoreValue, pu_t)
 {
-
+	renderLayer = 2;
 	Mech.PushBack({0,488,28,35});
 	Mech.PushBack({ 28,488,28,35 });
 	Mech.PushBack({ 56,488,28,35 });

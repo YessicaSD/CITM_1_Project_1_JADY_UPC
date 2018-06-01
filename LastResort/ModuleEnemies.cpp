@@ -342,7 +342,7 @@ Enemy* ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			enemies[i] = new Enemy_IF_Spawner(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 2, 200, info.pu_Type);
 			break;
 		case ENEMY_TYPES::INDOOR_TURRET_LASER:
-			enemies[i] = new Enemy_Inside_Turret_Laser(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 2, 200, info.pu_Type);
+			enemies[i] = new Enemy_Inside_Turret_Laser(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 2, 200, info.pu_Type, info.speed);
 				break;
 
 		}
