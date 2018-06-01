@@ -16,6 +16,7 @@ Particle_HMissile::Particle_HMissile(Particle& p, fPoint position, fPoint speed,
 
 	//Calculate variables
 	largestPossibleDistance = sqrt(pow(SCREEN_HEIGHT, 2) + pow(SCREEN_WIDTH, 2));
+	distanceToTarget = largestPossibleDistance;
 	missilePartRect = { 0, 0, 14, 6 };
 	hitDetectionRect = { 0, 0, SCREEN_WIDTH, 100};
 

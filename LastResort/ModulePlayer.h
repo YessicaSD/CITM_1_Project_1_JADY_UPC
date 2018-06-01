@@ -89,9 +89,6 @@ public:
 	int powerupUpgrades = 0;
 	bool unitPowerUp = false;
 	bool speedPowerup = false;
-	//bool laserPowerUp = false;
-	//bool missilesPowerUp = false;
-	//bool bombsPowerUp = false;
 	int gCounter = 0;
 	int hCounter = 0;
 	//------------States----------------------------
