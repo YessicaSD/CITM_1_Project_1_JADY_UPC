@@ -35,6 +35,9 @@
 #include "Enemy_IntergalacticF.h"
 #include "Enemy_IF_Spawner.h"
 #include "Enemy_InsideTurretLaserh.h"
+#include "Enemy_Bar_Guardian.h"
+
+
 #define DAMAGE_FLASHING_INTERVAL 4
 
 ModuleEnemies::ModuleEnemies()
@@ -345,8 +348,10 @@ Enemy* ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			break;
 		case ENEMY_TYPES::INDOOR_TURRET_LASER:
 			enemies[i] = new Enemy_Inside_Turret_Laser(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 2, 200, info.pu_Type, info.speed);
-				break;
-
+			break;
+		case ENEMY_TYPES::BAR_GUARDIAN:
+			enemies[i] = new Enemy_BarGuardian(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 2, 200, info.pu_Type);
+			break;
 		}
 		return enemies[i];
 	}
