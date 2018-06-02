@@ -291,14 +291,14 @@ void ModuleParticles::InitParticleValues()
 	littleRings.anim.speed = 0.5f;
 	littleRings.life = 2000;
 	littleRings.anim.loop = false;
-	littleRings.collision_fx = &littleRingsExplotion;
+	littleRings.collision_fx = &littleRingsExplosion;
 
-	littleRingsExplotion.anim.PushBack({149,247,11,31});
-	littleRingsExplotion.anim.PushBack({ 162,247,11,31 });
-	littleRingsExplotion.anim.PushBack({ 175,247,11,31 });
-	littleRingsExplotion.anim.PushBack({ 186,247,11,31 });
-	littleRingsExplotion.anim.PushBack({ 197,247,11,31 });
-	littleRingsExplotion.anim.speed = 0.2f;
+	littleRingsExplosion.anim.PushBack({149,247,11,31});
+	littleRingsExplosion.anim.PushBack({ 162,247,11,31 });
+	littleRingsExplosion.anim.PushBack({ 175,247,11,31 });
+	littleRingsExplosion.anim.PushBack({ 186,247,11,31 });
+	littleRingsExplosion.anim.PushBack({ 197,247,11,31 });
+	littleRingsExplosion.anim.speed = 0.2f;
 
 	//BigRings ---------------------------------------------------
 	bigRings.anim.PushBack({ 96,288,4,7 });
@@ -540,4 +540,5 @@ void ModuleParticles::InitParticleValues()
 	barGuardShot.anim.speed = 0.25;
 	barGuardShot.anim.loop = true;
 	barGuardShot.life = 10000;
+	barGuardShot.renderLayer = 1;
 }
