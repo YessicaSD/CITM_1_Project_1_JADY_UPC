@@ -349,7 +349,7 @@ Enemy* ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			enemies[i] = new Enemy_Missile(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 2, 200, info.pu_Type);
 			break;
 		case ENEMY_TYPES::INTERGALACTIC_F:
-			enemies[i] = new Enemy_Intergalactic_F(info.x , info.y , 50, 200, info.pu_Type);
+			enemies[i] = new Enemy_Intergalactic_F(info.x , info.y , 5, 200, info.pu_Type);
 			break;
 		case ENEMY_TYPES::IF_SPAWNER:
 			enemies[i] = new Enemy_IF_Spawner(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 2, 200, info.pu_Type);
@@ -370,7 +370,7 @@ Enemy* ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			enemies[i] = new Enemy_Lamella(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 2, 200, info.pu_Type);
 			break;
 		case ENEMY_TYPES:: RED_LAMELLA:
-			enemies[i] = new Enemy_RedLamella(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 2, 200, info.pu_Type);
+			enemies[i] = new Enemy_RedLamella(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 10, 300, info.pu_Type);
 			break;
 		case ENEMY_TYPES::METALBEE:
 			enemies[i] = new Enemy_MetalBee(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 2, 200, info.pu_Type);
