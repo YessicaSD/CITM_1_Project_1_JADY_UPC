@@ -71,10 +71,10 @@ void Enemy_Pinata:: CheckTarget() {
 
 void Enemy_Pinata::CheckDirection() {
 
-	if (float_position.x  < currentTarget->position.x) {
+	if (float_position.x  < currentTarget->position.x + currentTarget->playerCenter.x) {
 		currentDir = RIGHT;
 	}
-	else if (float_position.x >= currentTarget->position.x) {
+	else if (float_position.x >= currentTarget->position.x + currentTarget->playerCenter.x) {
 		currentDir = LEFT;
 	}
 
@@ -190,10 +190,10 @@ void Enemy_Pinata::Draw(SDL_Texture* sprites)
 
 	//Draw------------------------------------------------------------------
 	if (!blitEx) {
-		App->render->Blit(sprites, position.x - 16, position.y - 15, &currentAnim);
+		App->render->Blit(sprites, position.x - 20, position.y - 19, &currentAnim);
 	}
 	else {
-		App->render->BlitEx(sprites, position.x- 16, position.y -16, &currentAnim, SDL_FLIP_HORIZONTAL);
+		App->render->BlitEx(sprites, position.x- 20, position.y - 19, &currentAnim, SDL_FLIP_HORIZONTAL);
 	}
 		
 

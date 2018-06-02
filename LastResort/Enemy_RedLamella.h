@@ -22,27 +22,31 @@ private:
 	Animation initAnim;
 	//Variables---------------------------
 	fPoint float_position;
-	iPoint fixedPos;
-
-	//int initialY;
-	//int initialX;
-	enum Direction {
-		NONE,
-		RIGHT,
-		LEFT
-	} currentDir = NONE, lastDir = NONE;
-
-	enum MoveState {
-		IDLE,
-		FOLLOW,
-		ROTATE
-	} currentState = IDLE;
-
-	MovePath pinataMov;
-
-	bool blitEx = false;
+	fPoint velocity;
+	fPoint aceleration;
 	ModulePlayer* currentTarget = nullptr;
 	ModulePlayer* lastTarget = nullptr;
+	MovePath pinataMov;
+	bool blitEx = false;
+
+
+	enum DirectionX {
+		RIGHT,
+		LEFT
+	} currentDirX = LEFT, lastDirX = LEFT;
+
+	enum DirectionY {
+		UP,
+		DOWN
+	} currentDirY = UP;
+
+	enum MoveState {
+		FOLLOW,
+		ROTATE
+	} currentState = FOLLOW;
+
+
+	
 };
 
 #endif // __ENEMY_RED_LAMELLA_H__
