@@ -435,7 +435,7 @@ Collider* ModuleCollision::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, Module
 	//If we get to max colliders, pop an error
 	if(i == MAX_COLLIDERS)
 	{
-		LOG("Max colliders reached!\n");
+		LOG("-------------------------------------Max colliders reached!\n");
 	}
 
 	return ret;

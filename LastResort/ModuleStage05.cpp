@@ -135,7 +135,7 @@ bool Module5lvlScene::Start()
 		shipCollidersCol[i] = nullptr;
 	}
 
-	for (int i = 0; i < SHIP_COLLIDERS_NUM; ++i) {
+	for (int i = 0; i < FINAL_COLLIDERS_NUM; ++i) {
 		finalCollidersCol[i] = nullptr;
 	}
 
@@ -318,7 +318,7 @@ update_status Module5lvlScene::LogicUpdate()
 
 		UpdateShipColliders();
 	}
-	 else if (cameraMovement.currentMov >= 22) {
+	 else  {
 
 		 if (deletedShipColliders == false) {
 			 DeleteShipColliders();
@@ -670,7 +670,6 @@ void Module5lvlScene::AddShipColliders()
 
 	for (int i = 0; i < SHIP_COLLIDERS_NUM - 1; ++i)
 	{
-		
 		shipCollidersCol[i] = App->collision->AddCollider(
 		{ shipCollidersRect[i].x + (int)shipPos.x,
 			shipCollidersRect[i].y + (int)shipPos.y,
