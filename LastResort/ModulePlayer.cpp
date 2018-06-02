@@ -117,6 +117,10 @@ update_status ModulePlayer::LogicUpdate()
 	{
 		Winlvl();
 	}
+	if (winlvlsingle)
+	{
+		WinlvlSingle();
+	}
 	return UPDATE_CONTINUE;
 }
 
@@ -475,4 +479,23 @@ void ModulePlayer::Winlvl()
 
 	canMove = false;
 	Winposition();
+}
+void ModulePlayer::WinlvlSingle()
+{
+	if (position.x < SCREEN_WIDTH/2 - App->player1->playerCenter.x)
+	{
+		position.x += 1;
+	}
+	if (position.x > SCREEN_WIDTH / 2 - App->player1->playerCenter.x)
+	{
+		position.x -= 1;
+	}
+	if (position.y < 120)
+	{
+		position.y += 1;
+	}
+	if (position.y > 120)
+	{
+		position.y -= 1;
+	}
 }

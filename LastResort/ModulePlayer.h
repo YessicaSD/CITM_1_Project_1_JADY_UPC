@@ -121,9 +121,11 @@ public:
 	COLLIDER_TYPE shot_colType;
 
 	//Win variables
-	bool winlvl;
+	bool winlvl=false;
+	bool winlvlsingle=false;
 	int numLvlwin;
 	void Winlvl();
+	void WinlvlSingle();
 	virtual void Winposition()=0; 
 	bool start_timer;
 

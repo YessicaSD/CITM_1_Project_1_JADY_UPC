@@ -117,6 +117,7 @@ public:
 	SDL_Rect shipRearRect = { 0, 96, 128, 64};
 
 	//Enemies--------------------------------
+	Enemy* e_FrontShipTurret = nullptr;
 	int redBatsKilled;
 	int rotatingTurretsKilled;
 };
