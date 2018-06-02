@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleInput.h"
+
 #include "SDL/include/SDL.h"
 
 ModuleInput::ModuleInput() : Module()
@@ -14,10 +15,7 @@ ModuleInput::ModuleInput() : Module()
 	for (uint i = 0; i <SDL_CONTROLLER_BUTTON_MAX; ++i)
 		Controller2[i] = KEY_IDLE;
 
-	for (int i = 0; i < MAX_CONTROLLERS; ++i)
-	{
-		controller[i] = nullptr;
-	}
+
 	int i = 0;
 	stringbutton[0] = SDL_CONTROLLER_BUTTON_A; ++i;
 	stringbutton[0 + i] = SDL_CONTROLLER_BUTTON_B; ++i;
@@ -71,17 +69,7 @@ update_status ModuleInput::InputUpdate()
 	const Uint8* keys = SDL_GetKeyboardState(NULL);
 	//Open the first available controller
 	
-	for (int i = 0; i < SDL_NumJoysticks(); ++i) {
-		if (SDL_IsGameController(i)) {
-			controller[i] = SDL_GameControllerOpen(i);
-			if (controller) {
-			
-			}
-			else {
-				LOG("Could not open gamecontroller %i: %s\n", i, SDL_GetError());
-			}
-		}
-	}
+
 
 
 	for (int i = 0; i < MAX_KEYS; ++i)
@@ -105,7 +93,7 @@ update_status ModuleInput::InputUpdate()
 	//Controller 1 ---------------------------------------------------------------------------------
 	for (int i = 0; i < SDL_CONTROLLER_BUTTON_MAX; ++i)
 	{
-		if (SDL_GameControllerGetButton(controller[0], stringbutton[i]))
+		if (SDL_GameControllerGetButton(controller[0].controller, stringbutton[i]))
 		{
 			if (Controller1[i] == KEY_IDLE)
 				Controller1[i] = KEY_DOWN;
@@ -124,7 +112,7 @@ update_status ModuleInput::InputUpdate()
 	//Controller 2----------------------------------------------------------------------------
 	for (int i = 0; i < SDL_CONTROLLER_BUTTON_MAX; ++i)
 	{
-		if (SDL_GameControllerGetButton(controller[1], stringbutton[i]))
+		if (SDL_GameControllerGetButton(controller[1].controller, stringbutton[i]))
 		{
 			if (Controller2[i] == KEY_IDLE)
 				Controller2[i] = KEY_DOWN;
@@ -141,11 +129,43 @@ update_status ModuleInput::InputUpdate()
 	}
 
 	SDL_PollEvent(&event);
+
+	if (event.type == SDL_CONTROLLERDEVICEADDED)
+	{
+		for (int i = 0; i < MAX_CONTROLLERS; i++)
+		{
+			if (controller[i].controller == nullptr && controller[i].joyId == -1)
+			{
+				controller[i].controller= SDL_GameControllerOpen(i);
+				SDL_Joystick* j = SDL_GameControllerGetJoystick(controller[i].controller);
+				controller[i].joyId= SDL_JoystickInstanceID(j);
+				break;
+			}
+			
+		}
+	}
+	if (event.type == SDL_CONTROLLERDEVICEREMOVED)
+	{
+		for (int i = 0; i < MAX_CONTROLLERS; ++i)
+		{
+			if (controller[i].joyId == event.cdevice.which)
+			{
+				SDL_GameControllerClose(controller[i].controller);
+				controller[i].controller = nullptr;
+				controller[i].joyId = -1;
+
+				LOG("Disconnected gamepad index: %d", i)
+					break;
+			}
+		}
+	}
+
 	if (event.type == SDL_QUIT)
 		return update_status::UPDATE_STOP;
 	
 	if (keyboard[SDL_SCANCODE_ESCAPE])
 		return update_status::UPDATE_STOP;
+
 	
 
 	return update_status::UPDATE_CONTINUE;
@@ -158,9 +178,10 @@ bool ModuleInput::CleanUp()
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 	for (int i = 0; i < SDL_NumJoysticks(); ++i) {
 		if (SDL_IsGameController(i)) {
-			SDL_GameControllerClose(controller[i]);
+			SDL_GameControllerClose(controller[i].controller);
 			
 		}
 	}
 	return true;
 }
+

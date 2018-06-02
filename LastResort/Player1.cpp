@@ -117,13 +117,13 @@ void Player1::PlayerDies() {
 //MOVEMENT INPTUT
 bool Player1::MoveLeft()
 {
-	return (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller[0],
+	return (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller[0].controller,
 		SDL_CONTROLLER_AXIS_LEFTX)<-10000) ;
 }
 
 bool Player1::MoveRight()
 {
-	return (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && MoveLeft()== false || SDL_GameControllerGetAxis(App->input->controller[0],
+	return (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && MoveLeft()== false || SDL_GameControllerGetAxis(App->input->controller[0].controller,
 		SDL_CONTROLLER_AXIS_LEFTX)>10000 && MoveLeft() == false);
 }
 //We limit MoveRight because if MoveRight and Moveleft are pressed, it goes left
@@ -131,13 +131,13 @@ bool Player1::MoveRight()
 bool Player1::MoveDown()
 {
 	
-	return (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller[0], SDL_CONTROLLER_AXIS_LEFTY)>10000);
+	return (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller[0].controller, SDL_CONTROLLER_AXIS_LEFTY)>10000);
 }
 
 bool Player1::MoveUp()
 {
 	
-	return (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT && MoveDown() == false || SDL_GameControllerGetAxis(App->input->controller[0],
+	return (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT && MoveDown() == false || SDL_GameControllerGetAxis(App->input->controller[0].controller,
 		SDL_CONTROLLER_AXIS_LEFTY)<-10000 && MoveDown() == false);
 }
 //We limit MoveUp because if MoveUp and MoveDown are pressed, it goes down
