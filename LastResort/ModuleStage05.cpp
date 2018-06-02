@@ -174,7 +174,11 @@ bool Module5lvlScene::Start()
 	//App->enemies->AddEnemy(PINATA, 130, 130);
 	//App->enemies->AddEnemy(OSCILATOR, 500, 0);
 
+
+	App->enemies->AddEnemy(BOSS_05, 2385, 294);
+
 	App->enemies->InstaSpawn(METALBEE, 300, 200);
+
 	
 
 	//- FINAL POSITION ENEMIES (in order of appearance on the level)
