@@ -299,17 +299,17 @@ void ModuleStageFunctionality::GoToScene()
 		App->fade->FadeToBlack(currentStage, App->stage05, 0.5f);
 		break;
 	case 6:
-		//WIN SCREEN
-		if (App->player1->winlvl == false && App->player2->winlvl == false)
-		{
-			App->player1->winlvl = App->player2->winlvl = true;
-			App->player1->numLvlwin = App->player2->numLvlwin = 1;
-		}
-		App->fade->FadeToBlack(currentStage, App->stageclearScene, 3.5f);
-		App->unit1->Disable();
-		App->unit2->Disable();
-		currentStage = nullptr;
-		break;
+		////WIN SCREEN
+		//if (App->player1->winlvl == false && App->player2->winlvl == false)
+		//{
+		//	App->player1->winlvl = App->player2->winlvl = true;
+		//	App->player1->numLvlwin = App->player2->numLvlwin = 1;
+		//}
+		//
+		//App->unit1->Disable();
+		//App->unit2->Disable();
+		//currentStage = nullptr;
+		//break;
 	case 7:
 		//LOSE SCREEN
 		App->fade->FadeToBlack(currentStage, App->gameoverScene, 3.5f);

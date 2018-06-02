@@ -165,6 +165,7 @@ void Enemy_MetalBee::Draw(SDL_Texture* sprites)
 		if (animation->Finished()) {
 
 			animation->loop = 0;
+			animation->current_frame = 0;
 			animation = &moveAnim;
 			currentState = FOLLOW;
 			
@@ -175,6 +176,7 @@ void Enemy_MetalBee::Draw(SDL_Texture* sprites)
 		if (animation->Finished()) {
 
 			animation->loop = 0;
+			animation->current_frame = 0;
 			animation = &moveAnim;
 			currentState = FOLLOW;
 

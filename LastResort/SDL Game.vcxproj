@@ -125,7 +125,6 @@
     <ClInclude Include="ModuleRender.h" />
     <ClInclude Include="ModuleReady.h" />
     <ClInclude Include="ModuleStage05.h" />
-    <ClInclude Include="ModuleStageClear.h" />
     <ClInclude Include="ModuleTextures.h" />
     <ClInclude Include="ModuleGameTitle.h" />
     <ClInclude Include="ModuleUI.h" />
@@ -207,7 +206,6 @@
     <ClCompile Include="ModuleRender.cpp" />
     <ClCompile Include="ModuleReady.cpp" />
     <ClCompile Include="ModuleStage05.cpp" />
-    <ClCompile Include="ModuleStageClear.cpp" />
     <ClCompile Include="ModuleTextures.cpp" />
     <ClCompile Include="ModuleGameTitle.cpp" />
     <ClCompile Include="ModuleUI.cpp" />
