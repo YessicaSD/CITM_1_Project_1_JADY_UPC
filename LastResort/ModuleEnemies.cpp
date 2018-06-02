@@ -8,6 +8,7 @@
 #include "Player2.h"
 #include "ModulePowerups.h"
 #include "ModuleStage05.h"
+#include "ModuleAudio.h"
 //Enemies----------------------------
 #include "Enemy.h"
 #include "Enemy_Oscilator.h"
@@ -61,7 +62,7 @@ bool ModuleEnemies::Start()
 	 //ALL IN 1 PNG
 	nml_sprites = App->textures->Load("Assets/Enemies/Enemies1.png");
     dmg_sprites = App->textures->Load("Assets/Enemies/Enemies1_white.png");
-	
+	AsteroirdAppearSfx = App->audio->LoadSFX("Assets/Enemies/appear.wav");
 	return true;
 }
 
@@ -231,6 +232,7 @@ bool ModuleEnemies::CleanUp()
 
 	App->textures->Unload(nml_sprites);
 	App->textures->Unload(dmg_sprites);
+	App->audio->UnloadSFX(AsteroirdAppearSfx);
 
 	return true;
 }

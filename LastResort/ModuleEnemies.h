@@ -10,7 +10,7 @@
 
 #define MAX_ENEMIES 100
 
-
+struct Sfx;
 enum ENEMY_TYPES
 {
 	NO_TYPE = -1,
@@ -93,6 +93,7 @@ public:
 
 	SDL_Texture* nml_sprites = nullptr;
 	SDL_Texture* dmg_sprites = nullptr;
+	Sfx* AsteroirdAppearSfx=nullptr;
 	
 };
 

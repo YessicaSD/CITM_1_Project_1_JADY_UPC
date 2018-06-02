@@ -1,6 +1,8 @@
 #include "Enemy_Little_Asteroid.h"
 #include "ModuleRender.h"
 #include "Application.h"
+#include "ModuleEnemies.h"
+#include "ModuleAudio.h"
 
 Enemy_Little_Asteroid::Enemy_Little_Asteroid(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t, fPoint speed) : Enemy(x, y, hp, scoreValue, pu_t, speed)
 {
@@ -18,6 +20,7 @@ Enemy_Little_Asteroid::Enemy_Little_Asteroid(int x, int y, float hp, int scoreVa
 	collider = App->collision->AddCollider({ x, y, 31, 28}, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
 	fposition.x = (float)position.x;
 	fposition.y = (float)position.y;
+	App->audio->ControlAudio(App->enemies->AsteroirdAppearSfx, PLAY_AUDIO);
 }
 
 void Enemy_Little_Asteroid::Move()
