@@ -275,9 +275,10 @@ ModuleCollision::~ModuleCollision()
 
 update_status ModuleCollision::LogicUpdate()
 {
+	LOG("Filled colliders %i", getFilledColNum());
 	// Calculate collisions
-	Collider* c1;
-	Collider* c2;
+	Collider* c1 = nullptr;
+	Collider* c2 = nullptr;
 
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
@@ -438,6 +439,21 @@ Collider* ModuleCollision::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, Module
 	return ret;
 }
 
+int ModuleCollision::getFilledColNum()
+{
+	int filledColNum = 0;
+
+	for (int i = 0; i < MAX_COLLIDERS; ++i)
+	{
+		if (colliders[i] != nullptr)
+		{
+			filledColNum++;
+		}
+	}
+
+	return filledColNum;
+}
+
 // -----------------------------------------------------
 
 bool Collider::CheckCollision(const SDL_Rect& r) const
@@ -448,8 +464,3 @@ bool Collider::CheckCollision(const SDL_Rect& r) const
 		this->rect.y + this->rect.h > r.y       &&
 		this->rect.y < r.y + r.h);
 }
-//
-//int getFilledColNum()
-//{
-//	for (int i = 0; i < )
-//}

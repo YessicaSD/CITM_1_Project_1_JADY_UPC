@@ -27,7 +27,7 @@ private:
 		OPEN,
 	} currentState = IDLE;
 
-	Enemy* spawned[MAX_SPAWNED];
+	Enemy* spawned[MAX_SPAWNED] = {nullptr};
 	int currentEnemies = 0;
 	int spawnFrames = 0;
 	bool isSpawning = false;

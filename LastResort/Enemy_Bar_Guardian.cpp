@@ -143,11 +143,13 @@ void Enemy_BarGuardian::Move()
 		break;
 	}
 
-
+	
 	//Shoot
 	if(shotCounter >= 120)
 	{
+		
 		//Shoot three particles
+
 		App->particles->AddParticle(App->particles->barGuardShot,
 		{ (float)position.x , (float)position.y + 30 },
 		{ -3, 0 },
@@ -155,6 +157,7 @@ void Enemy_BarGuardian::Move()
 			COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE,
 			0,
 			PARTICLE_FIREBALL);
+
 		App->particles->AddParticle(App->particles->barGuardShot,
 		{ (float)position.x, (float)position.y },
 		{ -3, 0 },
@@ -192,18 +195,9 @@ void Enemy_BarGuardian::Draw(SDL_Texture* sprites)
 
 Enemy_BarGuardian::~Enemy_BarGuardian()
 {
-	if (collider != nullptr)
-	{
-		collider->to_delete = true;
-	}
-	if (topBarCol != nullptr)
-	{
-		topBarCol->to_delete = true;
-	}
-	if (botBarCol != nullptr)
-	{
-		botBarCol->to_delete = true;
-	}
+	if (collider != nullptr)  { collider ->to_delete = true; }
+	if (topBarCol != nullptr) { topBarCol->to_delete = true; }
+	if (botBarCol != nullptr) { botBarCol->to_delete = true; }
 
 	//When it dies put two bar enemies in place
 	App->enemies->AddEnemy(TOP_BAR,

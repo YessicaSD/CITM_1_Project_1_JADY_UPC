@@ -17,11 +17,6 @@ Enemy_Outdoor_turret::Enemy_Outdoor_turret(int x, int y, float hp, int scoreValu
 	//Particle ------------------------------------------------------------------------
 }
 
-Enemy_Outdoor_turret:: ~Enemy_Outdoor_turret()
-{
-
-}
-
 void Enemy_Outdoor_turret::Move()
 {
 	position.x = App->stage05->spawnPos.x+ initalPosition.x;
