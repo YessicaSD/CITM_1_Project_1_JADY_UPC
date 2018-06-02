@@ -7,6 +7,9 @@
 #include "ModuleStage05.h"
 #include "MovPath.h"
 
+#define MAX_LAMELA_SPEED 1.6f
+#define LAMELA_ROTATION_FRAMES 5
+
 
 Enemy_RedLamella::Enemy_RedLamella(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t) : Enemy(x, y, hp, scoreValue, pu_t)
 {
@@ -17,13 +20,13 @@ Enemy_RedLamella::Enemy_RedLamella(int x, int y, float hp, int scoreValue, POWER
 	}
 	moveAnim.speed = 0.3f;
 
-	rotateAnim.PushBack({ 961, 0, 31, 31 }); //1
-	rotateAnim.speed = 0.1f;
+	rotateAnim.PushBack({ 961, 0, 31, 31 }); 
+	rotateAnim.speed = 0.0f;
 
 	//Add collider--------------------------------
-	collider = App->collision->AddCollider({ x - 14 , y - 14, 28, 28 }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ x - 12 , y - 12, 24, 24 }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
 
-	velocity = { 2.0f, 2.0f };
+	speed = { -1.0f, 0.0f };
 	aceleration = { 0.1f, 0.1f };
 }
 
@@ -71,18 +74,12 @@ void Enemy_RedLamella::CheckDirection() {
 	else if (float_position.x >= currentTarget->position.x + currentTarget->playerCenter.x) {
 		currentDirX = LEFT;
 	}
-	else if (lastDirX != currentDirX ) {
-		currentState = ROTATE;
+
+	 if (lastDirX != currentDirX ) {
+		currentState =ROTATE;
 		lastDirX = currentDirX;
 	}
-	//	Check Y direction--------------------
 
-	if (float_position.y  < currentTarget->position.y  + currentTarget->playerCenter.y) {
-		currentDirY = DOWN;
-	}
-	else if (float_position.y >= currentTarget->position.y + currentTarget->playerCenter.y) {
-		currentDirY = UP;
-	}
 
 
 }
@@ -95,44 +92,46 @@ void Enemy_RedLamella::Move()
 	fPoint PlayerPos;
 
 	// Update player position---------------------------------------
-	CheckTarget();
-	CheckDirection();
+	if (currentState != ROTATE) {
+		CheckTarget();
+		CheckDirection();
+	}
 
 	PlayerPos.x = (float)currentTarget->position.x + currentTarget->playerCenter.x;
 	PlayerPos.y = (float)currentTarget->position.y + currentTarget->playerCenter.y;
 
 	vectorIncrease.UnitVector(PlayerPos, float_position);
 
-	velocity.x += vectorIncrease.x * aceleration.x;
+	speed.x += vectorIncrease.x * aceleration.x;
 
-	velocity.y += vectorIncrease.y * aceleration.y;
+	speed.y += vectorIncrease.y * aceleration.y;
 
 
-	if (velocity.x > 3) {
-		velocity.x = 3;
+	if (speed.x > MAX_LAMELA_SPEED) {
+		speed.x = MAX_LAMELA_SPEED;
 	}
-	else if (velocity.x < -3) {
-		velocity.x = - 3;
+	else if (speed.x < -MAX_LAMELA_SPEED) {
+		speed.x = -MAX_LAMELA_SPEED;
 	}
 
-	if (velocity.y > 3) {
-		velocity.y = 3;
+	if (speed.y > MAX_LAMELA_SPEED) {
+		speed.y = MAX_LAMELA_SPEED;
 	}
-	else if (velocity.y < -3) {
-		velocity.y = -3;
+	else if (speed.y < -MAX_LAMELA_SPEED) {
+		speed.y = -MAX_LAMELA_SPEED;
 	}
 
 	//Update position----------------------------------------------
 
-	float_position.x += velocity.x ;
-	float_position.y += velocity.y;
+	float_position.x += speed.x ;
+	float_position.y += speed.y;
 
 	position = { (int)float_position.x, (int)float_position.y };
 
 	//Set the collider position
 	if (collider != nullptr) {
 
-		collider->SetPos(position.x - 14, position.y - 14);
+		collider->SetPos(position.x - 12, position.y - 12);
 	}
 		
 }
@@ -150,11 +149,12 @@ void Enemy_RedLamella::Draw(SDL_Texture* sprites)
 
 		break;
 	case ROTATE:
-		currentAnim = rotateAnim.GetFrameEx();
 
-		if (rotateAnim.finished == true) {
+		currentAnim = rotateAnim.frames[0];
+		++currentFrames;
+		if (currentFrames > LAMELA_ROTATION_FRAMES) {
 			moveAnim.Reset();
-			rotateAnim.Reset();
+			currentFrames = 0;
 			currentState = FOLLOW;
 		}
 		break;
@@ -169,10 +169,10 @@ void Enemy_RedLamella::Draw(SDL_Texture* sprites)
 
 	//Draw------------------------------------------------------------------
 	if (!blitEx) {
-		App->render->Blit(sprites, position.x - 16, position.y - 15, &currentAnim);
+		App->render->Blit(sprites, position.x - 15, position.y - 15, &currentAnim);
 	}
 	else {
-		App->render->BlitEx(sprites, position.x - 16, position.y - 16, &currentAnim, SDL_FLIP_HORIZONTAL);
+		App->render->BlitEx(sprites, position.x - 15, position.y - 15, &currentAnim, SDL_FLIP_HORIZONTAL);
 	}
 
 }

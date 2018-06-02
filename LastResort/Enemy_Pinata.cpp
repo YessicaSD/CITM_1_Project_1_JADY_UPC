@@ -7,12 +7,15 @@
 #include "ModuleStage05.h"
 #include "MovPath.h"
 
+#define MAX_PINATA_SPEED 1.5f
 
 Enemy_Pinata::Enemy_Pinata(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t) : Enemy(x, y, hp, scoreValue, pu_t)
 {
 	//Position--------------------------------------
 	fixedPos.x = x - App->stage05->spawnPos.x;
 	fixedPos.y = y - App->stage05->spawnPos.y;
+	speed = { -1.0f, 0.0f };
+	aceleration = { 0.1f, 0.1f };
 	//Movement--------------------------------------
 	pinataMov.originPoint = { 0,0 };
 	pinataMov.PushBack({ 0,90 }, 150);
@@ -110,32 +113,51 @@ void Enemy_Pinata::Move()
 		}
 
 		pinataMov.GetCurrentPosition();
-		float_position.y = App->stage05->spawnPos.y  + fixedPos.y + pinataMov.GetPosition().y;
+		float_position.y = App->stage05->spawnPos.y + fixedPos.y + pinataMov.GetPosition().y;
 
 		if (currentDir == RIGHT)
 			float_position.x = App->stage05->spawnPos.x + fixedPos.x - pinataMov.GetPosition().x;
 		else
-			float_position.x = App->stage05->spawnPos.x + fixedPos.x +  pinataMov.GetPosition().x;
+			float_position.x = App->stage05->spawnPos.x + fixedPos.x + pinataMov.GetPosition().x;
 
 		break;
 
 	case FOLLOW:
 
-		if (currentDir == RIGHT) {
-			PlayerPos.x = (float)currentTarget->position.x + currentTarget->playerCenter.x + 8;
-			PlayerPos.y = (float)currentTarget->position.y + currentTarget->playerCenter.y;
-		}
-		else {
-			PlayerPos.x = (float)currentTarget->position.x + currentTarget->playerCenter.x - 8;
-			PlayerPos.y = (float)currentTarget->position.y + currentTarget->playerCenter.y;
-		}
-		vectorIncrease.UnitVector(PlayerPos, float_position);
-
-		float_position.x += vectorIncrease.x * 1;
-		float_position.y += vectorIncrease.y * 0.5;
 
 		CheckTarget();
 		CheckDirection();
+
+
+		PlayerPos.x = (float)currentTarget->position.x + currentTarget->playerCenter.x;
+		PlayerPos.y = (float)currentTarget->position.y + currentTarget->playerCenter.y;
+
+		vectorIncrease.UnitVector(PlayerPos, float_position);
+
+		speed.x += vectorIncrease.x * aceleration.x;
+
+		speed.y += vectorIncrease.y * aceleration.y;
+
+
+		if (speed.x > MAX_PINATA_SPEED) {
+			speed.x = MAX_PINATA_SPEED;
+		}
+		else if (speed.x < -MAX_PINATA_SPEED) {
+			speed.x = -MAX_PINATA_SPEED;
+		}
+
+		if (speed.y > MAX_PINATA_SPEED) {
+			speed.y = MAX_PINATA_SPEED;
+		}
+		else if (speed.y < -MAX_PINATA_SPEED) {
+			speed.y = -MAX_PINATA_SPEED;
+		}
+		//Update position----------------------------------------------
+
+		float_position.x += speed.x;
+		float_position.y += speed.y;
+
+		position = { (int)float_position.x, (int)float_position.y };
 
 		break;
 	case ROTATE:

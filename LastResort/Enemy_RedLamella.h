@@ -19,26 +19,21 @@ private:
 	//Animations---------------------------
 	Animation moveAnim;
 	Animation rotateAnim;
-	Animation initAnim;
 	//Variables---------------------------
 	fPoint float_position;
-	fPoint velocity;
+	fPoint speed;
 	fPoint aceleration;
 	ModulePlayer* currentTarget = nullptr;
 	ModulePlayer* lastTarget = nullptr;
 	MovePath pinataMov;
 	bool blitEx = false;
+	int currentFrames = 0;
 
 
 	enum DirectionX {
 		RIGHT,
 		LEFT
 	} currentDirX = LEFT, lastDirX = LEFT;
-
-	enum DirectionY {
-		UP,
-		DOWN
-	} currentDirY = UP;
 
 	enum MoveState {
 		FOLLOW,
