@@ -14,9 +14,9 @@ Enemy_BarGuardian::Enemy_BarGuardian(int x, int y, float hp, int scoreValue, POW
 	//Render layer----------------------------------
 	renderLayer = 0;
 	//Collider--------------------------------------
-	collider  = App->collision->AddCollider({ x - 14 , y - 14, 28, 28 }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
-	topBarCol = App->collision->AddCollider({ x - 14 , y - 14, 28, 28 }, COLLIDER_TYPE::COLLIDER_WALL);
-	botBarCol = App->collision->AddCollider({ x - 14 , y - 14, 28, 28 }, COLLIDER_TYPE::COLLIDER_WALL);
+	collider  = App->collision->AddCollider({ x,     y - backAnim.h/2,      backAnim.w,   backAnim.h   }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
+	topBarCol = App->collision->AddCollider({ x - 8, y - 24 - topBarAnim.h, topBarAnim.w, topBarAnim.h }, COLLIDER_TYPE::COLLIDER_WALL);
+	botBarCol = App->collision->AddCollider({ x - 8, y + 24,                topBarAnim.w, topBarAnim.h }, COLLIDER_TYPE::COLLIDER_WALL);
 }
 
 void Enemy_BarGuardian::Move()
@@ -34,7 +34,8 @@ void Enemy_BarGuardian::Move()
 		//Go down if it reaches the top
 		if(position.y <= 0 + 63)//INFO: 63 = Offset at which it changed direction
 		{
-			phase = barGuard_Down;
+			transitionCounter = 0;
+			phase = barGuard_Transition;
 		}
 		break;
 
@@ -48,21 +49,37 @@ void Enemy_BarGuardian::Move()
 		//Go up if it reaches the bottom
 		if (position.y >= SCREEN_HEIGHT - 63)
 		{
-			phase = barGuard_Up;
+			transitionCounter = 0;
+			phase = barGuard_Transition;
 		}
 		break;
 	case barGuard_Transition:
-		//if()
-		//{
-
-		//}
+		if(transitionCounter >= 5)
+		{
+			if (position.y < SCREEN_HEIGHT / 2)
+			{
+				phase = barGuard_Down;
+			}
+			else
+			{
+				phase = barGuard_Up;
+			}
+		}
+		else
+		{
+			transitionCounter++;
+		}
 		break;
 	}
 	//Set the collider position
-	if (collider != nullptr)
-	{
-		collider->SetPos(position.x - 14, position.y - 14);
-	}
+	if (collider  != nullptr) { collider ->SetPos(position.x    , position.y - backAnim.h / 2); }
+	if (topBarCol != nullptr) { topBarCol->SetPos(position.x - 8, position.y - 24 - topBarAnim.h); }
+	if (botBarCol != nullptr) { botBarCol->SetPos(position.x - 8, position.y + 24); }
+
+	//Eye logic
+
+
+
 
 	//Shoot
 }
@@ -75,10 +92,10 @@ void Enemy_BarGuardian::OnCollision(Collider* c2)
 
 void Enemy_BarGuardian::Draw(SDL_Texture* sprites)
 {
-	//Blit bar 1
-	App->render->Blit(sprites, position.x, position.y - 24 - topBarAnim.h, &botBarAnim);
-	//Blit bar 2
-	App->render->Blit(sprites, position.x, position.y + 24, &topBarAnim);//24 distance from the center of the enemy
+	//Blit top bar
+	App->render->Blit(sprites, position.x - 8, position.y - 24 - topBarAnim.h, &topBarAnim);
+	//Blit bot bar
+	App->render->Blit(sprites, position.x - 8, position.y + 24, &botBarAnim);//24 distance from the center of the enemy
 	//Blit back part
 	App->render->Blit(sprites, position.x, position.y - backAnim.h / 2, &backAnim);
 	//Blit eye
@@ -86,5 +103,16 @@ void Enemy_BarGuardian::Draw(SDL_Texture* sprites)
 
 Enemy_BarGuardian::~Enemy_BarGuardian()
 {
-
+	if (collider != nullptr)
+	{
+		collider->to_delete = true;
+	}
+	if (topBarCol != nullptr)
+	{
+		topBarCol->to_delete = true;
+	}
+	if (botBarCol != nullptr)
+	{
+		botBarCol->to_delete = true;
+	}
 }

@@ -32,6 +32,7 @@ private:
 	SDL_Rect backAnim;
 	Collider* topBarCol = nullptr;
 	Collider* botBarCol = nullptr;
+	int transitionCounter = 0;
 };
 
 #endif // __ENEMY_BAR_GUARDIAN_H__
