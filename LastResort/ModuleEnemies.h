@@ -79,8 +79,9 @@ public:
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
 
-	bool AddEnemy(ENEMY_TYPES type, int x, int y, Uint32 delay = 0, POWERUP_TYPE powerup_type = NOPOWERUP, fPoint speed = { 0, 0 });
-	Enemy* InstaSpawn(ENEMY_TYPES type, int x, int y, POWERUP_TYPE powerup_type = NOPOWERUP, fPoint speed  ={ 0, 0 });
+	bool AddEnemy(ENEMY_TYPES type, int x, int y, Uint32 delay = 0, POWERUP_TYPE powerup_type = NOPOWERUP, fPoint speed = { 0, 0 });//Puts the enemy into a queue and spawns it when it reaches its position, takes into account psd position
+	Enemy* InstaSpawn(ENEMY_TYPES type, int x, int y, POWERUP_TYPE powerup_type = NOPOWERUP, fPoint speed  ={ 0, 0 });//Spawns directly. Although if the enemy is outside the margins of the camera, it will delete it
+
 	void ManualDespawn(Enemy* enemyToDelete);
 
 private:
