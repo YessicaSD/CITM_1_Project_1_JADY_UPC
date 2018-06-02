@@ -4,7 +4,7 @@
 #include "ModuleStage05.h"
 #include <stdlib.h>
 
-#define MAX_BOSS_SPEED 1
+#define MAX_BOSS_SPEED 0.7f
 
 Enemy_Boss_05::Enemy_Boss_05(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t) : Enemy(x, y, hp, scoreValue, pu_t)
 {
@@ -14,17 +14,15 @@ Enemy_Boss_05::Enemy_Boss_05(int x, int y, float hp, int scoreValue, POWERUP_TYP
 
 	//Position--------------------------------------
 
-	fixedPos.x = x - App->stage05->spawnPos.x;
-	fixedPos.y = y - App->stage05->spawnPos.y +14;
 	speed = { 0.0f, 0.0f };
-	aceleration = { 0.0f, 0.05f };
-
+	aceleration = { 0.0f, 0.01f };
+	float_position = { 0.0f, 13.0f };
 	//Animations------------------------------------
 
 	for (int i = 0; i < 4; ++i) {
 		bossAnim.PushBack({ 525 + i * 48, 202,48,48 });
 	}
-	bossAnim.speed = 0.3f;
+	bossAnim.speed = 0.2f;
 
 	//Add collider--------------------------------
 	collider = App->collision->AddCollider({ x - 20, y - 20, 40, 40 }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
@@ -35,34 +33,35 @@ Enemy_Boss_05::Enemy_Boss_05(int x, int y, float hp, int scoreValue, POWERUP_TYP
 
 void Enemy_Boss_05::Move()
 {
+
 	switch (currentDir)
 	{
 	case Enemy_Boss_05::UP:
 
-		if (float_position.x  < 0) {
-			speed.y -= aceleration.y;
-		}
-		else if (float_position.x >= 0) {
+		if (float_position.y  < 0) {
 			speed.y += aceleration.y;
 		}
+		else if (float_position.y >= 0) {
+			speed.y -= aceleration.y;
+		}
 
-		if (speed.y >= 0.0f) {
+		if (float_position.y < -14.0f) {
 			currentDir = DOWN;
 		}
 
 		break;
 	case Enemy_Boss_05::DOWN:
 
-		if (float_position.x  < 0) {
-			speed.y += aceleration.y;
-		}
-		else if (float_position.x >= 0) {
+		if (float_position.y  < 0) {
 			speed.y -= aceleration.y;
 		}
-		if (speed.y >= 0.0f) {
-			currentDir = UP;
+		else if (float_position.y >= 0) {
+			speed.y += aceleration.y;
 		}
 
+		if (float_position.y > 14.0f) {
+			currentDir = UP;
+		}
 		break;
 	}
 
@@ -76,15 +75,14 @@ void Enemy_Boss_05::Move()
 
 	//Update position----------------------------------------------
 
-	float_position.x += speed.x;
 	float_position.y += speed.y;
 
-	position = { (int)(fixedPos.x + float_position.x), (int)(float_position.y + fixedPos.x )};
+	position = { (int)( fixedPos.x + float_position.x + App->stage05->spawnPos.x), (int)(fixedPos.y + float_position.y + App->stage05->spawnPos.y)};
 
 	//Set the collider position
 	if (collider != nullptr) {
 
-		collider->SetPos(position.x - 12, position.y - 12);
+		collider->SetPos(position.x - 24, position.y - 24);
 	}
 }
 

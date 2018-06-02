@@ -17,6 +17,7 @@ private:
 	//Animations---------------------------
 	Animation bossAnim;
 	//Variables----------------------------
+	fPoint initPos;
 	fPoint float_position;
 	fPoint speed;
 	fPoint aceleration;
