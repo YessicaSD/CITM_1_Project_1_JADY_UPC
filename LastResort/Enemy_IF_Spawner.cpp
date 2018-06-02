@@ -14,13 +14,13 @@ Enemy_IF_Spawner::Enemy_IF_Spawner(int x, int y, float hp, int scoreValue, POWER
 		spawned[i] = nullptr;
 	}
 
-	fixedPos.x = x - App->stage05->spawnPos.x;
-	fixedPos.y = y - App->stage05->spawnPos.y;
+	//fixedPos.x = x - App->stage05->spawnPos.x;
+	//fixedPos.y = y - App->stage05->spawnPos.y;
 
 	//Rects------------------------------------------------
 
-	insideCore = { 525,170,192,32 }; 
-	spawnDoor = { 525,144,128,26 };
+	insideCore = { 525, 170, 192, 32 }; 
+	spawnDoor  = { 525, 144, 128, 26 };
 
 	//Add collider----------------------------------------
 	collider = App->collision->AddCollider({ x - 96, y+ 32, 192, 32 }, COLLIDER_TYPE::COLLIDER_ENEMY_HEAVY, (Module*)App->enemies);
@@ -35,8 +35,6 @@ void Enemy_IF_Spawner::Move()
 	if (collider != nullptr) {
 		collider->SetPos(position.x - -96, position.y + 32);
 	}
-	
-
 
 	//Enemies Spawning------------------------------------------
 	currentEnemies = 0;

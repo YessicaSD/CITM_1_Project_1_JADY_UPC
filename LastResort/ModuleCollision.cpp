@@ -276,7 +276,7 @@ ModuleCollision::~ModuleCollision()
 
 update_status ModuleCollision::LogicUpdate()
 {
-	//LOG("Filled colliders %i", getFilledColNum());
+	LOG("Filled colliders %i", getFilledColNum());
 	// Calculate collisions
 	Collider* c1 = nullptr;
 	Collider* c2 = nullptr;
