@@ -39,7 +39,7 @@ Enemy_MetalBee::Enemy_MetalBee(int x, int y, float hp, int scoreValue, POWERUP_T
 	rotateAnimLeft.PushBack({ 731,296,48,45 });
 	rotateAnimLeft.PushBack({ 826,296,48,44 });
 	rotateAnimLeft.PushBack({ 826,296,48,44 });
-
+	rotateAnimLeft.speed = 0.2f;
 	collider = App->collision->AddCollider({ x - 12 , y - 12, 24, 24 }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
 
 	speed = { 0.2f, 0.0f };
@@ -162,21 +162,21 @@ void Enemy_MetalBee::Draw(SDL_Texture* sprites)
 	case ROTATE_RIGHT:
 
 		animation = &rotateAnimRight;
-		if (animation->Finished()) {
+		if (animation->finished == true) {
 
-			animation->loop = 0;
-			animation->current_frame = 0;
+
+			animation->Reset();
 			animation = &moveAnim;
 			currentState = FOLLOW;
 			
 		}
 		break;
+
 	case ROTATE_LEFT:
 		animation = &rotateAnimLeft;
-		if (animation->Finished()) {
+		if (animation->finished==true) {
 
-			animation->loop = 0;
-			animation->current_frame = 0;
+			animation->Reset();
 			animation = &moveAnim;
 			currentState = FOLLOW;
 
@@ -191,10 +191,10 @@ void Enemy_MetalBee::Draw(SDL_Texture* sprites)
 
 	//Draw------------------------------------------------------------------
 	if (!blitEx) {
-		App->render->Blit(sprites, position.x - 15, position.y - 15, &animation->GetCurrentFrame());
+		App->render->Blit(sprites, position.x - 15, position.y - 15, &animation->GetFrameEx());
 	}
 	else {
-		App->render->BlitEx(sprites, position.x - 15, position.y - 15, &animation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
+		App->render->BlitEx(sprites, position.x - 15, position.y - 15, &animation->GetFrameEx(), SDL_FLIP_HORIZONTAL);
 	}
 
 }
