@@ -10,7 +10,9 @@ Particle_Fireball::Particle_Fireball() : Particle()
 
 Particle_Fireball::Particle_Fireball(Particle& p, fPoint position, fPoint speed, Uint32 delay, COLLIDER_TYPE colType, SDL_Texture* tex) : Particle(p, position, speed, delay, colType, tex)
 {
-	collider->SetMeasurements(46, 26);
+	currentFrame = anim.GetCurrentFrame();
+
+	collider->SetMeasurements((int)(0.70 * currentFrame.w), (int)(0.80* currentFrame.h));
 }
 
 void Particle_Fireball::Move()

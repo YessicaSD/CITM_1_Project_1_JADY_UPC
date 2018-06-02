@@ -44,6 +44,7 @@ private:
 	int eyeCounter = 0;
 	iPoint topBarPos;
 	iPoint botBarPos;
+	int shotCounter = 0;
 };
 
 #endif // __ENEMY_BAR_GUARDIAN_H__

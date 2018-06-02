@@ -115,6 +115,7 @@ public:
 	Particle Missile;
 	Particle MissileExplosion;
 	Particle indoorLaser;
+	Particle barGuardShot;
 
 	//- OTHER
 	iPoint VectorMiddleBossShots;

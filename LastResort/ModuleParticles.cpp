@@ -235,7 +235,7 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 
 //Each new particle has to initializate:
 //- Push backs for its animation
-//- Render layer. 0 = behind the ship, 1 = in front of the ship. Is 1 by default
+//- Render layer. 0 = behind the ship, 1 = in front of the ship. Is 1 by default.
 void ModuleParticles::InitParticleValues()
 {
 	//Player----------------------------------------------------------------------------//
@@ -533,4 +533,11 @@ void ModuleParticles::InitParticleValues()
 
 	indoorLaser.anim.PushBack({ 141,0,80,6 });
 	indoorLaser.life = 5000;
+
+	barGuardShot.anim.PushBack({ 146, 374, 64, 16 });
+	barGuardShot.anim.PushBack({ 211, 374, 57, 16 });
+	barGuardShot.anim.PushBack({ 269, 374, 53, 16 });
+	barGuardShot.anim.speed = 0.25;
+	barGuardShot.anim.loop = true;
+	barGuardShot.life = 10000;
 }

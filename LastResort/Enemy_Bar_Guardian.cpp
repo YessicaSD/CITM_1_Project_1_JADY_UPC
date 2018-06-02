@@ -145,6 +145,39 @@ void Enemy_BarGuardian::Move()
 
 
 	//Shoot
+	if(shotCounter >= 120)
+	{
+		//Shoot three particles
+		App->particles->AddParticle(App->particles->barGuardShot,
+		{ (float)position.x, (float)(position.y - 30)},
+		{ -3, 0 },
+			App->particles->particlesTx,
+			COLLIDER_ENEMY_SHOT,
+			0,
+			PARTICLE_FIREBALL);
+
+		App->particles->AddParticle(App->particles->barGuardShot,
+		{ (float)position.x, (float)position.y },
+		{ -3, 0 },
+			App->particles->particlesTx,
+			COLLIDER_ENEMY_SHOT,
+			0,
+			PARTICLE_FIREBALL);
+
+		App->particles->AddParticle(App->particles->barGuardShot,
+		{ (float)position.x, (float)(position.y + 30)},
+		{ -3, 0 },
+			App->particles->particlesTx,
+			COLLIDER_ENEMY_SHOT,
+			0,
+			PARTICLE_FIREBALL);
+
+		shotCounter = 0;
+	}
+	else
+	{
+		shotCounter++;
+	}
 }
 
 void Enemy_BarGuardian::Draw(SDL_Texture* sprites)
