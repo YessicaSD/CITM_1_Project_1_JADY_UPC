@@ -77,7 +77,7 @@ private:
 
 	int getFilledColNum();
 
-	Collider* colliders[MAX_COLLIDERS];
+	Collider* colliders[MAX_COLLIDERS] = {nullptr};
 	bool matrix[COLLIDER_MAX][COLLIDER_MAX];
 	bool debug = false;
 };

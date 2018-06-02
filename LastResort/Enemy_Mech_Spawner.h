@@ -26,7 +26,7 @@ public:
 	void Draw(SDL_Texture* sprites);
 
 	animState currentState = ANIMATION;
-	Enemy* spawned[MAX_SPAWNED];
+	Enemy* spawned[MAX_SPAWNED] = {nullptr};
 	int currentEnemies = 0;
 	
 };

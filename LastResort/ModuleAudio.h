@@ -53,8 +53,8 @@ public:
 
 private: 
 
-	Music* musics[MAX_MUSICS];
-	Sfx* sfx[MAX_SOUNDEFECTS];
+	Music* musics[MAX_MUSICS];//Set to nullptr at the constructor
+	Sfx* sfx[MAX_SOUNDEFECTS];//Set to nullptr at the constructor
 	int volumeMUS = GENERAL_MUSIC_VOLUME;
 	int volumeSFX= GENERAL_SFX_VOLUME;
 	int sfxID =0;
