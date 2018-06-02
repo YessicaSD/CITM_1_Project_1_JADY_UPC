@@ -143,18 +143,16 @@ void Enemy_BarGuardian::Move()
 		break;
 	}
 
-
+	
 	//Shoot
 	if(shotCounter >= 120)
 	{
+		
 		//Shoot three particles
-		App->particles->AddParticle(App->particles->barGuardShot,
-		{ (float)position.x, (float)(position.y - 30)},
-		{ -3, 0 },
-			App->particles->particlesTx,
+	/*	App->particles->AddParticle(App->particles->barGuardShot,{ (float)position.x, (float)position.y - 30},{ -3, 0 },App->particles->particlesTx,
 			COLLIDER_ENEMY_SHOT,
 			0,
-			PARTICLE_FIREBALL);
+			PARTICLE_FIREBALL);*/
 
 		App->particles->AddParticle(App->particles->barGuardShot,
 		{ (float)position.x, (float)position.y },

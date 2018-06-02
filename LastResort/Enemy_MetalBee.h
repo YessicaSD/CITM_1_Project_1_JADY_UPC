@@ -5,20 +5,21 @@
 #include "MovPath.h"
 
 class ModulePlayer;
-
+#define MAX_LAMELA_SPEED 1.6f
 class Enemy_MetalBee : public Enemy
 {
 public:
 	Enemy_MetalBee(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop);
 	void Move();
-	/*void Draw(SDL_Texture* sprites);
+	void Draw(SDL_Texture* sprites);
 	void CheckTarget();
-	void CheckDirection();*/
+	void CheckDirection();
 
 private:
 	//Animations---------------------------
 	Animation moveAnim;
-	Animation rotateAnim;
+	Animation rotateAnimRight;
+	Animation rotateAnimLeft;
 	//Variables---------------------------
 	fPoint float_position;
 	fPoint speed;
@@ -37,7 +38,8 @@ private:
 
 	enum MoveState {
 		FOLLOW,
-		ROTATE
+		ROTATE_LEFT,
+		ROTATE_RIGHT,
 	} currentState = FOLLOW;
 
 };
