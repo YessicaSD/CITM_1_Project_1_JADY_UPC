@@ -41,6 +41,8 @@ public:
 
 	void HideUi();
 	void ShowUi();
+	void StageClearLogic();
+	void StageClearRender();
 
 
 public:

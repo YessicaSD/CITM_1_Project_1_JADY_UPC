@@ -169,19 +169,19 @@ void Player1::Winposition()
 {
 	if (position.x < 70)
 	{
-		position.x += SCREEN_SIZE;
+		position.x += 1;
 	}
 	if (position.x > 70)
 	{
-		position.x -= SCREEN_SIZE;
+		position.x -= 1;
 	}
 	if (position.y < 120)
 	{
-		position.y += SCREEN_SIZE;
+		position.y += 1;
 	}
 	if (position.y > 120)
 	{
-		position.y -= SCREEN_SIZE;
+		position.y -= 1;
 	}
 
 }
