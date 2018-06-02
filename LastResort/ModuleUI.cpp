@@ -161,27 +161,12 @@ update_status  ModuleUI::InputUpdate()
 		stageclear = true;
 	}
 	
-
+	//-----------------------------------------------------------------------------------------------------------------------------------
 	if (stageclear == true)
 	{
+		StageClearLogic();
 
-		if (frameCountStageClear >= 500)
-		{
-			stageclear = false;
-			App->fade->FadeToBlack(App->stage05, App->titleScene, 0.0f);
-		}
-
-		if (currentAlfa < 255)
-			currentAlfa += 1;
-		if (currentAlfa == 253)
-		{
-			App->audio->ControlAudio(App->stage05->lvl5Music, STOP_AUDIO);
-			App->audio->ControlAudio(lvlComplitedMusic, PLAY_AUDIO);
-		}
 		
-		
-		
-		frameCountStageClear += 1;
 		
 	}
 
@@ -217,11 +202,14 @@ update_status ModuleUI::RenderUpdate2()
 	
 	if(stageclear==true)
 	{
-		App->render->DrawQuad({ 0,0,SCREEN_WIDTH,SCREEN_HEIGHT }, 0, 0, 0, currentAlfa);
+		/*App->render->DrawQuad({ 0,0,SCREEN_WIDTH,SCREEN_HEIGHT }, 0, 0, 0, currentAlfa);
 		if (currentAlfa > 254)
 		{
-			App->render->Blit(uiTex, 50, 60, &BGroundStageClear5);
-		}
+			
+		}*/
+		StageClearRender();
+		
+
 	}
 
 	//Draw UI----------------------------------------------------------------------------------------//
@@ -350,4 +338,48 @@ void ModuleUI::ShowUi()
 void ModuleUI::HideUi()
 {
 	if (showUI == true) { showUI = false; }
+}
+
+
+
+void ModuleUI::StageClearLogic()
+{
+	if(App->player1->isActive && App->player2->isActive)
+		{
+		App->player1->winlvl = true;
+		App->player2->winlvl = true;
+	}
+	else
+	{
+		if(App->player1->isActive)
+			App->player1->winlvlsingle = true;
+		if (App->player2->isActive)
+			App->player2->winlvlsingle = true;
+	}
+	if (frameCountStageClear >= 300)
+	{
+		stageclear = false;
+		App->player1->winlvl = false;
+		App->player2->winlvl = false;
+		App->player1->winlvlsingle = false;
+		App->player2->winlvlsingle = false;
+		frameCountStageClear = 0;
+		App->fade->FadeToBlack(App->stage05, App->titleScene, 0.0f);
+	}
+
+	if (currentAlfa < 255)
+		currentAlfa += 1;
+	if (currentAlfa == 253)
+	{
+		App->audio->ControlAudio(App->stage05->lvl5Music, STOP_AUDIO);
+		App->audio->ControlAudio(lvlComplitedMusic, PLAY_AUDIO);
+	}
+
+
+
+	frameCountStageClear += 1;
+}
+void ModuleUI::StageClearRender()
+{
+	App->render->Blit(uiTex, 50, 60, &BGroundStageClear5);
 }

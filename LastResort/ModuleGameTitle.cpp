@@ -59,6 +59,10 @@ bool ModuleGameTitle:: Start()
 		
 	}
 	str_time = new char[8];
+
+	App->player1->isActive = false;
+	App->player2->isActive = false;
+
 	return ret;
 }
 bool ModuleGameTitle::CleanUp() {
