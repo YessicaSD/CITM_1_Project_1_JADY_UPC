@@ -87,6 +87,6 @@ private:
 };
 
 // Global var made extern for Application ---
-extern Application* App;
+extern Application* App = nullptr;
 
 #endif // __APPLICATION_H__

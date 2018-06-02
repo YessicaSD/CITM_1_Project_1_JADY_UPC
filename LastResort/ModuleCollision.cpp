@@ -276,8 +276,8 @@ ModuleCollision::~ModuleCollision()
 update_status ModuleCollision::LogicUpdate()
 {
 	// Calculate collisions
-	Collider* c1;
-	Collider* c2;
+	Collider* c1 = nullptr;
+	Collider* c2 = nullptr;
 
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
