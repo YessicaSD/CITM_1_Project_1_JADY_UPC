@@ -8,9 +8,9 @@
 //x = at the front of the missile
 //y = at the center of the missile
 //Explanatory drawing:
-//-------
-//------+
-//-------
+//----------
+//---------+
+//----------
 
 enum HMissilePhase
 {
