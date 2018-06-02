@@ -1,7 +1,8 @@
 #include "Application.h"
+#include "ModuleCollision.h"
 #include "ModuleInput.h"
 #include "ModuleRender.h"
-#include "ModuleCollision.h"
+
 
 ModuleCollision::ModuleCollision()
 {
@@ -321,6 +322,7 @@ update_status ModuleCollision::LogicUpdate()
 			colliders[i] = nullptr;
 		}
 	}
+
 
 	return UPDATE_CONTINUE;
 }

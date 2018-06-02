@@ -32,9 +32,16 @@ public:
 	bool CleanUp();
 
 	//Other functions
-	void RenderShipPart();
+
+	void AddShipColliders();
 	void UpdateShipColliders();
+	void DeleteShipColliders();
+
+	void AddFinalColliders();
 	void UpdateFinalColliders();
+	void DeleteFinalColliders();
+
+	void RenderShipPart();
 	void FireballFrontShip();
 	void FirebarsRearShip();
 	void ShipRear();
@@ -71,12 +78,15 @@ public:
 	SDL_Rect StarsRect2;
 
 	//Spaceship colliders
-	Collider* shipCollidersCol[SHIP_COLLIDERS_NUM] = { nullptr };
+	Collider* shipCollidersCol[SHIP_COLLIDERS_NUM];
 	SDL_Rect shipCollidersRect[SHIP_COLLIDERS_NUM];
+	bool addedShipColliders = false;
+	bool deletedShipColliders = false;
 	//Final part colliders
-	Collider* finalCollidersCol[FINAL_COLLIDERS_NUM] = { nullptr };
+	Collider* finalCollidersCol[FINAL_COLLIDERS_NUM];
 	SDL_Rect finalCollidersRect[FINAL_COLLIDERS_NUM];
-
+	bool addedFinalColliders = false;
+	bool deletedFinalColliders = false;
 	//Textures---------------------------------
 	SDL_Texture * starsTx = nullptr;
 	SDL_Texture * shipTx = nullptr;

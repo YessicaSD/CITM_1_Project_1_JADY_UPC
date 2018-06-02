@@ -9,6 +9,7 @@ struct SDL_Texture;
 struct SDL_Rect;
 struct Sfx;
 class ModulePlayer;
+struct Music;
 
 
 enum sceneType {
@@ -65,5 +66,19 @@ public:
 	SDL_Rect powBar;
 	SDL_Rect top;
 	SDL_Rect push_p2;
+
+	// STAGE CLEAR -------------------------------
+	bool stageclear=false;
+	int currentAlfa=0;
+	int frameCountStageClear;
+
+		//Rectangles
+	SDL_Rect BGroundStageClear5 = {0,96,213,16};
+	
+		SDL_Rect Player1 = { 64,3,32,12 };
+		SDL_Rect Player2 = { 262,3,32,11 };
+
+	Music * lvlComplitedMusic=nullptr;
+
 };
 #endif // !_MODULEUI_H_

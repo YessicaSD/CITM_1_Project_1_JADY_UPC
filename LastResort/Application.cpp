@@ -16,7 +16,7 @@
 #include "ModuleParticles.h"
 #include "ModuleCollision.h"
 #include "ModuleEnemies.h"
-#include "ModuleStageClear.h"
+
 #include "ModuleUnit.h"
 #include "Player1.h"
 #include "Player2.h"
@@ -47,7 +47,6 @@ Application::Application()
 	modules[i++] = readyScene = new ModuleStageReady();
 	modules[i++] = gameoverScene = new ModuleGameOver();
 	modules[i++] = continueScene = new ModuleContinue();
-	modules[i++] = stageclearScene = new ModuleStageClear();
 	modules[i++] = player1 = new Player1();
 	modules[i++] = player2 = new Player2();
 	modules[i++] = collision = new ModuleCollision();//!IMPORTANT: Collision needs to be the last of the modules which move colliders (like player, enemies...) because it calculates collisions after they have moved their colliders
@@ -77,7 +76,7 @@ bool Application::Init()
 	readyScene->Disable();
 	gameoverScene->Disable();
 	continueScene->Disable();
-	stageclearScene->Disable();
+	
 	unit1->Disable();
 	unit2->Disable();
 	stageFunctionality->Disable();// Does other disables inside of its disable //Player will be enabled on the first update of a new scene
