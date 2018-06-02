@@ -49,6 +49,12 @@ void Enemy_BarGuardian::Move()
 			phase = barGuard_Up;
 		}
 		break;
+	case barGuard_Transition:
+		//if()
+		//{
+
+		//}
+		break;
 	}
 	//Set the collider position
 	if (collider != nullptr)

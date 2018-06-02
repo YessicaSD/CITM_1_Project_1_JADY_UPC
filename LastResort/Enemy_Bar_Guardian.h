@@ -9,6 +9,7 @@ enum BarGuardianPhases
 {
 	barGuard_Up,
 	barGuard_Down,
+	barGuard_Transition,
 };
 
 class Enemy_BarGuardian : public Enemy
