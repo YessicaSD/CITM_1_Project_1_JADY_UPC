@@ -195,18 +195,9 @@ void Enemy_BarGuardian::Draw(SDL_Texture* sprites)
 
 Enemy_BarGuardian::~Enemy_BarGuardian()
 {
-	if (collider != nullptr)
-	{
-		collider->to_delete = true;
-	}
-	if (topBarCol != nullptr)
-	{
-		topBarCol->to_delete = true;
-	}
-	if (botBarCol != nullptr)
-	{
-		botBarCol->to_delete = true;
-	}
+	if (collider != nullptr)  { collider ->to_delete = true; }
+	if (topBarCol != nullptr) { topBarCol->to_delete = true; }
+	if (botBarCol != nullptr) { botBarCol->to_delete = true; }
 
 	//When it dies put two bar enemies in place
 	App->enemies->AddEnemy(TOP_BAR,
