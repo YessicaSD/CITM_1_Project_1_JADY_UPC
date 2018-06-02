@@ -33,6 +33,9 @@ Enemy_BarGuardian::Enemy_BarGuardian(int x, int y, float hp, int scoreValue, POW
 void Enemy_BarGuardian::Move()
 {
 	//Move
+	//- X
+	position.x = fixedPos.x + App->stage05->spawnPos.x;
+	//- Y
 	switch(phase)
 	{
 	case barGuard_Up:
@@ -178,10 +181,10 @@ Enemy_BarGuardian::~Enemy_BarGuardian()
 		0,
 		NOPOWERUP,
 		{ 0, 0 });
- 	//App->enemies->AddEnemy(TOP_BAR,
-		//position.x - 8 + topBarAnim.w / 2 - App->stage05->spawnPos.x ,
-		//position.y - 24 - topBarAnim.h / 2 - App->stage05->spawnPos.y ,
-		//0,
-		//NOPOWERUP,
-		//{ 0, 0 });
+	App->enemies->AddEnemy(BOT_BAR,
+		botBarPos.x + botBarAnim.w / 2 - App->stage05->spawnPos.x,
+		botBarPos.y + botBarAnim.h / 2 - App->stage05->spawnPos.y,
+		0,
+		NOPOWERUP,
+		{ 0, 0 });
 }

@@ -362,7 +362,7 @@ Enemy* ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			enemies[i] = new Enemy_TopBar(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 3, 0, info.pu_Type);
 			break;
 		case ENEMY_TYPES::BOT_BAR:
-			//enemies[i] = new Enemy_BotBar(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 3, 0, info.pu_Type);
+			enemies[i] = new Enemy_BotBar(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 3, 0, info.pu_Type);
 			break;
 		case ENEMY_TYPES:: RED_LAMELLA:
 			enemies[i] = new Enemy_RedLamella(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 2, 200, info.pu_Type);

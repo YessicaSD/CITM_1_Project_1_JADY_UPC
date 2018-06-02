@@ -93,7 +93,7 @@ public:
 
 	SDL_Texture* nml_sprites = nullptr;
 	SDL_Texture* dmg_sprites = nullptr;
-	Sfx* AsteroirdAppearSfx=nullptr;
+	Sfx* AsteroirdAppearSfx = nullptr;
 	
 };
 

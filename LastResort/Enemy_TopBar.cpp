@@ -8,7 +8,6 @@ Enemy_TopBar::Enemy_TopBar(int x, int y, float hp, int scoreValue, POWERUP_TYPE 
 {
 	//Animation-------------------------------------
 	barAnim = { 233, 460, 32, 128 };
-	//botBarAnim = { 265, 460, 32, 128 };
 	//Render layer----------------------------------
 	renderLayer = 0;
 	//Collider--------------------------------------
