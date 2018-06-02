@@ -254,6 +254,8 @@ bool Module5lvlScene::Start()
 
 	App->enemies->AddEnemy(SHIP_MOTOR, 1119, 225);
 
+	
+
 	//Ship colliders-----------------------------------------------------------------------------------------
 	for(int i = 0; i < SHIP_COLLIDERS_NUM - 1; ++i)
 	{
@@ -506,6 +508,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 22:
 		if (reachedCheckpoint[22] == false)
 		{
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 100, NOPOWERUP, { -1,1 });
 			//Delete ship colliders
 			for(int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
 			{

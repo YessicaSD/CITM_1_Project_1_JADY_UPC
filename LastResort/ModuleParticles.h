@@ -108,6 +108,7 @@ public:
 	Particle orangeBallExplosion;
 	Particle laserEnemyShot;
 	Particle asteroidDestroy;
+	Particle littleAsteroidDestroy;
 	Particle MiddleAsteroidDestroy;
 	Particle fireBall;
 	Particle fireBar;

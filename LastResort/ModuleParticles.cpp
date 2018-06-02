@@ -416,6 +416,11 @@ void ModuleParticles::InitParticleValues()
 	asteroidDestroy.anim.PushBack({ 0,15,55,63 });
 	asteroidDestroy.anim.speed = 0.2f;
 
+	littleAsteroidDestroy.anim.PushBack({ 115,343,31,30 });
+	littleAsteroidDestroy.anim.PushBack({ 85,343,31,30 });
+	littleAsteroidDestroy.anim.PushBack({ 85,343,31,30 });
+
+
 	//Middle Boss shot particle------------------------------------
 	middleBossShot.anim.PushBack({ 232,248,18,17 });
 	middleBossShot.anim.PushBack({ 232,267,17,17 });

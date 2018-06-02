@@ -68,7 +68,10 @@ void Enemy_Ship_Motor::Move()
 			frameCount = 0;
 		}
 	}
-
+	if (App->stage05->cameraMovement.currentMov == 22)
+	{
+		fixedPos.x -= 1;
+	}
 	if (collider != nullptr)
 		collider->SetPos(position.x - Ship_Part.w, position.y + 15 - Ship_Part.h);
 
