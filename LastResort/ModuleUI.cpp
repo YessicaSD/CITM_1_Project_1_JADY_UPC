@@ -16,6 +16,7 @@
 #include "ModuleStage05.h"
 #include "ModuleReady.h"
 #include "ModuleUnit.h"
+#include "ModuleGameTitle.h"
 
 using namespace std;
 
@@ -39,6 +40,10 @@ bool ModuleUI::Start() {
 	uiTex = App->textures->Load("Assets/UI/UI.png");
 	//audios------------------------------------------------------------------------
 	coinsSfx = App->audio->LoadSFX("Assets/Scenes/001. Coin inserted.wav");
+
+	// stageclear------------------------------------------------------------------
+	lvlComplitedMusic=App->audio->LoadMUS("Assets/Scenes/StageClear/Stage clear.ogg");
+
 	return ret;
 }
 
@@ -51,6 +56,7 @@ bool ModuleUI::CleanUp() {
 	//audios------------------------------------------------------------------------
 	App->audio->UnloadSFX(coinsSfx);
 	//------------------------------------------------------------------------------
+	App->audio->UnloadMUS(lvlComplitedMusic);
 	return true;
 }
 
@@ -149,6 +155,36 @@ update_status  ModuleUI::InputUpdate()
 			break;
 		}
 	}
+
+	if (App->input->keyboard[SDL_SCANCODE_E] == KEY_DOWN)
+	{
+		stageclear = true;
+	}
+	
+
+	if (stageclear == true)
+	{
+
+		if (frameCountStageClear >= 500)
+		{
+			stageclear = false;
+			App->fade->FadeToBlack(App->stage05, App->titleScene, 0.0f);
+		}
+
+		if (currentAlfa < 255)
+			currentAlfa += 1;
+		if (currentAlfa == 253)
+		{
+			App->audio->ControlAudio(App->stage05->lvl5Music, STOP_AUDIO);
+			App->audio->ControlAudio(lvlComplitedMusic, PLAY_AUDIO);
+		}
+		
+		
+		
+		frameCountStageClear += 1;
+		
+	}
+
 	return update_status::UPDATE_CONTINUE;
 }
 
@@ -179,6 +215,15 @@ update_status ModuleUI::RenderUpdate2()
 	str_lives_p2 = score_p2.c_str();
 	str_credits = credits_.c_str();
 	
+	if(stageclear==true)
+	{
+		App->render->DrawQuad({ 0,0,SCREEN_WIDTH,SCREEN_HEIGHT }, 0, 0, 0, currentAlfa);
+		if (currentAlfa > 254)
+		{
+			App->render->Blit(uiTex, 50, 60, &BGroundStageClear5);
+		}
+	}
+
 	//Draw UI----------------------------------------------------------------------------------------//
 	
 	if (showUI)
@@ -290,7 +335,11 @@ update_status ModuleUI::RenderUpdate2()
 		}
 	}
 
+
+	
+
 	return UPDATE_CONTINUE;
+
 }
 
 void ModuleUI::ShowUi()

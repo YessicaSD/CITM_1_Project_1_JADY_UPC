@@ -77,7 +77,7 @@ bool ModuleNeoGeo::Start()
 update_status ModuleNeoGeo::LogicUpdate()
 {
 	//We change the scene if the player presses enter
-	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_LCTRL] == KEY_DOWN || App->input->Controller1[SDL_CONTROLLER_BUTTON_A] == KEY_DOWN || App->input->Controller1[SDL_CONTROLLER_BUTTON_B] == KEY_DOWN || App->input->Controller1[SDL_CONTROLLER_BUTTON_Y] == KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_LCTRL] == KEY_DOWN || App->input->Controller1[SDL_CONTROLLER_BUTTON_A] == KEY_DOWN || App->input->Controller1[SDL_CONTROLLER_BUTTON_B] == KEY_DOWN || App->input->Controller1[SDL_CONTROLLER_BUTTON_Y] == KEY_DOWN || App->input->Controller2[SDL_CONTROLLER_BUTTON_B] == KEY_DOWN || App->input->Controller2[SDL_CONTROLLER_BUTTON_Y] == KEY_DOWN)
 	{
 		App->titleScene->titleDone = true;
 		App->fade->FadeToBlack(this, App->titleScene, 0.5f);

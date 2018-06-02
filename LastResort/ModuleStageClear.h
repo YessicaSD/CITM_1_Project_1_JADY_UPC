@@ -27,7 +27,7 @@ public:
 
 	SDL_Rect Player1 = { 64,3,32,12 };
 	SDL_Rect Player2 = { 262,3,32,11 };
-public:
+
 	Music * lvlComplitedMusic;
 	Uint32 start_time;
 	Uint32 current_time;

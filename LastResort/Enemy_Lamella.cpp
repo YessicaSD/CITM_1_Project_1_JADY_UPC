@@ -5,12 +5,14 @@
 #include "Player1.h"
 #include "Player2.h"
 #include "ModuleRender.h"
+#include "ModuleEnemies.h"
 
 Enemy_Lamella::Enemy_Lamella(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t) : Enemy(x, y, hp, scoreValue, pu_t)
 {
 	//Position
 	auxPos.x = (float)position.x;
 	auxPos.y = (float)position.y;
+
 	//Animation
 	appearingAnim.PushBack({ 523, 388, 28, 28 });
 	appearingAnim.PushBack({ 553, 388, 32, 32 });
@@ -131,6 +133,10 @@ void Enemy_Lamella::Move()
 			{
 				targetPos = App->player2->position + App->player2->playerCenter;
 			}
+
+			//Set the flip variable
+			if(targetPos.x < position.x) { flip = true; }
+			else { flip = false; }
 		}
 		break;
 	case moving:
@@ -156,7 +162,10 @@ void Enemy_Lamella::Move()
 		break;
 	case disappearing:
 		//Check if it has finished disappearing to despawn it
-		//killed = true?
+		if (animation->Finished())
+		{
+			App->enemies->ManualDespawn(this);
+		}
 		break;
 	}
 
@@ -172,6 +181,14 @@ void Enemy_Lamella::Move()
 
 void Enemy_Lamella::Draw(SDL_Texture* sprites)
 {
-	//Blit
-	App->render->Blit(sprites, position.x - currentFrame.w/2, position.y - currentFrame.h/2, &currentFrame);
+	if(flip == false)
+	{
+		//Blit normally
+		App->render->Blit(sprites, position.x - currentFrame.w / 2, position.y - currentFrame.h / 2, &currentFrame);
+	}
+	else
+	{
+		//Flipped blit
+		App->render->BlitEx(sprites, position.x - currentFrame.w / 2, position.y - currentFrame.h / 2, &currentFrame, SDL_FLIP_HORIZONTAL, 0);
+	}
 }

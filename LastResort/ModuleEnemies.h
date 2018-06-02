@@ -81,9 +81,9 @@ public:
 
 	bool AddEnemy(ENEMY_TYPES type, int x, int y, Uint32 delay = 0, POWERUP_TYPE powerup_type = NOPOWERUP, fPoint speed = { 0, 0 });
 	Enemy* InstaSpawn(ENEMY_TYPES type, int x, int y, POWERUP_TYPE powerup_type = NOPOWERUP, fPoint speed  ={ 0, 0 });
+	void ManualDespawn(Enemy* enemyToDelete);
 
 private:
-
 	Enemy* SpawnEnemy(const EnemyInfo& info);
 	void RenderEnemy(Enemy*);
 
