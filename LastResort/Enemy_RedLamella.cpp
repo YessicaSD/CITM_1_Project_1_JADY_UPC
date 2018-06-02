@@ -7,32 +7,27 @@
 #include "ModuleStage05.h"
 #include "MovPath.h"
 
+#define MAX_LAMELA_SPEED 1.6f
+#define LAMELA_ROTATION_FRAMES 5
+
 
 Enemy_RedLamella::Enemy_RedLamella(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t) : Enemy(x, y, hp, scoreValue, pu_t)
 {
-	//Position--------------------------------------
-	fixedPos.x = x - App->stage05->spawnPos.x;
-	fixedPos.y = y - App->stage05->spawnPos.y;
-	//Movement--------------------------------------
-	pinataMov.originPoint = { 0,0 };
-	pinataMov.PushBack({ 0,90 }, 150);
-	pinataMov.PushBack({ -10 ,85 }, 15);
 	//Animations------------------------------------
-	moveAnim.PushBack({ 263, 62,40,38 });   //1
-	moveAnim.PushBack({ 223, 100,40,38 });  //2
-	moveAnim.PushBack({ 263, 100,40,38 });  //3
+
+	for (int i = 0; i < 3; ++i) {
+		moveAnim.PushBack({ 868 + i* 31, 0,31,31 });
+	}
 	moveAnim.speed = 0.3f;
 
-	rotateAnim.PushBack({ 223, 176,40,38 }); //1
-	rotateAnim.PushBack({ 263, 138,40,38 }); //2
-	rotateAnim.PushBack({ 223, 138,40,38 }); //3
-	rotateAnim.speed = 0.1f;
+	rotateAnim.PushBack({ 961, 0, 31, 31 }); 
+	rotateAnim.speed = 0.0f;
 
-	initAnim.PushBack({ 223, 62,40,38 });   //1
-	initAnim.PushBack({ 223, 138,40,38 });  //2
-	initAnim.speed = 0.1f;
 	//Add collider--------------------------------
-	collider = App->collision->AddCollider({ x - 14 , y - 14, 28, 28 }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ x - 12 , y - 12, 24, 24 }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
+
+	speed = { -1.0f, 0.0f };
+	aceleration = { 0.1f, 0.1f };
 }
 
 
@@ -71,20 +66,22 @@ void Enemy_RedLamella::CheckTarget() {
 
 void Enemy_RedLamella::CheckDirection() {
 
-	if (float_position.x  < currentTarget->position.x) {
-		currentDir = RIGHT;
+	//	Check X direction----------------------
+
+	if (float_position.x  < currentTarget->position.x + currentTarget->playerCenter.x) {
+		currentDirX = RIGHT;
 	}
-	else if (float_position.x >= currentTarget->position.x) {
-		currentDir = LEFT;
+	else if (float_position.x >= currentTarget->position.x + currentTarget->playerCenter.x) {
+		currentDirX = LEFT;
 	}
 
-	if (lastDir == NONE) {
-		lastDir = currentDir;
+	 if (lastDirX != currentDirX ) {
+		currentState =ROTATE;
+		lastDirX = currentDirX;
 	}
-	else if (lastDir != currentDir && currentState != IDLE) {
-		currentState = ROTATE;
-		lastDir = currentDir;
-	}
+
+
+
 }
 
 //Movement-------------------------------------------------------------
@@ -94,59 +91,49 @@ void Enemy_RedLamella::Move()
 	fPoint vectorIncrease;
 	fPoint PlayerPos;
 
-	switch (currentState)
-	{
-	case IDLE:
-		if (pinataMov.currentMov == 1) {
-			CheckTarget();
-			CheckDirection();
-		}
-
-		if (pinataMov.movFinished)
-		{
-			renderLayer = 2;
-			currentState = FOLLOW;
-			break;
-		}
-
-		pinataMov.GetCurrentPosition();
-		float_position.y = App->stage05->spawnPos.y + fixedPos.y + pinataMov.GetPosition().y;
-
-		if (currentDir == RIGHT)
-			float_position.x = App->stage05->spawnPos.x + fixedPos.x - pinataMov.GetPosition().x;
-		else
-			float_position.x = App->stage05->spawnPos.x + fixedPos.x + pinataMov.GetPosition().x;
-
-		break;
-
-	case FOLLOW:
-
-		if (currentDir == RIGHT) {
-			PlayerPos.x = (float)currentTarget->position.x + currentTarget->playerCenter.x + 8;
-			PlayerPos.y = (float)currentTarget->position.y + currentTarget->playerCenter.y;
-		}
-		else {
-			PlayerPos.x = (float)currentTarget->position.x + currentTarget->playerCenter.x - 8;
-			PlayerPos.y = (float)currentTarget->position.y + currentTarget->playerCenter.y;
-		}
-		vectorIncrease.UnitVector(PlayerPos, float_position);
-
-		float_position.x += vectorIncrease.x * 1;
-		float_position.y += vectorIncrease.y * 0.5;
-
+	// Update player position---------------------------------------
+	if (currentState != ROTATE) {
 		CheckTarget();
 		CheckDirection();
-
-		break;
-	case ROTATE:
-		//Not move
-		break;
 	}
+
+	PlayerPos.x = (float)currentTarget->position.x + currentTarget->playerCenter.x;
+	PlayerPos.y = (float)currentTarget->position.y + currentTarget->playerCenter.y;
+
+	vectorIncrease.UnitVector(PlayerPos, float_position);
+
+	speed.x += vectorIncrease.x * aceleration.x;
+
+	speed.y += vectorIncrease.y * aceleration.y;
+
+
+	if (speed.x > MAX_LAMELA_SPEED) {
+		speed.x = MAX_LAMELA_SPEED;
+	}
+	else if (speed.x < -MAX_LAMELA_SPEED) {
+		speed.x = -MAX_LAMELA_SPEED;
+	}
+
+	if (speed.y > MAX_LAMELA_SPEED) {
+		speed.y = MAX_LAMELA_SPEED;
+	}
+	else if (speed.y < -MAX_LAMELA_SPEED) {
+		speed.y = -MAX_LAMELA_SPEED;
+	}
+
+	//Update position----------------------------------------------
+
+	float_position.x += speed.x ;
+	float_position.y += speed.y;
+
 	position = { (int)float_position.x, (int)float_position.y };
 
 	//Set the collider position
-	if (collider != nullptr)
-		collider->SetPos(position.x - 14, position.y - 14);
+	if (collider != nullptr) {
+
+		collider->SetPos(position.x - 12, position.y - 12);
+	}
+		
 }
 
 void Enemy_RedLamella::Draw(SDL_Texture* sprites)
@@ -156,26 +143,18 @@ void Enemy_RedLamella::Draw(SDL_Texture* sprites)
 
 	switch (currentState)
 	{
-	case IDLE:
-
-		if (pinataMov.currentMov == 0) {
-			currentAnim = initAnim.frames[0];
-		}
-		else {
-			currentAnim = initAnim.frames[1];
-		}
-		break;
 
 	case FOLLOW:
 		currentAnim = moveAnim.LoopAnimation();
 
 		break;
 	case ROTATE:
-		currentAnim = rotateAnim.GetFrameEx();
 
-		if (rotateAnim.finished == true) {
+		currentAnim = rotateAnim.frames[0];
+		++currentFrames;
+		if (currentFrames > LAMELA_ROTATION_FRAMES) {
 			moveAnim.Reset();
-			rotateAnim.Reset();
+			currentFrames = 0;
 			currentState = FOLLOW;
 		}
 		break;
@@ -183,17 +162,17 @@ void Enemy_RedLamella::Draw(SDL_Texture* sprites)
 	}
 
 	//Check direction for flip blit or not----------------------------------
-	if (currentDir == RIGHT)
+	if (currentDirX == RIGHT)
 		blitEx = true;
 	else
 		blitEx = false;
 
 	//Draw------------------------------------------------------------------
 	if (!blitEx) {
-		App->render->Blit(sprites, position.x - 16, position.y - 15, &currentAnim);
+		App->render->Blit(sprites, position.x - 15, position.y - 15, &currentAnim);
 	}
 	else {
-		App->render->BlitEx(sprites, position.x - 16, position.y - 16, &currentAnim, SDL_FLIP_HORIZONTAL);
+		App->render->BlitEx(sprites, position.x - 15, position.y - 15, &currentAnim, SDL_FLIP_HORIZONTAL);
 	}
 
 }
