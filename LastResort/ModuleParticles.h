@@ -81,7 +81,7 @@ public:
 	//- PoweUps 
 	Particle basicLaser; //Basic laser Shot
 	Particle littleRings;
-	Particle littleRingsExplotion;
+	Particle littleRingsExplosion;
 	Particle bigRings;
 	Particle bigRingsExplotion;
 	Particle hMissile;

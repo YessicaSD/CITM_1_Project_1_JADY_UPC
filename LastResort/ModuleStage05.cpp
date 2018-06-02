@@ -545,16 +545,10 @@ update_status Module5lvlScene::LogicUpdate()
 			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1400, 350, 21000);
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1110, 182, 21000, NOPOWERUP, { 1.5f,0.5f });
 			App->enemies->AddEnemy(POWERDROPPER, 1412, 350, 21000, SPEED); 
-
-
-
-
-
-
 			//Delete ship colliders
 			for(int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
 			{
-				shipCollidersCol[i]->to_delete;
+				shipCollidersCol[i]->to_delete = true;
 			}
 			//Add final part colliders
 			for (int i = 0; i < FINAL_COLLIDERS_NUM; ++i)
@@ -635,6 +629,23 @@ update_status Module5lvlScene::RenderUpdate1()
 bool Module5lvlScene::CleanUp() {
 
 	LOG("Unloading stage 05 scene");
+	//delete collider if they haven't been deleted during the game------------------
+	for (int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
+	{
+		if(shipCollidersCol[i] != nullptr)
+		{
+			shipCollidersCol[i]->to_delete = true;
+		}
+	}
+	//Add final part colliders
+	for (int i = 0; i < FINAL_COLLIDERS_NUM; ++i)
+	{
+		if(finalCollidersCol[i] != nullptr)
+		{
+			finalCollidersCol[i]->to_delete = true;
+		}
+		
+	}
 	//audios------------------------------------------------------------------------
 	App->audio->ControlAudio(lvl5Music, STOP_AUDIO);
 	App->audio->UnloadMUS(lvl5Music);

@@ -276,8 +276,8 @@ ModuleCollision::~ModuleCollision()
 update_status ModuleCollision::LogicUpdate()
 {
 	// Calculate collisions
-	Collider* c1;
-	Collider* c2;
+	Collider* c1 = nullptr;
+	Collider* c2 = nullptr;
 
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
@@ -448,3 +448,8 @@ bool Collider::CheckCollision(const SDL_Rect& r) const
 		this->rect.y + this->rect.h > r.y       &&
 		this->rect.y < r.y + r.h);
 }
+//
+//int getFilledColNum()
+//{
+//	for (int i = 0; i < )
+//}

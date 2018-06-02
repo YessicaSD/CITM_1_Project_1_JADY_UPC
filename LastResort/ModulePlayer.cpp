@@ -81,6 +81,7 @@ bool ModulePlayer::CleanUp()
 {
 	powerupUpgrades = 0;
 	currentPowerUp = POWERUP_TYPE::NOPOWERUP;
+	if (playerCol != nullptr) { playerCol->to_delete = true; }
 	LOG("Unloading player assets");
 	return true;
 }

@@ -71,10 +71,10 @@ public:
 	SDL_Rect StarsRect2;
 
 	//Spaceship colliders
-	Collider* shipCollidersCol[SHIP_COLLIDERS_NUM];
+	Collider* shipCollidersCol[SHIP_COLLIDERS_NUM] = { nullptr };
 	SDL_Rect shipCollidersRect[SHIP_COLLIDERS_NUM];
 	//Final part colliders
-	Collider* finalCollidersCol[FINAL_COLLIDERS_NUM];
+	Collider* finalCollidersCol[FINAL_COLLIDERS_NUM] = { nullptr };
 	SDL_Rect finalCollidersRect[FINAL_COLLIDERS_NUM];
 
 	//Textures---------------------------------

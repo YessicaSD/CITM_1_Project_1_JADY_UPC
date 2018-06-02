@@ -32,7 +32,7 @@ public:
 	int renderLayer = 1;
 
 	//Enemy ------
-	Enemy* enemySpawned;
+	Enemy* enemySpawned = nullptr;
 	
 
 public:

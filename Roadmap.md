@@ -38,10 +38,22 @@
 - [ ] @alejandro61299 - Final boss
 
 0.9.3 (01/05/2018 23:59)
-- [ ] @YessicaSD - Inside turrets which shoot lasers
+- [x] @YessicaSD - Inside turrets which shoot lasers
 - [ ] @YessicaSD - Metal bee
-- [ ] @JaumeMontagut - Bar guardians
+- [x] @JaumeMontagut - Bar guardians
 - [ ] @JaumeMontagut - Lamella
-- [ ] @JaumeMontagut - Unit trail
+- [x] @JaumeMontagut - Unit trail
 
-1.0.0 (03/05/2018 23:59)
+02/06/2018
+23:59
+> All enemies in place
+> Test and organize tasks for tomorrow (most important adjustments)
+> We do a release and upload it to campus
+
+03/06/2018
+8:00
+> Start recording
+> Do another release (test Jos, friends and family)
+
+22:00
+> Review task times

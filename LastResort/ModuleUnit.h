@@ -168,10 +168,10 @@ private:
 	int chargeYOffset[15] = { 18, 16, 16, 14, 14, 16, 16, 15, 15, 13, 13, 23, 23, 21, 21 };
 	Animation throwAnim;
 	SDL_Rect throwFrame;
-	Collider* hitDetectionLeft;
-	Collider* hitDetectionRight;
-	Collider* hitDetectionUp;
-	Collider* hitDetectionDown;
+	Collider* hitDetectionLeft = nullptr;
+	Collider* hitDetectionRight = nullptr;
+	Collider* hitDetectionUp = nullptr;
+	Collider* hitDetectionDown = nullptr;
 	const int sphereDiameter = 16;//The sphere part of the unit
 
 	//Following terrain

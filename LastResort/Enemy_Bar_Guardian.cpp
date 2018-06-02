@@ -149,24 +149,27 @@ void Enemy_BarGuardian::Move()
 	{
 		
 		//Shoot three particles
-	/*	App->particles->AddParticle(App->particles->barGuardShot,{ (float)position.x, (float)position.y - 30},{ -3, 0 },App->particles->particlesTx,
-			COLLIDER_ENEMY_SHOT,
+
+		App->particles->AddParticle(App->particles->barGuardShot,
+		{ (float)position.x , (float)position.y + 30 },
+		{ -3, 0 },
+			App->particles->particlesTx,
+			COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE,
 			0,
-			PARTICLE_FIREBALL);*/
+			PARTICLE_FIREBALL);
 
 		App->particles->AddParticle(App->particles->barGuardShot,
 		{ (float)position.x, (float)position.y },
 		{ -3, 0 },
 			App->particles->particlesTx,
-			COLLIDER_ENEMY_SHOT,
+			COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE,
 			0,
 			PARTICLE_FIREBALL);
-
 		App->particles->AddParticle(App->particles->barGuardShot,
-		{ (float)position.x, (float)(position.y + 30)},
+		{ (float)position.x , (float)position.y - 30 },
 		{ -3, 0 },
 			App->particles->particlesTx,
-			COLLIDER_ENEMY_SHOT,
+			COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE,
 			0,
 			PARTICLE_FIREBALL);
 
