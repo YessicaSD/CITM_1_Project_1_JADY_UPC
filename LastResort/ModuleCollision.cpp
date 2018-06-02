@@ -448,3 +448,8 @@ bool Collider::CheckCollision(const SDL_Rect& r) const
 		this->rect.y + this->rect.h > r.y       &&
 		this->rect.y < r.y + r.h);
 }
+//
+//int getFilledColNum()
+//{
+//	for (int i = 0; i < )
+//}
