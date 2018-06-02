@@ -41,6 +41,7 @@
 #include "Enemy_Boss_05.h"
 #include "Enemy_TopBar.h"
 #include "Enemy_BotBar.h"
+#include "Enemy_MetalBee.h"
 
 
 #define DAMAGE_FLASHING_INTERVAL 4
@@ -366,6 +367,9 @@ Enemy* ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			break;
 		case ENEMY_TYPES:: RED_LAMELLA:
 			enemies[i] = new Enemy_RedLamella(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 2, 200, info.pu_Type);
+			break;
+		case ENEMY_TYPES::METALBEE:
+			enemies[i] = new Enemy_MetalBee(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 2, 200, info.pu_Type);
 			break;
 		case ENEMY_TYPES::BOSS_05:
 			enemies[i] = new Enemy_Boss_05 (info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 2, 200, info.pu_Type);
