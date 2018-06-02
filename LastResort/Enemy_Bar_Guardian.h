@@ -3,8 +3,6 @@
 
 #include "Enemy.h"
 
-class ModulePlayer;
-
 enum BarGuardianPhases
 {
 	barGuard_Up,
@@ -27,7 +25,6 @@ public:
 	~Enemy_BarGuardian();
 	void Move();
 	void Draw(SDL_Texture* sprites);
-	void OnCollision(Collider* c2);
 
 private:
 	BarGuardianPhases phase = barGuard_Up;
@@ -45,6 +42,8 @@ private:
 	Collider* botBarCol = nullptr;
 	int transitionCounter = 0;
 	int eyeCounter = 0;
+	iPoint topBarPos;
+	iPoint botBarPos;
 };
 
 #endif // __ENEMY_BAR_GUARDIAN_H__

@@ -38,6 +38,8 @@
 #include "Enemy_Bar_Guardian.h"
 #include "Enemy_RedLamella.h"
 #include "Enemy_Boss_05.h"
+#include "Enemy_TopBar.h"
+#include "Enemy_BotBar.h"
 
 
 #define DAMAGE_FLASHING_INTERVAL 4
@@ -353,6 +355,12 @@ Enemy* ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			break;
 		case ENEMY_TYPES::BAR_GUARDIAN:
 			enemies[i] = new Enemy_BarGuardian(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 10, 300, info.pu_Type);
+			break;
+		case ENEMY_TYPES::TOP_BAR:
+			enemies[i] = new Enemy_TopBar(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 3, 0, info.pu_Type);
+			break;
+		case ENEMY_TYPES::BOT_BAR:
+			//enemies[i] = new Enemy_BotBar(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 3, 0, info.pu_Type);
 			break;
 		case ENEMY_TYPES:: RED_LAMELLA:
 			enemies[i] = new Enemy_RedLamella(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 2, 200, info.pu_Type);

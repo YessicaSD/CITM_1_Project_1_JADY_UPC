@@ -76,6 +76,7 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Application.h" />
+    <ClInclude Include="Enemy_BotBar.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Enemy_Bar_Guardian.h" />
     <ClInclude Include="Enemy_Basic.h" />
@@ -150,9 +151,11 @@
     <ClInclude Include="ModuleStageFunctionality.h" />
     <ClInclude Include="Enemy_RedBats.h" />
     <ClInclude Include="Rotation.h" />
+    <ClInclude Include="Enemy_TopBar.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Enemy_BotBar.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Enemy_Bar_Guardian.cpp" />
     <ClCompile Include="Enemy_Basic.cpp" />
@@ -223,6 +226,7 @@
     <ClCompile Include="ModuleStageFunctionality.cpp" />
     <ClCompile Include="Enemy_Redbats.cpp" />
     <ClCompile Include="Rotation.cpp" />
+    <ClCompile Include="Enemy_TopBar.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

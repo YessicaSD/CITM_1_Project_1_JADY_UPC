@@ -2,6 +2,7 @@
 #include "Enemy_Bar_Guardian.h"
 #include "ModuleCollision.h"
 #include "ModuleStage05.h"
+#include "ModuleEnemies.h"
 
 
 Enemy_BarGuardian::Enemy_BarGuardian(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t) : Enemy(x, y, hp, scoreValue, pu_t)
@@ -18,14 +19,13 @@ Enemy_BarGuardian::Enemy_BarGuardian(int x, int y, float hp, int scoreValue, POW
 	eyeOpen.PushBack   ({ 346, 493, 16, 74 });
 	eyeClosed.PushBack ({ 298, 493, 16, 74 });
 	animation = &eyeClosed;
-	//eyeAnim.PushBack();
 	backAnim = { 364, 493, 30,  80 };
 	topBarAnim = { 233, 460, 32, 128 };
 	botBarAnim = { 265, 460, 32, 128 };
 	//Render layer----------------------------------
 	renderLayer = 0;
 	//Collider--------------------------------------
-	collider  = App->collision->AddCollider({ x - 16 + 2, y - backAnim.h/2,      backAnim.w + 16 - 2,   backAnim.h }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
+	collider  = App->collision->AddCollider({ x - 16 + 2, y - backAnim.h/2,      backAnim.w + 16 - 2,   backAnim.h }, COLLIDER_TYPE::COLLIDER_IGNORE_HIT, (Module*)App->enemies);
 	topBarCol = App->collision->AddCollider({ x -  8, y - 24 - topBarAnim.h, topBarAnim.w, topBarAnim.h }, COLLIDER_TYPE::COLLIDER_WALL);
 	botBarCol = App->collision->AddCollider({ x -  8, y + 24,                topBarAnim.w, topBarAnim.h }, COLLIDER_TYPE::COLLIDER_WALL);
 }
@@ -82,16 +82,22 @@ void Enemy_BarGuardian::Move()
 		}
 		break;
 	}
+	//Set the bar positions
+	topBarPos.x = position.x -  8;
+	topBarPos.y = position.y - 24 - topBarAnim.h;
+	botBarPos.x = position.x - 8;
+	botBarPos.y = position.y + 24;
+
 	//Set the collider position
 	if (collider  != nullptr) { collider ->SetPos(position.x - 16 + 2, position.y - backAnim.h / 2); }
-	if (topBarCol != nullptr) { topBarCol->SetPos(position.x -  8, position.y - 24 - topBarAnim.h); }
-	if (botBarCol != nullptr) { botBarCol->SetPos(position.x -  8, position.y + 24); }
+	if (topBarCol != nullptr) { topBarCol->SetPos(topBarPos.x, topBarPos.y); }
+	if (botBarCol != nullptr) { botBarCol->SetPos(botBarPos.x, botBarPos.y); }
 
 	//Eye logic
 	switch (eyePhase)
 	{
 	case open:
-		if(eyeCounter >= 260)
+		if(eyeCounter >= 240)
 		{
 			eyePhase = closing;
 			animation = &closingEye;
@@ -106,14 +112,16 @@ void Enemy_BarGuardian::Move()
 		if (animation->Finished())
 		{
 			animation = &eyeClosed;
+			collider->type = COLLIDER_IGNORE_HIT;//Only lose health when it's open
 			eyePhase = closed;
 			eyeCounter = 0;
 		}
 		break;
 	case closed:
-		if (eyeCounter >= 260)
+		if (eyeCounter >= 120)
 		{
 			eyePhase = opening;
+			collider->type = COLLIDER_ENEMY_LIGHT;
 			animation = &openingEye;
 			eyeCounter = 0;
 		}
@@ -136,18 +144,12 @@ void Enemy_BarGuardian::Move()
 	//Shoot
 }
 
-void Enemy_BarGuardian::OnCollision(Collider* c2)
-{
-	//Only lose health if it is open (look at ship motor)
-	//When it dies put two bar enemies in place
-}
-
 void Enemy_BarGuardian::Draw(SDL_Texture* sprites)
 {
 	//Blit top bar
-	App->render->Blit(sprites, position.x - 8, position.y - 24 - topBarAnim.h, &topBarAnim);
+	App->render->Blit(sprites, topBarPos.x, topBarPos.y, &topBarAnim);
 	//Blit bot bar
-	App->render->Blit(sprites, position.x - 8, position.y + 24, &botBarAnim);//24 distance from the center of the enemy
+	App->render->Blit(sprites, botBarPos.x, botBarPos.y, &botBarAnim);//24 distance from the center of the enemy
 	//Blit back part
 	App->render->Blit(sprites, position.x, position.y - backAnim.h / 2, &backAnim);
 	//Blit eye
@@ -168,4 +170,18 @@ Enemy_BarGuardian::~Enemy_BarGuardian()
 	{
 		botBarCol->to_delete = true;
 	}
+
+	//When it dies put two bar enemies in place
+	App->enemies->AddEnemy(TOP_BAR,
+		topBarPos.x + topBarAnim.w / 2 - App->stage05->spawnPos.x,
+		topBarPos.y + topBarAnim.h / 2 - App->stage05->spawnPos.y,
+		0,
+		NOPOWERUP,
+		{ 0, 0 });
+ 	//App->enemies->AddEnemy(TOP_BAR,
+		//position.x - 8 + topBarAnim.w / 2 - App->stage05->spawnPos.x ,
+		//position.y - 24 - topBarAnim.h / 2 - App->stage05->spawnPos.y ,
+		//0,
+		//NOPOWERUP,
+		//{ 0, 0 });
 }
