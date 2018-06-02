@@ -65,7 +65,6 @@ public:
 
 	ModuleCollision();
 	~ModuleCollision();
-
 	update_status LogicUpdate();
 	update_status ScreenUpdate();
 	bool CleanUp() override;

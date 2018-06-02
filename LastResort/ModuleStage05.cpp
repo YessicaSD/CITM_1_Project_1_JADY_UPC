@@ -131,6 +131,14 @@ bool Module5lvlScene::Start()
 	current_time = 0;
 	start_time = SDL_GetTicks();
 
+	for (int i = 0; i < SHIP_COLLIDERS_NUM; ++i) {
+		shipCollidersCol[i] = nullptr;
+	}
+
+	for (int i = 0; i < SHIP_COLLIDERS_NUM; ++i) {
+		finalCollidersCol[i] = nullptr;
+	}
+
 	//Enable ---------------------------------------------------------------------
 	App->stageFunctionality->Enable();
 	App->stageFunctionality->currentStage = this;
@@ -176,7 +184,6 @@ bool Module5lvlScene::Start()
 
 
 	App->enemies->AddEnemy(BOSS_05, 2385, 294);
-
 	App->enemies->InstaSpawn(METALBEE, 300, 200);
 
 	
@@ -258,28 +265,10 @@ bool Module5lvlScene::Start()
 
 	App->enemies->AddEnemy(SHIP_MOTOR, 1119, 225);
 
-	
-
-	//Ship colliders-----------------------------------------------------------------------------------------
-	for(int i = 0; i < SHIP_COLLIDERS_NUM - 1; ++i)
-	{
-		shipCollidersCol[i] = App->collision->AddCollider(
-		   {shipCollidersRect[i].x + (int)shipPos.x,
-			shipCollidersRect[i].y + (int)shipPos.y,
-			shipCollidersRect[i].w,
-			shipCollidersRect[i].h },
-			COLLIDER_TYPE::COLLIDER_WALL);
-	}
-	//Different case (it is an enemy heavy type collider)
-	shipCollidersCol[47] = App->collision->AddCollider(
-	{ shipCollidersRect[47].x + (int)shipPos.x,
-		shipCollidersRect[47].y + (int)shipPos.y,
-		shipCollidersRect[47].w,
-		shipCollidersRect[47].h },
-		COLLIDER_TYPE::COLLIDER_ENEMY_HEAVY);
 
 	return ret;
 }
+
 
 update_status Module5lvlScene::LogicUpdate()
 {
@@ -308,11 +297,40 @@ update_status Module5lvlScene::LogicUpdate()
 	spawnPos.x = (int)shipPos.x;
 	spawnPos.y = (int)shipPos.y;
 
-	//- Update game checkpoints (there are only 2, one at the start of the game and the other at the beggining of the asteroids section)
+	//---------Update game checkpoints------------------------------------ (there are only 2, one at the start of the game and the other at the beggining of the asteroids section)
 	if (cameraMovement.currentMov  > 21) 
 		currentCheckPoint = 1;
 	else 
 		currentCheckPoint = 0;
+
+	//---------Update colliders-------------------------------------------
+
+
+	 if (cameraMovement.currentMov < 22) {
+
+		 if (deletedFinalColliders == false) {
+			 DeleteFinalColliders();
+		 }
+
+		 if (addedShipColliders == false) {
+			 AddShipColliders();
+		 }
+
+		UpdateShipColliders();
+	}
+	 else if (cameraMovement.currentMov >= 22) {
+
+		 if (deletedShipColliders == false) {
+			 DeleteShipColliders();
+		 }
+
+		 if (addedFinalColliders == false) {
+			 AddFinalColliders();
+		 }
+
+		 UpdateFinalColliders();
+	 }
+
 
 	//- The mega checkpoint switch--------------------------------------
 	//LOG("Current check point %i", cameraMovement.currentMov);
@@ -323,7 +341,6 @@ update_status Module5lvlScene::LogicUpdate()
 		{
 			reachedCheckpoint[0] = true;
 		}
-		UpdateShipColliders();
 
 		break;
 	case 1:
@@ -331,7 +348,6 @@ update_status Module5lvlScene::LogicUpdate()
 		{
 			reachedCheckpoint[1] = true;
 		}
-		UpdateShipColliders();
 
 		break;
 	case 2:
@@ -339,7 +355,6 @@ update_status Module5lvlScene::LogicUpdate()
 		{
 			reachedCheckpoint[2] = true;
 		}
-		UpdateShipColliders();
 
 		break;
 	case 3:
@@ -347,7 +362,6 @@ update_status Module5lvlScene::LogicUpdate()
 		{
 			reachedCheckpoint[3] = true;
 		}
-		UpdateShipColliders();
 		FireballFrontShip();
 
 		break;
@@ -357,7 +371,6 @@ update_status Module5lvlScene::LogicUpdate()
 			redBatsKilled = 0;
 			reachedCheckpoint[4] = true;
 		}
-		UpdateShipColliders();
 		FireballFrontShip();
 
 		break;
@@ -366,7 +379,6 @@ update_status Module5lvlScene::LogicUpdate()
 		{
 			reachedCheckpoint[5] = true;
 		}
-		UpdateShipColliders();
 
 		break;
 	case 6:
@@ -374,7 +386,6 @@ update_status Module5lvlScene::LogicUpdate()
 		{
 			reachedCheckpoint[6] = true;
 		}
-		UpdateShipColliders();
 
 		break;
 	case 7:
@@ -382,7 +393,6 @@ update_status Module5lvlScene::LogicUpdate()
 		{
 			reachedCheckpoint[7] = true;
 		}
-		UpdateShipColliders();
 
 		break;
 	case 8:
@@ -390,7 +400,6 @@ update_status Module5lvlScene::LogicUpdate()
 		{
 			reachedCheckpoint[8] = true;
 		}
-		UpdateShipColliders();
 
 		break;
 	case 9:
@@ -398,15 +407,12 @@ update_status Module5lvlScene::LogicUpdate()
 		{
 			reachedCheckpoint[9] = true;
 		}
-		UpdateShipColliders();
-
 		break;
 	case 10:
 		if (reachedCheckpoint[10] == false)
 		{
 			reachedCheckpoint[10] = true;
 		}
-		UpdateShipColliders();
 
 		break;
 	case 11:
@@ -415,8 +421,6 @@ update_status Module5lvlScene::LogicUpdate()
 			
 			reachedCheckpoint[11] = true;
 		}
-		UpdateShipColliders();
-
 		break;
 	case 12:
 		if (reachedCheckpoint[12] == false)
@@ -426,7 +430,6 @@ update_status Module5lvlScene::LogicUpdate()
 			reachedCheckpoint[12] = true;
 		}
 		
-		UpdateShipColliders();
 
 		break;
 	case 13:
@@ -434,7 +437,6 @@ update_status Module5lvlScene::LogicUpdate()
 		{
 			reachedCheckpoint[13] = true;
 		}
-		UpdateShipColliders();
 
 		break;
 	case 14:
@@ -443,7 +445,6 @@ update_status Module5lvlScene::LogicUpdate()
 			redBatsKilled = 0;
 			reachedCheckpoint[14] = true;
 		}
-		UpdateShipColliders();
 		FirebarsRearShip();
 
 		break;
@@ -452,7 +453,6 @@ update_status Module5lvlScene::LogicUpdate()
 		{
 			reachedCheckpoint[15] = true;
 		}
-		UpdateShipColliders();
 		FirebarsRearShip();
 
 		break;
@@ -462,7 +462,6 @@ update_status Module5lvlScene::LogicUpdate()
 			
 			reachedCheckpoint[16] = true;
 		}
-		UpdateShipColliders();
 		FirebarsRearShip();
 
 		break;
@@ -472,7 +471,6 @@ update_status Module5lvlScene::LogicUpdate()
 			redBatsKilled = 0;
 			reachedCheckpoint[17] = true;
 		}
-		UpdateShipColliders();
 		FirebarsRearShip();
 
 		break;
@@ -481,7 +479,6 @@ update_status Module5lvlScene::LogicUpdate()
 		{
 			reachedCheckpoint[18] = true;
 		}
-		UpdateShipColliders();
 
 		break;
 	case 19:
@@ -489,7 +486,6 @@ update_status Module5lvlScene::LogicUpdate()
 		{
 			reachedCheckpoint[19] = true;
 		}
-		UpdateShipColliders();
 
 		break;
 	case 20:
@@ -498,7 +494,7 @@ update_status Module5lvlScene::LogicUpdate()
 			redBatsKilled = 0;
 			reachedCheckpoint[20] = true;
 		}
-		UpdateShipColliders();
+
 
 		break;
 	case 21:
@@ -506,12 +502,14 @@ update_status Module5lvlScene::LogicUpdate()
 		{
 			reachedCheckpoint[21] = true;
 		}
-		UpdateShipColliders();
 
 		break;
 	case 22:
 		if (reachedCheckpoint[22] == false)
 		{
+
+			reachedCheckpoint[22] = true;
+
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 4000, NOPOWERUP, { -1,1 });
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 4500, NOPOWERUP, { -1.5f,0.5f });
 
@@ -549,41 +547,19 @@ update_status Module5lvlScene::LogicUpdate()
 			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1400, 350, 21000);
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1110, 182, 21000, NOPOWERUP, { 1.5f,0.5f });
 			App->enemies->AddEnemy(POWERDROPPER, 1412, 350, 21000, SPEED); 
-			//Delete ship colliders
-			for(int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
-			{
-				shipCollidersCol[i]->to_delete = true;
-			}
-			//Add final part colliders
-			for (int i = 0; i < FINAL_COLLIDERS_NUM; ++i)
-			{
-				finalCollidersCol[i] = App->collision->AddCollider(
-				{ finalCollidersRect[i].x + (int)shipPos.x,
-					finalCollidersRect[i].y + (int)shipPos.y,
-					finalCollidersRect[i].w,
-					finalCollidersRect[i].h },
-					COLLIDER_TYPE::COLLIDER_WALL);
-			}
-			reachedCheckpoint[22] = true;
 		}
-
 		break;
 	case 23:
 		if (reachedCheckpoint[23] == false)
 		{
 			reachedCheckpoint[23] = true;
 		}
-		UpdateFinalColliders();
-
 		break;
 	case 24:
 		if (reachedCheckpoint[24] == false)
 		{
 			reachedCheckpoint[24] = true;
 		}
-		//Update final part colliders
-		UpdateFinalColliders();
-
 		break;
 	}
 	return UPDATE_CONTINUE;
@@ -634,22 +610,9 @@ bool Module5lvlScene::CleanUp() {
 
 	LOG("Unloading stage 05 scene");
 	//delete collider if they haven't been deleted during the game------------------
-	for (int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
-	{
-		if(shipCollidersCol[i] != nullptr)
-		{
-			shipCollidersCol[i]->to_delete = true;
-		}
-	}
+	DeleteShipColliders();
 	//Add final part colliders
-	for (int i = 0; i < FINAL_COLLIDERS_NUM; ++i)
-	{
-		if(finalCollidersCol[i] != nullptr)
-		{
-			finalCollidersCol[i]->to_delete = true;
-		}
-		
-	}
+	DeleteFinalColliders();
 	//audios------------------------------------------------------------------------
 	App->audio->ControlAudio(lvl5Music, STOP_AUDIO);
 	App->audio->UnloadMUS(lvl5Music);
@@ -699,6 +662,32 @@ void Module5lvlScene::RenderShip()
 	App->render->Blit(shipTx, shipPos.x, shipPos.y, &shipRect);
 }
 
+void Module5lvlScene::AddShipColliders()
+{
+	//Ship colliders-----------------------------------------------------------------------------------------
+	addedShipColliders = true;
+	deletedShipColliders = false;
+
+	for (int i = 0; i < SHIP_COLLIDERS_NUM - 1; ++i)
+	{
+		
+		shipCollidersCol[i] = App->collision->AddCollider(
+		{ shipCollidersRect[i].x + (int)shipPos.x,
+			shipCollidersRect[i].y + (int)shipPos.y,
+			shipCollidersRect[i].w,
+			shipCollidersRect[i].h },
+			COLLIDER_TYPE::COLLIDER_WALL);
+	}
+	//Different case (it is an enemy heavy type collider)
+	shipCollidersCol[47] = App->collision->AddCollider(
+	{ shipCollidersRect[47].x + (int)shipPos.x,
+		shipCollidersRect[47].y + (int)shipPos.y,
+		shipCollidersRect[47].w,
+		shipCollidersRect[47].h },
+		COLLIDER_TYPE::COLLIDER_ENEMY_HEAVY);
+
+}
+
 void Module5lvlScene::UpdateShipColliders()
 {
 	for (int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
@@ -709,6 +698,39 @@ void Module5lvlScene::UpdateShipColliders()
 	}
 }
 
+void Module5lvlScene::DeleteShipColliders() {
+
+	deletedShipColliders = true;
+	addedShipColliders = false;
+
+	for (int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
+	{
+		if (shipCollidersCol[i] != nullptr)
+		{
+			shipCollidersCol[i]->to_delete = true;
+			shipCollidersCol[i] = nullptr;
+		}
+	}
+}
+
+void Module5lvlScene::AddFinalColliders()
+{
+	//Add final part colliders
+	addedFinalColliders = true;
+	deletedFinalColliders = false;
+
+	for (int i = 0; i < FINAL_COLLIDERS_NUM; ++i)
+	{
+		finalCollidersCol[i] = App->collision->AddCollider(
+		{ finalCollidersRect[i].x + (int)shipPos.x,
+			finalCollidersRect[i].y + (int)shipPos.y,
+			finalCollidersRect[i].w,
+			finalCollidersRect[i].h },
+			COLLIDER_TYPE::COLLIDER_WALL);
+	}
+}
+
+
 void Module5lvlScene::UpdateFinalColliders()
 {
 	for (int i = 0; i < FINAL_COLLIDERS_NUM; ++i)
@@ -718,6 +740,24 @@ void Module5lvlScene::UpdateFinalColliders()
 			finalCollidersRect[i].y + (int)shipPos.y);
 	}
 }
+
+void Module5lvlScene::DeleteFinalColliders() {
+
+	deletedFinalColliders = true;
+	addedFinalColliders = false;
+
+	for (int i = 0; i < FINAL_COLLIDERS_NUM; ++i)
+	{
+		if (finalCollidersCol[i] != nullptr)
+		{
+			finalCollidersCol[i]->to_delete = true;
+			finalCollidersCol[i] = nullptr;
+		}
+
+	}
+}
+
+
 
 void Module5lvlScene::FireballFrontShip()
 {
