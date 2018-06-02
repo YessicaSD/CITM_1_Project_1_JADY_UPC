@@ -204,7 +204,7 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(ROTATING_TURRET, 255, 225);
 	App->enemies->AddEnemy(ROTATING_TURRET, 302, 241);
 
-	App->enemies->AddEnemy(FRONT_TURRET, 47, 64);
+	//App->enemies->AddEnemy(FRONT_TURRET, 47, 64);
 
 	App->enemies->AddEnemy(REDBATS, 325, -25);
 	App->enemies->AddEnemy(REDBATS, 400, -25);
@@ -333,7 +333,7 @@ update_status Module5lvlScene::LogicUpdate()
 
 
 	//- The mega checkpoint switch--------------------------------------
-	//LOG("Current check point %i", cameraMovement.currentMov);
+	LOG("Current check point %i", cameraMovement.currentMov);
 	switch(cameraMovement.currentMov)
 	{
 	case 0:
@@ -353,6 +353,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 2:
 		if (reachedCheckpoint[2] == false)
 		{
+			e_FrontShipTurret = App->enemies->InstaSpawn(FRONT_TURRET, 47, 64, POWERUP_TYPE::NOPOWERUP, { 0, 0 });
 			reachedCheckpoint[2] = true;
 		}
 
@@ -377,6 +378,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 5:
 		if (reachedCheckpoint[5] == false)
 		{
+			App->enemies->ManualDespawn(e_FrontShipTurret);
 			reachedCheckpoint[5] = true;
 		}
 
