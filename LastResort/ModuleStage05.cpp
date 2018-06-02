@@ -509,6 +509,7 @@ update_status Module5lvlScene::LogicUpdate()
 		if (reachedCheckpoint[22] == false)
 		{
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 100, NOPOWERUP, { -1,1 });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 150, NOPOWERUP, { -1.5f,0.5f });
 			//Delete ship colliders
 			for(int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
 			{

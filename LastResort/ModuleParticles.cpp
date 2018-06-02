@@ -416,9 +416,22 @@ void ModuleParticles::InitParticleValues()
 	asteroidDestroy.anim.PushBack({ 0,15,55,63 });
 	asteroidDestroy.anim.speed = 0.2f;
 
-	littleAsteroidDestroy.anim.PushBack({ 115,343,31,30 });
-	littleAsteroidDestroy.anim.PushBack({ 85,343,31,30 });
-	littleAsteroidDestroy.anim.PushBack({ 85,343,31,30 });
+
+	littleAsteroidDestroy.anim.PushBack({ 305,341,31,30 });
+	littleAsteroidDestroy.anim.PushBack({ 274,341,31,30 });
+	littleAsteroidDestroy.anim.PushBack({ 242,341,32,31 });
+	littleAsteroidDestroy.anim.PushBack({ 210,341,32,31 });
+	littleAsteroidDestroy.anim.PushBack({ 178,341,32,32 });
+	littleAsteroidDestroy.anim.PushBack({ 146,341,32,32 });
+	littleAsteroidDestroy.anim.PushBack({ 368,309,32,32 });
+	littleAsteroidDestroy.anim.PushBack({ 337,309,31,32 });
+	littleAsteroidDestroy.anim.PushBack({ 306,309,31,32 });
+	littleAsteroidDestroy.anim.PushBack({ 275,309,31,32 });
+	littleAsteroidDestroy.anim.PushBack({ 244,309,31,32 });
+	littleAsteroidDestroy.anim.PushBack({ 213,309,31,32 });
+	littleAsteroidDestroy.anim.PushBack({ 182,309,31,32 });
+	littleAsteroidDestroy.anim.PushBack({ 157,309,25,32 });
+	littleAsteroidDestroy.anim.speed = 0.2f;
 
 
 	//Middle Boss shot particle------------------------------------

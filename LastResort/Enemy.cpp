@@ -16,7 +16,7 @@ Enemy::Enemy(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t)
 	fixedPos.x = x - App->stage05->spawnPos.x;
 	fixedPos.y = y - App->stage05->spawnPos.y;
 }
-Enemy::Enemy(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t,iPoint speed)
+Enemy::Enemy(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t,fPoint speed)
 	: position(x, y), hp(hp), scoreValue(scoreValue), powerUp_drop(pu_t),speed(speed)
 {
 	fixedPos.x = x - App->stage05->spawnPos.x;
