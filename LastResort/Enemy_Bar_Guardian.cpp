@@ -14,7 +14,9 @@ Enemy_BarGuardian::Enemy_BarGuardian(int x, int y, float hp, int scoreValue, POW
 	//Render layer----------------------------------
 	renderLayer = 0;
 	//Collider--------------------------------------
-	collider = App->collision->AddCollider({ x - 14 , y - 14, 28, 28 }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
+	collider  = App->collision->AddCollider({ x - 14 , y - 14, 28, 28 }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
+	topBarCol = App->collision->AddCollider({ x - 14 , y - 14, 28, 28 }, COLLIDER_TYPE::COLLIDER_WALL);
+	botBarCol = App->collision->AddCollider({ x - 14 , y - 14, 28, 28 }, COLLIDER_TYPE::COLLIDER_WALL);
 }
 
 void Enemy_BarGuardian::Move()
@@ -80,4 +82,9 @@ void Enemy_BarGuardian::Draw(SDL_Texture* sprites)
 	//Blit back part
 	App->render->Blit(sprites, position.x, position.y - backAnim.h / 2, &backAnim);
 	//Blit eye
+}
+
+Enemy_BarGuardian::~Enemy_BarGuardian()
+{
+
 }
