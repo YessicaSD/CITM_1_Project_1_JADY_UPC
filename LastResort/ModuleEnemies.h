@@ -88,7 +88,7 @@ private:
 
 private:
 	EnemyInfo queue[MAX_ENEMIES];
-	Enemy* enemies[MAX_ENEMIES] = {nullptr};
+	Enemy* enemies[MAX_ENEMIES];
 
 public:
 

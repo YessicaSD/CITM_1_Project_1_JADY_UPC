@@ -53,8 +53,8 @@ public:
 
 private: 
 
-	Music* musics[MAX_MUSICS] = {nullptr};
-	Sfx* sfx[MAX_SOUNDEFECTS] = {nullptr};
+	Music* musics[MAX_MUSICS];
+	Sfx* sfx[MAX_SOUNDEFECTS];
 	int volumeMUS = GENERAL_MUSIC_VOLUME;
 	int volumeSFX= GENERAL_SFX_VOLUME;
 	int sfxID =0;
