@@ -28,14 +28,20 @@ public:
 	bool CleanUp();
 
 public:
+	struct Controller
+	{
+		SDL_GameController *controller=nullptr;
+		SDL_JoystickID joyId = -1;
+	};
+
 	KEY_STATE keyboard[MAX_KEYS];
 	KEY_STATE Controller1[SDL_CONTROLLER_BUTTON_MAX];
 	KEY_STATE Controller2[SDL_CONTROLLER_BUTTON_MAX];
 	SDL_GameControllerButton stringbutton[SDL_CONTROLLER_BUTTON_MAX];
-	SDL_GameController *controller[MAX_CONTROLLERS];
+	Controller controller[MAX_CONTROLLERS];
 	SDL_Event event;
 	
-
+	
 
 	
 	
