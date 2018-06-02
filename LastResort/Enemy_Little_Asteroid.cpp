@@ -15,6 +15,7 @@ Enemy_Little_Asteroid::Enemy_Little_Asteroid(int x, int y, float hp, int scoreVa
 	LittleAsteroid.PushBack({ 97,585,31,28 });
 	LittleAsteroid.speed = 0.2;
 	animation = &LittleAsteroid;
+	collider = App->collision->AddCollider({ x, y, 31, 28}, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
 }
 
 void Enemy_Little_Asteroid::Move()
