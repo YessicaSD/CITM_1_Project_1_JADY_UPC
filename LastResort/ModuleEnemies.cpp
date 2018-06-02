@@ -35,6 +35,11 @@
 #include "Enemy_IntergalacticF.h"
 #include "Enemy_IF_Spawner.h"
 #include "Enemy_InsideTurretLaserh.h"
+#include "Enemy_Bar_Guardian.h"
+#include "Enemy_RedLamella.h"
+#include "Enemy_Boss_05.h"
+
+
 #define DAMAGE_FLASHING_INTERVAL 4
 
 ModuleEnemies::ModuleEnemies()
@@ -345,11 +350,20 @@ Enemy* ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			break;
 		case ENEMY_TYPES::INDOOR_TURRET_LASER:
 			enemies[i] = new Enemy_Inside_Turret_Laser(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 2, 200, info.pu_Type, info.speed);
-				break;
-
+			break;
+		case ENEMY_TYPES::BAR_GUARDIAN:
+			enemies[i] = new Enemy_BarGuardian(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 2, 200, info.pu_Type);
+			break;
+		case ENEMY_TYPES:: RED_LAMELLA:
+			enemies[i] = new Enemy_RedLamella(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 2, 200, info.pu_Type);
+			break;
+		case ENEMY_TYPES::BOSS_05:
+			enemies[i] = new Enemy_Boss_05 (info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 2, 200, info.pu_Type);
+			break;
 		}
 		return enemies[i];
 	}
+	
 	return nullptr;
 }
 

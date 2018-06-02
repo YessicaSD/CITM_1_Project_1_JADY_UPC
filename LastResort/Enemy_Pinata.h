@@ -23,6 +23,8 @@ private:
 	//Variables---------------------------
 	fPoint float_position;
 	iPoint fixedPos;
+	fPoint speed;
+	fPoint aceleration;
 
 	//int initialY;
 	//int initialX;
