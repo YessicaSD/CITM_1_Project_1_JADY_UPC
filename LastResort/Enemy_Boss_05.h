@@ -1,5 +1,5 @@
-#ifndef __ENEMY_INTERGSLSCTIC_F_H__
-#define __ENEMY_INTERGSLSCTIC_F_H__
+#ifndef __ENEMY_BOSS_05_H__
+#define __ENEMY_BOSS_05_H__
 
 #include "Enemy.h"
 #include "MovPath.h"
@@ -22,5 +22,5 @@ private:
 	int shootFrames;
 };
 
-#endif // __ENEMY_INTERGSLSCTIC_F_H__
+#endif // __ENEMY_BOSS_05_H__
 
