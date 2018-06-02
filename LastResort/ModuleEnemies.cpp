@@ -391,11 +391,15 @@ void ModuleEnemies::ManualDespawn(Enemy* enemyToDelete)
 	{
 		if (enemies[i] != nullptr)
 		{
-			//Delete enemy-----------------------
-			//enemies[i]->OnCollision(c2);
-			enemies[i]->isDead = true;
-			delete enemies[i];
-			enemies[i] = nullptr;
+			if(enemies[i] == enemyToDelete)
+			{
+				//Delete enemy-----------------------
+				//enemies[i]->OnCollision(c2);
+				enemies[i]->isDead = true;
+				delete enemies[i];
+				enemies[i] = nullptr;
+				break;
+			}
 		}
 	}
 }
