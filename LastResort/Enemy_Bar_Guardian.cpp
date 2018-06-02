@@ -7,6 +7,15 @@
 Enemy_BarGuardian::Enemy_BarGuardian(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t) : Enemy(x, y, hp, scoreValue, pu_t)
 {
 	//Animation-------------------------------------
+	closingEye.PushBack({ 330, 493, 16, 74 });
+	closingEye.PushBack({ 314, 493, 16, 74 });
+	closingEye.speed = 1;
+	openingEye.PushBack({ 314, 493, 16, 74 });
+	openingEye.PushBack({ 330, 493, 16, 74 });
+	openingEye.speed = 1;
+	eyeOpen.PushBack   ({ 347, 493, 16, 74 });
+	eyeClosed.PushBack ({ 298, 493, 16, 74 });
+	animation = &eyeClosed;
 	//eyeAnim.PushBack();
 	backAnim = { 364, 493, 30,  80 };
 	topBarAnim = { 233, 460, 32, 128 };
@@ -77,8 +86,49 @@ void Enemy_BarGuardian::Move()
 	if (botBarCol != nullptr) { botBarCol->SetPos(position.x - 8, position.y + 24); }
 
 	//Eye logic
-
-
+	switch (eyePhase)
+	{
+	case open:
+		if(eyeCounter >= 260)
+		{
+			eyePhase = closing;
+			animation = &closingEye;
+			eyeCounter = 0;
+		}
+		else
+		{
+			eyeCounter++;
+		}
+		break;
+	case closing:
+		if(animation->finished)
+		{
+			animation = &eyeClosed;
+			eyePhase = closed;
+			eyeCounter = 0;
+		}
+		break;
+	case closed:
+		if (eyeCounter >= 260)
+		{
+			eyePhase = opening;
+			animation = &openingEye;
+			eyeCounter = 0;
+		}
+		else
+		{
+			eyeCounter++;
+		}
+		break;
+	case opening:
+		if (animation->finished)
+		{
+			animation = &eyeOpen;
+			eyePhase = open;
+			eyeCounter = 0;
+		}
+		break;
+	}
 
 
 	//Shoot
@@ -99,6 +149,7 @@ void Enemy_BarGuardian::Draw(SDL_Texture* sprites)
 	//Blit back part
 	App->render->Blit(sprites, position.x, position.y - backAnim.h / 2, &backAnim);
 	//Blit eye
+	App->render->Blit(sprites, position.x - 16 + 1, position.y - 74/2, &animation->GetCurrentFrame());
 }
 
 Enemy_BarGuardian::~Enemy_BarGuardian()
