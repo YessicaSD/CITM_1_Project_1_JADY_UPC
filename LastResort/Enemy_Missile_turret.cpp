@@ -16,7 +16,7 @@ void Enemy_Missile_turret::Move()
 
 	if (frameCount == 150 && position.x>0 && position.y>0 )
 	{
-		App->particles->AddParticle(App->particles->Missile, { (float)position.x+5,(float)position.y-5 }, { 0,0 }, App->particles->particlesTx, COLLIDER_ENEMY_SHOT2, 0, PARTICLE_MISSILE);
+		App->particles->AddParticle(App->particles->missile, { (float)position.x+5,(float)position.y-5 }, { 0,0 }, App->particles->particlesTx, COLLIDER_ENEMY_SHOT2, 0, PARTICLE_MISSILE);
 		frameCount = 0;
 	}
 

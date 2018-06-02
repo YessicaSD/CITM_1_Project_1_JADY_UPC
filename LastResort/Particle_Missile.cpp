@@ -34,20 +34,17 @@ void Particle_Missile::Move()
 
 		else
 		{
-
 			if (position.DistanceTo({ (float)App->player1->position.x,(float)App->player1->position.y }) < position.DistanceTo({ (float)App->player2->position.x, (float)App->player2->position.y }))
 				targetPlayerPos = { (float)App->player1->position.x,(float)App->player1->position.y };
 
 			else
 				targetPlayerPos = { (float)App->player2->position.x,(float)App->player2->position.y };
-
 		}
 		targetPlayerPos.x += 20;
 		targetPlayerPos.y += 10;
 		speed.UnitVector(targetPlayerPos, position);
-		fixedPos.x += speed.x*2;
-		fixedPos.y += speed.y * 2;
-
+		fixedPos.x += speed.x * 1.25f;
+		fixedPos.y += speed.y * 1.25f;
 	}
 
 	position.x = (float)App->stage05->spawnPos.x + fixedPos.x;

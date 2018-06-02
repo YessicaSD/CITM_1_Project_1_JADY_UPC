@@ -60,8 +60,8 @@ bool ModuleParticles::Start()
 	basicShot.sfx = basicShotSfx;
 	death_explosion.sfx = deathSfx;
 	laserEnemyShot.sfx = laserEnemyShot_sfx;
-	Missile.sfx = rocket;
-	MissileExplosion.sfx = rocketExplosion;
+	missile.sfx = rocket;
+	missileExplosion.sfx = rocketExplosion;
 	return true;
 }
 
@@ -505,24 +505,24 @@ void ModuleParticles::InitParticleValues()
 	fireBar.renderLayer = 0;
 
 	//Missile 
-	Missile.anim.PushBack({157,246,15,8}); //0 //RIGHT
-	Missile.anim.PushBack({ 172,246,13,8 }); //1
-	Missile.anim.speed = 1.0f;
-	Missile.life = 1000;
-	Missile.collision_fx = &MissileExplosion;
+	missile.anim.PushBack({157,246,15,8}); //0 //RIGHT
+	missile.anim.PushBack({ 172,246,13,8 }); //1
+	missile.anim.speed = 1.0f;
+	missile.life = 1500;
+	missile.collision_fx = &missileExplosion;
 	
-	MissileExplosion.anim.PushBack({ 157,254,21,19 });
-	MissileExplosion.anim.PushBack({ 178,254,27,27 });
-	MissileExplosion.anim.PushBack({ 205,254,30,30 });
-	MissileExplosion.anim.PushBack({ 235,254,31,32 });
-	MissileExplosion.anim.PushBack({ 267,254,28,31 });
-	MissileExplosion.anim.PushBack({ 295,254,31,31 });
-	MissileExplosion.anim.PushBack({ 326,254,30,31 });
-	MissileExplosion.anim.PushBack({ 179,280,31,29 });
-	MissileExplosion.anim.PushBack({ 210,281,29,27 });
-	MissileExplosion.anim.speed = 0.2f;
+	missileExplosion.anim.PushBack({ 157,254,21,19 });
+	missileExplosion.anim.PushBack({ 178,254,27,27 });
+	missileExplosion.anim.PushBack({ 205,254,30,30 });
+	missileExplosion.anim.PushBack({ 235,254,31,32 });
+	missileExplosion.anim.PushBack({ 267,254,28,31 });
+	missileExplosion.anim.PushBack({ 295,254,31,31 });
+	missileExplosion.anim.PushBack({ 326,254,30,31 });
+	missileExplosion.anim.PushBack({ 179,280,31,29 });
+	missileExplosion.anim.PushBack({ 210,281,29,27 });
+	missileExplosion.anim.speed = 0.2f;
 
-	hMissile.collision_fx = &MissileExplosion;
+	hMissile.collision_fx = &missileExplosion;
 
 	//Intergalactic fighter shot----------------------------------
 
