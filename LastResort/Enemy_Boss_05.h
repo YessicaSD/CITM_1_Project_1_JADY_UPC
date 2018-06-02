@@ -17,9 +17,14 @@ private:
 	//Animations---------------------------
 	Animation bossAnim;
 	//Variables----------------------------
+	fPoint float_position;
 	fPoint speed;
 	fPoint aceleration;
 	int shootFrames;
+	enum DirectionY {
+		UP,
+		DOWN
+	} currentDir = UP;
 };
 
 #endif // __ENEMY_BOSS_05_H__
