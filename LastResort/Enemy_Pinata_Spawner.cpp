@@ -58,7 +58,7 @@ void Enemy_Pinata_Spawner::Move()
 		currentState = OPEN;
 	}
 
-	if (currentEnemies < 3  && spawnFrames > SPAWN_FRAMES)
+	if (currentEnemies < 3  && spawnFrames > SPAWN_FRAMES && position.x>0 && position.y >0)
 	{
 		for (int i = 0; i < MAX_SPAWNED; ++i)
 		{
