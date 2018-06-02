@@ -7,8 +7,9 @@ class Enemy_Little_Asteroid : public Enemy
 {
 private:
 	Animation LittleAsteroid;
+	fPoint fposition;
 public:
-	Enemy_Little_Asteroid(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop, iPoint speed);
+	Enemy_Little_Asteroid(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop, fPoint speed);
 	~Enemy_Little_Asteroid() {};
 	void Move();
 	void Draw(SDL_Texture* sprites);

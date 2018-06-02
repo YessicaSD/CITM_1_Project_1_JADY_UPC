@@ -5,7 +5,7 @@
 #include "ModuleStage05.h"
 #include "Player1.h"
 #include "Player2.h"
-Enemy_indoorTurret::Enemy_indoorTurret(int x, int  y, float hp, int scoreValue, POWERUP_TYPE powerupDrop, iPoint speed) : Enemy( x, y, hp, scoreValue,powerupDrop,speed)
+Enemy_indoorTurret::Enemy_indoorTurret(int x, int  y, float hp, int scoreValue, POWERUP_TYPE powerupDrop, fPoint speed) : Enemy( x, y, hp, scoreValue,powerupDrop,speed)
 {
 	indoorTurretAnim.PushBack({ 128,196,24,16 });
 	animation = &indoorTurretAnim;
@@ -51,7 +51,7 @@ void Enemy_indoorTurret::Move()
 	frameCounter += 1;
 
 	//Set collider position
-	switch(speed.x)
+	switch((int)speed.x)
 	{
 	case 0:
 		if (collider != nullptr)
@@ -81,7 +81,7 @@ void Enemy_indoorTurret::Move()
 void Enemy_indoorTurret::Draw(SDL_Texture* sprites)
 {
 	//Draw
-	switch (speed.x)
+	switch ((int)speed.x)
 	{
 	case 0:
 		if (animation != nullptr)

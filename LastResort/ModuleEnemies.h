@@ -50,7 +50,7 @@ struct EnemyInfo
 {
 	ENEMY_TYPES type = ENEMY_TYPES::NO_TYPE;
 	int x, y;
-	iPoint speed;
+	fPoint speed;
 	Uint32 delay;//In miliseconds
 	POWERUP_TYPE pu_Type = POWERUP_TYPE:: NOPOWERUP;
 	//Additional variables (help us spawn enemies with time)
@@ -75,8 +75,8 @@ public:
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
 
-	bool AddEnemy(ENEMY_TYPES type, int x, int y, Uint32 delay = 0, POWERUP_TYPE powerup_type = NOPOWERUP, iPoint speed = { 0, 0 });
-	Enemy* InstaSpawn(ENEMY_TYPES type, int x, int y, POWERUP_TYPE powerup_type = NOPOWERUP, iPoint speed  ={ 0, 0 });
+	bool AddEnemy(ENEMY_TYPES type, int x, int y, Uint32 delay = 0, POWERUP_TYPE powerup_type = NOPOWERUP, fPoint speed = { 0, 0 });
+	Enemy* InstaSpawn(ENEMY_TYPES type, int x, int y, POWERUP_TYPE powerup_type = NOPOWERUP, fPoint speed  ={ 0, 0 });
 
 private:
 

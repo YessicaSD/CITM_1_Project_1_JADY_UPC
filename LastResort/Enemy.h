@@ -16,7 +16,7 @@ class Enemy
 
 public:
 	iPoint position;
-	iPoint speed;//Not all enemies use this parameter to move, but its very helpful for those who do
+	fPoint speed;//Not all enemies use this parameter to move, but its very helpful for those who do
 	iPoint fixedPos;
 	POWERUP_TYPE powerUp_drop;
 	Animation* animation = nullptr;
@@ -37,7 +37,7 @@ public:
 
 public:
 	Enemy(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t);
-	Enemy(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t,iPoint speed);
+	Enemy(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t,fPoint speed);
 	virtual ~Enemy();
 
 	const Collider* GetCollider() const;

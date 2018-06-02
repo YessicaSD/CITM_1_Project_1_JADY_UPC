@@ -2,7 +2,7 @@
 #include "ModuleRender.h"
 #include "Application.h"
 
-Enemy_Little_Asteroid::Enemy_Little_Asteroid(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t, iPoint speed) : Enemy(x, y, hp, scoreValue, pu_t, speed)
+Enemy_Little_Asteroid::Enemy_Little_Asteroid(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t, fPoint speed) : Enemy(x, y, hp, scoreValue, pu_t, speed)
 {
 	LittleAsteroid.PushBack({ 0,557,32,28 });
 	LittleAsteroid.PushBack({ 32,557,31,26 });
@@ -16,11 +16,16 @@ Enemy_Little_Asteroid::Enemy_Little_Asteroid(int x, int y, float hp, int scoreVa
 	LittleAsteroid.speed = 0.2;
 	animation = &LittleAsteroid;
 	collider = App->collision->AddCollider({ x, y, 31, 28}, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
+	fposition.x = (float)position.x;
+	fposition.y = (float)position.y;
 }
 
 void Enemy_Little_Asteroid::Move()
 {
-	position += speed;
+	fposition += speed;
+	position.x = (int)fposition.x;
+	position.y = (int)fposition.y;
+
 
 	if (collider != nullptr)
 		collider->SetPos(position.x - animation->GetFrame().w / 2, position.y - animation->GetFrame().h / 2);
@@ -35,5 +40,5 @@ void Enemy_Little_Asteroid::Draw(SDL_Texture* sprites)
 }
 void Enemy_Little_Asteroid::OnCollision(Collider*)
 {
-
+	App->particles->AddParticle(App->particles->littleAsteroidDestroy, { (float)position.x, (float)position.y }, { 0 , 0 }, App->particles->particlesTx, COLLIDER_IGNORE_HIT, 0);
 }

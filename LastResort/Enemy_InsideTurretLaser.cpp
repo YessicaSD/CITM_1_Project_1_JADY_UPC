@@ -1,7 +1,7 @@
 #include "Enemy_InsideTurretLaserh.h"
 #include "Application.h"
 #include "ModuleStage05.h"
-Enemy_Inside_Turret_Laser::Enemy_Inside_Turret_Laser(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop,iPoint speed) : Enemy(x,y,hp,scoreValue,powerupDrop,speed)
+Enemy_Inside_Turret_Laser::Enemy_Inside_Turret_Laser(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop,fPoint speed) : Enemy(x,y,hp,scoreValue,powerupDrop,speed)
 {
 	renderLayer = 2;
 	turret.PushBack({ 250,310,16,24 });
