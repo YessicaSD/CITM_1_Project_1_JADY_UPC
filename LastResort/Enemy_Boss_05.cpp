@@ -79,7 +79,7 @@ void Enemy_Boss_05::Move()
 	float_position.x += speed.x;
 	float_position.y += speed.y;
 
-	position = { (int)fixedPos.x + float_position.x, (int)float_position.y + fixedPos.x };
+	position = { (int)(fixedPos.x + float_position.x), (int)(float_position.y + fixedPos.x )};
 
 	//Set the collider position
 	if (collider != nullptr) {
