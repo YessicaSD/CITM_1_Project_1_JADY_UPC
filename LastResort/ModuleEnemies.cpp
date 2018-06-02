@@ -385,13 +385,28 @@ Enemy* ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 	return nullptr;
 }
 
+void ModuleEnemies::ManualDespawn(Enemy* enemyToDelete)
+{
+	for (uint i = 0; i < MAX_ENEMIES; ++i)
+	{
+		if (enemies[i] != nullptr)
+		{
+			//Delete enemy-----------------------
+			//enemies[i]->OnCollision(c2);
+			enemies[i]->isDead = true;
+			delete enemies[i];
+			enemies[i] = nullptr;
+		}
+	}
+}
+
 void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 {
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
 		if (enemies[i] != nullptr && enemies[i]->collider == c1)
 		{
-			//Rest hp to enemies depending on the collider's damage
+			//Substract hp to enemies depending on the collider's damage
 			enemies[i]->hp -= c2->damage;  
 			//If enemy dies-----------------------------------------
 			if (enemies[i]->hp <= 0)

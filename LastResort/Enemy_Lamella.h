@@ -31,6 +31,7 @@ private:
 	const float moveSpeed = 2;
 
 	SDL_Rect currentFrame;
+	bool flip = false;
 };
 
 #endif // __ENEMY_RED_LAMELLA_H__
