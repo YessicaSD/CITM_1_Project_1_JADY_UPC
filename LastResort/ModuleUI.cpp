@@ -209,10 +209,10 @@ update_status ModuleUI::RenderUpdate2()
 	string credits_ = to_string(credits);
 	string debug;
 	
-	str_score_p1 = lives_p1.c_str();
-	str_score_p2 = lives_p2.c_str();
-	str_lives_p1 = score_p1.c_str();
-	str_lives_p2 = score_p2.c_str();
+	str_score_p1 = score_p1.c_str();
+	str_score_p2 = score_p2.c_str();
+	str_lives_p1 = lives_p2.c_str();
+	str_lives_p2 = lives_p1.c_str();
 	str_credits = credits_.c_str();
 	
 	if(stageclear==true)
