@@ -40,7 +40,7 @@ private:
 	float distanceToTarget;
 	float largestPossibleDistance;
 	iPoint targetPos;
-	Collider* enemyDetectionCol;
+	Collider* enemyDetectionCol = nullptr;
 
 	//Animation
 	Animation steppingOutAnim;
