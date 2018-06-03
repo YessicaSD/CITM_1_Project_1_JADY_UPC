@@ -1,3 +1,4 @@
+#include "Powerup_Despeed.h"
 #include "Application.h"
 #include "ModuleRender.h"
 #include "ModuleTextures.h"
@@ -13,6 +14,7 @@
 #include "Player1.h"
 #include "Player2.h"
 #include "ModuleUnit.h"
+
 
 
 ModulePowerups::ModulePowerups()
@@ -32,6 +34,7 @@ bool ModulePowerups::Start()
 	powerupTx     = App->textures->Load("Assets/PowerUps/PowerUps.png");
 	speedSFX      = App->audio->LoadSFX("Assets/PowerUps/019. Move speed upgrade.wav");
 	getPowerupSFX = App->audio->LoadSFX("Assets/Powerups/GetPowerup.wav");
+	despeedSFX = App->audio->LoadSFX("Assets/PowerUps/024. Move speed downgrade.wav");
 	return true;
 }
 

@@ -223,6 +223,8 @@
     <ClCompile Include="Player1.cpp" />
     <ClCompile Include="Player2.cpp" />
     <ClCompile Include="Powerup.cpp" />
+    <ClCompile Include="Powerup_Despeed.h" />
+    <ClCompile Include="Powerup_Despeed.cpp" />
     <ClCompile Include="Powerup_G.cpp" />
     <ClCompile Include="Powerup_Homing.cpp" />
     <ClCompile Include="Powerup_Laser.cpp" />
