@@ -136,7 +136,7 @@ void Enemy_Intergalactic_F::Move()
 
 		//Shots logic-----------------------------------------------------------------
 
-		if (currentFrames > shootFrames && currentFrames != -1 && position.x>0 && position.y>0 && position.x<SCREEN_WIDTH +20 && position.y<SCREEN_HEIGHT) {
+		if (currentFrames > shootFrames && currentFrames != -1 && position.x>0 && position.y>0 && position.x<SCREEN_WIDTH + 30 && position.y<SCREEN_HEIGHT) {
 			currentFrames = -1;
 			isShooting = true;
 
