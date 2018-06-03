@@ -56,7 +56,7 @@ void Enemy_Assist_Turret::Move()
 			else
 				speed_p = { 0,- 1.0f };
 
-			App->particles->AddParticle(App->particles->missile_2, { (float)position.x + 5,(float)position.y - 5 }, speed_p, App->particles->particlesTx, COLLIDER_ENEMY_SHOT2, 0, PARTICLE_ASSIS_TURRET);
+			App->particles->AddParticle(App->particles->missile_2, { (float)position.x + 5,(float)position.y - 5 }, speed_p, App->particles->particlesTx, COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE, 0, PARTICLE_ASSIS_TURRET);
 			isShooting = true;
 			frameCount = 0;
 		}
