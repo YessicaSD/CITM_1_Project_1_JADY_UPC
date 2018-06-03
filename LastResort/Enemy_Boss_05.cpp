@@ -6,10 +6,11 @@
 
 #define MAX_BOSS_SPEED 0.7f
 #define BOOS_SHOOT_FRAMES 220
+#define DESTROY_FRAMES 30
+#define ARMOR_EXPLOSIOM_FRAMES 15
 
 Enemy_Boss_05::Enemy_Boss_05(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t) : Enemy(x, y, hp, scoreValue, pu_t)
 {
-	shootFrames = rand() % 120 + 120;
 
 	//Position--------------------------------------
 
@@ -17,6 +18,8 @@ Enemy_Boss_05::Enemy_Boss_05(int x, int y, float hp, int scoreValue, POWERUP_TYP
 	aceleration = { 0.0f, 0.01f };
 	float_position = { 0.0f, 13.0f };
 	//Animations------------------------------------
+	metalArmorTexPos = { 717 ,0 };
+	metalArmorPos = { -81, -86 };
 
 	for (int i = 0; i < 4; ++i) {
 		bossAnim.PushBack({ 525 + i * 48, 202,48,48 });
@@ -81,9 +84,34 @@ void Enemy_Boss_05::Move()
 	//Shoot particle-----------------------------------------------
 	if (shootFrames > BOOS_SHOOT_FRAMES) {
 		shootFrames = 0;
-		App->particles->AddParticle(App->particles->bossShot, { (float)position.x- 28 ,  (float)position.y}, { 0,0 }, App->particles->particlesTx, COLLIDER_IGNORE_HIT, 0.0f ,PARTICLE_BOSS);
+		App->particles->AddParticle(App->particles->bossShot, { (float)position.x- 35 ,  (float)position.y}, { 0,0 }, App->particles->particlesTx, COLLIDER_IGNORE_HIT, 0.0f ,PARTICLE_BOSS);
 	}
-	++shootFrames;
+
+
+
+	if (App->stage05->cameraMovement.currentMov == 24) {
+	
+		if (initframes > 180) {
+
+			if (destroyFrames > DESTROY_FRAMES && destroyedParts < 6) {
+				++destroyedParts;
+				destroyFrames = 0;
+			}
+			else {
+				++destroyFrames;
+			}
+
+			if (destroyFrames == ARMOR_EXPLOSIOM_FRAMES) {
+				AddExplosions();
+			}
+			
+			++shootFrames;
+		}
+		else {
+			++initframes;
+		}
+	}
+
 
 	//Set the collider position
 	if (collider != nullptr) {
@@ -92,11 +120,80 @@ void Enemy_Boss_05::Move()
 	}
 }
 
+void Enemy_Boss_05::AddExplosions() {
+
+	fPoint pos;
+
+	pos.x = metalArmorPos.x + (int)fixedPos.x + App->stage05->spawnPos.x + armorWeight;
+	pos.y = metalArmorPos.y + (int)fixedPos.y + App->stage05->spawnPos.y;
+
+	switch (destroyedParts)
+	{
+	case 0:
+		App->particles->AddParticle(App->particles->g_explosion02, { pos.x + 16.0f,  pos.y +77}, { 0,0 }, App->particles->explosionTx, COLLIDER_IGNORE_HIT, 0.0f, PARTICLE_FOLLOW_WORLD);
+		App->particles->AddParticle(App->particles->g_explosion02, { pos.x + 16.0f,  pos.y + 93 }, { 0,0 }, App->particles->explosionTx, COLLIDER_IGNORE_HIT, 0.0f, PARTICLE_FOLLOW_WORLD);
+		break;
+	case 1:
+		App->particles->AddParticle(App->particles->g_explosion02, { pos.x + 16.0f,  pos.y + 37 }, { 0,0 }, App->particles->explosionTx, COLLIDER_IGNORE_HIT, 0, PARTICLE_FOLLOW_WORLD);
+		App->particles->AddParticle(App->particles->g_explosion02, { pos.x + 16.0f,  pos.y + 37 +13 }, { 0,0 }, App->particles->explosionTx, COLLIDER_IGNORE_HIT, 300, PARTICLE_FOLLOW_WORLD);
+		App->particles->AddParticle(App->particles->g_explosion02, { pos.x + 16.0f,  pos.y + 37 + 13 * 4 }, { 0,0 }, App->particles->explosionTx, COLLIDER_IGNORE_HIT, 0, PARTICLE_FOLLOW_WORLD);
+		App->particles->AddParticle(App->particles->g_explosion02, { pos.x + 16.0f,  pos.y + 37 + 13 * 5 }, { 0,0 }, App->particles->explosionTx, COLLIDER_IGNORE_HIT, 100, PARTICLE_FOLLOW_WORLD);
+		App->particles->AddParticle(App->particles->g_explosion02, { pos.x + 16.0f,  pos.y + 37 + 13 * 6 }, { 0,0 }, App->particles->explosionTx, COLLIDER_IGNORE_HIT, 400, PARTICLE_FOLLOW_WORLD);
+		App->particles->AddParticle(App->particles->g_explosion02, { pos.x + 16.0f,  pos.y + 37 + 13*2 }, { 0,0 }, App->particles->explosionTx, COLLIDER_IGNORE_HIT, 50, PARTICLE_FOLLOW_WORLD); 
+		App->particles->AddParticle(App->particles->g_explosion02, { pos.x + 16.0f,  pos.y + 37 + 13*3 }, { 0,0 }, App->particles->explosionTx, COLLIDER_IGNORE_HIT, 100, PARTICLE_FOLLOW_WORLD);
+		break;
+	case 2:
+		App->particles->AddParticle(App->particles->g_explosion02, { pos.x + 16.0f,  pos.y + 37 }, { 0,0 }, App->particles->explosionTx, COLLIDER_IGNORE_HIT, 250, PARTICLE_FOLLOW_WORLD);
+		App->particles->AddParticle(App->particles->g_explosion02, { pos.x + 16.0f,  pos.y + 37 + 13 }, { 0,0 }, App->particles->explosionTx, COLLIDER_IGNORE_HIT, 350, PARTICLE_FOLLOW_WORLD);
+		App->particles->AddParticle(App->particles->g_explosion02, { pos.x + 16.0f,  pos.y + 37 + 13 * 4 }, { 0,0 }, App->particles->explosionTx, COLLIDER_IGNORE_HIT, 500, PARTICLE_FOLLOW_WORLD);
+		App->particles->AddParticle(App->particles->g_explosion02, { pos.x + 16.0f,  pos.y + 37 + 13 * 5 }, { 0,0 }, App->particles->explosionTx, COLLIDER_IGNORE_HIT, 50, PARTICLE_FOLLOW_WORLD);
+		App->particles->AddParticle(App->particles->g_explosion02, { pos.x + 16.0f,  pos.y + 37 + 13 * 6 }, { 0,0 }, App->particles->explosionTx, COLLIDER_IGNORE_HIT, 400, PARTICLE_FOLLOW_WORLD);
+		App->particles->AddParticle(App->particles->g_explosion02, { pos.x + 16.0f,  pos.y + 37 + 13 * 2 }, { 0,0 }, App->particles->explosionTx, COLLIDER_IGNORE_HIT, 150, PARTICLE_FOLLOW_WORLD);
+		App->particles->AddParticle(App->particles->g_explosion02, { pos.x + 16.0f,  pos.y + 37 + 13 * 3 }, { 0,0 }, App->particles->explosionTx, COLLIDER_IGNORE_HIT, 50, PARTICLE_FOLLOW_WORLD);
+
+		break;
+	case 3:
+		App->particles->AddParticle(App->particles->g_explosion02, { pos.x + 16.0f,  pos.y + 37 }, { 0,0 }, App->particles->explosionTx, COLLIDER_IGNORE_HIT, 600, PARTICLE_FOLLOW_WORLD);
+		App->particles->AddParticle(App->particles->g_explosion02, { pos.x + 16.0f,  pos.y + 37 + 13 }, { 0,0 }, App->particles->explosionTx, COLLIDER_IGNORE_HIT, 120, PARTICLE_FOLLOW_WORLD);
+		App->particles->AddParticle(App->particles->g_explosion02, { pos.x + 16.0f,  pos.y + 37 + 13 * 4 }, { 0,0 }, App->particles->explosionTx, COLLIDER_IGNORE_HIT, 300, PARTICLE_FOLLOW_WORLD);
+		App->particles->AddParticle(App->particles->g_explosion02, { pos.x + 16.0f,  pos.y + 37 + 13 * 5 }, { 0,0 }, App->particles->explosionTx, COLLIDER_IGNORE_HIT, 50, PARTICLE_FOLLOW_WORLD);
+		App->particles->AddParticle(App->particles->g_explosion02, { pos.x + 16.0f,  pos.y + 37 + 13 * 6 }, { 0,0 }, App->particles->explosionTx, COLLIDER_IGNORE_HIT, 400, PARTICLE_FOLLOW_WORLD);
+		App->particles->AddParticle(App->particles->g_explosion02, { pos.x + 16.0f,  pos.y + 37 + 13 * 2 }, { 0,0 }, App->particles->explosionTx, COLLIDER_IGNORE_HIT, 200, PARTICLE_FOLLOW_WORLD);
+		App->particles->AddParticle(App->particles->g_explosion02, { pos.x + 16.0f,  pos.y + 37 + 13 * 3 }, { 0,0 }, App->particles->explosionTx, COLLIDER_IGNORE_HIT, 300, PARTICLE_FOLLOW_WORLD);
+		break;
+	case 4:
+		App->particles->AddParticle(App->particles->g_explosion02, { pos.x + 16.0f,  pos.y + 24 }, { 0,0 }, App->particles->explosionTx, COLLIDER_IGNORE_HIT, 300, PARTICLE_FOLLOW_WORLD);
+		App->particles->AddParticle(App->particles->g_explosion02, { pos.x + 16.0f,  pos.y + 24 + 13 }, { 0,0 }, App->particles->explosionTx, COLLIDER_IGNORE_HIT, 120, PARTICLE_FOLLOW_WORLD);
+		App->particles->AddParticle(App->particles->g_explosion02, { pos.x + 16.0f,  pos.y + 24 + 13 * 4 }, { 0,0 }, App->particles->explosionTx, COLLIDER_IGNORE_HIT, 300, PARTICLE_FOLLOW_WORLD);
+		App->particles->AddParticle(App->particles->g_explosion02, { pos.x + 16.0f,  pos.y + 24 + 13 * 5 }, { 0,0 }, App->particles->explosionTx, COLLIDER_IGNORE_HIT, 50, PARTICLE_FOLLOW_WORLD);
+		App->particles->AddParticle(App->particles->g_explosion02, { pos.x + 16.0f,  pos.y + 24 + 13 * 6 }, { 0,0 }, App->particles->explosionTx, COLLIDER_IGNORE_HIT, 100, PARTICLE_FOLLOW_WORLD);
+		App->particles->AddParticle(App->particles->g_explosion02, { pos.x + 16.0f,  pos.y + 24 + 13 * 2 }, { 0,0 }, App->particles->explosionTx, COLLIDER_IGNORE_HIT, 350, PARTICLE_FOLLOW_WORLD);
+		App->particles->AddParticle(App->particles->g_explosion02, { pos.x + 16.0f,  pos.y + 24 + 13 * 3 }, { 0,0 }, App->particles->explosionTx, COLLIDER_IGNORE_HIT, 450, PARTICLE_FOLLOW_WORLD);
+		App->particles->AddParticle(App->particles->g_explosion02, { pos.x + 16.0f,  pos.y + 24 + 13 * 8 }, { 0,0 }, App->particles->explosionTx, COLLIDER_IGNORE_HIT, 150, PARTICLE_FOLLOW_WORLD);
+		App->particles->AddParticle(App->particles->g_explosion02, { pos.x + 16.0f,  pos.y + 24 + 13 * 7}, { 0,0 }, App->particles->explosionTx, COLLIDER_IGNORE_HIT, 300, PARTICLE_FOLLOW_WORLD);
+		break;
+	}
+
+
+}
+
+
 void Enemy_Boss_05::Draw0(SDL_Texture* sprites)
 {
 
 	//Draw------------------------------------------------------------------
 
 	App->render->Blit(sprites, position.x - 24, position.y - 24, &bossAnim.LoopAnimation());
+
+}
+
+void Enemy_Boss_05::Draw1(SDL_Texture* sprites)
+{
+	armorWeight = destroyedParts * 32;
+
+	SDL_Rect metalArmor = { metalArmorTexPos.x + armorWeight ,metalArmorTexPos.y,151 - armorWeight,156 };
+	//Draw------------------------------------------------------------------
+
+	App->render->Blit(sprites, metalArmorPos.x + (int)fixedPos.x + App->stage05->spawnPos.x + armorWeight, metalArmorPos.y + (int)fixedPos.y + App->stage05->spawnPos.y, &metalArmor);
 
 }
