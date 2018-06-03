@@ -62,7 +62,7 @@ void Enemy_Ship_Motor::Move()
 
 		if(Ship_Motor.finished)
 		{
-			collider->type = COLLIDER_IGNORE_HIT;
+			collider->type = COLLIDER_WALL;
 			Ship_Motor.Reset();
 			stateMotor = CLOSE;
 			Ship_Motor.speed = 0.0f;
@@ -75,6 +75,12 @@ void Enemy_Ship_Motor::Move()
 	}
 	if (collider != nullptr)
 		collider->SetPos(position.x - Ship_Part.w, position.y + 15 - Ship_Part.h);
+
+	//Check if missile launcher has died
+	if(MissileLaunch != nullptr && MissileLaunch->isDead)
+	{
+		MissileLaunch = nullptr;
+	}
 
 }
 
@@ -90,17 +96,13 @@ void Enemy_Ship_Motor::OnCollision(Collider* collider)
 {
 	App->particles->AddParticle(App->particles->g_explosion02, { (float)position.x, (float)position.y }, { 0 ,0 }, App->particles->g_explosion02.texture, COLLIDER_IGNORE_HIT, 0, PARTICLE_FOLLOW_BACKGROUND);
 
-	//Sfx REMEMBER: Improve it for 1.0----------------------------------
 	if (SDL_GetTicks() % 2)
 		App->audio->ControlAudio(App->particles->g_explosion01_1sfx, PLAY_AUDIO);
 	else
 		App->audio->ControlAudio(App->particles->g_explosion02_1sfx, PLAY_AUDIO);
 
-	if (MissileLaunch != nullptr && MissileLaunch->isDead != true)
+	if(MissileLaunch != nullptr)
 	{
-		MissileLaunch->hp = 0;
-		//---Delete enemy---------------------------
-		App->particles->AddParticle(App->particles->littleRings, { (float)MissileLaunch->position.x,(float)MissileLaunch->position.y }, { 0,0 }, App->particles->explosionTx, COLLIDER_WALL);
+		App->enemies->ManualDespawn(MissileLaunch);
 	}
-	
 }

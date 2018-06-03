@@ -183,12 +183,10 @@ bool Module5lvlScene::Start()
 	//App->enemies->AddEnemy(PINATA, 150, 150);
 	//App->enemies->AddEnemy(PINATA, 130, 130);
 	//App->enemies->AddEnemy(OSCILATOR, 500, 0);
-	App->enemies->InstaSpawn(RED_LAMELLA, 300, 200);
-
-	
+	//App->enemies->InstaSpawn(RED_LAMELLA, 300, 200);
 
 	//- FINAL POSITION ENEMIES (in order of appearance on the level)
-	App->enemies->AddEnemy(POWERDROPPER, -88, 260, 0, POWERUP_TYPE::LASER); //homing
+	App->enemies->AddEnemy(POWERDROPPER, -88, 260, 0, POWERUP_TYPE::HOMING);
 	App->enemies->AddEnemy(POWERDROPPER, 180, 280, 0, POWERUP_TYPE::LASER);
 	
 	App->enemies->AddEnemy(REDBATS, 250, 270);

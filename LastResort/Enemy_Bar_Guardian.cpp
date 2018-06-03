@@ -23,7 +23,7 @@ Enemy_BarGuardian::Enemy_BarGuardian(int x, int y, float hp, int scoreValue, POW
 	topBarAnim = { 233, 460, 32, 128 };
 	botBarAnim = { 265, 460, 32, 128 };
 	//Collider--------------------------------------
-	collider  = App->collision->AddCollider({ x - 16 + 2, y - backAnim.h/2,      backAnim.w + 16 - 2,   backAnim.h }, COLLIDER_TYPE::COLLIDER_IGNORE_HIT, (Module*)App->enemies);
+	collider  = App->collision->AddCollider({ x - 16 + 2, y - backAnim.h/2,      backAnim.w + 16 - 2,   backAnim.h }, COLLIDER_TYPE::COLLIDER_WALL, (Module*)App->enemies);
 	topBarCol = App->collision->AddCollider({ x -  8, y - 24 - topBarAnim.h, topBarAnim.w, topBarAnim.h }, COLLIDER_TYPE::COLLIDER_WALL);
 	botBarCol = App->collision->AddCollider({ x -  8, y + 24,                topBarAnim.w, topBarAnim.h }, COLLIDER_TYPE::COLLIDER_WALL);
 }
@@ -113,7 +113,7 @@ void Enemy_BarGuardian::Move()
 		if (animation->Finished())
 		{
 			animation = &eyeClosed;
-			collider->type = COLLIDER_IGNORE_HIT;//Only lose health when it's open
+			collider->type = COLLIDER_WALL;//Only lose health when it's open
 			eyePhase = closed;
 			eyeCounter = 0;
 		}
