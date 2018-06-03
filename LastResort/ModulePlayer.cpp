@@ -81,11 +81,11 @@ void ModulePlayer::Reappear() {
 	//collider-----------------------------------------------------------------------
 	if (playerCol != nullptr)
 	{
-		playerCol->type = COLLIDER_TYPE::COLLIDER_GOD;
+		playerCol->type = COLLIDER_TYPE::COLLIDER_IGNORE_HIT;
 	}
 	else
 	{
-		playerCol = App->collision->AddCollider({ position.x, position.y + 2, 24, 8 }, COLLIDER_TYPE::COLLIDER_GOD, this);
+		playerCol = App->collision->AddCollider({ position.x, position.y + 2, 24, 8 }, COLLIDER_TYPE::COLLIDER_IGNORE_HIT, this);
 	}
 }
 
@@ -118,10 +118,44 @@ update_status ModulePlayer::InputUpdate()
 
 update_status ModulePlayer::LogicUpdate()
 {
-
 	if (canMove == true)
 	{
 		ShootingLogic();
+	}
+
+	//Invencibility Logic--------------------------------------------------------------
+	if (playerAnimState == Movement)
+	{
+		if (isInvincible == true)
+		{
+			if ((invincibilityFrames / 2) % 2 == 0)
+			{
+				current_animation = &shipAnimBlack.frames[currentFrame];
+			}
+			else
+			{
+				current_animation = &shipAnim.frames[currentFrame];
+			}
+			--invincibilityFrames;
+
+			if (invincibilityFrames < 0)
+			{
+				isInvincible = false;
+				//We change the collider type when spawning if god mode is not active
+				if (App->stageFunctionality->godMode == false)
+				{
+					playerCol->type = COLLIDER_PLAYER;
+				}
+				else
+				{
+					playerCol->type = COLLIDER_GOD;
+				}
+			}
+		}
+		else
+		{
+			current_animation = &shipAnim.frames[currentFrame]; //It set the animation frame 
+		}
 	}
 
 	//Winlvl
@@ -181,9 +215,7 @@ update_status ModulePlayer::RenderUpdate2()
 	{
 		if (ShotLaserBasic.finished == false)
 		{
-			
 			App->render->Blit(App->stageFunctionality->PlayerTexture, position.x + 32, position.y + 5 - ShotLaserBasic.GetFrame().h / 2, &ShotLaserBasic.GetFrameEx());
-		
 		}
 	}
 
@@ -220,7 +252,6 @@ void ModulePlayer::ShipAnimation()
 		break;
 
 	case Movement:
-
 		//Idle--------------------------------------------------------
 		if (yAxis > -transitionLimit && yAxis < transitionLimit)
 		{
@@ -245,25 +276,6 @@ void ModulePlayer::ShipAnimation()
 			currentFrame = MaxUp;
 		}
 		//Draw ship--------------------------------------------------
-		if (isInvincible == true) {
-			if ((invincibilityFrames / 2) % 2 == 0) {
-				current_animation = &shipAnimBlack.frames[currentFrame];
-			}
-			else {
-				current_animation = &shipAnim.frames[currentFrame];
-			}
-			--invincibilityFrames;
-
-			if (invincibilityFrames < 0) {
-				isInvincible = false;
-				//We change the collider type when spawning if god mode is not active
-				if (App->stageFunctionality->godMode == false) { playerCol->type = COLLIDER_PLAYER; }
-			}
-		}
-		else {
-			current_animation = &shipAnim.frames[currentFrame]; //It set the animation frame 
-		}
-
 		App->render->Blit(App->stageFunctionality->PlayerTexture, position.x, position.y, current_animation);
 
 		break;
