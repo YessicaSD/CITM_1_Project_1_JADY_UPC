@@ -28,4 +28,4 @@ The object of the game is to fight through five stages and destroy the end stage
 
 <iframe width="854" height="480" src="https://www.youtube.com/embed/uvoda9_zHeA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-Download game: https://github.com/YessicaSD/Project_1_JADY_UPC/releases/tag/1.0.5.0
+Download game: [https://github.com/YessicaSD/Project_1_JADY_UPC/releases/tag/1.0.5.0](https://github.com/YessicaSD/Project_1_JADY_UPC/releases/tag/1.0.5.0)
