@@ -328,7 +328,10 @@ void ModuleStageFunctionality::GoToScene()
 		break;
 	case 11:
 		//CONTINUE SCREEN
+		App->player1->isActive = false;
+		App->player2->isActive = false;
 		App->fade->FadeToBlack(currentStage, App->continueScene, 0.5f);
+		
 		break;
 	}
 }
