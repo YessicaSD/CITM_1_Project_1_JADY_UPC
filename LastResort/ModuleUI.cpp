@@ -79,8 +79,8 @@ update_status  ModuleUI::InputUpdate()
 		App->input->keyboard[SDL_SCANCODE_F5] == KEY_IDLE &&
 		App->input->keyboard[SDL_SCANCODE_F6] == KEY_IDLE &&
 		App->input->keyboard[SDL_SCANCODE_F7] == KEY_IDLE &&
-		App->input->keyboard[SDL_SCANCODE_F8] == KEY_IDLE ||
-		App->input->Controller1[SDL_CONTROLLER_BUTTON_B] == KEY_DOWN)
+		App->input->keyboard[SDL_SCANCODE_F8] == KEY_IDLE && App->player2->winlvlsingle == false ||
+		App->input->Controller1[SDL_CONTROLLER_BUTTON_B] == KEY_DOWN && App->player2->winlvlsingle == false)
 	{
 		if (App->player1->isActive == false && credits > 0)
 		{
@@ -116,8 +116,8 @@ update_status  ModuleUI::InputUpdate()
 		(App->input->keyboard[SDL_SCANCODE_F5] == KEY_IDLE &&
 			App->input->keyboard[SDL_SCANCODE_F6] == KEY_IDLE &&
 			App->input->keyboard[SDL_SCANCODE_F7] == KEY_IDLE &&
-			App->input->keyboard[SDL_SCANCODE_F8] == KEY_IDLE) ||
-			App->input->Controller2[SDL_CONTROLLER_BUTTON_B] == KEY_DOWN)
+			App->input->keyboard[SDL_SCANCODE_F8] == KEY_IDLE && App->player1->winlvlsingle == false ) ||
+			App->input->Controller2[SDL_CONTROLLER_BUTTON_B] == KEY_DOWN && App->player1->winlvlsingle==false)
 	{
 		switch (currentScene)
 		{
@@ -166,8 +166,6 @@ update_status  ModuleUI::InputUpdate()
 	{
 		StageClearLogic();
 
-		
-		
 	}
 
 	return update_status::UPDATE_CONTINUE;
@@ -187,28 +185,66 @@ update_status ModuleUI::RenderUpdate2()
 	char const*str_credits = nullptr;
 	char const *str_debug = nullptr;
 	
+
 	string lives_p1 = to_string(App->player1->lives);
 	string lives_p2 = to_string(App->player2->lives);
 	string score_p1 = to_string(App->player1->score);
 	string score_p2 = to_string(App->player2->score);
 	string credits_ = to_string(credits);
 	string debug;
+	string bonus = to_string(numbonus);
+	string playerbonusS = to_string(playerbonus);
 	
 	str_score_p1 = score_p1.c_str();
 	str_score_p2 = score_p2.c_str();
 	str_lives_p1 = lives_p2.c_str();
 	str_lives_p2 = lives_p1.c_str();
 	str_credits = credits_.c_str();
-	
+	str_bonus = bonus.c_str();
+	str_bonus_player = playerbonusS.c_str();
+
 	if(stageclear==true)
 	{
-		/*App->render->DrawQuad({ 0,0,SCREEN_WIDTH,SCREEN_HEIGHT }, 0, 0, 0, currentAlfa);
-		if (currentAlfa > 254)
+		App->render->Blit(uiTex, 50, 60, &BGroundStageClear5);
+		if (App->player1->isActive && App->player2->isActive)
 		{
-			
-		}*/
-		StageClearRender();
-		
+			App->fonts->BlitText(SCREEN_WIDTH / 2 - 110, 85,
+				0, "BONUS");
+			App->fonts->BlitText(SCREEN_WIDTH / 2 + 20, 85,
+				0, "BONUS");
+
+			if (numbonus <= 0)
+			{
+				App->fonts->BlitText(SCREEN_WIDTH / 2 - 42, 85,
+					0, "0");
+				App->fonts->BlitText(SCREEN_WIDTH / 2 + 92, 85,
+						0, "0");
+			}
+
+			App->fonts->BlitText(SCREEN_WIDTH / 2 - 50, 85,
+				0, str_bonus);
+			App->fonts->BlitText(SCREEN_WIDTH / 2 +100, 85,
+				0, str_bonus); 
+
+			App->fonts->BlitText( 65, 160,
+				0, str_bonus_player);
+			App->fonts->BlitText(SCREEN_WIDTH/2 + 45, 160,
+				0, str_bonus_player);
+		}
+		else
+		{
+			App->fonts->BlitText(SCREEN_WIDTH / 2 - 80, 100,
+				0, "BONUS");
+			if (numbonus <= 0)
+			{
+				App->fonts->BlitText(SCREEN_WIDTH / 2+8, 100,
+					0, "0");
+			}
+			App->fonts->BlitText(SCREEN_WIDTH / 2 , 100,
+				0, str_bonus);
+			App->fonts->BlitText(SCREEN_WIDTH / 2 - 20, 160,
+				0, str_bonus_player);
+		}
 
 	}
 
@@ -327,7 +363,7 @@ update_status ModuleUI::RenderUpdate2()
 	
 
 	return UPDATE_CONTINUE;
-
+	
 }
 
 void ModuleUI::ShowUi()
@@ -344,19 +380,40 @@ void ModuleUI::HideUi()
 
 void ModuleUI::StageClearLogic()
 {
+	
+	if (frameCountStageClear == 0)
+	{
+		App->audio->ControlAudio(App->stage05->lvl5Music, STOP_AUDIO);
+	}
+	if (frameCountStageClear == 2)
+	{
+		App->audio->ControlAudio(lvlComplitedMusic, PLAY_AUDIO);
+	}
+
 	if(App->player1->isActive && App->player2->isActive)
 		{
 		App->player1->winlvl = true;
 		App->player2->winlvl = true;
+		if (App->player1->playerCol != nullptr) { App->player1->playerCol->type = COLLIDER_GOD; }
+		if (App->player2->playerCol != nullptr) { App->player2->playerCol->type = COLLIDER_GOD; }
 	}
 	else
 	{
-		if(App->player1->isActive)
+		if (App->player1->isActive)
+		{
 			App->player1->winlvlsingle = true;
+			if (App->player1->playerCol != nullptr) { App->player1->playerCol->type = COLLIDER_GOD; }
+		}
+			
+
 		if (App->player2->isActive)
+		{
 			App->player2->winlvlsingle = true;
+			if (App->player2->playerCol != nullptr) { App->player2->playerCol->type = COLLIDER_GOD; }
+		}
+			
 	}
-	if (frameCountStageClear >= 300)
+	if (frameCountStageClear >= 400)
 	{
 		stageclear = false;
 
@@ -365,23 +422,17 @@ void ModuleUI::StageClearLogic()
 		App->player1->winlvlsingle = false;
 		App->player2->winlvlsingle = false;
 
+		numbonus = 10000;
+		playerbonus = 0;
 		frameCountStageClear = 0;
 		App->fade->FadeToBlack(App->stage05, App->titleScene, 0.0f);
 	}
-
-	if (currentAlfa < 255)
-		currentAlfa += 1;
-	if (currentAlfa == 253)
+	if (numbonus > 0)
 	{
-		App->audio->ControlAudio(App->stage05->lvl5Music, STOP_AUDIO);
-		App->audio->ControlAudio(lvlComplitedMusic, PLAY_AUDIO);
+		numbonus -= 100;
+		playerbonus += 100;
 	}
-
-
+	
 
 	frameCountStageClear += 1;
-}
-void ModuleUI::StageClearRender()
-{
-	App->render->Blit(uiTex, 50, 60, &BGroundStageClear5);
 }

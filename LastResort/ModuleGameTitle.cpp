@@ -145,6 +145,7 @@ update_status ModuleGameTitle::LogicUpdate() {
 	
 		if (current_time>17000 || titleDone == true)
 		App->fonts->BlitText(50, 190, 0, "SNK CORP. OF AMERICA @1992");
+		App->audio->ControlAudio(Titlemusic, STOP_AUDIO);
 	
 	/*if (current_time>18000 || titleDone == true)
 	{

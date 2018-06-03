@@ -53,8 +53,9 @@ public:
 
 	//General data--------------------------------
 	bool showUI = false;
+	int numbonus = 10000;
 	int credits = 0;
-
+	int playerbonus=0;
 	
 
 	//Audios-------------------------------------
@@ -71,9 +72,8 @@ public:
 
 	// STAGE CLEAR -------------------------------
 	bool stageclear=false;
-	int currentAlfa=0;
 	int frameCountStageClear;
-
+	
 		//Rectangles
 	SDL_Rect BGroundStageClear5 = {0,96,213,16};
 	
@@ -81,6 +81,9 @@ public:
 		SDL_Rect Player2 = { 262,3,32,11 };
 
 	Music * lvlComplitedMusic=nullptr;
+	char  const* str_bonus = nullptr;
+	char const* str_bonus_player = nullptr;
+	
 
 };
 #endif // !_MODULEUI_H_
