@@ -185,10 +185,18 @@ void Enemy_BarGuardian::Draw0(SDL_Texture* sprites)
 	App->render->Blit(sprites, topBarPos.x, topBarPos.y, &topBarAnim);
 	//Blit bot bar
 	App->render->Blit(sprites, botBarPos.x, botBarPos.y, &botBarAnim);//24 distance from the center of the enemy
+}
+
+void Enemy_BarGuardian::Draw1(SDL_Texture* sprites)
+{
+	//Blit eye
+	App->render->Blit(sprites, position.x - 16, position.y - 74 / 2 + 1, &animation->GetCurrentFrame());
+}
+
+void Enemy_BarGuardian::Draw2(SDL_Texture* sprites)
+{
 	//Blit back part
 	App->render->Blit(sprites, position.x, position.y - backAnim.h / 2, &backAnim);
-	//Blit eye
-	App->render->Blit(sprites, position.x - 16, position.y - 74/2 + 1, &animation->GetCurrentFrame());
 }
 
 Enemy_BarGuardian::~Enemy_BarGuardian()

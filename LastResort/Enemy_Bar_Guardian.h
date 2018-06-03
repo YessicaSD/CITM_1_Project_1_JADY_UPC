@@ -25,6 +25,8 @@ public:
 	~Enemy_BarGuardian();
 	void Move();
 	void Draw0(SDL_Texture* sprites);
+	void Draw1(SDL_Texture* sprites);
+	void Draw2(SDL_Texture* sprites);
 
 private:
 	BarGuardianPhases phase = barGuard_Up;
