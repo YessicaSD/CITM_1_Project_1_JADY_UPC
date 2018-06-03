@@ -27,6 +27,7 @@ public:
 	bool invert = false;
 	bool first_loop = true;
 	bool finished = false;
+	bool autoReset = false;
 
 public:
 	Animation()
