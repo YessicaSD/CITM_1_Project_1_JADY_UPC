@@ -247,6 +247,17 @@ void ModuleEnemies::RenderEnemy(Enemy * Ienemy, int layer)
 // Called before quitting
 bool ModuleEnemies::CleanUp()
 {
+	ClearQueues();
+
+	App->textures->Unload(nml_sprites);
+	App->textures->Unload(dmg_sprites);
+	App->audio->UnloadSFX(AsteroirdAppearSfx);
+
+	return true;
+}
+
+void ModuleEnemies::ClearQueues()
+{
 	LOG("Freeing all enemies");
 
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
@@ -261,18 +272,12 @@ bool ModuleEnemies::CleanUp()
 
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
-			queue[i].type = ENEMY_TYPES::NO_TYPE;
-			queue[i].delay = 0;
-			queue[i].pu_Type = POWERUP_TYPE::NOPOWERUP;
-			queue[i].counting = false;
-			queue[i].spawnTime = 0;
+		queue[i].type = ENEMY_TYPES::NO_TYPE;
+		queue[i].delay = 0;
+		queue[i].pu_Type = POWERUP_TYPE::NOPOWERUP;
+		queue[i].counting = false;
+		queue[i].spawnTime = 0;
 	}
-
-	App->textures->Unload(nml_sprites);
-	App->textures->Unload(dmg_sprites);
-	App->audio->UnloadSFX(AsteroirdAppearSfx);
-
-	return true;
 }
 
 bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, Uint32 delay, POWERUP_TYPE powerup_type, fPoint speed)

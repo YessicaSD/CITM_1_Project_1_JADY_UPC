@@ -83,6 +83,7 @@ public:
 	Enemy* InstaSpawn(ENEMY_TYPES type, int x, int y, POWERUP_TYPE powerup_type = NOPOWERUP, fPoint speed  ={ 0, 0 });//Spawns directly. Although if the enemy is outside the margins of the camera, it will delete it
 
 	void ManualDespawn(Enemy* enemyToDelete);
+	void ClearQueues();
 
 private:
 	Enemy* SpawnEnemy(const EnemyInfo& info);
