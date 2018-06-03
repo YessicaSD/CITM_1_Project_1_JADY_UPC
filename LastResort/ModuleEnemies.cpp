@@ -355,7 +355,7 @@ Enemy* ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			enemies[i] = new Enemy_IF_Spawner(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 2, 200, info.pu_Type);
 			break;
 		case ENEMY_TYPES::INDOOR_TURRET_LASER:
-			enemies[i] = new Enemy_Inside_Turret_Laser(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 2, 200, info.pu_Type, info.speed);
+			enemies[i] = new Enemy_Inside_Turret_Laser(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 30, 500, info.pu_Type, info.speed);
 			break;
 		case ENEMY_TYPES::BAR_GUARDIAN:
 			enemies[i] = new Enemy_BarGuardian(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 10, 300, info.pu_Type);
