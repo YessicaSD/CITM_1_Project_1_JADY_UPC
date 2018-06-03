@@ -305,38 +305,33 @@ void ModuleStageFunctionality::GoToScene()
 	case 6:
 		////WIN SCREEN
 		App->ui->stageclear = true;
-		//if (App->player1->winlvl == false && App->player2->winlvl == false)
-		//{
-		//	App->player1->winlvl = App->player2->winlvl = true;
-		//	App->player1->numLvlwin = App->player2->numLvlwin = 1;
-		//}
-		//
-		//App->unit1->Disable();
-		//App->unit2->Disable();
-		//currentStage = nullptr;
-		//break;
+		break;
+
 	case 7:
 		//LOSE SCREEN
-		App->fade->FadeToBlack(currentStage, App->gameoverScene, 3.5f);
+		App->fade->FadeToBlack(currentStage, App->gameoverScene, 0.5f);
 		App->unit1->Disable();
 		App->unit2->Disable();
 		currentStage = nullptr;
 		break;
 	case 8:
 		//NEO GEO SCREEEN
-		App->fade->FadeToBlack(currentStage, App->neogeoScene, 3.5f);
+		App->fade->FadeToBlack(currentStage, App->neogeoScene, 0.5f);
 		break;
 	case 9:
 		//LAST RESORT SCREEN
-		App->fade->FadeToBlack(currentStage, App->titleScene, 3.5f);
+		App->fade->FadeToBlack(currentStage, App->titleScene, 0.5f);
 		break;
 	case 10:
 		//READY SCREEN
-		App->fade->FadeToBlack(currentStage, App->readyScene, 3.5f);
+		App->fade->FadeToBlack(currentStage, App->readyScene, 0.5f);
 		break;
 	case 11:
 		//CONTINUE SCREEN
-		App->fade->FadeToBlack(currentStage, App->continueScene, 3.5f);
+		App->player1->isActive = false;
+		App->player2->isActive = false;
+		App->fade->FadeToBlack(currentStage, App->continueScene, 0.5f);
+		
 		break;
 	}
 }

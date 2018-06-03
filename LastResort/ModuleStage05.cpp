@@ -682,6 +682,9 @@ update_status Module5lvlScene::LogicUpdate()
 			App->enemies->AddEnemy(POWERDROPPER,    1411, 340, 2049755 - startTime, GROUND);
 			App->enemies->AddEnemy(BIG_ASTEROID,    1411, 300, 2050000 - startTime);
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1150, 182, 2049750 - startTime, NOPOWERUP, { 0.50f, 1.0f });
+			App->enemies->AddEnemy(METALBEE, 2152, 182);
+			App->enemies->AddEnemy(METALBEE, 2152, 406);
+
 			reachedCheckpoint[22] = true;
 		}
 		break;
