@@ -521,47 +521,43 @@ update_status Module5lvlScene::LogicUpdate()
 
 			reachedCheckpoint[22] = true;
 
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 4000, NOPOWERUP, { -1,1 });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 4500, NOPOWERUP, { -1.5f,0.5f });
-
-			App->enemies->AddEnemy(REDBATS, 1412, 320, 4500);
-			App->enemies->AddEnemy(REDBATS, 1412, 320, 5000);
-			App->enemies->AddEnemy(REDBATS, 1412, 320, 5500);
-			App->enemies->AddEnemy(REDBATS, 1412, 320, 6000);
-			App->enemies->AddEnemy(REDBATS, 1412, 320, 6500);
-
-			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1415, 320, 5500, NOPOWERUP, { -1.5f,0.5f });
-			App->enemies->AddEnemy(BIG_ASTEROID, 1415, 294, 7500, NOPOWERUP, { -1.5f,0.5f });
-
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 8000, NOPOWERUP, { -1.5f,0.5f });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 11000, NOPOWERUP, { -1,1 });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 13000, NOPOWERUP, { -1.5f,0.5f });
-			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1400, 275, 13000);
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 13500, NOPOWERUP, { 0.5f,1.5f });
-			App->enemies->AddEnemy(POWERDROPPER, 1412, 350, 14000, SPEED, { 0.5f,1.5f });
-			App->enemies->AddEnemy(OSCILATOR, 1412, 350, 14000, NOPOWERUP);
-
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 15000, NOPOWERUP, { -1.5f,0.5f });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 15500, NOPOWERUP, { -1,1 });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182,  4000, NOPOWERUP, { -1   , 1    });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182,  4500, NOPOWERUP, { -1.5f, 0.5f });
+			App->enemies->AddEnemy(REDBATS,         1412, 320,  4500, NOPOWERUP);
+			App->enemies->AddEnemy(REDBATS,         1412, 320,  5000, NOPOWERUP);
+			App->enemies->AddEnemy(REDBATS,         1412, 320,  5500, NOPOWERUP);
+			App->enemies->AddEnemy(REDBATS,         1412, 320,  6000, NOPOWERUP);
+			App->enemies->AddEnemy(REDBATS,         1412, 320,  6500, NOPOWERUP);
+			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1415, 320,  5500, NOPOWERUP, { -1.5f, 0.5f });
+			App->enemies->AddEnemy(BIG_ASTEROID,    1415, 294,  7500, NOPOWERUP, { -1.5f, 0.5f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182,  8000, NOPOWERUP, { -1.5f, 0.5f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 11000, NOPOWERUP, { -1   , 1    });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 13000, NOPOWERUP, { -1.5f, 0.5f });
+			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1400, 275, 13000, NOPOWERUP);
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 13500, NOPOWERUP, {  0.5f, 1.5f });
+			App->enemies->AddEnemy(POWERDROPPER,    1412, 350, 14000, SPEED,     {  0.5f, 1.5f });
+			App->enemies->AddEnemy(OSCILATOR,       1412, 350, 14000, NOPOWERUP);
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 15000, NOPOWERUP, { -1.5f, 0.5f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 15500, NOPOWERUP, { -1   , 1    });
 			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1400, 350, 16000, NOPOWERUP);
-			App->enemies->AddEnemy(BIG_ASTEROID, 1400, 260, 17000, NOPOWERUP);
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1350, 182, 17500, NOPOWERUP, { -1.5f,0.5f });
-			App->enemies->AddEnemy(OSCILATOR, 1412, 350, 18000, NOPOWERUP);
-			App->enemies->AddEnemy(BIG_ASTEROID, 1400, 350, 18000);
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 18000, NOPOWERUP, { -1.0f,1.0f });
-			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1400, 220, 18000);
-			App->enemies->AddEnemy(POWERDROPPER, 1412, 350, 19000, SPEED);
-			App->enemies->AddEnemy(BIG_ASTEROID, 1400, 360, 19000);
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 19000, NOPOWERUP, { -1.0f,1.0f });
-			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1400, 220, 20000);
-			App->enemies->AddEnemy(BIG_ASTEROID, 1400, 260, 21000);
-			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1400, 350, 21000);
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1110, 182, 21000, NOPOWERUP, { 1.5f,0.5f });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1110, 182, 21000, NOPOWERUP, { 1.0f,1.0f });
-			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1400, 375, 22000);
-			App->enemies->AddEnemy(BIG_ASTEROID, 1400, 290, 22000);
-			App->enemies->AddEnemy(OSCILATOR, 1412, 350, 22000, NOPOWERUP);
-			App->enemies->AddEnemy(POWERDROPPER, 1412, 350, 22000, SPEED);
+			App->enemies->AddEnemy(BIG_ASTEROID,    1400, 260, 17000, NOPOWERUP);
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1350, 182, 17500, NOPOWERUP, { -1.5f, 0.5f });
+			App->enemies->AddEnemy(OSCILATOR,       1412, 350, 18000, NOPOWERUP);//4:45 s since last oscilator
+			App->enemies->AddEnemy(BIG_ASTEROID,    1400, 350, 18000, NOPOWERUP);
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 18000, NOPOWERUP, { -1.0f, 1.0f });
+			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1400, 220, 18000, NOPOWERUP);
+			App->enemies->AddEnemy(POWERDROPPER,    1412, 350, 19000, SPEED);
+			App->enemies->AddEnemy(BIG_ASTEROID,    1400, 360, 19000, NOPOWERUP);
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 19000, NOPOWERUP, { -1.0f, 1.0f });
+			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1400, 220, 20000, NOPOWERUP);
+			App->enemies->AddEnemy(BIG_ASTEROID,    1400, 260, 21000, NOPOWERUP);
+			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1400, 350, 21000, NOPOWERUP);
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1110, 182, 21000, NOPOWERUP, {  1.5f, 0.5f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1110, 182, 21000, NOPOWERUP, {  1.0f, 1.0f });
+			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1400, 375, 22000, NOPOWERUP);
+			App->enemies->AddEnemy(BIG_ASTEROID,    1400, 290, 22000, NOPOWERUP);
+			App->enemies->AddEnemy(OSCILATOR,       1412, 350, 22000, NOPOWERUP);//4:25 s since last oscilator
+			App->enemies->AddEnemy(POWERDROPPER,    1412, 350, 22000, SPEED);
 		}
 		break;
 	case 23:
