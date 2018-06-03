@@ -473,7 +473,7 @@ void ModulePlayer::Winlvl()
 {
 	if (App->stageFunctionality->godMode == false)
 	{
-		playerCol->type = COLLIDER_IGNORE_HIT;
+		
 		App->stageFunctionality->godMode = true;
 	}
 

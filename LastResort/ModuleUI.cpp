@@ -394,22 +394,22 @@ void ModuleUI::StageClearLogic()
 		{
 		App->player1->winlvl = true;
 		App->player2->winlvl = true;
-		if (App->player1->playerCol != nullptr) { App->player1->playerCol->type = COLLIDER_GOD; }
-		if (App->player2->playerCol != nullptr) { App->player2->playerCol->type = COLLIDER_GOD; }
+		if (App->player1->playerCol != nullptr) { App->player1->playerCol->type = COLLIDER_IGNORE_HIT; }
+		if (App->player2->playerCol != nullptr) { App->player2->playerCol->type = COLLIDER_IGNORE_HIT; }
 	}
 	else
 	{
 		if (App->player1->isActive)
 		{
 			App->player1->winlvlsingle = true;
-			if (App->player1->playerCol != nullptr) { App->player1->playerCol->type = COLLIDER_GOD; }
+			if (App->player1->playerCol != nullptr) { App->player1->playerCol->type = COLLIDER_IGNORE_HIT; }
 		}
 			
 
 		if (App->player2->isActive)
 		{
 			App->player2->winlvlsingle = true;
-			if (App->player2->playerCol != nullptr) { App->player2->playerCol->type = COLLIDER_GOD; }
+			if (App->player2->playerCol != nullptr) { App->player2->playerCol->type = COLLIDER_IGNORE_HIT; }
 		}
 			
 	}
