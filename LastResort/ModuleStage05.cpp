@@ -266,6 +266,15 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(SHIP_MOTOR, 1119, 225);
 
 
+	//End of the level
+	App->enemies->AddEnemy(BAR_GUARDIAN, 1580, 182 + SCREEN_HEIGHT / 2);
+	App->enemies->AddEnemy(BAR_GUARDIAN, 1700, 182 + SCREEN_HEIGHT / 2);
+	App->enemies->AddEnemy(BAR_GUARDIAN, 1778, 182 + SCREEN_HEIGHT / 2);
+	App->enemies->AddEnemy(BAR_GUARDIAN, 1850, 182 + SCREEN_HEIGHT / 2);
+	App->enemies->AddEnemy(BAR_GUARDIAN, 1905, 182 + SCREEN_HEIGHT / 2);
+	App->enemies->AddEnemy(BAR_GUARDIAN, 1962, 182 + SCREEN_HEIGHT / 2);
+	App->enemies->AddEnemy(BAR_GUARDIAN, 2070, 182 + SCREEN_HEIGHT / 2);
+
 	return ret;
 }
 
@@ -549,12 +558,10 @@ update_status Module5lvlScene::LogicUpdate()
 			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1400, 350, 21000);
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1110, 182, 21000, NOPOWERUP, { 1.5f,0.5f });
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1110, 182, 21000, NOPOWERUP, { 1.0f,1.0f });
-			App->enemies->AddEnemy(POWERDROPPER, 1412, 350, 21000, SPEED);
 			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1400, 375, 22000);
 			App->enemies->AddEnemy(BIG_ASTEROID, 1400, 290, 22000);
 			App->enemies->AddEnemy(OSCILATOR, 1412, 350, 22000, NOPOWERUP);
-			
-
+			App->enemies->AddEnemy(POWERDROPPER, 1412, 350, 22000, SPEED);
 		}
 		break;
 	case 23:
