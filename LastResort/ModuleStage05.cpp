@@ -247,8 +247,6 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(MISSILE_TURRET, 943, -3);
 	App->enemies->AddEnemy(MISSILE_TURRET, 975, -3);
 
-	App->enemies->AddEnemy(IF_SPAWNER, 735, 31);
-
 	App->enemies->AddEnemy(REAR_TURRET, 1357, 41);
 
 	App->enemies->AddEnemy(REDBATS,1616 , 30);
@@ -256,12 +254,6 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(REDBATS, 1616, 30, 1000);
 	App->enemies->AddEnemy(REDBATS, 1616, 30, 1500);
 	App->enemies->AddEnemy(REDBATS, 1616, 30, 2000);
-
-	App->enemies->AddEnemy(PINATA_SPAWNER, 1167, 144);
-	App->enemies->AddEnemy(PINATA_SPAWNER, 1295, 144);
-
-	App->enemies->AddEnemy(SHIP_MOTOR, 1119, 225);
-
 
 	//End of the level
 	App->enemies->AddEnemy(BAR_GUARDIAN, 1580, 182 + SCREEN_HEIGHT / 2);
@@ -272,6 +264,10 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(BAR_GUARDIAN, 1962, 182 + SCREEN_HEIGHT / 2);
 	App->enemies->AddEnemy(BAR_GUARDIAN, 2070, 182 + SCREEN_HEIGHT / 2);
 	App->enemies->AddEnemy(BOSS_05, 2385, 294);
+
+	//Add colliders
+	AddShipColliders();
+	AddFinalColliders();
 
 	return ret;
 }
@@ -311,41 +307,17 @@ update_status Module5lvlScene::LogicUpdate()
 		currentCheckPoint = 0;
 
 	//---------Update colliders-------------------------------------------
-
-
-	 if (cameraMovement.currentMov < 22) {
-
-		 if (deletedFinalColliders == false) {
-			 DeleteFinalColliders();
-		 }
-
-		 if (addedShipColliders == false) {
-			 AddShipColliders();
-		 }
-
-		UpdateShipColliders();
-	}
-	 else  {
-
-		 if (deletedShipColliders == false) {
-			 DeleteShipColliders();
-		 }
-
-		 if (addedFinalColliders == false) {
-			 AddFinalColliders();
-		 }
-
-		 UpdateFinalColliders();
-	 }
-
+	UpdateShipColliders();
+	UpdateFinalColliders();
 
 	//- The mega checkpoint switch--------------------------------------
-	//LOG("Current check point %i", cameraMovement.currentMov);
+	LOG("Current check point %i", cameraMovement.currentMov);
 	switch(cameraMovement.currentMov)
 	{
 	case 0:
 		if(reachedCheckpoint[0] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			reachedCheckpoint[0] = true;
 		}
 
@@ -353,6 +325,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 1:
 		if (reachedCheckpoint[1] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			reachedCheckpoint[1] = true;
 		}
 
@@ -360,6 +333,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 2:
 		if (reachedCheckpoint[2] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			e_FrontShipTurret = App->enemies->InstaSpawn(FRONT_TURRET, 47, 64, POWERUP_TYPE::NOPOWERUP, { 0, 0 });
 			reachedCheckpoint[2] = true;
 		}
@@ -368,6 +342,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 3:
 		if (reachedCheckpoint[3] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			reachedCheckpoint[3] = true;
 		}
 		FireballFrontShip();
@@ -376,6 +351,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 4:
 		if (reachedCheckpoint[4] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			reachedCheckpoint[4] = true;
 		}
 		FireballFrontShip();
@@ -384,6 +360,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 5:
 		if (reachedCheckpoint[5] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			App->enemies->ManualDespawn(e_FrontShipTurret);
 			reachedCheckpoint[5] = true;
 		}
@@ -392,6 +369,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 6:
 		if (reachedCheckpoint[6] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			reachedCheckpoint[6] = true;
 		}
 
@@ -399,6 +377,8 @@ update_status Module5lvlScene::LogicUpdate()
 	case 7:
 		if (reachedCheckpoint[7] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
+			e_IFSpawn = App->enemies->InstaSpawn(IF_SPAWNER, 735, 31);
 			reachedCheckpoint[7] = true;
 		}
 
@@ -406,6 +386,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 8:
 		if (reachedCheckpoint[8] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			reachedCheckpoint[8] = true;
 		}
 
@@ -413,12 +394,14 @@ update_status Module5lvlScene::LogicUpdate()
 	case 9:
 		if (reachedCheckpoint[9] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			reachedCheckpoint[9] = true;
 		}
 		break;
 	case 10:
 		if (reachedCheckpoint[10] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			reachedCheckpoint[10] = true;
 		}
 
@@ -426,15 +409,15 @@ update_status Module5lvlScene::LogicUpdate()
 	case 11:
 		if (reachedCheckpoint[11] == false)
 		{
-			
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			reachedCheckpoint[11] = true;
 		}
 		break;
 	case 12:
 		if (reachedCheckpoint[12] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			App->enemies->AddEnemy(MISSILE_TURRET, 879, -3);
-			
 			reachedCheckpoint[12] = true;
 		}
 		
@@ -443,6 +426,8 @@ update_status Module5lvlScene::LogicUpdate()
 	case 13:
 		if (reachedCheckpoint[13] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
+			App->enemies->ManualDespawn(e_IFSpawn);
 			reachedCheckpoint[13] = true;
 		}
 
@@ -450,6 +435,9 @@ update_status Module5lvlScene::LogicUpdate()
 	case 14:
 		if (reachedCheckpoint[14] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
+			e_PinaSpawn1 = App->enemies->InstaSpawn(PINATA_SPAWNER, 1167, 144);
+			e_PinaSpawn2 = App->enemies->InstaSpawn(PINATA_SPAWNER, 1295, 144);
 			reachedCheckpoint[14] = true;
 		}
 		FirebarsRearShip();
@@ -458,6 +446,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 15:
 		if (reachedCheckpoint[15] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			reachedCheckpoint[15] = true;
 		}
 		FirebarsRearShip();
@@ -466,7 +455,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 16:
 		if (reachedCheckpoint[16] == false)
 		{
-			
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			reachedCheckpoint[16] = true;
 		}
 		FirebarsRearShip();
@@ -475,6 +464,8 @@ update_status Module5lvlScene::LogicUpdate()
 	case 17:
 		if (reachedCheckpoint[17] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
+			e_ShipMotor = App->enemies->InstaSpawn(SHIP_MOTOR, 1119, 225);
 			reachedCheckpoint[17] = true;
 		}
 		FirebarsRearShip();
@@ -483,6 +474,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 18:
 		if (reachedCheckpoint[18] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			reachedCheckpoint[18] = true;
 		}
 
@@ -490,6 +482,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 19:
 		if (reachedCheckpoint[19] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			reachedCheckpoint[19] = true;
 		}
 
@@ -497,6 +490,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 20:
 		if (reachedCheckpoint[20] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			reachedCheckpoint[20] = true;
 		}
 
@@ -505,6 +499,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 21:
 		if (reachedCheckpoint[21] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			reachedCheckpoint[21] = true;
 		}
 
@@ -512,12 +507,17 @@ update_status Module5lvlScene::LogicUpdate()
 	case 22:
 		if (reachedCheckpoint[22] == false)
 		{
+			//Set ship colliders to IGNORE HIT (if not the unit follows them)-------------------------------------------------------------------------------
+			ShipColIgnoreHit();
+			App->enemies->ManualDespawn(e_ShipMotor);
+			App->enemies->ManualDespawn(e_PinaSpawn1);
+			App->enemies->ManualDespawn(e_PinaSpawn2);
 			//Add enemies-----------------------------------------------------------------------------------------------------------------------------------
 			//INFO 1: We'll take the positions of the enemies from this video https://www.youtube.com/watch?time_continue=1213&v=aybhwlEV0EM
 			//- To make it easier for us to calcule the positions we'll convert the time of the video to the time of the actual level with a simple substraction
 			//- Although 1m = 60000ms we'll just multiply by 1000 because it doesn't matter since it all happens in one minute
 			//- Ex. 20:16 = 2016000. 2016 * 1000 = 2016000
-			const uint startTime = 2012000;//Start time = 20:12
+			const uint startTime = 2015000;//Start time = 20:12
 			//INFO 2: In this current checkpoint the positions of the camera are the following:
 			//const uint cp22_top   =  182;
 			//const uint cp22_bot   =  405;
@@ -556,73 +556,82 @@ update_status Module5lvlScene::LogicUpdate()
 			App->enemies->AddEnemy(BIG_ASTEROID,    1400, 360, 2031000 - startTime);
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 2031000 - startTime, NOPOWERUP, { -1.0f, 1.0f });
 			//20:32 - 20:42
-			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1400, 220, 2032000 - startTime);
-			App->enemies->AddEnemy(BIG_ASTEROID,    1400, 260, 2033000 - startTime);
-			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1400, 350, 2033000 - startTime);
+			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1412, 220, 2032000 - startTime);
+			App->enemies->AddEnemy(BIG_ASTEROID,    1412, 260, 2033000 - startTime);
+			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1412, 350, 2033000 - startTime);
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1110, 182, 2033000 - startTime, NOPOWERUP, {  1.5f, 0.5f });
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1110, 182, 2033000 - startTime, NOPOWERUP, {  1.0f, 1.0f });
 			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1400, 375, 2034000 - startTime);
 			App->enemies->AddEnemy(POWERDROPPER, 1412, 290, 2034000 - startTime, DESPEED);
 			App->enemies->AddEnemy(OSCILATOR,       1412, 350, 2034500 - startTime);
 			//20:42 - 20:52
-			App->enemies->AddEnemy(BIG_ASTEROID,    1400, 300, 2037000 - startTime, NOPOWERUP);
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1200, 182, 2037000 - startTime, NOPOWERUP, {  0.00f, 1.0f });//Group on the left
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1200, 182, 2037000 - startTime, NOPOWERUP, {  0.25f, 1.0f });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1200, 182, 2037000 - startTime, NOPOWERUP, {  0.50f, 1.0f });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1200, 182, 2037000 - startTime, NOPOWERUP, {  0.75f, 1.0f });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2037000 - startTime, NOPOWERUP, {  0.00f, 1.0f });//Group on the right
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2037000 - startTime, NOPOWERUP, { -0.25f, 1.0f });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2037000 - startTime, NOPOWERUP, { -0.50f, 1.0f });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2037000 - startTime, NOPOWERUP, { -0.75f, 1.0f });
+			
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1380, 184, 2037000 - startTime, NOPOWERUP, { 0.00f, 1.0f });//Group on the right
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1370, 184, 2037000 - startTime, NOPOWERUP, {  -1.00f, 0.75f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1360, 184, 2037000 - startTime, NOPOWERUP, { - 1.00f, 0.50f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1350, 184, 2037000 - startTime, NOPOWERUP, {  -1.00f, 0.25f });
+
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1110, 184, 2037000 - startTime, NOPOWERUP, {  1.0f, 1.0f });//Group on the left
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1115, 184, 2037000 - startTime, NOPOWERUP, { 1.5f, 0.75f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1120, 184, 2037000 - startTime, NOPOWERUP, { 1.0f, 0.5f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1125, 184, 2037000 - startTime, NOPOWERUP, { 1.0f, 0.25f });
+
+
 			App->enemies->AddEnemy(BIG_ASTEROID,    1411, 250, 2037000 - startTime);
 			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1411, 275, 2037000 - startTime);
+
 			App->enemies->AddEnemy(BIG_ASTEROID,    1411, 350, 2036750 - startTime);
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1200, 182, 2037000 - startTime, NOPOWERUP, {  0.00f, 1.0f });//Group on the left
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1200, 182, 2037000 - startTime, NOPOWERUP, {  0.25f, 1.0f });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1200, 182, 2037000 - startTime, NOPOWERUP, {  0.50f, 1.0f });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1200, 182, 2037000 - startTime, NOPOWERUP, {  0.75f, 1.0f });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2037000 - startTime, NOPOWERUP, {  0.00f, 1.0f });//Group on the right
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2037000 - startTime, NOPOWERUP, { -0.25f, 1.0f });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2037000 - startTime, NOPOWERUP, { -0.50f, 1.0f });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2037000 - startTime, NOPOWERUP, { -0.75f, 1.0f });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1200, 182, 2038000 - startTime, NOPOWERUP, {  0.00f, 1.0f });//Group on the left
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1200, 182, 2038000 - startTime, NOPOWERUP, {  0.25f, 1.0f });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1200, 182, 2038000 - startTime, NOPOWERUP, {  0.50f, 1.0f });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1200, 182, 2038000 - startTime, NOPOWERUP, {  0.75f, 1.0f });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2038000 - startTime, NOPOWERUP, {  0.00f, 1.0f });//Group on the right
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2038000 - startTime, NOPOWERUP, { -0.25f, 1.0f });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2038000 - startTime, NOPOWERUP, { -0.50f, 1.0f });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2038000 - startTime, NOPOWERUP, { -0.75f, 1.0f });
-			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1411, 300, 2038000 - startTime);
-			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1411, 370, 2040000 - startTime);
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2039000 - startTime, NOPOWERUP, {  0.00f, 1.0f });//Group on the right
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2039000 - startTime, NOPOWERUP, { -0.25f, 1.0f });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2039000 - startTime, NOPOWERUP, { -0.50f, 1.0f });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2039000 - startTime, NOPOWERUP, { -0.75f, 1.0f });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2039250 - startTime, NOPOWERUP, { -0.50f, 1.0f });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2039250 - startTime, NOPOWERUP, { -0.75f, 1.0f });
-			App->enemies->AddEnemy(METALBEE       , 1400, 182, 2039000 - startTime);
-			App->enemies->AddEnemy(BIG_ASTEROID   , 1411, 250, 2040000 - startTime);
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2040000 - startTime, NOPOWERUP, { -0.50f, 1.0f });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2040000 - startTime, NOPOWERUP, {  0.00f, 1.0f });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2040000 - startTime, NOPOWERUP, {  0.50f, 1.0f });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1250, 182, 2041000 - startTime, NOPOWERUP, { -0.80f, 1.0f });//Top group
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1250, 182, 2041000 - startTime, NOPOWERUP, { -0.75f, 1.0f });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1250, 182, 2041000 - startTime, NOPOWERUP, { -0.50f, 1.0f });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1250, 182, 2041000 - startTime, NOPOWERUP, { -0.40f, 1.0f });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1250, 182, 2041000 - startTime, NOPOWERUP, {  0.00f, 1.0f });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1250, 182, 2041000 - startTime, NOPOWERUP, {  0.40f, 1.0f });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1250, 182, 2041000 - startTime, NOPOWERUP, {  0.60f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 184, 2038500 - startTime, NOPOWERUP, { -1.00f, 1.0f });//Group on the right
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 184, 2038500 - startTime, NOPOWERUP, { -1.25f, 0.75f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 2038500 - startTime, NOPOWERUP, { -1.5f, 0.50f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 2038500 - startTime, NOPOWERUP, { -1.90f, 0.10f });
+
+
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1200, 184, 2038000 - startTime, NOPOWERUP, {  0.00f, 2.0f });//Group on the left
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1200, 184, 2038000 - startTime, NOPOWERUP, {  0.25f, 1.75f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1200, 184, 2038000 - startTime, NOPOWERUP, {  0.50f, 1.5f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1200, 184, 2038000 - startTime, NOPOWERUP, {  0.75f, 1.25f });
+			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1411, 300, 2039000 - startTime);
+			App->enemies->AddEnemy(METALBEE       , 1412, 182, 2039000 - startTime);
+
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 2039000 - startTime, NOPOWERUP, {  1.00f, 1.0f });//Group on the right
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 2039000 - startTime, NOPOWERUP, { -0.25f, 1.75f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 2039000 - startTime, NOPOWERUP, { -0.50f, 1.5f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 2039000 - startTime, NOPOWERUP, { -1.0f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 2039250 - startTime, NOPOWERUP, { -1.5f, 0.5f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 2039500 - startTime, NOPOWERUP, { -1.5f, 0.5f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 2039250 - startTime, NOPOWERUP, { -1.75f, 0.25f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 2039500 - startTime, NOPOWERUP, { -1.75f, 0.25f });
+
+			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1415, 370, 2039000 - startTime);
+			App->enemies->AddEnemy(BIG_ASTEROID   , 1415, 250, 2041000 - startTime);
+			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1415, 370, 2041000 - startTime);
+
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1260, 182, 2041000 - startTime, NOPOWERUP, { 0.0f, 2.0f });//Top group
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1260, 182, 2041000 - startTime, NOPOWERUP, { -1.0f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1260, 182, 2041000 - startTime, NOPOWERUP, { 1.0f, 1.0f });
+
+
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1250, 182, 2041500 - startTime, NOPOWERUP, { -0.25f, 1.75f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1250, 182, 2041500 - startTime, NOPOWERUP, { -0.35f, 1.65f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1250, 182, 2041500 - startTime, NOPOWERUP, { -1.75f, 0.25f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1250, 182, 2041500 - startTime, NOPOWERUP, { -2.0f, 0.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1250, 182, 2041500 - startTime, NOPOWERUP, {  0.00f, 2.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1250, 182, 2041500 - startTime, NOPOWERUP, {  0.50f, 1.5f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1250, 182, 2041500 - startTime, NOPOWERUP, {  0.75f, 0.25f });
 			App->enemies->AddEnemy(BIG_ASTEROID,    1411, 350, 2042000 - startTime);
 			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1411, 310, 2042000 - startTime);
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1260, 182, 2042500 - startTime, NOPOWERUP, { -0.15f, 1.0f });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1260, 182, 2042500 - startTime, NOPOWERUP, {  0.15f, 1.0f });
-			App->enemies->AddEnemy(BIG_ASTEROID,    1411, 290, 2043000 - startTime);
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1140, 182, 2044500 - startTime, NOPOWERUP, {  0.50f, 1.0f });//speed
+			App->enemies->AddEnemy(BIG_ASTEROID,    1411, 290, 2042500 - startTime);
+
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1260, 182, 2043000 - startTime, NOPOWERUP, { -0.15f, 1.75f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1260, 182, 2043000 - startTime, NOPOWERUP, {  0.15f, 1.75f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1140, 182, 2044500 - startTime, NOPOWERUP, {  0.50f, 1.5f });//speed
+
 			App->enemies->AddEnemy(LAMELLA,         1150, 200, 2046000 - startTime);
 			App->enemies->AddEnemy(LAMELLA,         1150, 260, 2046000 - startTime);
 			App->enemies->AddEnemy(LAMELLA,         1150, 320, 2046000 - startTime);
 			App->enemies->AddEnemy(LAMELLA,         1150, 380, 2046000 - startTime);
+
 			App->enemies->AddEnemy(LAMELLA,         1350, 200, 2046000 - startTime);
 			App->enemies->AddEnemy(LAMELLA,         1350, 260, 2046000 - startTime);
 			App->enemies->AddEnemy(LAMELLA,         1350, 320, 2046000 - startTime);
@@ -632,7 +641,9 @@ update_status Module5lvlScene::LogicUpdate()
 			App->enemies->AddEnemy(BIG_ASTEROID,    1411, 325, 2047500 - startTime);
 			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1411, 380, 2047000 - startTime);
 			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1411, 220, 2047000 - startTime);
-			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1411, 320, 2047000 - startTime);
+
+
+
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1411, 182, 2047000 - startTime, NOPOWERUP, { -0.75f, 1.0f });//Left group
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1411, 182, 2047000 - startTime, NOPOWERUP, { -0.50f, 1.0f });
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1411, 182, 2047000 - startTime, NOPOWERUP, { -0.25f, 1.0f });
@@ -644,16 +655,20 @@ update_status Module5lvlScene::LogicUpdate()
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1260, 182, 2048000 - startTime, NOPOWERUP, { -0.50f, 1.0f });//Right asteroid
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1260, 182, 2048250 - startTime, NOPOWERUP, { -0.50f, 1.0f });//Right asteroid
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1360, 182, 2048000 - startTime, NOPOWERUP, {  0.00f, 1.0f });//Top asteroid
+
+			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1411, 320, 2047000 - startTime);
+			
 			App->enemies->AddEnemy(BIG_ASTEROID,    1411, 210, 2049000 - startTime);
 			App->enemies->AddEnemy(BIG_ASTEROID,    1411, 370, 2049000 - startTime);
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1150, 182, 2049750 - startTime, NOPOWERUP, { 0.50f, 1.0f });//Left asteroid
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1150, 182, 2049750 - startTime, NOPOWERUP, { 0.50f, 1.0f });//Left asteroid
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1260, 182, 2049750 - startTime, NOPOWERUP, { -0.50f, 1.0f });//Right asteroid
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1360, 182, 2049750 - startTime, NOPOWERUP, { 0.00f, 1.0f });//Top asteroid
+
 			App->enemies->AddEnemy(POWERDROPPER,    1411, 210, 2049750 - startTime, HOMING);
-			App->enemies->AddEnemy(POWERDROPPER,    1411, 240, 2049750 - startTime, HOMING);
+			App->enemies->AddEnemy(POWERDROPPER,    1411, 240, 2049755 - startTime, HOMING);
 			App->enemies->AddEnemy(POWERDROPPER,    1411, 370, 2049750 - startTime, GROUND);
-			App->enemies->AddEnemy(POWERDROPPER,    1411, 340, 2049750 - startTime, GROUND);
+			App->enemies->AddEnemy(POWERDROPPER,    1411, 340, 2049755 - startTime, GROUND);
 			App->enemies->AddEnemy(BIG_ASTEROID,    1411, 300, 2050000 - startTime);
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1150, 182, 2049750 - startTime, NOPOWERUP, { 0.50f, 1.0f });
 			reachedCheckpoint[22] = true;
@@ -724,9 +739,8 @@ update_status Module5lvlScene::RenderUpdate1()
 bool Module5lvlScene::CleanUp() {
 
 	LOG("Unloading stage 05 scene");
-	//delete collider if they haven't been deleted during the game------------------
+	//Delete colliders--------------------------------------------------------------
 	DeleteShipColliders();
-	//Add final part colliders
 	DeleteFinalColliders();
 	//audios------------------------------------------------------------------------
 	App->audio->ControlAudio(lvl5Music, STOP_AUDIO);
@@ -781,40 +795,28 @@ void Module5lvlScene::RenderShip()
 void Module5lvlScene::AddShipColliders()
 {
 	//Ship colliders-----------------------------------------------------------------------------------------
-	addedShipColliders = true;
-	deletedShipColliders = false;
-
-	for (int i = 0; i < SHIP_COLLIDERS_NUM ; ++i)
+	for (int i = 0; i < SHIP_COLLIDERS_NUM - 1; ++i)
 	{
-		if (shipCollidersCol[i] == nullptr)
-		{
-			shipCollidersCol[i] = App->collision->AddCollider(
-			{ shipCollidersRect[i].x + (int)shipPos.x,
-				shipCollidersRect[i].y + (int)shipPos.y,
-				shipCollidersRect[i].w,
-				shipCollidersRect[i].h },
-				COLLIDER_TYPE::COLLIDER_WALL);
-		}
-	
+		shipCollidersCol[i] = App->collision->AddCollider(
+		{ shipCollidersRect[i].x + (int)shipPos.x,
+			shipCollidersRect[i].y + (int)shipPos.y,
+			shipCollidersRect[i].w,
+			shipCollidersRect[i].h },
+			COLLIDER_TYPE::COLLIDER_WALL);
 	}
+
 	//Different case (it is an enemy heavy type collider)
-	if (shipCollidersCol[47] == nullptr)
-	{
-		shipCollidersCol[47] = App->collision->AddCollider(
-		{ shipCollidersRect[47].x + (int)shipPos.x,
-			shipCollidersRect[47].y + (int)shipPos.y,
-			shipCollidersRect[47].w,
-			shipCollidersRect[47].h },
-			COLLIDER_TYPE::COLLIDER_ENEMY_HEAVY);
-	}
-
-
-
+	shipCollidersCol[47] = App->collision->AddCollider(
+	{ shipCollidersRect[47].x + (int)shipPos.x,
+		shipCollidersRect[47].y + (int)shipPos.y,
+		shipCollidersRect[47].w,
+		shipCollidersRect[47].h },
+		COLLIDER_TYPE::COLLIDER_ENEMY_HEAVY);
 }
 
 void Module5lvlScene::UpdateShipColliders()
 {
-	for (int i = 0; i < SHIP_COLLIDERS_NUM ; ++i)
+	for (int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
 	{
 		if (shipCollidersCol[i] != nullptr)
 		{
@@ -826,11 +828,8 @@ void Module5lvlScene::UpdateShipColliders()
 
 }
 
-void Module5lvlScene::DeleteShipColliders() {
-
-	deletedShipColliders = true;
-	addedShipColliders = false;
-
+void Module5lvlScene::DeleteShipColliders()
+{
 	for (int i = 0; i < SHIP_COLLIDERS_NUM ; ++i)
 	{
 		if (shipCollidersCol[i] != nullptr)
@@ -843,22 +842,14 @@ void Module5lvlScene::DeleteShipColliders() {
 
 void Module5lvlScene::AddFinalColliders()
 {
-	//Add final part colliders
-	addedFinalColliders = true;
-	deletedFinalColliders = false;
-
-	for (int i = 0; i < FINAL_COLLIDERS_NUM ; ++i)
+	for (int i = 0; i < FINAL_COLLIDERS_NUM; ++i)
 	{
-	
-		if (finalCollidersCol[i] == nullptr)
-		{
-			finalCollidersCol[i] = App->collision->AddCollider(
-			{ finalCollidersRect[i].x + (int)shipPos.x,
-				finalCollidersRect[i].y + (int)shipPos.y,
-				finalCollidersRect[i].w,
-				finalCollidersRect[i].h },
-				COLLIDER_TYPE::COLLIDER_WALL);
-		}
+		finalCollidersCol[i] = App->collision->AddCollider(
+		{ finalCollidersRect[i].x + (int)shipPos.x,
+			finalCollidersRect[i].y + (int)shipPos.y,
+			finalCollidersRect[i].w,
+			finalCollidersRect[i].h },
+			COLLIDER_TYPE::COLLIDER_WALL);
 	}
 }
 
@@ -867,7 +858,6 @@ void Module5lvlScene::UpdateFinalColliders()
 {
 	for (int i = 0; i < FINAL_COLLIDERS_NUM ; ++i)
 	{
-	
 		if (finalCollidersCol[i] != nullptr)
 		{
 			finalCollidersCol[i]->SetPos(
@@ -877,11 +867,8 @@ void Module5lvlScene::UpdateFinalColliders()
 	}
 }
 
-void Module5lvlScene::DeleteFinalColliders() {
-
-	deletedFinalColliders = true;
-	addedFinalColliders = false;
-
+void Module5lvlScene::DeleteFinalColliders()
+{
 	for (int i = 0; i < FINAL_COLLIDERS_NUM; ++i)
 	{
 		if (finalCollidersCol[i] != nullptr)
@@ -890,6 +877,44 @@ void Module5lvlScene::DeleteFinalColliders() {
 			finalCollidersCol[i] = nullptr;
 		}
 
+	}
+}
+
+void Module5lvlScene::ShipColIgnoreHit()
+{
+	if(shipColIgnoreHit == false)
+	{
+		for (int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
+		{
+			if (shipCollidersCol[i] != nullptr)
+			{
+				shipCollidersCol[i]->type = COLLIDER_IGNORE_HIT;
+			}
+		}
+
+		shipColIgnoreHit = true;
+	}
+}
+
+void Module5lvlScene::ResetShipColType()
+{
+	if (shipColIgnoreHit == true)
+	{
+		for (int i = 0; i < SHIP_COLLIDERS_NUM - 1; ++i)
+		{
+			if (shipCollidersCol[i] != nullptr)
+			{
+				shipCollidersCol[i]->type = COLLIDER_WALL;
+			}
+		}
+
+		//Different case (it is an enemy heavy type collider)
+		if (shipCollidersCol[47] != nullptr)
+		{
+			shipCollidersCol[47]->type = COLLIDER_ENEMY_HEAVY;
+		}
+
+		shipColIgnoreHit = false;
 	}
 }
 

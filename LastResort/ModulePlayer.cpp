@@ -81,11 +81,11 @@ void ModulePlayer::Reappear() {
 	//collider-----------------------------------------------------------------------
 	if (playerCol != nullptr)
 	{
-		playerCol->type = COLLIDER_TYPE::COLLIDER_IGNORE_HIT;
+		playerCol->type = COLLIDER_TYPE::COLLIDER_GOD;
 	}
 	else
 	{
-		playerCol = App->collision->AddCollider({ position.x, position.y + 2, 24, 8 }, COLLIDER_TYPE::COLLIDER_IGNORE_HIT, this);
+		playerCol = App->collision->AddCollider({ position.x, position.y + 2, 24, 8 }, COLLIDER_TYPE::COLLIDER_GOD, this);
 	}
 }
 

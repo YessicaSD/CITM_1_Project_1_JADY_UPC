@@ -4,15 +4,14 @@
 #include "Powerup.h"
 
 struct Collider;
-//struct Sfx;
 
-class Powerup_SlowDown : public Powerup
+class Powerup_despeed : public Powerup
 {
 public:
-	Powerup_SlowDown(int x, int y);
-	Animation DespeedAnim;
-
+	Powerup_despeed(int x, int y);
+	Animation despeedanim;
 	void OnCollision(Collider*, ModulePlayer*);
 };
 
-#endif // __POWERUP_SPEED_H__
+#endif // __POWERUP_despeed_H__
+

@@ -48,7 +48,7 @@ void Enemy_Pinata_Spawner::Move()
 		}
 	}
 
-	LOG("currentEnemies : %d", currentEnemies);
+	//LOG("currentEnemies : %d", currentEnemies);
 
 
 	if (currentEnemies < 3 && spawnFrames > SPAWN_FRAMES - 60)

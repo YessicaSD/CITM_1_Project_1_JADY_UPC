@@ -37,6 +37,7 @@ bool ModuleGameTitle:: Start()
 	O8Texture = App->textures->Load("Assets/Scenes/LastResortTitle/O8.png");
 	R9Texture = App->textures->Load("Assets/Scenes/LastResortTitle/R9.png"); //2LASTCHAR
 	T10Texture = App->textures->Load("Assets/Scenes/LastResortTitle/T10.png");
+	neogeoTx = App->textures->Load("Assets/Scenes/NeoGeo/NeoGeoLogo.png");
 	//audios--------------------------------------------------------------------------------
 	Titlemusic=App->audio->LoadMUS("Assets/Scenes/LastResortTitle/TITLE.ogg");
 	App->audio->ControlAudio(Titlemusic, PLAY_AUDIO);
