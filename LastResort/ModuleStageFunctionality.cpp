@@ -304,6 +304,7 @@ void ModuleStageFunctionality::GoToScene()
 		break;
 	case 6:
 		////WIN SCREEN
+		App->ui->stageclear = true;
 		//if (App->player1->winlvl == false && App->player2->winlvl == false)
 		//{
 		//	App->player1->winlvl = App->player2->winlvl = true;
