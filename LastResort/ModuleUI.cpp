@@ -389,6 +389,9 @@ void ModuleUI::StageClearLogic()
 	{
 		App->player1->winlvl = true;
 		App->player2->winlvl = true;
+		App->player1->canMove = false;
+		App->player2->canMove = false;
+		
 		if (App->player1->playerCol != nullptr) { App->player1->playerCol->type = COLLIDER_IGNORE_HIT; }
 		if (App->player2->playerCol != nullptr) { App->player2->playerCol->type = COLLIDER_IGNORE_HIT; }
 	}
@@ -397,6 +400,8 @@ void ModuleUI::StageClearLogic()
 		if (App->player1->isActive)
 		{
 			App->player1->winlvlsingle = true;
+			App->player2->canMove = false;
+
 			if (App->player1->playerCol != nullptr) { App->player1->playerCol->type = COLLIDER_IGNORE_HIT; }
 		}
 			
@@ -404,6 +409,7 @@ void ModuleUI::StageClearLogic()
 		if (App->player2->isActive)
 		{
 			App->player2->winlvlsingle = true;
+			App->player2->canMove = false;
 			if (App->player2->playerCol != nullptr) { App->player2->playerCol->type = COLLIDER_IGNORE_HIT; }
 		}
 			
@@ -411,7 +417,8 @@ void ModuleUI::StageClearLogic()
 	if (frameCountStageClear >= 400)
 	{
 		stageclear = false;
-
+		App->player1->canMove = true;
+		App->player2->canMove = true;
 		App->player1->winlvl = false;
 		App->player2->winlvl = false;
 		App->player1->winlvlsingle = false;
