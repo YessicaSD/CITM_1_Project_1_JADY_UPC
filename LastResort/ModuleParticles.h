@@ -61,7 +61,6 @@ public:
 	SDL_Texture * laserTx = nullptr;
 	
 	//SFX----------------------------------------------
-	Sfx* AsteroidDestroySfx;
 	//Mix_Chunk* g_explosion02_2sfx = nullptr;
 	//Mix_Chunk* g_explosion02_3sfx = nullptr;	
 	//Mix_Chunk* g_explosion01_2sfx = nullptr;
@@ -111,6 +110,8 @@ public:
 	Particle asteroidDestroy;
 	Particle littleAsteroidDestroy;
 	Particle MiddleAsteroidDestroy;
+	Sfx* asteroisExplotionSfx=nullptr;
+
 	Particle fireBall;
 	Particle fireBar;
 	Particle missile;

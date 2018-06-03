@@ -5,7 +5,7 @@
 #include "Globals.h"
 #include "ModuleAudio.h"
 
-Powerup_Despeed::Powerup_Despeed(int x, int y) : Powerup(x, y)
+Powerup_SlowDown::Powerup_SlowDown(int x, int y) : Powerup(x, y)
 {
 	//Push backs
 	DespeedAnim.PushBack({ 0, 85, 18, 21 });
@@ -16,7 +16,7 @@ Powerup_Despeed::Powerup_Despeed(int x, int y) : Powerup(x, y)
 	collider = App->collision->AddCollider({ 0, 0, 18, 21 }, COLLIDER_TYPE::COLLIDER_POWERUP, (Module*)App->powerups);
 }
 
-void Powerup_Despeed::OnCollision(Collider* col, ModulePlayer* playerTarget)
+void Powerup_SlowDown::OnCollision(Collider* col, ModulePlayer* playerTarget)
 {
 	App->audio->ControlAudio(App->powerups->despeedSFX, PLAY_AUDIO);
 
