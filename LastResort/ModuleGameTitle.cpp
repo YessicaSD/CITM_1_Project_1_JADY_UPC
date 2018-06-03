@@ -90,9 +90,11 @@ bool ModuleGameTitle::CleanUp() {
 	App->textures->Unload(O8Texture);
 	App->textures->Unload(R9Texture);
 	App->textures->Unload(T10Texture);
+	App->textures->Unload(T10Texture);
+	App->textures->Unload(neogeoTx);
 	//audios------------------------------------------------------------------------
 	App->audio->ControlAudio(Titlemusic, STOP_AUDIO);
-	App->audio->UnloadMUS(Titlemusic);
+	
 
 	//Reset variables---------------------------------------------------------------
 	titleDone = false;
