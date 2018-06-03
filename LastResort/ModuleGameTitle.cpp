@@ -1,13 +1,13 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleGameTitle.h"
+#include "ModuleAudio.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "Player1.h"
 #include "Player2.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
-#include "ModuleAudio.h"
 #include "ModuleGameOver.h"
 #include "ModuleStageClear.h"
 #include "ModuleStage01.h"
@@ -38,7 +38,7 @@ bool ModuleGameTitle:: Start()
 	R9Texture = App->textures->Load("Assets/Scenes/LastResortTitle/R9.png"); //2LASTCHAR
 	T10Texture = App->textures->Load("Assets/Scenes/LastResortTitle/T10.png");
 	//audios--------------------------------------------------------------------------------
-	Titlemusic=App->audio->LoadMUS("Assets/Scenes/LastResortTitle/02-LAST-RESORT-TITLE.ogg");
+	Titlemusic=App->audio->LoadMUS("Assets/Scenes/LastResortTitle/TITLE.ogg");
 	App->audio->ControlAudio(Titlemusic, PLAY_AUDIO);
 	//UI-------------------------------------------------------------------------------------
 	App->ui->currentScene = TITLE_SCENE;
@@ -143,9 +143,11 @@ update_status ModuleGameTitle::LogicUpdate() {
 			App->render->Blit(T10Texture, 238, 85, &T10.GetCurrentFrame());
 	
 	
-		if (current_time>17000 || titleDone == true)
-		App->fonts->BlitText(50, 190, 0, "SNK CORP. OF AMERICA @1992");
-		App->audio->ControlAudio(Titlemusic, STOP_AUDIO);
+		if (current_time > 17000 || titleDone == true) {
+			App->fonts->BlitText(50, 190, 0, "SNK CORP. OF AMERICA @1992");
+			App->audio->ControlAudio(Titlemusic, STOP_AUDIO);
+		}
+	
 	
 	/*if (current_time>18000 || titleDone == true)
 	{

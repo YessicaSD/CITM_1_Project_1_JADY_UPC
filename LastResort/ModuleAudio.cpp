@@ -25,7 +25,7 @@ bool ModuleAudio::Init()
 {
 	LOG("Init Image library");
 	bool ret = true;
-	int flags = MIX_INIT_OGG;
+	int flags = MIX_INIT_OGG ;
 	int init = Mix_Init(flags);
 
 	if ((init & flags) != flags)
@@ -35,9 +35,10 @@ bool ModuleAudio::Init()
 	}
 
 	else {
-		Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
+		Mix_OpenAudio(44100, AUDIO_U16, 1, 4096);
 		Mix_VolumeMusic(GENERAL_MUSIC_VOLUME);
-		Mix_AllocateChannels(10);
+		Mix_AllocateChannels(30);
+
 		
 	}
 
@@ -96,6 +97,11 @@ Music*  ModuleAudio::LoadMUS(const char* path) {
 	Mix_Music *music = nullptr;
 	music = Mix_LoadMUS(path);
 
+	if (!music) {
+		LOG("Cannot load music Mix Error: %s\n", Mix_GetError());
+		return nullptr;
+	}
+
 	for (int i = 0; i < MAX_MUSICS; ++i)
 	{
 		if (musics[i] == nullptr)
@@ -104,6 +110,7 @@ Music*  ModuleAudio::LoadMUS(const char* path) {
 			musics[i]->id = musicID;
 			++musicID;
 			musics[i]->name = path;
+			LOG(" Loaded music:  %s ", musics[i]->name);
 			musics[i]->audio = music;
 			return musics[i];
 		}
@@ -129,6 +136,7 @@ Sfx*  ModuleAudio::LoadSFX(const char* path) {
 			sfx[i]->id = sfxID;
 			++sfxID;
 			sfx[i]->name = path;
+			LOG(" Loaded sfx:  %s ", sfx[i]->name);
 			sfx[i]->audio = chunk;
 	
 		
@@ -151,7 +159,7 @@ bool ModuleAudio::UnloadMUS(Music * music) {
 	{
 		if (musics[i] != nullptr  && musics[i] == music )
 		{
-			LOG(" Unload music:  %s ", music->name);
+			LOG(" Unloaded music:  %s ", music->name);
 			Mix_FreeMusic(musics[i]->audio);
 			delete musics[i];
 			musics[i] = nullptr;
@@ -194,33 +202,36 @@ bool ModuleAudio::UnloadSFX(Sfx * sound_fx) {
 }
 
 
-bool ModuleAudio::ControlAudio(Music* music, Audio_State state) {
+bool ModuleAudio::ControlAudio( Music* music, Audio_State state) {
 
 	if (music == nullptr) {
 		return false;
 	}
 
-	for (uint i = 0; i < MAX_MUSICS; ++i) {
+	for (int i = 0; i < MAX_MUSICS; ++i) {
 
 		if (musics[i] != nullptr && musics[i] == music ) {
 
 			switch (state)
 			{
 			case PLAY_AUDIO:
-				if (!Mix_PlayingMusic())
-					Mix_PlayMusic(musics[i]->audio, 3);
-				else
-					LOG("Music is already playing");
+				if (Mix_PlayMusic(musics[i]->audio, 0) == -1) {
+
+					LOG("Mix_PlayMusic: %s\n", Mix_GetError());
+			
+				}
+				
 				break;
 			case STOP_AUDIO:
 				if (!Mix_PausedMusic())
 					Mix_PauseMusic();
 				break;
 			}
-			break;
+			return true;
 		}
 		
 	}
+	return false;
 }
 
 bool ModuleAudio::ControlAudio(Sfx* SFX, Audio_State state) {
@@ -229,7 +240,7 @@ bool ModuleAudio::ControlAudio(Sfx* SFX, Audio_State state) {
 		return false;
 	}
 
-	for (uint i = 0; i < MAX_SOUNDEFECTS; ++i) {
+	for (int i = 0; i < MAX_SOUNDEFECTS; ++i) {
 
 		if (sfx[i] != nullptr && sfx[i] == SFX) {
 
