@@ -118,6 +118,7 @@ public:
 	Particle indoorLaser;
 	Particle barGuardShot;
 	Particle bossShot;
+	Sfx* bossShot_sfx = nullptr;
 
 	//- OTHER
 	iPoint VectorMiddleBossShots;

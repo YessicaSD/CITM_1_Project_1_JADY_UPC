@@ -55,6 +55,7 @@ bool ModuleParticles::Start()
 	laserTravelling    = App->audio->LoadSFX("Assets/Particles/lasers traveling.wav");
 	rocketExplosion    = App->audio->LoadSFX("Assets/Particles/rocket explosion.wav");
 	rocket             = App->audio->LoadSFX("Assets/Particles/rocket.wav");
+	bossShot_sfx       = App->audio->LoadSFX("Assets/Particles/laser_boss_lvl_5.wav");
 	//- Initializate textures
 	g_explosion02.texture = explosionTx;
 	//- Initializate audios
@@ -83,7 +84,8 @@ bool ModuleParticles::CleanUp()
 	App->audio->UnloadSFX(g_explosion01_1sfx);
 	App->audio->UnloadSFX(g_explosion02_1sfx);
 	App->audio->UnloadSFX(laserEnemyShot_sfx);
-
+	App->audio->UnloadSFX(bossShot_sfx);
+	
 	//----------------------------------------------------------
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{

@@ -412,7 +412,7 @@ Enemy* ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			enemies[i] = new Enemy_MetalBee(info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 2, 200, info.pu_Type);
 			break;
 		case ENEMY_TYPES::BOSS_05:
-			enemies[i] = new Enemy_Boss_05 (info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 2, 200, info.pu_Type);
+			enemies[i] = new Enemy_Boss_05 (info.x + App->stage05->spawnPos.x, info.y + App->stage05->spawnPos.y, 60, 3000, info.pu_Type);
 			break;
 		}
 		return enemies[i];

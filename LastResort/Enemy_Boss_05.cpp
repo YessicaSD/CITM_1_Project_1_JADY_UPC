@@ -1,7 +1,9 @@
 #include "Application.h"
+#include "ModuleAudio.h"
 #include "Enemy_Boss_05.h"
 #include "ModuleCollision.h"
 #include "ModuleStage05.h"
+#include "ModuleUI.h"
 #include <stdlib.h>
 
 #define MAX_BOSS_SPEED 0.7f
@@ -30,7 +32,13 @@ Enemy_Boss_05::Enemy_Boss_05(int x, int y, float hp, int scoreValue, POWERUP_TYP
 	collider = App->collision->AddCollider({ x - 20, y - 20, 40, 40 }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
 }
 
+Enemy_Boss_05::~Enemy_Boss_05()
+{
+	if (collider != nullptr)
+		collider->to_delete = true;
 
+	App->ui->stageclear = true;
+}
 //Movement-------------------------------------------------------------
 
 void Enemy_Boss_05::Move()
@@ -84,6 +92,7 @@ void Enemy_Boss_05::Move()
 	//Shoot particle-----------------------------------------------
 	if (shootFrames > BOOS_SHOOT_FRAMES) {
 		shootFrames = 0;
+		App->audio->ControlAudio( App->particles->bossShot_sfx, PLAY_AUDIO);
 		App->particles->AddParticle(App->particles->bossShot, { (float)position.x- 35 ,  (float)position.y}, { 0,0 }, App->particles->particlesTx, COLLIDER_IGNORE_HIT, 0.0f ,PARTICLE_BOSS);
 	}
 
