@@ -20,7 +20,7 @@
 #define FireAnimAddedSpeed 0.03f
 #define NumberofFireAnimRects 14
 #define NumberofFireSquares 8
-#define FinalFireSquare 8
+#define FinalFireSquare 7
 
 ModuleContinue::ModuleContinue() {
 	//Background Rect--------------------------------------------------------------
@@ -62,6 +62,9 @@ bool ModuleContinue::Start() {
 	time_finished = false;
 	bgAlpha = MAX_ALPHA;
 	rest_bgAlpha = true;
+	//-------------Reset players score-----------------------
+	App->player1->score = 0;
+	App->player2->score = 0;
 	//textures-----------------------------------------------------------------------
 	backgroundTex = App->textures->Load("Assets/Scenes/Continue/backgrounds.png");
 	continueTex = App->textures->Load("Assets/Scenes/Continue/continue.png");
@@ -120,29 +123,37 @@ update_status ModuleContinue::LogicUpdate() {
 	}
 	//Fire--------------------------------------------------------------------------
 	for (int i = 0; i < NumberofFireSquares; ++i) {
-		if (!fireAnim[i].finished) {
+
+		if (fireAnim[i].finished == false) 
+		{
 			if (i < NumberofFireSquares - 1)
 				App->render->Blit(continueTex, 21 + 32 * i, 96, &fireAnim[i].GetFrameEx());
 			else
 				App->render->Blit(continueTex, 253, 96, &fireAnim[i].GetFrameEx());
 		}
-		else if (fireAnim[FinalFireSquare - 1].finished) {
-			fireAnim[i].finished = false;
-			if (i == FinalFireSquare - 1) {
+
+		else if (fireAnim[FinalFireSquare].finished == true )
+		{
+			fireAnim[i].Reset();
+			if (i == FinalFireSquare ) {
 				--number;
 			}
 		}
 	}
 	//Continue------------------------------------------------------------------------
 	App->render->Blit(continueTex, 16, 96, &continue_rect);
+
 	//Number-------------------------------------------------------------------------
+
 	App->render->Blit(continueTex, 256, 96, &numbersAnim.frames[number]);
+
+	//Game Over scene-----------------------------------------------------------------
 	if (number < 0) {
 		time_finished = true;
 		App->fade->FadeToBlack(this, App->gameoverScene, 0.0f);
 	}
 
-
+	//Ready scene---------------------------------------------------------------------
 
 	if (App->player1->isActive == true || App->player2->isActive == true)
 	{

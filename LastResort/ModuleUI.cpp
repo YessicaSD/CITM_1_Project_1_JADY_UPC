@@ -391,7 +391,7 @@ void ModuleUI::StageClearLogic()
 	}
 
 	if(App->player1->isActive && App->player2->isActive)
-		{
+	{
 		App->player1->winlvl = true;
 		App->player2->winlvl = true;
 		if (App->player1->playerCol != nullptr) { App->player1->playerCol->type = COLLIDER_IGNORE_HIT; }

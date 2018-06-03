@@ -60,7 +60,7 @@ Enemy_Intergalactic_F::Enemy_Intergalactic_F(int x, int y, float hp, int scoreVa
 
 
 	//Add collider--------------------------------
-	collider = App->collision->AddCollider({ x - 20, y- 20, 40, 40 }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ x - 15, y- 15, 30, 30 }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
 }
 
 
@@ -156,7 +156,7 @@ void Enemy_Intergalactic_F::Move()
 	position = { (int)float_position.x, (int)float_position.y };
 
 	if (collider != nullptr)
-		collider->SetPos(position.x - 20, position.y - 20);
+		collider->SetPos(position.x - 15, position.y - 15);
 }
 
 void Enemy_Intergalactic_F::Draw0(SDL_Texture* sprites)

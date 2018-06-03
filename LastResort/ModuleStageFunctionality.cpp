@@ -110,15 +110,15 @@ void ModuleStageFunctionality::Debugging()
 		if (godMode == true)
 		{
 			SDL_SetTextureColorMod(PlayerTexture, 255, 255, 255);
-			if (App->player1->playerCol != nullptr) { App->player1->playerCol->type = COLLIDER_PLAYER; }
-			if (App->player2->playerCol != nullptr) { App->player2->playerCol->type = COLLIDER_PLAYER; }
+			if (App->player1->isActive && App->player1->playerCol != nullptr) { App->player1->playerCol->type = COLLIDER_PLAYER; }
+			if (App->player2->isActive && App->player2->playerCol != nullptr) { App->player2->playerCol->type = COLLIDER_PLAYER; }
 			godMode = false;
 		}
 		else
 		{
 			SDL_SetTextureColorMod(PlayerTexture, 255, 255, 150);
-			if (App->player1->playerCol != nullptr) { App->player1->playerCol->type = COLLIDER_GOD; }
-			if (App->player2->playerCol != nullptr) { App->player2->playerCol->type = COLLIDER_GOD; }
+			if (App->player1->isActive && App->player1->playerCol != nullptr) { App->player1->playerCol->type = COLLIDER_GOD; }
+			if (App->player2->isActive && App->player2->playerCol != nullptr) { App->player2->playerCol->type = COLLIDER_GOD; }
 			godMode = true;
 		}
 	}
