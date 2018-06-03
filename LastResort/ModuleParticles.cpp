@@ -88,6 +88,9 @@ bool ModuleParticles::CleanUp()
 	App->audio->UnloadSFX(laserEnemyShot_sfx);
 	App->audio->UnloadSFX(bossShot_sfx);
 	App->audio->UnloadSFX(asteroisExplotionSfx);
+	App->audio->UnloadSFX(laserTravelling);
+	App->audio->UnloadSFX(rocketExplosion);
+	App->audio->UnloadSFX(rocket);
 
 	//----------------------------------------------------------
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
