@@ -30,6 +30,8 @@ private:
 	bool blitEx = false;
 	int currentFrames = 0;
 
+	fPoint vectorIncrease;
+	fPoint PlayerPos;
 
 	enum DirectionX {
 		RIGHT,

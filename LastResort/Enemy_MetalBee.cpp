@@ -16,41 +16,46 @@ Enemy_MetalBee::Enemy_MetalBee(int x, int y, float hp, int scoreValue, POWERUP_T
 	moveAnim.speed = 0.2f;
 	animation = &moveAnim;
 
-	rotateAnimRight.PushBack({ 621,250,43,44 });
+	rotateAnimRight.PushBack({ 562,341,43,44 });
+	rotateAnimRight.PushBack({ 519,341,43,44 });
 	rotateAnimRight.PushBack({ 666,250,37,45 });
 	rotateAnimRight.PushBack({ 705,250,39,45 });
 	rotateAnimRight.PushBack({ 746,250,41,45 });
 	rotateAnimRight.PushBack({ 789,250,41,45 });
-	rotateAnimRight.PushBack({ 832,250,41,45 });
+	rotateAnimRight.PushBack({ 832,250,48,45 });
+	rotateAnimRight.PushBack({ 606,341,48,46 });
+	rotateAnimRight.PushBack({ 656,341,41,46 });
+	rotateAnimRight.PushBack({ 699,341,41,46 });
 	rotateAnimRight.PushBack({ 882,250,37,45 });
-	rotateAnimRight.PushBack({ 882,250,37,45 });
+	rotateAnimRight.PushBack({ 822,341,40,46 });
+	rotateAnimRight.PushBack({ 864,341,42,46 });
+	rotateAnimRight.PushBack({ 908,341,42,46 });
 	rotateAnimRight.speed = 0.2f;
 
-	rotateAnimLeft.PushBack({ 921,250,43,44 });
-	rotateAnimLeft.PushBack({876,296,43,44 });
-	rotateAnimLeft.PushBack({ 921,250,43,44 });
-	rotateAnimLeft.PushBack({ 519,296,37,45 });
-	rotateAnimLeft.PushBack({ 558,296,37,45 });
-	rotateAnimLeft.PushBack({ 558,296,37,45 });
-	rotateAnimLeft.PushBack({ 597,296,40,45 });
-	rotateAnimLeft.PushBack({ 639,296,40,45 });
-	rotateAnimLeft.PushBack({ 681,296,48,45 });
-	rotateAnimLeft.PushBack({ 681,296,48,45 });
-	rotateAnimLeft.PushBack({ 731,296,48,45 });
-	rotateAnimLeft.PushBack({ 826,296,48,44 });
-	rotateAnimLeft.PushBack({ 826,296,48,44 });
+
+	rotateAnimLeft.PushBack({ 921,250,44,44 });
+	rotateAnimLeft.PushBack({ 519,295,37,46 });
+	rotateAnimLeft.PushBack({ 558,295,37,46 });
+	rotateAnimLeft.PushBack({ 597,295,40,46 });
+	rotateAnimLeft.PushBack({ 639,295,40,46 });
+	rotateAnimLeft.PushBack({ 681,295,48,46 });
+	rotateAnimLeft.PushBack({ 731,295,48,46 });
+	rotateAnimLeft.PushBack({ 921,295,40,46 });
+	rotateAnimLeft.PushBack({ 781,341,40,47 });
+	rotateAnimLeft.PushBack({ 742,341,37,46 });
+	rotateAnimLeft.PushBack({ 952,341,37,46 });
+	rotateAnimLeft.PushBack({ 963,295,48,46 });
 	rotateAnimLeft.speed = 0.2f;
 	collider = App->collision->AddCollider({ x - 12 , y - 12, 24, 24 }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
 
 	speed = { 0.2f, 0.0f };
 	aceleration = { 0.1f, 0.1f };
+	float_position.x = x;
+	float_position.y = y;
 
 }
 void Enemy_MetalBee:: Move()
 {
-	fPoint vectorIncrease;
-	fPoint PlayerPos;
-
 	// Update player position---------------------------------------
 	if (currentState != ROTATE_LEFT && currentState != ROTATE_RIGHT) {
 		CheckTarget();
@@ -117,8 +122,9 @@ void Enemy_MetalBee::CheckTarget() {
 		lastTarget = currentTarget;
 	}
 	else if (lastTarget != currentTarget) {
-		CheckDirection();
+		
 		lastTarget = currentTarget;
+		CheckDirection();
 	}
 
 }
@@ -156,7 +162,7 @@ void Enemy_MetalBee::Draw1(SDL_Texture* sprites)
 	{
 
 	case FOLLOW:
-
+		
 		break;
 
 	case ROTATE_RIGHT:
@@ -186,7 +192,7 @@ void Enemy_MetalBee::Draw1(SDL_Texture* sprites)
 	}
 
 	//Check direction for flip blit or not----------------------------------
-	if (currentDirX == LEFT)
+	if (currentDirX == LEFT && currentState != ROTATE_LEFT)
 		blitEx = true;
 
 	//Draw------------------------------------------------------------------
