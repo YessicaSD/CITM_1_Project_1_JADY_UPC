@@ -116,7 +116,7 @@ void Particle_Boss::Move() {
 		collider->SetMeasurements((int)laserWeight, 6);
 	}
 
-	if (frames > 160) {
+	if (frames >=160) {
 
 		if (deletedLaserCol== false) {
 			collider->to_delete = true;
@@ -130,6 +130,10 @@ void Particle_Boss::Move() {
 		}
 
 		for (int i = 0; i < MAX_DIR; ++i) {
+
+			if (collider == nullptr) {
+				break;
+			}
 
 			switch (i)
 			{

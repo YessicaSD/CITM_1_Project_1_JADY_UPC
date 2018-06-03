@@ -707,7 +707,7 @@ void Module5lvlScene::AddShipColliders()
 
 	for (int i = 0; i < SHIP_COLLIDERS_NUM ; ++i)
 	{
-		if (shipCollidersCol[i] != nullptr)
+		if (shipCollidersCol[i] == nullptr)
 		{
 			shipCollidersCol[i] = App->collision->AddCollider(
 			{ shipCollidersRect[i].x + (int)shipPos.x,
@@ -719,7 +719,7 @@ void Module5lvlScene::AddShipColliders()
 	
 	}
 	//Different case (it is an enemy heavy type collider)
-	if (shipCollidersCol[47] != nullptr)
+	if (shipCollidersCol[47] == nullptr)
 	{
 		shipCollidersCol[47] = App->collision->AddCollider(
 		{ shipCollidersRect[47].x + (int)shipPos.x,
@@ -771,7 +771,7 @@ void Module5lvlScene::AddFinalColliders()
 	for (int i = 0; i < FINAL_COLLIDERS_NUM ; ++i)
 	{
 	
-		if (finalCollidersCol[i] != nullptr)
+		if (finalCollidersCol[i] == nullptr)
 		{
 			finalCollidersCol[i] = App->collision->AddCollider(
 			{ finalCollidersRect[i].x + (int)shipPos.x,
