@@ -156,11 +156,6 @@ update_status  ModuleUI::InputUpdate()
 		}
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_E] == KEY_DOWN)
-	{
-		stageclear = true;
-	}
-	
 	//-----------------------------------------------------------------------------------------------------------------------------------
 	if (stageclear == true)
 	{

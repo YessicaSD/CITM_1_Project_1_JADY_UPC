@@ -273,6 +273,9 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(BAR_GUARDIAN, 2070, 182 + SCREEN_HEIGHT / 2);
 	App->enemies->AddEnemy(BOSS_05, 2385, 294);
 
+	//Add colliders
+	AddShipColliders();
+	AddFinalColliders();
 	return ret;
 }
 
@@ -311,33 +314,8 @@ update_status Module5lvlScene::LogicUpdate()
 		currentCheckPoint = 0;
 
 	//---------Update colliders-------------------------------------------
-
-
-	 if (cameraMovement.currentMov < 22) {
-
-		 if (deletedFinalColliders == false) {
-			 DeleteFinalColliders();
-		 }
-
-		 if (addedShipColliders == false) {
-			 AddShipColliders();
-		 }
-
-		UpdateShipColliders();
-	}
-	 else  {
-
-		 if (deletedShipColliders == false) {
-			 DeleteShipColliders();
-		 }
-
-		 if (addedFinalColliders == false) {
-			 AddFinalColliders();
-		 }
-
-		 UpdateFinalColliders();
-	 }
-
+	UpdateShipColliders();
+	UpdateFinalColliders();
 
 	//- The mega checkpoint switch--------------------------------------
 	//LOG("Current check point %i", cameraMovement.currentMov);
@@ -724,9 +702,8 @@ update_status Module5lvlScene::RenderUpdate1()
 bool Module5lvlScene::CleanUp() {
 
 	LOG("Unloading stage 05 scene");
-	//delete collider if they haven't been deleted during the game------------------
+	//Delete colliders--------------------------------------------------------------
 	DeleteShipColliders();
-	//Add final part colliders
 	DeleteFinalColliders();
 	//audios------------------------------------------------------------------------
 	App->audio->ControlAudio(lvl5Music, STOP_AUDIO);
@@ -797,6 +774,7 @@ void Module5lvlScene::AddShipColliders()
 		}
 	
 	}
+
 	//Different case (it is an enemy heavy type collider)
 	if (shipCollidersCol[47] == nullptr)
 	{
@@ -826,11 +804,8 @@ void Module5lvlScene::UpdateShipColliders()
 
 }
 
-void Module5lvlScene::DeleteShipColliders() {
-
-	deletedShipColliders = true;
-	addedShipColliders = false;
-
+void Module5lvlScene::DeleteShipColliders()
+{
 	for (int i = 0; i < SHIP_COLLIDERS_NUM ; ++i)
 	{
 		if (shipCollidersCol[i] != nullptr)
@@ -843,10 +818,6 @@ void Module5lvlScene::DeleteShipColliders() {
 
 void Module5lvlScene::AddFinalColliders()
 {
-	//Add final part colliders
-	addedFinalColliders = true;
-	deletedFinalColliders = false;
-
 	for (int i = 0; i < FINAL_COLLIDERS_NUM ; ++i)
 	{
 	
@@ -877,11 +848,8 @@ void Module5lvlScene::UpdateFinalColliders()
 	}
 }
 
-void Module5lvlScene::DeleteFinalColliders() {
-
-	deletedFinalColliders = true;
-	addedFinalColliders = false;
-
+void Module5lvlScene::DeleteFinalColliders()
+{
 	for (int i = 0; i < FINAL_COLLIDERS_NUM; ++i)
 	{
 		if (finalCollidersCol[i] != nullptr)
