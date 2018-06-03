@@ -5,6 +5,7 @@
 #include "ModuleStageFunctionality.h"
 #include "ModuleAudio.h"
 #include "ModuleRender.h"
+#include <stdlib.h>
 
 Enemy_RedBats::Enemy_RedBats(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t) : Enemy(x, y, hp, scoreValue, pu_t)
 {
@@ -63,7 +64,8 @@ void Enemy_RedBats::OnCollision(Collider* collider)
 	//- Check how many red bats have been killed
 	if (App->stageFunctionality->redBatsKilled >= 5)
 	{
-		App->powerups->AddPowerup(position.x, position.y, POWERUP_TYPE::LASER);
+		int droptype = rand() % 5;
+		App->powerups->AddPowerup(position.x, position.y, (POWERUP_TYPE)droptype);
 		App->stageFunctionality->redBatsKilled = 0;
 	}
 
