@@ -21,16 +21,17 @@ public:
 public:
 
 	SDL_Texture * TitleTexture = nullptr;
-	SDL_Texture *L1Texture;
-	SDL_Texture *A2Texture;
-	SDL_Texture *S3Texture;
-	SDL_Texture *T4Texture;
-	SDL_Texture *R5Texture;
-	SDL_Texture *E6Texture;
-	SDL_Texture *S7Texture;
-	SDL_Texture *O8Texture;
-	SDL_Texture *R9Texture; //2LASTCHAR
-	SDL_Texture *T10Texture;
+	SDL_Texture *L1Texture =nullptr;
+	SDL_Texture *A2Texture = nullptr;
+	SDL_Texture *S3Texture = nullptr;
+	SDL_Texture *T4Texture = nullptr;
+	SDL_Texture *R5Texture = nullptr;
+	SDL_Texture *E6Texture = nullptr;
+	SDL_Texture *S7Texture = nullptr;
+	SDL_Texture *O8Texture = nullptr;
+	SDL_Texture *R9Texture = nullptr; //2LASTCHAR
+	SDL_Texture *T10Texture = nullptr;
+	SDL_Texture *neogeoTx = nullptr;
 
 	//SDL_Rect LastResortRect;
 
