@@ -29,7 +29,6 @@ public:
 	int dmg_frames = 0;
 	int flashing_interval = -1;
 	bool isDamaged = false;
-	int renderLayer = 1;
 
 	//Enemy ------
 	Enemy* enemySpawned = nullptr;
@@ -43,7 +42,9 @@ public:
 	const Collider* GetCollider() const;
 
 	virtual void Move() {};
-	virtual void Draw(SDL_Texture* sprites);
+	virtual void Draw0(SDL_Texture* sprites);
+	virtual void Draw1(SDL_Texture* sprites);
+	virtual void Draw2(SDL_Texture* sprites);
 	virtual void OnCollision(Collider*);
 };
 

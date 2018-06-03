@@ -19,7 +19,7 @@ public:
 	Enemy_Mech(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop);
 	~Enemy_Mech() {};
 	void Move();
-	void Draw(SDL_Texture* sprites);
+	void Draw2(SDL_Texture* sprites);
 };
 
 #endif // __ENEMY_MECH_H__

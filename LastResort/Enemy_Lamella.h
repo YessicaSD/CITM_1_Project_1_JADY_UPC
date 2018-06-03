@@ -10,7 +10,7 @@ class Enemy_Lamella : public Enemy
 public:
 	Enemy_Lamella(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop);
 	void Move();
-	void Draw(SDL_Texture* sprites);
+	void Draw1(SDL_Texture* sprites);
 
 private:
 	enum phases

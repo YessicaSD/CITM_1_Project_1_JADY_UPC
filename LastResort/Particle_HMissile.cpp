@@ -39,8 +39,9 @@ Particle_HMissile::Particle_HMissile(Particle& p, fPoint position, fPoint speed,
 	anim = steppingOutAnim;
 	currentFrame = anim.GetCurrentFrame();
 
-	//Colliders
-	collider = App->collision->AddCollider({ (int)position.x - missilePartRect.w, (int)position.y - missilePartRect.h / 2,  missilePartRect.w, missilePartRect.h }, colType, (Module*)App->particles);
+	//Collider
+	collider->SetPos((int)position.x - missilePartRect.w, (int)position.y - missilePartRect.h / 2);
+	collider->SetMeasurements(missilePartRect.w, missilePartRect.w);
 }
 
 //PHASE 1: Moving to position (stepping out)
@@ -187,11 +188,13 @@ void Particle_HMissile::OnCollisionParticle(Collider* c1, Collider* c2)
 
 Particle_HMissile::~Particle_HMissile()
 {
-	if(collider != nullptr){
+	if(collider != nullptr)
+	{
 		collider->to_delete = true;
 	}
 
-	if(enemyDetectionCol != nullptr){
+	if(enemyDetectionCol != nullptr)
+	{
 		enemyDetectionCol->to_delete = true;
 	}
 }

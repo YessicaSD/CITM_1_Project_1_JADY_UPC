@@ -359,10 +359,12 @@ void ModuleUI::StageClearLogic()
 	if (frameCountStageClear >= 300)
 	{
 		stageclear = false;
+
 		App->player1->winlvl = false;
 		App->player2->winlvl = false;
 		App->player1->winlvlsingle = false;
 		App->player2->winlvlsingle = false;
+
 		frameCountStageClear = 0;
 		App->fade->FadeToBlack(App->stage05, App->titleScene, 0.0f);
 	}

@@ -5,6 +5,7 @@
 #include "ModuleParticles.h"
 #include "SDL\include\SDL.h"
 #include "ModuleAudio.h"
+#include "ModuleRender.h"
 
 Enemy_Ship_Motor::Enemy_Ship_Motor(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop):Enemy( x, y,  hp, scoreValue, powerupDrop)
 {
@@ -77,7 +78,7 @@ void Enemy_Ship_Motor::Move()
 
 }
 
-void Enemy_Ship_Motor::Draw(SDL_Texture* sprites)
+void Enemy_Ship_Motor::Draw1(SDL_Texture* sprites)
 {
 	if (animation != nullptr)
 		App->render->Blit(sprites, position.x-Ship_Part.w, position.y +15 - Ship_Part.h, &(animation->GetFrameEx()));

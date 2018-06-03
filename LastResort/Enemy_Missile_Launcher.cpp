@@ -72,7 +72,7 @@ void Enemy_Missile_Launcher::Move() {
 	mframeCount += 1;
 }
 
-void Enemy_Missile_Launcher::Draw(SDL_Texture* sprites)
+void Enemy_Missile_Launcher::Draw1(SDL_Texture* sprites)
 {
 	if (animation != nullptr)
 		App->render->Blit(sprites, position.x , position.y , &(animation->GetCurrentFrame()));

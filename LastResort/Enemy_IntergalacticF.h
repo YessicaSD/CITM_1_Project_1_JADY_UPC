@@ -11,7 +11,7 @@ class Enemy_Intergalactic_F : public Enemy
 public:
 	Enemy_Intergalactic_F(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop);
 	void Move();
-	void Draw(SDL_Texture* sprites);
+	void Draw0(SDL_Texture* sprites);
 	void CheckTarget();
 	void CheckDirection();
 

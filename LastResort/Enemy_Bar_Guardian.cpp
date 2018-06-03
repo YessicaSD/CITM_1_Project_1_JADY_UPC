@@ -22,8 +22,6 @@ Enemy_BarGuardian::Enemy_BarGuardian(int x, int y, float hp, int scoreValue, POW
 	backAnim = { 364, 493, 30,  80 };
 	topBarAnim = { 233, 460, 32, 128 };
 	botBarAnim = { 265, 460, 32, 128 };
-	//Render layer----------------------------------
-	renderLayer = 0;
 	//Collider--------------------------------------
 	collider  = App->collision->AddCollider({ x - 16 + 2, y - backAnim.h/2,      backAnim.w + 16 - 2,   backAnim.h }, COLLIDER_TYPE::COLLIDER_IGNORE_HIT, (Module*)App->enemies);
 	topBarCol = App->collision->AddCollider({ x -  8, y - 24 - topBarAnim.h, topBarAnim.w, topBarAnim.h }, COLLIDER_TYPE::COLLIDER_WALL);
@@ -181,16 +179,24 @@ void Enemy_BarGuardian::Move()
 	}
 }
 
-void Enemy_BarGuardian::Draw(SDL_Texture* sprites)
+void Enemy_BarGuardian::Draw0(SDL_Texture* sprites)
 {
 	//Blit top bar
 	App->render->Blit(sprites, topBarPos.x, topBarPos.y, &topBarAnim);
 	//Blit bot bar
 	App->render->Blit(sprites, botBarPos.x, botBarPos.y, &botBarAnim);//24 distance from the center of the enemy
+}
+
+void Enemy_BarGuardian::Draw1(SDL_Texture* sprites)
+{
+	//Blit eye
+	App->render->Blit(sprites, position.x - 16, position.y - 74 / 2 + 1, &animation->GetCurrentFrame());
+}
+
+void Enemy_BarGuardian::Draw2(SDL_Texture* sprites)
+{
 	//Blit back part
 	App->render->Blit(sprites, position.x, position.y - backAnim.h / 2, &backAnim);
-	//Blit eye
-	App->render->Blit(sprites, position.x - 16, position.y - 74/2 + 1, &animation->GetCurrentFrame());
 }
 
 Enemy_BarGuardian::~Enemy_BarGuardian()

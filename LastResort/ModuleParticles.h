@@ -113,8 +113,8 @@ public:
 	Particle MiddleAsteroidDestroy;
 	Particle fireBall;
 	Particle fireBar;
-	Particle Missile;
-	Particle MissileExplosion;
+	Particle missile;
+	Particle missileExplosion;
 	Particle indoorLaser;
 	Particle barGuardShot;
 	Particle bossShot;

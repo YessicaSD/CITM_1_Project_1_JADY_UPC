@@ -80,7 +80,7 @@ void Enemy_Mech_Spawner::Move()
 	
 };
 
-void Enemy_Mech_Spawner::Draw(SDL_Texture* sprites)
+void Enemy_Mech_Spawner::Draw1(SDL_Texture* sprites)
 {
 		if (animation != nullptr)
 		{

@@ -179,7 +179,7 @@ void Enemy_Lamella::Move()
 	}
 }
 
-void Enemy_Lamella::Draw(SDL_Texture* sprites)
+void Enemy_Lamella::Draw1(SDL_Texture* sprites)
 {
 	if(flip == false)
 	{

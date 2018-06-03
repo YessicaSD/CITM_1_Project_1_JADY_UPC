@@ -7,6 +7,7 @@
 #include "ModuleStage05.h"
 #include "Rotation.h"
 #include "ModuleAudio.h"
+#include "ModuleRender.h"
 
 Enemy_RotatingTurret::Enemy_RotatingTurret(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t) : Enemy(x, y, hp, scoreValue, pu_t)
 {
@@ -88,7 +89,7 @@ void Enemy_RotatingTurret::Move()
 	collider->SetPos(position.x + spriteXOffset[pushBackNumber], position.y + spriteYOffset[pushBackNumber]);
 }
 
-void Enemy_RotatingTurret::Draw(SDL_Texture* sprites)
+void Enemy_RotatingTurret::Draw1(SDL_Texture* sprites)
 {
 	//Blit
 	App->render->Blit(sprites, position.x + spriteXOffset[pushBackNumber], position.y + spriteYOffset[pushBackNumber], &rotatingTurretAnim.ReturnFrame(pushBackNumber));

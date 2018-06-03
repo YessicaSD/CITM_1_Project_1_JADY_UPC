@@ -31,3 +31,9 @@ void Enemy_Outdoor_turret::Move()
 	if (collider != nullptr)
 		collider->SetPos(position.x, position.y);
 }
+
+void Enemy_Outdoor_turret::Draw1(SDL_Texture * sprites)
+{
+	if (animation != nullptr)
+		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
+}

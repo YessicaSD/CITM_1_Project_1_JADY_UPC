@@ -78,7 +78,7 @@ void Enemy_indoorTurret::Move()
 	}
 }
 
-void Enemy_indoorTurret::Draw(SDL_Texture* sprites)
+void Enemy_indoorTurret::Draw1(SDL_Texture* sprites)
 {
 	//Draw
 	switch ((int)speed.x)

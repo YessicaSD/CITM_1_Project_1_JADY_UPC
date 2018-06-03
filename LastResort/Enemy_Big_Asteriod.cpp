@@ -15,10 +15,8 @@ void Enemy_Big_Asteroid::Move()
 	if (collider != nullptr)
 		collider->SetPos(position.x - animation->GetFrame().w / 2, position.y - animation->GetFrame().h / 2);
 }
-void Enemy_Big_Asteroid::Draw(SDL_Texture* sprites)
+void Enemy_Big_Asteroid::Draw1(SDL_Texture* sprites)
 {
-
-
 	if (animation != nullptr)
 	{
 			App->render->Blit(sprites, position.x - animation->GetFrame().w / 2, position.y - animation->GetFrame().h/2, &(animation->GetCurrentFrame()));
