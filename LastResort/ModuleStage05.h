@@ -11,8 +11,8 @@
 #include "Enemy_Middle_Asteroid.h"
 #include "ModuleAudio.h"
 
-#define SHIP_COLLIDERS_NUM 48//The number of colliders the ship is made of (see Docs>shipColliders.psd)
-#define FINAL_COLLIDERS_NUM 13//The number of colliders the final part is made of (see Docs>finalPartColliders.psd)
+#define SHIP_COLLIDERS_NUM 50//The number of colliders the ship is made of (see Docs>shipColliders.psd)
+#define FINAL_COLLIDERS_NUM 15//The number of colliders the final part is made of (see Docs>finalPartColliders.psd)
 #define CHECKPOIN_NUMBER 25
 
 struct  Music;

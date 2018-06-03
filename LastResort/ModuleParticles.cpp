@@ -1,11 +1,13 @@
 #include <math.h>
-
 #include "Globals.h"
 #include "Application.h"
+#include "ModuleParticles.h"
+#include "ModuleStage05.h"
+#include "SDL/include/SDL_timer.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleCollision.h"
-#include "ModuleParticles.h"
+
 #include "ModuleAudio.h"
 #include "Player1.h"
 #include "Player2.h"
@@ -16,8 +18,8 @@
 #include "Particle_Missile.h"
 #include "Particle_Fireball.h"
 #include "Particle_Indoor_Laser.h"
-#include "ModuleStage05.h"
-#include "SDL/include/SDL_timer.h"
+#include "Particle_Boss.h"
+
 
 ModuleParticles::ModuleParticles()
 {
@@ -193,6 +195,9 @@ Particle* ModuleParticles::AddParticle(Particle& particle, fPoint position, fPoi
 				break;
 			case PARTICLE_INDOOR_LASER:
 				p = new Particle_Indoor_Laser(particle, position, speed, delay, colType, tex);
+				break;
+			case PARTICLE_BOSS:
+				p =  new Particle_Boss( position, tex);
 				break;
 			}
 

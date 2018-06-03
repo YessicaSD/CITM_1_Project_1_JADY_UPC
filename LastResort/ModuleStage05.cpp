@@ -131,11 +131,11 @@ bool Module5lvlScene::Start()
 	current_time = 0;
 	start_time = SDL_GetTicks();
 
-	for (int i = 0; i < SHIP_COLLIDERS_NUM; ++i) {
+	for (int i = 0; i < SHIP_COLLIDERS_NUM  ; ++i) {
 		shipCollidersCol[i] = nullptr;
 	}
 
-	for (int i = 0; i < FINAL_COLLIDERS_NUM; ++i) {
+	for (int i = 0; i < FINAL_COLLIDERS_NUM ; ++i) {
 		finalCollidersCol[i] = nullptr;
 	}
 
@@ -670,33 +670,46 @@ void Module5lvlScene::AddShipColliders()
 	addedShipColliders = true;
 	deletedShipColliders = false;
 
-	for (int i = 0; i < SHIP_COLLIDERS_NUM - 1; ++i)
+	for (int i = 0; i < SHIP_COLLIDERS_NUM ; ++i)
 	{
-		shipCollidersCol[i] = App->collision->AddCollider(
-		{ shipCollidersRect[i].x + (int)shipPos.x,
-			shipCollidersRect[i].y + (int)shipPos.y,
-			shipCollidersRect[i].w,
-			shipCollidersRect[i].h },
-			COLLIDER_TYPE::COLLIDER_WALL);
+		if (shipCollidersCol[i] != nullptr)
+		{
+			shipCollidersCol[i] = App->collision->AddCollider(
+			{ shipCollidersRect[i].x + (int)shipPos.x,
+				shipCollidersRect[i].y + (int)shipPos.y,
+				shipCollidersRect[i].w,
+				shipCollidersRect[i].h },
+				COLLIDER_TYPE::COLLIDER_WALL);
+		}
+	
 	}
 	//Different case (it is an enemy heavy type collider)
-	shipCollidersCol[47] = App->collision->AddCollider(
-	{ shipCollidersRect[47].x + (int)shipPos.x,
-		shipCollidersRect[47].y + (int)shipPos.y,
-		shipCollidersRect[47].w,
-		shipCollidersRect[47].h },
-		COLLIDER_TYPE::COLLIDER_ENEMY_HEAVY);
+	if (shipCollidersCol[47] != nullptr)
+	{
+		shipCollidersCol[47] = App->collision->AddCollider(
+		{ shipCollidersRect[47].x + (int)shipPos.x,
+			shipCollidersRect[47].y + (int)shipPos.y,
+			shipCollidersRect[47].w,
+			shipCollidersRect[47].h },
+			COLLIDER_TYPE::COLLIDER_ENEMY_HEAVY);
+	}
+
+
 
 }
 
 void Module5lvlScene::UpdateShipColliders()
 {
-	for (int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
+	for (int i = 0; i < SHIP_COLLIDERS_NUM ; ++i)
 	{
-		shipCollidersCol[i]->SetPos(
-			shipCollidersRect[i].x + (int)shipPos.x,
-			shipCollidersRect[i].y + (int)shipPos.y);
+		if (shipCollidersCol[i] != nullptr)
+		{
+			shipCollidersCol[i]->SetPos(
+				shipCollidersRect[i].x + (int)shipPos.x,
+				shipCollidersRect[i].y + (int)shipPos.y);
+		}
 	}
+
 }
 
 void Module5lvlScene::DeleteShipColliders() {
@@ -704,7 +717,7 @@ void Module5lvlScene::DeleteShipColliders() {
 	deletedShipColliders = true;
 	addedShipColliders = false;
 
-	for (int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
+	for (int i = 0; i < SHIP_COLLIDERS_NUM ; ++i)
 	{
 		if (shipCollidersCol[i] != nullptr)
 		{
@@ -720,25 +733,33 @@ void Module5lvlScene::AddFinalColliders()
 	addedFinalColliders = true;
 	deletedFinalColliders = false;
 
-	for (int i = 0; i < FINAL_COLLIDERS_NUM; ++i)
+	for (int i = 0; i < FINAL_COLLIDERS_NUM ; ++i)
 	{
-		finalCollidersCol[i] = App->collision->AddCollider(
-		{ finalCollidersRect[i].x + (int)shipPos.x,
-			finalCollidersRect[i].y + (int)shipPos.y,
-			finalCollidersRect[i].w,
-			finalCollidersRect[i].h },
-			COLLIDER_TYPE::COLLIDER_WALL);
+	
+		if (finalCollidersCol[i] != nullptr)
+		{
+			finalCollidersCol[i] = App->collision->AddCollider(
+			{ finalCollidersRect[i].x + (int)shipPos.x,
+				finalCollidersRect[i].y + (int)shipPos.y,
+				finalCollidersRect[i].w,
+				finalCollidersRect[i].h },
+				COLLIDER_TYPE::COLLIDER_WALL);
+		}
 	}
 }
 
 
 void Module5lvlScene::UpdateFinalColliders()
 {
-	for (int i = 0; i < FINAL_COLLIDERS_NUM; ++i)
+	for (int i = 0; i < FINAL_COLLIDERS_NUM ; ++i)
 	{
-		finalCollidersCol[i]->SetPos(
-			finalCollidersRect[i].x + (int)shipPos.x,
-			finalCollidersRect[i].y + (int)shipPos.y);
+	
+		if (finalCollidersCol[i] != nullptr)
+		{
+			finalCollidersCol[i]->SetPos(
+				finalCollidersRect[i].x + (int)shipPos.x,
+				finalCollidersRect[i].y + (int)shipPos.y);
+		}
 	}
 }
 

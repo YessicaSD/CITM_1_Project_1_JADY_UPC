@@ -5,6 +5,7 @@
 #include <stdlib.h>
 
 #define MAX_BOSS_SPEED 0.7f
+#define BOOS_SHOOT_FRAMES 200
 
 Enemy_Boss_05::Enemy_Boss_05(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t) : Enemy(x, y, hp, scoreValue, pu_t)
 {
@@ -78,6 +79,13 @@ void Enemy_Boss_05::Move()
 	float_position.y += speed.y;
 
 	position = { (int)( fixedPos.x + float_position.x + App->stage05->spawnPos.x), (int)(fixedPos.y + float_position.y + App->stage05->spawnPos.y)};
+
+	//Shoot particle-----------------------------------------------
+	if (shootFrames > BOOS_SHOOT_FRAMES) {
+		shootFrames = 0;
+		App->particles->AddParticle(App->particles->bossShot, { (float)position.x ,  (float)position.y - 28}, { 0,0 }, App->particles->particlesTx, COLLIDER_IGNORE_HIT, 0.0f ,PARTICLE_BOSS);
+	}
+	++shootFrames;
 
 	//Set the collider position
 	if (collider != nullptr) {
