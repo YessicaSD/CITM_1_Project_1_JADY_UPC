@@ -96,7 +96,7 @@ Enemy_Lamella::Enemy_Lamella(int x, int y, float hp, int scoreValue, POWERUP_TYP
 	animation = &appearingAnim;
 
 	//Add collider
-	collider = App->collision->AddCollider({ position.x - animation->GetFrame().w / 2, y - animation->GetFrame().h / 2 , animation->GetFrame().w, animation->GetFrame().h}, COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ position.x - animation->GetFrame().w / 2, y - animation->GetFrame().h / 2 , animation->GetFrame().w, animation->GetFrame().h}, COLLIDER_IGNORE_HIT, (Module*)App->enemies);
 }
 
 void Enemy_Lamella::Move()
@@ -110,6 +110,7 @@ void Enemy_Lamella::Move()
 			//Change phase
 			lamellaPhase = moving;
 			animation = &movingAnim;
+			if (collider != nullptr) { collider->type = COLLIDER_ENEMY_LIGHT; }
 
 			//Select the player it has to move to
 			if (App->player1->isActive && App->player2->isActive)
