@@ -8,7 +8,7 @@
 #include "Enemy_PowerDropper.h"
 
 
-#define MAX_ENEMIES 100
+#define MAX_ENEMIES 300 //We need lots of enemies (especially on the asteroids section about 130 enemies are put in the queue)
 
 struct Sfx;
 enum ENEMY_TYPES

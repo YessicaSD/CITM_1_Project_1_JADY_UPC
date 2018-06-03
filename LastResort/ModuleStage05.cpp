@@ -517,57 +517,108 @@ update_status Module5lvlScene::LogicUpdate()
 			//- To make it easier for us to calcule the positions we'll convert the time of the video to the time of the actual level with a simple substraction
 			//- Although 1m = 60000ms we'll just multiply by 1000 because it doesn't matter since it all happens in one minute
 			//- Ex. 20:16 = 2016000. 2016 * 1000 = 2016000
+			const uint startTime = 2012000;//Start time = 20:12
 			//INFO 2: In this current checkpoint the positions of the camera are the following:
-			//- TOP    = 182
-			//- BOTTOM = 405
-			//- LEFT   = 1108
-			//- RIGHT  = 1411
-			int startTime = 2012000;//Start time = 20:12
+			//const uint cp22_top   =  182;
+			//const uint cp22_bot   =  405;
+			//const uint cp22_left  = 1108;
+			//const uint cp22_right = 1411;
 			//20:12 - 20:22
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 2016000 - startTime, NOPOWERUP, { -1   , 1    });
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 2016500 - startTime, NOPOWERUP, { -1.5f, 0.5f });
-			App->enemies->AddEnemy(REDBATS,         1412, 320, 2016500 - startTime, NOPOWERUP);
-			App->enemies->AddEnemy(REDBATS,         1412, 320, 2017000 - startTime, NOPOWERUP);
-			App->enemies->AddEnemy(REDBATS,         1412, 320, 2017500 - startTime, NOPOWERUP);
+			App->enemies->AddEnemy(REDBATS,         1412, 320, 2016500 - startTime);
+			App->enemies->AddEnemy(REDBATS,         1412, 320, 2017000 - startTime);
+			App->enemies->AddEnemy(REDBATS,         1412, 320, 2017500 - startTime);
+			App->enemies->AddEnemy(REDBATS,         1412, 320, 2018000 - startTime);
+			App->enemies->AddEnemy(REDBATS,         1412, 320, 2018500 - startTime);
+			App->enemies->AddEnemy(REDBATS,         1412, 320, 2019000 - startTime);
 			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1415, 320, 2017500 - startTime, NOPOWERUP, { -1.5f, 0.5f });
-			App->enemies->AddEnemy(REDBATS,         1412, 320, 2018000 - startTime, NOPOWERUP);
-			App->enemies->AddEnemy(REDBATS,         1412, 320, 2018500 - startTime, NOPOWERUP);
 			App->enemies->AddEnemy(BIG_ASTEROID,    1415, 294, 2019500 - startTime, NOPOWERUP, { -1.5f, 0.5f });
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 2020000 - startTime, NOPOWERUP, { -1.5f, 0.5f });
 			//20:22 - 20:32
+			App->enemies->AddEnemy(POWERDROPPER,    1412, 350, 2023000 - startTime, SPEED,     { 0.5f, 1.5f });
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 2023000 - startTime, NOPOWERUP, { -1   , 1    });
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 2025000 - startTime, NOPOWERUP, { -1.5f, 0.5f });
-			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1400, 275, 2025000 - startTime, NOPOWERUP);
+			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1400, 275, 2025000 - startTime);
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 2025500 - startTime, NOPOWERUP, {  0.5f, 1.5f });
 			App->enemies->AddEnemy(POWERDROPPER,    1412, 350, 2026000 - startTime, SPEED,     {  0.5f, 1.5f });
-			App->enemies->AddEnemy(OSCILATOR,       1412, 350, 2026000 - startTime, NOPOWERUP);
+			App->enemies->AddEnemy(OSCILATOR,       1412, 350, 2026000 - startTime);
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 2027000 - startTime, NOPOWERUP, { -1.5f, 0.5f });
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 2027500 - startTime, NOPOWERUP, { -1   , 1    });
-			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1400, 350, 2028000 - startTime, NOPOWERUP);
-			App->enemies->AddEnemy(BIG_ASTEROID,    1400, 260, 2029000 - startTime, NOPOWERUP);
+			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1400, 350, 2028000 - startTime);
+			App->enemies->AddEnemy(BIG_ASTEROID,    1400, 260, 2029000 - startTime);
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1350, 182, 2029500 - startTime, NOPOWERUP, { -1.5f, 0.5f });
-			App->enemies->AddEnemy(OSCILATOR,       1412, 350, 2030000 - startTime, NOPOWERUP);
-			App->enemies->AddEnemy(BIG_ASTEROID,    1400, 350, 2030000 - startTime, NOPOWERUP);
+			App->enemies->AddEnemy(OSCILATOR,       1412, 350, 2030000 - startTime);
+			App->enemies->AddEnemy(BIG_ASTEROID,    1400, 350, 2030000 - startTime);
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 2030000 - startTime, NOPOWERUP, { -1.0f, 1.0f });
-			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1400, 220, 2030000 - startTime, NOPOWERUP);
+			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1400, 220, 2030000 - startTime);
 			App->enemies->AddEnemy(POWERDROPPER,    1412, 350, 2031000 - startTime, SPEED);
-			App->enemies->AddEnemy(BIG_ASTEROID,    1400, 360, 2031000 - startTime, NOPOWERUP);
+			App->enemies->AddEnemy(BIG_ASTEROID,    1400, 360, 2031000 - startTime);
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 2031000 - startTime, NOPOWERUP, { -1.0f, 1.0f });
 			//20:32 - 20:42
-			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1400, 220, 2032000 - startTime, NOPOWERUP);
-			App->enemies->AddEnemy(BIG_ASTEROID,    1400, 260, 2033000 - startTime, NOPOWERUP);
-			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1400, 350, 2033000 - startTime, NOPOWERUP);
+			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1400, 220, 2032000 - startTime);
+			App->enemies->AddEnemy(BIG_ASTEROID,    1400, 260, 2033000 - startTime);
+			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1400, 350, 2033000 - startTime);
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1110, 182, 2033000 - startTime, NOPOWERUP, {  1.5f, 0.5f });
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1110, 182, 2033000 - startTime, NOPOWERUP, {  1.0f, 1.0f });
-			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1400, 375, 2034000 - startTime, NOPOWERUP);
-			App->enemies->AddEnemy(OSCILATOR,       1412, 350, 2034000 - startTime, NOPOWERUP);
-			App->enemies->AddEnemy(POWERDROPPER,    1412, 290, 2034000 - startTime, SPEED);
+			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1400, 375, 2034000 - startTime);
+			App->enemies->AddEnemy(POWERDROPPER, 1412, 290, 2034000 - startTime, DESPEED);
+			App->enemies->AddEnemy(OSCILATOR,       1412, 350, 2034500 - startTime);
 			//20:42 - 20:52
-			App->enemies->AddEnemy(BIG_ASTEROID,    1400, 300, 2043000 - startTime, NOPOWERUP);
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1250, 182, 2043500 - startTime, NOPOWERUP, { -0.25f, 1.0f });
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1250, 182, 2043500 - startTime, NOPOWERUP, {  0.25f, 1.0f });
-			App->enemies->AddEnemy(BIG_ASTEROID,    1411, 250, 2044000 - startTime);
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1108, 182, 2045000 - startTime, NOPOWERUP, {  1.0f , 1.0f });
+			App->enemies->AddEnemy(BIG_ASTEROID,    1400, 300, 2037000 - startTime, NOPOWERUP);
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1200, 182, 2037000 - startTime, NOPOWERUP, {  0.00f, 1.0f });//Group on the left
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1200, 182, 2037000 - startTime, NOPOWERUP, {  0.25f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1200, 182, 2037000 - startTime, NOPOWERUP, {  0.50f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1200, 182, 2037000 - startTime, NOPOWERUP, {  0.75f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2037000 - startTime, NOPOWERUP, {  0.00f, 1.0f });//Group on the right
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2037000 - startTime, NOPOWERUP, { -0.25f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2037000 - startTime, NOPOWERUP, { -0.50f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2037000 - startTime, NOPOWERUP, { -0.75f, 1.0f });
+			App->enemies->AddEnemy(BIG_ASTEROID,    1411, 250, 2037000 - startTime);
+			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1411, 275, 2037000 - startTime);
+			App->enemies->AddEnemy(BIG_ASTEROID,    1411, 350, 2036750 - startTime);
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1200, 182, 2037000 - startTime, NOPOWERUP, {  0.00f, 1.0f });//Group on the left
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1200, 182, 2037000 - startTime, NOPOWERUP, {  0.25f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1200, 182, 2037000 - startTime, NOPOWERUP, {  0.50f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1200, 182, 2037000 - startTime, NOPOWERUP, {  0.75f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2037000 - startTime, NOPOWERUP, {  0.00f, 1.0f });//Group on the right
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2037000 - startTime, NOPOWERUP, { -0.25f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2037000 - startTime, NOPOWERUP, { -0.50f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2037000 - startTime, NOPOWERUP, { -0.75f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1200, 182, 2038000 - startTime, NOPOWERUP, {  0.00f, 1.0f });//Group on the left
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1200, 182, 2038000 - startTime, NOPOWERUP, {  0.25f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1200, 182, 2038000 - startTime, NOPOWERUP, {  0.50f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1200, 182, 2038000 - startTime, NOPOWERUP, {  0.75f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2038000 - startTime, NOPOWERUP, {  0.00f, 1.0f });//Group on the right
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2038000 - startTime, NOPOWERUP, { -0.25f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2038000 - startTime, NOPOWERUP, { -0.50f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2038000 - startTime, NOPOWERUP, { -0.75f, 1.0f });
+			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1411, 300, 2038000 - startTime);
+			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1411, 370, 2040000 - startTime);
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2039000 - startTime, NOPOWERUP, {  0.00f, 1.0f });//Group on the right
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2039000 - startTime, NOPOWERUP, { -0.25f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2039000 - startTime, NOPOWERUP, { -0.50f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2039000 - startTime, NOPOWERUP, { -0.75f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2039250 - startTime, NOPOWERUP, { -0.50f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2039250 - startTime, NOPOWERUP, { -0.75f, 1.0f });
+			App->enemies->AddEnemy(METALBEE       , 1400, 182, 2039000 - startTime);
+			App->enemies->AddEnemy(BIG_ASTEROID   , 1411, 250, 2040000 - startTime);
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2040000 - startTime, NOPOWERUP, { -0.50f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2040000 - startTime, NOPOWERUP, {  0.00f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1300, 182, 2040000 - startTime, NOPOWERUP, {  0.50f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1250, 182, 2041000 - startTime, NOPOWERUP, { -0.80f, 1.0f });//Top group
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1250, 182, 2041000 - startTime, NOPOWERUP, { -0.75f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1250, 182, 2041000 - startTime, NOPOWERUP, { -0.50f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1250, 182, 2041000 - startTime, NOPOWERUP, { -0.40f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1250, 182, 2041000 - startTime, NOPOWERUP, {  0.00f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1250, 182, 2041000 - startTime, NOPOWERUP, {  0.40f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1250, 182, 2041000 - startTime, NOPOWERUP, {  0.60f, 1.0f });
+			App->enemies->AddEnemy(BIG_ASTEROID,    1411, 350, 2042000 - startTime);
+			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1411, 310, 2042000 - startTime);
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1260, 182, 2042500 - startTime, NOPOWERUP, { -0.15f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1260, 182, 2042500 - startTime, NOPOWERUP, {  0.15f, 1.0f });
+			App->enemies->AddEnemy(BIG_ASTEROID,    1411, 290, 2043000 - startTime);
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1140, 182, 2044500 - startTime);
 			App->enemies->AddEnemy(LAMELLA,         1150, 200, 2046000 - startTime);
 			App->enemies->AddEnemy(LAMELLA,         1150, 260, 2046000 - startTime);
 			App->enemies->AddEnemy(LAMELLA,         1150, 320, 2046000 - startTime);
@@ -576,10 +627,35 @@ update_status Module5lvlScene::LogicUpdate()
 			App->enemies->AddEnemy(LAMELLA,         1350, 260, 2046000 - startTime);
 			App->enemies->AddEnemy(LAMELLA,         1350, 320, 2046000 - startTime);
 			App->enemies->AddEnemy(LAMELLA,         1350, 380, 2046000 - startTime);
+			App->enemies->AddEnemy(POWERDROPPER,    1411, 290, 2046000 - startTime, SPEED);
 			App->enemies->AddEnemy(BIG_ASTEROID,    1411, 350, 2047000 - startTime);
+			App->enemies->AddEnemy(BIG_ASTEROID,    1411, 325, 2047500 - startTime);
 			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1411, 380, 2047000 - startTime);
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1411, 250, 2047000 - startTime, NOPOWERUP, {  -1.0f, 1.0f });
-
+			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1411, 220, 2047000 - startTime);
+			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1411, 320, 2047000 - startTime);
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1411, 182, 2047000 - startTime, NOPOWERUP, { -0.75f, 1.0f });//Left group
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1411, 182, 2047000 - startTime, NOPOWERUP, { -0.50f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1411, 182, 2047000 - startTime, NOPOWERUP, { -0.25f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1110, 182, 2047000 - startTime, NOPOWERUP, {  0.75f, 1.0f });//Left group
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1110, 182, 2047000 - startTime, NOPOWERUP, {  0.50f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1110, 182, 2047000 - startTime, NOPOWERUP, {  0.25f, 1.0f });
+			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1411, 360, 2048000 - startTime);
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1150, 182, 2048000 - startTime, NOPOWERUP, {  0.50f, 1.0f });//Left asteroid
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1260, 182, 2048000 - startTime, NOPOWERUP, { -0.50f, 1.0f });//Right asteroid
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1260, 182, 2048250 - startTime, NOPOWERUP, { -0.50f, 1.0f });//Right asteroid
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1360, 182, 2048000 - startTime, NOPOWERUP, {  0.00f, 1.0f });//Top asteroid
+			App->enemies->AddEnemy(BIG_ASTEROID,    1411, 210, 2049000 - startTime);
+			App->enemies->AddEnemy(BIG_ASTEROID,    1411, 370, 2049000 - startTime);
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1150, 182, 2049750 - startTime, NOPOWERUP, { 0.50f, 1.0f });//Left asteroid
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1150, 182, 2049750 - startTime, NOPOWERUP, { 0.50f, 1.0f });//Left asteroid
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1260, 182, 2049750 - startTime, NOPOWERUP, { -0.50f, 1.0f });//Right asteroid
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1360, 182, 2049750 - startTime, NOPOWERUP, { 0.00f, 1.0f });//Top asteroid
+			App->enemies->AddEnemy(POWERDROPPER,    1411, 210, 2049750 - startTime, SPEED);
+			App->enemies->AddEnemy(POWERDROPPER,    1411, 240, 2049750 - startTime, SPEED);
+			App->enemies->AddEnemy(POWERDROPPER,    1411, 370, 2049750 - startTime, GROUND);
+			App->enemies->AddEnemy(POWERDROPPER,    1411, 340, 2049750 - startTime, GROUND);
+			App->enemies->AddEnemy(BIG_ASTEROID,    1411, 300, 2050000 - startTime);
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1150, 182, 2049750 - startTime, NOPOWERUP, { 0.50f, 1.0f });
 			reachedCheckpoint[22] = true;
 		}
 		break;
