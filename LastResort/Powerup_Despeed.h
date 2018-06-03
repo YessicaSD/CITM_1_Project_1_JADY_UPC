@@ -6,10 +6,10 @@
 struct Collider;
 //struct Sfx;
 
-class Powerup_Despeed : public Powerup
+class Powerup_SlowDown : public Powerup
 {
 public:
-	Powerup_Despeed(int x, int y);
+	Powerup_SlowDown(int x, int y);
 	Animation DespeedAnim;
 
 	void OnCollision(Collider*, ModulePlayer*);

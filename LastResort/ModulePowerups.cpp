@@ -131,7 +131,7 @@ bool ModulePowerups::AddPowerup(int x, int y, POWERUP_TYPE type)//x and y should
 				powerups[i]->type = SPEED;
 				break;
 			case POWERUP_TYPE::DESPEED:
-				powerups[i] = new Powerup_Despeed(x, y);
+				powerups[i] = new Powerup_SlowDown(x, y);
 				powerups[i]->type = DESPEED;
 				break;
 

@@ -43,5 +43,7 @@ void Enemy_Little_Asteroid::Draw1(SDL_Texture* sprites)
 }
 void Enemy_Little_Asteroid::OnCollision(Collider*)
 {
+
 	App->particles->AddParticle(App->particles->littleAsteroidDestroy, { (float)position.x, (float)position.y }, { 0 , 0 }, App->particles->particlesTx, COLLIDER_IGNORE_HIT, 0);
+	App->audio->ControlAudio(App->particles->asteroisExplotionSfx, PLAY_AUDIO);
 }

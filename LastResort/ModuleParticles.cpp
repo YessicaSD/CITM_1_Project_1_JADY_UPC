@@ -56,6 +56,8 @@ bool ModuleParticles::Start()
 	rocketExplosion    = App->audio->LoadSFX("Assets/Particles/rocket explosion.wav");
 	rocket             = App->audio->LoadSFX("Assets/Particles/rocket.wav");
 	bossShot_sfx       = App->audio->LoadSFX("Assets/Particles/laser_boss_lvl_5.wav");
+	asteroisExplotionSfx  = App->audio->LoadSFX("Assets/Enemies/destroy.wav");
+
 	//- Initializate textures
 	g_explosion02.texture = explosionTx;
 	//- Initializate audios
@@ -85,7 +87,8 @@ bool ModuleParticles::CleanUp()
 	App->audio->UnloadSFX(g_explosion02_1sfx);
 	App->audio->UnloadSFX(laserEnemyShot_sfx);
 	App->audio->UnloadSFX(bossShot_sfx);
-	
+	App->audio->UnloadSFX(asteroisExplotionSfx);
+
 	//----------------------------------------------------------
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -263,7 +266,7 @@ void ModuleParticles::InitParticleValues()
 	basicShot.anim.speed = 0.0f;
 	basicShot.anim.loop = false;
 	basicShot.collision_fx = &basic_explosion;
-
+	
 	//Basic shot particle---------------------------------------
 	unitShot.anim.PushBack({ 155, 288, 13, 13 });
 	unitShot.anim.PushBack({ 170, 288, 13, 13 });
@@ -422,6 +425,7 @@ void ModuleParticles::InitParticleValues()
 	asteroidDestroy.anim.PushBack({ 55,15,61,63 });
 	asteroidDestroy.anim.PushBack({ 0,15,55,63 });
 	asteroidDestroy.anim.speed = 0.2f;
+	
 
 
 	littleAsteroidDestroy.anim.PushBack({ 305,341,31,30 });
@@ -439,6 +443,22 @@ void ModuleParticles::InitParticleValues()
 	littleAsteroidDestroy.anim.PushBack({ 182,309,31,32 });
 	littleAsteroidDestroy.anim.PushBack({ 157,309,25,32 });
 	littleAsteroidDestroy.anim.speed = 0.2f;
+	
+
+	MiddleAsteroidDestroy.anim.PushBack({119,246,38,38});
+	MiddleAsteroidDestroy.anim.PushBack({ 80,246,39,39 });
+	MiddleAsteroidDestroy.anim.PushBack({ 80,246,39,39 });
+	MiddleAsteroidDestroy.anim.PushBack({ 40,246,40,40 });
+	MiddleAsteroidDestroy.anim.PushBack({ 0,246,40,40 });
+	MiddleAsteroidDestroy.anim.PushBack({ 211,206,40,40 });
+	MiddleAsteroidDestroy.anim.PushBack({ 172,206,39,40 });
+	MiddleAsteroidDestroy.anim.PushBack({ 134,206,38,37 });
+	MiddleAsteroidDestroy.anim.PushBack({ 95,206,39,39 });
+	MiddleAsteroidDestroy.anim.PushBack({ 56,206,39,39 });
+	MiddleAsteroidDestroy.anim.PushBack({ 25,206,31,34 });
+	MiddleAsteroidDestroy.anim.PushBack({ 0,206,25,32 });
+	MiddleAsteroidDestroy.anim.speed = 0.2f;
+
 
 
 	//Middle Boss shot particle------------------------------------
