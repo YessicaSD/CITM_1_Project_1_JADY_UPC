@@ -20,6 +20,8 @@
 #include "ModuleUnit.h"
 #include "ModuleInput.h"
 
+#define RED_LAMELLA_SPAWN_FRAMES 900
+
 Module5lvlScene::Module5lvlScene()
 {
 	shipRect = { 0,0 , 1423,288 };
@@ -181,7 +183,7 @@ bool Module5lvlScene::Start()
 	//App->enemies->AddEnemy(PINATA, 150, 150);
 	//App->enemies->AddEnemy(PINATA, 130, 130);
 	//App->enemies->AddEnemy(OSCILATOR, 500, 0);
-	//App->enemies->InstaSpawn(METALBEE, 300, 200);
+	App->enemies->InstaSpawn(RED_LAMELLA, 300, 200);
 
 	
 
@@ -594,6 +596,11 @@ update_status Module5lvlScene::LogicUpdate()
 		{
 			reachedCheckpoint[24] = true;
 		}
+		if (redLamellasSpawnFrames > RED_LAMELLA_SPAWN_FRAMES) {
+			App->enemies->InstaSpawn(RED_LAMELLA, 350 , 72 , NOPOWERUP);
+			redLamellasSpawnFrames = 0;
+		}
+		++redLamellasSpawnFrames;
 		break;
 	}
 	return UPDATE_CONTINUE;

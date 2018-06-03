@@ -8,12 +8,15 @@
 #include "MovPath.h"
 
 #define MAX_LAMELA_SPEED 1.6f
-#define LAMELA_ROTATION_FRAMES 5
+#define LAMELLA_ROTATION_FRAMES 5
+#define LAMELLA_RUNAWAY_FRAMES 1500
 
 
 Enemy_RedLamella::Enemy_RedLamella(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t) : Enemy(x, y, hp, scoreValue, pu_t)
 {
 	//Animations------------------------------------
+	float_position.x += x;
+	float_position.y += y;
 
 	for (int i = 0; i < 3; ++i) {
 		moveAnim.PushBack({ 868 + i* 31, 0,31,31 });
@@ -64,9 +67,25 @@ void Enemy_RedLamella::CheckTarget() {
 
 //Check enemy direction-----------------------------------------------
 
-void Enemy_RedLamella::CheckDirection() {
+bool Enemy_RedLamella::CheckDirection() {
 
 	//	Check X direction----------------------
+	if (runAway == true) {
+
+		if (float_position.x  < -400) {
+			currentDirX = RIGHT;
+		}
+		else if (float_position.x > -400) {
+			currentDirX = LEFT;
+		}
+
+		if (lastDirX != currentDirX) {
+			currentState = ROTATE;
+			lastDirX = currentDirX;
+		}
+		return true;
+	}
+
 
 	if (float_position.x  < currentTarget->position.x + currentTarget->playerCenter.x) {
 		currentDirX = RIGHT;
@@ -96,9 +115,21 @@ void Enemy_RedLamella::Move()
 		CheckTarget();
 		CheckDirection();
 	}
+	if (runAway == true) {
 
-	PlayerPos.x = (float)currentTarget->position.x + currentTarget->playerCenter.x;
-	PlayerPos.y = (float)currentTarget->position.y + currentTarget->playerCenter.y;
+		PlayerPos.x = -400.0f;
+		PlayerPos.y = 112.0f;
+	}
+	else {
+		PlayerPos.x = (float)currentTarget->position.x + currentTarget->playerCenter.x;
+		PlayerPos.y = (float)currentTarget->position.y + currentTarget->playerCenter.y;
+	}
+
+	if (runAwayFrames > LAMELLA_RUNAWAY_FRAMES)
+		runAway = true;
+	else 
+	++runAwayFrames;
+
 
 	vectorIncrease.UnitVector(PlayerPos, float_position);
 
@@ -152,7 +183,7 @@ void Enemy_RedLamella::Draw1(SDL_Texture* sprites)
 
 		currentAnim = rotateAnim.frames[0];
 		++currentFrames;
-		if (currentFrames > LAMELA_ROTATION_FRAMES) {
+		if (currentFrames > LAMELLA_ROTATION_FRAMES) {
 			moveAnim.Reset();
 			currentFrames = 0;
 			currentState = FOLLOW;

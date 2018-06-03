@@ -13,7 +13,7 @@ public:
 	void Move();
 	void Draw1(SDL_Texture* sprites);
 	void CheckTarget();
-	void CheckDirection();
+	bool CheckDirection();
 
 private:
 	//Animations---------------------------
@@ -26,8 +26,11 @@ private:
 	ModulePlayer* currentTarget = nullptr;
 	ModulePlayer* lastTarget = nullptr;
 	MovePath pinataMov;
+
 	bool blitEx = false;
+	bool runAway = false;
 	int currentFrames = 0;
+	int runAwayFrames = 0;
 
 
 	enum DirectionX {
@@ -37,7 +40,7 @@ private:
 
 	enum MoveState {
 		FOLLOW,
-		ROTATE
+		ROTATE,
 	} currentState = FOLLOW;
 
 

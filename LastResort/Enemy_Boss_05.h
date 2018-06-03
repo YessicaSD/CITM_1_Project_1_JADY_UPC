@@ -10,10 +10,10 @@ class Enemy_Boss_05 : public Enemy
 {
 public:
 	Enemy_Boss_05(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop);
-	~Enemy_Boss_05();
 	void Move();
 	void Draw0(SDL_Texture* sprites);
 	void Draw1(SDL_Texture* sprites);
+	void OnCollision(Collider* collider);
 	void AddExplosions();
 
 private:

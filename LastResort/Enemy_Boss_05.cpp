@@ -32,13 +32,13 @@ Enemy_Boss_05::Enemy_Boss_05(int x, int y, float hp, int scoreValue, POWERUP_TYP
 	collider = App->collision->AddCollider({ x - 20, y - 20, 40, 40 }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
 }
 
-Enemy_Boss_05::~Enemy_Boss_05()
-{
-	if (collider != nullptr)
-		collider->to_delete = true;
+
+void Enemy_Boss_05::OnCollision(Collider* collider) {
 
 	App->ui->stageclear = true;
 }
+
+
 //Movement-------------------------------------------------------------
 
 void Enemy_Boss_05::Move()
