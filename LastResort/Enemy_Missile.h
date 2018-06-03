@@ -8,7 +8,7 @@ class Enemy_Missile : public Enemy
 private:
 	Animation Missile;
 	fPoint speed;
-	
+	SDL_Rect current_anim;
 
 public:
 	Enemy_Missile(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop);
