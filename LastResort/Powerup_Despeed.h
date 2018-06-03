@@ -3,6 +3,8 @@
 
 #include "Powerup.h"
 
+struct Collider;
+//struct Sfx;
 
 class Powerup_Despeed : public Powerup
 {

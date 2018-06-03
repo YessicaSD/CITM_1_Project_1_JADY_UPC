@@ -1,10 +1,10 @@
-#include "Powerup_Despeed.h"
 #include "Application.h"
 #include "ModuleRender.h"
 #include "ModuleTextures.h"
 #include "ModulePowerups.h"
 #include "Powerup.h"
 #include "Powerup_Speed.h"
+#include "Powerup_Despeed.h"
 #include "Powerup_Laser.h"
 #include "Powerup_G.h"
 #include "Powerup_Homing.h"
@@ -131,7 +131,7 @@ bool ModulePowerups::AddPowerup(int x, int y, POWERUP_TYPE type)//x and y should
 				powerups[i]->type = SPEED;
 				break;
 			case POWERUP_TYPE::DESPEED:
-				powerups[i] = new Powerup_Speed(x, y);
+				powerups[i] = new Powerup_Despeed(x, y);
 				powerups[i]->type = DESPEED;
 				break;
 			case POWERUP_TYPE::LASER:
