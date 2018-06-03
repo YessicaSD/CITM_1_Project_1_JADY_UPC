@@ -12,6 +12,7 @@ private:
 	iPoint fixedPos;
 	int frameCount;
 	bool isShooting = false;
+	bool flip = false;
 	enum TurretStates {
 		INIT, NORMAL
 	} state = INIT;

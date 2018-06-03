@@ -5,7 +5,7 @@
 
 Enemy_Assist_Turret::Enemy_Assist_Turret(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop) :Enemy(x, y, hp, scoreValue, powerupDrop)
 {
-	for (int j = 0; j < 3; ++j) {
+	for (int j = 0; j < 2; ++j) {
 		for (int i = 0; i < 5; ++i) {
 			initAnim.PushBack({ 868 + i*24, 34 + j*24,24,24 });
 		}
@@ -25,10 +25,22 @@ Enemy_Assist_Turret::Enemy_Assist_Turret(int x, int y, float hp, int scoreValue,
 	fixedPos.x = x - App->stage05->spawnPos.x;
 	fixedPos.y = y - App->stage05->spawnPos.y;
 	collider = App->collision->AddCollider({ x - 10, y - 10, 20, 20 }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
+
+	position = fixedPos + App->stage05->spawnPos;
+
+	if (position.y > 200) {
+		flip = false;
+	}
+	else
+		flip = true;
+
+
 }
 void Enemy_Assist_Turret::Move()
 {
+	fPoint speed_p;
 	position = fixedPos + App->stage05->spawnPos;
+
 
 	switch (state)
 	{
@@ -38,7 +50,13 @@ void Enemy_Assist_Turret::Move()
 
 		if (frameCount == 300)
 		{
-			App->particles->AddParticle(App->particles->missile, { (float)position.x + 5,(float)position.y - 5 }, { 0,0 }, App->particles->particlesTx, COLLIDER_ENEMY_SHOT2, 0, PARTICLE_MISSILE);
+			if (flip == true) {
+				speed_p = { 0, 1.0f };
+			}
+			else
+				speed_p = { 0,- 1.0f };
+
+			App->particles->AddParticle(App->particles->missile_2, { (float)position.x + 5,(float)position.y - 5 }, speed_p, App->particles->particlesTx, COLLIDER_ENEMY_SHOT2, 0, PARTICLE_ASSIS_TURRET);
 			isShooting = true;
 			frameCount = 0;
 		}
@@ -69,12 +87,23 @@ void Enemy_Assist_Turret::Draw1(SDL_Texture * sprites)
 		break;
 	}
 	if (isShooting == true) {
-		App->render->Blit(sprites, position.x - 12, position.y - 12 - 8, &fireAnim.GetFrameEx());
+
+		if (flip == true) {
+			App->render->BlitEx(sprites, position.x - 12, position.y - 12 + 8, &fireAnim.GetFrameEx(), SDL_FLIP_VERTICAL);
+		}
+		else
+			App->render->Blit(sprites, position.x - 12, position.y - 12 - 8, &fireAnim.GetFrameEx());
+
 		if (fireAnim.finished == true) {
 			fireAnim.Reset();
 			isShooting = false;
 		}
 	}
 
-	App->render->Blit(sprites, position.x - 12, position.y - 12, &currentAnim);
+	if (flip == true) {
+		App->render->BlitEx(sprites, position.x - 12, position.y - 12, &currentAnim, SDL_FLIP_VERTICAL);
+	}
+	else
+		App->render->Blit(sprites, position.x - 12, position.y - 12, &currentAnim);
+
 }

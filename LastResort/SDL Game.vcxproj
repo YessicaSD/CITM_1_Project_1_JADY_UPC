@@ -143,6 +143,7 @@
     <ClInclude Include="Particle_HMissile.h" />
     <ClInclude Include="Particle_Indoor_Laser.h" />
     <ClInclude Include="Particle_Missile.h" />
+    <ClInclude Include="Particle_Missile_2.h" />
     <ClInclude Include="Path.h" />
     <ClInclude Include="Player1.h" />
     <ClInclude Include="Player2.h" />
@@ -223,6 +224,7 @@
     <ClCompile Include="Particle_HMissile.cpp" />
     <ClCompile Include="Particle_Indoor_Laser.cpp" />
     <ClCompile Include="Particle_Missile.cpp" />
+    <ClCompile Include="Particle_Missile_2.cpp" />
     <ClCompile Include="Player1.cpp" />
     <ClCompile Include="Player2.cpp" />
     <ClCompile Include="Powerup.cpp" />

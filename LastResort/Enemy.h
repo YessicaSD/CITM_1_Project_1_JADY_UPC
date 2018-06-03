@@ -11,9 +11,6 @@ struct Collider;
 
 class Enemy
 {
-
-
-
 public:
 	iPoint position;
 	fPoint speed;//Not all enemies use this parameter to move, but its very helpful for those who do

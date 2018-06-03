@@ -19,7 +19,7 @@
 #include "Particle_Fireball.h"
 #include "Particle_Indoor_Laser.h"
 #include "Particle_Boss.h"
-
+#include "Particle_Missile_2.h"
 
 ModuleParticles::ModuleParticles()
 {
@@ -206,6 +206,9 @@ Particle* ModuleParticles::AddParticle(Particle& particle, fPoint position, fPoi
 				break;
 			case PARTICLE_BOSS:
 				p =  new Particle_Boss( position, tex);
+				break;
+			case	PARTICLE_ASSIS_TURRET:
+				p = new Particle_Missile_2(particle, position, speed, delay, colType, tex);
 				break;
 			}
 
@@ -553,6 +556,13 @@ void ModuleParticles::InitParticleValues()
 	missileExplosion.anim.speed = 0.2f;
 
 	hMissile.collision_fx = &missileExplosion;
+
+	//Missile 2 
+	missile_2.anim.PushBack({ 268,169,16,16 }); 
+	missile_2.anim.PushBack({ 284,169,16,16 }); 
+	missile_2.anim.speed = 1.0f;
+	missile_2.life = 1500;
+	missile_2.collision_fx = &missileExplosion;
 
 	//Intergalactic fighter shot----------------------------------
 

@@ -28,6 +28,7 @@ enum PARTICLE_TYPE
 	PARTICLE_FIREBALL,
 	PARTICLE_INDOOR_LASER,
 	PARTICLE_BOSS,
+	PARTICLE_ASSIS_TURRET,
 	MAX_PARTICLE,//Always last
 };
 
@@ -116,6 +117,7 @@ public:
 	Particle fireBall;
 	Particle fireBar;
 	Particle missile;
+	Particle missile_2;
 	Particle missileExplosion;
 	Particle indoorLaser;
 	Particle barGuardShot;
