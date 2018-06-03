@@ -3,7 +3,6 @@
 #include "ModuleStage05.h"
 Enemy_Inside_Turret_Laser::Enemy_Inside_Turret_Laser(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop,fPoint speed) : Enemy(x,y,hp,scoreValue,powerupDrop,speed)
 {
-	renderLayer = 2;
 	turret.PushBack({ 250,310,16,24 });
 	animation = &turret;
 	collider = App->collision->AddCollider({ x, y, 16, 24 }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
@@ -26,7 +25,8 @@ void Enemy_Inside_Turret_Laser::Move() {
 	collider->rect.x = position.x - animation->GetFrame().w/2;
 	framecount += 1;
 }
-void Enemy_Inside_Turret_Laser::Draw(SDL_Texture* sprites)
+
+void Enemy_Inside_Turret_Laser::Draw2(SDL_Texture* sprites)
 {
 	if (speed.x > 0)
 	{

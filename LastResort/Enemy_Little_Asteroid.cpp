@@ -33,7 +33,7 @@ void Enemy_Little_Asteroid::Move()
 	if (collider != nullptr)
 		collider->SetPos(position.x - animation->GetFrame().w / 2, position.y - animation->GetFrame().h / 2);
 }
-void Enemy_Little_Asteroid::Draw(SDL_Texture* sprites)
+void Enemy_Little_Asteroid::Draw1(SDL_Texture* sprites)
 {
 	if (animation != nullptr)
 	{

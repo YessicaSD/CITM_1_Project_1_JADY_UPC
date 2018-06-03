@@ -24,7 +24,7 @@ public:
 	Enemy_BarGuardian(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop);
 	~Enemy_BarGuardian();
 	void Move();
-	void Draw(SDL_Texture* sprites);
+	void Draw0(SDL_Texture* sprites);
 
 private:
 	BarGuardianPhases phase = barGuard_Up;

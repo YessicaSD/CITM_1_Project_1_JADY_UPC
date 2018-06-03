@@ -139,9 +139,9 @@ update_status ModuleEnemies::RenderUpdate0()
 {
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
-		if (enemies[i] != nullptr && enemies[i]->renderLayer == 0)
+		if (enemies[i] != nullptr)
 		{
-			RenderEnemy(enemies[i]);
+			RenderEnemy(enemies[i], 0);
 		}
 	}
 
@@ -152,9 +152,9 @@ update_status ModuleEnemies::RenderUpdate1()
 {
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
-		if (enemies[i] != nullptr && enemies[i]->renderLayer == 1)
+		if (enemies[i] != nullptr)
 		{
-			RenderEnemy(enemies[i]);
+			RenderEnemy(enemies[i], 1);
 		}
 	}
 
@@ -165,26 +165,50 @@ update_status ModuleEnemies::RenderUpdate2()
 {
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
-		if (enemies[i] != nullptr && enemies[i]->renderLayer == 2)
+		if (enemies[i] != nullptr)
 		{
-			RenderEnemy(enemies[i]);
+			RenderEnemy(enemies[i], 2);
 		}
 	}
 
 	return UPDATE_CONTINUE;
 }
 
-void ModuleEnemies::RenderEnemy(Enemy * Ienemy)
+void ModuleEnemies::RenderEnemy(Enemy * Ienemy, int layer)
 {
 	if (Ienemy->isDamaged)
 	{
 		if (Ienemy->flashing_interval % 2)
 		{
-			Ienemy->Draw(dmg_sprites);
+			//Draw in layer
+			switch(layer)
+			{
+			case 0:
+				Ienemy->Draw0(dmg_sprites);
+				break;
+			case 1:
+				Ienemy->Draw1(dmg_sprites);
+				break;
+			case 2:
+				Ienemy->Draw2(dmg_sprites);
+				break;
+			}
 		}
 		else
 		{
-			Ienemy->Draw(nml_sprites);
+			//Draw in layer
+			switch (layer)
+			{
+			case 0:
+				Ienemy->Draw0(nml_sprites);
+				break;
+			case 1:
+				Ienemy->Draw1(nml_sprites);
+				break;
+			case 2:
+				Ienemy->Draw2(nml_sprites);
+				break;
+			}
 		}
 
 		Ienemy->dmg_frames += 1;
@@ -204,7 +228,19 @@ void ModuleEnemies::RenderEnemy(Enemy * Ienemy)
 	}
 	else
 	{
-		Ienemy->Draw(nml_sprites);
+		//Draw in layer
+		switch (layer)
+		{
+		case 0:
+			Ienemy->Draw0(nml_sprites);
+			break;
+		case 1:
+			Ienemy->Draw1(nml_sprites);
+			break;
+		case 2:
+			Ienemy->Draw2(nml_sprites);
+			break;
+		}
 	}
 }
 

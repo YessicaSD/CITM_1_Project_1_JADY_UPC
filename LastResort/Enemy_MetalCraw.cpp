@@ -71,7 +71,7 @@ void Enemy_MetalCraw::Move()
 		collider->SetPos(position.x, position.y);
 
 }
-void  Enemy_MetalCraw::Draw(SDL_Texture* sprites)
+void  Enemy_MetalCraw::Draw1(SDL_Texture* sprites)
 {
 	if (animation != nullptr)
 	{

@@ -21,7 +21,7 @@ void Enemy_Missile::Move()
 		collider->SetPos(position.x - animation->GetFrame().w, position.y - animation->GetFrame().h / 2);
 }
 
-void Enemy_Missile::Draw(SDL_Texture* sprites)
+void Enemy_Missile::Draw1(SDL_Texture* sprites)
 {
 	if (animation != nullptr)
 		App->render->Blit(sprites, position.x-animation->GetFrame().w, position.y - animation->GetFrame().h/2, &(animation->GetCurrentFrame()));

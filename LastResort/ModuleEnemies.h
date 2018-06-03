@@ -86,7 +86,7 @@ public:
 
 private:
 	Enemy* SpawnEnemy(const EnemyInfo& info);
-	void RenderEnemy(Enemy*);
+	void RenderEnemy(Enemy*, int layer);
 
 private:
 	EnemyInfo queue[MAX_ENEMIES];

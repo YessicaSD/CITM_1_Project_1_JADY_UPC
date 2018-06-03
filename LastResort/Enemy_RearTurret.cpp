@@ -7,9 +7,6 @@
 
 Enemy_RearTurret::Enemy_RearTurret(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t) : Enemy(x, y, hp, scoreValue, pu_t)
 {
-	//Render layer
-	renderLayer = 0;
-
 	//Animation
 	rearTurretRect = { 223, 213, 32, 32 };
 
@@ -76,7 +73,7 @@ void Enemy_RearTurret::Move()
 	collider->SetPos(position.x - rearTurretRect.w / 2, position.y - rearTurretRect.h / 2);
 }
 
-void Enemy_RearTurret::Draw(SDL_Texture * sprites)
+void Enemy_RearTurret::Draw0(SDL_Texture * sprites)
 {
 	//RENDER------------------------------------------------
 	App->render->Blit(sprites, position.x - rearTurretRect.w / 2, position.y - rearTurretRect.h / 2, &rearTurretRect);

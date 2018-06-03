@@ -107,7 +107,7 @@ void Enemy_Pinata::Move()
 
 		if (pinataMov.movFinished)
 		{
-			renderLayer = 2;
+			drawOnLayer2 = true;
 			currentState = FOLLOW;
 			break;
 		}
@@ -171,7 +171,23 @@ void Enemy_Pinata::Move()
 		collider->SetPos(position.x - 14, position.y - 14);
 }
 
-void Enemy_Pinata::Draw(SDL_Texture* sprites)
+void Enemy_Pinata::Draw1(SDL_Texture* sprites)
+{
+	if(!drawOnLayer2)
+	{
+		DrawPinata(sprites);
+	}
+}
+
+void Enemy_Pinata::Draw2(SDL_Texture* sprites)
+{
+	if(drawOnLayer2)
+	{
+		DrawPinata(sprites);
+	}
+}
+
+void Enemy_Pinata::DrawPinata(SDL_Texture* sprites)
 {
 	SDL_Rect currentAnim;
 	blitEx = false;

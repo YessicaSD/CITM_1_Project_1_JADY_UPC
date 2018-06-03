@@ -8,8 +8,6 @@
 
 Enemy_Pinata_Spawner::Enemy_Pinata_Spawner(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t) : Enemy(x, y, hp, scoreValue, pu_t)
 {
-	renderLayer = 2;
-
 	for (uint i = 0; i < MAX_SPAWNED; ++i) {
 		spawned[i] = nullptr;
 	}
@@ -88,7 +86,7 @@ void Enemy_Pinata_Spawner::Move()
 
 }
 
-void Enemy_Pinata_Spawner::Draw(SDL_Texture* sprites) {
+void Enemy_Pinata_Spawner::Draw2(SDL_Texture* sprites) {
 
 	SDL_Rect currentAnim;
 

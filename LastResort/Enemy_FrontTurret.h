@@ -9,6 +9,7 @@ class Enemy_FrontTurret : public Enemy
 public:
 	Enemy_FrontTurret(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop);
 	void Move();
+	void Draw1(SDL_Texture * sprites);
 
 private:
 	//Helper functions

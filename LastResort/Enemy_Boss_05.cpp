@@ -8,8 +8,6 @@
 
 Enemy_Boss_05::Enemy_Boss_05(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t) : Enemy(x, y, hp, scoreValue, pu_t)
 {
-	renderLayer = 0;
-
 	shootFrames = rand() % 120 + 120;
 
 	//Position--------------------------------------
@@ -86,7 +84,7 @@ void Enemy_Boss_05::Move()
 	}
 }
 
-void Enemy_Boss_05::Draw(SDL_Texture* sprites)
+void Enemy_Boss_05::Draw0(SDL_Texture* sprites)
 {
 
 	//Draw------------------------------------------------------------------

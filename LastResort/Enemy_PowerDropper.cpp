@@ -1,6 +1,7 @@
 #include "Application.h"
 #include "Enemy_PowerDropper.h"
 #include "ModuleCollision.h"
+#include "ModuleRender.h"
 
 Enemy_PowerDropper::Enemy_PowerDropper(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t) : Enemy(x, y, hp, scoreValue, pu_t)
 {
@@ -39,4 +40,10 @@ void Enemy_PowerDropper::Move()
 
 	if (collider != nullptr)
 		collider->SetPos(position.x, position.y);
+}
+
+void Enemy_PowerDropper::Draw1(SDL_Texture * sprites)
+{
+	if (animation != nullptr)
+		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
 }

@@ -1,6 +1,7 @@
 #include "Application.h"
 #include "Enemy_Missile_turret.h"
 #include "ModuleStage05.h"
+#include "ModuleRender.h"
 
 Enemy_Missile_turret::Enemy_Missile_turret(int x,int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop):Enemy(x,y, hp, scoreValue,  powerupDrop)
 {
@@ -24,4 +25,10 @@ void Enemy_Missile_turret::Move()
 
 	if (collider != nullptr)
 		collider->SetPos(position.x, position.y);
+}
+
+void Enemy_Missile_turret::Draw1(SDL_Texture * sprites)
+{
+	if (animation != nullptr)
+		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
 }

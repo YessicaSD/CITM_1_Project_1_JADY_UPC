@@ -136,7 +136,7 @@ void Enemy_RedLamella::Move()
 		
 }
 
-void Enemy_RedLamella::Draw(SDL_Texture* sprites)
+void Enemy_RedLamella::Draw1(SDL_Texture* sprites)
 {
 	SDL_Rect currentAnim;
 	blitEx = false;

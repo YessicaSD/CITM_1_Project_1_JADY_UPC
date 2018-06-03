@@ -15,6 +15,7 @@ public:
 
 	Enemy_RedBats(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop);
 	void Move();
+	void Draw1(SDL_Texture * sprites);
 	void OnCollision(Collider*);
 };
 #endif // __ENEMY_REDBATS_H__

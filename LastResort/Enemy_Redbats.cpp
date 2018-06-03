@@ -72,3 +72,9 @@ void Enemy_RedBats::OnCollision(Collider* collider)
 		App->audio->ControlAudio(App->particles->g_explosion02_1sfx, PLAY_AUDIO);
 	}
 }
+
+void Enemy_RedBats::Draw1(SDL_Texture * sprites)
+{
+	if (animation != nullptr)
+		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
+}

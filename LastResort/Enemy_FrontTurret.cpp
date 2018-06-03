@@ -75,6 +75,13 @@ void Enemy_FrontTurret::Move()
 		collider->SetPos(position.x, position.y);
 }
 
+void Enemy_FrontTurret::Draw1(SDL_Texture * sprites)
+{
+	if (animation != nullptr)
+		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
+}
+
+
 void Enemy_FrontTurret::ShootBall(fPoint position, fPoint speed)
 {
 	//Shoot

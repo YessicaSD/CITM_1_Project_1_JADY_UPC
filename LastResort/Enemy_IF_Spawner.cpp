@@ -8,8 +8,6 @@
 
 Enemy_IF_Spawner::Enemy_IF_Spawner(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t) : Enemy(x, y, hp, scoreValue, pu_t)
 {
-	renderLayer = 2;
-
 	for (uint i = 0; i < MAX_SPAWNED; ++i) {
 		spawned[i] = nullptr;
 	}
@@ -78,7 +76,7 @@ void Enemy_IF_Spawner::Move()
 	}
 }
 
-void Enemy_IF_Spawner::Draw(SDL_Texture* sprites) {
+void Enemy_IF_Spawner::Draw2(SDL_Texture* sprites) {
 
 	App->render->Blit(sprites, position.x -64, position.y - 15, &spawnDoor);
 	App->render->Blit(sprites, position.x - 96, position.y +32, &insideCore);

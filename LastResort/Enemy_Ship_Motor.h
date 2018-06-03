@@ -24,7 +24,7 @@ public:
 
 	Enemy_Ship_Motor(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop);
 	void Move();
-	void Draw(SDL_Texture*);
+	void Draw1(SDL_Texture*);
 	void OnCollision(Collider*);
 };
 #endif // __ENEMY_SHIP_THING_H__

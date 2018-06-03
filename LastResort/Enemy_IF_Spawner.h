@@ -14,7 +14,7 @@ class Enemy_IF_Spawner : public Enemy
 public:
 	Enemy_IF_Spawner(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop);
 	void Move();
-	void Draw(SDL_Texture* sprites);
+	void Draw2(SDL_Texture* sprites);
 
 private:
 	SDL_Rect insideCore;

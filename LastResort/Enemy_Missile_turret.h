@@ -14,6 +14,7 @@ public:
 	Enemy_Missile_turret(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop);
 	int frameCount;
 	void Move();
+	void Draw1(SDL_Texture * sprites);
 };
 
 #endif // __ENEMY_OSCILATOR_H__

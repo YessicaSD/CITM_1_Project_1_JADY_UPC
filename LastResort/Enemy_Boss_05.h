@@ -11,7 +11,7 @@ class Enemy_Boss_05 : public Enemy
 public:
 	Enemy_Boss_05(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop);
 	void Move();
-	void Draw(SDL_Texture* sprites);
+	void Draw0(SDL_Texture* sprites);
 
 private:
 	//Animations---------------------------

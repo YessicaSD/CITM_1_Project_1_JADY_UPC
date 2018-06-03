@@ -17,7 +17,7 @@ void Enemy_Middle_Asteroid::Move()
 		collider->SetPos(position.x - animation->GetFrame().w / 2, position.y - animation->GetFrame().h / 2);
 }
 
-void Enemy_Middle_Asteroid::Draw(SDL_Texture* sprites)
+void Enemy_Middle_Asteroid::Draw1(SDL_Texture* sprites)
 {
 	if (animation != nullptr)
 	{

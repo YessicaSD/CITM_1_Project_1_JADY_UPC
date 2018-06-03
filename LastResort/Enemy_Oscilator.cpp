@@ -1,6 +1,7 @@
 #include "Application.h"
 #include "Enemy_Oscilator.h"
 #include "ModuleCollision.h"
+#include "ModuleRender.h"
 
 Enemy_Oscilator::Enemy_Oscilator(int x, float hp, int scoreValue, POWERUP_TYPE pu_t) : Enemy(x, original_y, hp, scoreValue, pu_t)
 {
@@ -59,4 +60,10 @@ void Enemy_Oscilator::Move()
 	
 	if (collider != nullptr)
 		collider->SetPos(position.x, position.y);
+}
+
+void Enemy_Oscilator::Draw1(SDL_Texture * sprites)
+{
+	if (animation != nullptr)
+		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
 }

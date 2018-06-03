@@ -147,7 +147,7 @@ void Enemy_MetalBee::CheckDirection() {
 
 }
 
-void Enemy_MetalBee::Draw(SDL_Texture* sprites)
+void Enemy_MetalBee::Draw1(SDL_Texture* sprites)
 {
 
 	blitEx = false;

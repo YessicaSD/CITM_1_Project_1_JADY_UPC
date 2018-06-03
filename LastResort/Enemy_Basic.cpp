@@ -26,3 +26,10 @@ void Enemy_Basic::Move()
 		collider->SetPos(position.x, position.y);
 }
 
+void Enemy_Basic::Draw1(SDL_Texture * sprites)
+{
+	if (animation != nullptr)
+		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
+}
+
+

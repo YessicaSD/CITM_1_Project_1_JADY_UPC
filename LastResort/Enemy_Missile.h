@@ -13,7 +13,7 @@ private:
 public:
 	Enemy_Missile(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop);
 	void Move();
-	void Draw(SDL_Texture* sprites);
+	void Draw1(SDL_Texture* sprites);
 };
 
 #endif // __ENEMY_MISSILE_LAUNCHER_H__

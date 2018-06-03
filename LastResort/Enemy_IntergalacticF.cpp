@@ -12,8 +12,6 @@
 
 Enemy_Intergalactic_F::Enemy_Intergalactic_F(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t) : Enemy(x, y, hp, scoreValue, pu_t)
 {
-	renderLayer = 0;
-
 	shootFrames = rand() %120 + 120;
 
 	//Position--------------------------------------
@@ -161,7 +159,7 @@ void Enemy_Intergalactic_F::Move()
 		collider->SetPos(position.x - 20, position.y - 20);
 }
 
-void Enemy_Intergalactic_F::Draw(SDL_Texture* sprites)
+void Enemy_Intergalactic_F::Draw0(SDL_Texture* sprites)
 {
 	SDL_Rect currentAnim;
 

@@ -23,7 +23,7 @@ public:
 	Enemy_Mech_Spawner(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop);
 	~Enemy_Mech_Spawner() {};
 	void Move();
-	void Draw(SDL_Texture* sprites);
+	void Draw1(SDL_Texture* sprites);
 
 	animState currentState = ANIMATION;
 	Enemy* spawned[MAX_SPAWNED] = {nullptr};

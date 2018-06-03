@@ -11,7 +11,7 @@ class Enemy_MetalBee : public Enemy
 public:
 	Enemy_MetalBee(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop);
 	void Move();
-	void Draw(SDL_Texture* sprites);
+	void Draw1(SDL_Texture* sprites);
 	void CheckTarget();
 	void CheckDirection();
 

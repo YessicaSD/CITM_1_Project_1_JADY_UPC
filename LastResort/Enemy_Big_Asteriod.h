@@ -11,7 +11,7 @@ public:
 	Enemy_Big_Asteroid(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop);
 	~Enemy_Big_Asteroid() {};
 	void Move();
-	void Draw(SDL_Texture* sprites);
+	void Draw1(SDL_Texture* sprites);
 	void OnCollision(Collider*);
 };
 
