@@ -17,7 +17,7 @@ The object of the game is to fight through five stages and destroy the end stage
 ## Gameplay
 <iframe width="854" height="480" src="https://www.youtube.com/embed/aybhwlEV0EM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-<iframe width="854" height="480" src="https://www.youtube.com/watch?v=uvoda9_zHeA&feature=youtu.be" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="800" height="480" src="https://www.youtube.com/watch?v=uvoda9_zHeA&feature=youtu.be" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 Link video: https://www.youtube.com/watch?v=uvoda9_zHeA&feature=youtu.be
 
