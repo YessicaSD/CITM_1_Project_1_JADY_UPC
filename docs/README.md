@@ -14,9 +14,16 @@ The object of the game is to fight through five stages and destroy the end stage
 
 ![Team JADY](https://raw.githubusercontent.com/Dasanch/Project_1_JADY_UPC/master/docs/Team_JADY.png)
 
-## Gameplay
-<iframe width="854" height="480" src="https://www.youtube.com/watch?v=uvoda9_zHeA&feature=youtu.be" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+## Original game video:
 
-Link video: https://www.youtube.com/watch?v=uvoda9_zHeA&feature=youtu.be
+[![Watch the video](https://www.youtube.com/embed/aybhwlEV0EM)](https://www.youtube.com/embed/aybhwlEV0EM)
+
+<iframe width="854" height="480" src="https://www.youtube.com/embed/aybhwlEV0EM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+## Tribute game video:
+
+[![Watch the video](https://www.youtube.com/watch?v=uvoda9_zHeA&feature=youtu.be)](https://www.youtube.com/watch?v=uvoda9_zHeA&feature=youtu.be)
+
+<iframe width="854" height="480" src="https://www.youtube.com/watch?v=uvoda9_zHeA&feature=youtu.be" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 Download game: https://github.com/YessicaSD/Project_1_JADY_UPC/releases/tag/1.0.5.0
