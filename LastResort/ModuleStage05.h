@@ -117,6 +117,10 @@ public:
 
 	//Enemies--------------------------------
 	Enemy* e_FrontShipTurret = nullptr;
+	Enemy* e_IFSpawn = nullptr;
+	Enemy* e_ShipMotor = nullptr;
+	Enemy* e_PinaSpawn1 = nullptr;
+	Enemy* e_PinaSpawn2 = nullptr;
 	int rotatingTurretsKilled;
 	int redLamellasSpawnFrames = 0;
 };

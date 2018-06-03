@@ -67,7 +67,7 @@ void Enemy_RearTurret::Move()
 
 	}
 
-	LOG("Rear turret position x: %f y %f", position.x, position.y);
+	//LOG("Rear turret position x: %f y %f", position.x, position.y);
 
 	//- Update the collider
 	collider->SetPos(position.x - rearTurretRect.w / 2, position.y - rearTurretRect.h / 2);

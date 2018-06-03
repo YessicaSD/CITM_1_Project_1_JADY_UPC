@@ -23,6 +23,8 @@ private:
 public:
 
 	Enemy_Ship_Motor(int x, int y, float hp, int scoreValue, POWERUP_TYPE powerupDrop);
+	~Enemy_Ship_Motor();
+
 	void Move();
 	void Draw1(SDL_Texture*);
 	void OnCollision(Collider*);

@@ -247,8 +247,6 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(MISSILE_TURRET, 943, -3);
 	App->enemies->AddEnemy(MISSILE_TURRET, 975, -3);
 
-	App->enemies->AddEnemy(IF_SPAWNER, 735, 31);
-
 	App->enemies->AddEnemy(REAR_TURRET, 1357, 41);
 
 	App->enemies->AddEnemy(REDBATS,1616 , 30);
@@ -256,12 +254,6 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(REDBATS, 1616, 30, 1000);
 	App->enemies->AddEnemy(REDBATS, 1616, 30, 1500);
 	App->enemies->AddEnemy(REDBATS, 1616, 30, 2000);
-
-	App->enemies->AddEnemy(PINATA_SPAWNER, 1167, 144);
-	App->enemies->AddEnemy(PINATA_SPAWNER, 1295, 144);
-
-	App->enemies->AddEnemy(SHIP_MOTOR, 1119, 225);
-
 
 	//End of the level
 	App->enemies->AddEnemy(BAR_GUARDIAN, 1580, 182 + SCREEN_HEIGHT / 2);
@@ -276,6 +268,7 @@ bool Module5lvlScene::Start()
 	//Add colliders
 	AddShipColliders();
 	AddFinalColliders();
+
 	return ret;
 }
 
@@ -318,7 +311,7 @@ update_status Module5lvlScene::LogicUpdate()
 	UpdateFinalColliders();
 
 	//- The mega checkpoint switch--------------------------------------
-	//LOG("Current check point %i", cameraMovement.currentMov);
+	LOG("Current check point %i", cameraMovement.currentMov);
 	switch(cameraMovement.currentMov)
 	{
 	case 0:
@@ -385,6 +378,7 @@ update_status Module5lvlScene::LogicUpdate()
 		if (reachedCheckpoint[7] == false)
 		{
 			ResetShipColType();//In case it goes to a previous checkpoint by using F6
+			e_IFSpawn = App->enemies->InstaSpawn(IF_SPAWNER, 735, 31);
 			reachedCheckpoint[7] = true;
 		}
 
@@ -433,6 +427,7 @@ update_status Module5lvlScene::LogicUpdate()
 		if (reachedCheckpoint[13] == false)
 		{
 			ResetShipColType();//In case it goes to a previous checkpoint by using F6
+			App->enemies->ManualDespawn(e_IFSpawn);
 			reachedCheckpoint[13] = true;
 		}
 
@@ -441,6 +436,8 @@ update_status Module5lvlScene::LogicUpdate()
 		if (reachedCheckpoint[14] == false)
 		{
 			ResetShipColType();//In case it goes to a previous checkpoint by using F6
+			e_PinaSpawn1 = App->enemies->InstaSpawn(PINATA_SPAWNER, 1167, 144);
+			e_PinaSpawn2 = App->enemies->InstaSpawn(PINATA_SPAWNER, 1295, 144);
 			reachedCheckpoint[14] = true;
 		}
 		FirebarsRearShip();
@@ -468,6 +465,7 @@ update_status Module5lvlScene::LogicUpdate()
 		if (reachedCheckpoint[17] == false)
 		{
 			ResetShipColType();//In case it goes to a previous checkpoint by using F6
+			e_ShipMotor = App->enemies->InstaSpawn(SHIP_MOTOR, 1119, 225);
 			reachedCheckpoint[17] = true;
 		}
 		FirebarsRearShip();
@@ -511,7 +509,9 @@ update_status Module5lvlScene::LogicUpdate()
 		{
 			//Set ship colliders to IGNORE HIT (if not the unit follows them)-------------------------------------------------------------------------------
 			ShipColIgnoreHit();
-
+			App->enemies->ManualDespawn(e_ShipMotor);
+			App->enemies->ManualDespawn(e_PinaSpawn1);
+			App->enemies->ManualDespawn(e_PinaSpawn2);
 			//Add enemies-----------------------------------------------------------------------------------------------------------------------------------
 			//INFO 1: We'll take the positions of the enemies from this video https://www.youtube.com/watch?time_continue=1213&v=aybhwlEV0EM
 			//- To make it easier for us to calcule the positions we'll convert the time of the video to the time of the actual level with a simple substraction

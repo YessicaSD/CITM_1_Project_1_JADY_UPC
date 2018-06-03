@@ -31,9 +31,6 @@ Enemy_Ship_Motor::Enemy_Ship_Motor(int x, int y, float hp, int scoreValue, POWER
 	Ship_Part = {414,444,63,63};
 	collider = App->collision->AddCollider({ x, y, 50, 40 }, COLLIDER_TYPE::COLLIDER_ENEMY_HEAVY, (Module*)App->enemies);
 	stateMotor = CLOSE;
-	
-	
-
 }
 
 void Enemy_Ship_Motor::Move()
@@ -69,10 +66,7 @@ void Enemy_Ship_Motor::Move()
 			frameCount = 0;
 		}
 	}
-	if (App->stage05->cameraMovement.currentMov == 22)
-	{
-		fixedPos.x -= 1;
-	}
+
 	if (collider != nullptr)
 		collider->SetPos(position.x - Ship_Part.w, position.y + 15 - Ship_Part.h);
 
@@ -82,6 +76,14 @@ void Enemy_Ship_Motor::Move()
 		MissileLaunch = nullptr;
 	}
 
+}
+
+Enemy_Ship_Motor::~Enemy_Ship_Motor()
+{
+	if (MissileLaunch != nullptr)
+	{
+		App->enemies->ManualDespawn(MissileLaunch);
+	}
 }
 
 void Enemy_Ship_Motor::Draw1(SDL_Texture* sprites)
@@ -100,9 +102,5 @@ void Enemy_Ship_Motor::OnCollision(Collider* collider)
 		App->audio->ControlAudio(App->particles->g_explosion01_1sfx, PLAY_AUDIO);
 	else
 		App->audio->ControlAudio(App->particles->g_explosion02_1sfx, PLAY_AUDIO);
-
-	if(MissileLaunch != nullptr)
-	{
-		App->enemies->ManualDespawn(MissileLaunch);
-	}
+	//It will destroy ship launcher in its destructior
 }
