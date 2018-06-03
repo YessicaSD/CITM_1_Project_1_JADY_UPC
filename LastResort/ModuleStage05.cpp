@@ -801,7 +801,7 @@ void Module5lvlScene::AddShipColliders()
 
 void Module5lvlScene::UpdateShipColliders()
 {
-	for (int i = 0; i < SHIP_COLLIDERS_NUM ; ++i)
+	for (int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
 	{
 		if (shipCollidersCol[i] != nullptr)
 		{
@@ -827,18 +827,14 @@ void Module5lvlScene::DeleteShipColliders()
 
 void Module5lvlScene::AddFinalColliders()
 {
-	for (int i = 0; i < FINAL_COLLIDERS_NUM ; ++i)
+	for (int i = 0; i < FINAL_COLLIDERS_NUM; ++i)
 	{
-	
-		if (finalCollidersCol[i] == nullptr)
-		{
-			finalCollidersCol[i] = App->collision->AddCollider(
-			{ finalCollidersRect[i].x + (int)shipPos.x,
-				finalCollidersRect[i].y + (int)shipPos.y,
-				finalCollidersRect[i].w,
-				finalCollidersRect[i].h },
-				COLLIDER_TYPE::COLLIDER_WALL);
-		}
+		finalCollidersCol[i] = App->collision->AddCollider(
+		{ finalCollidersRect[i].x + (int)shipPos.x,
+			finalCollidersRect[i].y + (int)shipPos.y,
+			finalCollidersRect[i].w,
+			finalCollidersRect[i].h },
+			COLLIDER_TYPE::COLLIDER_WALL);
 	}
 }
 
@@ -847,7 +843,6 @@ void Module5lvlScene::UpdateFinalColliders()
 {
 	for (int i = 0; i < FINAL_COLLIDERS_NUM ; ++i)
 	{
-	
 		if (finalCollidersCol[i] != nullptr)
 		{
 			finalCollidersCol[i]->SetPos(
