@@ -136,9 +136,10 @@ void Enemy_Intergalactic_F::Move()
 
 		//Shots logic-----------------------------------------------------------------
 
-		if (currentFrames > shootFrames && currentFrames != -1) {
+		if (currentFrames > shootFrames && currentFrames != -1 && position.x>0 && position.y>0 && position.x<SCREEN_WIDTH +20 && position.y<SCREEN_HEIGHT) {
 			currentFrames = -1;
 			isShooting = true;
+
 			if (currentDir == RIGHT)
 				App->particles->AddParticle(App->particles->i_f_Shot, { (float)(position.x -24), (float)(position.y - 8) }, { 2.8f, 0.0f }, App->particles->particlesTx, COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE, 0, PARTICLE_FOLLOW_WORLD);
 			else
