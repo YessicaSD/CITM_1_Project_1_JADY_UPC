@@ -4,7 +4,8 @@
 #include "Powerup.h"
 
 struct Collider;
-struct Sfx;
+//struct Sfx;
+
 class Powerup_Speed : public Powerup
 {
 public:

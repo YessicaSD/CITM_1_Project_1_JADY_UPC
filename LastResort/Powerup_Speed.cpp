@@ -4,6 +4,7 @@
 #include "ModulePlayer.h"
 #include "Globals.h"
 #include "ModuleAudio.h"
+
 Powerup_Speed::Powerup_Speed(int x, int y) : Powerup(x, y)
 {
 	//Push backs
@@ -15,13 +16,13 @@ Powerup_Speed::Powerup_Speed(int x, int y) : Powerup(x, y)
 	collider = App->collision->AddCollider({ 0, 0, 18, 21 }, COLLIDER_TYPE::COLLIDER_POWERUP, (Module*)App->powerups);
 }
 
-void Powerup_Speed::OnCollision(Collider* col, ModulePlayer* playerTarjet)
+void Powerup_Speed::OnCollision(Collider* col, ModulePlayer* playerTarget)
 {
 	App->audio->ControlAudio(App->powerups->speedSFX, PLAY_AUDIO);
 
-	playerTarjet->speedPowerup = true;
+	playerTarget->speedPowerup = true;
 	//We give it this powerup
-	if (playerTarjet->movementSpeed < 3.0f)
-		playerTarjet->movementSpeed += 0.3f;//Test value. We should check what is the speed increase in the game.
+	if (playerTarget->movementSpeed < 3.0f)
+		playerTarget->movementSpeed += 0.3f;//Test value. We should check what is the speed increase in the game.
 
 }
