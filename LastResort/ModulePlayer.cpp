@@ -33,8 +33,6 @@ ModulePlayer::ModulePlayer() //Constructor
 	SpeedAnimation.speed = 0.2f;
 	SpeedAnimation.loop = false;
 
-
-	
 	Despeed_Animation.PushBack({ 32,54,32,32 });
 	Despeed_Animation.PushBack({ 96,54,32,32 });
 	Despeed_Animation.PushBack({ 64,32,32,32 });
@@ -47,7 +45,6 @@ ModulePlayer::ModulePlayer() //Constructor
 	Despeed_Animation.PushBack({ 0, 0, 0, 0 });
 	Despeed_Animation.speed = 0.2f;
 	Despeed_Animation.loop = false;
-
 }
 
 ModulePlayer::~ModulePlayer()
@@ -65,8 +62,7 @@ bool ModulePlayer::Start()
 	playerAnimState = PlayerAnimationState::None;
 
 	//collider-----------------------------------------------------------------------
-	if (isActive)
-		playerCol = App->collision->AddCollider({ position.x, position.y + 2, 24, 8 }, COLLIDER_TYPE::COLLIDER_IGNORE_HIT, this);
+	playerCol = App->collision->AddCollider({ position.x, position.y + 2, 24, 8 }, COLLIDER_TYPE::COLLIDER_IGNORE_HIT, this);
 	return ret;
 }
 
