@@ -6,9 +6,15 @@
 class Enemy_Assist_Turret : public Enemy
 {
 private:
-	Animation turret;
+	Animation initAnim;
+	Animation turretAnim;
+	Animation fireAnim;
 	iPoint fixedPos;
 	int frameCount;
+	bool isShooting = false;
+	enum TurretStates {
+		INIT, NORMAL
+	} state = INIT;
 
 public:
 

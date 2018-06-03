@@ -182,7 +182,11 @@ bool Module5lvlScene::Start()
 	//App->enemies->AddEnemy(PINATA, 140, 140);
 	//App->enemies->AddEnemy(PINATA, 150, 150);
 	//App->enemies->AddEnemy(PINATA, 130, 130);
-	//App->enemies->AddEnemy(OSCILATOR, 500, 0);
+	App->enemies->AddEnemy(ASSIST_TURRET, 2243, 362);
+	App->enemies->AddEnemy(ASSIST_TURRET, 2283, 362);
+	App->enemies->AddEnemy(ASSIST_TURRET, 2323, 362);
+	App->enemies->AddEnemy(ASSIST_TURRET, 2363, 362);
+	App->enemies->AddEnemy(ASSIST_TURRET, 2403, 362);
 	//App->enemies->InstaSpawn(RED_LAMELLA, 300, 200);
 
 	//- FINAL POSITION ENEMIES (in order of appearance on the level)
