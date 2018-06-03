@@ -342,7 +342,7 @@ update_status Module5lvlScene::LogicUpdate()
 
 
 	//- The mega checkpoint switch--------------------------------------
-	LOG("Current check point %i", cameraMovement.currentMov);
+	//LOG("Current check point %i", cameraMovement.currentMov);
 	switch(cameraMovement.currentMov)
 	{
 	case 0:
@@ -568,19 +568,19 @@ update_status Module5lvlScene::LogicUpdate()
 			App->enemies->AddEnemy(BIG_ASTEROID,    1400, 300, 2043000 - startTime, NOPOWERUP);
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1250, 182, 2043500 - startTime, NOPOWERUP, { -0.25f, 1.0f });
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1250, 182, 2043500 - startTime, NOPOWERUP, {  0.25f, 1.0f });
+			App->enemies->AddEnemy(BIG_ASTEROID,    1411, 250, 2044000 - startTime);
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1108, 182, 2045000 - startTime, NOPOWERUP, {  1.0f , 1.0f });
-			App->enemies->AddEnemy(LAMELLA, 1150, 200, 2046000 );
-			App->enemies->AddEnemy(LAMELLA, 1150, 260, 2046000);
-			App->enemies->AddEnemy(LAMELLA, 1150, 320, 2046000);
-			App->enemies->AddEnemy(LAMELLA, 1150, 380, 2046000);
-			App->enemies->AddEnemy(LAMELLA, 1350, 200, 2046000);
-			App->enemies->AddEnemy(LAMELLA, 1350, 260, 2046000);
-			App->enemies->AddEnemy(LAMELLA, 1350, 320, 2046000);
-			App->enemies->AddEnemy(LAMELLA, 1350, 380, 2046000);
-
-			//20:52 - 20:62
-
-			//App->enemies->AddEnemy();
+			App->enemies->AddEnemy(LAMELLA,         1150, 200, 2046000 - startTime);
+			App->enemies->AddEnemy(LAMELLA,         1150, 260, 2046000 - startTime);
+			App->enemies->AddEnemy(LAMELLA,         1150, 320, 2046000 - startTime);
+			App->enemies->AddEnemy(LAMELLA,         1150, 380, 2046000 - startTime);
+			App->enemies->AddEnemy(LAMELLA,         1350, 200, 2046000 - startTime);
+			App->enemies->AddEnemy(LAMELLA,         1350, 260, 2046000 - startTime);
+			App->enemies->AddEnemy(LAMELLA,         1350, 320, 2046000 - startTime);
+			App->enemies->AddEnemy(LAMELLA,         1350, 380, 2046000 - startTime);
+			App->enemies->AddEnemy(BIG_ASTEROID,    1411, 350, 2047000 - startTime);
+			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1411, 380, 2047000 - startTime);
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1411, 250, 2047000 - startTime, NOPOWERUP, {  -1.0f, 1.0f });
 
 			reachedCheckpoint[22] = true;
 		}

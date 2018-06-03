@@ -28,31 +28,31 @@
 Application::Application()
 {
 	int i = 0;
-	modules[i++] = window = new ModuleWindow();
-	modules[i++] = input = new ModuleInput();
-	modules[i++] = textures = new ModuleTextures();
-	modules[i++] = fonts = new ModuleFonts();
-	modules[i++] = audio = new ModuleAudio();
-	modules[i++] = stage01 = new ModuleStage01();
-	modules[i++] = stage02 = new Module2lvlScene();
-	modules[i++] = stage05 = new Module5lvlScene();
+	modules[i++] = window             = new ModuleWindow();
+	modules[i++] = input              = new ModuleInput();
+	modules[i++] = textures           = new ModuleTextures();
+	modules[i++] = fonts              = new ModuleFonts();
+	modules[i++] = audio              = new ModuleAudio();
+	modules[i++] = stage01            = new ModuleStage01();
+	modules[i++] = stage02            = new Module2lvlScene();
+	modules[i++] = stage05            = new Module5lvlScene();
 	modules[i++] = stageFunctionality = new ModuleStageFunctionality();
-	modules[i++] = powerups = new ModulePowerups();
-	modules[i++] = enemies = new ModuleEnemies();
-	modules[i++] = unit1 = new ModuleUnit();
-	modules[i++] = unit2 = new ModuleUnit();
-	modules[i++] = particles = new ModuleParticles();
-	modules[i++] = neogeoScene = new ModuleNeoGeo();
-	modules[i++] = titleScene = new ModuleGameTitle();
-	modules[i++] = readyScene = new ModuleStageReady();
-	modules[i++] = gameoverScene = new ModuleGameOver();
-	modules[i++] = continueScene = new ModuleContinue();
-	modules[i++] = player1 = new Player1();
-	modules[i++] = player2 = new Player2();
-	modules[i++] = collision = new ModuleCollision();//!IMPORTANT: Collision needs to be the last of the modules which move colliders (like player, enemies...) because it calculates collisions after they have moved their colliders
-	modules[i++] = fade = new ModuleFadeToBlack();// !IMPORTANT: Fade needs to be before module ui
-	modules[i++] = ui = new ModuleUI();
-	modules[i++] = render = new ModuleRender();//!IMPORTANT: Module render always needs to be the last because it's the one that does SetRenderPresent()
+	modules[i++] = powerups           = new ModulePowerups();
+	modules[i++] = enemies            = new ModuleEnemies();
+	modules[i++] = unit1              = new ModuleUnit();
+	modules[i++] = unit2              = new ModuleUnit();
+	modules[i++] = particles          = new ModuleParticles();
+	modules[i++] = neogeoScene        = new ModuleNeoGeo();
+	modules[i++] = titleScene         = new ModuleGameTitle();
+	modules[i++] = readyScene         = new ModuleStageReady();
+	modules[i++] = gameoverScene      = new ModuleGameOver();
+	modules[i++] = continueScene      = new ModuleContinue();
+	modules[i++] = player1            = new Player1();
+	modules[i++] = player2            = new Player2();
+	modules[i++] = collision          = new ModuleCollision();//!IMPORTANT: Collision needs to be the last of the modules which move colliders (like player, enemies...) because it calculates collisions after they have moved their colliders
+	modules[i++] = fade               = new ModuleFadeToBlack();// !IMPORTANT: Fade needs to be before module ui
+	modules[i++] = ui                 = new ModuleUI();
+	modules[i++] = render             = new ModuleRender();//!IMPORTANT: Module render always needs to be the last because it's the one that does SetRenderPresent()
 
 }
 
