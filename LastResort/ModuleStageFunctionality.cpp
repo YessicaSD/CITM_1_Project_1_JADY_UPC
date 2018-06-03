@@ -68,6 +68,10 @@ bool ModuleStageFunctionality::Start()
 
 bool ModuleStageFunctionality::CleanUp()
 {
+	//Variables
+	redBatsKilled = 0;
+	redBatsSpawned = 0;
+
 	//Unload textures
 	App->textures->Unload(PlayerTexture);
 	App->textures->Unload(SpeedAnimationTex);

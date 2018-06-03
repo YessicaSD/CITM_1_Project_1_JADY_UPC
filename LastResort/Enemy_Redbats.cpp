@@ -2,8 +2,9 @@
 #include "Enemy_RedBats.h"
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
-#include "ModuleStage05.h"
+#include "ModuleStageFunctionality.h"
 #include "ModuleAudio.h"
+#include "ModuleRender.h"
 
 Enemy_RedBats::Enemy_RedBats(int x, int y, float hp, int scoreValue, POWERUP_TYPE pu_t) : Enemy(x, y, hp, scoreValue, pu_t)
 {
@@ -19,6 +20,13 @@ Enemy_RedBats::Enemy_RedBats(int x, int y, float hp, int scoreValue, POWERUP_TYP
 	animation = &RedBats;
 	collider = App->collision->AddCollider({ x, y, 27, 25 }, COLLIDER_TYPE::COLLIDER_ENEMY_LIGHT, (Module*)App->enemies);
 	original_y = y;
+	if(App->stageFunctionality->redBatsSpawned == 5)
+	{
+		//We reset the red bats killed if it is the start of another group
+		App->stageFunctionality->redBatsKilled  = 0;
+		App->stageFunctionality->redBatsSpawned = 0;
+	}
+	App->stageFunctionality->redBatsSpawned++;
 }
 
 void Enemy_RedBats::Move()
@@ -51,12 +59,12 @@ void Enemy_RedBats::OnCollision(Collider* collider)
 {
 	//Spawn powerup if all the other red bats have been killed-----------
 	//- Increase the killed bats counter
-	App->stage05->redBatsKilled++;
+	App->stageFunctionality->redBatsKilled++;
 	//- Check how many red bats have been killed
-	if (App->stage05->redBatsKilled >= 5)
+	if (App->stageFunctionality->redBatsKilled >= 5)
 	{
 		App->powerups->AddPowerup(position.x, position.y, POWERUP_TYPE::LASER);
-		App->stage05->redBatsKilled = 0;
+		App->stageFunctionality->redBatsKilled = 0;
 	}
 
 	//Explosion type REMEMBER: Improve it for 1.0-----------------------

@@ -62,6 +62,10 @@ public:
 
 	//Other-------------------------------------------------------------
 	bool godMode = false;
+
+	//Enemies
+	int redBatsKilled = 0;
+	int redBatsSpawned = 0;
 };
 
 #endif // __ModuleStageFunctionality_H_H__

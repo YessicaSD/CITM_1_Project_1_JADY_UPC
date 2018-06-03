@@ -378,7 +378,6 @@ update_status Module5lvlScene::LogicUpdate()
 	case 4:
 		if (reachedCheckpoint[4] == false)
 		{
-			redBatsKilled = 0;
 			reachedCheckpoint[4] = true;
 		}
 		FireballFrontShip();
@@ -453,7 +452,6 @@ update_status Module5lvlScene::LogicUpdate()
 	case 14:
 		if (reachedCheckpoint[14] == false)
 		{
-			redBatsKilled = 0;
 			reachedCheckpoint[14] = true;
 		}
 		FirebarsRearShip();
@@ -479,7 +477,6 @@ update_status Module5lvlScene::LogicUpdate()
 	case 17:
 		if (reachedCheckpoint[17] == false)
 		{
-			redBatsKilled = 0;
 			reachedCheckpoint[17] = true;
 		}
 		FirebarsRearShip();
@@ -502,7 +499,6 @@ update_status Module5lvlScene::LogicUpdate()
 	case 20:
 		if (reachedCheckpoint[20] == false)
 		{
-			redBatsKilled = 0;
 			reachedCheckpoint[20] = true;
 		}
 
@@ -657,8 +653,9 @@ void Module5lvlScene::ResetValues()
 {
 	shipPartPos = { 63, 160 };
 	fireballFrameCounter = 0;
-	redBatsKilled = 0;
 	rotatingTurretsKilled = 0;
+	//App->stageFunctionality->redBatsKilled = 0;//Uncomment if ModuleStageFunctionality is not disabled when switching between scenes
+	//App->stageFunctionality->redBatsSpawned = 0;
 
 	for(int i = 0; i < CHECKPOIN_NUMBER; ++i)
 	{

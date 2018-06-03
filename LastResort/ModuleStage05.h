@@ -118,7 +118,6 @@ public:
 
 	//Enemies--------------------------------
 	Enemy* e_FrontShipTurret = nullptr;
-	int redBatsKilled;
 	int rotatingTurretsKilled;
 };
 
