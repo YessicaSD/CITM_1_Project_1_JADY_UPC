@@ -618,7 +618,7 @@ update_status Module5lvlScene::LogicUpdate()
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1260, 182, 2042500 - startTime, NOPOWERUP, { -0.15f, 1.0f });
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1260, 182, 2042500 - startTime, NOPOWERUP, {  0.15f, 1.0f });
 			App->enemies->AddEnemy(BIG_ASTEROID,    1411, 290, 2043000 - startTime);
-			App->enemies->AddEnemy(LITTLE_ASTEROID, 1140, 182, 2044500 - startTime);
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1140, 182, 2044500 - startTime, NOPOWERUP, {  0.50f, 1.0f });//speed
 			App->enemies->AddEnemy(LAMELLA,         1150, 200, 2046000 - startTime);
 			App->enemies->AddEnemy(LAMELLA,         1150, 260, 2046000 - startTime);
 			App->enemies->AddEnemy(LAMELLA,         1150, 320, 2046000 - startTime);
@@ -627,7 +627,7 @@ update_status Module5lvlScene::LogicUpdate()
 			App->enemies->AddEnemy(LAMELLA,         1350, 260, 2046000 - startTime);
 			App->enemies->AddEnemy(LAMELLA,         1350, 320, 2046000 - startTime);
 			App->enemies->AddEnemy(LAMELLA,         1350, 380, 2046000 - startTime);
-			App->enemies->AddEnemy(POWERDROPPER,    1411, 290, 2046000 - startTime, SPEED);
+			App->enemies->AddEnemy(POWERDROPPER,    1411, 290, 2046000 - startTime, LASER);
 			App->enemies->AddEnemy(BIG_ASTEROID,    1411, 350, 2047000 - startTime);
 			App->enemies->AddEnemy(BIG_ASTEROID,    1411, 325, 2047500 - startTime);
 			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1411, 380, 2047000 - startTime);
@@ -650,8 +650,8 @@ update_status Module5lvlScene::LogicUpdate()
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1150, 182, 2049750 - startTime, NOPOWERUP, { 0.50f, 1.0f });//Left asteroid
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1260, 182, 2049750 - startTime, NOPOWERUP, { -0.50f, 1.0f });//Right asteroid
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1360, 182, 2049750 - startTime, NOPOWERUP, { 0.00f, 1.0f });//Top asteroid
-			App->enemies->AddEnemy(POWERDROPPER,    1411, 210, 2049750 - startTime, SPEED);
-			App->enemies->AddEnemy(POWERDROPPER,    1411, 240, 2049750 - startTime, SPEED);
+			App->enemies->AddEnemy(POWERDROPPER,    1411, 210, 2049750 - startTime, HOMING);
+			App->enemies->AddEnemy(POWERDROPPER,    1411, 240, 2049750 - startTime, HOMING);
 			App->enemies->AddEnemy(POWERDROPPER,    1411, 370, 2049750 - startTime, GROUND);
 			App->enemies->AddEnemy(POWERDROPPER,    1411, 340, 2049750 - startTime, GROUND);
 			App->enemies->AddEnemy(BIG_ASTEROID,    1411, 300, 2050000 - startTime);
