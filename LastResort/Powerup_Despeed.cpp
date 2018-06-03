@@ -19,9 +19,9 @@ void Powerup_Despeed::OnCollision(Collider* col, ModulePlayer* playerTarjet)
 {
 	App->audio->ControlAudio(App->powerups->despeedSFX, PLAY_AUDIO);
 
-	playerTarjet->speedPowerup = true;
+	playerTarjet->despeed_Powerup = true;
 	//We give it this powerup
-	if (playerTarjet->movementSpeed > 0.0f)
+	if (playerTarjet->movementSpeed > 2.0f)
 		playerTarjet->movementSpeed -= 0.3f;
 
 }

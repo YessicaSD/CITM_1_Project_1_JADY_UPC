@@ -35,18 +35,18 @@ ModulePlayer::ModulePlayer() //Constructor
 
 
 	
-	/*despeedAnimation.PushBack({ 32,54,32,32 });
-	despeedAnimation.PushBack({ 96,54,32,32 });
-	despeedAnimation.PushBack({ 64,32,32,32 });
-	despeedAnimation.PushBack({ 32,32,32,32 });
-	despeedAnimation.PushBack({ 0,32,32,32 });
-	despeedAnimation.PushBack({ 96, 0,32,32 });
-	despeedAnimation.PushBack({ 64, 0,32,32 });
-	despeedAnimation.PushBack({ 32, 0,32,32 });
-	despeedAnimation.PushBack({ 0, 0,32,31 });
-	despeedAnimation.PushBack({ 0, 0, 0, 0 });
-	despeedAnimation.speed = 0.2f;
-	despeedAnimation.loop = false;*/
+	Despeed_Animation.PushBack({ 32,54,32,32 });
+	Despeed_Animation.PushBack({ 96,54,32,32 });
+	Despeed_Animation.PushBack({ 64,32,32,32 });
+	Despeed_Animation.PushBack({ 32,32,32,32 });
+	Despeed_Animation.PushBack({ 0,32,32,32 });
+	Despeed_Animation.PushBack({ 96, 0,32,32 });
+	Despeed_Animation.PushBack({ 64, 0,32,32 });
+	Despeed_Animation.PushBack({ 32, 0,32,32 });
+	Despeed_Animation.PushBack({ 0, 0,32,31 });
+	Despeed_Animation.PushBack({ 0, 0, 0, 0 });
+	Despeed_Animation.speed = 0.2f;
+	Despeed_Animation.loop = false;
 
 }
 
@@ -155,15 +155,15 @@ update_status ModulePlayer::RenderUpdate2()
 			speedPowerup = false;
 		}
 	}
-	/*if (despeedPowerup == true)
+	if (despeed_Powerup == true)
 	{
-		App->render->Blit(App->stageFunctionality->SpeedAnimationTex, position.x - 32, position.y - 9, &despeedAnimation.GetCurrentFrame());
-		if (SpeedAnimation.current_frame == 9)
+		App->render->Blit(App->stageFunctionality->SpeedAnimationTex, position.x - 32, position.y - 9, &Despeed_Animation.GetCurrentFrame());
+		if (Despeed_Animation.current_frame == 9)
 		{
-			SpeedAnimation.current_frame = 0;
-			speedPowerup = false;
+			Despeed_Animation.current_frame = 0;
+			despeed_Powerup = false;
 		}
-	}*/
+	}
 
 	//Ship fire animation (in front of the ship)---------------------------------------
 	if (shoot == true)

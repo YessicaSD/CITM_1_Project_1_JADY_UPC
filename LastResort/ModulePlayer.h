@@ -89,7 +89,7 @@ public:
 	int powerupUpgrades = 0;
 	bool unitPowerUp = false;
 	bool speedPowerup = false;
-	bool despeedPowerup = false;
+	bool despeed_Powerup = false;
 	int gCounter = 0;
 	int hCounter = 0;
 	//------------States----------------------------
@@ -101,7 +101,7 @@ public:
 	//------------PowerUps--------------------------
 	Animation ShotLaserBasic;
 	Animation SpeedAnimation;
-	/*Animation despeedAnimation;*/
+	Animation Despeed_Animation;
 	iPoint ShotPosition;
 	//------------Basic----------------------------
 	SDL_Rect *current_animation = nullptr; //pointer to the only one animation 
