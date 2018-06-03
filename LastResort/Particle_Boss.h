@@ -34,7 +34,7 @@ public:
 	bool addedColliders = false;
 	bool addedLaserCol= false;
 	bool deletedLaserCol = false;
-	Laser lasers[MAX_DIR - 1];
+	Laser lasers[MAX_DIR];
 	fPoint linearOffset = { 18.0f,18.0f };
 	fPoint diagonalOffset = { 12.0f,12.0f };
 	fPoint laserPos;
@@ -58,7 +58,7 @@ public:
 	void Draw();
 
 	void AddColliders();
-
+	bool CheckParticleDeath();
 };
 
 #endif // __PARTICLE_BOSS_H__

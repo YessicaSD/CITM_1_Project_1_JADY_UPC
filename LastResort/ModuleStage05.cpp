@@ -184,7 +184,7 @@ bool Module5lvlScene::Start()
 
 
 	App->enemies->AddEnemy(BOSS_05, 2385, 294);
-	App->enemies->InstaSpawn(METALBEE, 300, 200);
+	//App->enemies->InstaSpawn(METALBEE, 300, 200);
 
 	
 

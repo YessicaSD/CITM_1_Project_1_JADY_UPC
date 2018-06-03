@@ -3,11 +3,12 @@
 #include "Particle_Boss.h"
 #include "ModuleStage05.h"
 
-#define LASERS_SPEED 0.2f
+#define LASERS_SPEED 1.6f
+#define LASERS_D_SPEED 1.4f
 #define COLIDER_OFFSET 2.0f
-#define LASER_1_SPEED 1.8f
-#define LINEAR_OFFSET 18
-#define DIAGONAL_OFFSET 24
+#define LASER_1_SPEED 2.1f
+#define LINEAR_OFFSET 24
+#define DIAGONAL_OFFSET 18
 
 Particle_Boss::Particle_Boss(fPoint position, SDL_Texture* tex)
 {
@@ -15,58 +16,65 @@ Particle_Boss::Particle_Boss(fPoint position, SDL_Texture* tex)
 	//this->anim = p.anim;
 	this->texture = tex;
 	laserPos = position;
+
 	//laserMesures = { 85, 6 };
 	
 	
 	//Animations-----------------------------------------------
 
+	for (int j = 0; j < 3; ++j) {
+
+		for (int i = 0; i < 8; ++i) {
+
+			originAnim.PushBack({ 333 + i * 16,84 + j * 16,16,16 });
+
+		}
+
+	}
+	originAnim.speed = 0.33f;
+
+
 	 for (int j = 0; j < 3; ++j) {
 
 		 for (int i = 0; i < 6; ++i) {
-			 originAnim.PushBack({ 333 + i*27,6 + j*26 ,27,26 });
+
+			 finalAnim.PushBack({ 333 + i*27,6 + j*26 ,27,26 });
+
 		 }
 
 	 }
 
-	 originAnim.speed = 0.3f;
-
-	 for (int j = 0; j < 3; ++j) {
-
-		 for (int i = 0; i < 8; ++i) {
-			 finalAnim.PushBack({ 333 + i * 16,84 + j * 16,16,16 });
-		 }
-		  
-	 }
 	 for (int j = 2; j >= 0; --j) {
 
-		 for (int i = 7; i >= 0; --i) {
-			 finalAnim.PushBack({ 333 + i * 16,84 + j * 16,16,16 });
+		 for (int i = 5; i >= 0; --i) {
+
+			 finalAnim.PushBack({ 333 + i * 27,6 + j * 26 ,27,26 });
+
 		 }
 
 	 }
-	 finalAnim.speed = 0.3f;
-	  
 
+	 finalAnim.speed = 0.60f;
 
 	diagonalLaserRAnim.PushBack({ 495,6,36,36 });
 	diagonalLaserRAnim.PushBack({ 531,6,36,36 });
 
-	diagonalLaserRAnim.speed = 0.1f;
+	diagonalLaserRAnim.speed = 0.2f;
 
 	diagonalLaserLAnim.PushBack({ 495,138,36,36 });
 	diagonalLaserLAnim.PushBack({ 531,138,36,36 });
 
-	diagonalLaserLAnim.speed = 0.1f; 
+	diagonalLaserLAnim.speed = 0.2f; 
 
 	linearLaserXAnim.PushBack({ 495,90,48,48 });
 	linearLaserXAnim.PushBack({ 543,90,48,48 });
 
-	linearLaserXAnim.speed = 0.1f;
+	linearLaserXAnim.speed = 0.2f;
 
 	linearLaserYAnim.PushBack({ 495,42,48,48 });
 	linearLaserYAnim.PushBack({ 543,42,48,48 });
 
-	linearLaserYAnim.speed = 0.1f;
+	linearLaserYAnim.speed = 0.2f;
 
 	lasers[N].animation = linearLaserYAnim;
 	lasers[NE].animation = diagonalLaserRAnim;
@@ -98,7 +106,7 @@ Particle_Boss:: ~Particle_Boss() {
 }
 
 void Particle_Boss::Move() {
-	
+
 
 	if (frames < 100 && frames >= 40) {
 		if (addedLaserCol == false) {
@@ -106,32 +114,48 @@ void Particle_Boss::Move() {
 			addedLaserCol = true;
 		}
 		laserPos.x -= LASER_1_SPEED;
-		laserWeight += LASER_1_SPEED;
-		collider->SetPos((int)laserPos.x, (int)laserPos.y -3);
+
+		if (laserWeight <= 85)
+			laserWeight += LASER_1_SPEED;
+
+		collider->SetPos((int)laserPos.x, (int)laserPos.y - 3);
 		collider->SetMeasurements((int)laserWeight, 6);
 	}
 
-	else if (frames < 160 && frames >= 100) {
-		laserWeight -= LASER_1_SPEED;
-		collider->SetMeasurements((int)laserWeight, 6);
-	}
+	else if (frames <= 160 && frames >= 100) {
 
-	if (frames >=160) {
-
-		if (deletedLaserCol== false) {
-			collider->to_delete = true;
-			collider = nullptr;
-			deletedLaserCol = true;
+		if (laserWeight >= 0) {
+			laserPosTex1.x += LASER_1_SPEED;
+			laserPosTex2.x += LASER_1_SPEED;
+			laserWeight -= LASER_1_SPEED;
 		}
+			
+		if (frames == 160) {
+			if (deletedLaserCol == false) {
+				collider->to_delete = true;
+				collider = nullptr;
+				deletedLaserCol = true;
+			}
+		}
+		else
+			collider->SetMeasurements((int)laserWeight, 6);
+	}
 
+	if (frames >= 140) {
+	
 		if (addedColliders == false) {
 			AddColliders();
 			addedColliders = true;
+
+			for (int i = 0; i < MAX_DIR; ++i) {
+				lasers[i].position = laserPos;
+			}
 		}
+
 
 		for (int i = 0; i < MAX_DIR; ++i) {
 
-			if (collider == nullptr) {
+			if (lasers[i].collider == nullptr) {
 				break;
 			}
 
@@ -142,7 +166,7 @@ void Particle_Boss::Move() {
 				lasers[i].collider->SetPos(lasers[i].position.x - COLIDER_OFFSET, lasers[i].position.y - linearOffset.y - COLIDER_OFFSET);
 				break;
 			case NE:
-				lasers[i].position += {LASERS_SPEED, -LASERS_SPEED};
+				lasers[i].position += {LASERS_D_SPEED, -LASERS_D_SPEED};
 				lasers[i].collider->SetPos(lasers[i].position.x + diagonalOffset.x - COLIDER_OFFSET, lasers[i].position.y - diagonalOffset.y - COLIDER_OFFSET);
 				break;
 			case E:
@@ -150,7 +174,7 @@ void Particle_Boss::Move() {
 				lasers[i].collider->SetPos(lasers[i].position.x + linearOffset.x - COLIDER_OFFSET, lasers[i].position.y - COLIDER_OFFSET);
 				break;
 			case SE:
-				lasers[i].position += {LASERS_SPEED, LASERS_SPEED};
+				lasers[i].position += {LASERS_D_SPEED, LASERS_D_SPEED};
 				lasers[i].collider->SetPos(lasers[i].position.x + diagonalOffset.x - COLIDER_OFFSET, lasers[i].position.y + diagonalOffset.y - COLIDER_OFFSET);
 				break;
 			case S:
@@ -159,7 +183,7 @@ void Particle_Boss::Move() {
 
 				break;
 			case SW:
-				lasers[i].position += {-LASERS_SPEED, LASERS_SPEED};
+				lasers[i].position += {-LASERS_D_SPEED, LASERS_D_SPEED};
 				lasers[i].collider->SetPos(lasers[i].position.x - diagonalOffset.x - COLIDER_OFFSET, lasers[i].position.y + diagonalOffset.y - COLIDER_OFFSET);
 				break;
 			case W:
@@ -167,15 +191,15 @@ void Particle_Boss::Move() {
 				lasers[i].collider->SetPos(lasers[i].position.x - linearOffset.x - COLIDER_OFFSET, lasers[i].position.y - COLIDER_OFFSET);
 				break;
 			case NW:
-				lasers[i].position += {-LASERS_SPEED, -LASERS_SPEED};
+				lasers[i].position += {-LASERS_D_SPEED, -LASERS_D_SPEED};
 				lasers[i].collider->SetPos(lasers[i].position.x - diagonalOffset.x - COLIDER_OFFSET, lasers[i].position.y - diagonalOffset.y - COLIDER_OFFSET);
 				break;
 			}
 		}
 	}
 	++frames;
-
 }
+
 void Particle_Boss::Draw() {
 
 	SDL_Rect laser_rect;
@@ -199,7 +223,7 @@ void Particle_Boss::Draw() {
 	//Lasers animation-----------------------------------------------
 	
 
-	if (frames > 160) {
+	if (frames > 140) {
 
 		for (int i = 0; i < MAX_DIR ; ++i) {
 
@@ -236,14 +260,14 @@ void Particle_Boss::Draw() {
 	//Origin animation-----------------------------------------------
 
 	if (originAnim.finished != true) {
-		App->render->Blit(texture, (int)position.x - 16, (int)position.y - 16, &originAnim.GetFrameEx());
+		App->render->Blit(texture, (int)position.x - 8, (int)position.y - 8, &originAnim.GetFrameEx());
 	}
 
 	//Final animation-----------------------------------------------
 
-	if (frames >= 150 && finalAnim.finished != true) {
+	if (frames >= 110 && finalAnim.finished != true) {
 
-		App->render->Blit(texture, (int)laserPos.x, (int)laserPos.y , &finalAnim.GetFrameEx());
+		App->render->Blit(texture, (int)laserPos.x - 13, (int)laserPos.y -13 , &finalAnim.GetFrameEx());
 	}
 
 	
@@ -257,7 +281,14 @@ void Particle_Boss::AddColliders() {
 			lasers[i].collider = App->collision->AddCollider({ (int)lasers[i].position.x - 2, (int)lasers[i].position.y - 2 , 4, 4 }, COLLIDER_ENEMY_SHOT_INDESTRUCTIBLE, (Module*)App->particles);
 		}
 	}
-
-
 }
 
+
+bool  Particle_Boss::CheckParticleDeath()
+{
+	if (frames > 320) {
+		return true;
+	}
+
+	return false;
+}
