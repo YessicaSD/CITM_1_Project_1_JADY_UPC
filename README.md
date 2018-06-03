@@ -120,7 +120,32 @@ How to use advanced debugging?
 	- 7: Piñata spawner
 	- 8: Front turret
 	- 9: Outdoor turret
-
+	- 10: Front_turret
+	- 11: Outdoor_turret
+	- 12: Mech
+	- 13: Mech Spawner
+	- 14: Big asteroid
+	- 15: Middle asteroid
+	- 16: Little asteroid
+	- 17: Indoor turret
+	- 18: Indoor turret laser
+	- 19: Rear turret
+	- 20: Missile turret
+	- 21: Ship motor
+	- 22: Missile launcher
+	- 23: Missile
+	- 24: Intergalctic fighter
+	- 25: Intergalactic fighter spawner
+	- 26: Bar guardian
+	- 27: Top bar
+	- 28: Bot bar
+	- 29: Lamella
+	- 30: Red lamella
+	- 31: Metal bee
+	- 32: Boss lvl 5
+	- 33: Assist turret
+	- 34: Assist turret spawner
+	
 ###### Powerups debug table:
 	- 0: Speed
 	- 1: Despeed

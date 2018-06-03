@@ -34,7 +34,7 @@ typedef unsigned int uint;
 #define REN_VSYNC 1
 
 //----------Music-------------------
-#define GENERAL_MUSIC_VOLUME 20 //0 to 180 //Optimum 15
+#define GENERAL_MUSIC_VOLUME 30 //0 to 180 //Optimum 15
 #define GENERAL_SFX_VOLUME 20 //0 to 100   //Optimum 20
 
 //----------Spawning----------------
