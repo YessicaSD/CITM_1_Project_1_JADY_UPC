@@ -324,6 +324,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 0:
 		if(reachedCheckpoint[0] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			reachedCheckpoint[0] = true;
 		}
 
@@ -331,6 +332,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 1:
 		if (reachedCheckpoint[1] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			reachedCheckpoint[1] = true;
 		}
 
@@ -338,6 +340,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 2:
 		if (reachedCheckpoint[2] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			e_FrontShipTurret = App->enemies->InstaSpawn(FRONT_TURRET, 47, 64, POWERUP_TYPE::NOPOWERUP, { 0, 0 });
 			reachedCheckpoint[2] = true;
 		}
@@ -346,6 +349,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 3:
 		if (reachedCheckpoint[3] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			reachedCheckpoint[3] = true;
 		}
 		FireballFrontShip();
@@ -354,6 +358,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 4:
 		if (reachedCheckpoint[4] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			reachedCheckpoint[4] = true;
 		}
 		FireballFrontShip();
@@ -362,6 +367,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 5:
 		if (reachedCheckpoint[5] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			App->enemies->ManualDespawn(e_FrontShipTurret);
 			reachedCheckpoint[5] = true;
 		}
@@ -370,6 +376,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 6:
 		if (reachedCheckpoint[6] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			reachedCheckpoint[6] = true;
 		}
 
@@ -377,6 +384,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 7:
 		if (reachedCheckpoint[7] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			reachedCheckpoint[7] = true;
 		}
 
@@ -384,6 +392,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 8:
 		if (reachedCheckpoint[8] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			reachedCheckpoint[8] = true;
 		}
 
@@ -391,12 +400,14 @@ update_status Module5lvlScene::LogicUpdate()
 	case 9:
 		if (reachedCheckpoint[9] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			reachedCheckpoint[9] = true;
 		}
 		break;
 	case 10:
 		if (reachedCheckpoint[10] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			reachedCheckpoint[10] = true;
 		}
 
@@ -404,15 +415,15 @@ update_status Module5lvlScene::LogicUpdate()
 	case 11:
 		if (reachedCheckpoint[11] == false)
 		{
-			
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			reachedCheckpoint[11] = true;
 		}
 		break;
 	case 12:
 		if (reachedCheckpoint[12] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			App->enemies->AddEnemy(MISSILE_TURRET, 879, -3);
-			
 			reachedCheckpoint[12] = true;
 		}
 		
@@ -421,6 +432,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 13:
 		if (reachedCheckpoint[13] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			reachedCheckpoint[13] = true;
 		}
 
@@ -428,6 +440,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 14:
 		if (reachedCheckpoint[14] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			reachedCheckpoint[14] = true;
 		}
 		FirebarsRearShip();
@@ -436,6 +449,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 15:
 		if (reachedCheckpoint[15] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			reachedCheckpoint[15] = true;
 		}
 		FirebarsRearShip();
@@ -444,7 +458,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 16:
 		if (reachedCheckpoint[16] == false)
 		{
-			
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			reachedCheckpoint[16] = true;
 		}
 		FirebarsRearShip();
@@ -453,6 +467,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 17:
 		if (reachedCheckpoint[17] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			reachedCheckpoint[17] = true;
 		}
 		FirebarsRearShip();
@@ -461,6 +476,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 18:
 		if (reachedCheckpoint[18] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			reachedCheckpoint[18] = true;
 		}
 
@@ -468,6 +484,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 19:
 		if (reachedCheckpoint[19] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			reachedCheckpoint[19] = true;
 		}
 
@@ -475,6 +492,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 20:
 		if (reachedCheckpoint[20] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			reachedCheckpoint[20] = true;
 		}
 
@@ -483,6 +501,7 @@ update_status Module5lvlScene::LogicUpdate()
 	case 21:
 		if (reachedCheckpoint[21] == false)
 		{
+			ResetShipColType();//In case it goes to a previous checkpoint by using F6
 			reachedCheckpoint[21] = true;
 		}
 
@@ -490,6 +509,9 @@ update_status Module5lvlScene::LogicUpdate()
 	case 22:
 		if (reachedCheckpoint[22] == false)
 		{
+			//Set ship colliders to IGNORE HIT (if not the unit follows them)-------------------------------------------------------------------------------
+			ShipColIgnoreHit();
+
 			//Add enemies-----------------------------------------------------------------------------------------------------------------------------------
 			//INFO 1: We'll take the positions of the enemies from this video https://www.youtube.com/watch?time_continue=1213&v=aybhwlEV0EM
 			//- To make it easier for us to calcule the positions we'll convert the time of the video to the time of the actual level with a simple substraction
@@ -758,36 +780,23 @@ void Module5lvlScene::RenderShip()
 void Module5lvlScene::AddShipColliders()
 {
 	//Ship colliders-----------------------------------------------------------------------------------------
-	addedShipColliders = true;
-	deletedShipColliders = false;
-
-	for (int i = 0; i < SHIP_COLLIDERS_NUM ; ++i)
+	for (int i = 0; i < SHIP_COLLIDERS_NUM - 1; ++i)
 	{
-		if (shipCollidersCol[i] == nullptr)
-		{
-			shipCollidersCol[i] = App->collision->AddCollider(
-			{ shipCollidersRect[i].x + (int)shipPos.x,
-				shipCollidersRect[i].y + (int)shipPos.y,
-				shipCollidersRect[i].w,
-				shipCollidersRect[i].h },
-				COLLIDER_TYPE::COLLIDER_WALL);
-		}
-	
+		shipCollidersCol[i] = App->collision->AddCollider(
+		{ shipCollidersRect[i].x + (int)shipPos.x,
+			shipCollidersRect[i].y + (int)shipPos.y,
+			shipCollidersRect[i].w,
+			shipCollidersRect[i].h },
+			COLLIDER_TYPE::COLLIDER_WALL);
 	}
 
 	//Different case (it is an enemy heavy type collider)
-	if (shipCollidersCol[47] == nullptr)
-	{
-		shipCollidersCol[47] = App->collision->AddCollider(
-		{ shipCollidersRect[47].x + (int)shipPos.x,
-			shipCollidersRect[47].y + (int)shipPos.y,
-			shipCollidersRect[47].w,
-			shipCollidersRect[47].h },
-			COLLIDER_TYPE::COLLIDER_ENEMY_HEAVY);
-	}
-
-
-
+	shipCollidersCol[47] = App->collision->AddCollider(
+	{ shipCollidersRect[47].x + (int)shipPos.x,
+		shipCollidersRect[47].y + (int)shipPos.y,
+		shipCollidersRect[47].w,
+		shipCollidersRect[47].h },
+		COLLIDER_TYPE::COLLIDER_ENEMY_HEAVY);
 }
 
 void Module5lvlScene::UpdateShipColliders()
@@ -858,6 +867,44 @@ void Module5lvlScene::DeleteFinalColliders()
 			finalCollidersCol[i] = nullptr;
 		}
 
+	}
+}
+
+void Module5lvlScene::ShipColIgnoreHit()
+{
+	if(shipColIgnoreHit == false)
+	{
+		for (int i = 0; i < SHIP_COLLIDERS_NUM; ++i)
+		{
+			if (shipCollidersCol[i] != nullptr)
+			{
+				shipCollidersCol[i]->type = COLLIDER_IGNORE_HIT;
+			}
+		}
+
+		shipColIgnoreHit = true;
+	}
+}
+
+void Module5lvlScene::ResetShipColType()
+{
+	if (shipColIgnoreHit == true)
+	{
+		for (int i = 0; i < SHIP_COLLIDERS_NUM - 1; ++i)
+		{
+			if (shipCollidersCol[i] != nullptr)
+			{
+				shipCollidersCol[i]->type = COLLIDER_WALL;
+			}
+		}
+
+		//Different case (it is an enemy heavy type collider)
+		if (shipCollidersCol[47] != nullptr)
+		{
+			shipCollidersCol[47]->type = COLLIDER_ENEMY_HEAVY;
+		}
+
+		shipColIgnoreHit = false;
 	}
 }
 
