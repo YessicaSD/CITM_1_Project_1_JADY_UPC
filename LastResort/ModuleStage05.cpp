@@ -514,11 +514,16 @@ update_status Module5lvlScene::LogicUpdate()
 	case 22:
 		if (reachedCheckpoint[22] == false)
 		{
-			//Adding enemies
-			//INFO: We'll take the positions of the enemies from this video https://www.youtube.com/watch?time_continue=1213&v=aybhwlEV0EM
-			//INFO: To make it easier for us to calcule the positions we'll convert the time of the video to the time of the actual level with a simple substraction
-			//Although 1m = 60000ms we'll just multiply by 1000 because it doesn't matter since it all happens in one minute
-			//Ex. 20:16 = 2016000. 2016 * 1000 = 2016000
+			//Add enemies-----------------------------------------------------------------------------------------------------------------------------------
+			//INFO 1: We'll take the positions of the enemies from this video https://www.youtube.com/watch?time_continue=1213&v=aybhwlEV0EM
+			//- To make it easier for us to calcule the positions we'll convert the time of the video to the time of the actual level with a simple substraction
+			//- Although 1m = 60000ms we'll just multiply by 1000 because it doesn't matter since it all happens in one minute
+			//- Ex. 20:16 = 2016000. 2016 * 1000 = 2016000
+			//INFO 2: In this current checkpoint the positions of the camera are the following:
+			//- TOP    = 182
+			//- BOTTOM = 405
+			//- LEFT   = 1108
+			//- RIGHT  = 1411
 			int startTime = 2012000;//Start time = 20:12
 			//20:12 - 20:22
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 2016000 - startTime, NOPOWERUP, { -1   , 1    });
@@ -543,7 +548,7 @@ update_status Module5lvlScene::LogicUpdate()
 			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1400, 350, 2028000 - startTime, NOPOWERUP);
 			App->enemies->AddEnemy(BIG_ASTEROID,    1400, 260, 2029000 - startTime, NOPOWERUP);
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1350, 182, 2029500 - startTime, NOPOWERUP, { -1.5f, 0.5f });
-			App->enemies->AddEnemy(OSCILATOR,       1412, 350, 2030000 - startTime, NOPOWERUP);//4:45 s since last oscilator
+			App->enemies->AddEnemy(OSCILATOR,       1412, 350, 2030000 - startTime, NOPOWERUP);
 			App->enemies->AddEnemy(BIG_ASTEROID,    1400, 350, 2030000 - startTime, NOPOWERUP);
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1400, 182, 2030000 - startTime, NOPOWERUP, { -1.0f, 1.0f });
 			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1400, 220, 2030000 - startTime, NOPOWERUP);
@@ -557,11 +562,22 @@ update_status Module5lvlScene::LogicUpdate()
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1110, 182, 2033000 - startTime, NOPOWERUP, {  1.5f, 0.5f });
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1110, 182, 2033000 - startTime, NOPOWERUP, {  1.0f, 1.0f });
 			App->enemies->AddEnemy(MIDDLE_ASTEROID, 1400, 375, 2034000 - startTime, NOPOWERUP);
-			App->enemies->AddEnemy(BIG_ASTEROID,    1400, 290, 2034000 - startTime, NOPOWERUP);
-			App->enemies->AddEnemy(OSCILATOR,       1412, 350, 2034000 - startTime, NOPOWERUP);//4:25 s since last oscilator
-			App->enemies->AddEnemy(POWERDROPPER,    1412, 350, 2034000 - startTime, SPEED);
+			App->enemies->AddEnemy(OSCILATOR,       1412, 350, 2034000 - startTime, NOPOWERUP);
+			App->enemies->AddEnemy(POWERDROPPER,    1412, 290, 2034000 - startTime, SPEED);
 			//20:42 - 20:52
-			//App->enemies->AddEnemy();
+			App->enemies->AddEnemy(BIG_ASTEROID,    1400, 300, 2043000 - startTime, NOPOWERUP);
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1250, 182, 2043500 - startTime, NOPOWERUP, { -0.25f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1250, 182, 2043500 - startTime, NOPOWERUP, {  0.25f, 1.0f });
+			App->enemies->AddEnemy(LITTLE_ASTEROID, 1108, 182, 2045000 - startTime, NOPOWERUP, {  1.0f , 1.0f });
+			App->enemies->AddEnemy(LAMELLA, 1150, 200, 2046000 );
+			App->enemies->AddEnemy(LAMELLA, 1150, 260, 2046000);
+			App->enemies->AddEnemy(LAMELLA, 1150, 320, 2046000);
+			App->enemies->AddEnemy(LAMELLA, 1150, 380, 2046000);
+			App->enemies->AddEnemy(LAMELLA, 1350, 200, 2046000);
+			App->enemies->AddEnemy(LAMELLA, 1350, 260, 2046000);
+			App->enemies->AddEnemy(LAMELLA, 1350, 320, 2046000);
+			App->enemies->AddEnemy(LAMELLA, 1350, 380, 2046000);
+
 			//20:52 - 20:62
 
 			//App->enemies->AddEnemy();
