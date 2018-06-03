@@ -664,10 +664,11 @@ update_status Module5lvlScene::LogicUpdate()
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1150, 182, 2049750 - startTime, NOPOWERUP, { 0.50f, 1.0f });//Left asteroid
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1260, 182, 2049750 - startTime, NOPOWERUP, { -0.50f, 1.0f });//Right asteroid
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1360, 182, 2049750 - startTime, NOPOWERUP, { 0.00f, 1.0f });//Top asteroid
+
 			App->enemies->AddEnemy(POWERDROPPER,    1411, 210, 2049750 - startTime, HOMING);
-			App->enemies->AddEnemy(POWERDROPPER,    1411, 240, 2049750 - startTime, HOMING);
+			App->enemies->AddEnemy(POWERDROPPER,    1411, 240, 2049755 - startTime, HOMING);
 			App->enemies->AddEnemy(POWERDROPPER,    1411, 370, 2049750 - startTime, GROUND);
-			App->enemies->AddEnemy(POWERDROPPER,    1411, 340, 2049750 - startTime, GROUND);
+			App->enemies->AddEnemy(POWERDROPPER,    1411, 340, 2049755 - startTime, GROUND);
 			App->enemies->AddEnemy(BIG_ASTEROID,    1411, 300, 2050000 - startTime);
 			App->enemies->AddEnemy(LITTLE_ASTEROID, 1150, 182, 2049750 - startTime, NOPOWERUP, { 0.50f, 1.0f });
 			reachedCheckpoint[22] = true;
