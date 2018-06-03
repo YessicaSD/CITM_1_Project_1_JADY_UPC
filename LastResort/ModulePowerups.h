@@ -43,6 +43,7 @@ public:
 	bool AddPowerup(int, int, POWERUP_TYPE);
 	Sfx * speedSFX = nullptr;
 	Sfx * getPowerupSFX = nullptr;
+	Sfx * despeedSFX = nullptr;
 
 private:
 	//We don't need a queue, because we'll render the powerups as soon as AddCollider gets called
