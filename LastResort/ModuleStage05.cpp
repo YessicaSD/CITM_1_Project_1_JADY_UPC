@@ -182,11 +182,6 @@ bool Module5lvlScene::Start()
 	//App->enemies->AddEnemy(PINATA, 140, 140);
 	//App->enemies->AddEnemy(PINATA, 150, 150);
 	//App->enemies->AddEnemy(PINATA, 130, 130);
-	App->enemies->AddEnemy(ASSIST_TURRET, 2243, 362);
-	App->enemies->AddEnemy(ASSIST_TURRET, 2283, 362);
-	App->enemies->AddEnemy(ASSIST_TURRET, 2323, 362);
-	App->enemies->AddEnemy(ASSIST_TURRET, 2363, 362);
-	App->enemies->AddEnemy(ASSIST_TURRET, 2403, 362);
 	//App->enemies->InstaSpawn(RED_LAMELLA, 300, 200);
 
 	//- FINAL POSITION ENEMIES (in order of appearance on the level)
@@ -269,6 +264,18 @@ bool Module5lvlScene::Start()
 	App->enemies->AddEnemy(BAR_GUARDIAN, 2070, 182 + SCREEN_HEIGHT / 2);
 	App->enemies->AddEnemy(BOSS_05, 2385, 294);
 
+	App->enemies->AddEnemy(ASSIST_TURRET, 2243, 362);
+	App->enemies->AddEnemy(ASSIST_TURRET, 2283, 362);
+	App->enemies->AddEnemy(ASSIST_TURRET, 2323, 362);
+	App->enemies->AddEnemy(ASSIST_TURRET, 2363, 362);
+	App->enemies->AddEnemy(ASSIST_TURRET, 2403, 362);
+
+	App->enemies->AddEnemy(ASSIST_TURRET, 2208, 226);
+	App->enemies->AddEnemy(ASSIST_TURRET, 2248, 226);
+	App->enemies->AddEnemy(ASSIST_TURRET, 2299, 226);
+	App->enemies->AddEnemy(ASSIST_TURRET, 2339, 226);
+	App->enemies->AddEnemy(ASSIST_TURRET, 2379, 226);  
+	App->enemies->AddEnemy(ASSIST_TURRET, 2419, 226);
 	//Add colliders
 	AddShipColliders();
 	AddFinalColliders();
